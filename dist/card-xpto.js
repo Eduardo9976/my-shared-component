@@ -960,7 +960,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           ]),
           default: withCtx(() => [
             createBaseVNode("div", _hoisted_3, [
-              _cache[5] || (_cache[5] = createBaseVNode("p", { class: "text-gray-600" }, " Este é um card de exemplo criado como web component. Ele demonstra o uso de vários componentes do Nuxt UI. ", -1)),
+              _cache[5] || (_cache[5] = createBaseVNode("p", { class: "text-gray-600" }, " Card do Edu usando UCard no Nuxt UI web component ", -1)),
               createBaseVNode("div", _hoisted_4, [
                 createVNode(_component_UBadge, {
                   color: "success",
@@ -1035,8 +1035,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _style_0 = "\n.card-container[data-v-96703004] {\r\n    font-family: var(--ui-font);\n}\r\n";
-const CardXPTO = /* @__PURE__ */ _export_sfc(_sfc_main, [["styles", [_style_0]], ["__scopeId", "data-v-96703004"]]);
+const _style_0 = "\n.card-container[data-v-d520b128] {\r\n    font-family: var(--ui-font);\n}\r\n";
+const CardXPTO = /* @__PURE__ */ _export_sfc(_sfc_main, [["styles", [_style_0]], ["__scopeId", "data-v-d520b128"]]);
 const CardXPTElement = defineCustomElement(CardXPTO, {
   shadowRoot: false
   // Desabilita shadow DOM para facilitar uso

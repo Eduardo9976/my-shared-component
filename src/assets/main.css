@@ -142,4 +142,80 @@
   --ui-z-popover: 1060;
   --ui-z-tooltip: 1070;
   --ui-z-toast: 1080;
+
+  /* Variáveis do Tailwind CSS */
+  --tw-duration: 150ms;
+  --tw-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --tw-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --tw-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --tw-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Variáveis de opacidade */
+  --tw-bg-opacity: 1;
+  --tw-text-opacity: 1;
+  --tw-border-opacity: 1;
+  --tw-ring-opacity: 0.5;
+  --tw-shadow-color: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  
+  /* Variáveis de transform */
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  
+  /* Variáveis de filtros */
+  --tw-blur: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-grayscale: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-drop-shadow: ;
+  --tw-backdrop-blur: ;
+  --tw-backdrop-brightness: ;
+  --tw-backdrop-contrast: ;
+  --tw-backdrop-grayscale: ;
+  --tw-backdrop-hue-rotate: ;
+  --tw-backdrop-invert: ;
+  --tw-backdrop-opacity: ;
+  --tw-backdrop-saturate: ;
+  --tw-backdrop-sepia: ;
+  --tw-filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+  --tw-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  
+  /* Variáveis de ring */
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-inset: ;
+  
+  /* Variáveis de divisão */
+  --tw-divide-x-reverse: 0;
+  --tw-divide-y-reverse: 0;
+  --tw-divide-opacity: 1;
+  
+  /* Variáveis de espaçamento */
+  --tw-space-x-reverse: 0;
+  --tw-space-y-reverse: 0;
+  
+  /* Variáveis de gradiente */
+  --tw-gradient-from-position: ;
+  --tw-gradient-via-position: ;
+  --tw-gradient-to-position: ;
+  --tw-gradient-from: #000;
+  --tw-gradient-to: #000;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  
+  /* Variáveis de scroll */
+  --tw-scroll-snap-strictness: proximity;
 }

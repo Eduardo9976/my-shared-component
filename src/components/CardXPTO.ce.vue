@@ -10,8 +10,7 @@
             
             <div class="space-y-3">
                 <p class="text-gray-600">
-                    Este é um card de exemplo criado como web component. 
-                    Ele demonstra o uso de vários componentes do Nuxt UI.
+                    Card do Edu usando UCard no Nuxt UI web component
                 </p>
                 
                 <div class="flex items-center gap-2">
