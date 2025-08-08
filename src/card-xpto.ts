@@ -72,8 +72,11 @@ const nuxtUICSSVariables = `
   --ui-success: var(--ui-color-success-500);
   --ui-primary: var(--ui-color-primary-500);
   --ui-danger: var(--ui-color-danger-500);
+  --ui-error: var(--ui-color-danger-500);
   --ui-warning: var(--ui-color-warning-500);
   --ui-gray: var(--ui-color-gray-500);
+  --ui-secondary: var(--ui-color-gray-500);
+  --ui-info: var(--ui-color-primary-500);
   
   /* Variáveis de texto */
   --ui-text-dimmed: var(--ui-color-gray-400);
@@ -132,19 +135,3 @@ const nuxtUICSSVariables = `
   --ui-z-toast: 1080;
 }
 `
-
-// Converte o componente Vue em um Custom Element
-const CardXPTElement = defineCustomElement(CardXPTO, {
-  shadowRoot: false, // Desabilita shadow DOM para facilitar uso
-  styles: [
-    // Apenas as variáveis CSS do Nuxt UI - Tailwind já está importado
-    nuxtUICSSVariables
-  ],
-});
-
-// Registra o Custom Element no navegador
-if (!customElements.get('card-xpto')) {
-  customElements.define('card-xpto', CardXPTElement)
-}
-
-export default CardXPTElement
