@@ -78,7 +78,6 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --color-blue-100: oklch(93.2% .032 255.585);
     --color-blue-500: oklch(62.3% .214 259.815);
-    --color-gray-600: oklch(44.6% .03 256.802);
     --color-white: #fff;
     --spacing: .25rem;
     --container-md: 28rem;
