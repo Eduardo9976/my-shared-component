@@ -24808,6 +24808,62 @@ const nuxtUICSSVariables = `
   --ui-danger: var(--ui-color-danger-500);
   --ui-warning: var(--ui-color-warning-500);
   --ui-gray: var(--ui-color-gray-500);
+  
+  /* Variáveis de texto */
+  --ui-text-dimmed: var(--ui-color-gray-400);
+  --ui-text-muted: var(--ui-color-gray-500);
+  --ui-text-toned: var(--ui-color-gray-600);
+  --ui-text: var(--ui-color-gray-700);
+  --ui-text-highlighted: var(--ui-color-gray-900);
+  --ui-text-inverted: #ffffff;
+  
+  /* Variáveis de background */
+  --ui-bg: #ffffff;
+  --ui-bg-muted: var(--ui-color-gray-50);
+  --ui-bg-elevated: var(--ui-color-gray-100);
+  --ui-bg-accented: var(--ui-color-gray-200);
+  --ui-bg-inverted: var(--ui-color-gray-900);
+  
+  /* Variáveis de border */
+  --ui-border: var(--ui-color-gray-200);
+  --ui-border-muted: var(--ui-color-gray-200);
+  --ui-border-accented: var(--ui-color-gray-300);
+  --ui-border-inverted: var(--ui-color-gray-900);
+  
+  /* Variáveis de radius */
+  --ui-radius: 0.25rem;
+  
+  /* Variáveis de font */
+  --ui-font: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --ui-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  /* Variáveis de transition */
+  --ui-transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --ui-transition-duration: 0.15s;
+  --ui-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Variáveis de container */
+  --ui-container: 80rem;
+  
+  /* Variáveis de spacing */
+  --ui-spacing: 0.25rem;
+  
+  /* Variáveis de shadow */
+  --ui-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --ui-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --ui-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --ui-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --ui-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  
+  /* Variáveis de z-index */
+  --ui-z-dropdown: 1000;
+  --ui-z-sticky: 1020;
+  --ui-z-fixed: 1030;
+  --ui-z-modal-backdrop: 1040;
+  --ui-z-modal: 1050;
+  --ui-z-popover: 1060;
+  --ui-z-tooltip: 1070;
+  --ui-z-toast: 1080;
 }
 `;
 const SharedButtonElement = /* @__PURE__ */ defineCustomElement(_sfc_main, {
