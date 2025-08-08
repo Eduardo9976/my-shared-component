@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teste do Web Component</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- Incluir o CSS do Nuxt UI e Tailwind -->
+
     <link rel="stylesheet" href="https://eduardo9976.github.io/my-shared-component/dist/shared-button.css">
-    <!-- Incluir o web component do GitHub Pages com cache busting -->
+
     <script type="module" src="https://eduardo9976.github.io/my-shared-component/dist/shared-button.js?v=6"></script>
     <style>
         body {
@@ -16,19 +16,22 @@
             padding: 20px;
             background-color: #f5f5f5;
         }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
             background: white;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
+
         h1 {
             color: #333;
             text-align: center;
             margin-bottom: 20px;
         }
+
         p {
             color: #666;
             line-height: 1.6;
@@ -36,20 +39,21 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🧪 Teste do Web Component</h1>
-        <p>Testando o web component carregado do GitHub Pages:</p>
-        <shared-button></shared-button>
-        <p>Se o botão aparecer com estilos e texto "Botão Atualizado - Teste", o web component está funcionando! ✅</p>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            if (customElements.get('shared-button')) {
-                console.log('✅ Web component carregado com sucesso do GitHub Pages!');
-            } else {
-                console.error('❌ Web component não foi carregado');
-            }
-        });
-    </script>
+<div class="container">
+    <h1>🧪 Teste do Web Component</h1>
+    <p>Testando o web component carregado do GitHub Pages:</p>
+    <shared-button></shared-button>
+    <p>Se o botão aparecer com estilos e texto "Botão Atualizado - Teste", o web component está funcionando! ✅</p>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (customElements.get('shared-button')) {
+      console.log('✅ Web component carregado com sucesso do GitHub Pages!');
+    }
+    else {
+      console.error('❌ Web component não foi carregado');
+    }
+  });
+</script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 import { defineCustomElement } from 'vue'
-import SharedButton from './components/SharedButton.vue'
+import SharedButton from './components/SharedButton.ce.vue'
 
 // Importar os estilos CSS do Nuxt UI e Tailwind
 import './assets/main.css'

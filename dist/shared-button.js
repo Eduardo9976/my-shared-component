@@ -13657,7 +13657,7 @@ const _sfc_main$1 = {
 };
 const _hoisted_1 = { class: "border border-blue-500 p-4 bg-blue-100" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "SharedButton",
+  __name: "SharedButton.ce",
   setup(__props) {
     return (_ctx, _cache) => {
       const _component_UButton = _sfc_main$1;

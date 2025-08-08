@@ -10,7 +10,6 @@ export default defineConfig({
     vue({
       template: {
         compilerOptions: {
-          // Tratar todos os elementos com hífen como elementos personalizados
           isCustomElement: (tag) => tag.includes('-'),
         },
       },
