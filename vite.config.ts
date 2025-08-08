@@ -36,17 +36,29 @@ export default defineConfig({
     rollupOptions: {
       input: {
         app: './index.html',
-        'shared-button': './src/shared-button.ts'
+        'shared-button': './src/shared-button.ts',
+        'card-xpto': './src/card-xpto.ts'
       },
       output: {
         entryFileNames: (chunkInfo) => {
           if (chunkInfo.name === 'shared-button') {
             return 'shared-button.js'
           }
+          if (chunkInfo.name === 'card-xpto') {
+            return 'card-xpto.js'
+          }
           return '[name].js'
         },
         chunkFileNames: '[name].js',
-        assetFileNames: 'shared-button.css'
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'shared-button.css') {
+            return 'shared-button.css'
+          }
+          if (assetInfo.name === 'card-xpto.css') {
+            return 'card-xpto.css'
+          }
+          return '[name].[ext]'
+        }
       }
     },
     // Configurações para web component

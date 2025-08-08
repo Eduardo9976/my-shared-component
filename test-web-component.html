@@ -6,9 +6,10 @@
     <title>Teste do Web Component</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-    <link rel="stylesheet" href="https://eduardo9976.github.io/my-shared-component/dist/shared-button.css">
+    <link rel="stylesheet" href="https://eduardo9976.github.io/my-shared-component/dist/style.css">
 
-    <script type="module" src="https://eduardo9976.github.io/my-shared-component/dist/shared-button.js?v=6"></script>
+    <script type="module" src="https://eduardo9976.github.io/my-shared-component/dist/shared-button.js?v=7"></script>
+    <script type="module" src="https://eduardo9976.github.io/my-shared-component/dist/card-xpto.js?v=7"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,22 +37,68 @@
             color: #666;
             line-height: 1.6;
         }
+
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .component-section {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fafafa;
+        }
+
+        .component-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>🧪 Teste do Web Component</h1>
-    <p>Testando o web component carregado do GitHub Pages:</p>
-    <shared-button></shared-button>
-    <p>Se o botão aparecer com estilos e texto "Botão Atualizado - Teste", o web component está funcionando! ✅</p>
+    <p>Testando os web components carregados do GitHub Pages:</p>
+    
+    <div class="components-grid">
+        <div class="component-section">
+            <div class="component-title">Shared Button</div>
+            <shared-button></shared-button>
+        </div>
+        
+        <div class="component-section">
+            <div class="component-title">Card XPTO</div>
+            <card-xpto></card-xpto>
+        </div>
+    </div>
+    
+    <p style="margin-top: 30px; text-align: center;">
+        Se ambos os componentes aparecerem com estilos corretos, os web components estão funcionando! ✅
+    </p>
 </div>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    if (customElements.get('shared-button')) {
-      console.log('✅ Web component carregado com sucesso do GitHub Pages!');
-    }
-    else {
-      console.error('❌ Web component não foi carregado');
+    const components = ['shared-button', 'card-xpto'];
+    let loadedComponents = 0;
+    
+    components.forEach(componentName => {
+      if (customElements.get(componentName)) {
+        console.log(`✅ Web component ${componentName} carregado com sucesso!`);
+        loadedComponents++;
+      } else {
+        console.error(`❌ Web component ${componentName} não foi carregado`);
+      }
+    });
+    
+    if (loadedComponents === components.length) {
+      console.log('🎉 Todos os web components foram carregados com sucesso!');
+    } else {
+      console.error('⚠️ Alguns web components não foram carregados');
     }
   });
 </script>
