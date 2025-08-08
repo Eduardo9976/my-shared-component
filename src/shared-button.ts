@@ -6,8 +6,9 @@ import './assets/main.css'
 
 // Converte o componente Vue em um Custom Element
 const SharedButtonElement = defineCustomElement(SharedButton, {
-  shadowRoot: false // Desabilita shadow DOM para facilitar uso
-})
+  shadowRoot: false, // Desabilita shadow DOM para facilitar uso
+  styles: [`/* inlined css */`],
+});
 
 // Registra o Custom Element no navegador
 if (!customElements.get('shared-button')) {
