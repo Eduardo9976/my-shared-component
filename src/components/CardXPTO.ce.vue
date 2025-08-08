@@ -32,7 +32,7 @@
                         <UIcon name="i-lucide-heart" class="w-4 h-4" />
                         Curtir
                     </UButton>
-                    <UButton color="gray" variant="outline" size="sm">
+                    <UButton color="primary" variant="outline" size="sm">
                         <UIcon name="i-lucide-share" class="w-4 h-4" />
                         Compartilhar
                     </UButton>
@@ -42,7 +42,7 @@
             <template #footer>
                 <div class="flex justify-between items-center text-sm text-gray-500">
                     <span>Criado em {{ new Date().toLocaleDateString() }}</span>
-                    <UButton color="gray" variant="ghost" size="xs">
+                    <UButton color="primary" variant="ghost" size="xs">
                         <UIcon name="i-lucide-more-horizontal" />
                     </UButton>
                 </div>
