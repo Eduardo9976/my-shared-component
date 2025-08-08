@@ -98,7 +98,7 @@ const toNumber = (val) => {
 };
 let _globalThis;
 const getGlobalThis = () => {
-  return _globalThis || (_globalThis = typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : {});
+  return _globalThis || (_globalThis = typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : {});
 };
 function normalizeStyle(value) {
   if (isArray$1(value)) {
@@ -7373,8 +7373,8 @@ function createFilterWrapper(filter, fn) {
   }
   return wrapper;
 }
-const bypassFilter = (invoke) => {
-  return invoke();
+const bypassFilter = (invoke2) => {
+  return invoke2();
 };
 function pausableFilter(extendFilter = bypassFilter, options = {}) {
   const {
@@ -12458,7 +12458,7 @@ const Icon = /* @__PURE__ */ defineComponent((props, { emit: emit2 }) => {
   const rendering = ref(!!props.ssr);
   const lastRenderedIconName = ref("");
   const iconData = shallowRef(null);
-  function getIcon() {
+  function getIcon2() {
     const icon = props.icon;
     if (typeof icon === "object" && icon !== null && typeof icon.body === "string") {
       lastRenderedIconName.value = "";
@@ -12512,7 +12512,7 @@ const Icon = /* @__PURE__ */ defineComponent((props, { emit: emit2 }) => {
     return { data, classes };
   }
   function updateIconData() {
-    const icon = getIcon();
+    const icon = getIcon2();
     if (!icon) {
       iconData.value = null;
     } else if (icon.data !== iconData.value?.data) {

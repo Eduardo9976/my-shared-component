@@ -7,5 +7,6 @@
 </template>
 
 <script setup lang="ts">
-// O UButton será auto-importado pelo Nuxt UI
+// Importar estilos diretamente no componente
+import '../assets/main.css'
 </script>

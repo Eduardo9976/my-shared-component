@@ -886,7 +886,7 @@ function useMediaQuery(query, options = {}) {
   useEventListener$1(mediaQuery, "change", handler, { passive: true });
   return computed(() => matches.value);
 }
-const _global = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+const _global = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : {};
 const globalKey = "__vueuse_ssr_handlers__";
 const handlers = /* @__PURE__ */ getHandlers();
 function getHandlers() {
