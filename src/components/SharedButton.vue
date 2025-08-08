@@ -1,6 +1,6 @@
 <template>
     <div class="border border-blue-500 p-4 bg-blue-100">
-        <UButton color="blue" variant="solid">
+        <UButton color="success" variant="solid">
             Click me web component
         </UButton>
     </div>

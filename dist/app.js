@@ -1,22 +1,4174 @@
-import{c as Vt,t as j,i as dt,h as ft,a as me,r as M,w as he,o as zt,b as Ft,d as Ht,g as Q,e as T,f as Bt,j as W,k as pt,l as qt,s as G,m as Wt,p as Je,n as Ne,q as Kt,u as Ut,v as Jt,x as re,y as Yt,z as h,A as ie,B as Xt,C as Gt,D as mt,E as Z,F as Qt,G as Zt,H as Me,I as A,J as C,K as x,L as S,M as P,P as U,N as ht,O as eo,Q as to,R as ue,S as ve,T as qe,U as oo,V as Ie,W as no,X as so,Y as vt,Z as N,_ as yt,$ as We,a0 as gt,a1 as Ye,a2 as D,a3 as ee,a4 as te,a5 as B,a6 as F,a7 as Te,a8 as X,a9 as oe,aa as ye,ab as Ce,ac as ao,ad as kt,ae as Pe,af as ne,ag as q,ah as de,ai as bt,aj as ro,ak as io,al as ce,am as De,an as lo,ao as co,ap as uo,aq as fo}from"./shared-button.js";(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const a of document.querySelectorAll('link[rel="modulepreload"]'))n(a);new MutationObserver(a=>{for(const r of a)if(r.type==="childList")for(const i of r.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&n(i)}).observe(document,{childList:!0,subtree:!0});function o(a){const r={};return a.integrity&&(r.integrity=a.integrity),a.referrerPolicy&&(r.referrerPolicy=a.referrerPolicy),a.crossOrigin==="use-credentials"?r.credentials="include":a.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function n(a){if(a.ep)return;a.ep=!0;const r=o(a);fetch(a.href,r)}})();const po=new Set(["link","style","script","noscript"]),mo=new Set(["title","titleTemplate","script","style","noscript"]),Xe=new Set(["base","meta","link","style","script","noscript"]),ho=new Set(["title","base","htmlAttrs","bodyAttrs","meta","link","style","script","noscript"]),vo=new Set(["base","title","titleTemplate","bodyAttrs","htmlAttrs","templateParams"]),yo=new Set(["key","tagPosition","tagPriority","tagDuplicateStrategy","innerHTML","textContent","processTemplateParams"]),go=new Set(["templateParams","htmlAttrs","bodyAttrs"]),ko=new Set(["theme-color","google-site-verification","og","article","book","profile","twitter","author"]),bo=["name","property","http-equiv"],wo=new Set(["viewport","description","keywords","robots"]);function wt(e){const t=e.split(":");return t.length?ko.has(t[1]):!1}function je(e){const{props:t,tag:o}=e;if(vo.has(o))return o;if(o==="link"&&t.rel==="canonical")return"canonical";if(t.charset)return"charset";if(e.tag==="meta"){for(const n of bo)if(t[n]!==void 0){const a=t[n],r=a.includes(":"),i=wo.has(a),c=!(r||i)&&e.key?`:key:${e.key}`:"";return`${o}:${a}${c}`}}if(e.key)return`${o}:key:${e.key}`;if(t.id)return`${o}:id:${t.id}`;if(mo.has(o)){const n=e.textContent||e.innerHTML;if(n)return`${o}:content:${n}`}}function Ge(e){const t=e._h||e._d;if(t)return t;const o=e.textContent||e.innerHTML;return o||`${e.tag}:${Object.entries(e.props).map(([n,a])=>`${n}:${String(a)}`).join(",")}`}function Ee(e,t,o){typeof e==="function"&&(!o||o!=="titleTemplate"&&!(o[0]==="o"&&o[1]==="n"))&&(e=e());let a;if(t&&(a=t(o,e)),Array.isArray(a))return a.map(r=>Ee(r,t));if(a?.constructor===Object){const r={};for(const i of Object.keys(a))r[i]=Ee(a[i],t,i);return r}return a}function _o(e,t){const o=e==="style"?new Map:new Set;function n(a){const r=a.trim();if(r)if(e==="style"){const[i,...s]=r.split(":").map(c=>c.trim());i&&s.length&&o.set(i,s.join(":"))}else r.split(" ").filter(Boolean).forEach(i=>o.add(i))}return typeof t=="string"?e==="style"?t.split(";").forEach(n):n(t):Array.isArray(t)?t.forEach(a=>n(a)):t&&typeof t=="object"&&Object.entries(t).forEach(([a,r])=>{r&&r!=="false"&&(e==="style"?o.set(a.trim(),r):n(a))}),o}function _t(e,t){return e.props=e.props||{},t?e.tag==="templateParams"?(e.props=t,e):(Object.entries(t).forEach(([o,n])=>{if(n===null){e.props[o]=null;return}if(o==="class"||o==="style"){e.props[o]=_o(o,n);return}if(yo.has(o)){if(["textContent","innerHTML"].includes(o)&&typeof n=="object"){let i=t.type;if(t.type||(i="application/json"),!i?.endsWith("json")&&i!=="speculationrules")return;t.type=i,e.props.type=i,e[o]=JSON.stringify(n)}else e[o]=n;return}const a=String(n),r=o.startsWith("data-");a==="true"||a===""?e.props[o]=r?a:!0:!n&&r&&a==="false"?e.props[o]="false":n!==void 0&&(e.props[o]=n)}),e):e}function xo(e,t){const o=typeof t=="object"&&typeof t!="function"?t:{[e==="script"||e==="noscript"||e==="style"?"innerHTML":"textContent"]:t},n=_t({tag:e,props:{}},o);return n.key&&po.has(n.tag)&&(n.props["data-hid"]=n._h=n.key),n.tag==="script"&&typeof n.innerHTML=="object"&&(n.innerHTML=JSON.stringify(n.innerHTML),n.props.type=n.props.type||"application/json"),Array.isArray(n.props.content)?n.props.content.map(a=>({...n,props:{...n.props,content:a}})):n}function To(e,t){if(!e)return[];typeof e=="function"&&(e=e());const o=(a,r)=>{for(let i=0;i<t.length;i++)r=t[i](a,r);return r};e=o(void 0,e);const n=[];return e=Ee(e,o),Object.entries(e||{}).forEach(([a,r])=>{if(r!==void 0)for(const i of Array.isArray(r)?r:[r])n.push(xo(a,i))}),n.flat()}const Qe=(e,t)=>e._w===t._w?e._p-t._p:e._w-t._w,Ze={base:-10,title:10},Co={critical:-8,high:-1,low:2},et={meta:{"content-security-policy":-30,charset:-20,viewport:-15},link:{preconnect:20,stylesheet:60,preload:70,modulepreload:70,prefetch:90,"dns-prefetch":90,prerender:90},script:{async:30,defer:80,sync:50},style:{imported:40,sync:60}},Eo=/@import/,le=e=>e===""||e===!0;function So(e,t){if(typeof t.tagPriority=="number")return t.tagPriority;let o=100;const n=Co[t.tagPriority]||0,a=e.resolvedOptions.disableCapoSorting?{link:{},script:{},style:{}}:et;if(t.tag in Ze)o=Ze[t.tag];else if(t.tag==="meta"){const r=t.props["http-equiv"]==="content-security-policy"?"content-security-policy":t.props.charset?"charset":t.props.name==="viewport"?"viewport":null;r&&(o=et.meta[r])}else t.tag==="link"&&t.props.rel?o=a.link[t.props.rel]:t.tag==="script"?le(t.props.async)?o=a.script.async:t.props.src&&!le(t.props.defer)&&!le(t.props.async)&&t.props.type!=="module"&&!t.props.type?.endsWith("json")?o=a.script.sync:le(t.props.defer)&&t.props.src&&!le(t.props.async)&&(o=a.script.defer):t.tag==="style"&&(o=t.innerHTML&&Eo.test(t.innerHTML)?a.style.imported:a.style.sync);return(o||100)+n}function tt(e,t){const o=typeof t=="function"?t(e):t,n=o.key||String(e.plugins.size+1);e.plugins.get(n)||(e.plugins.set(n,o),e.hooks.addHooks(o.hooks||{}))}function Mo(e={}){const t=Vt();t.addHooks(e.hooks||{});const o=!e.document,n=new Map,a=new Map,r=new Set,i={_entryCount:1,plugins:a,dirty:!1,resolvedOptions:e,hooks:t,ssr:o,entries:n,headEntries(){return[...n.values()]},use:s=>tt(i,s),push(s,c){const l={...c||{}};delete l.head;const u=l._index??i._entryCount++,p={_i:u,input:s,options:l},v={_poll(d=!1){i.dirty=!0,!d&&r.add(u),t.callHook("entries:updated",i)},dispose(){n.delete(u)&&i.invalidate()},patch(d){(!l.mode||l.mode==="server"&&o||l.mode==="client"&&!o)&&(p.input=d,n.set(u,p),v._poll())}};return v.patch(s),v},async resolveTags(){const s={tagMap:new Map,tags:[],entries:[...i.entries.values()]};for(await t.callHook("entries:resolve",s);r.size;){const v=r.values().next().value;r.delete(v);const d=n.get(v);if(d){const m={tags:To(d.input,e.propResolvers||[]).map(f=>Object.assign(f,d.options)),entry:d};await t.callHook("entries:normalize",m),d._tags=m.tags.map((f,y)=>(f._w=So(i,f),f._p=(d._i<<10)+y,f._d=je(f),f))}}let c=!1;s.entries.flatMap(v=>(v._tags||[]).map(d=>({...d,props:{...d.props}}))).sort(Qe).reduce((v,d)=>{const m=String(d._d||d._p);if(!v.has(m))return v.set(m,d);const f=v.get(m);if((d?.tagDuplicateStrategy||(go.has(d.tag)?"merge":null)||(d.key&&d.key===f.key?"merge":null))==="merge"){const g={...f.props};Object.entries(d.props).forEach(([b,k])=>g[b]=b==="style"?new Map([...f.props.style||new Map,...k]):b==="class"?new Set([...f.props.class||new Set,...k]):k),v.set(m,{...d,props:g})}else d._p>>10===f._p>>10&&d.tag==="meta"&&wt(m)?(v.set(m,Object.assign([...Array.isArray(f)?f:[f],d],d)),c=!0):(d._w===f._w?d._p>f._p:d?._w<f?._w)&&v.set(m,d);return v},s.tagMap);const l=s.tagMap.get("title"),u=s.tagMap.get("titleTemplate");if(i._title=l?.textContent,u){const v=u?.textContent;if(i._titleTemplate=v,v){let d=typeof v=="function"?v(l?.textContent):v;typeof d=="string"&&!i.plugins.has("template-params")&&(d=d.replace("%s",l?.textContent||"")),l?d===null?s.tagMap.delete("title"):s.tagMap.set("title",{...l,textContent:d}):(u.tag="title",u.textContent=d)}}s.tags=Array.from(s.tagMap.values()),c&&(s.tags=s.tags.flat().sort(Qe)),await t.callHook("tags:beforeResolve",s),await t.callHook("tags:resolve",s),await t.callHook("tags:afterResolve",s);const p=[];for(const v of s.tags){const{innerHTML:d,tag:m,props:f}=v;if(ho.has(m)&&!(Object.keys(f).length===0&&!v.innerHTML&&!v.textContent)&&!(m==="meta"&&!f.content&&!f["http-equiv"]&&!f.charset)){if(m==="script"&&d){if(f.type?.endsWith("json")){const y=typeof d=="string"?d:JSON.stringify(d);v.innerHTML=y.replace(/</g,"\\u003C")}else typeof d=="string"&&(v.innerHTML=d.replace(new RegExp(`</${m}`,"g"),`<\\/${m}`));v._d=je(v)}p.push(v)}}return p},invalidate(){for(const s of n.values())r.add(s._i);i.dirty=!0,t.callHook("entries:updated",i)}};return(e?.plugins||[]).forEach(s=>tt(i,s)),i.hooks.callHook("init",i),e.init?.forEach(s=>s&&i.push(s)),i}async function xt(e,t={}){const o=t.document||e.resolvedOptions.document;if(!o||!e.dirty)return;const n={shouldRender:!0,tags:[]};if(await e.hooks.callHook("dom:beforeRender",n),!!n.shouldRender)return e._domUpdatePromise||(e._domUpdatePromise=new Promise(async a=>{const r=new Map,i=new Promise(d=>{e.resolveTags().then(m=>{d(m.map(f=>{const y=r.get(f._d)||0,g={tag:f,id:(y?`${f._d}:${y}`:f._d)||Ge(f),shouldRender:!0};return f._d&&wt(f._d)&&r.set(f._d,y+1),g}))})});let s=e._dom;if(!s){s={title:o.title,elMap:new Map().set("htmlAttrs",o.documentElement).set("bodyAttrs",o.body)};for(const d of["body","head"]){const m=o[d]?.children;for(const f of m){const y=f.tagName.toLowerCase();if(!Xe.has(y))continue;const g=_t({tag:y,props:{}},{innerHTML:f.innerHTML,...f.getAttributeNames().reduce((b,k)=>(b[k]=f.getAttribute(k),b),{})||{}});if(g.key=f.getAttribute("data-hid")||void 0,g._d=je(g)||Ge(g),s.elMap.has(g._d)){let b=1,k=g._d;for(;s.elMap.has(k);)k=`${g._d}:${b++}`;s.elMap.set(k,f)}else s.elMap.set(g._d,f)}}}s.pendingSideEffects={...s.sideEffects},s.sideEffects={};function c(d,m,f){const y=`${d}:${m}`;s.sideEffects[y]=f,delete s.pendingSideEffects[y]}function l({id:d,$el:m,tag:f}){const y=f.tag.endsWith("Attrs");s.elMap.set(d,m),y||(f.textContent&&f.textContent!==m.textContent&&(m.textContent=f.textContent),f.innerHTML&&f.innerHTML!==m.innerHTML&&(m.innerHTML=f.innerHTML),c(d,"el",()=>{m?.remove(),s.elMap.delete(d)}));for(const g in f.props){if(!Object.prototype.hasOwnProperty.call(f.props,g))continue;const b=f.props[g];if(g.startsWith("on")&&typeof b=="function"){const w=m?.dataset;if(w&&w[`${g}fired`]){const _=g.slice(0,-5);b.call(m,new Event(_.substring(2)))}m.getAttribute(`data-${g}`)!==""&&((f.tag==="bodyAttrs"?o.defaultView:m).addEventListener(g.substring(2),b.bind(m)),m.setAttribute(`data-${g}`,""));continue}const k=`attr:${g}`;if(g==="class"){if(!b)continue;for(const w of b)y&&c(d,`${k}:${w}`,()=>m.classList.remove(w)),!m.classList.contains(w)&&m.classList.add(w)}else if(g==="style"){if(!b)continue;for(const[w,_]of b)c(d,`${k}:${w}`,()=>{m.style.removeProperty(w)}),m.style.setProperty(w,_)}else b!==!1&&b!==null&&(m.getAttribute(g)!==b&&m.setAttribute(g,b===!0?"":String(b)),y&&c(d,k,()=>m.removeAttribute(g)))}}const u=[],p={bodyClose:void 0,bodyOpen:void 0,head:void 0},v=await i;for(const d of v){const{tag:m,shouldRender:f,id:y}=d;if(f){if(m.tag==="title"){o.title=m.textContent,c("title","",()=>o.title=s.title);continue}d.$el=d.$el||s.elMap.get(y),d.$el?l(d):Xe.has(m.tag)&&u.push(d)}}for(const d of u){const m=d.tag.tagPosition||"head";d.$el=o.createElement(d.tag.tag),l(d),p[m]=p[m]||o.createDocumentFragment(),p[m].appendChild(d.$el)}for(const d of v)await e.hooks.callHook("dom:renderTag",d,o,c);p.head&&o.head.appendChild(p.head),p.bodyOpen&&o.body.insertBefore(p.bodyOpen,o.body.firstChild),p.bodyClose&&o.body.appendChild(p.bodyClose);for(const d in s.pendingSideEffects)s.pendingSideEffects[d]();e._dom=s,await e.hooks.callHook("dom:rendered",{renders:v}),a()}).finally(()=>{e._domUpdatePromise=void 0,e.dirty=!1})),e._domUpdatePromise}function Po(e={}){const t=e.domOptions?.render||xt;e.document=e.document||(typeof window<"u"?document:void 0);const o=e.document?.head.querySelector('script[id="unhead:payload"]')?.innerHTML||!1;return Mo({...e,plugins:[...e.plugins||[],{key:"client",hooks:{"entries:updated":t}}],init:[o?JSON.parse(o):!1,...e.init||[]]})}function $o(e,t){let o=0;return()=>{const n=++o;t(()=>{o===n&&e()})}}const Ao=(e,t)=>dt(t)?j(t):t,Tt="usehead";function Oo(e){return{install(o){o.config.globalProperties.$unhead=e,o.config.globalProperties.$head=e,o.provide(Tt,e)}}.install}function No(){if(ft()){const e=me(Tt);if(!e)throw new Error("useHead() was called without provide context, ensure you call it through the setup() function.");return e}throw new Error("useHead() was called without provide context, ensure you call it through the setup() function.")}function Do(e,t={}){const o=t.head||No();return o.ssr?o.push(e||{},t):Lo(o,e,t)}function Lo(e,t,o={}){const n=M(!1);let a;return he(()=>{const i=n.value?{}:Ee(t,Ao);a?a.patch(i):a=e.push(i,o)}),Q()&&(zt(()=>{a.dispose()}),Ft(()=>{n.value=!0}),Ht(()=>{n.value=!1})),a}function Ro(e={}){const t=Po({domOptions:{render:$o(()=>xt(t),o=>setTimeout(o,0))},...e});return t.install=Oo(t),t}const Io={install(e){if(e._context.provides.usehead)return;const t=Ro();e.use(t)}};var ke={inherit:"inherit",current:"currentcolor",transparent:"transparent",black:"#000",white:"#fff",slate:{50:"oklch(98.4% 0.003 247.858)",100:"oklch(96.8% 0.007 247.896)",200:"oklch(92.9% 0.013 255.508)",300:"oklch(86.9% 0.022 252.894)",400:"oklch(70.4% 0.04 256.788)",500:"oklch(55.4% 0.046 257.417)",600:"oklch(44.6% 0.043 257.281)",700:"oklch(37.2% 0.044 257.287)",800:"oklch(27.9% 0.041 260.031)",900:"oklch(20.8% 0.042 265.755)",950:"oklch(12.9% 0.042 264.695)"},gray:{50:"oklch(98.5% 0.002 247.839)",100:"oklch(96.7% 0.003 264.542)",200:"oklch(92.8% 0.006 264.531)",300:"oklch(87.2% 0.01 258.338)",400:"oklch(70.7% 0.022 261.325)",500:"oklch(55.1% 0.027 264.364)",600:"oklch(44.6% 0.03 256.802)",700:"oklch(37.3% 0.034 259.733)",800:"oklch(27.8% 0.033 256.848)",900:"oklch(21% 0.034 264.665)",950:"oklch(13% 0.028 261.692)"},zinc:{50:"oklch(98.5% 0 0)",100:"oklch(96.7% 0.001 286.375)",200:"oklch(92% 0.004 286.32)",300:"oklch(87.1% 0.006 286.286)",400:"oklch(70.5% 0.015 286.067)",500:"oklch(55.2% 0.016 285.938)",600:"oklch(44.2% 0.017 285.786)",700:"oklch(37% 0.013 285.805)",800:"oklch(27.4% 0.006 286.033)",900:"oklch(21% 0.006 285.885)",950:"oklch(14.1% 0.005 285.823)"},neutral:{50:"oklch(98.5% 0 0)",100:"oklch(97% 0 0)",200:"oklch(92.2% 0 0)",300:"oklch(87% 0 0)",400:"oklch(70.8% 0 0)",500:"oklch(55.6% 0 0)",600:"oklch(43.9% 0 0)",700:"oklch(37.1% 0 0)",800:"oklch(26.9% 0 0)",900:"oklch(20.5% 0 0)",950:"oklch(14.5% 0 0)"},stone:{50:"oklch(98.5% 0.001 106.423)",100:"oklch(97% 0.001 106.424)",200:"oklch(92.3% 0.003 48.717)",300:"oklch(86.9% 0.005 56.366)",400:"oklch(70.9% 0.01 56.259)",500:"oklch(55.3% 0.013 58.071)",600:"oklch(44.4% 0.011 73.639)",700:"oklch(37.4% 0.01 67.558)",800:"oklch(26.8% 0.007 34.298)",900:"oklch(21.6% 0.006 56.043)",950:"oklch(14.7% 0.004 49.25)"},red:{50:"oklch(97.1% 0.013 17.38)",100:"oklch(93.6% 0.032 17.717)",200:"oklch(88.5% 0.062 18.334)",300:"oklch(80.8% 0.114 19.571)",400:"oklch(70.4% 0.191 22.216)",500:"oklch(63.7% 0.237 25.331)",600:"oklch(57.7% 0.245 27.325)",700:"oklch(50.5% 0.213 27.518)",800:"oklch(44.4% 0.177 26.899)",900:"oklch(39.6% 0.141 25.723)",950:"oklch(25.8% 0.092 26.042)"},orange:{50:"oklch(98% 0.016 73.684)",100:"oklch(95.4% 0.038 75.164)",200:"oklch(90.1% 0.076 70.697)",300:"oklch(83.7% 0.128 66.29)",400:"oklch(75% 0.183 55.934)",500:"oklch(70.5% 0.213 47.604)",600:"oklch(64.6% 0.222 41.116)",700:"oklch(55.3% 0.195 38.402)",800:"oklch(47% 0.157 37.304)",900:"oklch(40.8% 0.123 38.172)",950:"oklch(26.6% 0.079 36.259)"},amber:{50:"oklch(98.7% 0.022 95.277)",100:"oklch(96.2% 0.059 95.617)",200:"oklch(92.4% 0.12 95.746)",300:"oklch(87.9% 0.169 91.605)",400:"oklch(82.8% 0.189 84.429)",500:"oklch(76.9% 0.188 70.08)",600:"oklch(66.6% 0.179 58.318)",700:"oklch(55.5% 0.163 48.998)",800:"oklch(47.3% 0.137 46.201)",900:"oklch(41.4% 0.112 45.904)",950:"oklch(27.9% 0.077 45.635)"},yellow:{50:"oklch(98.7% 0.026 102.212)",100:"oklch(97.3% 0.071 103.193)",200:"oklch(94.5% 0.129 101.54)",300:"oklch(90.5% 0.182 98.111)",400:"oklch(85.2% 0.199 91.936)",500:"oklch(79.5% 0.184 86.047)",600:"oklch(68.1% 0.162 75.834)",700:"oklch(55.4% 0.135 66.442)",800:"oklch(47.6% 0.114 61.907)",900:"oklch(42.1% 0.095 57.708)",950:"oklch(28.6% 0.066 53.813)"},lime:{50:"oklch(98.6% 0.031 120.757)",100:"oklch(96.7% 0.067 122.328)",200:"oklch(93.8% 0.127 124.321)",300:"oklch(89.7% 0.196 126.665)",400:"oklch(84.1% 0.238 128.85)",500:"oklch(76.8% 0.233 130.85)",600:"oklch(64.8% 0.2 131.684)",700:"oklch(53.2% 0.157 131.589)",800:"oklch(45.3% 0.124 130.933)",900:"oklch(40.5% 0.101 131.063)",950:"oklch(27.4% 0.072 132.109)"},green:{50:"oklch(98.2% 0.018 155.826)",100:"oklch(96.2% 0.044 156.743)",200:"oklch(92.5% 0.084 155.995)",300:"oklch(87.1% 0.15 154.449)",400:"oklch(79.2% 0.209 151.711)",500:"oklch(72.3% 0.219 149.579)",600:"oklch(62.7% 0.194 149.214)",700:"oklch(52.7% 0.154 150.069)",800:"oklch(44.8% 0.119 151.328)",900:"oklch(39.3% 0.095 152.535)",950:"oklch(26.6% 0.065 152.934)"},emerald:{50:"oklch(97.9% 0.021 166.113)",100:"oklch(95% 0.052 163.051)",200:"oklch(90.5% 0.093 164.15)",300:"oklch(84.5% 0.143 164.978)",400:"oklch(76.5% 0.177 163.223)",500:"oklch(69.6% 0.17 162.48)",600:"oklch(59.6% 0.145 163.225)",700:"oklch(50.8% 0.118 165.612)",800:"oklch(43.2% 0.095 166.913)",900:"oklch(37.8% 0.077 168.94)",950:"oklch(26.2% 0.051 172.552)"},teal:{50:"oklch(98.4% 0.014 180.72)",100:"oklch(95.3% 0.051 180.801)",200:"oklch(91% 0.096 180.426)",300:"oklch(85.5% 0.138 181.071)",400:"oklch(77.7% 0.152 181.912)",500:"oklch(70.4% 0.14 182.503)",600:"oklch(60% 0.118 184.704)",700:"oklch(51.1% 0.096 186.391)",800:"oklch(43.7% 0.078 188.216)",900:"oklch(38.6% 0.063 188.416)",950:"oklch(27.7% 0.046 192.524)"},cyan:{50:"oklch(98.4% 0.019 200.873)",100:"oklch(95.6% 0.045 203.388)",200:"oklch(91.7% 0.08 205.041)",300:"oklch(86.5% 0.127 207.078)",400:"oklch(78.9% 0.154 211.53)",500:"oklch(71.5% 0.143 215.221)",600:"oklch(60.9% 0.126 221.723)",700:"oklch(52% 0.105 223.128)",800:"oklch(45% 0.085 224.283)",900:"oklch(39.8% 0.07 227.392)",950:"oklch(30.2% 0.056 229.695)"},sky:{50:"oklch(97.7% 0.013 236.62)",100:"oklch(95.1% 0.026 236.824)",200:"oklch(90.1% 0.058 230.902)",300:"oklch(82.8% 0.111 230.318)",400:"oklch(74.6% 0.16 232.661)",500:"oklch(68.5% 0.169 237.323)",600:"oklch(58.8% 0.158 241.966)",700:"oklch(50% 0.134 242.749)",800:"oklch(44.3% 0.11 240.79)",900:"oklch(39.1% 0.09 240.876)",950:"oklch(29.3% 0.066 243.157)"},blue:{50:"oklch(97% 0.014 254.604)",100:"oklch(93.2% 0.032 255.585)",200:"oklch(88.2% 0.059 254.128)",300:"oklch(80.9% 0.105 251.813)",400:"oklch(70.7% 0.165 254.624)",500:"oklch(62.3% 0.214 259.815)",600:"oklch(54.6% 0.245 262.881)",700:"oklch(48.8% 0.243 264.376)",800:"oklch(42.4% 0.199 265.638)",900:"oklch(37.9% 0.146 265.522)",950:"oklch(28.2% 0.091 267.935)"},indigo:{50:"oklch(96.2% 0.018 272.314)",100:"oklch(93% 0.034 272.788)",200:"oklch(87% 0.065 274.039)",300:"oklch(78.5% 0.115 274.713)",400:"oklch(67.3% 0.182 276.935)",500:"oklch(58.5% 0.233 277.117)",600:"oklch(51.1% 0.262 276.966)",700:"oklch(45.7% 0.24 277.023)",800:"oklch(39.8% 0.195 277.366)",900:"oklch(35.9% 0.144 278.697)",950:"oklch(25.7% 0.09 281.288)"},violet:{50:"oklch(96.9% 0.016 293.756)",100:"oklch(94.3% 0.029 294.588)",200:"oklch(89.4% 0.057 293.283)",300:"oklch(81.1% 0.111 293.571)",400:"oklch(70.2% 0.183 293.541)",500:"oklch(60.6% 0.25 292.717)",600:"oklch(54.1% 0.281 293.009)",700:"oklch(49.1% 0.27 292.581)",800:"oklch(43.2% 0.232 292.759)",900:"oklch(38% 0.189 293.745)",950:"oklch(28.3% 0.141 291.089)"},purple:{50:"oklch(97.7% 0.014 308.299)",100:"oklch(94.6% 0.033 307.174)",200:"oklch(90.2% 0.063 306.703)",300:"oklch(82.7% 0.119 306.383)",400:"oklch(71.4% 0.203 305.504)",500:"oklch(62.7% 0.265 303.9)",600:"oklch(55.8% 0.288 302.321)",700:"oklch(49.6% 0.265 301.924)",800:"oklch(43.8% 0.218 303.724)",900:"oklch(38.1% 0.176 304.987)",950:"oklch(29.1% 0.149 302.717)"},fuchsia:{50:"oklch(97.7% 0.017 320.058)",100:"oklch(95.2% 0.037 318.852)",200:"oklch(90.3% 0.076 319.62)",300:"oklch(83.3% 0.145 321.434)",400:"oklch(74% 0.238 322.16)",500:"oklch(66.7% 0.295 322.15)",600:"oklch(59.1% 0.293 322.896)",700:"oklch(51.8% 0.253 323.949)",800:"oklch(45.2% 0.211 324.591)",900:"oklch(40.1% 0.17 325.612)",950:"oklch(29.3% 0.136 325.661)"},pink:{50:"oklch(97.1% 0.014 343.198)",100:"oklch(94.8% 0.028 342.258)",200:"oklch(89.9% 0.061 343.231)",300:"oklch(82.3% 0.12 346.018)",400:"oklch(71.8% 0.202 349.761)",500:"oklch(65.6% 0.241 354.308)",600:"oklch(59.2% 0.249 0.584)",700:"oklch(52.5% 0.223 3.958)",800:"oklch(45.9% 0.187 3.815)",900:"oklch(40.8% 0.153 2.432)",950:"oklch(28.4% 0.109 3.907)"},rose:{50:"oklch(96.9% 0.015 12.422)",100:"oklch(94.1% 0.03 12.58)",200:"oklch(89.2% 0.058 10.001)",300:"oklch(81% 0.117 11.638)",400:"oklch(71.2% 0.194 13.428)",500:"oklch(64.5% 0.246 16.439)",600:"oklch(58.6% 0.253 17.585)",700:"oklch(51.4% 0.222 16.935)",800:"oklch(45.5% 0.188 13.697)",900:"oklch(41% 0.159 10.272)",950:"oklch(27.1% 0.105 12.094)"}};const fe=qt?window:void 0;function Ct(e){var t;const o=j(e);return(t=o?.$el)!=null?t:o}function Ve(...e){const t=[],o=()=>{t.forEach(s=>s()),t.length=0},n=(s,c,l,u)=>(s.addEventListener(c,l,u),()=>s.removeEventListener(c,l,u)),a=T(()=>{const s=Ne(j(e[0])).filter(c=>c!=null);return s.every(c=>typeof c!="string")?s:void 0}),r=Kt(()=>{var s,c;return[(c=(s=a.value)==null?void 0:s.map(l=>Ct(l)))!=null?c:[fe].filter(l=>l!=null),Ne(j(a.value?e[1]:e[0])),Ne(h(a.value?e[2]:e[1])),j(a.value?e[3]:e[2])]},([s,c,l,u])=>{if(o(),!s?.length||!c?.length||!l?.length)return;const p=Yt(u)?{...u}:u;t.push(...s.flatMap(v=>c.flatMap(d=>l.map(m=>n(v,d,m,p)))))},{flush:"post"}),i=()=>{r(),o()};return Ut(o),i}function jo(){const e=G(!1),t=Q();return t&&re(()=>{e.value=!0},t),e}function Vo(e){const t=jo();return T(()=>(t.value,!!e()))}const zo=Symbol("vueuse-ssr-width");function Fo(){const e=ft()?Jt(zo,null):null;return typeof e=="number"?e:void 0}function Ho(e,t={}){const{window:o=fe,ssrWidth:n=Fo()}=t,a=Vo(()=>o&&"matchMedia"in o&&typeof o.matchMedia=="function"),r=G(typeof n=="number"),i=G(),s=G(!1),c=l=>{s.value=l.matches};return he(()=>{if(r.value){r.value=!a.value;const l=j(e).split(",");s.value=l.some(u=>{const p=u.includes("not all"),v=u.match(/\(\s*min-width:\s*(-?\d+(?:\.\d*)?[a-z]+\s*)\)/),d=u.match(/\(\s*max-width:\s*(-?\d+(?:\.\d*)?[a-z]+\s*)\)/);let m=!!(v||d);return v&&m&&(m=n>=Je(v[1])),d&&m&&(m=n<=Je(d[1])),p?!m:m});return}a.value&&(i.value=o.matchMedia(j(e)),s.value=i.value.matches)}),Ve(i,"change",c,{passive:!0}),T(()=>s.value)}const be=typeof globalThis<"u"?globalThis:typeof window<"u"?window:typeof global<"u"?global:typeof self<"u"?self:{},we="__vueuse_ssr_handlers__",Bo=qo();function qo(){return we in be||(be[we]=be[we]||{}),be[we]}function Et(e,t){return Bo[e]||t}function Wo(e){return Ho("(prefers-color-scheme: dark)",e)}function Ko(e){return e==null?"any":e instanceof Set?"set":e instanceof Map?"map":e instanceof Date?"date":typeof e=="boolean"?"boolean":typeof e=="string"?"string":typeof e=="object"?"object":Number.isNaN(e)?"any":"number"}const Uo={boolean:{read:e=>e==="true",write:e=>String(e)},object:{read:e=>JSON.parse(e),write:e=>JSON.stringify(e)},number:{read:e=>Number.parseFloat(e),write:e=>String(e)},any:{read:e=>e,write:e=>String(e)},string:{read:e=>e,write:e=>String(e)},map:{read:e=>new Map(JSON.parse(e)),write:e=>JSON.stringify(Array.from(e.entries()))},set:{read:e=>new Set(JSON.parse(e)),write:e=>JSON.stringify(Array.from(e))},date:{read:e=>new Date(e),write:e=>e.toISOString()}},ot="vueuse-storage";function Jo(e,t,o,n={}){var a;const{flush:r="pre",deep:i=!0,listenToStorageChanges:s=!0,writeDefaults:c=!0,mergeDefaults:l=!1,shallow:u,window:p=fe,eventFilter:v,onError:d=E=>{console.error(E)},initOnMounted:m}=n,f=(u?G:M)(typeof t=="function"?t():t),y=T(()=>j(e));if(!o)try{o=Et("getDefaultStorage",()=>{var E;return(E=fe)==null?void 0:E.localStorage})()}catch(E){d(E)}if(!o)return f;const g=j(t),b=Ko(g),k=(a=n.serializer)!=null?a:Uo[b],{pause:w,resume:_}=Wt(f,()=>L(f.value),{flush:r,deep:i,eventFilter:v});W(y,()=>I(),{flush:r});let $=!1;const V=E=>{m&&!$||I(E)},K=E=>{m&&!$||H(E)};p&&s&&(o instanceof Storage?Ve(p,"storage",V,{passive:!0}):Ve(p,ot,K)),m?pt(()=>{$=!0,I()}):I();function R(E,O){if(p){const z={key:y.value,oldValue:E,newValue:O,storageArea:o};p.dispatchEvent(o instanceof Storage?new StorageEvent("storage",z):new CustomEvent(ot,{detail:z}))}}function L(E){try{const O=o.getItem(y.value);if(E==null)R(O,null),o.removeItem(y.value);else{const z=k.write(E);O!==z&&(o.setItem(y.value,z),R(O,z))}}catch(O){d(O)}}function Y(E){const O=E?E.newValue:o.getItem(y.value);if(O==null)return c&&g!=null&&o.setItem(y.value,k.write(g)),g;if(!E&&l){const z=k.read(O);return typeof l=="function"?l(z,g):b==="object"&&!Array.isArray(z)?{...g,...z}:z}else return typeof O!="string"?O:k.read(O)}function I(E){if(!(E&&E.storageArea!==o)){if(E&&E.key==null){f.value=g;return}if(!(E&&E.key!==y.value)){w();try{E?.newValue!==k.write(f.value)&&(f.value=Y(E))}catch(O){d(O)}finally{E?ie(_):_()}}}}function H(E){I(E.detail)}return f}const Yo="*,*::before,*::after{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}";function Xo(e={}){const{selector:t="html",attribute:o="class",initialValue:n="auto",window:a=fe,storage:r,storageKey:i="vueuse-color-scheme",listenToStorageChanges:s=!0,storageRef:c,emitAuto:l,disableTransition:u=!0}=e,p={auto:"",light:"light",dark:"dark",...e.modes||{}},v=Wo({window:a}),d=T(()=>v.value?"dark":"light"),m=c||(i==null?Bt(n):Jo(i,n,r,{window:a,listenToStorageChanges:s})),f=T(()=>m.value==="auto"?d.value:m.value),y=Et("updateHTMLAttrs",(w,_,$)=>{const V=typeof w=="string"?a?.document.querySelector(w):Ct(w);if(!V)return;const K=new Set,R=new Set;let L=null;if(_==="class"){const I=$.split(/\s/g);Object.values(p).flatMap(H=>(H||"").split(/\s/g)).filter(Boolean).forEach(H=>{I.includes(H)?K.add(H):R.add(H)})}else L={key:_,value:$};if(K.size===0&&R.size===0&&L===null)return;let Y;u&&(Y=a.document.createElement("style"),Y.appendChild(document.createTextNode(Yo)),a.document.head.appendChild(Y));for(const I of K)V.classList.add(I);for(const I of R)V.classList.remove(I);L&&V.setAttribute(L.key,L.value),u&&(a.getComputedStyle(Y).opacity,document.head.removeChild(Y))});function g(w){var _;y(t,o,(_=p[w])!=null?_:w)}function b(w){e.onChanged?e.onChanged(w,g):g(w)}W(f,b,{flush:"post",immediate:!0}),pt(()=>b(f.value));const k=T({get(){return l?m.value:f.value},set(w){m.value=w}});return Object.assign(k,{store:m,system:d,state:f})}function Go(e={}){const{valueDark:t="dark",valueLight:o=""}=e,n=Xo({...e,onChanged:(i,s)=>{var c;e.onChanged?(c=e.onChanged)==null||c.call(e,i==="dark",s,i):s(i)},modes:{dark:t,light:o}}),a=T(()=>n.system.value);return T({get(){return n.value==="dark"},set(i){const s=i?"dark":"light";a.value===s?n.value="auto":n.value=s}})}function Qo(e){return Xt(e,{dir:"ltr"})}function Zo(e){return(t,o)=>en(t,o,h(e))}function en(e,t,o){return Gt(o,`messages.${e}`,e).replace(/\{(\w+)\}/g,(a,r)=>`${t?.[r]??`{${r}}`}`)}function tn(e){const t=T(()=>h(e).name),o=T(()=>h(e).code),n=T(()=>h(e).dir),a=dt(e)?e:M(e);return{lang:t,code:o,dir:n,locale:a,t:Zo(e)}}const nt=Qo({name:"English",code:"en",messages:{inputMenu:{noMatch:"No matching data",noData:"No data",create:'Create "{label}"'},calendar:{prevYear:"Previous year",nextYear:"Next year",prevMonth:"Previous month",nextMonth:"Next month"},inputNumber:{increment:"Increment",decrement:"Decrement"},commandPalette:{placeholder:"Type a command or search...",noMatch:"No matching data",noData:"No data",close:"Close",back:"Back"},selectMenu:{noMatch:"No matching data",noData:"No data",create:'Create "{label}"',search:"Search..."},toast:{close:"Close"},carousel:{prev:"Prev",next:"Next",dots:"Choose slide to display",goto:"Go to slide {slide}"},modal:{close:"Close"},slideover:{close:"Close"},alert:{close:"Close"},table:{noData:"No data"}}}),St=Symbol.for("nuxt-ui.locale-context"),on=e=>{const t=e||Z(me(St,nt));return tn(T(()=>t.value||nt))},Mt=mt(on),nn=[50,100,200,300,400,500,600,700,800,900,950];function sn(e,t){return e in ke&&typeof ke[e]=="object"&&t in ke[e]?ke[e][t]:""}function an(e,t){return`${nn.map(o=>`--ui-color-${e}-${o}: var(--color-${t==="neutral"?"old-neutral":t}-${o}, ${sn(t,o)});`).join(`
-  `)}`}function st(e,t){return`--ui-${e}: var(--ui-color-${e}-${t});`}const rn=Qt(()=>{const e=Me();Zt();const t=T(()=>{const{neutral:n,...a}=e.ui.colors;return`@layer base {
+import { c as createHooks, t as toValue, i as isRef, h as hasInjectionContext, a as inject, r as ref, w as watchEffect, o as onBeforeUnmount, b as onDeactivated, d as onActivated, g as getCurrentInstance, e as computed, f as toRef, j as watch, k as tryOnMounted, l as isClient$1, s as shallowRef, m as watchPausable, p as pxValue, n as toArray$1, q as watchImmediate$1, u as tryOnScopeDispose$1, v as injectLocal, x as onMounted, y as isObject$1, z as unref, A as nextTick, B as defu, C as get, D as createSharedComposable, E as toRef$1, F as defineNuxtPlugin, G as useNuxtApp, H as useAppConfig, I as defineComponent, J as createBlock, K as openBlock, L as withCtx, M as renderSlot, P as Primitive, N as readonly, O as getCurrentScope, Q as onScopeDispose, R as provide, S as toRefs, T as onUnmounted, U as renderSlotFragments, V as h, W as toHandlerKey, X as camelize, Y as reactive, Z as createCommentVNode, _ as Teleport, $ as useForwardProps, a0 as markRaw, a1 as Slot, a2 as mergeProps, a3 as createTextVNode, a4 as toDisplayString, a5 as createElementBlock, a6 as createVNode, a7 as withModifiers, a8 as Fragment, a9 as normalizeProps$1, aa as guardReactiveProps, ab as normalizeStyle, ac as useState, ad as useSlots, ae as reactivePick, af as tv, ag as normalizeClass, ah as renderList, ai as createBaseVNode, aj as _sfc_main$p, ak as _sfc_main$q, al as resolveDynamicComponent, am as _sfc_main$r, an as omit, ao as shallowReactive, ap as useId, aq as createApp } from "./shared-button.js";
+(function polyfill() {
+  const relList = document.createElement("link").relList;
+  if (relList && relList.supports && relList.supports("modulepreload")) return;
+  for (const link of document.querySelectorAll('link[rel="modulepreload"]')) processPreload(link);
+  new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type !== "childList") continue;
+      for (const node of mutation.addedNodes) if (node.tagName === "LINK" && node.rel === "modulepreload") processPreload(node);
+    }
+  }).observe(document, {
+    childList: true,
+    subtree: true
+  });
+  function getFetchOpts(link) {
+    const fetchOpts = {};
+    if (link.integrity) fetchOpts.integrity = link.integrity;
+    if (link.referrerPolicy) fetchOpts.referrerPolicy = link.referrerPolicy;
+    if (link.crossOrigin === "use-credentials") fetchOpts.credentials = "include";
+    else if (link.crossOrigin === "anonymous") fetchOpts.credentials = "omit";
+    else fetchOpts.credentials = "same-origin";
+    return fetchOpts;
+  }
+  function processPreload(link) {
+    if (link.ep) return;
+    link.ep = true;
+    const fetchOpts = getFetchOpts(link);
+    fetch(link.href, fetchOpts);
+  }
+})();
+const DupeableTags = /* @__PURE__ */ new Set(["link", "style", "script", "noscript"]);
+const TagsWithInnerContent = /* @__PURE__ */ new Set(["title", "titleTemplate", "script", "style", "noscript"]);
+const HasElementTags = /* @__PURE__ */ new Set([
+  "base",
+  "meta",
+  "link",
+  "style",
+  "script",
+  "noscript"
+]);
+const ValidHeadTags = /* @__PURE__ */ new Set([
+  "title",
+  "base",
+  "htmlAttrs",
+  "bodyAttrs",
+  "meta",
+  "link",
+  "style",
+  "script",
+  "noscript"
+]);
+const UniqueTags = /* @__PURE__ */ new Set(["base", "title", "titleTemplate", "bodyAttrs", "htmlAttrs", "templateParams"]);
+const TagConfigKeys = /* @__PURE__ */ new Set(["key", "tagPosition", "tagPriority", "tagDuplicateStrategy", "innerHTML", "textContent", "processTemplateParams"]);
+const UsesMergeStrategy = /* @__PURE__ */ new Set(["templateParams", "htmlAttrs", "bodyAttrs"]);
+const MetaTagsArrayable = /* @__PURE__ */ new Set([
+  "theme-color",
+  "google-site-verification",
+  "og",
+  "article",
+  "book",
+  "profile",
+  "twitter",
+  "author"
+]);
+const allowedMetaProperties = ["name", "property", "http-equiv"];
+const StandardSingleMetaTags = /* @__PURE__ */ new Set([
+  "viewport",
+  "description",
+  "keywords",
+  "robots"
+]);
+function isMetaArrayDupeKey(v) {
+  const parts = v.split(":");
+  if (!parts.length)
+    return false;
+  return MetaTagsArrayable.has(parts[1]);
+}
+function dedupeKey(tag) {
+  const { props, tag: name } = tag;
+  if (UniqueTags.has(name))
+    return name;
+  if (name === "link" && props.rel === "canonical")
+    return "canonical";
+  if (props.charset)
+    return "charset";
+  if (tag.tag === "meta") {
+    for (const n of allowedMetaProperties) {
+      if (props[n] !== void 0) {
+        const propValue = props[n];
+        const isStructured = propValue.includes(":");
+        const isStandardSingle = StandardSingleMetaTags.has(propValue);
+        const shouldAlwaysDedupe = isStructured || isStandardSingle;
+        const keyPart = !shouldAlwaysDedupe && tag.key ? `:key:${tag.key}` : "";
+        return `${name}:${propValue}${keyPart}`;
+      }
+    }
+  }
+  if (tag.key) {
+    return `${name}:key:${tag.key}`;
+  }
+  if (props.id) {
+    return `${name}:id:${props.id}`;
+  }
+  if (TagsWithInnerContent.has(name)) {
+    const v = tag.textContent || tag.innerHTML;
+    if (v) {
+      return `${name}:content:${v}`;
+    }
+  }
+}
+function hashTag(tag) {
+  const dedupe = tag._h || tag._d;
+  if (dedupe)
+    return dedupe;
+  const inner = tag.textContent || tag.innerHTML;
+  if (inner)
+    return inner;
+  return `${tag.tag}:${Object.entries(tag.props).map(([k, v]) => `${k}:${String(v)}`).join(",")}`;
+}
+function walkResolver(val, resolve, key) {
+  const type = typeof val;
+  if (type === "function") {
+    if (!key || key !== "titleTemplate" && !(key[0] === "o" && key[1] === "n")) {
+      val = val();
+    }
+  }
+  let v;
+  if (resolve) {
+    v = resolve(key, val);
+  }
+  if (Array.isArray(v)) {
+    return v.map((r) => walkResolver(r, resolve));
+  }
+  if (v?.constructor === Object) {
+    const next = {};
+    for (const key2 of Object.keys(v)) {
+      next[key2] = walkResolver(v[key2], resolve, key2);
+    }
+    return next;
+  }
+  return v;
+}
+function normalizeStyleClassProps(key, value) {
+  const store = key === "style" ? /* @__PURE__ */ new Map() : /* @__PURE__ */ new Set();
+  function processValue(rawValue) {
+    const value2 = rawValue.trim();
+    if (!value2)
+      return;
+    if (key === "style") {
+      const [k, ...v] = value2.split(":").map((s) => s.trim());
+      if (k && v.length)
+        store.set(k, v.join(":"));
+    } else {
+      value2.split(" ").filter(Boolean).forEach((c) => store.add(c));
+    }
+  }
+  if (typeof value === "string") {
+    key === "style" ? value.split(";").forEach(processValue) : processValue(value);
+  } else if (Array.isArray(value)) {
+    value.forEach((item) => processValue(item));
+  } else if (value && typeof value === "object") {
+    Object.entries(value).forEach(([k, v]) => {
+      if (v && v !== "false") {
+        key === "style" ? store.set(k.trim(), v) : processValue(k);
+      }
+    });
+  }
+  return store;
+}
+function normalizeProps(tag, input) {
+  tag.props = tag.props || {};
+  if (!input) {
+    return tag;
+  }
+  if (tag.tag === "templateParams") {
+    tag.props = input;
+    return tag;
+  }
+  Object.entries(input).forEach(([key, value]) => {
+    if (value === null) {
+      tag.props[key] = null;
+      return;
+    }
+    if (key === "class" || key === "style") {
+      tag.props[key] = normalizeStyleClassProps(key, value);
+      return;
+    }
+    if (TagConfigKeys.has(key)) {
+      if (["textContent", "innerHTML"].includes(key) && typeof value === "object") {
+        let type = input.type;
+        if (!input.type) {
+          type = "application/json";
+        }
+        if (!type?.endsWith("json") && type !== "speculationrules") {
+          return;
+        }
+        input.type = type;
+        tag.props.type = type;
+        tag[key] = JSON.stringify(value);
+      } else {
+        tag[key] = value;
+      }
+      return;
+    }
+    const strValue = String(value);
+    const isDataKey = key.startsWith("data-");
+    if (strValue === "true" || strValue === "") {
+      tag.props[key] = isDataKey ? strValue : true;
+    } else if (!value && isDataKey && strValue === "false") {
+      tag.props[key] = "false";
+    } else if (value !== void 0) {
+      tag.props[key] = value;
+    }
+  });
+  return tag;
+}
+function normalizeTag(tagName, _input) {
+  const input = typeof _input === "object" && typeof _input !== "function" ? _input : { [tagName === "script" || tagName === "noscript" || tagName === "style" ? "innerHTML" : "textContent"]: _input };
+  const tag = normalizeProps({ tag: tagName, props: {} }, input);
+  if (tag.key && DupeableTags.has(tag.tag)) {
+    tag.props["data-hid"] = tag._h = tag.key;
+  }
+  if (tag.tag === "script" && typeof tag.innerHTML === "object") {
+    tag.innerHTML = JSON.stringify(tag.innerHTML);
+    tag.props.type = tag.props.type || "application/json";
+  }
+  return Array.isArray(tag.props.content) ? tag.props.content.map((v) => ({ ...tag, props: { ...tag.props, content: v } })) : tag;
+}
+function normalizeEntryToTags(input, propResolvers) {
+  if (!input) {
+    return [];
+  }
+  if (typeof input === "function") {
+    input = input();
+  }
+  const resolvers = (key, val) => {
+    for (let i = 0; i < propResolvers.length; i++) {
+      val = propResolvers[i](key, val);
+    }
+    return val;
+  };
+  input = resolvers(void 0, input);
+  const tags = [];
+  input = walkResolver(input, resolvers);
+  Object.entries(input || {}).forEach(([key, value]) => {
+    if (value === void 0)
+      return;
+    for (const v of Array.isArray(value) ? value : [value])
+      tags.push(normalizeTag(key, v));
+  });
+  return tags.flat();
+}
+const sortTags = (a, b) => a._w === b._w ? a._p - b._p : a._w - b._w;
+const TAG_WEIGHTS = {
+  base: -10,
+  title: 10
+};
+const TAG_ALIASES = {
+  critical: -8,
+  high: -1,
+  low: 2
+};
+const WEIGHT_MAP = {
+  meta: {
+    "content-security-policy": -30,
+    "charset": -20,
+    "viewport": -15
+  },
+  link: {
+    "preconnect": 20,
+    "stylesheet": 60,
+    "preload": 70,
+    "modulepreload": 70,
+    "prefetch": 90,
+    "dns-prefetch": 90,
+    "prerender": 90
+  },
+  script: {
+    async: 30,
+    defer: 80,
+    sync: 50
+  },
+  style: {
+    imported: 40,
+    sync: 60
+  }
+};
+const ImportStyleRe = /@import/;
+const isTruthy = (val) => val === "" || val === true;
+function tagWeight(head, tag) {
+  if (typeof tag.tagPriority === "number")
+    return tag.tagPriority;
+  let weight = 100;
+  const offset = TAG_ALIASES[tag.tagPriority] || 0;
+  const weightMap = head.resolvedOptions.disableCapoSorting ? {
+    link: {},
+    script: {},
+    style: {}
+  } : WEIGHT_MAP;
+  if (tag.tag in TAG_WEIGHTS) {
+    weight = TAG_WEIGHTS[tag.tag];
+  } else if (tag.tag === "meta") {
+    const metaType = tag.props["http-equiv"] === "content-security-policy" ? "content-security-policy" : tag.props.charset ? "charset" : tag.props.name === "viewport" ? "viewport" : null;
+    if (metaType)
+      weight = WEIGHT_MAP.meta[metaType];
+  } else if (tag.tag === "link" && tag.props.rel) {
+    weight = weightMap.link[tag.props.rel];
+  } else if (tag.tag === "script") {
+    if (isTruthy(tag.props.async)) {
+      weight = weightMap.script.async;
+    } else if (tag.props.src && !isTruthy(tag.props.defer) && !isTruthy(tag.props.async) && tag.props.type !== "module" && !tag.props.type?.endsWith("json")) {
+      weight = weightMap.script.sync;
+    } else if (isTruthy(tag.props.defer) && tag.props.src && !isTruthy(tag.props.async)) {
+      weight = weightMap.script.defer;
+    }
+  } else if (tag.tag === "style") {
+    weight = tag.innerHTML && ImportStyleRe.test(tag.innerHTML) ? weightMap.style.imported : weightMap.style.sync;
+  }
+  return (weight || 100) + offset;
+}
+function registerPlugin(head, p) {
+  const plugin = typeof p === "function" ? p(head) : p;
+  const key = plugin.key || String(head.plugins.size + 1);
+  const exists = head.plugins.get(key);
+  if (!exists) {
+    head.plugins.set(key, plugin);
+    head.hooks.addHooks(plugin.hooks || {});
+  }
+}
+// @__NO_SIDE_EFFECTS__
+function createUnhead(resolvedOptions = {}) {
+  const hooks = createHooks();
+  hooks.addHooks(resolvedOptions.hooks || {});
+  const ssr = !resolvedOptions.document;
+  const entries = /* @__PURE__ */ new Map();
+  const plugins = /* @__PURE__ */ new Map();
+  const normalizeQueue = /* @__PURE__ */ new Set();
+  const head = {
+    _entryCount: 1,
+    // 0 is reserved for internal use
+    plugins,
+    dirty: false,
+    resolvedOptions,
+    hooks,
+    ssr,
+    entries,
+    headEntries() {
+      return [...entries.values()];
+    },
+    use: (p) => registerPlugin(head, p),
+    push(input, _options) {
+      const options = { ..._options || {} };
+      delete options.head;
+      const _i = options._index ?? head._entryCount++;
+      const inst = { _i, input, options };
+      const _ = {
+        _poll(rm = false) {
+          head.dirty = true;
+          !rm && normalizeQueue.add(_i);
+          hooks.callHook("entries:updated", head);
+        },
+        dispose() {
+          if (entries.delete(_i)) {
+            head.invalidate();
+          }
+        },
+        // a patch is the same as creating a new entry, just a nice DX
+        patch(input2) {
+          if (!options.mode || options.mode === "server" && ssr || options.mode === "client" && !ssr) {
+            inst.input = input2;
+            entries.set(_i, inst);
+            _._poll();
+          }
+        }
+      };
+      _.patch(input);
+      return _;
+    },
+    async resolveTags() {
+      const ctx = {
+        tagMap: /* @__PURE__ */ new Map(),
+        tags: [],
+        entries: [...head.entries.values()]
+      };
+      await hooks.callHook("entries:resolve", ctx);
+      while (normalizeQueue.size) {
+        const i = normalizeQueue.values().next().value;
+        normalizeQueue.delete(i);
+        const e = entries.get(i);
+        if (e) {
+          const normalizeCtx = {
+            tags: normalizeEntryToTags(e.input, resolvedOptions.propResolvers || []).map((t) => Object.assign(t, e.options)),
+            entry: e
+          };
+          await hooks.callHook("entries:normalize", normalizeCtx);
+          e._tags = normalizeCtx.tags.map((t, i2) => {
+            t._w = tagWeight(head, t);
+            t._p = (e._i << 10) + i2;
+            t._d = dedupeKey(t);
+            return t;
+          });
+        }
+      }
+      let hasFlatMeta = false;
+      ctx.entries.flatMap((e) => (e._tags || []).map((t) => ({ ...t, props: { ...t.props } }))).sort(sortTags).reduce((acc, next) => {
+        const k = String(next._d || next._p);
+        if (!acc.has(k))
+          return acc.set(k, next);
+        const prev = acc.get(k);
+        const strategy = next?.tagDuplicateStrategy || (UsesMergeStrategy.has(next.tag) ? "merge" : null) || (next.key && next.key === prev.key ? "merge" : null);
+        if (strategy === "merge") {
+          const newProps = { ...prev.props };
+          Object.entries(next.props).forEach(([p, v]) => (
+            // @ts-expect-error untyped
+            newProps[p] = p === "style" ? new Map([...prev.props.style || /* @__PURE__ */ new Map(), ...v]) : p === "class" ? /* @__PURE__ */ new Set([...prev.props.class || /* @__PURE__ */ new Set(), ...v]) : v
+          ));
+          acc.set(k, { ...next, props: newProps });
+        } else if (next._p >> 10 === prev._p >> 10 && next.tag === "meta" && isMetaArrayDupeKey(k)) {
+          acc.set(k, Object.assign([...Array.isArray(prev) ? prev : [prev], next], next));
+          hasFlatMeta = true;
+        } else if (next._w === prev._w ? next._p > prev._p : next?._w < prev?._w) {
+          acc.set(k, next);
+        }
+        return acc;
+      }, ctx.tagMap);
+      const title = ctx.tagMap.get("title");
+      const titleTemplate = ctx.tagMap.get("titleTemplate");
+      head._title = title?.textContent;
+      if (titleTemplate) {
+        const titleTemplateFn = titleTemplate?.textContent;
+        head._titleTemplate = titleTemplateFn;
+        if (titleTemplateFn) {
+          let newTitle = typeof titleTemplateFn === "function" ? titleTemplateFn(title?.textContent) : titleTemplateFn;
+          if (typeof newTitle === "string" && !head.plugins.has("template-params")) {
+            newTitle = newTitle.replace("%s", title?.textContent || "");
+          }
+          if (title) {
+            newTitle === null ? ctx.tagMap.delete("title") : ctx.tagMap.set("title", { ...title, textContent: newTitle });
+          } else {
+            titleTemplate.tag = "title";
+            titleTemplate.textContent = newTitle;
+          }
+        }
+      }
+      ctx.tags = Array.from(ctx.tagMap.values());
+      if (hasFlatMeta) {
+        ctx.tags = ctx.tags.flat().sort(sortTags);
+      }
+      await hooks.callHook("tags:beforeResolve", ctx);
+      await hooks.callHook("tags:resolve", ctx);
+      await hooks.callHook("tags:afterResolve", ctx);
+      const finalTags = [];
+      for (const t of ctx.tags) {
+        const { innerHTML, tag, props } = t;
+        if (!ValidHeadTags.has(tag)) {
+          continue;
+        }
+        if (Object.keys(props).length === 0 && !t.innerHTML && !t.textContent) {
+          continue;
+        }
+        if (tag === "meta" && !props.content && !props["http-equiv"] && !props.charset) {
+          continue;
+        }
+        if (tag === "script" && innerHTML) {
+          if (props.type?.endsWith("json")) {
+            const v = typeof innerHTML === "string" ? innerHTML : JSON.stringify(innerHTML);
+            t.innerHTML = v.replace(/</g, "\\u003C");
+          } else if (typeof innerHTML === "string") {
+            t.innerHTML = innerHTML.replace(new RegExp(`</${tag}`, "g"), `<\\/${tag}`);
+          }
+          t._d = dedupeKey(t);
+        }
+        finalTags.push(t);
+      }
+      return finalTags;
+    },
+    invalidate() {
+      for (const entry of entries.values()) {
+        normalizeQueue.add(entry._i);
+      }
+      head.dirty = true;
+      hooks.callHook("entries:updated", head);
+    }
+  };
+  (resolvedOptions?.plugins || []).forEach((p) => registerPlugin(head, p));
+  head.hooks.callHook("init", head);
+  resolvedOptions.init?.forEach((e) => e && head.push(e));
+  return head;
+}
+async function renderDOMHead(head, options = {}) {
+  const dom = options.document || head.resolvedOptions.document;
+  if (!dom || !head.dirty)
+    return;
+  const beforeRenderCtx = { shouldRender: true, tags: [] };
+  await head.hooks.callHook("dom:beforeRender", beforeRenderCtx);
+  if (!beforeRenderCtx.shouldRender)
+    return;
+  if (head._domUpdatePromise) {
+    return head._domUpdatePromise;
+  }
+  head._domUpdatePromise = new Promise(async (resolve) => {
+    const dupeKeyCounter = /* @__PURE__ */ new Map();
+    const resolveTagPromise = new Promise((resolve2) => {
+      head.resolveTags().then((tags2) => {
+        resolve2(
+          tags2.map((tag) => {
+            const count = dupeKeyCounter.get(tag._d) || 0;
+            const res = {
+              tag,
+              id: (count ? `${tag._d}:${count}` : tag._d) || hashTag(tag),
+              shouldRender: true
+            };
+            if (tag._d && isMetaArrayDupeKey(tag._d)) {
+              dupeKeyCounter.set(tag._d, count + 1);
+            }
+            return res;
+          })
+        );
+      });
+    });
+    let state = head._dom;
+    if (!state) {
+      state = {
+        title: dom.title,
+        elMap: (/* @__PURE__ */ new Map()).set("htmlAttrs", dom.documentElement).set("bodyAttrs", dom.body)
+      };
+      for (const key of ["body", "head"]) {
+        const children = dom[key]?.children;
+        for (const c of children) {
+          const tag = c.tagName.toLowerCase();
+          if (!HasElementTags.has(tag)) {
+            continue;
+          }
+          const next = normalizeProps({ tag, props: {} }, {
+            innerHTML: c.innerHTML,
+            ...c.getAttributeNames().reduce((props, name) => {
+              props[name] = c.getAttribute(name);
+              return props;
+            }, {}) || {}
+          });
+          next.key = c.getAttribute("data-hid") || void 0;
+          next._d = dedupeKey(next) || hashTag(next);
+          if (state.elMap.has(next._d)) {
+            let count = 1;
+            let k = next._d;
+            while (state.elMap.has(k)) {
+              k = `${next._d}:${count++}`;
+            }
+            state.elMap.set(k, c);
+          } else {
+            state.elMap.set(next._d, c);
+          }
+        }
+      }
+    }
+    state.pendingSideEffects = { ...state.sideEffects };
+    state.sideEffects = {};
+    function track(id, scope, fn) {
+      const k = `${id}:${scope}`;
+      state.sideEffects[k] = fn;
+      delete state.pendingSideEffects[k];
+    }
+    function trackCtx({ id, $el, tag }) {
+      const isAttrTag = tag.tag.endsWith("Attrs");
+      state.elMap.set(id, $el);
+      if (!isAttrTag) {
+        if (tag.textContent && tag.textContent !== $el.textContent) {
+          $el.textContent = tag.textContent;
+        }
+        if (tag.innerHTML && tag.innerHTML !== $el.innerHTML) {
+          $el.innerHTML = tag.innerHTML;
+        }
+        track(id, "el", () => {
+          $el?.remove();
+          state.elMap.delete(id);
+        });
+      }
+      for (const k in tag.props) {
+        if (!Object.prototype.hasOwnProperty.call(tag.props, k))
+          continue;
+        const value = tag.props[k];
+        if (k.startsWith("on") && typeof value === "function") {
+          const dataset = $el?.dataset;
+          if (dataset && dataset[`${k}fired`]) {
+            const ek = k.slice(0, -5);
+            value.call($el, new Event(ek.substring(2)));
+          }
+          if ($el.getAttribute(`data-${k}`) !== "") {
+            (tag.tag === "bodyAttrs" ? dom.defaultView : $el).addEventListener(
+              // onload -> load
+              k.substring(2),
+              value.bind($el)
+            );
+            $el.setAttribute(`data-${k}`, "");
+          }
+          continue;
+        }
+        const ck = `attr:${k}`;
+        if (k === "class") {
+          if (!value) {
+            continue;
+          }
+          for (const c of value) {
+            isAttrTag && track(id, `${ck}:${c}`, () => $el.classList.remove(c));
+            !$el.classList.contains(c) && $el.classList.add(c);
+          }
+        } else if (k === "style") {
+          if (!value) {
+            continue;
+          }
+          for (const [k2, v] of value) {
+            track(id, `${ck}:${k2}`, () => {
+              $el.style.removeProperty(k2);
+            });
+            $el.style.setProperty(k2, v);
+          }
+        } else if (value !== false && value !== null) {
+          $el.getAttribute(k) !== value && $el.setAttribute(k, value === true ? "" : String(value));
+          isAttrTag && track(id, ck, () => $el.removeAttribute(k));
+        }
+      }
+    }
+    const pending = [];
+    const frag = {
+      bodyClose: void 0,
+      bodyOpen: void 0,
+      head: void 0
+    };
+    const tags = await resolveTagPromise;
+    for (const ctx of tags) {
+      const { tag, shouldRender, id } = ctx;
+      if (!shouldRender)
+        continue;
+      if (tag.tag === "title") {
+        dom.title = tag.textContent;
+        track("title", "", () => dom.title = state.title);
+        continue;
+      }
+      ctx.$el = ctx.$el || state.elMap.get(id);
+      if (ctx.$el) {
+        trackCtx(ctx);
+      } else if (HasElementTags.has(tag.tag)) {
+        pending.push(ctx);
+      }
+    }
+    for (const ctx of pending) {
+      const pos = ctx.tag.tagPosition || "head";
+      ctx.$el = dom.createElement(ctx.tag.tag);
+      trackCtx(ctx);
+      frag[pos] = frag[pos] || dom.createDocumentFragment();
+      frag[pos].appendChild(ctx.$el);
+    }
+    for (const ctx of tags)
+      await head.hooks.callHook("dom:renderTag", ctx, dom, track);
+    frag.head && dom.head.appendChild(frag.head);
+    frag.bodyOpen && dom.body.insertBefore(frag.bodyOpen, dom.body.firstChild);
+    frag.bodyClose && dom.body.appendChild(frag.bodyClose);
+    for (const k in state.pendingSideEffects) {
+      state.pendingSideEffects[k]();
+    }
+    head._dom = state;
+    await head.hooks.callHook("dom:rendered", { renders: tags });
+    resolve();
+  }).finally(() => {
+    head._domUpdatePromise = void 0;
+    head.dirty = false;
+  });
+  return head._domUpdatePromise;
+}
+function createHead$1(options = {}) {
+  const render = options.domOptions?.render || renderDOMHead;
+  options.document = options.document || (typeof window !== "undefined" ? document : void 0);
+  const initialPayload = options.document?.head.querySelector('script[id="unhead:payload"]')?.innerHTML || false;
+  return /* @__PURE__ */ createUnhead({
+    ...options,
+    plugins: [
+      ...options.plugins || [],
+      {
+        key: "client",
+        hooks: {
+          "entries:updated": render
+        }
+      }
+    ],
+    init: [
+      initialPayload ? JSON.parse(initialPayload) : false,
+      ...options.init || []
+    ]
+  });
+}
+function createDebouncedFn(callee, delayer) {
+  let ctxId = 0;
+  return () => {
+    const delayFnCtxId = ++ctxId;
+    delayer(() => {
+      if (ctxId === delayFnCtxId) {
+        callee();
+      }
+    });
+  };
+}
+const VueResolver = (_, value) => {
+  return isRef(value) ? toValue(value) : value;
+};
+const headSymbol = "usehead";
+function vueInstall(head) {
+  const plugin = {
+    install(app2) {
+      app2.config.globalProperties.$unhead = head;
+      app2.config.globalProperties.$head = head;
+      app2.provide(headSymbol, head);
+    }
+  };
+  return plugin.install;
+}
+function injectHead() {
+  if (hasInjectionContext()) {
+    const instance = inject(headSymbol);
+    if (!instance) {
+      throw new Error("useHead() was called without provide context, ensure you call it through the setup() function.");
+    }
+    return instance;
+  }
+  throw new Error("useHead() was called without provide context, ensure you call it through the setup() function.");
+}
+function useHead(input, options = {}) {
+  const head = options.head || injectHead();
+  return head.ssr ? head.push(input || {}, options) : clientUseHead(head, input, options);
+}
+function clientUseHead(head, input, options = {}) {
+  const deactivated = ref(false);
+  let entry;
+  watchEffect(() => {
+    const i = deactivated.value ? {} : walkResolver(input, VueResolver);
+    if (entry) {
+      entry.patch(i);
+    } else {
+      entry = head.push(i, options);
+    }
+  });
+  const vm = getCurrentInstance();
+  if (vm) {
+    onBeforeUnmount(() => {
+      entry.dispose();
+    });
+    onDeactivated(() => {
+      deactivated.value = true;
+    });
+    onActivated(() => {
+      deactivated.value = false;
+    });
+  }
+  return entry;
+}
+function createHead(options = {}) {
+  const head = createHead$1({
+    domOptions: {
+      render: createDebouncedFn(() => renderDOMHead(head), (fn) => setTimeout(fn, 0))
+    },
+    ...options
+  });
+  head.install = vueInstall(head);
+  return head;
+}
+const C_58_47Users_47eduardoc_47Documents_47repositories_47shared_45cp_45vue_47node_modules_47_46pnpm_47_64nuxt_43ui_643_463_460__64babel_43parse_5b281630bc34f8f6c46d98745ce85891_47node_modules_47_64nuxt_47ui_47dist_47runtime_47vue_47plugins_47head_46js = {
+  install(app2) {
+    if (app2._context.provides.usehead) {
+      return;
+    }
+    const head = createHead();
+    app2.use(head);
+  }
+};
+var l = { inherit: "inherit", current: "currentcolor", transparent: "transparent", black: "#000", white: "#fff", slate: { 50: "oklch(98.4% 0.003 247.858)", 100: "oklch(96.8% 0.007 247.896)", 200: "oklch(92.9% 0.013 255.508)", 300: "oklch(86.9% 0.022 252.894)", 400: "oklch(70.4% 0.04 256.788)", 500: "oklch(55.4% 0.046 257.417)", 600: "oklch(44.6% 0.043 257.281)", 700: "oklch(37.2% 0.044 257.287)", 800: "oklch(27.9% 0.041 260.031)", 900: "oklch(20.8% 0.042 265.755)", 950: "oklch(12.9% 0.042 264.695)" }, gray: { 50: "oklch(98.5% 0.002 247.839)", 100: "oklch(96.7% 0.003 264.542)", 200: "oklch(92.8% 0.006 264.531)", 300: "oklch(87.2% 0.01 258.338)", 400: "oklch(70.7% 0.022 261.325)", 500: "oklch(55.1% 0.027 264.364)", 600: "oklch(44.6% 0.03 256.802)", 700: "oklch(37.3% 0.034 259.733)", 800: "oklch(27.8% 0.033 256.848)", 900: "oklch(21% 0.034 264.665)", 950: "oklch(13% 0.028 261.692)" }, zinc: { 50: "oklch(98.5% 0 0)", 100: "oklch(96.7% 0.001 286.375)", 200: "oklch(92% 0.004 286.32)", 300: "oklch(87.1% 0.006 286.286)", 400: "oklch(70.5% 0.015 286.067)", 500: "oklch(55.2% 0.016 285.938)", 600: "oklch(44.2% 0.017 285.786)", 700: "oklch(37% 0.013 285.805)", 800: "oklch(27.4% 0.006 286.033)", 900: "oklch(21% 0.006 285.885)", 950: "oklch(14.1% 0.005 285.823)" }, neutral: { 50: "oklch(98.5% 0 0)", 100: "oklch(97% 0 0)", 200: "oklch(92.2% 0 0)", 300: "oklch(87% 0 0)", 400: "oklch(70.8% 0 0)", 500: "oklch(55.6% 0 0)", 600: "oklch(43.9% 0 0)", 700: "oklch(37.1% 0 0)", 800: "oklch(26.9% 0 0)", 900: "oklch(20.5% 0 0)", 950: "oklch(14.5% 0 0)" }, stone: { 50: "oklch(98.5% 0.001 106.423)", 100: "oklch(97% 0.001 106.424)", 200: "oklch(92.3% 0.003 48.717)", 300: "oklch(86.9% 0.005 56.366)", 400: "oklch(70.9% 0.01 56.259)", 500: "oklch(55.3% 0.013 58.071)", 600: "oklch(44.4% 0.011 73.639)", 700: "oklch(37.4% 0.01 67.558)", 800: "oklch(26.8% 0.007 34.298)", 900: "oklch(21.6% 0.006 56.043)", 950: "oklch(14.7% 0.004 49.25)" }, red: { 50: "oklch(97.1% 0.013 17.38)", 100: "oklch(93.6% 0.032 17.717)", 200: "oklch(88.5% 0.062 18.334)", 300: "oklch(80.8% 0.114 19.571)", 400: "oklch(70.4% 0.191 22.216)", 500: "oklch(63.7% 0.237 25.331)", 600: "oklch(57.7% 0.245 27.325)", 700: "oklch(50.5% 0.213 27.518)", 800: "oklch(44.4% 0.177 26.899)", 900: "oklch(39.6% 0.141 25.723)", 950: "oklch(25.8% 0.092 26.042)" }, orange: { 50: "oklch(98% 0.016 73.684)", 100: "oklch(95.4% 0.038 75.164)", 200: "oklch(90.1% 0.076 70.697)", 300: "oklch(83.7% 0.128 66.29)", 400: "oklch(75% 0.183 55.934)", 500: "oklch(70.5% 0.213 47.604)", 600: "oklch(64.6% 0.222 41.116)", 700: "oklch(55.3% 0.195 38.402)", 800: "oklch(47% 0.157 37.304)", 900: "oklch(40.8% 0.123 38.172)", 950: "oklch(26.6% 0.079 36.259)" }, amber: { 50: "oklch(98.7% 0.022 95.277)", 100: "oklch(96.2% 0.059 95.617)", 200: "oklch(92.4% 0.12 95.746)", 300: "oklch(87.9% 0.169 91.605)", 400: "oklch(82.8% 0.189 84.429)", 500: "oklch(76.9% 0.188 70.08)", 600: "oklch(66.6% 0.179 58.318)", 700: "oklch(55.5% 0.163 48.998)", 800: "oklch(47.3% 0.137 46.201)", 900: "oklch(41.4% 0.112 45.904)", 950: "oklch(27.9% 0.077 45.635)" }, yellow: { 50: "oklch(98.7% 0.026 102.212)", 100: "oklch(97.3% 0.071 103.193)", 200: "oklch(94.5% 0.129 101.54)", 300: "oklch(90.5% 0.182 98.111)", 400: "oklch(85.2% 0.199 91.936)", 500: "oklch(79.5% 0.184 86.047)", 600: "oklch(68.1% 0.162 75.834)", 700: "oklch(55.4% 0.135 66.442)", 800: "oklch(47.6% 0.114 61.907)", 900: "oklch(42.1% 0.095 57.708)", 950: "oklch(28.6% 0.066 53.813)" }, lime: { 50: "oklch(98.6% 0.031 120.757)", 100: "oklch(96.7% 0.067 122.328)", 200: "oklch(93.8% 0.127 124.321)", 300: "oklch(89.7% 0.196 126.665)", 400: "oklch(84.1% 0.238 128.85)", 500: "oklch(76.8% 0.233 130.85)", 600: "oklch(64.8% 0.2 131.684)", 700: "oklch(53.2% 0.157 131.589)", 800: "oklch(45.3% 0.124 130.933)", 900: "oklch(40.5% 0.101 131.063)", 950: "oklch(27.4% 0.072 132.109)" }, green: { 50: "oklch(98.2% 0.018 155.826)", 100: "oklch(96.2% 0.044 156.743)", 200: "oklch(92.5% 0.084 155.995)", 300: "oklch(87.1% 0.15 154.449)", 400: "oklch(79.2% 0.209 151.711)", 500: "oklch(72.3% 0.219 149.579)", 600: "oklch(62.7% 0.194 149.214)", 700: "oklch(52.7% 0.154 150.069)", 800: "oklch(44.8% 0.119 151.328)", 900: "oklch(39.3% 0.095 152.535)", 950: "oklch(26.6% 0.065 152.934)" }, emerald: { 50: "oklch(97.9% 0.021 166.113)", 100: "oklch(95% 0.052 163.051)", 200: "oklch(90.5% 0.093 164.15)", 300: "oklch(84.5% 0.143 164.978)", 400: "oklch(76.5% 0.177 163.223)", 500: "oklch(69.6% 0.17 162.48)", 600: "oklch(59.6% 0.145 163.225)", 700: "oklch(50.8% 0.118 165.612)", 800: "oklch(43.2% 0.095 166.913)", 900: "oklch(37.8% 0.077 168.94)", 950: "oklch(26.2% 0.051 172.552)" }, teal: { 50: "oklch(98.4% 0.014 180.72)", 100: "oklch(95.3% 0.051 180.801)", 200: "oklch(91% 0.096 180.426)", 300: "oklch(85.5% 0.138 181.071)", 400: "oklch(77.7% 0.152 181.912)", 500: "oklch(70.4% 0.14 182.503)", 600: "oklch(60% 0.118 184.704)", 700: "oklch(51.1% 0.096 186.391)", 800: "oklch(43.7% 0.078 188.216)", 900: "oklch(38.6% 0.063 188.416)", 950: "oklch(27.7% 0.046 192.524)" }, cyan: { 50: "oklch(98.4% 0.019 200.873)", 100: "oklch(95.6% 0.045 203.388)", 200: "oklch(91.7% 0.08 205.041)", 300: "oklch(86.5% 0.127 207.078)", 400: "oklch(78.9% 0.154 211.53)", 500: "oklch(71.5% 0.143 215.221)", 600: "oklch(60.9% 0.126 221.723)", 700: "oklch(52% 0.105 223.128)", 800: "oklch(45% 0.085 224.283)", 900: "oklch(39.8% 0.07 227.392)", 950: "oklch(30.2% 0.056 229.695)" }, sky: { 50: "oklch(97.7% 0.013 236.62)", 100: "oklch(95.1% 0.026 236.824)", 200: "oklch(90.1% 0.058 230.902)", 300: "oklch(82.8% 0.111 230.318)", 400: "oklch(74.6% 0.16 232.661)", 500: "oklch(68.5% 0.169 237.323)", 600: "oklch(58.8% 0.158 241.966)", 700: "oklch(50% 0.134 242.749)", 800: "oklch(44.3% 0.11 240.79)", 900: "oklch(39.1% 0.09 240.876)", 950: "oklch(29.3% 0.066 243.157)" }, blue: { 50: "oklch(97% 0.014 254.604)", 100: "oklch(93.2% 0.032 255.585)", 200: "oklch(88.2% 0.059 254.128)", 300: "oklch(80.9% 0.105 251.813)", 400: "oklch(70.7% 0.165 254.624)", 500: "oklch(62.3% 0.214 259.815)", 600: "oklch(54.6% 0.245 262.881)", 700: "oklch(48.8% 0.243 264.376)", 800: "oklch(42.4% 0.199 265.638)", 900: "oklch(37.9% 0.146 265.522)", 950: "oklch(28.2% 0.091 267.935)" }, indigo: { 50: "oklch(96.2% 0.018 272.314)", 100: "oklch(93% 0.034 272.788)", 200: "oklch(87% 0.065 274.039)", 300: "oklch(78.5% 0.115 274.713)", 400: "oklch(67.3% 0.182 276.935)", 500: "oklch(58.5% 0.233 277.117)", 600: "oklch(51.1% 0.262 276.966)", 700: "oklch(45.7% 0.24 277.023)", 800: "oklch(39.8% 0.195 277.366)", 900: "oklch(35.9% 0.144 278.697)", 950: "oklch(25.7% 0.09 281.288)" }, violet: { 50: "oklch(96.9% 0.016 293.756)", 100: "oklch(94.3% 0.029 294.588)", 200: "oklch(89.4% 0.057 293.283)", 300: "oklch(81.1% 0.111 293.571)", 400: "oklch(70.2% 0.183 293.541)", 500: "oklch(60.6% 0.25 292.717)", 600: "oklch(54.1% 0.281 293.009)", 700: "oklch(49.1% 0.27 292.581)", 800: "oklch(43.2% 0.232 292.759)", 900: "oklch(38% 0.189 293.745)", 950: "oklch(28.3% 0.141 291.089)" }, purple: { 50: "oklch(97.7% 0.014 308.299)", 100: "oklch(94.6% 0.033 307.174)", 200: "oklch(90.2% 0.063 306.703)", 300: "oklch(82.7% 0.119 306.383)", 400: "oklch(71.4% 0.203 305.504)", 500: "oklch(62.7% 0.265 303.9)", 600: "oklch(55.8% 0.288 302.321)", 700: "oklch(49.6% 0.265 301.924)", 800: "oklch(43.8% 0.218 303.724)", 900: "oklch(38.1% 0.176 304.987)", 950: "oklch(29.1% 0.149 302.717)" }, fuchsia: { 50: "oklch(97.7% 0.017 320.058)", 100: "oklch(95.2% 0.037 318.852)", 200: "oklch(90.3% 0.076 319.62)", 300: "oklch(83.3% 0.145 321.434)", 400: "oklch(74% 0.238 322.16)", 500: "oklch(66.7% 0.295 322.15)", 600: "oklch(59.1% 0.293 322.896)", 700: "oklch(51.8% 0.253 323.949)", 800: "oklch(45.2% 0.211 324.591)", 900: "oklch(40.1% 0.17 325.612)", 950: "oklch(29.3% 0.136 325.661)" }, pink: { 50: "oklch(97.1% 0.014 343.198)", 100: "oklch(94.8% 0.028 342.258)", 200: "oklch(89.9% 0.061 343.231)", 300: "oklch(82.3% 0.12 346.018)", 400: "oklch(71.8% 0.202 349.761)", 500: "oklch(65.6% 0.241 354.308)", 600: "oklch(59.2% 0.249 0.584)", 700: "oklch(52.5% 0.223 3.958)", 800: "oklch(45.9% 0.187 3.815)", 900: "oklch(40.8% 0.153 2.432)", 950: "oklch(28.4% 0.109 3.907)" }, rose: { 50: "oklch(96.9% 0.015 12.422)", 100: "oklch(94.1% 0.03 12.58)", 200: "oklch(89.2% 0.058 10.001)", 300: "oklch(81% 0.117 11.638)", 400: "oklch(71.2% 0.194 13.428)", 500: "oklch(64.5% 0.246 16.439)", 600: "oklch(58.6% 0.253 17.585)", 700: "oklch(51.4% 0.222 16.935)", 800: "oklch(45.5% 0.188 13.697)", 900: "oklch(41% 0.159 10.272)", 950: "oklch(27.1% 0.105 12.094)" } };
+const defaultWindow$1 = isClient$1 ? window : void 0;
+function unrefElement$1(elRef) {
+  var _a;
+  const plain = toValue(elRef);
+  return (_a = plain == null ? void 0 : plain.$el) != null ? _a : plain;
+}
+function useEventListener$1(...args) {
+  const cleanups = [];
+  const cleanup = () => {
+    cleanups.forEach((fn) => fn());
+    cleanups.length = 0;
+  };
+  const register = (el, event, listener, options) => {
+    el.addEventListener(event, listener, options);
+    return () => el.removeEventListener(event, listener, options);
+  };
+  const firstParamTargets = computed(() => {
+    const test = toArray$1(toValue(args[0])).filter((e) => e != null);
+    return test.every((e) => typeof e !== "string") ? test : void 0;
+  });
+  const stopWatch = watchImmediate$1(
+    () => {
+      var _a, _b;
+      return [
+        (_b = (_a = firstParamTargets.value) == null ? void 0 : _a.map((e) => unrefElement$1(e))) != null ? _b : [defaultWindow$1].filter((e) => e != null),
+        toArray$1(toValue(firstParamTargets.value ? args[1] : args[0])),
+        toArray$1(unref(firstParamTargets.value ? args[2] : args[1])),
+        // @ts-expect-error - TypeScript gets the correct types, but somehow still complains
+        toValue(firstParamTargets.value ? args[3] : args[2])
+      ];
+    },
+    ([raw_targets, raw_events, raw_listeners, raw_options]) => {
+      cleanup();
+      if (!(raw_targets == null ? void 0 : raw_targets.length) || !(raw_events == null ? void 0 : raw_events.length) || !(raw_listeners == null ? void 0 : raw_listeners.length))
+        return;
+      const optionsClone = isObject$1(raw_options) ? { ...raw_options } : raw_options;
+      cleanups.push(
+        ...raw_targets.flatMap(
+          (el) => raw_events.flatMap(
+            (event) => raw_listeners.map((listener) => register(el, event, listener, optionsClone))
+          )
+        )
+      );
+    },
+    { flush: "post" }
+  );
+  const stop = () => {
+    stopWatch();
+    cleanup();
+  };
+  tryOnScopeDispose$1(cleanup);
+  return stop;
+}
+// @__NO_SIDE_EFFECTS__
+function useMounted$1() {
+  const isMounted = shallowRef(false);
+  const instance = getCurrentInstance();
+  if (instance) {
+    onMounted(() => {
+      isMounted.value = true;
+    }, instance);
+  }
+  return isMounted;
+}
+// @__NO_SIDE_EFFECTS__
+function useSupported(callback) {
+  const isMounted = /* @__PURE__ */ useMounted$1();
+  return computed(() => {
+    isMounted.value;
+    return Boolean(callback());
+  });
+}
+const ssrWidthSymbol = Symbol("vueuse-ssr-width");
+// @__NO_SIDE_EFFECTS__
+function useSSRWidth() {
+  const ssrWidth = hasInjectionContext() ? injectLocal(ssrWidthSymbol, null) : null;
+  return typeof ssrWidth === "number" ? ssrWidth : void 0;
+}
+function useMediaQuery(query, options = {}) {
+  const { window: window2 = defaultWindow$1, ssrWidth = /* @__PURE__ */ useSSRWidth() } = options;
+  const isSupported = /* @__PURE__ */ useSupported(() => window2 && "matchMedia" in window2 && typeof window2.matchMedia === "function");
+  const ssrSupport = shallowRef(typeof ssrWidth === "number");
+  const mediaQuery = shallowRef();
+  const matches = shallowRef(false);
+  const handler = (event) => {
+    matches.value = event.matches;
+  };
+  watchEffect(() => {
+    if (ssrSupport.value) {
+      ssrSupport.value = !isSupported.value;
+      const queryStrings = toValue(query).split(",");
+      matches.value = queryStrings.some((queryString) => {
+        const not = queryString.includes("not all");
+        const minWidth = queryString.match(/\(\s*min-width:\s*(-?\d+(?:\.\d*)?[a-z]+\s*)\)/);
+        const maxWidth = queryString.match(/\(\s*max-width:\s*(-?\d+(?:\.\d*)?[a-z]+\s*)\)/);
+        let res = Boolean(minWidth || maxWidth);
+        if (minWidth && res) {
+          res = ssrWidth >= pxValue(minWidth[1]);
+        }
+        if (maxWidth && res) {
+          res = ssrWidth <= pxValue(maxWidth[1]);
+        }
+        return not ? !res : res;
+      });
+      return;
+    }
+    if (!isSupported.value)
+      return;
+    mediaQuery.value = window2.matchMedia(toValue(query));
+    matches.value = mediaQuery.value.matches;
+  });
+  useEventListener$1(mediaQuery, "change", handler, { passive: true });
+  return computed(() => matches.value);
+}
+const _global = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+const globalKey = "__vueuse_ssr_handlers__";
+const handlers = /* @__PURE__ */ getHandlers();
+function getHandlers() {
+  if (!(globalKey in _global))
+    _global[globalKey] = _global[globalKey] || {};
+  return _global[globalKey];
+}
+function getSSRHandler(key, fallback) {
+  return handlers[key] || fallback;
+}
+// @__NO_SIDE_EFFECTS__
+function usePreferredDark(options) {
+  return useMediaQuery("(prefers-color-scheme: dark)", options);
+}
+function guessSerializerType(rawInit) {
+  return rawInit == null ? "any" : rawInit instanceof Set ? "set" : rawInit instanceof Map ? "map" : rawInit instanceof Date ? "date" : typeof rawInit === "boolean" ? "boolean" : typeof rawInit === "string" ? "string" : typeof rawInit === "object" ? "object" : !Number.isNaN(rawInit) ? "number" : "any";
+}
+const StorageSerializers = {
+  boolean: {
+    read: (v) => v === "true",
+    write: (v) => String(v)
+  },
+  object: {
+    read: (v) => JSON.parse(v),
+    write: (v) => JSON.stringify(v)
+  },
+  number: {
+    read: (v) => Number.parseFloat(v),
+    write: (v) => String(v)
+  },
+  any: {
+    read: (v) => v,
+    write: (v) => String(v)
+  },
+  string: {
+    read: (v) => v,
+    write: (v) => String(v)
+  },
+  map: {
+    read: (v) => new Map(JSON.parse(v)),
+    write: (v) => JSON.stringify(Array.from(v.entries()))
+  },
+  set: {
+    read: (v) => new Set(JSON.parse(v)),
+    write: (v) => JSON.stringify(Array.from(v))
+  },
+  date: {
+    read: (v) => new Date(v),
+    write: (v) => v.toISOString()
+  }
+};
+const customStorageEventName = "vueuse-storage";
+function useStorage(key, defaults2, storage, options = {}) {
+  var _a;
+  const {
+    flush = "pre",
+    deep = true,
+    listenToStorageChanges = true,
+    writeDefaults = true,
+    mergeDefaults = false,
+    shallow,
+    window: window2 = defaultWindow$1,
+    eventFilter,
+    onError = (e) => {
+      console.error(e);
+    },
+    initOnMounted
+  } = options;
+  const data = (shallow ? shallowRef : ref)(typeof defaults2 === "function" ? defaults2() : defaults2);
+  const keyComputed = computed(() => toValue(key));
+  if (!storage) {
+    try {
+      storage = getSSRHandler("getDefaultStorage", () => {
+        var _a2;
+        return (_a2 = defaultWindow$1) == null ? void 0 : _a2.localStorage;
+      })();
+    } catch (e) {
+      onError(e);
+    }
+  }
+  if (!storage)
+    return data;
+  const rawInit = toValue(defaults2);
+  const type = guessSerializerType(rawInit);
+  const serializer = (_a = options.serializer) != null ? _a : StorageSerializers[type];
+  const { pause: pauseWatch, resume: resumeWatch } = watchPausable(
+    data,
+    () => write(data.value),
+    { flush, deep, eventFilter }
+  );
+  watch(keyComputed, () => update(), { flush });
+  let firstMounted = false;
+  const onStorageEvent = (ev) => {
+    if (initOnMounted && !firstMounted) {
+      return;
+    }
+    update(ev);
+  };
+  const onStorageCustomEvent = (ev) => {
+    if (initOnMounted && !firstMounted) {
+      return;
+    }
+    updateFromCustomEvent(ev);
+  };
+  if (window2 && listenToStorageChanges) {
+    if (storage instanceof Storage)
+      useEventListener$1(window2, "storage", onStorageEvent, { passive: true });
+    else
+      useEventListener$1(window2, customStorageEventName, onStorageCustomEvent);
+  }
+  if (initOnMounted) {
+    tryOnMounted(() => {
+      firstMounted = true;
+      update();
+    });
+  } else {
+    update();
+  }
+  function dispatchWriteEvent(oldValue, newValue) {
+    if (window2) {
+      const payload = {
+        key: keyComputed.value,
+        oldValue,
+        newValue,
+        storageArea: storage
+      };
+      window2.dispatchEvent(storage instanceof Storage ? new StorageEvent("storage", payload) : new CustomEvent(customStorageEventName, {
+        detail: payload
+      }));
+    }
+  }
+  function write(v) {
+    try {
+      const oldValue = storage.getItem(keyComputed.value);
+      if (v == null) {
+        dispatchWriteEvent(oldValue, null);
+        storage.removeItem(keyComputed.value);
+      } else {
+        const serialized = serializer.write(v);
+        if (oldValue !== serialized) {
+          storage.setItem(keyComputed.value, serialized);
+          dispatchWriteEvent(oldValue, serialized);
+        }
+      }
+    } catch (e) {
+      onError(e);
+    }
+  }
+  function read(event) {
+    const rawValue = event ? event.newValue : storage.getItem(keyComputed.value);
+    if (rawValue == null) {
+      if (writeDefaults && rawInit != null)
+        storage.setItem(keyComputed.value, serializer.write(rawInit));
+      return rawInit;
+    } else if (!event && mergeDefaults) {
+      const value = serializer.read(rawValue);
+      if (typeof mergeDefaults === "function")
+        return mergeDefaults(value, rawInit);
+      else if (type === "object" && !Array.isArray(value))
+        return { ...rawInit, ...value };
+      return value;
+    } else if (typeof rawValue !== "string") {
+      return rawValue;
+    } else {
+      return serializer.read(rawValue);
+    }
+  }
+  function update(event) {
+    if (event && event.storageArea !== storage)
+      return;
+    if (event && event.key == null) {
+      data.value = rawInit;
+      return;
+    }
+    if (event && event.key !== keyComputed.value)
+      return;
+    pauseWatch();
+    try {
+      if ((event == null ? void 0 : event.newValue) !== serializer.write(data.value))
+        data.value = read(event);
+    } catch (e) {
+      onError(e);
+    } finally {
+      if (event)
+        nextTick(resumeWatch);
+      else
+        resumeWatch();
+    }
+  }
+  function updateFromCustomEvent(event) {
+    update(event.detail);
+  }
+  return data;
+}
+const CSS_DISABLE_TRANS = "*,*::before,*::after{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}";
+function useColorMode(options = {}) {
+  const {
+    selector = "html",
+    attribute = "class",
+    initialValue = "auto",
+    window: window2 = defaultWindow$1,
+    storage,
+    storageKey = "vueuse-color-scheme",
+    listenToStorageChanges = true,
+    storageRef,
+    emitAuto,
+    disableTransition = true
+  } = options;
+  const modes = {
+    auto: "",
+    light: "light",
+    dark: "dark",
+    ...options.modes || {}
+  };
+  const preferredDark = /* @__PURE__ */ usePreferredDark({ window: window2 });
+  const system = computed(() => preferredDark.value ? "dark" : "light");
+  const store = storageRef || (storageKey == null ? toRef(initialValue) : useStorage(storageKey, initialValue, storage, { window: window2, listenToStorageChanges }));
+  const state = computed(() => store.value === "auto" ? system.value : store.value);
+  const updateHTMLAttrs = getSSRHandler(
+    "updateHTMLAttrs",
+    (selector2, attribute2, value) => {
+      const el = typeof selector2 === "string" ? window2 == null ? void 0 : window2.document.querySelector(selector2) : unrefElement$1(selector2);
+      if (!el)
+        return;
+      const classesToAdd = /* @__PURE__ */ new Set();
+      const classesToRemove = /* @__PURE__ */ new Set();
+      let attributeToChange = null;
+      if (attribute2 === "class") {
+        const current = value.split(/\s/g);
+        Object.values(modes).flatMap((i) => (i || "").split(/\s/g)).filter(Boolean).forEach((v) => {
+          if (current.includes(v))
+            classesToAdd.add(v);
+          else
+            classesToRemove.add(v);
+        });
+      } else {
+        attributeToChange = { key: attribute2, value };
+      }
+      if (classesToAdd.size === 0 && classesToRemove.size === 0 && attributeToChange === null)
+        return;
+      let style;
+      if (disableTransition) {
+        style = window2.document.createElement("style");
+        style.appendChild(document.createTextNode(CSS_DISABLE_TRANS));
+        window2.document.head.appendChild(style);
+      }
+      for (const c of classesToAdd) {
+        el.classList.add(c);
+      }
+      for (const c of classesToRemove) {
+        el.classList.remove(c);
+      }
+      if (attributeToChange) {
+        el.setAttribute(attributeToChange.key, attributeToChange.value);
+      }
+      if (disableTransition) {
+        window2.getComputedStyle(style).opacity;
+        document.head.removeChild(style);
+      }
+    }
+  );
+  function defaultOnChanged(mode) {
+    var _a;
+    updateHTMLAttrs(selector, attribute, (_a = modes[mode]) != null ? _a : mode);
+  }
+  function onChanged(mode) {
+    if (options.onChanged)
+      options.onChanged(mode, defaultOnChanged);
+    else
+      defaultOnChanged(mode);
+  }
+  watch(state, onChanged, { flush: "post", immediate: true });
+  tryOnMounted(() => onChanged(state.value));
+  const auto = computed({
+    get() {
+      return emitAuto ? store.value : state.value;
+    },
+    set(v) {
+      store.value = v;
+    }
+  });
+  return Object.assign(auto, { store, system, state });
+}
+function useDark(options = {}) {
+  const {
+    valueDark = "dark",
+    valueLight = ""
+  } = options;
+  const mode = useColorMode({
+    ...options,
+    onChanged: (mode2, defaultHandler) => {
+      var _a;
+      if (options.onChanged)
+        (_a = options.onChanged) == null ? void 0 : _a.call(options, mode2 === "dark", defaultHandler, mode2);
+      else
+        defaultHandler(mode2);
+    },
+    modes: {
+      dark: valueDark,
+      light: valueLight
+    }
+  });
+  const system = computed(() => mode.system.value);
+  const isDark = computed({
+    get() {
+      return mode.value === "dark";
+    },
+    set(v) {
+      const modeVal = v ? "dark" : "light";
+      if (system.value === modeVal)
+        mode.value = "auto";
+      else
+        mode.value = modeVal;
+    }
+  });
+  return isDark;
+}
+// @__NO_SIDE_EFFECTS__
+function defineLocale(options) {
+  return defu(options, { dir: "ltr" });
+}
+function buildTranslator(locale) {
+  return (path, option) => translate(path, option, unref(locale));
+}
+function translate(path, option, locale) {
+  const prop = get(locale, `messages.${path}`, path);
+  return prop.replace(
+    /\{(\w+)\}/g,
+    (_, key) => `${option?.[key] ?? `{${key}}`}`
+  );
+}
+function buildLocaleContext(locale) {
+  const lang = computed(() => unref(locale).name);
+  const code = computed(() => unref(locale).code);
+  const dir = computed(() => unref(locale).dir);
+  const localeRef = isRef(locale) ? locale : ref(locale);
+  return {
+    lang,
+    code,
+    dir,
+    locale: localeRef,
+    t: buildTranslator(locale)
+  };
+}
+const en = /* @__PURE__ */ defineLocale({
+  name: "English",
+  code: "en",
+  messages: {
+    inputMenu: {
+      noMatch: "No matching data",
+      noData: "No data",
+      create: 'Create "{label}"'
+    },
+    calendar: {
+      prevYear: "Previous year",
+      nextYear: "Next year",
+      prevMonth: "Previous month",
+      nextMonth: "Next month"
+    },
+    inputNumber: {
+      increment: "Increment",
+      decrement: "Decrement"
+    },
+    commandPalette: {
+      placeholder: "Type a command or search...",
+      noMatch: "No matching data",
+      noData: "No data",
+      close: "Close",
+      back: "Back"
+    },
+    selectMenu: {
+      noMatch: "No matching data",
+      noData: "No data",
+      create: 'Create "{label}"',
+      search: "Search..."
+    },
+    toast: {
+      close: "Close"
+    },
+    carousel: {
+      prev: "Prev",
+      next: "Next",
+      dots: "Choose slide to display",
+      goto: "Go to slide {slide}"
+    },
+    modal: {
+      close: "Close"
+    },
+    slideover: {
+      close: "Close"
+    },
+    alert: {
+      close: "Close"
+    },
+    table: {
+      noData: "No data"
+    }
+  }
+});
+const localeContextInjectionKey = Symbol.for("nuxt-ui.locale-context");
+const _useLocale = (localeOverrides) => {
+  const locale = localeOverrides || toRef$1(inject(localeContextInjectionKey, en));
+  return buildLocaleContext(computed(() => locale.value || en));
+};
+const useLocale = createSharedComposable(_useLocale);
+const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+function getColor(color, shade) {
+  if (color in l && typeof l[color] === "object" && shade in l[color]) {
+    return l[color][shade];
+  }
+  return "";
+}
+function generateShades(key, value) {
+  return `${shades.map((shade) => `--ui-color-${key}-${shade}: var(--color-${value === "neutral" ? "old-neutral" : value}-${shade}, ${getColor(value, shade)});`).join("\n  ")}`;
+}
+function generateColor(key, shade) {
+  return `--ui-${key}: var(--ui-color-${key}-${shade});`;
+}
+const C_58_47Users_47eduardoc_47Documents_47repositories_47shared_45cp_45vue_47node_modules_47_46pnpm_47_64nuxt_43ui_643_463_460__64babel_43parse_5b281630bc34f8f6c46d98745ce85891_47node_modules_47_64nuxt_47ui_47dist_47runtime_47plugins_47colors_46js = defineNuxtPlugin(() => {
+  const appConfig = useAppConfig();
+  useNuxtApp();
+  const root = computed(() => {
+    const { neutral, ...colors2 } = appConfig.ui.colors;
+    return `@layer base {
   :root {
-  ${Object.entries(e.ui.colors).map(([r,i])=>an(r,i)).join(`
-  `)}
+  ${Object.entries(appConfig.ui.colors).map(([key, value]) => generateShades(key, value)).join("\n  ")}
   }
   :root, .light {
-  ${Object.keys(a).map(r=>st(r,500)).join(`
-  `)}
+  ${Object.keys(colors2).map((key) => generateColor(key, 500)).join("\n  ")}
   }
   .dark {
-  ${Object.keys(a).map(r=>st(r,400)).join(`
-  `)}
+  ${Object.keys(colors2).map((key) => generateColor(key, 400)).join("\n  ")}
   }
-}`}),o={style:[{innerHTML:()=>t.value,tagPriority:-2,id:"nuxt-ui-colors"}]};{const n=document.createElement("style");n.innerHTML=t.value,n.setAttribute("data-nuxt-ui-colors",""),document.head.appendChild(n),o.script=[{innerHTML:"document.head.removeChild(document.querySelector('[data-nuxt-ui-colors]'))"}]}Do(o)}),ln={install(){Go()}},cn={install(e){e.use(Io),e.use(rn),e.use(ln)}},Pt=A({__name:"VisuallyHidden",props:{feature:{default:"focusable"},asChild:{type:Boolean},as:{default:"span"}},setup(e){return(t,o)=>(x(),C(h(U),{as:t.as,"as-child":t.asChild,"aria-hidden":t.feature==="focusable"?"true":void 0,"data-hidden":t.feature==="fully-hidden"?"":void 0,tabindex:t.feature==="fully-hidden"?"-1":void 0,style:{position:"absolute",border:0,width:"1px",height:"1px",padding:0,margin:"-1px",overflow:"hidden",clip:"rect(0, 0, 0, 0)",clipPath:"inset(50%)",whiteSpace:"nowrap",wordWrap:"normal"}},{default:S(()=>[P(t.$slots,"default")]),_:3},8,["as","as-child","aria-hidden","data-hidden","tabindex"]))}});function Ke(e){return eo()?(to(e),!0):!1}const $e=typeof window<"u"&&typeof document<"u";typeof WorkerGlobalScope<"u"&&globalThis instanceof WorkerGlobalScope;const un=e=>typeof e<"u",dn=Object.prototype.toString,fn=e=>dn.call(e)==="[object Object]",pn=()=>{};function Le(e){return Array.isArray(e)?e:[e]}function $t(e,t,o={}){const{immediate:n=!0,immediateCallback:a=!1}=o,r=G(!1);let i=null;function s(){i&&(clearTimeout(i),i=null)}function c(){r.value=!1,s()}function l(...u){a&&e(),s(),r.value=!0,i=setTimeout(()=>{r.value=!1,i=null,e(...u)},j(t))}return n&&(r.value=!0,$e&&l()),Ke(c),{isPending:ht(r),start:l,stop:c}}function mn(e=1e3,t={}){const{controls:o=!1,callback:n}=t,a=$t(n??pn,e,t),r=T(()=>!a.isPending.value);return o?{ready:r,...a}:r}function hn(e,t,o){return W(e,t,{...o,immediate:!0})}const Ae=$e?window:void 0;function se(e){var t;const o=j(e);return(t=o?.$el)!=null?t:o}function vn(...e){const t=[],o=()=>{t.forEach(s=>s()),t.length=0},n=(s,c,l,u)=>(s.addEventListener(c,l,u),()=>s.removeEventListener(c,l,u)),a=T(()=>{const s=Le(j(e[0])).filter(c=>c!=null);return s.every(c=>typeof c!="string")?s:void 0}),r=hn(()=>{var s,c;return[(c=(s=a.value)==null?void 0:s.map(l=>se(l)))!=null?c:[Ae].filter(l=>l!=null),Le(j(a.value?e[1]:e[0])),Le(h(a.value?e[2]:e[1])),j(a.value?e[3]:e[2])]},([s,c,l,u])=>{if(o(),!s?.length||!c?.length||!l?.length)return;const p=fn(u)?{...u}:u;t.push(...s.flatMap(v=>c.flatMap(d=>l.map(m=>n(v,d,m,p)))))},{flush:"post"}),i=()=>{r(),o()};return Ke(o),i}function yn(){const e=G(!1),t=Q();return t&&re(()=>{e.value=!0},t),e}function gn(e){return typeof e=="function"?e:typeof e=="string"?t=>t.key===e:Array.isArray(e)?t=>e.includes(t.key):()=>!0}function At(...e){let t,o,n={};e.length===3?(t=e[0],o=e[1],n=e[2]):e.length===2?typeof e[1]=="object"?(t=!0,o=e[0],n=e[1]):(t=e[0],o=e[1]):(t=!0,o=e[0]);const{target:a=Ae,eventName:r="keydown",passive:i=!1,dedupe:s=!1}=n,c=gn(t);return vn(a,r,u=>{u.repeat&&j(s)||c(u)&&o(u)},i)}function Ot(e,t={}){const{immediate:o=!0,fpsLimit:n=void 0,window:a=Ae,once:r=!1}=t,i=G(!1),s=T(()=>n?1e3/j(n):null);let c=0,l=null;function u(d){if(!i.value||!a)return;c||(c=d);const m=d-c;if(s.value&&m<s.value){l=a.requestAnimationFrame(u);return}if(c=d,e({delta:m,timestamp:d}),r){i.value=!1,l=null;return}l=a.requestAnimationFrame(u)}function p(){!i.value&&a&&(i.value=!0,c=0,l=a.requestAnimationFrame(u))}function v(){i.value=!1,l!=null&&a&&(a.cancelAnimationFrame(l),l=null)}return o&&p(),Ke(v),{isActive:ht(i),pause:v,resume:p}}function kn(e){return JSON.parse(JSON.stringify(e))}function ze(e,t,o,n={}){var a,r,i;const{clone:s=!1,passive:c=!1,eventName:l,deep:u=!1,defaultValue:p,shouldEmit:v}=n,d=Q(),m=o||d?.emit||((a=d?.$emit)==null?void 0:a.bind(d))||((i=(r=d?.proxy)==null?void 0:r.$emit)==null?void 0:i.bind(d?.proxy));let f=l;t||(t="modelValue"),f=f||`update:${t.toString()}`;const y=k=>s?typeof s=="function"?s(k):kn(k):k,g=()=>un(e[t])?y(e[t]):p,b=k=>{v?v(k)&&m(f,k):m(f,k)};if(c){const k=g(),w=M(k);let _=!1;return W(()=>e[t],$=>{_||(_=!0,w.value=y($),ie(()=>_=!1))}),W(w,$=>{!_&&($!==e[t]||u)&&b($)},{deep:u}),w}else return T({get(){return g()},set(k){b(k)}})}function ge(e,t){const o=typeof e=="string"&&!t?`${e}Context`:t,n=Symbol(o);return[i=>{const s=me(n,i);if(s||s===null)return s;throw new Error(`Injection \`${n.toString()}\` not found. Component must be used within ${Array.isArray(e)?`one of the following components: ${e.join(", ")}`:`\`${e}\``}`)},i=>(ue(n,i),i)]}function Nt(e){return e==null}const[bs,bn]=ge("ConfigProvider"),wn=A({inheritAttrs:!1,__name:"ConfigProvider",props:{dir:{default:"ltr"},locale:{default:"en"},scrollBody:{type:[Boolean,Object],default:!0},nonce:{default:void 0},useId:{type:Function,default:void 0}},setup(e){const t=e,{dir:o,locale:n,scrollBody:a,nonce:r}=ve(t);return bn({dir:o,locale:n,scrollBody:a,nonce:r,useId:t.useId}),(i,s)=>P(i.$slots,"default")}});function J(){const e=Q(),t=M(),o=T(()=>["#text","#comment"].includes(t.value?.$el.nodeName)?t.value?.$el.nextElementSibling:se(t)),n=Object.assign({},e.exposed),a={};for(const i in e.props)Object.defineProperty(a,i,{enumerable:!0,configurable:!0,get:()=>e.props[i]});if(Object.keys(n).length>0)for(const i in n)Object.defineProperty(a,i,{enumerable:!0,configurable:!0,get:()=>n[i]});Object.defineProperty(a,"$el",{enumerable:!0,configurable:!0,get:()=>e.vnode.el}),e.exposed=a;function r(i){t.value=i,i&&(Object.defineProperty(a,"$el",{enumerable:!0,configurable:!0,get:()=>i instanceof Element?i:i.$el}),e.exposed=a)}return{forwardRef:r,currentRef:t,currentElement:o}}function _n(e,t){const o=M(e);function n(r){return t[o.value][r]??o.value}return{state:o,dispatch:r=>{o.value=n(r)}}}function xn(e,t){const o=M({}),n=M("none"),a=M(e),r=e.value?"mounted":"unmounted";let i;const s=t.value?.ownerDocument.defaultView??Ae,{state:c,dispatch:l}=_n(r,{mounted:{UNMOUNT:"unmounted",ANIMATION_OUT:"unmountSuspended"},unmountSuspended:{MOUNT:"mounted",ANIMATION_END:"unmounted"},unmounted:{MOUNT:"mounted"}}),u=y=>{if($e){const g=new CustomEvent(y,{bubbles:!1,cancelable:!1});t.value?.dispatchEvent(g)}};W(e,async(y,g)=>{const b=g!==y;if(await ie(),b){const k=n.value,w=_e(t.value);y?(l("MOUNT"),u("enter"),w==="none"&&u("after-enter")):w==="none"||w==="undefined"||o.value?.display==="none"?(l("UNMOUNT"),u("leave"),u("after-leave")):g&&k!==w?(l("ANIMATION_OUT"),u("leave")):(l("UNMOUNT"),u("after-leave"))}},{immediate:!0});const p=y=>{const g=_e(t.value),b=g.includes(y.animationName),k=c.value==="mounted"?"enter":"leave";if(y.target===t.value&&b&&(u(`after-${k}`),l("ANIMATION_END"),!a.value)){const w=t.value.style.animationFillMode;t.value.style.animationFillMode="forwards",i=s?.setTimeout(()=>{t.value?.style.animationFillMode==="forwards"&&(t.value.style.animationFillMode=w)})}y.target===t.value&&g==="none"&&l("ANIMATION_END")},v=y=>{y.target===t.value&&(n.value=_e(t.value))},d=W(t,(y,g)=>{y?(o.value=getComputedStyle(y),y.addEventListener("animationstart",v),y.addEventListener("animationcancel",p),y.addEventListener("animationend",p)):(l("ANIMATION_END"),i!==void 0&&s?.clearTimeout(i),g?.removeEventListener("animationstart",v),g?.removeEventListener("animationcancel",p),g?.removeEventListener("animationend",p))},{immediate:!0}),m=W(c,()=>{const y=_e(t.value);n.value=c.value==="mounted"?y:"none"});return qe(()=>{d(),m()}),{isPresent:T(()=>["mounted","unmountSuspended"].includes(c.value))}}function _e(e){return e&&getComputedStyle(e).animationName||"none"}const Tn=A({name:"Presence",props:{present:{type:Boolean,required:!0},forceMount:{type:Boolean}},slots:{},setup(e,{slots:t,expose:o}){const{present:n,forceMount:a}=ve(e),r=M(),{isPresent:i}=xn(n,r);o({present:i});let s=t.default({present:i.value});s=oo(s||[]);const c=Q();if(s&&s?.length>1){const l=c?.parent?.type.name?`<${c.parent.type.name} />`:"component";throw new Error([`Detected an invalid children for \`${l}\` for  \`Presence\` component.`,"","Note: Presence works similarly to `v-if` directly, but it waits for animation/transition to finished before unmounting. So it expect only one direct child of valid VNode type.","You can apply a few solutions:",["Provide a single child element so that `presence` directive attach correctly.","Ensure the first child is an actual element instead of a raw text node or comment node."].map(u=>`  - ${u}`).join(`
-`)].join(`
-`))}return()=>a.value||n.value||i.value?Ie(t.default({present:i.value})[0],{ref:l=>{const u=se(l);return typeof u?.hasAttribute>"u"||(u?.hasAttribute("data-reka-popper-content-wrapper")?r.value=u.firstElementChild:r.value=u),u}}):null}});function Cn(e){const t=Q(),o=t?.type.emits,n={};return o?.length||console.warn(`No emitted event found. Please check component: ${t?.type.__name}`),o?.forEach(a=>{n[no(so(a))]=(...r)=>e(a,...r)}),n}function ae(){let e=document.activeElement;if(e==null)return null;for(;e!=null&&e.shadowRoot!=null&&e.shadowRoot.activeElement!=null;)e=e.shadowRoot.activeElement;return e}function Re(e,{select:t=!1}={}){const o=ae();for(const n of e)if(Mn(n,{select:t}),ae()!==o)return!0}function En(e){const t=[],o=document.createTreeWalker(e,NodeFilter.SHOW_ELEMENT,{acceptNode:n=>{const a=n.tagName==="INPUT"&&n.type==="hidden";return n.disabled||n.hidden||a?NodeFilter.FILTER_SKIP:n.tabIndex>=0?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_SKIP}});for(;o.nextNode();)t.push(o.currentNode);return t}function Sn(e){return e instanceof HTMLInputElement&&"select"in e}function Mn(e,{select:t=!1}={}){if(e&&e.focus){const o=ae();e.focus({preventScroll:!0}),e!==o&&Sn(e)&&t&&e.select()}}const at=vt({layersRoot:new Set,layersWithOutsidePointerEventsDisabled:new Set,branches:new Set}),Pn=A({__name:"Teleport",props:{to:{default:"body"},disabled:{type:Boolean},defer:{type:Boolean},forceMount:{type:Boolean}},setup(e){const t=yn();return(o,n)=>h(t)||o.forceMount?(x(),C(yt,{key:0,to:o.to,disabled:o.disabled,defer:o.defer},[P(o.$slots,"default")],8,["to","disabled","defer"])):N("",!0)}});function Dt(e,t){const o=We(e),n=t?Cn(t):{};return T(()=>({...o.value,...n}))}function rt(){const e=M(),t=T(()=>["#text","#comment"].includes(e.value?.$el.nodeName)?e.value?.$el.nextElementSibling:se(e));return{primitiveElement:e,currentElement:t}}const it="data-reka-collection-item";function Ue(e={}){const{key:t="",isProvider:o=!1}=e,n=`${t}CollectionProvider`;let a;if(o){const u=M(new Map);a={collectionRef:M(),itemMap:u},ue(n,a)}else a=me(n);const r=(u=!1)=>{const p=a.collectionRef.value;if(!p)return[];const v=Array.from(p.querySelectorAll(`[${it}]`)),m=Array.from(a.itemMap.value.values()).sort((f,y)=>v.indexOf(f.ref)-v.indexOf(y.ref));return u?m:m.filter(f=>f.ref.dataset.disabled!=="")},i=A({name:"CollectionSlot",setup(u,{slots:p}){const{primitiveElement:v,currentElement:d}=rt();return W(d,()=>{a.collectionRef.value=d.value}),()=>Ie(Ye,{ref:v},p)}}),s=A({name:"CollectionItem",inheritAttrs:!1,props:{value:{validator:()=>!0}},setup(u,{slots:p,attrs:v}){const{primitiveElement:d,currentElement:m}=rt();return he(f=>{if(m.value){const y=gt(m.value);a.itemMap.value.set(y,{ref:m.value,value:u.value}),f(()=>a.itemMap.value.delete(y))}}),()=>Ie(Ye,{...v,[it]:"",ref:d},p)}}),c=T(()=>Array.from(a.itemMap.value.values())),l=T(()=>a.itemMap.value.size);return{getItems:r,reactiveItems:c,itemMapSize:l,CollectionSlot:i,CollectionItem:s}}const pe=100,[$n,An]=ge("ProgressRoot"),Se=e=>typeof e=="number";function On(e,t){return Nt(e)||Se(e)&&!Number.isNaN(e)&&e<=t&&e>=0?e:(console.error(`Invalid prop \`value\` of value \`${e}\` supplied to \`ProgressRoot\`. The \`value\` prop must be:
+}`;
+  });
+  const headData = {
+    style: [{
+      innerHTML: () => root.value,
+      tagPriority: -2,
+      id: "nuxt-ui-colors"
+    }]
+  };
+  {
+    const style = document.createElement("style");
+    style.innerHTML = root.value;
+    style.setAttribute("data-nuxt-ui-colors", "");
+    document.head.appendChild(style);
+    headData.script = [{
+      innerHTML: "document.head.removeChild(document.querySelector('[data-nuxt-ui-colors]'))"
+    }];
+  }
+  useHead(headData);
+});
+const C_58_47Users_47eduardoc_47Documents_47repositories_47shared_45cp_45vue_47node_modules_47_46pnpm_47_64nuxt_43ui_643_463_460__64babel_43parse_5b281630bc34f8f6c46d98745ce85891_47node_modules_47_64nuxt_47ui_47dist_47runtime_47vue_47plugins_47color_45mode_46js = {
+  install() {
+    useDark();
+  }
+};
+const ui = {
+  install(app2) {
+    app2.use(C_58_47Users_47eduardoc_47Documents_47repositories_47shared_45cp_45vue_47node_modules_47_46pnpm_47_64nuxt_43ui_643_463_460__64babel_43parse_5b281630bc34f8f6c46d98745ce85891_47node_modules_47_64nuxt_47ui_47dist_47runtime_47vue_47plugins_47head_46js);
+    app2.use(C_58_47Users_47eduardoc_47Documents_47repositories_47shared_45cp_45vue_47node_modules_47_46pnpm_47_64nuxt_43ui_643_463_460__64babel_43parse_5b281630bc34f8f6c46d98745ce85891_47node_modules_47_64nuxt_47ui_47dist_47runtime_47plugins_47colors_46js);
+    app2.use(C_58_47Users_47eduardoc_47Documents_47repositories_47shared_45cp_45vue_47node_modules_47_46pnpm_47_64nuxt_43ui_643_463_460__64babel_43parse_5b281630bc34f8f6c46d98745ce85891_47node_modules_47_64nuxt_47ui_47dist_47runtime_47vue_47plugins_47color_45mode_46js);
+  }
+};
+const _sfc_main$o = /* @__PURE__ */ defineComponent({
+  __name: "VisuallyHidden",
+  props: {
+    feature: { default: "focusable" },
+    asChild: { type: Boolean },
+    as: { default: "span" }
+  },
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        as: _ctx.as,
+        "as-child": _ctx.asChild,
+        "aria-hidden": _ctx.feature === "focusable" ? "true" : void 0,
+        "data-hidden": _ctx.feature === "fully-hidden" ? "" : void 0,
+        tabindex: _ctx.feature === "fully-hidden" ? "-1" : void 0,
+        style: {
+          // See: https://github.com/twbs/bootstrap/blob/master/scss/mixins/_screen-reader.scss
+          position: "absolute",
+          border: 0,
+          width: "1px",
+          height: "1px",
+          padding: 0,
+          margin: "-1px",
+          overflow: "hidden",
+          clip: "rect(0, 0, 0, 0)",
+          clipPath: "inset(50%)",
+          whiteSpace: "nowrap",
+          wordWrap: "normal"
+        }
+      }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 8, ["as", "as-child", "aria-hidden", "data-hidden", "tabindex"]);
+    };
+  }
+});
+function tryOnScopeDispose(fn) {
+  if (getCurrentScope()) {
+    onScopeDispose(fn);
+    return true;
+  }
+  return false;
+}
+const isClient = typeof window !== "undefined" && typeof document !== "undefined";
+typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
+const isDef = (val) => typeof val !== "undefined";
+const toString = Object.prototype.toString;
+const isObject = (val) => toString.call(val) === "[object Object]";
+const noop = () => {
+};
+function toArray(value) {
+  return Array.isArray(value) ? value : [value];
+}
+function useTimeoutFn(cb, interval, options = {}) {
+  const {
+    immediate = true,
+    immediateCallback = false
+  } = options;
+  const isPending = shallowRef(false);
+  let timer = null;
+  function clear() {
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+  }
+  function stop() {
+    isPending.value = false;
+    clear();
+  }
+  function start(...args) {
+    if (immediateCallback)
+      cb();
+    clear();
+    isPending.value = true;
+    timer = setTimeout(() => {
+      isPending.value = false;
+      timer = null;
+      cb(...args);
+    }, toValue(interval));
+  }
+  if (immediate) {
+    isPending.value = true;
+    if (isClient)
+      start();
+  }
+  tryOnScopeDispose(stop);
+  return {
+    isPending: readonly(isPending),
+    start,
+    stop
+  };
+}
+function useTimeout(interval = 1e3, options = {}) {
+  const {
+    controls: exposeControls = false,
+    callback
+  } = options;
+  const controls = useTimeoutFn(
+    callback != null ? callback : noop,
+    interval,
+    options
+  );
+  const ready = computed(() => !controls.isPending.value);
+  if (exposeControls) {
+    return {
+      ready,
+      ...controls
+    };
+  } else {
+    return ready;
+  }
+}
+function watchImmediate(source, cb, options) {
+  return watch(
+    source,
+    cb,
+    {
+      ...options,
+      immediate: true
+    }
+  );
+}
+const defaultWindow = isClient ? window : void 0;
+function unrefElement(elRef) {
+  var _a;
+  const plain = toValue(elRef);
+  return (_a = plain == null ? void 0 : plain.$el) != null ? _a : plain;
+}
+function useEventListener(...args) {
+  const cleanups = [];
+  const cleanup = () => {
+    cleanups.forEach((fn) => fn());
+    cleanups.length = 0;
+  };
+  const register = (el, event, listener, options) => {
+    el.addEventListener(event, listener, options);
+    return () => el.removeEventListener(event, listener, options);
+  };
+  const firstParamTargets = computed(() => {
+    const test = toArray(toValue(args[0])).filter((e) => e != null);
+    return test.every((e) => typeof e !== "string") ? test : void 0;
+  });
+  const stopWatch = watchImmediate(
+    () => {
+      var _a, _b;
+      return [
+        (_b = (_a = firstParamTargets.value) == null ? void 0 : _a.map((e) => unrefElement(e))) != null ? _b : [defaultWindow].filter((e) => e != null),
+        toArray(toValue(firstParamTargets.value ? args[1] : args[0])),
+        toArray(unref(firstParamTargets.value ? args[2] : args[1])),
+        // @ts-expect-error - TypeScript gets the correct types, but somehow still complains
+        toValue(firstParamTargets.value ? args[3] : args[2])
+      ];
+    },
+    ([raw_targets, raw_events, raw_listeners, raw_options]) => {
+      cleanup();
+      if (!(raw_targets == null ? void 0 : raw_targets.length) || !(raw_events == null ? void 0 : raw_events.length) || !(raw_listeners == null ? void 0 : raw_listeners.length))
+        return;
+      const optionsClone = isObject(raw_options) ? { ...raw_options } : raw_options;
+      cleanups.push(
+        ...raw_targets.flatMap(
+          (el) => raw_events.flatMap(
+            (event) => raw_listeners.map((listener) => register(el, event, listener, optionsClone))
+          )
+        )
+      );
+    },
+    { flush: "post" }
+  );
+  const stop = () => {
+    stopWatch();
+    cleanup();
+  };
+  tryOnScopeDispose(cleanup);
+  return stop;
+}
+function useMounted() {
+  const isMounted = shallowRef(false);
+  const instance = getCurrentInstance();
+  if (instance) {
+    onMounted(() => {
+      isMounted.value = true;
+    }, instance);
+  }
+  return isMounted;
+}
+function createKeyPredicate(keyFilter) {
+  if (typeof keyFilter === "function")
+    return keyFilter;
+  else if (typeof keyFilter === "string")
+    return (event) => event.key === keyFilter;
+  else if (Array.isArray(keyFilter))
+    return (event) => keyFilter.includes(event.key);
+  return () => true;
+}
+function onKeyStroke(...args) {
+  let key;
+  let handler;
+  let options = {};
+  if (args.length === 3) {
+    key = args[0];
+    handler = args[1];
+    options = args[2];
+  } else if (args.length === 2) {
+    if (typeof args[1] === "object") {
+      key = true;
+      handler = args[0];
+      options = args[1];
+    } else {
+      key = args[0];
+      handler = args[1];
+    }
+  } else {
+    key = true;
+    handler = args[0];
+  }
+  const {
+    target = defaultWindow,
+    eventName = "keydown",
+    passive = false,
+    dedupe = false
+  } = options;
+  const predicate = createKeyPredicate(key);
+  const listener = (e) => {
+    if (e.repeat && toValue(dedupe))
+      return;
+    if (predicate(e))
+      handler(e);
+  };
+  return useEventListener(target, eventName, listener, passive);
+}
+function useRafFn(fn, options = {}) {
+  const {
+    immediate = true,
+    fpsLimit = void 0,
+    window: window2 = defaultWindow,
+    once = false
+  } = options;
+  const isActive = shallowRef(false);
+  const intervalLimit = computed(() => {
+    return fpsLimit ? 1e3 / toValue(fpsLimit) : null;
+  });
+  let previousFrameTimestamp = 0;
+  let rafId = null;
+  function loop(timestamp2) {
+    if (!isActive.value || !window2)
+      return;
+    if (!previousFrameTimestamp)
+      previousFrameTimestamp = timestamp2;
+    const delta = timestamp2 - previousFrameTimestamp;
+    if (intervalLimit.value && delta < intervalLimit.value) {
+      rafId = window2.requestAnimationFrame(loop);
+      return;
+    }
+    previousFrameTimestamp = timestamp2;
+    fn({ delta, timestamp: timestamp2 });
+    if (once) {
+      isActive.value = false;
+      rafId = null;
+      return;
+    }
+    rafId = window2.requestAnimationFrame(loop);
+  }
+  function resume() {
+    if (!isActive.value && window2) {
+      isActive.value = true;
+      previousFrameTimestamp = 0;
+      rafId = window2.requestAnimationFrame(loop);
+    }
+  }
+  function pause() {
+    isActive.value = false;
+    if (rafId != null && window2) {
+      window2.cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+  if (immediate)
+    resume();
+  tryOnScopeDispose(pause);
+  return {
+    isActive: readonly(isActive),
+    pause,
+    resume
+  };
+}
+function cloneFnJSON(source) {
+  return JSON.parse(JSON.stringify(source));
+}
+function useVModel(props, key, emit, options = {}) {
+  var _a, _b, _c;
+  const {
+    clone = false,
+    passive = false,
+    eventName,
+    deep = false,
+    defaultValue,
+    shouldEmit
+  } = options;
+  const vm = getCurrentInstance();
+  const _emit = emit || (vm == null ? void 0 : vm.emit) || ((_a = vm == null ? void 0 : vm.$emit) == null ? void 0 : _a.bind(vm)) || ((_c = (_b = vm == null ? void 0 : vm.proxy) == null ? void 0 : _b.$emit) == null ? void 0 : _c.bind(vm == null ? void 0 : vm.proxy));
+  let event = eventName;
+  if (!key) {
+    key = "modelValue";
+  }
+  event = event || `update:${key.toString()}`;
+  const cloneFn = (val) => !clone ? val : typeof clone === "function" ? clone(val) : cloneFnJSON(val);
+  const getValue2 = () => isDef(props[key]) ? cloneFn(props[key]) : defaultValue;
+  const triggerEmit = (value) => {
+    if (shouldEmit) {
+      if (shouldEmit(value))
+        _emit(event, value);
+    } else {
+      _emit(event, value);
+    }
+  };
+  if (passive) {
+    const initialValue = getValue2();
+    const proxy = ref(initialValue);
+    let isUpdating = false;
+    watch(
+      () => props[key],
+      (v) => {
+        if (!isUpdating) {
+          isUpdating = true;
+          proxy.value = cloneFn(v);
+          nextTick(() => isUpdating = false);
+        }
+      }
+    );
+    watch(
+      proxy,
+      (v) => {
+        if (!isUpdating && (v !== props[key] || deep))
+          triggerEmit(v);
+      },
+      { deep }
+    );
+    return proxy;
+  } else {
+    return computed({
+      get() {
+        return getValue2();
+      },
+      set(value) {
+        triggerEmit(value);
+      }
+    });
+  }
+}
+function createContext(providerComponentName, contextName) {
+  const symbolDescription = typeof providerComponentName === "string" && !contextName ? `${providerComponentName}Context` : contextName;
+  const injectionKey = Symbol(symbolDescription);
+  const injectContext = (fallback) => {
+    const context2 = inject(injectionKey, fallback);
+    if (context2)
+      return context2;
+    if (context2 === null)
+      return context2;
+    throw new Error(
+      `Injection \`${injectionKey.toString()}\` not found. Component must be used within ${Array.isArray(providerComponentName) ? `one of the following components: ${providerComponentName.join(
+        ", "
+      )}` : `\`${providerComponentName}\``}`
+    );
+  };
+  const provideContext = (contextValue) => {
+    provide(injectionKey, contextValue);
+    return contextValue;
+  };
+  return [injectContext, provideContext];
+}
+function isNullish(value) {
+  return value === null || value === void 0;
+}
+const [injectConfigProviderContext, provideConfigProviderContext] = createContext("ConfigProvider");
+const _sfc_main$n = /* @__PURE__ */ defineComponent({
+  ...{
+    inheritAttrs: false
+  },
+  __name: "ConfigProvider",
+  props: {
+    dir: { default: "ltr" },
+    locale: { default: "en" },
+    scrollBody: { type: [Boolean, Object], default: true },
+    nonce: { default: void 0 },
+    useId: { type: Function, default: void 0 }
+  },
+  setup(__props) {
+    const props = __props;
+    const { dir, locale, scrollBody, nonce } = toRefs(props);
+    provideConfigProviderContext({
+      dir,
+      locale,
+      scrollBody,
+      nonce,
+      useId: props.useId
+    });
+    return (_ctx, _cache) => {
+      return renderSlot(_ctx.$slots, "default");
+    };
+  }
+});
+function useForwardExpose() {
+  const instance = getCurrentInstance();
+  const currentRef = ref();
+  const currentElement = computed(() => {
+    return ["#text", "#comment"].includes(currentRef.value?.$el.nodeName) ? currentRef.value?.$el.nextElementSibling : unrefElement(currentRef);
+  });
+  const localExpose = Object.assign({}, instance.exposed);
+  const ret = {};
+  for (const key in instance.props) {
+    Object.defineProperty(ret, key, {
+      enumerable: true,
+      configurable: true,
+      get: () => instance.props[key]
+    });
+  }
+  if (Object.keys(localExpose).length > 0) {
+    for (const key in localExpose) {
+      Object.defineProperty(ret, key, {
+        enumerable: true,
+        configurable: true,
+        get: () => localExpose[key]
+      });
+    }
+  }
+  Object.defineProperty(ret, "$el", {
+    enumerable: true,
+    configurable: true,
+    get: () => instance.vnode.el
+  });
+  instance.exposed = ret;
+  function forwardRef(ref2) {
+    currentRef.value = ref2;
+    if (!ref2)
+      return;
+    Object.defineProperty(ret, "$el", {
+      enumerable: true,
+      configurable: true,
+      get: () => ref2 instanceof Element ? ref2 : ref2.$el
+    });
+    instance.exposed = ret;
+  }
+  return { forwardRef, currentRef, currentElement };
+}
+function useStateMachine(initialState, machine) {
+  const state = ref(initialState);
+  function reducer(event) {
+    const nextState = machine[state.value][event];
+    return nextState ?? state.value;
+  }
+  const dispatch = (event) => {
+    state.value = reducer(event);
+  };
+  return {
+    state,
+    dispatch
+  };
+}
+function usePresence(present, node) {
+  const stylesRef = ref({});
+  const prevAnimationNameRef = ref("none");
+  const prevPresentRef = ref(present);
+  const initialState = present.value ? "mounted" : "unmounted";
+  let timeoutId;
+  const ownerWindow = node.value?.ownerDocument.defaultView ?? defaultWindow;
+  const { state, dispatch } = useStateMachine(initialState, {
+    mounted: {
+      UNMOUNT: "unmounted",
+      ANIMATION_OUT: "unmountSuspended"
+    },
+    unmountSuspended: {
+      MOUNT: "mounted",
+      ANIMATION_END: "unmounted"
+    },
+    unmounted: {
+      MOUNT: "mounted"
+    }
+  });
+  const dispatchCustomEvent = (name) => {
+    if (isClient) {
+      const customEvent = new CustomEvent(name, { bubbles: false, cancelable: false });
+      node.value?.dispatchEvent(customEvent);
+    }
+  };
+  watch(
+    present,
+    async (currentPresent, prevPresent) => {
+      const hasPresentChanged = prevPresent !== currentPresent;
+      await nextTick();
+      if (hasPresentChanged) {
+        const prevAnimationName = prevAnimationNameRef.value;
+        const currentAnimationName = getAnimationName(node.value);
+        if (currentPresent) {
+          dispatch("MOUNT");
+          dispatchCustomEvent("enter");
+          if (currentAnimationName === "none")
+            dispatchCustomEvent("after-enter");
+        } else if (currentAnimationName === "none" || currentAnimationName === "undefined" || stylesRef.value?.display === "none") {
+          dispatch("UNMOUNT");
+          dispatchCustomEvent("leave");
+          dispatchCustomEvent("after-leave");
+        } else {
+          const isAnimating = prevAnimationName !== currentAnimationName;
+          if (prevPresent && isAnimating) {
+            dispatch("ANIMATION_OUT");
+            dispatchCustomEvent("leave");
+          } else {
+            dispatch("UNMOUNT");
+            dispatchCustomEvent("after-leave");
+          }
+        }
+      }
+    },
+    { immediate: true }
+  );
+  const handleAnimationEnd = (event) => {
+    const currentAnimationName = getAnimationName(node.value);
+    const isCurrentAnimation = currentAnimationName.includes(
+      event.animationName
+    );
+    const directionName = state.value === "mounted" ? "enter" : "leave";
+    if (event.target === node.value && isCurrentAnimation) {
+      dispatchCustomEvent(`after-${directionName}`);
+      dispatch("ANIMATION_END");
+      if (!prevPresentRef.value) {
+        const currentFillMode = node.value.style.animationFillMode;
+        node.value.style.animationFillMode = "forwards";
+        timeoutId = ownerWindow?.setTimeout(() => {
+          if (node.value?.style.animationFillMode === "forwards") {
+            node.value.style.animationFillMode = currentFillMode;
+          }
+        });
+      }
+    }
+    if (event.target === node.value && currentAnimationName === "none")
+      dispatch("ANIMATION_END");
+  };
+  const handleAnimationStart = (event) => {
+    if (event.target === node.value) {
+      prevAnimationNameRef.value = getAnimationName(node.value);
+    }
+  };
+  const watcher = watch(
+    node,
+    (newNode, oldNode) => {
+      if (newNode) {
+        stylesRef.value = getComputedStyle(newNode);
+        newNode.addEventListener("animationstart", handleAnimationStart);
+        newNode.addEventListener("animationcancel", handleAnimationEnd);
+        newNode.addEventListener("animationend", handleAnimationEnd);
+      } else {
+        dispatch("ANIMATION_END");
+        if (timeoutId !== void 0)
+          ownerWindow?.clearTimeout(timeoutId);
+        oldNode?.removeEventListener("animationstart", handleAnimationStart);
+        oldNode?.removeEventListener("animationcancel", handleAnimationEnd);
+        oldNode?.removeEventListener("animationend", handleAnimationEnd);
+      }
+    },
+    { immediate: true }
+  );
+  const stateWatcher = watch(state, () => {
+    const currentAnimationName = getAnimationName(node.value);
+    prevAnimationNameRef.value = state.value === "mounted" ? currentAnimationName : "none";
+  });
+  onUnmounted(() => {
+    watcher();
+    stateWatcher();
+  });
+  const isPresent = computed(
+    () => ["mounted", "unmountSuspended"].includes(state.value)
+  );
+  return {
+    isPresent
+  };
+}
+function getAnimationName(node) {
+  return node ? getComputedStyle(node).animationName || "none" : "none";
+}
+const Presence = defineComponent({
+  name: "Presence",
+  props: {
+    present: {
+      type: Boolean,
+      required: true
+    },
+    forceMount: {
+      type: Boolean
+    }
+  },
+  slots: {},
+  setup(props, { slots, expose }) {
+    const { present, forceMount } = toRefs(props);
+    const node = ref();
+    const { isPresent } = usePresence(present, node);
+    expose({ present: isPresent });
+    let children = slots.default({ present: isPresent.value });
+    children = renderSlotFragments(children || []);
+    const instance = getCurrentInstance();
+    if (children && children?.length > 1) {
+      const componentName = instance?.parent?.type.name ? `<${instance.parent.type.name} />` : "component";
+      throw new Error(
+        [
+          `Detected an invalid children for \`${componentName}\` for  \`Presence\` component.`,
+          "",
+          "Note: Presence works similarly to `v-if` directly, but it waits for animation/transition to finished before unmounting. So it expect only one direct child of valid VNode type.",
+          "You can apply a few solutions:",
+          [
+            "Provide a single child element so that `presence` directive attach correctly.",
+            "Ensure the first child is an actual element instead of a raw text node or comment node."
+          ].map((line) => `  - ${line}`).join("\n")
+        ].join("\n")
+      );
+    }
+    return () => {
+      if (forceMount.value || present.value || isPresent.value) {
+        return h(slots.default({ present: isPresent.value })[0], {
+          ref: (v) => {
+            const el = unrefElement(v);
+            if (typeof el?.hasAttribute === "undefined")
+              return el;
+            if (el?.hasAttribute("data-reka-popper-content-wrapper"))
+              node.value = el.firstElementChild;
+            else
+              node.value = el;
+            return el;
+          }
+        });
+      } else {
+        return null;
+      }
+    };
+  }
+});
+function useEmitAsProps(emit) {
+  const vm = getCurrentInstance();
+  const events = vm?.type.emits;
+  const result = {};
+  if (!events?.length) {
+    console.warn(
+      `No emitted event found. Please check component: ${vm?.type.__name}`
+    );
+  }
+  events?.forEach((ev) => {
+    result[toHandlerKey(camelize(ev))] = (...arg) => emit(ev, ...arg);
+  });
+  return result;
+}
+function getActiveElement() {
+  let activeElement = document.activeElement;
+  if (activeElement == null) {
+    return null;
+  }
+  while (activeElement != null && activeElement.shadowRoot != null && activeElement.shadowRoot.activeElement != null) {
+    activeElement = activeElement.shadowRoot.activeElement;
+  }
+  return activeElement;
+}
+function focusFirst(candidates, { select = false } = {}) {
+  const previouslyFocusedElement = getActiveElement();
+  for (const candidate of candidates) {
+    focus(candidate, { select });
+    if (getActiveElement() !== previouslyFocusedElement)
+      return true;
+  }
+}
+function getTabbableCandidates(container) {
+  const nodes = [];
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_ELEMENT, {
+    acceptNode: (node) => {
+      const isHiddenInput = node.tagName === "INPUT" && node.type === "hidden";
+      if (node.disabled || node.hidden || isHiddenInput)
+        return NodeFilter.FILTER_SKIP;
+      return node.tabIndex >= 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+    }
+  });
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  return nodes;
+}
+function isSelectableInput(element) {
+  return element instanceof HTMLInputElement && "select" in element;
+}
+function focus(element, { select = false } = {}) {
+  if (element && element.focus) {
+    const previouslyFocusedElement = getActiveElement();
+    element.focus({ preventScroll: true });
+    if (element !== previouslyFocusedElement && isSelectableInput(element) && select) {
+      element.select();
+    }
+  }
+}
+const context = reactive({
+  layersRoot: /* @__PURE__ */ new Set(),
+  layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
+  branches: /* @__PURE__ */ new Set()
+});
+const _sfc_main$m = /* @__PURE__ */ defineComponent({
+  __name: "Teleport",
+  props: {
+    to: { default: "body" },
+    disabled: { type: Boolean },
+    defer: { type: Boolean },
+    forceMount: { type: Boolean }
+  },
+  setup(__props) {
+    const isMounted = useMounted();
+    return (_ctx, _cache) => {
+      return unref(isMounted) || _ctx.forceMount ? (openBlock(), createBlock(Teleport, {
+        key: 0,
+        to: _ctx.to,
+        disabled: _ctx.disabled,
+        defer: _ctx.defer
+      }, [
+        renderSlot(_ctx.$slots, "default")
+      ], 8, ["to", "disabled", "defer"])) : createCommentVNode("", true);
+    };
+  }
+});
+function useForwardPropsEmits(props, emit) {
+  const parsedProps = useForwardProps(props);
+  const emitsAsProps = emit ? useEmitAsProps(emit) : {};
+  return computed(() => ({
+    ...parsedProps.value,
+    ...emitsAsProps
+  }));
+}
+function usePrimitiveElement() {
+  const primitiveElement = ref();
+  const currentElement = computed(() => ["#text", "#comment"].includes(primitiveElement.value?.$el.nodeName) ? primitiveElement.value?.$el.nextElementSibling : unrefElement(primitiveElement));
+  return {
+    primitiveElement,
+    currentElement
+  };
+}
+const ITEM_DATA_ATTR = "data-reka-collection-item";
+function useCollection(options = {}) {
+  const { key = "", isProvider = false } = options;
+  const injectionKey = `${key}CollectionProvider`;
+  let context2;
+  if (isProvider) {
+    const itemMap = ref(/* @__PURE__ */ new Map());
+    const collectionRef = ref();
+    context2 = {
+      collectionRef,
+      itemMap
+    };
+    provide(injectionKey, context2);
+  } else {
+    context2 = inject(injectionKey);
+  }
+  const getItems = (includeDisabledItem = false) => {
+    const collectionNode = context2.collectionRef.value;
+    if (!collectionNode)
+      return [];
+    const orderedNodes = Array.from(collectionNode.querySelectorAll(`[${ITEM_DATA_ATTR}]`));
+    const items = Array.from(context2.itemMap.value.values());
+    const orderedItems = items.sort(
+      (a, b) => orderedNodes.indexOf(a.ref) - orderedNodes.indexOf(b.ref)
+    );
+    if (includeDisabledItem)
+      return orderedItems;
+    else
+      return orderedItems.filter((i) => i.ref.dataset.disabled !== "");
+  };
+  const CollectionSlot = defineComponent({
+    name: "CollectionSlot",
+    setup(_, { slots }) {
+      const { primitiveElement, currentElement } = usePrimitiveElement();
+      watch(currentElement, () => {
+        context2.collectionRef.value = currentElement.value;
+      });
+      return () => h(Slot, { ref: primitiveElement }, slots);
+    }
+  });
+  const CollectionItem = defineComponent({
+    name: "CollectionItem",
+    inheritAttrs: false,
+    props: {
+      value: {
+        // It accepts any value
+        validator: () => true
+      }
+    },
+    setup(props, { slots, attrs }) {
+      const { primitiveElement, currentElement } = usePrimitiveElement();
+      watchEffect((cleanupFn) => {
+        if (currentElement.value) {
+          const key2 = markRaw(currentElement.value);
+          context2.itemMap.value.set(key2, { ref: currentElement.value, value: props.value });
+          cleanupFn(() => context2.itemMap.value.delete(key2));
+        }
+      });
+      return () => h(Slot, { ...attrs, [ITEM_DATA_ATTR]: "", ref: primitiveElement }, slots);
+    }
+  });
+  const reactiveItems = computed(() => Array.from(context2.itemMap.value.values()));
+  const itemMapSize = computed(() => context2.itemMap.value.size);
+  return { getItems, reactiveItems, itemMapSize, CollectionSlot, CollectionItem };
+}
+const DEFAULT_MAX = 100;
+const [injectProgressRootContext, provideProgressRootContext] = createContext("ProgressRoot");
+const isNumber = (v) => typeof v === "number";
+function validateValue(value, max) {
+  const isValidValueError = isNullish(value) || isNumber(value) && !Number.isNaN(value) && value <= max && value >= 0;
+  if (isValidValueError)
+    return value;
+  console.error(`Invalid prop \`value\` of value \`${value}\` supplied to \`ProgressRoot\`. The \`value\` prop must be:
   - a positive number
-  - less than the value passed to \`max\` (or ${pe} if no \`max\` prop is set)
+  - less than the value passed to \`max\` (or ${DEFAULT_MAX} if no \`max\` prop is set)
   - \`null\`  or \`undefined\` if the progress is indeterminate.
 
-Defaulting to \`null\`.`),null)}function Nn(e){return Se(e)&&!Number.isNaN(e)&&e>0?e:(console.error(`Invalid prop \`max\` of value \`${e}\` supplied to \`ProgressRoot\`. Only numbers greater than 0 are valid max values. Defaulting to \`${pe}\`.`),pe)}const Dn=A({__name:"ProgressRoot",props:{modelValue:{},max:{default:pe},getValueLabel:{type:Function,default:(e,t)=>Se(e)?`${Math.round(e/t*pe)}%`:void 0},getValueText:{},asChild:{type:Boolean},as:{}},emits:["update:modelValue","update:max"],setup(e,{emit:t}){const o=e,n=t;J();const a=ze(o,"modelValue",n,{passive:o.modelValue===void 0}),r=ze(o,"max",n,{passive:o.max===void 0});W(()=>a.value,async s=>{const c=On(s,o.max);c!==s&&(await ie(),a.value=c)},{immediate:!0}),W(()=>o.max,s=>{const c=Nn(o.max);c!==s&&(r.value=c)},{immediate:!0});const i=T(()=>Nt(a.value)?"indeterminate":a.value===r.value?"complete":"loading");return An({modelValue:a,max:r,progressState:i}),(s,c)=>(x(),C(h(U),{"as-child":s.asChild,as:s.as,"aria-valuemax":h(r),"aria-valuemin":0,"aria-valuenow":Se(h(a))?h(a):void 0,"aria-valuetext":s.getValueText?.(h(a),h(r)),"aria-label":s.getValueLabel(h(a),h(r)),role:"progressbar","data-state":i.value,"data-value":h(a)??void 0,"data-max":h(r)},{default:S(()=>[P(s.$slots,"default",{modelValue:h(a)})]),_:3},8,["as-child","as","aria-valuemax","aria-valuenow","aria-valuetext","aria-label","data-state","data-value","data-max"]))}}),Ln=A({__name:"ProgressIndicator",props:{asChild:{type:Boolean},as:{}},setup(e){const t=e,o=$n();return J(),(n,a)=>(x(),C(h(U),D(t,{"data-state":h(o).progressState.value,"data-value":h(o).modelValue?.value??void 0,"data-max":h(o).max.value}),{default:S(()=>[P(n.$slots,"default")]),_:3},16,["data-state","data-value","data-max"]))}}),Lt=A({__name:"ToastAnnounceExclude",props:{altText:{},asChild:{type:Boolean},as:{}},setup(e){return(t,o)=>(x(),C(h(U),{as:t.as,"as-child":t.asChild,"data-reka-toast-announce-exclude":"","data-reka-toast-announce-alt":t.altText||void 0},{default:S(()=>[P(t.$slots,"default")]),_:3},8,["as","as-child","data-reka-toast-announce-alt"]))}}),[Oe,Rn]=ge("ToastProvider"),In=A({inheritAttrs:!1,__name:"ToastProvider",props:{label:{default:"Notification"},duration:{default:5e3},swipeDirection:{default:"right"},swipeThreshold:{default:50}},setup(e){const t=e,{label:o,duration:n,swipeDirection:a,swipeThreshold:r}=ve(t);Ue({isProvider:!0});const i=M(),s=M(0),c=M(!1),l=M(!1);if(t.label&&typeof t.label=="string"&&!t.label.trim()){const u="Invalid prop `label` supplied to `ToastProvider`. Expected non-empty `string`.";throw new Error(u)}return Rn({label:o,duration:n,swipeDirection:a,swipeThreshold:r,toastCount:s,viewport:i,onViewportChange(u){i.value=u},onToastAdd(){s.value++},onToastRemove(){s.value--},isFocusedToastEscapeKeyDownRef:c,isClosePausedRef:l}),(u,p)=>P(u.$slots,"default")}}),jn=A({__name:"ToastAnnounce",setup(e){const t=Oe(),o=mn(1e3),n=M(!1);return Ot(()=>{n.value=!0}),(a,r)=>h(o)||n.value?(x(),C(h(Pt),{key:0},{default:S(()=>[ee(te(h(t).label.value)+" ",1),P(a.$slots,"default")]),_:3})):N("",!0)}}),Vn="toast.swipeStart",zn="toast.swipeMove",Fn="toast.swipeCancel",Hn="toast.swipeEnd",Fe="toast.viewportPause",He="toast.viewportResume";function xe(e,t,o){const n=o.originalEvent.currentTarget,a=new CustomEvent(e,{bubbles:!1,cancelable:!0,detail:o});t&&n.addEventListener(e,t,{once:!0}),n.dispatchEvent(a)}function lt(e,t,o=0){const n=Math.abs(e.x),a=Math.abs(e.y),r=n>a;return t==="left"||t==="right"?r&&n>o:!r&&a>o}function Bn(e){return e.nodeType===e.ELEMENT_NODE}function Rt(e){const t=[];return Array.from(e.childNodes).forEach(n=>{if(n.nodeType===n.TEXT_NODE&&n.textContent&&t.push(n.textContent),Bn(n)){const a=n.ariaHidden||n.hidden||n.style.display==="none",r=n.dataset.rekaToastAnnounceExclude==="";if(!a)if(r){const i=n.dataset.rekaToastAnnounceAlt;i&&t.push(i)}else t.push(...Rt(n))}}),t}const[qn,Wn]=ge("ToastRoot"),Kn=A({inheritAttrs:!1,__name:"ToastRootImpl",props:{type:{},open:{type:Boolean,default:!1},duration:{},asChild:{type:Boolean},as:{default:"li"}},emits:["close","escapeKeyDown","pause","resume","swipeStart","swipeMove","swipeCancel","swipeEnd"],setup(e,{emit:t}){const o=e,n=t,{forwardRef:a,currentElement:r}=J(),{CollectionItem:i}=Ue(),s=Oe(),c=M(null),l=M(null),u=T(()=>typeof o.duration=="number"?o.duration:s.duration.value),p=M(0),v=M(u.value),d=M(0),m=M(u.value),f=Ot(()=>{const k=new Date().getTime()-p.value;m.value=Math.max(v.value-k,0)},{fpsLimit:60});function y(k){k<=0||k===Number.POSITIVE_INFINITY||$e&&(window.clearTimeout(d.value),p.value=new Date().getTime(),d.value=window.setTimeout(g,k))}function g(k){const w=k?.pointerType==="";r.value?.contains(ae())&&w&&s.viewport.value?.focus(),w&&(s.isClosePausedRef.value=!1),n("close")}const b=T(()=>r.value?Rt(r.value):null);if(o.type&&!["foreground","background"].includes(o.type)){const k="Invalid prop `type` supplied to `Toast`. Expected `foreground | background`.";throw new Error(k)}return he(k=>{const w=s.viewport.value;if(w){const _=()=>{y(v.value),f.resume(),n("resume")},$=()=>{const V=new Date().getTime()-p.value;v.value=v.value-V,window.clearTimeout(d.value),f.pause(),n("pause")};return w.addEventListener(Fe,$),w.addEventListener(He,_),()=>{w.removeEventListener(Fe,$),w.removeEventListener(He,_)}}}),W(()=>[o.open,u.value],()=>{v.value=u.value,o.open&&!s.isClosePausedRef.value&&y(u.value)},{immediate:!0}),At("Escape",k=>{n("escapeKeyDown",k),k.defaultPrevented||(s.isFocusedToastEscapeKeyDownRef.value=!0,g())}),re(()=>{s.onToastAdd()}),qe(()=>{s.onToastRemove()}),Wn({onClose:g}),(k,w)=>(x(),B(X,null,[b.value?(x(),C(jn,{key:0,role:"alert","aria-live":k.type==="foreground"?"assertive":"polite","aria-atomic":"true"},{default:S(()=>[ee(te(b.value),1)]),_:1},8,["aria-live"])):N("",!0),h(s).viewport.value?(x(),C(yt,{key:1,to:h(s).viewport.value},[F(h(i),null,{default:S(()=>[F(h(U),D({ref:h(a),role:"alert","aria-live":"off","aria-atomic":"true",tabindex:"0"},k.$attrs,{as:k.as,"as-child":k.asChild,"data-state":k.open?"open":"closed","data-swipe-direction":h(s).swipeDirection.value,style:{userSelect:"none",touchAction:"none"},onPointerdown:w[0]||(w[0]=Te(_=>{c.value={x:_.clientX,y:_.clientY}},["left"])),onPointermove:w[1]||(w[1]=_=>{if(!c.value)return;const $=_.clientX-c.value.x,V=_.clientY-c.value.y,K=!!l.value,R=["left","right"].includes(h(s).swipeDirection.value),L=["left","up"].includes(h(s).swipeDirection.value)?Math.min:Math.max,Y=R?L(0,$):0,I=R?0:L(0,V),H=_.pointerType==="touch"?10:2,E={x:Y,y:I},O={originalEvent:_,delta:E};K?(l.value=E,h(xe)(h(zn),z=>n("swipeMove",z),O)):h(lt)(E,h(s).swipeDirection.value,H)?(l.value=E,h(xe)(h(Vn),z=>n("swipeStart",z),O),_.target.setPointerCapture(_.pointerId)):(Math.abs($)>H||Math.abs(V)>H)&&(c.value=null)}),onPointerup:w[2]||(w[2]=_=>{const $=l.value,V=_.target;if(V.hasPointerCapture(_.pointerId)&&V.releasePointerCapture(_.pointerId),l.value=null,c.value=null,$){const K=_.currentTarget,R={originalEvent:_,delta:$};h(lt)($,h(s).swipeDirection.value,h(s).swipeThreshold.value)?h(xe)(h(Hn),L=>n("swipeEnd",L),R):h(xe)(h(Fn),L=>n("swipeCancel",L),R),K?.addEventListener("click",L=>L.preventDefault(),{once:!0})}})}),{default:S(()=>[P(k.$slots,"default",{remaining:m.value,duration:u.value})]),_:3},16,["as","as-child","data-state","data-swipe-direction"])]),_:3})],8,["to"])):N("",!0)],64))}}),It=A({__name:"ToastClose",props:{asChild:{type:Boolean},as:{default:"button"}},setup(e){const t=e,o=qn(),{forwardRef:n}=J();return(a,r)=>(x(),C(Lt,{"as-child":""},{default:S(()=>[F(h(U),D(t,{ref:h(n),type:a.as==="button"?"button":void 0,onClick:h(o).onClose}),{default:S(()=>[P(a.$slots,"default")]),_:3},16,["type","onClick"])]),_:3}))}}),ct=A({__name:"ToastAction",props:{altText:{},asChild:{type:Boolean},as:{}},setup(e){if(!e.altText)throw new Error("Missing prop `altText` expected on `ToastAction`");const{forwardRef:o}=J();return(n,a)=>n.altText?(x(),C(Lt,{key:0,"alt-text":n.altText,"as-child":""},{default:S(()=>[F(It,{ref:h(o),as:n.as,"as-child":n.asChild},{default:S(()=>[P(n.$slots,"default")]),_:3},8,["as","as-child"])]),_:3},8,["alt-text"])):N("",!0)}}),Un=A({__name:"ToastDescription",props:{asChild:{type:Boolean},as:{}},setup(e){const t=e;return J(),(o,n)=>(x(),C(h(U),oe(ye(t)),{default:S(()=>[P(o.$slots,"default")]),_:3},16))}}),Jn=A({__name:"ToastPortal",props:{to:{},disabled:{type:Boolean},defer:{type:Boolean},forceMount:{type:Boolean}},setup(e){const t=e;return(o,n)=>(x(),C(h(Pn),oe(ye(t)),{default:S(()=>[P(o.$slots,"default")]),_:3},16))}}),Yn=A({__name:"ToastRoot",props:{defaultOpen:{type:Boolean,default:!0},forceMount:{type:Boolean},type:{default:"foreground"},open:{type:Boolean,default:void 0},duration:{},asChild:{type:Boolean},as:{default:"li"}},emits:["escapeKeyDown","pause","resume","swipeStart","swipeMove","swipeCancel","swipeEnd","update:open"],setup(e,{emit:t}){const o=e,n=t,{forwardRef:a}=J(),r=ze(o,"open",n,{defaultValue:o.defaultOpen,passive:o.open===void 0});return(i,s)=>(x(),C(h(Tn),{present:i.forceMount||h(r)},{default:S(()=>[F(Kn,D({ref:h(a),open:h(r),type:i.type,as:i.as,"as-child":i.asChild,duration:i.duration},i.$attrs,{onClose:s[0]||(s[0]=c=>r.value=!1),onPause:s[1]||(s[1]=c=>n("pause")),onResume:s[2]||(s[2]=c=>n("resume")),onEscapeKeyDown:s[3]||(s[3]=c=>n("escapeKeyDown",c)),onSwipeStart:s[4]||(s[4]=c=>{n("swipeStart",c),c.defaultPrevented||c.currentTarget.setAttribute("data-swipe","start")}),onSwipeMove:s[5]||(s[5]=c=>{if(n("swipeMove",c),!c.defaultPrevented){const{x:l,y:u}=c.detail.delta,p=c.currentTarget;p.setAttribute("data-swipe","move"),p.style.setProperty("--reka-toast-swipe-move-x",`${l}px`),p.style.setProperty("--reka-toast-swipe-move-y",`${u}px`)}}),onSwipeCancel:s[6]||(s[6]=c=>{if(n("swipeCancel",c),!c.defaultPrevented){const l=c.currentTarget;l.setAttribute("data-swipe","cancel"),l.style.removeProperty("--reka-toast-swipe-move-x"),l.style.removeProperty("--reka-toast-swipe-move-y"),l.style.removeProperty("--reka-toast-swipe-end-x"),l.style.removeProperty("--reka-toast-swipe-end-y")}}),onSwipeEnd:s[7]||(s[7]=c=>{if(n("swipeEnd",c),!c.defaultPrevented){const{x:l,y:u}=c.detail.delta,p=c.currentTarget;p.setAttribute("data-swipe","end"),p.style.removeProperty("--reka-toast-swipe-move-x"),p.style.removeProperty("--reka-toast-swipe-move-y"),p.style.setProperty("--reka-toast-swipe-end-x",`${l}px`),p.style.setProperty("--reka-toast-swipe-end-y",`${u}px`),r.value=!1}})}),{default:S(({remaining:c,duration:l})=>[P(i.$slots,"default",{remaining:c,duration:l,open:h(r)})]),_:3},16,["open","type","as","as-child","duration"])]),_:3},8,["present"]))}}),Xn=A({__name:"ToastTitle",props:{asChild:{type:Boolean},as:{}},setup(e){const t=e;return J(),(o,n)=>(x(),C(h(U),oe(ye(t)),{default:S(()=>[P(o.$slots,"default")]),_:3},16))}}),ut=A({__name:"FocusProxy",emits:["focusFromOutsideViewport"],setup(e,{emit:t}){const o=t,n=Oe();return(a,r)=>(x(),C(h(Pt),{"aria-hidden":"true",tabindex:"0",style:{position:"fixed"},onFocus:r[0]||(r[0]=i=>{const s=i.relatedTarget;!h(n).viewport.value?.contains(s)&&o("focusFromOutsideViewport")})},{default:S(()=>[P(a.$slots,"default")]),_:3}))}}),Gn=A({__name:"DismissableLayerBranch",props:{asChild:{type:Boolean},as:{}},setup(e){const t=e,{forwardRef:o,currentElement:n}=J();return re(()=>{at.branches.add(n.value)}),qe(()=>{at.branches.delete(n.value)}),(a,r)=>(x(),C(h(U),D({ref:h(o)},t),{default:S(()=>[P(a.$slots,"default")]),_:3},16))}}),Qn=A({inheritAttrs:!1,__name:"ToastViewport",props:{hotkey:{default:()=>["F8"]},label:{type:[String,Function],default:"Notifications ({hotkey})"},asChild:{type:Boolean},as:{default:"ol"}},setup(e){const t=e,{hotkey:o,label:n}=ve(t),{forwardRef:a,currentElement:r}=J(),{CollectionSlot:i,getItems:s}=Ue(),c=Oe(),l=T(()=>c.toastCount.value>0),u=M(),p=M(),v=T(()=>o.value.join("+").replace(/Key/g,"").replace(/Digit/g,""));At(o.value,()=>{r.value.focus()}),re(()=>{c.onViewportChange(r.value)}),he(m=>{const f=r.value;if(l.value&&f){const y=()=>{if(!c.isClosePausedRef.value){const _=new CustomEvent(Fe);f.dispatchEvent(_),c.isClosePausedRef.value=!0}},g=()=>{if(c.isClosePausedRef.value){const _=new CustomEvent(He);f.dispatchEvent(_),c.isClosePausedRef.value=!1}},b=_=>{!f.contains(_.relatedTarget)&&g()},k=()=>{f.contains(ae())||g()},w=_=>{const $=_.altKey||_.ctrlKey||_.metaKey;if(_.key==="Tab"&&!$){const K=ae(),R=_.shiftKey;if(_.target===f&&R){u.value?.focus();return}const I=d({tabbingDirection:R?"backwards":"forwards"}),H=I.findIndex(E=>E===K);Re(I.slice(H+1))?_.preventDefault():R?u.value?.focus():p.value?.focus()}};f.addEventListener("focusin",y),f.addEventListener("focusout",b),f.addEventListener("pointermove",y),f.addEventListener("pointerleave",k),f.addEventListener("keydown",w),window.addEventListener("blur",y),window.addEventListener("focus",g),m(()=>{f.removeEventListener("focusin",y),f.removeEventListener("focusout",b),f.removeEventListener("pointermove",y),f.removeEventListener("pointerleave",k),f.removeEventListener("keydown",w),window.removeEventListener("blur",y),window.removeEventListener("focus",g)})}});function d({tabbingDirection:m}){const y=s().map(g=>g.ref).map(g=>{const b=[g,...En(g)];return m==="forwards"?b:b.reverse()});return(m==="forwards"?y.reverse():y).flat()}return(m,f)=>(x(),C(h(Gn),{role:"region","aria-label":typeof h(n)=="string"?h(n).replace("{hotkey}",v.value):h(n)(v.value),tabindex:"-1",style:Ce({pointerEvents:l.value?void 0:"none"})},{default:S(()=>[l.value?(x(),C(ut,{key:0,ref:y=>{u.value=h(se)(y)},onFocusFromOutsideViewport:f[0]||(f[0]=()=>{const y=d({tabbingDirection:"forwards"});h(Re)(y)})},null,512)):N("",!0),F(h(i),null,{default:S(()=>[F(h(U),D({ref:h(a),tabindex:"-1",as:m.as,"as-child":m.asChild},m.$attrs),{default:S(()=>[P(m.$slots,"default")]),_:3},16,["as","as-child"])]),_:3}),l.value?(x(),C(ut,{key:1,ref:y=>{p.value=h(se)(y)},onFocusFromOutsideViewport:f[1]||(f[1]=()=>{const y=d({tabbingDirection:"backwards"});h(Re)(y)})},null,512)):N("",!0)]),_:3},8,["aria-label","style"]))}}),[ws,Zn]=ge("TooltipProvider"),es=A({inheritAttrs:!1,__name:"TooltipProvider",props:{delayDuration:{default:700},skipDelayDuration:{default:300},disableHoverableContent:{type:Boolean,default:!1},disableClosingTrigger:{type:Boolean},disabled:{type:Boolean},ignoreNonKeyboardFocus:{type:Boolean,default:!1}},setup(e){const t=e,{delayDuration:o,skipDelayDuration:n,disableHoverableContent:a,disableClosingTrigger:r,ignoreNonKeyboardFocus:i,disabled:s}=ve(t);J();const c=M(!0),l=M(!1),{start:u,stop:p}=$t(()=>{c.value=!0},n,{immediate:!1});return Zn({isOpenDelayed:c,delayDuration:o,onOpen(){p(),c.value=!1},onClose(){u()},isPointerInTransitRef:l,disableHoverableContent:a,disableClosingTrigger:r,disabled:s,ignoreNonKeyboardFocus:i}),(v,d)=>P(v.$slots,"default")}}),Be=Symbol("nuxt-ui.portal-target");function ts(e){const t=me(Be,void 0),o=T(()=>typeof e.value=="boolean"||e.value===void 0?t?.value??"body":e.value),n=T(()=>typeof e.value=="boolean"?!e.value:!1);return ue(Be,T(()=>o.value)),T(()=>({to:o.value,disabled:n.value}))}function os(){const e=ao("toasts",()=>[]),t=M(!1),o=[],n=()=>`${Date.now()}-${Math.random().toString(36).slice(2,9)}`;async function a(){if(!(t.value||o.length===0)){for(t.value=!0;o.length>0;){const l=o.shift();await ie(),e.value=[...e.value,l].slice(-5)}t.value=!1}}function r(l){const u={id:n(),open:!0,...l};return o.push(u),a(),u}function i(l,u){const p=e.value.findIndex(v=>v.id===l);p!==-1&&(e.value[p]={...e.value[p],...u})}function s(l){const u=e.value.findIndex(p=>p.id===l);u!==-1&&(e.value[u]={...e.value[u],open:!1}),setTimeout(()=>{e.value=e.value.filter(p=>p.id!==l)},200)}function c(){e.value=[]}return{toasts:e,add:r,update:i,remove:s,clear:c}}const ns={slots:{root:"gap-2",base:"relative overflow-hidden rounded-full bg-accented",indicator:"rounded-full size-full transition-transform duration-200 ease-out",status:"flex justify-end text-dimmed transition-[width] duration-200",steps:"grid items-end",step:"truncate text-end row-start-1 col-start-1 transition-opacity"},variants:{animation:{carousel:"","carousel-inverse":"",swing:"",elastic:""},color:{primary:{indicator:"bg-primary",steps:"text-primary"},secondary:{indicator:"bg-secondary",steps:"text-secondary"},success:{indicator:"bg-success",steps:"text-success"},info:{indicator:"bg-info",steps:"text-info"},warning:{indicator:"bg-warning",steps:"text-warning"},error:{indicator:"bg-error",steps:"text-error"},neutral:{indicator:"bg-inverted",steps:"text-inverted"}},size:{"2xs":{status:"text-xs",steps:"text-xs"},xs:{status:"text-xs",steps:"text-xs"},sm:{status:"text-sm",steps:"text-sm"},md:{status:"text-sm",steps:"text-sm"},lg:{status:"text-sm",steps:"text-sm"},xl:{status:"text-base",steps:"text-base"},"2xl":{status:"text-base",steps:"text-base"}},step:{active:{step:"opacity-100"},first:{step:"opacity-100 text-muted"},other:{step:"opacity-0"},last:{step:""}},orientation:{horizontal:{root:"w-full flex flex-col",base:"w-full",status:"flex-row"},vertical:{root:"h-full flex flex-row-reverse",base:"h-full",status:"flex-col"}},inverted:{true:{status:"self-end"}}},compoundVariants:[{inverted:!0,orientation:"horizontal",class:{step:"text-start",status:"flex-row-reverse"}},{inverted:!0,orientation:"vertical",class:{steps:"items-start",status:"flex-col-reverse"}},{orientation:"horizontal",size:"2xs",class:"h-px"},{orientation:"horizontal",size:"xs",class:"h-0.5"},{orientation:"horizontal",size:"sm",class:"h-1"},{orientation:"horizontal",size:"md",class:"h-2"},{orientation:"horizontal",size:"lg",class:"h-3"},{orientation:"horizontal",size:"xl",class:"h-4"},{orientation:"horizontal",size:"2xl",class:"h-5"},{orientation:"vertical",size:"2xs",class:"w-px"},{orientation:"vertical",size:"xs",class:"w-0.5"},{orientation:"vertical",size:"sm",class:"w-1"},{orientation:"vertical",size:"md",class:"w-2"},{orientation:"vertical",size:"lg",class:"w-3"},{orientation:"vertical",size:"xl",class:"w-4"},{orientation:"vertical",size:"2xl",class:"w-5"},{orientation:"horizontal",animation:"carousel",class:{indicator:"data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"}},{orientation:"vertical",animation:"carousel",class:{indicator:"data-[state=indeterminate]:animate-[carousel-vertical_2s_ease-in-out_infinite]"}},{orientation:"horizontal",animation:"carousel-inverse",class:{indicator:"data-[state=indeterminate]:animate-[carousel-inverse_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]"}},{orientation:"vertical",animation:"carousel-inverse",class:{indicator:"data-[state=indeterminate]:animate-[carousel-inverse-vertical_2s_ease-in-out_infinite]"}},{orientation:"horizontal",animation:"swing",class:{indicator:"data-[state=indeterminate]:animate-[swing_2s_ease-in-out_infinite]"}},{orientation:"vertical",animation:"swing",class:{indicator:"data-[state=indeterminate]:animate-[swing-vertical_2s_ease-in-out_infinite]"}},{orientation:"horizontal",animation:"elastic",class:{indicator:"data-[state=indeterminate]:animate-[elastic_2s_ease-in-out_infinite]"}},{orientation:"vertical",animation:"elastic",class:{indicator:"data-[state=indeterminate]:animate-[elastic-vertical_2s_ease-in-out_infinite]"}}],defaultVariants:{animation:"carousel",color:"primary",size:"md"}},ss={__name:"Progress",props:{as:{type:null,required:!1},max:{type:[Number,Array],required:!1},status:{type:Boolean,required:!1},inverted:{type:Boolean,required:!1,default:!1},size:{type:null,required:!1},color:{type:null,required:!1},orientation:{type:null,required:!1,default:"horizontal"},animation:{type:null,required:!1},class:{type:null,required:!1},ui:{type:null,required:!1},getValueLabel:{type:Function,required:!1},getValueText:{type:Function,required:!1},modelValue:{type:[Number,null],required:!1,default:null}},emits:["update:modelValue","update:max"],setup(e,{emit:t}){const o=e,n=t,a=kt(),{dir:r}=Mt(),i=Me(),s=Dt(Pe(o,"getValueLabel","getValueText","modelValue"),n),c=T(()=>s.value.modelValue===null),l=T(()=>Array.isArray(o.max)),u=T(()=>{if(!(c.value||!o.max))return Array.isArray(o.max)?o.max.length-1:Number(o.max)}),p=T(()=>{if(!c.value)switch(!0){case s.value.modelValue<0:return 0;case s.value.modelValue>(u.value??100):return 100;default:return Math.round(s.value.modelValue/(u.value??100)*100)}}),v=T(()=>{if(p.value!==void 0)return o.orientation==="vertical"?{transform:`translateY(${o.inverted?"":"-"}${100-p.value}%)`}:r.value==="rtl"?{transform:`translateX(${o.inverted?"-":""}${100-p.value}%)`}:{transform:`translateX(${o.inverted?"":"-"}${100-p.value}%)`}}),d=T(()=>({[o.orientation==="vertical"?"height":"width"]:p.value?`${p.value}%`:"fit-content"}));function m(k){return k===Number(o.modelValue)}function f(k){return k===0}function y(k){return k===u.value}function g(k){return k=Number(k),m(k)&&!f(k)?"active":f(k)&&m(k)?"first":y(k)&&m(k)?"last":"other"}const b=T(()=>ne({extend:ne(ns),...i.ui?.progress||{}})({animation:o.animation,size:o.size,color:o.color,orientation:o.orientation,inverted:o.inverted}));return(k,w)=>(x(),C(h(U),{as:e.as,class:q(b.value.root({class:[o.ui?.root,o.class]}))},{default:S(()=>[!c.value&&(e.status||a.status)?(x(),B("div",{key:0,class:q(b.value.status({class:o.ui?.status})),style:Ce(d.value)},[P(k.$slots,"status",{percent:p.value},()=>[ee(te(p.value)+"% ",1)])],6)):N("",!0),F(h(Dn),D(h(s),{max:u.value,class:b.value.base({class:o.ui?.base}),style:{transform:"translateZ(0)"}}),{default:S(()=>[F(h(Ln),{class:q(b.value.indicator({class:o.ui?.indicator})),style:Ce(v.value)},null,8,["class","style"])]),_:1},16,["max","class"]),l.value?(x(),B("div",{key:1,class:q(b.value.steps({class:o.ui?.steps}))},[(x(!0),B(X,null,de(e.max,(_,$)=>(x(),B("div",{key:$,class:q(b.value.step({class:o.ui?.step,step:g($)}))},[P(k.$slots,`step-${$}`,{step:_},()=>[ee(te(_),1)])],2))),128))],2)):N("",!0)]),_:3},8,["as","class"]))}},as={slots:{root:"relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none",wrapper:"w-0 flex-1 flex flex-col",title:"text-sm font-medium text-highlighted",description:"text-sm text-muted",icon:"shrink-0 size-5",avatar:"shrink-0",avatarSize:"2xl",actions:"flex gap-1.5 shrink-0",progress:"absolute inset-x-0 bottom-0",close:"p-0"},variants:{color:{primary:{root:"focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",icon:"text-primary"},secondary:{root:"focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-secondary",icon:"text-secondary"},success:{root:"focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-success",icon:"text-success"},info:{root:"focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-info",icon:"text-info"},warning:{root:"focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-warning",icon:"text-warning"},error:{root:"focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error",icon:"text-error"},neutral:{root:"focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted",icon:"text-highlighted"}},orientation:{horizontal:{root:"items-center",actions:"items-center"},vertical:{root:"items-start",actions:"items-start mt-2.5"}},title:{true:{description:"mt-1"}}},defaultVariants:{color:"primary"}},rs={__name:"Toast",props:{as:{type:null,required:!1},title:{type:[String,Object,Function],required:!1},description:{type:[String,Object,Function],required:!1},icon:{type:String,required:!1},avatar:{type:Object,required:!1},color:{type:null,required:!1},orientation:{type:null,required:!1,default:"vertical"},close:{type:[Boolean,Object],required:!1,default:!0},closeIcon:{type:String,required:!1},actions:{type:Array,required:!1},progress:{type:[Boolean,Object],required:!1,default:!0},class:{type:null,required:!1},ui:{type:null,required:!1},defaultOpen:{type:Boolean,required:!1},open:{type:Boolean,required:!1},type:{type:String,required:!1},duration:{type:Number,required:!1}},emits:["escapeKeyDown","pause","resume","swipeStart","swipeMove","swipeCancel","swipeEnd","update:open"],setup(e,{expose:t,emit:o}){const n=e,a=o,r=kt(),{t:i}=Mt(),s=Me(),c=Dt(Pe(n,"as","defaultOpen","open","duration","type"),a),l=T(()=>ne({extend:ne(as),...s.ui?.toast||{}})({color:n.color,orientation:n.orientation,title:!!n.title||!!r.title})),u=M(),p=M(0);return re(()=>{u.value&&ie(()=>{p.value=u.value?.$el?.getBoundingClientRect()?.height})}),t({height:p}),(v,d)=>(x(),C(h(Yn),D({ref_key:"el",ref:u},h(c),{"data-orientation":e.orientation,class:l.value.root({class:[n.ui?.root,n.class]}),style:{"--height":p.value}}),{default:S(({remaining:m,duration:f,open:y})=>[P(v.$slots,"leading",{},()=>[e.avatar?(x(),C(ro,D({key:0,size:n.ui?.avatarSize||l.value.avatarSize()},e.avatar,{class:l.value.avatar({class:n.ui?.avatar})}),null,16,["size","class"])):e.icon?(x(),C(io,{key:1,name:e.icon,class:q(l.value.icon({class:n.ui?.icon}))},null,8,["name","class"])):N("",!0)]),bt("div",{class:q(l.value.wrapper({class:n.ui?.wrapper}))},[e.title||r.title?(x(),C(h(Xn),{key:0,class:q(l.value.title({class:n.ui?.title}))},{default:S(()=>[P(v.$slots,"title",{},()=>[typeof e.title=="function"?(x(),C(ce(e.title()),{key:0})):typeof e.title=="object"?(x(),C(ce(e.title),{key:1})):(x(),B(X,{key:2},[ee(te(e.title),1)],64))])]),_:3},8,["class"])):N("",!0),e.description||r.description?(x(),C(h(Un),{key:1,class:q(l.value.description({class:n.ui?.description}))},{default:S(()=>[P(v.$slots,"description",{},()=>[typeof e.description=="function"?(x(),C(ce(e.description()),{key:0})):typeof e.description=="object"?(x(),C(ce(e.description),{key:1})):(x(),B(X,{key:2},[ee(te(e.description),1)],64))])]),_:3},8,["class"])):N("",!0),e.orientation==="vertical"&&(e.actions?.length||r.actions)?(x(),B("div",{key:2,class:q(l.value.actions({class:n.ui?.actions}))},[P(v.$slots,"actions",{},()=>[(x(!0),B(X,null,de(e.actions,(g,b)=>(x(),C(h(ct),{key:b,"alt-text":g.label||"Action","as-child":"",onClick:d[0]||(d[0]=Te(()=>{},["stop"]))},{default:S(()=>[F(De,D({size:"xs",color:e.color},{ref_for:!0},g),null,16,["color"])]),_:2},1032,["alt-text"]))),128))])],2)):N("",!0)],2),e.orientation==="horizontal"&&(e.actions?.length||r.actions)||e.close?(x(),B("div",{key:0,class:q(l.value.actions({class:n.ui?.actions,orientation:"horizontal"}))},[e.orientation==="horizontal"&&(e.actions?.length||r.actions)?P(v.$slots,"actions",{key:0},()=>[(x(!0),B(X,null,de(e.actions,(g,b)=>(x(),C(h(ct),{key:b,"alt-text":g.label||"Action","as-child":"",onClick:d[1]||(d[1]=Te(()=>{},["stop"]))},{default:S(()=>[F(De,D({size:"xs",color:e.color},{ref_for:!0},g),null,16,["color"])]),_:2},1032,["alt-text"]))),128))]):N("",!0),e.close||r.close?(x(),C(h(It),{key:1,"as-child":""},{default:S(()=>[P(v.$slots,"close",{ui:l.value},()=>[e.close?(x(),C(De,D({key:0,icon:e.closeIcon||h(s).ui.icons.close,color:"neutral",variant:"link","aria-label":h(i)("toast.close")},typeof e.close=="object"?e.close:{},{class:l.value.close({class:n.ui?.close}),onClick:d[2]||(d[2]=Te(()=>{},["stop"]))}),null,16,["icon","aria-label","class"])):N("",!0)])]),_:3})):N("",!0)],2)):N("",!0),e.progress&&y&&m>0&&f?(x(),C(ss,D({key:1,"model-value":m/f*100,color:e.color},typeof e.progress=="object"?e.progress:{},{size:"sm",class:l.value.progress({class:n.ui?.progress})}),null,16,["model-value","color","class"])):N("",!0)]),_:3},16,["data-orientation","class","style"]))}},is={slots:{viewport:"fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none",base:"pointer-events-auto absolute inset-x-0 z-(--index) transform-(--transform) data-[expanded=false]:data-[front=false]:h-(--front-height) data-[expanded=false]:data-[front=false]:*:opacity-0 data-[front=false]:*:transition-opacity data-[front=false]:*:duration-100 data-[state=closed]:animate-[toast-closed_200ms_ease-in-out] data-[state=closed]:data-[expanded=false]:data-[front=false]:animate-[toast-collapsed-closed_200ms_ease-in-out] data-[swipe=move]:transition-none transition-[transform,translate,height] duration-200 ease-out"},variants:{position:{"top-left":{viewport:"left-4"},"top-center":{viewport:"left-1/2 transform -translate-x-1/2"},"top-right":{viewport:"right-4"},"bottom-left":{viewport:"left-4"},"bottom-center":{viewport:"left-1/2 transform -translate-x-1/2"},"bottom-right":{viewport:"right-4"}},swipeDirection:{up:"data-[swipe=end]:animate-[toast-slide-up_200ms_ease-out]",right:"data-[swipe=end]:animate-[toast-slide-right_200ms_ease-out]",down:"data-[swipe=end]:animate-[toast-slide-down_200ms_ease-out]",left:"data-[swipe=end]:animate-[toast-slide-left_200ms_ease-out]"}},compoundVariants:[{position:["top-left","top-center","top-right"],class:{viewport:"top-4",base:"top-0 data-[state=open]:animate-[slide-in-from-top_200ms_ease-in-out]"}},{position:["bottom-left","bottom-center","bottom-right"],class:{viewport:"bottom-4",base:"bottom-0 data-[state=open]:animate-[slide-in-from-bottom_200ms_ease-in-out]"}},{swipeDirection:["left","right"],class:"data-[swipe=move]:translate-x-(--reka-toast-swipe-move-x) data-[swipe=end]:translate-x-(--reka-toast-swipe-end-x) data-[swipe=cancel]:translate-x-0"},{swipeDirection:["up","down"],class:"data-[swipe=move]:translate-y-(--reka-toast-swipe-move-y) data-[swipe=end]:translate-y-(--reka-toast-swipe-end-y) data-[swipe=cancel]:translate-y-0"}],defaultVariants:{position:"bottom-right"}},ls={name:"Toaster"},cs=Object.assign(ls,{props:{position:{type:null,required:!1},expand:{type:Boolean,required:!1,default:!0},progress:{type:Boolean,required:!1,default:!0},portal:{type:[Boolean,String],required:!1,skipCheck:!0,default:!0},class:{type:null,required:!1},ui:{type:null,required:!1},label:{type:String,required:!1},duration:{type:Number,required:!1,default:5e3},swipeThreshold:{type:Number,required:!1}},setup(e){const t=e,{toasts:o,remove:n}=os(),a=Me(),r=We(Pe(t,"duration","label","swipeThreshold")),i=ts(Z(()=>t.portal)),s=T(()=>{switch(t.position){case"top-center":return"up";case"top-right":case"bottom-right":return"right";case"bottom-center":return"down";case"top-left":case"bottom-left":return"left"}return"right"}),c=T(()=>ne({extend:ne(is),...a.ui?.toaster||{}})({position:t.position,swipeDirection:s.value}));function l(y,g){y||n(g)}const u=M(!1),p=T(()=>t.expand||u.value),v=M([]),d=T(()=>v.value.reduce((y,{height:g})=>y+g+16,0)),m=T(()=>v.value[v.value.length-1]?.height||0);function f(y){return v.value.slice(y+1).reduce((g,{height:b})=>g+b+16,0)}return(y,g)=>(x(),C(h(In),D({"swipe-direction":s.value},h(r)),{default:S(()=>[P(y.$slots,"default"),(x(!0),B(X,null,de(h(o),(b,k)=>(x(),C(rs,D({key:b.id,ref_for:!0,ref_key:"refs",ref:v,progress:e.progress},{ref_for:!0},h(lo)(b,["id","close"]),{close:b.close,"data-expanded":p.value,"data-front":!p.value&&k===h(o).length-1,style:{"--index":k-h(o).length+h(o).length,"--before":h(o).length-1-k,"--offset":f(k),"--scale":p.value?"1":"calc(1 - var(--before) * var(--scale-factor))","--translate":p.value?"calc(var(--offset) * var(--translate-factor))":"calc(var(--before) * var(--gap))","--transform":"translateY(var(--translate)) scale(var(--scale))"},class:c.value.base({class:[t.ui?.base,b.onClick?"cursor-pointer":void 0]}),"onUpdate:open":w=>l(w,b.id),onClick:w=>b.onClick&&b.onClick(b)}),null,16,["progress","close","data-expanded","data-front","style","class","onUpdate:open","onClick"]))),128)),F(h(Jn),oe(ye(h(i))),{default:S(()=>[F(h(Qn),{"data-expanded":p.value,class:q(c.value.viewport({class:[t.ui?.viewport,t.class]})),style:Ce({"--scale-factor":"0.05","--translate-factor":e.position?.startsWith("top")?"1px":"-1px","--gap":e.position?.startsWith("top")?"16px":"-16px","--front-height":`${m.value}px`,"--height":`${d.value}px`}),onMouseenter:g[0]||(g[0]=b=>u.value=!0),onMouseleave:g[1]||(g[1]=b=>u.value=!1)},null,8,["data-expanded","class","style"])]),_:1},16)]),_:3},16,["swipe-direction"]))}});function us(){const e=co([]),t=(l,u)=>{const{props:p,defaultOpen:v,destroyOnClose:d}=u||{},m=vt({id:Symbol(import.meta.dev?"useOverlay":""),isOpen:!!v,component:gt(l),isMounted:!!v,destroyOnClose:!!d,originalProps:p||{},props:{...p}});return e.push(m),{...m,open:f=>o(m.id,f),close:f=>n(m.id,f),patch:f=>i(m.id,f)}},o=(l,u)=>{const p=s(l);return u?p.props={...p.originalProps,...u}:p.props={...p.originalProps},p.isOpen=!0,p.isMounted=!0,{id:l,isMounted:p.isMounted,isOpen:p.isOpen,result:new Promise(v=>p.resolvePromise=v)}},n=(l,u)=>{const p=s(l);p.isOpen=!1,p.resolvePromise&&(p.resolvePromise(u),p.resolvePromise=void 0)},a=()=>{e.forEach(l=>n(l.id))},r=l=>{const u=s(l);if(u.isMounted=!1,u.destroyOnClose){const p=e.findIndex(v=>v.id===l);e.splice(p,1)}},i=(l,u)=>{const p=s(l);p.props={...p.props,...u}},s=l=>{const u=e.find(p=>p.id===l);if(!u)throw new Error("Overlay not found");return u};return{overlays:e,open:o,close:n,closeAll:a,create:t,patch:i,unmount:r,isOpen:l=>s(l).isOpen}}const ds=mt(us),fs={__name:"OverlayProvider",setup(e){const{overlays:t,unmount:o,close:n}=ds(),a=T(()=>t.filter(s=>s.isMounted)),r=s=>{n(s),o(s)},i=(s,c)=>{n(s,c)};return(s,c)=>(x(!0),B(X,null,de(a.value,l=>(x(),C(ce(l.component),D({key:l.id},{ref_for:!0},l.props,{open:l.isOpen,"onUpdate:open":u=>l.isOpen=u,onClose:u=>i(l.id,u),"onAfter:leave":u=>r(l.id)}),null,16,["open","onUpdate:open","onClose","onAfter:leave"]))),128))}},ps={name:"App"},ms=Object.assign(ps,{props:{tooltip:{type:Object,required:!1},toaster:{type:[Object,null],required:!1},locale:{type:null,required:!1},portal:{type:null,required:!1,default:"body"},scrollBody:{type:[Boolean,Object],required:!1},nonce:{type:String,required:!1}},setup(e){const t=e,o=We(Pe(t,"scrollBody")),n=Z(()=>t.tooltip),a=Z(()=>t.toaster),r=Z(()=>t.locale);ue(St,r);const i=Z(()=>t.portal);return ue(Be,i),(s,c)=>(x(),C(h(wn),D({"use-id":()=>uo(),dir:r.value?.dir,locale:r.value?.code},h(o)),{default:S(()=>[F(h(es),oe(ye(n.value)),{default:S(()=>[e.toaster!==null?(x(),C(cs,oe(D({key:0},a.value)),{default:S(()=>[P(s.$slots,"default")]),_:3},16)):P(s.$slots,"default",{key:1}),F(fs)]),_:3},16)]),_:3},16,["use-id","dir","locale"]))}}),hs=(e,t)=>{const o=e.__vccOpts||e;for(const[n,a]of t)o[n]=a;return o},vs={};function ys(e,t){const o=ms;return x(),C(o,null,{default:S(()=>t[0]||(t[0]=[bt("shared-button",null,null,-1)])),_:1,__:[0]})}const gs=hs(vs,[["render",ys]]),jt=fo(gs);jt.use(cn);jt.mount("#app");
+Defaulting to \`null\`.`);
+  return null;
+}
+function validateMax(max) {
+  const isValidMaxError = isNumber(max) && !Number.isNaN(max) && max > 0;
+  if (isValidMaxError)
+    return max;
+  console.error(
+    `Invalid prop \`max\` of value \`${max}\` supplied to \`ProgressRoot\`. Only numbers greater than 0 are valid max values. Defaulting to \`${DEFAULT_MAX}\`.`
+  );
+  return DEFAULT_MAX;
+}
+const _sfc_main$l = /* @__PURE__ */ defineComponent({
+  __name: "ProgressRoot",
+  props: {
+    modelValue: {},
+    max: { default: DEFAULT_MAX },
+    getValueLabel: { type: Function, default: (value, max) => isNumber(value) ? `${Math.round(value / max * DEFAULT_MAX)}%` : void 0 },
+    getValueText: {},
+    asChild: { type: Boolean },
+    as: {}
+  },
+  emits: ["update:modelValue", "update:max"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emit = __emit;
+    useForwardExpose();
+    const modelValue = useVModel(props, "modelValue", emit, {
+      passive: props.modelValue === void 0
+    });
+    const max = useVModel(props, "max", emit, {
+      passive: props.max === void 0
+    });
+    watch(
+      () => modelValue.value,
+      async (value) => {
+        const correctedValue = validateValue(value, props.max);
+        if (correctedValue !== value) {
+          await nextTick();
+          modelValue.value = correctedValue;
+        }
+      },
+      { immediate: true }
+    );
+    watch(
+      () => props.max,
+      (newMax) => {
+        const correctedMax = validateMax(props.max);
+        if (correctedMax !== newMax)
+          max.value = correctedMax;
+      },
+      { immediate: true }
+    );
+    const progressState = computed(() => {
+      if (isNullish(modelValue.value))
+        return "indeterminate";
+      if (modelValue.value === max.value)
+        return "complete";
+      return "loading";
+    });
+    provideProgressRootContext({
+      modelValue,
+      max,
+      progressState
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        "as-child": _ctx.asChild,
+        as: _ctx.as,
+        "aria-valuemax": unref(max),
+        "aria-valuemin": 0,
+        "aria-valuenow": isNumber(unref(modelValue)) ? unref(modelValue) : void 0,
+        "aria-valuetext": _ctx.getValueText?.(unref(modelValue), unref(max)),
+        "aria-label": _ctx.getValueLabel(unref(modelValue), unref(max)),
+        role: "progressbar",
+        "data-state": progressState.value,
+        "data-value": unref(modelValue) ?? void 0,
+        "data-max": unref(max)
+      }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default", { modelValue: unref(modelValue) })
+        ]),
+        _: 3
+      }, 8, ["as-child", "as", "aria-valuemax", "aria-valuenow", "aria-valuetext", "aria-label", "data-state", "data-value", "data-max"]);
+    };
+  }
+});
+const _sfc_main$k = /* @__PURE__ */ defineComponent({
+  __name: "ProgressIndicator",
+  props: {
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    const props = __props;
+    const rootContext = injectProgressRootContext();
+    useForwardExpose();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), mergeProps(props, {
+        "data-state": unref(rootContext).progressState.value,
+        "data-value": unref(rootContext).modelValue?.value ?? void 0,
+        "data-max": unref(rootContext).max.value
+      }), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16, ["data-state", "data-value", "data-max"]);
+    };
+  }
+});
+const _sfc_main$j = /* @__PURE__ */ defineComponent({
+  __name: "ToastAnnounceExclude",
+  props: {
+    altText: {},
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        as: _ctx.as,
+        "as-child": _ctx.asChild,
+        "data-reka-toast-announce-exclude": "",
+        "data-reka-toast-announce-alt": _ctx.altText || void 0
+      }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 8, ["as", "as-child", "data-reka-toast-announce-alt"]);
+    };
+  }
+});
+const [injectToastProviderContext, provideToastProviderContext] = createContext("ToastProvider");
+const _sfc_main$i = /* @__PURE__ */ defineComponent({
+  ...{
+    inheritAttrs: false
+  },
+  __name: "ToastProvider",
+  props: {
+    label: { default: "Notification" },
+    duration: { default: 5e3 },
+    swipeDirection: { default: "right" },
+    swipeThreshold: { default: 50 }
+  },
+  setup(__props) {
+    const props = __props;
+    const { label, duration, swipeDirection, swipeThreshold } = toRefs(props);
+    useCollection({ isProvider: true });
+    const viewport = ref();
+    const toastCount = ref(0);
+    const isFocusedToastEscapeKeyDownRef = ref(false);
+    const isClosePausedRef = ref(false);
+    if (props.label && typeof props.label === "string" && !props.label.trim()) {
+      const error = "Invalid prop `label` supplied to `ToastProvider`. Expected non-empty `string`.";
+      throw new Error(error);
+    }
+    provideToastProviderContext({
+      label,
+      duration,
+      swipeDirection,
+      swipeThreshold,
+      toastCount,
+      viewport,
+      onViewportChange(el) {
+        viewport.value = el;
+      },
+      onToastAdd() {
+        toastCount.value++;
+      },
+      onToastRemove() {
+        toastCount.value--;
+      },
+      isFocusedToastEscapeKeyDownRef,
+      isClosePausedRef
+    });
+    return (_ctx, _cache) => {
+      return renderSlot(_ctx.$slots, "default");
+    };
+  }
+});
+const _sfc_main$h = /* @__PURE__ */ defineComponent({
+  __name: "ToastAnnounce",
+  setup(__props) {
+    const providerContext = injectToastProviderContext();
+    const isAnnounced = useTimeout(1e3);
+    const renderAnnounceText = ref(false);
+    useRafFn(() => {
+      renderAnnounceText.value = true;
+    });
+    return (_ctx, _cache) => {
+      return unref(isAnnounced) || renderAnnounceText.value ? (openBlock(), createBlock(unref(_sfc_main$o), { key: 0 }, {
+        default: withCtx(() => [
+          createTextVNode(toDisplayString(unref(providerContext).label.value) + " ", 1),
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      })) : createCommentVNode("", true);
+    };
+  }
+});
+const TOAST_SWIPE_START = "toast.swipeStart";
+const TOAST_SWIPE_MOVE = "toast.swipeMove";
+const TOAST_SWIPE_CANCEL = "toast.swipeCancel";
+const TOAST_SWIPE_END = "toast.swipeEnd";
+const VIEWPORT_PAUSE = "toast.viewportPause";
+const VIEWPORT_RESUME = "toast.viewportResume";
+function handleAndDispatchCustomEvent(name, handler, detail) {
+  const currentTarget = detail.originalEvent.currentTarget;
+  const event = new CustomEvent(name, {
+    bubbles: false,
+    cancelable: true,
+    detail
+  });
+  if (handler)
+    currentTarget.addEventListener(name, handler, { once: true });
+  currentTarget.dispatchEvent(event);
+}
+function isDeltaInDirection(delta, direction, threshold = 0) {
+  const deltaX = Math.abs(delta.x);
+  const deltaY = Math.abs(delta.y);
+  const isDeltaX = deltaX > deltaY;
+  if (direction === "left" || direction === "right")
+    return isDeltaX && deltaX > threshold;
+  else
+    return !isDeltaX && deltaY > threshold;
+}
+function isHTMLElement(node) {
+  return node.nodeType === node.ELEMENT_NODE;
+}
+function getAnnounceTextContent(container) {
+  const textContent = [];
+  const childNodes = Array.from(container.childNodes);
+  childNodes.forEach((node) => {
+    if (node.nodeType === node.TEXT_NODE && node.textContent)
+      textContent.push(node.textContent);
+    if (isHTMLElement(node)) {
+      const isHidden = node.ariaHidden || node.hidden || node.style.display === "none";
+      const isExcluded = node.dataset.rekaToastAnnounceExclude === "";
+      if (!isHidden) {
+        if (isExcluded) {
+          const altText = node.dataset.rekaToastAnnounceAlt;
+          if (altText)
+            textContent.push(altText);
+        } else {
+          textContent.push(...getAnnounceTextContent(node));
+        }
+      }
+    }
+  });
+  return textContent;
+}
+const [injectToastRootContext, provideToastRootContext] = createContext("ToastRoot");
+const _sfc_main$g = /* @__PURE__ */ defineComponent({
+  ...{
+    inheritAttrs: false
+  },
+  __name: "ToastRootImpl",
+  props: {
+    type: {},
+    open: { type: Boolean, default: false },
+    duration: {},
+    asChild: { type: Boolean },
+    as: { default: "li" }
+  },
+  emits: ["close", "escapeKeyDown", "pause", "resume", "swipeStart", "swipeMove", "swipeCancel", "swipeEnd"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emits = __emit;
+    const { forwardRef, currentElement } = useForwardExpose();
+    const { CollectionItem } = useCollection();
+    const providerContext = injectToastProviderContext();
+    const pointerStartRef = ref(null);
+    const swipeDeltaRef = ref(null);
+    const duration = computed(
+      () => typeof props.duration === "number" ? props.duration : providerContext.duration.value
+    );
+    const closeTimerStartTimeRef = ref(0);
+    const closeTimerRemainingTimeRef = ref(duration.value);
+    const closeTimerRef = ref(0);
+    const remainingTime = ref(duration.value);
+    const remainingRaf = useRafFn(() => {
+      const elapsedTime = (/* @__PURE__ */ new Date()).getTime() - closeTimerStartTimeRef.value;
+      remainingTime.value = Math.max(closeTimerRemainingTimeRef.value - elapsedTime, 0);
+    }, { fpsLimit: 60 });
+    function startTimer(duration2) {
+      if (duration2 <= 0 || duration2 === Number.POSITIVE_INFINITY)
+        return;
+      if (!isClient)
+        return;
+      window.clearTimeout(closeTimerRef.value);
+      closeTimerStartTimeRef.value = (/* @__PURE__ */ new Date()).getTime();
+      closeTimerRef.value = window.setTimeout(handleClose, duration2);
+    }
+    function handleClose(event) {
+      const isNonPointerEvent = event?.pointerType === "";
+      const isFocusInToast = currentElement.value?.contains(getActiveElement());
+      if (isFocusInToast && isNonPointerEvent)
+        providerContext.viewport.value?.focus();
+      if (isNonPointerEvent) {
+        providerContext.isClosePausedRef.value = false;
+      }
+      emits("close");
+    }
+    const announceTextContent = computed(() => currentElement.value ? getAnnounceTextContent(currentElement.value) : null);
+    if (props.type && !["foreground", "background"].includes(props.type)) {
+      const error = "Invalid prop `type` supplied to `Toast`. Expected `foreground | background`.";
+      throw new Error(error);
+    }
+    watchEffect((cleanupFn) => {
+      const viewport = providerContext.viewport.value;
+      if (viewport) {
+        const handleResume = () => {
+          startTimer(closeTimerRemainingTimeRef.value);
+          remainingRaf.resume();
+          emits("resume");
+        };
+        const handlePause = () => {
+          const elapsedTime = (/* @__PURE__ */ new Date()).getTime() - closeTimerStartTimeRef.value;
+          closeTimerRemainingTimeRef.value = closeTimerRemainingTimeRef.value - elapsedTime;
+          window.clearTimeout(closeTimerRef.value);
+          remainingRaf.pause();
+          emits("pause");
+        };
+        viewport.addEventListener(VIEWPORT_PAUSE, handlePause);
+        viewport.addEventListener(VIEWPORT_RESUME, handleResume);
+        return () => {
+          viewport.removeEventListener(VIEWPORT_PAUSE, handlePause);
+          viewport.removeEventListener(VIEWPORT_RESUME, handleResume);
+        };
+      }
+    });
+    watch(() => [props.open, duration.value], () => {
+      closeTimerRemainingTimeRef.value = duration.value;
+      if (props.open && !providerContext.isClosePausedRef.value)
+        startTimer(duration.value);
+    }, { immediate: true });
+    onKeyStroke("Escape", (event) => {
+      emits("escapeKeyDown", event);
+      if (!event.defaultPrevented) {
+        providerContext.isFocusedToastEscapeKeyDownRef.value = true;
+        handleClose();
+      }
+    });
+    onMounted(() => {
+      providerContext.onToastAdd();
+    });
+    onUnmounted(() => {
+      providerContext.onToastRemove();
+    });
+    provideToastRootContext({ onClose: handleClose });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock(Fragment, null, [
+        announceTextContent.value ? (openBlock(), createBlock(_sfc_main$h, {
+          key: 0,
+          role: "alert",
+          "aria-live": _ctx.type === "foreground" ? "assertive" : "polite",
+          "aria-atomic": "true"
+        }, {
+          default: withCtx(() => [
+            createTextVNode(toDisplayString(announceTextContent.value), 1)
+          ]),
+          _: 1
+        }, 8, ["aria-live"])) : createCommentVNode("", true),
+        unref(providerContext).viewport.value ? (openBlock(), createBlock(Teleport, {
+          key: 1,
+          to: unref(providerContext).viewport.value
+        }, [
+          createVNode(unref(CollectionItem), null, {
+            default: withCtx(() => [
+              createVNode(unref(Primitive), mergeProps({
+                ref: unref(forwardRef),
+                role: "alert",
+                "aria-live": "off",
+                "aria-atomic": "true",
+                tabindex: "0"
+              }, _ctx.$attrs, {
+                as: _ctx.as,
+                "as-child": _ctx.asChild,
+                "data-state": _ctx.open ? "open" : "closed",
+                "data-swipe-direction": unref(providerContext).swipeDirection.value,
+                style: { userSelect: "none", touchAction: "none" },
+                onPointerdown: _cache[0] || (_cache[0] = withModifiers((event) => {
+                  pointerStartRef.value = { x: event.clientX, y: event.clientY };
+                }, ["left"])),
+                onPointermove: _cache[1] || (_cache[1] = (event) => {
+                  if (!pointerStartRef.value) return;
+                  const x = event.clientX - pointerStartRef.value.x;
+                  const y = event.clientY - pointerStartRef.value.y;
+                  const hasSwipeMoveStarted = Boolean(swipeDeltaRef.value);
+                  const isHorizontalSwipe = ["left", "right"].includes(unref(providerContext).swipeDirection.value);
+                  const clamp = ["left", "up"].includes(unref(providerContext).swipeDirection.value) ? Math.min : Math.max;
+                  const clampedX = isHorizontalSwipe ? clamp(0, x) : 0;
+                  const clampedY = !isHorizontalSwipe ? clamp(0, y) : 0;
+                  const moveStartBuffer = event.pointerType === "touch" ? 10 : 2;
+                  const delta = { x: clampedX, y: clampedY };
+                  const eventDetail = { originalEvent: event, delta };
+                  if (hasSwipeMoveStarted) {
+                    swipeDeltaRef.value = delta;
+                    unref(handleAndDispatchCustomEvent)(unref(TOAST_SWIPE_MOVE), (ev) => emits("swipeMove", ev), eventDetail);
+                  } else if (unref(isDeltaInDirection)(delta, unref(providerContext).swipeDirection.value, moveStartBuffer)) {
+                    swipeDeltaRef.value = delta;
+                    unref(handleAndDispatchCustomEvent)(unref(TOAST_SWIPE_START), (ev) => emits("swipeStart", ev), eventDetail);
+                    event.target.setPointerCapture(event.pointerId);
+                  } else if (Math.abs(x) > moveStartBuffer || Math.abs(y) > moveStartBuffer) {
+                    pointerStartRef.value = null;
+                  }
+                }),
+                onPointerup: _cache[2] || (_cache[2] = (event) => {
+                  const delta = swipeDeltaRef.value;
+                  const target = event.target;
+                  if (target.hasPointerCapture(event.pointerId)) {
+                    target.releasePointerCapture(event.pointerId);
+                  }
+                  swipeDeltaRef.value = null;
+                  pointerStartRef.value = null;
+                  if (delta) {
+                    const toast = event.currentTarget;
+                    const eventDetail = { originalEvent: event, delta };
+                    if (unref(isDeltaInDirection)(delta, unref(providerContext).swipeDirection.value, unref(providerContext).swipeThreshold.value)) {
+                      unref(handleAndDispatchCustomEvent)(unref(TOAST_SWIPE_END), (ev) => emits("swipeEnd", ev), eventDetail);
+                    } else {
+                      unref(handleAndDispatchCustomEvent)(unref(TOAST_SWIPE_CANCEL), (ev) => emits("swipeCancel", ev), eventDetail);
+                    }
+                    toast?.addEventListener("click", (event2) => event2.preventDefault(), {
+                      once: true
+                    });
+                  }
+                })
+              }), {
+                default: withCtx(() => [
+                  renderSlot(_ctx.$slots, "default", {
+                    remaining: remainingTime.value,
+                    duration: duration.value
+                  })
+                ]),
+                _: 3
+              }, 16, ["as", "as-child", "data-state", "data-swipe-direction"])
+            ]),
+            _: 3
+          })
+        ], 8, ["to"])) : createCommentVNode("", true)
+      ], 64);
+    };
+  }
+});
+const _sfc_main$f = /* @__PURE__ */ defineComponent({
+  __name: "ToastClose",
+  props: {
+    asChild: { type: Boolean },
+    as: { default: "button" }
+  },
+  setup(__props) {
+    const props = __props;
+    const rootContext = injectToastRootContext();
+    const { forwardRef } = useForwardExpose();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(_sfc_main$j, { "as-child": "" }, {
+        default: withCtx(() => [
+          createVNode(unref(Primitive), mergeProps(props, {
+            ref: unref(forwardRef),
+            type: _ctx.as === "button" ? "button" : void 0,
+            onClick: unref(rootContext).onClose
+          }), {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default")
+            ]),
+            _: 3
+          }, 16, ["type", "onClick"])
+        ]),
+        _: 3
+      });
+    };
+  }
+});
+const _sfc_main$e = /* @__PURE__ */ defineComponent({
+  __name: "ToastAction",
+  props: {
+    altText: {},
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    const props = __props;
+    if (!props.altText)
+      throw new Error("Missing prop `altText` expected on `ToastAction`");
+    const { forwardRef } = useForwardExpose();
+    return (_ctx, _cache) => {
+      return _ctx.altText ? (openBlock(), createBlock(_sfc_main$j, {
+        key: 0,
+        "alt-text": _ctx.altText,
+        "as-child": ""
+      }, {
+        default: withCtx(() => [
+          createVNode(_sfc_main$f, {
+            ref: unref(forwardRef),
+            as: _ctx.as,
+            "as-child": _ctx.asChild
+          }, {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default")
+            ]),
+            _: 3
+          }, 8, ["as", "as-child"])
+        ]),
+        _: 3
+      }, 8, ["alt-text"])) : createCommentVNode("", true);
+    };
+  }
+});
+const _sfc_main$d = /* @__PURE__ */ defineComponent({
+  __name: "ToastDescription",
+  props: {
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    const props = __props;
+    useForwardExpose();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), normalizeProps$1(guardReactiveProps(props)), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16);
+    };
+  }
+});
+const _sfc_main$c = /* @__PURE__ */ defineComponent({
+  __name: "ToastPortal",
+  props: {
+    to: {},
+    disabled: { type: Boolean },
+    defer: { type: Boolean },
+    forceMount: { type: Boolean }
+  },
+  setup(__props) {
+    const props = __props;
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$m), normalizeProps$1(guardReactiveProps(props)), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16);
+    };
+  }
+});
+const _sfc_main$b = /* @__PURE__ */ defineComponent({
+  __name: "ToastRoot",
+  props: {
+    defaultOpen: { type: Boolean, default: true },
+    forceMount: { type: Boolean },
+    type: { default: "foreground" },
+    open: { type: Boolean, default: void 0 },
+    duration: {},
+    asChild: { type: Boolean },
+    as: { default: "li" }
+  },
+  emits: ["escapeKeyDown", "pause", "resume", "swipeStart", "swipeMove", "swipeCancel", "swipeEnd", "update:open"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emits = __emit;
+    const { forwardRef } = useForwardExpose();
+    const open = useVModel(props, "open", emits, {
+      defaultValue: props.defaultOpen,
+      passive: props.open === void 0
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Presence), {
+        present: _ctx.forceMount || unref(open)
+      }, {
+        default: withCtx(() => [
+          createVNode(_sfc_main$g, mergeProps({
+            ref: unref(forwardRef),
+            open: unref(open),
+            type: _ctx.type,
+            as: _ctx.as,
+            "as-child": _ctx.asChild,
+            duration: _ctx.duration
+          }, _ctx.$attrs, {
+            onClose: _cache[0] || (_cache[0] = ($event) => open.value = false),
+            onPause: _cache[1] || (_cache[1] = ($event) => emits("pause")),
+            onResume: _cache[2] || (_cache[2] = ($event) => emits("resume")),
+            onEscapeKeyDown: _cache[3] || (_cache[3] = ($event) => emits("escapeKeyDown", $event)),
+            onSwipeStart: _cache[4] || (_cache[4] = (event) => {
+              emits("swipeStart", event);
+              if (!event.defaultPrevented) {
+                event.currentTarget.setAttribute("data-swipe", "start");
+              }
+            }),
+            onSwipeMove: _cache[5] || (_cache[5] = (event) => {
+              emits("swipeMove", event);
+              if (!event.defaultPrevented) {
+                const { x, y } = event.detail.delta;
+                const target = event.currentTarget;
+                target.setAttribute("data-swipe", "move");
+                target.style.setProperty("--reka-toast-swipe-move-x", `${x}px`);
+                target.style.setProperty("--reka-toast-swipe-move-y", `${y}px`);
+              }
+            }),
+            onSwipeCancel: _cache[6] || (_cache[6] = (event) => {
+              emits("swipeCancel", event);
+              if (!event.defaultPrevented) {
+                const target = event.currentTarget;
+                target.setAttribute("data-swipe", "cancel");
+                target.style.removeProperty("--reka-toast-swipe-move-x");
+                target.style.removeProperty("--reka-toast-swipe-move-y");
+                target.style.removeProperty("--reka-toast-swipe-end-x");
+                target.style.removeProperty("--reka-toast-swipe-end-y");
+              }
+            }),
+            onSwipeEnd: _cache[7] || (_cache[7] = (event) => {
+              emits("swipeEnd", event);
+              if (!event.defaultPrevented) {
+                const { x, y } = event.detail.delta;
+                const target = event.currentTarget;
+                target.setAttribute("data-swipe", "end");
+                target.style.removeProperty("--reka-toast-swipe-move-x");
+                target.style.removeProperty("--reka-toast-swipe-move-y");
+                target.style.setProperty("--reka-toast-swipe-end-x", `${x}px`);
+                target.style.setProperty("--reka-toast-swipe-end-y", `${y}px`);
+                open.value = false;
+              }
+            })
+          }), {
+            default: withCtx(({ remaining, duration: _duration }) => [
+              renderSlot(_ctx.$slots, "default", {
+                remaining,
+                duration: _duration,
+                open: unref(open)
+              })
+            ]),
+            _: 3
+          }, 16, ["open", "type", "as", "as-child", "duration"])
+        ]),
+        _: 3
+      }, 8, ["present"]);
+    };
+  }
+});
+const _sfc_main$a = /* @__PURE__ */ defineComponent({
+  __name: "ToastTitle",
+  props: {
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    const props = __props;
+    useForwardExpose();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), normalizeProps$1(guardReactiveProps(props)), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16);
+    };
+  }
+});
+const _sfc_main$9 = /* @__PURE__ */ defineComponent({
+  __name: "FocusProxy",
+  emits: ["focusFromOutsideViewport"],
+  setup(__props, { emit: __emit }) {
+    const emits = __emit;
+    const providerContext = injectToastProviderContext();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$o), {
+        "aria-hidden": "true",
+        tabindex: "0",
+        style: { "position": "fixed" },
+        onFocus: _cache[0] || (_cache[0] = (event) => {
+          const prevFocusedElement = event.relatedTarget;
+          const isFocusFromOutsideViewport = !unref(providerContext).viewport.value?.contains(prevFocusedElement);
+          if (isFocusFromOutsideViewport) emits("focusFromOutsideViewport");
+        })
+      }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      });
+    };
+  }
+});
+const _sfc_main$8 = /* @__PURE__ */ defineComponent({
+  __name: "DismissableLayerBranch",
+  props: {
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    const props = __props;
+    const { forwardRef, currentElement } = useForwardExpose();
+    onMounted(() => {
+      context.branches.add(currentElement.value);
+    });
+    onUnmounted(() => {
+      context.branches.delete(currentElement.value);
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), mergeProps({ ref: unref(forwardRef) }, props), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16);
+    };
+  }
+});
+const _sfc_main$7 = /* @__PURE__ */ defineComponent({
+  ...{
+    inheritAttrs: false
+  },
+  __name: "ToastViewport",
+  props: {
+    hotkey: { default: () => ["F8"] },
+    label: { type: [String, Function], default: "Notifications ({hotkey})" },
+    asChild: { type: Boolean },
+    as: { default: "ol" }
+  },
+  setup(__props) {
+    const props = __props;
+    const { hotkey, label } = toRefs(props);
+    const { forwardRef, currentElement } = useForwardExpose();
+    const { CollectionSlot, getItems } = useCollection();
+    const providerContext = injectToastProviderContext();
+    const hasToasts = computed(() => providerContext.toastCount.value > 0);
+    const headFocusProxyRef = ref();
+    const tailFocusProxyRef = ref();
+    const hotkeyMessage = computed(() => hotkey.value.join("+").replace(/Key/g, "").replace(/Digit/g, ""));
+    onKeyStroke(hotkey.value, () => {
+      currentElement.value.focus();
+    });
+    onMounted(() => {
+      providerContext.onViewportChange(currentElement.value);
+    });
+    watchEffect((cleanupFn) => {
+      const viewport = currentElement.value;
+      if (hasToasts.value && viewport) {
+        const handlePause = () => {
+          if (!providerContext.isClosePausedRef.value) {
+            const pauseEvent = new CustomEvent(VIEWPORT_PAUSE);
+            viewport.dispatchEvent(pauseEvent);
+            providerContext.isClosePausedRef.value = true;
+          }
+        };
+        const handleResume = () => {
+          if (providerContext.isClosePausedRef.value) {
+            const resumeEvent = new CustomEvent(VIEWPORT_RESUME);
+            viewport.dispatchEvent(resumeEvent);
+            providerContext.isClosePausedRef.value = false;
+          }
+        };
+        const handleFocusOutResume = (event) => {
+          const isFocusMovingOutside = !viewport.contains(event.relatedTarget);
+          if (isFocusMovingOutside)
+            handleResume();
+        };
+        const handlePointerLeaveResume = () => {
+          const isFocusInside = viewport.contains(getActiveElement());
+          if (!isFocusInside)
+            handleResume();
+        };
+        const handleKeyDown = (event) => {
+          const isMetaKey = event.altKey || event.ctrlKey || event.metaKey;
+          const isTabKey = event.key === "Tab" && !isMetaKey;
+          if (isTabKey) {
+            const focusedElement = getActiveElement();
+            const isTabbingBackwards = event.shiftKey;
+            const targetIsViewport = event.target === viewport;
+            if (targetIsViewport && isTabbingBackwards) {
+              headFocusProxyRef.value?.focus();
+              return;
+            }
+            const tabbingDirection = isTabbingBackwards ? "backwards" : "forwards";
+            const sortedCandidates = getSortedTabbableCandidates({ tabbingDirection });
+            const index = sortedCandidates.findIndex((candidate) => candidate === focusedElement);
+            if (focusFirst(sortedCandidates.slice(index + 1))) {
+              event.preventDefault();
+            } else {
+              isTabbingBackwards ? headFocusProxyRef.value?.focus() : tailFocusProxyRef.value?.focus();
+            }
+          }
+        };
+        viewport.addEventListener("focusin", handlePause);
+        viewport.addEventListener("focusout", handleFocusOutResume);
+        viewport.addEventListener("pointermove", handlePause);
+        viewport.addEventListener("pointerleave", handlePointerLeaveResume);
+        viewport.addEventListener("keydown", handleKeyDown);
+        window.addEventListener("blur", handlePause);
+        window.addEventListener("focus", handleResume);
+        cleanupFn(() => {
+          viewport.removeEventListener("focusin", handlePause);
+          viewport.removeEventListener("focusout", handleFocusOutResume);
+          viewport.removeEventListener("pointermove", handlePause);
+          viewport.removeEventListener("pointerleave", handlePointerLeaveResume);
+          viewport.removeEventListener("keydown", handleKeyDown);
+          window.removeEventListener("blur", handlePause);
+          window.removeEventListener("focus", handleResume);
+        });
+      }
+    });
+    function getSortedTabbableCandidates({ tabbingDirection }) {
+      const toastItems = getItems().map((i) => i.ref);
+      const tabbableCandidates = toastItems.map((toastNode) => {
+        const toastTabbableCandidates = [toastNode, ...getTabbableCandidates(toastNode)];
+        return tabbingDirection === "forwards" ? toastTabbableCandidates : toastTabbableCandidates.reverse();
+      });
+      return (tabbingDirection === "forwards" ? tabbableCandidates.reverse() : tabbableCandidates).flat();
+    }
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$8), {
+        role: "region",
+        "aria-label": typeof unref(label) === "string" ? unref(label).replace("{hotkey}", hotkeyMessage.value) : unref(label)(hotkeyMessage.value),
+        tabindex: "-1",
+        style: normalizeStyle({
+          // incase list has size when empty (e.g. padding), we remove pointer events so
+          // it doesn't prevent interactions with page elements that it overlays
+          pointerEvents: hasToasts.value ? void 0 : "none"
+        })
+      }, {
+        default: withCtx(() => [
+          hasToasts.value ? (openBlock(), createBlock(_sfc_main$9, {
+            key: 0,
+            ref: (node) => {
+              headFocusProxyRef.value = unref(unrefElement)(node);
+              return void 0;
+            },
+            onFocusFromOutsideViewport: _cache[0] || (_cache[0] = () => {
+              const tabbableCandidates = getSortedTabbableCandidates({
+                tabbingDirection: "forwards"
+              });
+              unref(focusFirst)(tabbableCandidates);
+            })
+          }, null, 512)) : createCommentVNode("", true),
+          createVNode(unref(CollectionSlot), null, {
+            default: withCtx(() => [
+              createVNode(unref(Primitive), mergeProps({
+                ref: unref(forwardRef),
+                tabindex: "-1",
+                as: _ctx.as,
+                "as-child": _ctx.asChild
+              }, _ctx.$attrs), {
+                default: withCtx(() => [
+                  renderSlot(_ctx.$slots, "default")
+                ]),
+                _: 3
+              }, 16, ["as", "as-child"])
+            ]),
+            _: 3
+          }),
+          hasToasts.value ? (openBlock(), createBlock(_sfc_main$9, {
+            key: 1,
+            ref: (node) => {
+              tailFocusProxyRef.value = unref(unrefElement)(node);
+              return void 0;
+            },
+            onFocusFromOutsideViewport: _cache[1] || (_cache[1] = () => {
+              const tabbableCandidates = getSortedTabbableCandidates({
+                tabbingDirection: "backwards"
+              });
+              unref(focusFirst)(tabbableCandidates);
+            })
+          }, null, 512)) : createCommentVNode("", true)
+        ]),
+        _: 3
+      }, 8, ["aria-label", "style"]);
+    };
+  }
+});
+const [injectTooltipProviderContext, provideTooltipProviderContext] = createContext("TooltipProvider");
+const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+  ...{
+    inheritAttrs: false
+  },
+  __name: "TooltipProvider",
+  props: {
+    delayDuration: { default: 700 },
+    skipDelayDuration: { default: 300 },
+    disableHoverableContent: { type: Boolean, default: false },
+    disableClosingTrigger: { type: Boolean },
+    disabled: { type: Boolean },
+    ignoreNonKeyboardFocus: { type: Boolean, default: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const { delayDuration, skipDelayDuration, disableHoverableContent, disableClosingTrigger, ignoreNonKeyboardFocus, disabled } = toRefs(props);
+    useForwardExpose();
+    const isOpenDelayed = ref(true);
+    const isPointerInTransitRef = ref(false);
+    const { start: startTimer, stop: clearTimer } = useTimeoutFn(() => {
+      isOpenDelayed.value = true;
+    }, skipDelayDuration, { immediate: false });
+    provideTooltipProviderContext({
+      isOpenDelayed,
+      delayDuration,
+      onOpen() {
+        clearTimer();
+        isOpenDelayed.value = false;
+      },
+      onClose() {
+        startTimer();
+      },
+      isPointerInTransitRef,
+      disableHoverableContent,
+      disableClosingTrigger,
+      disabled,
+      ignoreNonKeyboardFocus
+    });
+    return (_ctx, _cache) => {
+      return renderSlot(_ctx.$slots, "default");
+    };
+  }
+});
+const portalTargetInjectionKey = Symbol("nuxt-ui.portal-target");
+function usePortal(portal) {
+  const portalTarget = inject(portalTargetInjectionKey, void 0);
+  const to = computed(() => {
+    if (typeof portal.value === "boolean" || portal.value === void 0) {
+      return portalTarget?.value ?? "body";
+    }
+    return portal.value;
+  });
+  const disabled = computed(() => typeof portal.value === "boolean" ? !portal.value : false);
+  provide(portalTargetInjectionKey, computed(() => to.value));
+  return computed(() => ({
+    to: to.value,
+    disabled: disabled.value
+  }));
+}
+function useToast() {
+  const toasts = useState("toasts", () => []);
+  const running = ref(false);
+  const queue = [];
+  const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+  async function processQueue() {
+    if (running.value || queue.length === 0) {
+      return;
+    }
+    running.value = true;
+    while (queue.length > 0) {
+      const toast = queue.shift();
+      await nextTick();
+      toasts.value = [...toasts.value, toast].slice(-5);
+    }
+    running.value = false;
+  }
+  function add(toast) {
+    const body = {
+      id: generateId(),
+      open: true,
+      ...toast
+    };
+    queue.push(body);
+    processQueue();
+    return body;
+  }
+  function update(id, toast) {
+    const index = toasts.value.findIndex((t) => t.id === id);
+    if (index !== -1) {
+      toasts.value[index] = {
+        ...toasts.value[index],
+        ...toast
+      };
+    }
+  }
+  function remove(id) {
+    const index = toasts.value.findIndex((t) => t.id === id);
+    if (index !== -1) {
+      toasts.value[index] = {
+        ...toasts.value[index],
+        open: false
+      };
+    }
+    setTimeout(() => {
+      toasts.value = toasts.value.filter((t) => t.id !== id);
+    }, 200);
+  }
+  function clear() {
+    toasts.value = [];
+  }
+  return {
+    toasts,
+    add,
+    update,
+    remove,
+    clear
+  };
+}
+const theme$2 = {
+  "slots": {
+    "root": "gap-2",
+    "base": "relative overflow-hidden rounded-full bg-accented",
+    "indicator": "rounded-full size-full transition-transform duration-200 ease-out",
+    "status": "flex justify-end text-dimmed transition-[width] duration-200",
+    "steps": "grid items-end",
+    "step": "truncate text-end row-start-1 col-start-1 transition-opacity"
+  },
+  "variants": {
+    "animation": {
+      "carousel": "",
+      "carousel-inverse": "",
+      "swing": "",
+      "elastic": ""
+    },
+    "color": {
+      "primary": {
+        "indicator": "bg-primary",
+        "steps": "text-primary"
+      },
+      "secondary": {
+        "indicator": "bg-secondary",
+        "steps": "text-secondary"
+      },
+      "success": {
+        "indicator": "bg-success",
+        "steps": "text-success"
+      },
+      "info": {
+        "indicator": "bg-info",
+        "steps": "text-info"
+      },
+      "warning": {
+        "indicator": "bg-warning",
+        "steps": "text-warning"
+      },
+      "error": {
+        "indicator": "bg-error",
+        "steps": "text-error"
+      },
+      "neutral": {
+        "indicator": "bg-inverted",
+        "steps": "text-inverted"
+      }
+    },
+    "size": {
+      "2xs": {
+        "status": "text-xs",
+        "steps": "text-xs"
+      },
+      "xs": {
+        "status": "text-xs",
+        "steps": "text-xs"
+      },
+      "sm": {
+        "status": "text-sm",
+        "steps": "text-sm"
+      },
+      "md": {
+        "status": "text-sm",
+        "steps": "text-sm"
+      },
+      "lg": {
+        "status": "text-sm",
+        "steps": "text-sm"
+      },
+      "xl": {
+        "status": "text-base",
+        "steps": "text-base"
+      },
+      "2xl": {
+        "status": "text-base",
+        "steps": "text-base"
+      }
+    },
+    "step": {
+      "active": {
+        "step": "opacity-100"
+      },
+      "first": {
+        "step": "opacity-100 text-muted"
+      },
+      "other": {
+        "step": "opacity-0"
+      },
+      "last": {
+        "step": ""
+      }
+    },
+    "orientation": {
+      "horizontal": {
+        "root": "w-full flex flex-col",
+        "base": "w-full",
+        "status": "flex-row"
+      },
+      "vertical": {
+        "root": "h-full flex flex-row-reverse",
+        "base": "h-full",
+        "status": "flex-col"
+      }
+    },
+    "inverted": {
+      "true": {
+        "status": "self-end"
+      }
+    }
+  },
+  "compoundVariants": [
+    {
+      "inverted": true,
+      "orientation": "horizontal",
+      "class": {
+        "step": "text-start",
+        "status": "flex-row-reverse"
+      }
+    },
+    {
+      "inverted": true,
+      "orientation": "vertical",
+      "class": {
+        "steps": "items-start",
+        "status": "flex-col-reverse"
+      }
+    },
+    {
+      "orientation": "horizontal",
+      "size": "2xs",
+      "class": "h-px"
+    },
+    {
+      "orientation": "horizontal",
+      "size": "xs",
+      "class": "h-0.5"
+    },
+    {
+      "orientation": "horizontal",
+      "size": "sm",
+      "class": "h-1"
+    },
+    {
+      "orientation": "horizontal",
+      "size": "md",
+      "class": "h-2"
+    },
+    {
+      "orientation": "horizontal",
+      "size": "lg",
+      "class": "h-3"
+    },
+    {
+      "orientation": "horizontal",
+      "size": "xl",
+      "class": "h-4"
+    },
+    {
+      "orientation": "horizontal",
+      "size": "2xl",
+      "class": "h-5"
+    },
+    {
+      "orientation": "vertical",
+      "size": "2xs",
+      "class": "w-px"
+    },
+    {
+      "orientation": "vertical",
+      "size": "xs",
+      "class": "w-0.5"
+    },
+    {
+      "orientation": "vertical",
+      "size": "sm",
+      "class": "w-1"
+    },
+    {
+      "orientation": "vertical",
+      "size": "md",
+      "class": "w-2"
+    },
+    {
+      "orientation": "vertical",
+      "size": "lg",
+      "class": "w-3"
+    },
+    {
+      "orientation": "vertical",
+      "size": "xl",
+      "class": "w-4"
+    },
+    {
+      "orientation": "vertical",
+      "size": "2xl",
+      "class": "w-5"
+    },
+    {
+      "orientation": "horizontal",
+      "animation": "carousel",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"
+      }
+    },
+    {
+      "orientation": "vertical",
+      "animation": "carousel",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[carousel-vertical_2s_ease-in-out_infinite]"
+      }
+    },
+    {
+      "orientation": "horizontal",
+      "animation": "carousel-inverse",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[carousel-inverse_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]"
+      }
+    },
+    {
+      "orientation": "vertical",
+      "animation": "carousel-inverse",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[carousel-inverse-vertical_2s_ease-in-out_infinite]"
+      }
+    },
+    {
+      "orientation": "horizontal",
+      "animation": "swing",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[swing_2s_ease-in-out_infinite]"
+      }
+    },
+    {
+      "orientation": "vertical",
+      "animation": "swing",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[swing-vertical_2s_ease-in-out_infinite]"
+      }
+    },
+    {
+      "orientation": "horizontal",
+      "animation": "elastic",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[elastic_2s_ease-in-out_infinite]"
+      }
+    },
+    {
+      "orientation": "vertical",
+      "animation": "elastic",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[elastic-vertical_2s_ease-in-out_infinite]"
+      }
+    }
+  ],
+  "defaultVariants": {
+    "animation": "carousel",
+    "color": "primary",
+    "size": "md"
+  }
+};
+const _sfc_main$5 = {
+  __name: "Progress",
+  props: {
+    as: { type: null, required: false },
+    max: { type: [Number, Array], required: false },
+    status: { type: Boolean, required: false },
+    inverted: { type: Boolean, required: false, default: false },
+    size: { type: null, required: false },
+    color: { type: null, required: false },
+    orientation: { type: null, required: false, default: "horizontal" },
+    animation: { type: null, required: false },
+    class: { type: null, required: false },
+    ui: { type: null, required: false },
+    getValueLabel: { type: Function, required: false },
+    getValueText: { type: Function, required: false },
+    modelValue: { type: [Number, null], required: false, default: null }
+  },
+  emits: ["update:modelValue", "update:max"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emits = __emit;
+    const slots = useSlots();
+    const { dir } = useLocale();
+    const appConfig = useAppConfig();
+    const rootProps = useForwardPropsEmits(reactivePick(props, "getValueLabel", "getValueText", "modelValue"), emits);
+    const isIndeterminate = computed(() => rootProps.value.modelValue === null);
+    const hasSteps = computed(() => Array.isArray(props.max));
+    const realMax = computed(() => {
+      if (isIndeterminate.value || !props.max) {
+        return void 0;
+      }
+      if (Array.isArray(props.max)) {
+        return props.max.length - 1;
+      }
+      return Number(props.max);
+    });
+    const percent = computed(() => {
+      if (isIndeterminate.value) {
+        return void 0;
+      }
+      switch (true) {
+        case rootProps.value.modelValue < 0:
+          return 0;
+        case rootProps.value.modelValue > (realMax.value ?? 100):
+          return 100;
+        default:
+          return Math.round(rootProps.value.modelValue / (realMax.value ?? 100) * 100);
+      }
+    });
+    const indicatorStyle = computed(() => {
+      if (percent.value === void 0) {
+        return;
+      }
+      if (props.orientation === "vertical") {
+        return {
+          transform: `translateY(${props.inverted ? "" : "-"}${100 - percent.value}%)`
+        };
+      } else {
+        if (dir.value === "rtl") {
+          return {
+            transform: `translateX(${props.inverted ? "-" : ""}${100 - percent.value}%)`
+          };
+        } else {
+          return {
+            transform: `translateX(${props.inverted ? "" : "-"}${100 - percent.value}%)`
+          };
+        }
+      }
+    });
+    const statusStyle = computed(() => {
+      return {
+        [props.orientation === "vertical" ? "height" : "width"]: percent.value ? `${percent.value}%` : "fit-content"
+      };
+    });
+    function isActive(index) {
+      return index === Number(props.modelValue);
+    }
+    function isFirst(index) {
+      return index === 0;
+    }
+    function isLast(index) {
+      return index === realMax.value;
+    }
+    function stepVariant(index) {
+      index = Number(index);
+      if (isActive(index) && !isFirst(index)) {
+        return "active";
+      }
+      if (isFirst(index) && isActive(index)) {
+        return "first";
+      }
+      if (isLast(index) && isActive(index)) {
+        return "last";
+      }
+      return "other";
+    }
+    const ui2 = computed(() => tv({ extend: tv(theme$2), ...appConfig.ui?.progress || {} })({
+      animation: props.animation,
+      size: props.size,
+      color: props.color,
+      orientation: props.orientation,
+      inverted: props.inverted
+    }));
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        as: __props.as,
+        class: normalizeClass(ui2.value.root({ class: [props.ui?.root, props.class] }))
+      }, {
+        default: withCtx(() => [
+          !isIndeterminate.value && (__props.status || !!slots.status) ? (openBlock(), createElementBlock("div", {
+            key: 0,
+            class: normalizeClass(ui2.value.status({ class: props.ui?.status })),
+            style: normalizeStyle(statusStyle.value)
+          }, [
+            renderSlot(_ctx.$slots, "status", { percent: percent.value }, () => [
+              createTextVNode(toDisplayString(percent.value) + "% ", 1)
+            ])
+          ], 6)) : createCommentVNode("", true),
+          createVNode(unref(_sfc_main$l), mergeProps(unref(rootProps), {
+            max: realMax.value,
+            class: ui2.value.base({ class: props.ui?.base }),
+            style: { "transform": "translateZ(0)" }
+          }), {
+            default: withCtx(() => [
+              createVNode(unref(_sfc_main$k), {
+                class: normalizeClass(ui2.value.indicator({ class: props.ui?.indicator })),
+                style: normalizeStyle(indicatorStyle.value)
+              }, null, 8, ["class", "style"])
+            ]),
+            _: 1
+          }, 16, ["max", "class"]),
+          hasSteps.value ? (openBlock(), createElementBlock("div", {
+            key: 1,
+            class: normalizeClass(ui2.value.steps({ class: props.ui?.steps }))
+          }, [
+            (openBlock(true), createElementBlock(Fragment, null, renderList(__props.max, (step, index) => {
+              return openBlock(), createElementBlock("div", {
+                key: index,
+                class: normalizeClass(ui2.value.step({ class: props.ui?.step, step: stepVariant(index) }))
+              }, [
+                renderSlot(_ctx.$slots, `step-${index}`, { step }, () => [
+                  createTextVNode(toDisplayString(step), 1)
+                ])
+              ], 2);
+            }), 128))
+          ], 2)) : createCommentVNode("", true)
+        ]),
+        _: 3
+      }, 8, ["as", "class"]);
+    };
+  }
+};
+const theme$1 = {
+  "slots": {
+    "root": "relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none",
+    "wrapper": "w-0 flex-1 flex flex-col",
+    "title": "text-sm font-medium text-highlighted",
+    "description": "text-sm text-muted",
+    "icon": "shrink-0 size-5",
+    "avatar": "shrink-0",
+    "avatarSize": "2xl",
+    "actions": "flex gap-1.5 shrink-0",
+    "progress": "absolute inset-x-0 bottom-0",
+    "close": "p-0"
+  },
+  "variants": {
+    "color": {
+      "primary": {
+        "root": "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
+        "icon": "text-primary"
+      },
+      "secondary": {
+        "root": "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-secondary",
+        "icon": "text-secondary"
+      },
+      "success": {
+        "root": "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-success",
+        "icon": "text-success"
+      },
+      "info": {
+        "root": "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-info",
+        "icon": "text-info"
+      },
+      "warning": {
+        "root": "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-warning",
+        "icon": "text-warning"
+      },
+      "error": {
+        "root": "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error",
+        "icon": "text-error"
+      },
+      "neutral": {
+        "root": "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted",
+        "icon": "text-highlighted"
+      }
+    },
+    "orientation": {
+      "horizontal": {
+        "root": "items-center",
+        "actions": "items-center"
+      },
+      "vertical": {
+        "root": "items-start",
+        "actions": "items-start mt-2.5"
+      }
+    },
+    "title": {
+      "true": {
+        "description": "mt-1"
+      }
+    }
+  },
+  "defaultVariants": {
+    "color": "primary"
+  }
+};
+const _sfc_main$4 = {
+  __name: "Toast",
+  props: {
+    as: { type: null, required: false },
+    title: { type: [String, Object, Function], required: false },
+    description: { type: [String, Object, Function], required: false },
+    icon: { type: String, required: false },
+    avatar: { type: Object, required: false },
+    color: { type: null, required: false },
+    orientation: { type: null, required: false, default: "vertical" },
+    close: { type: [Boolean, Object], required: false, default: true },
+    closeIcon: { type: String, required: false },
+    actions: { type: Array, required: false },
+    progress: { type: [Boolean, Object], required: false, default: true },
+    class: { type: null, required: false },
+    ui: { type: null, required: false },
+    defaultOpen: { type: Boolean, required: false },
+    open: { type: Boolean, required: false },
+    type: { type: String, required: false },
+    duration: { type: Number, required: false }
+  },
+  emits: ["escapeKeyDown", "pause", "resume", "swipeStart", "swipeMove", "swipeCancel", "swipeEnd", "update:open"],
+  setup(__props, { expose: __expose, emit: __emit }) {
+    const props = __props;
+    const emits = __emit;
+    const slots = useSlots();
+    const { t } = useLocale();
+    const appConfig = useAppConfig();
+    const rootProps = useForwardPropsEmits(reactivePick(props, "as", "defaultOpen", "open", "duration", "type"), emits);
+    const ui2 = computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.toast || {} })({
+      color: props.color,
+      orientation: props.orientation,
+      title: !!props.title || !!slots.title
+    }));
+    const el = ref();
+    const height = ref(0);
+    onMounted(() => {
+      if (!el.value) {
+        return;
+      }
+      nextTick(() => {
+        height.value = el.value?.$el?.getBoundingClientRect()?.height;
+      });
+    });
+    __expose({
+      height
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$b), mergeProps({
+        ref_key: "el",
+        ref: el
+      }, unref(rootProps), {
+        "data-orientation": __props.orientation,
+        class: ui2.value.root({ class: [props.ui?.root, props.class] }),
+        style: { "--height": height.value }
+      }), {
+        default: withCtx(({ remaining, duration, open }) => [
+          renderSlot(_ctx.$slots, "leading", {}, () => [
+            __props.avatar ? (openBlock(), createBlock(_sfc_main$p, mergeProps({
+              key: 0,
+              size: props.ui?.avatarSize || ui2.value.avatarSize()
+            }, __props.avatar, {
+              class: ui2.value.avatar({ class: props.ui?.avatar })
+            }), null, 16, ["size", "class"])) : __props.icon ? (openBlock(), createBlock(_sfc_main$q, {
+              key: 1,
+              name: __props.icon,
+              class: normalizeClass(ui2.value.icon({ class: props.ui?.icon }))
+            }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+          ]),
+          createBaseVNode("div", {
+            class: normalizeClass(ui2.value.wrapper({ class: props.ui?.wrapper }))
+          }, [
+            __props.title || !!slots.title ? (openBlock(), createBlock(unref(_sfc_main$a), {
+              key: 0,
+              class: normalizeClass(ui2.value.title({ class: props.ui?.title }))
+            }, {
+              default: withCtx(() => [
+                renderSlot(_ctx.$slots, "title", {}, () => [
+                  typeof __props.title === "function" ? (openBlock(), createBlock(resolveDynamicComponent(__props.title()), { key: 0 })) : typeof __props.title === "object" ? (openBlock(), createBlock(resolveDynamicComponent(__props.title), { key: 1 })) : (openBlock(), createElementBlock(Fragment, { key: 2 }, [
+                    createTextVNode(toDisplayString(__props.title), 1)
+                  ], 64))
+                ])
+              ]),
+              _: 3
+            }, 8, ["class"])) : createCommentVNode("", true),
+            __props.description || !!slots.description ? (openBlock(), createBlock(unref(_sfc_main$d), {
+              key: 1,
+              class: normalizeClass(ui2.value.description({ class: props.ui?.description }))
+            }, {
+              default: withCtx(() => [
+                renderSlot(_ctx.$slots, "description", {}, () => [
+                  typeof __props.description === "function" ? (openBlock(), createBlock(resolveDynamicComponent(__props.description()), { key: 0 })) : typeof __props.description === "object" ? (openBlock(), createBlock(resolveDynamicComponent(__props.description), { key: 1 })) : (openBlock(), createElementBlock(Fragment, { key: 2 }, [
+                    createTextVNode(toDisplayString(__props.description), 1)
+                  ], 64))
+                ])
+              ]),
+              _: 3
+            }, 8, ["class"])) : createCommentVNode("", true),
+            __props.orientation === "vertical" && (__props.actions?.length || !!slots.actions) ? (openBlock(), createElementBlock("div", {
+              key: 2,
+              class: normalizeClass(ui2.value.actions({ class: props.ui?.actions }))
+            }, [
+              renderSlot(_ctx.$slots, "actions", {}, () => [
+                (openBlock(true), createElementBlock(Fragment, null, renderList(__props.actions, (action, index) => {
+                  return openBlock(), createBlock(unref(_sfc_main$e), {
+                    key: index,
+                    "alt-text": action.label || "Action",
+                    "as-child": "",
+                    onClick: _cache[0] || (_cache[0] = withModifiers(() => {
+                    }, ["stop"]))
+                  }, {
+                    default: withCtx(() => [
+                      createVNode(_sfc_main$r, mergeProps({
+                        size: "xs",
+                        color: __props.color
+                      }, { ref_for: true }, action), null, 16, ["color"])
+                    ]),
+                    _: 2
+                  }, 1032, ["alt-text"]);
+                }), 128))
+              ])
+            ], 2)) : createCommentVNode("", true)
+          ], 2),
+          __props.orientation === "horizontal" && (__props.actions?.length || !!slots.actions) || __props.close ? (openBlock(), createElementBlock("div", {
+            key: 0,
+            class: normalizeClass(ui2.value.actions({ class: props.ui?.actions, orientation: "horizontal" }))
+          }, [
+            __props.orientation === "horizontal" && (__props.actions?.length || !!slots.actions) ? renderSlot(_ctx.$slots, "actions", { key: 0 }, () => [
+              (openBlock(true), createElementBlock(Fragment, null, renderList(__props.actions, (action, index) => {
+                return openBlock(), createBlock(unref(_sfc_main$e), {
+                  key: index,
+                  "alt-text": action.label || "Action",
+                  "as-child": "",
+                  onClick: _cache[1] || (_cache[1] = withModifiers(() => {
+                  }, ["stop"]))
+                }, {
+                  default: withCtx(() => [
+                    createVNode(_sfc_main$r, mergeProps({
+                      size: "xs",
+                      color: __props.color
+                    }, { ref_for: true }, action), null, 16, ["color"])
+                  ]),
+                  _: 2
+                }, 1032, ["alt-text"]);
+              }), 128))
+            ]) : createCommentVNode("", true),
+            __props.close || !!slots.close ? (openBlock(), createBlock(unref(_sfc_main$f), {
+              key: 1,
+              "as-child": ""
+            }, {
+              default: withCtx(() => [
+                renderSlot(_ctx.$slots, "close", { ui: ui2.value }, () => [
+                  __props.close ? (openBlock(), createBlock(_sfc_main$r, mergeProps({
+                    key: 0,
+                    icon: __props.closeIcon || unref(appConfig).ui.icons.close,
+                    color: "neutral",
+                    variant: "link",
+                    "aria-label": unref(t)("toast.close")
+                  }, typeof __props.close === "object" ? __props.close : {}, {
+                    class: ui2.value.close({ class: props.ui?.close }),
+                    onClick: _cache[2] || (_cache[2] = withModifiers(() => {
+                    }, ["stop"]))
+                  }), null, 16, ["icon", "aria-label", "class"])) : createCommentVNode("", true)
+                ])
+              ]),
+              _: 3
+            })) : createCommentVNode("", true)
+          ], 2)) : createCommentVNode("", true),
+          __props.progress && open && remaining > 0 && duration ? (openBlock(), createBlock(_sfc_main$5, mergeProps({
+            key: 1,
+            "model-value": remaining / duration * 100,
+            color: __props.color
+          }, typeof __props.progress === "object" ? __props.progress : {}, {
+            size: "sm",
+            class: ui2.value.progress({ class: props.ui?.progress })
+          }), null, 16, ["model-value", "color", "class"])) : createCommentVNode("", true)
+        ]),
+        _: 3
+      }, 16, ["data-orientation", "class", "style"]);
+    };
+  }
+};
+const theme = {
+  "slots": {
+    "viewport": "fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none",
+    "base": "pointer-events-auto absolute inset-x-0 z-(--index) transform-(--transform) data-[expanded=false]:data-[front=false]:h-(--front-height) data-[expanded=false]:data-[front=false]:*:opacity-0 data-[front=false]:*:transition-opacity data-[front=false]:*:duration-100 data-[state=closed]:animate-[toast-closed_200ms_ease-in-out] data-[state=closed]:data-[expanded=false]:data-[front=false]:animate-[toast-collapsed-closed_200ms_ease-in-out] data-[swipe=move]:transition-none transition-[transform,translate,height] duration-200 ease-out"
+  },
+  "variants": {
+    "position": {
+      "top-left": {
+        "viewport": "left-4"
+      },
+      "top-center": {
+        "viewport": "left-1/2 transform -translate-x-1/2"
+      },
+      "top-right": {
+        "viewport": "right-4"
+      },
+      "bottom-left": {
+        "viewport": "left-4"
+      },
+      "bottom-center": {
+        "viewport": "left-1/2 transform -translate-x-1/2"
+      },
+      "bottom-right": {
+        "viewport": "right-4"
+      }
+    },
+    "swipeDirection": {
+      "up": "data-[swipe=end]:animate-[toast-slide-up_200ms_ease-out]",
+      "right": "data-[swipe=end]:animate-[toast-slide-right_200ms_ease-out]",
+      "down": "data-[swipe=end]:animate-[toast-slide-down_200ms_ease-out]",
+      "left": "data-[swipe=end]:animate-[toast-slide-left_200ms_ease-out]"
+    }
+  },
+  "compoundVariants": [
+    {
+      "position": [
+        "top-left",
+        "top-center",
+        "top-right"
+      ],
+      "class": {
+        "viewport": "top-4",
+        "base": "top-0 data-[state=open]:animate-[slide-in-from-top_200ms_ease-in-out]"
+      }
+    },
+    {
+      "position": [
+        "bottom-left",
+        "bottom-center",
+        "bottom-right"
+      ],
+      "class": {
+        "viewport": "bottom-4",
+        "base": "bottom-0 data-[state=open]:animate-[slide-in-from-bottom_200ms_ease-in-out]"
+      }
+    },
+    {
+      "swipeDirection": [
+        "left",
+        "right"
+      ],
+      "class": "data-[swipe=move]:translate-x-(--reka-toast-swipe-move-x) data-[swipe=end]:translate-x-(--reka-toast-swipe-end-x) data-[swipe=cancel]:translate-x-0"
+    },
+    {
+      "swipeDirection": [
+        "up",
+        "down"
+      ],
+      "class": "data-[swipe=move]:translate-y-(--reka-toast-swipe-move-y) data-[swipe=end]:translate-y-(--reka-toast-swipe-end-y) data-[swipe=cancel]:translate-y-0"
+    }
+  ],
+  "defaultVariants": {
+    "position": "bottom-right"
+  }
+};
+const __default__$1 = {
+  name: "Toaster"
+};
+const _sfc_main$3 = /* @__PURE__ */ Object.assign(__default__$1, {
+  props: {
+    position: { type: null, required: false },
+    expand: { type: Boolean, required: false, default: true },
+    progress: { type: Boolean, required: false, default: true },
+    portal: { type: [Boolean, String], required: false, skipCheck: true, default: true },
+    class: { type: null, required: false },
+    ui: { type: null, required: false },
+    label: { type: String, required: false },
+    duration: { type: Number, required: false, default: 5e3 },
+    swipeThreshold: { type: Number, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const { toasts, remove } = useToast();
+    const appConfig = useAppConfig();
+    const providerProps = useForwardProps(reactivePick(props, "duration", "label", "swipeThreshold"));
+    const portalProps = usePortal(toRef$1(() => props.portal));
+    const swipeDirection = computed(() => {
+      switch (props.position) {
+        case "top-center":
+          return "up";
+        case "top-right":
+        case "bottom-right":
+          return "right";
+        case "bottom-center":
+          return "down";
+        case "top-left":
+        case "bottom-left":
+          return "left";
+      }
+      return "right";
+    });
+    const ui2 = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.toaster || {} })({
+      position: props.position,
+      swipeDirection: swipeDirection.value
+    }));
+    function onUpdateOpen(value, id) {
+      if (value) {
+        return;
+      }
+      remove(id);
+    }
+    const hovered = ref(false);
+    const expanded = computed(() => props.expand || hovered.value);
+    const refs = ref([]);
+    const height = computed(() => refs.value.reduce((acc, { height: height2 }) => acc + height2 + 16, 0));
+    const frontHeight = computed(() => refs.value[refs.value.length - 1]?.height || 0);
+    function getOffset(index) {
+      return refs.value.slice(index + 1).reduce((acc, { height: height2 }) => acc + height2 + 16, 0);
+    }
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$i), mergeProps({ "swipe-direction": swipeDirection.value }, unref(providerProps)), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default"),
+          (openBlock(true), createElementBlock(Fragment, null, renderList(unref(toasts), (toast, index) => {
+            return openBlock(), createBlock(_sfc_main$4, mergeProps({
+              key: toast.id,
+              ref_for: true,
+              ref_key: "refs",
+              ref: refs,
+              progress: __props.progress
+            }, { ref_for: true }, unref(omit)(toast, ["id", "close"]), {
+              close: toast.close,
+              "data-expanded": expanded.value,
+              "data-front": !expanded.value && index === unref(toasts).length - 1,
+              style: {
+                "--index": index - unref(toasts).length + unref(toasts).length,
+                "--before": unref(toasts).length - 1 - index,
+                "--offset": getOffset(index),
+                "--scale": expanded.value ? "1" : "calc(1 - var(--before) * var(--scale-factor))",
+                "--translate": expanded.value ? "calc(var(--offset) * var(--translate-factor))" : "calc(var(--before) * var(--gap))",
+                "--transform": "translateY(var(--translate)) scale(var(--scale))"
+              },
+              class: ui2.value.base({ class: [props.ui?.base, toast.onClick ? "cursor-pointer" : void 0] }),
+              "onUpdate:open": ($event) => onUpdateOpen($event, toast.id),
+              onClick: ($event) => toast.onClick && toast.onClick(toast)
+            }), null, 16, ["progress", "close", "data-expanded", "data-front", "style", "class", "onUpdate:open", "onClick"]);
+          }), 128)),
+          createVNode(unref(_sfc_main$c), normalizeProps$1(guardReactiveProps(unref(portalProps))), {
+            default: withCtx(() => [
+              createVNode(unref(_sfc_main$7), {
+                "data-expanded": expanded.value,
+                class: normalizeClass(ui2.value.viewport({ class: [props.ui?.viewport, props.class] })),
+                style: normalizeStyle({
+                  "--scale-factor": "0.05",
+                  "--translate-factor": __props.position?.startsWith("top") ? "1px" : "-1px",
+                  "--gap": __props.position?.startsWith("top") ? "16px" : "-16px",
+                  "--front-height": `${frontHeight.value}px`,
+                  "--height": `${height.value}px`
+                }),
+                onMouseenter: _cache[0] || (_cache[0] = ($event) => hovered.value = true),
+                onMouseleave: _cache[1] || (_cache[1] = ($event) => hovered.value = false)
+              }, null, 8, ["data-expanded", "class", "style"])
+            ]),
+            _: 1
+          }, 16)
+        ]),
+        _: 3
+      }, 16, ["swipe-direction"]);
+    };
+  }
+});
+function _useOverlay() {
+  const overlays = shallowReactive([]);
+  const create = (component, _options) => {
+    const { props, defaultOpen, destroyOnClose } = _options || {};
+    const options = reactive({
+      id: Symbol(import.meta.dev ? "useOverlay" : ""),
+      isOpen: !!defaultOpen,
+      component: markRaw(component),
+      isMounted: !!defaultOpen,
+      destroyOnClose: !!destroyOnClose,
+      originalProps: props || {},
+      props: { ...props }
+    });
+    overlays.push(options);
+    return {
+      ...options,
+      open: (props2) => open(options.id, props2),
+      close: (value) => close(options.id, value),
+      patch: (props2) => patch(options.id, props2)
+    };
+  };
+  const open = (id, props) => {
+    const overlay = getOverlay(id);
+    if (props) {
+      overlay.props = { ...overlay.originalProps, ...props };
+    } else {
+      overlay.props = { ...overlay.originalProps };
+    }
+    overlay.isOpen = true;
+    overlay.isMounted = true;
+    return {
+      id,
+      isMounted: overlay.isMounted,
+      isOpen: overlay.isOpen,
+      result: new Promise((resolve) => overlay.resolvePromise = resolve)
+    };
+  };
+  const close = (id, value) => {
+    const overlay = getOverlay(id);
+    overlay.isOpen = false;
+    if (overlay.resolvePromise) {
+      overlay.resolvePromise(value);
+      overlay.resolvePromise = void 0;
+    }
+  };
+  const closeAll = () => {
+    overlays.forEach((overlay) => close(overlay.id));
+  };
+  const unmount = (id) => {
+    const overlay = getOverlay(id);
+    overlay.isMounted = false;
+    if (overlay.destroyOnClose) {
+      const index = overlays.findIndex((overlay2) => overlay2.id === id);
+      overlays.splice(index, 1);
+    }
+  };
+  const patch = (id, props) => {
+    const overlay = getOverlay(id);
+    overlay.props = { ...overlay.props, ...props };
+  };
+  const getOverlay = (id) => {
+    const overlay = overlays.find((overlay2) => overlay2.id === id);
+    if (!overlay) {
+      throw new Error("Overlay not found");
+    }
+    return overlay;
+  };
+  const isOpen = (id) => {
+    const overlay = getOverlay(id);
+    return overlay.isOpen;
+  };
+  return {
+    overlays,
+    open,
+    close,
+    closeAll,
+    create,
+    patch,
+    unmount,
+    isOpen
+  };
+}
+const useOverlay = /* @__PURE__ */ createSharedComposable(_useOverlay);
+const _sfc_main$2 = {
+  __name: "OverlayProvider",
+  setup(__props) {
+    const { overlays, unmount, close } = useOverlay();
+    const mountedOverlays = computed(() => overlays.filter((overlay) => overlay.isMounted));
+    const onAfterLeave = (id) => {
+      close(id);
+      unmount(id);
+    };
+    const onClose = (id, value) => {
+      close(id, value);
+    };
+    return (_ctx, _cache) => {
+      return openBlock(true), createElementBlock(Fragment, null, renderList(mountedOverlays.value, (overlay) => {
+        return openBlock(), createBlock(resolveDynamicComponent(overlay.component), mergeProps({
+          key: overlay.id
+        }, { ref_for: true }, overlay.props, {
+          open: overlay.isOpen,
+          "onUpdate:open": ($event) => overlay.isOpen = $event,
+          onClose: (value) => onClose(overlay.id, value),
+          "onAfter:leave": ($event) => onAfterLeave(overlay.id)
+        }), null, 16, ["open", "onUpdate:open", "onClose", "onAfter:leave"]);
+      }), 128);
+    };
+  }
+};
+const __default__ = {
+  name: "App"
+};
+const _sfc_main$1 = /* @__PURE__ */ Object.assign(__default__, {
+  props: {
+    tooltip: { type: Object, required: false },
+    toaster: { type: [Object, null], required: false },
+    locale: { type: null, required: false },
+    portal: { type: null, required: false, default: "body" },
+    scrollBody: { type: [Boolean, Object], required: false },
+    nonce: { type: String, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const configProviderProps = useForwardProps(reactivePick(props, "scrollBody"));
+    const tooltipProps = toRef$1(() => props.tooltip);
+    const toasterProps = toRef$1(() => props.toaster);
+    const locale = toRef$1(() => props.locale);
+    provide(localeContextInjectionKey, locale);
+    const portal = toRef$1(() => props.portal);
+    provide(portalTargetInjectionKey, portal);
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$n), mergeProps({
+        "use-id": () => useId(),
+        dir: locale.value?.dir,
+        locale: locale.value?.code
+      }, unref(configProviderProps)), {
+        default: withCtx(() => [
+          createVNode(unref(_sfc_main$6), normalizeProps$1(guardReactiveProps(tooltipProps.value)), {
+            default: withCtx(() => [
+              __props.toaster !== null ? (openBlock(), createBlock(_sfc_main$3, normalizeProps$1(mergeProps({ key: 0 }, toasterProps.value)), {
+                default: withCtx(() => [
+                  renderSlot(_ctx.$slots, "default")
+                ]),
+                _: 3
+              }, 16)) : renderSlot(_ctx.$slots, "default", { key: 1 }),
+              createVNode(_sfc_main$2)
+            ]),
+            _: 3
+          }, 16)
+        ]),
+        _: 3
+      }, 16, ["use-id", "dir", "locale"]);
+    };
+  }
+});
+const _export_sfc = (sfc, props) => {
+  const target = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target[key] = val;
+  }
+  return target;
+};
+const _sfc_main = {};
+function _sfc_render(_ctx, _cache) {
+  const _component_UApp = _sfc_main$1;
+  return openBlock(), createBlock(_component_UApp, null, {
+    default: withCtx(() => _cache[0] || (_cache[0] = [
+      createBaseVNode("shared-button", null, null, -1)
+    ])),
+    _: 1,
+    __: [0]
+  });
+}
+const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);
+const app = createApp(App);
+app.use(ui);
+app.mount("#app");
