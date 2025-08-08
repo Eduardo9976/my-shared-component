@@ -33,9 +33,14 @@ export default defineConfig({
                 'shared-button': './src/shared-button.ts'
             },
             output: {
-                entryFileNames: '[name].js',
+                entryFileNames: (chunkInfo) => {
+                    if (chunkInfo.name === 'shared-button') {
+                        return 'shared-button.js';
+                    }
+                    return '[name].js';
+                },
                 chunkFileNames: '[name].js',
-                assetFileNames: '[name].[ext]'
+                assetFileNames: 'shared-button.css'
             }
         },
         // Configurações para web component
