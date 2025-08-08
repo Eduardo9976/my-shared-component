@@ -7,7 +7,146 @@ import './assets/main.css'
 // Converte o componente Vue em um Custom Element
 const SharedButtonElement = defineCustomElement(SharedButton, {
   shadowRoot: false, // Desabilita shadow DOM para facilitar uso
-  styles: [`/* inlined css */`],
+  styles: [
+    // Estilos inline necessários para o Nuxt UI funcionar
+    `
+    /* Variáveis CSS do Nuxt UI */
+    :root {
+      --ui-success: #22c55e;
+      --ui-success-50: #f0fdf4;
+      --ui-success-100: #dcfce7;
+      --ui-success-200: #bbf7d0;
+      --ui-success-300: #86efac;
+      --ui-success-400: #4ade80;
+      --ui-success-500: #22c55e;
+      --ui-success-600: #16a34a;
+      --ui-success-700: #15803d;
+      --ui-success-800: #166534;
+      --ui-success-900: #14532d;
+      --ui-success-950: #052e16;
+      
+      --ui-primary: #3b82f6;
+      --ui-primary-50: #eff6ff;
+      --ui-primary-100: #dbeafe;
+      --ui-primary-200: #bfdbfe;
+      --ui-primary-300: #93c5fd;
+      --ui-primary-400: #60a5fa;
+      --ui-primary-500: #3b82f6;
+      --ui-primary-600: #2563eb;
+      --ui-primary-700: #1d4ed8;
+      --ui-primary-800: #1e40af;
+      --ui-primary-900: #1e3a8a;
+      --ui-primary-950: #172554;
+      
+      --ui-danger: #ef4444;
+      --ui-danger-50: #fef2f2;
+      --ui-danger-100: #fee2e2;
+      --ui-danger-200: #fecaca;
+      --ui-danger-300: #fca5a5;
+      --ui-danger-400: #f87171;
+      --ui-danger-500: #ef4444;
+      --ui-danger-600: #dc2626;
+      --ui-danger-700: #b91c1c;
+      --ui-danger-800: #991b1b;
+      --ui-danger-900: #7f1d1d;
+      --ui-danger-950: #450a0a;
+      
+      --ui-warning: #f59e0b;
+      --ui-warning-50: #fffbeb;
+      --ui-warning-100: #fef3c7;
+      --ui-warning-200: #fde68a;
+      --ui-warning-300: #fcd34d;
+      --ui-warning-400: #fbbf24;
+      --ui-warning-500: #f59e0b;
+      --ui-warning-600: #d97706;
+      --ui-warning-700: #b45309;
+      --ui-warning-800: #92400e;
+      --ui-warning-900: #78350f;
+      --ui-warning-950: #451a03;
+      
+      --ui-gray: #6b7280;
+      --ui-gray-50: #f9fafb;
+      --ui-gray-100: #f3f4f6;
+      --ui-gray-200: #e5e7eb;
+      --ui-gray-300: #d1d5db;
+      --ui-gray-400: #9ca3af;
+      --ui-gray-500: #6b7280;
+      --ui-gray-600: #4b5563;
+      --ui-gray-700: #374151;
+      --ui-gray-800: #1f2937;
+      --ui-gray-900: #111827;
+      --ui-gray-950: #030712;
+    }
+    
+    /* Estilos básicos do Tailwind */
+    .border { border-width: 1px; }
+    .border-blue-500 { border-color: rgb(59 130 246); }
+    .p-4 { padding: 1rem; }
+    .bg-blue-100 { background-color: rgb(219 234 254); }
+    .font-bold { font-weight: 700; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mt-4 { margin-top: 1rem; }
+    
+    /* Estilos para botões do Nuxt UI */
+    .u-button { 
+      display: inline-flex; 
+      align-items: center; 
+      justify-content: center; 
+      padding: 0.5rem 1rem; 
+      border-radius: 0.375rem; 
+      font-weight: 500; 
+      text-decoration: none; 
+      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke; 
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); 
+      transition-duration: 150ms;
+    }
+    .u-button--success { 
+      background-color: var(--ui-success); 
+      color: white; 
+      border: 1px solid var(--ui-success);
+    }
+    .u-button--solid { 
+      background-color: var(--ui-success); 
+      color: white;
+    }
+    
+    /* Estilos para componentes do Nuxt UI */
+    .u-accordion { border: 1px solid #e5e7eb; border-radius: 0.5rem; }
+    .u-accordion-item { border-bottom: 1px solid #e5e7eb; }
+    .u-accordion-item:last-child { border-bottom: none; }
+    .u-accordion-trigger { 
+      width: 100%; 
+      padding: 1rem; 
+      text-align: left; 
+      background: none; 
+      border: none; 
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .u-accordion-content { 
+      padding: 0 1rem 1rem 1rem; 
+      color: #6b7280; 
+      font-size: 0.875rem; 
+      line-height: 1.25rem;
+    }
+    
+    /* Estilos adicionais para garantir funcionamento */
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-2 { gap: 0.5rem; }
+    .w-5 { width: 1.25rem; }
+    .h-5 { height: 1.25rem; }
+    .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+    .text-gray-600 { color: rgb(75 85 99); }
+    .font-semibold { font-weight: 600; }
+    .rounded-lg { border-radius: 0.5rem; }
+    .overflow-hidden { overflow: hidden; }
+    .transition-transform { transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+    `
+  ],
 });
 
 // Registra o Custom Element no navegador
