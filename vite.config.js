@@ -26,6 +26,12 @@ export default defineConfig({
     optimizeDeps: {
         exclude: ['@inertiajs/vue3']
     },
+    define: {
+        'process.env': {},
+        'process.platform': '"browser"',
+        'process.version': '"v16.0.0"',
+        global: 'globalThis'
+    },
     build: {
         rollupOptions: {
             input: {
