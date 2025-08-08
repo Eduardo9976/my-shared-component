@@ -13664,10 +13664,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("div", _hoisted_1, [
         createVNode(_component_UButton, {
           color: "success",
-          variant: "solid"
+          variant: "solid",
+          class: "font-bold"
         }, {
           default: withCtx(() => _cache[0] || (_cache[0] = [
-            createTextVNode(" Click me web component ", -1)
+            createTextVNode(" Botão Atualizado - Teste ", -1)
           ])),
           _: 1,
           __: [0]

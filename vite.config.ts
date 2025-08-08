@@ -44,6 +44,8 @@ export default defineConfig({
     cssCodeSplit: false,
     assetsInlineLimit: 0,
     // Garantir que todos os estilos sejam incluídos
-    minify: false
+    minify: false,
+    // Forçar inclusão de todos os estilos
+    cssMinify: false
   }
 })

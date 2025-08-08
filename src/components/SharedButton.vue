@@ -1,7 +1,7 @@
 <template>
     <div class="border border-blue-500 p-4 bg-blue-100">
-        <UButton color="success" variant="solid">
-            Click me web component
+        <UButton color="success" variant="solid" class="font-bold">
+            Botão Atualizado - Teste
         </UButton>
     </div>
 </template>
