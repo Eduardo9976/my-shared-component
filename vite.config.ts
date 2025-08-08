@@ -39,18 +39,12 @@ export default defineConfig({
         assetFileNames: '[name].[ext]'
       }
     },
-    // Configurações para web component sem shadow DOM
+    // Configurações para web component
     cssCodeSplit: false,
     assetsInlineLimit: 0,
     // Garantir que todos os estilos sejam incluídos
     minify: false,
     // Forçar inclusão de todos os estilos
-    cssMinify: false,
-    // Incluir todos os estilos no bundle
-    lib: {
-      entry: './src/shared-button.ts',
-      name: 'SharedButton',
-      formats: ['es']
-    }
+    cssMinify: false
   }
 })
