@@ -1,4 +1,4 @@
-import { c as createHooks, t as toValue, i as isRef, h as hasInjectionContext, a as inject, r as ref, w as watchEffect, o as onBeforeUnmount, b as onDeactivated, d as onActivated, g as getCurrentInstance, e as computed, f as toRef, j as watch, k as tryOnMounted, l as isClient$1, s as shallowRef, m as watchPausable, p as pxValue, n as toArray$1, q as watchImmediate$1, u as tryOnScopeDispose$1, v as injectLocal, x as onMounted, y as isObject$1, z as unref, A as nextTick, B as defu, C as get, D as createSharedComposable, E as toRef$1, F as defineNuxtPlugin, G as useNuxtApp, H as useAppConfig, I as defineComponent, J as createBlock, K as openBlock, L as withCtx, M as renderSlot, P as Primitive, N as readonly, O as getCurrentScope, Q as onScopeDispose, R as provide, S as toRefs, T as onUnmounted, U as renderSlotFragments, V as h, W as toHandlerKey, X as camelize, Y as reactive, Z as createCommentVNode, _ as Teleport, $ as useForwardProps, a0 as markRaw, a1 as Slot, a2 as mergeProps, a3 as createTextVNode, a4 as toDisplayString, a5 as createElementBlock, a6 as createVNode, a7 as withModifiers, a8 as Fragment, a9 as normalizeProps$1, aa as guardReactiveProps, ab as normalizeStyle, ac as useState, ad as useSlots, ae as reactivePick, af as tv, ag as normalizeClass, ah as renderList, ai as createBaseVNode, aj as _sfc_main$p, ak as _sfc_main$q, al as resolveDynamicComponent, am as _sfc_main$r, an as omit, ao as shallowReactive, ap as useId, aq as createApp } from "./shared-button.js";
+import { c as createHooks, t as toValue, i as isRef, h as hasInjectionContext, a as inject, r as ref, w as watchEffect, o as onBeforeUnmount, b as onDeactivated, d as onActivated, g as getCurrentInstance, e as computed, f as toRef, j as watch, k as tryOnMounted, l as isClient$1, s as shallowRef, m as watchPausable, p as pxValue, n as toArray$1, q as watchImmediate$1, u as tryOnScopeDispose$1, v as injectLocal, x as onMounted, y as isObject$1, z as unref, A as nextTick, B as defu, C as get, D as createSharedComposable, E as toRef$1, F as defineNuxtPlugin, G as useNuxtApp, H as useAppConfig, I as defineComponent, J as createBlock, K as openBlock, L as withCtx, M as renderSlot, P as Primitive, N as readonly, O as getCurrentScope, Q as onScopeDispose, R as provide, S as toRefs, T as onUnmounted, U as renderSlotFragments, V as h, W as toHandlerKey, X as camelize, Y as reactive, Z as createCommentVNode, _ as Teleport, $ as useForwardProps, a0 as markRaw, a1 as Slot, a2 as mergeProps, a3 as createTextVNode, a4 as toDisplayString, a5 as createElementBlock, a6 as createVNode, a7 as withModifiers, a8 as Fragment, a9 as normalizeProps$1, aa as guardReactiveProps, ab as normalizeStyle, ac as useState, ad as useSlots, ae as reactivePick, af as tv, ag as normalizeClass, ah as renderList, ai as createBaseVNode, aj as _sfc_main$p, ak as _sfc_main$q, al as resolveDynamicComponent, am as _sfc_main$r, an as omit, ao as shallowReactive, ap as useId, aq as createApp } from "./shared-button2.js";
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) return;
@@ -939,7 +939,7 @@ const StorageSerializers = {
   }
 };
 const customStorageEventName = "vueuse-storage";
-function useStorage(key, defaults2, storage, options = {}) {
+function useStorage(key, defaults, storage, options = {}) {
   var _a;
   const {
     flush = "pre",
@@ -955,7 +955,7 @@ function useStorage(key, defaults2, storage, options = {}) {
     },
     initOnMounted
   } = options;
-  const data = (shallow ? shallowRef : ref)(typeof defaults2 === "function" ? defaults2() : defaults2);
+  const data = (shallow ? shallowRef : ref)(typeof defaults === "function" ? defaults() : defaults);
   const keyComputed = computed(() => toValue(key));
   if (!storage) {
     try {
@@ -969,7 +969,7 @@ function useStorage(key, defaults2, storage, options = {}) {
   }
   if (!storage)
     return data;
-  const rawInit = toValue(defaults2);
+  const rawInit = toValue(defaults);
   const type = guessSerializerType(rawInit);
   const serializer = (_a = options.serializer) != null ? _a : StorageSerializers[type];
   const { pause: pauseWatch, resume: resumeWatch } = watchPausable(
@@ -1598,18 +1598,18 @@ function useRafFn(fn, options = {}) {
   });
   let previousFrameTimestamp = 0;
   let rafId = null;
-  function loop(timestamp2) {
+  function loop(timestamp) {
     if (!isActive.value || !window2)
       return;
     if (!previousFrameTimestamp)
-      previousFrameTimestamp = timestamp2;
-    const delta = timestamp2 - previousFrameTimestamp;
+      previousFrameTimestamp = timestamp;
+    const delta = timestamp - previousFrameTimestamp;
     if (intervalLimit.value && delta < intervalLimit.value) {
       rafId = window2.requestAnimationFrame(loop);
       return;
     }
-    previousFrameTimestamp = timestamp2;
-    fn({ delta, timestamp: timestamp2 });
+    previousFrameTimestamp = timestamp;
+    fn({ delta, timestamp });
     if (once) {
       isActive.value = false;
       rafId = null;
@@ -1661,7 +1661,7 @@ function useVModel(props, key, emit, options = {}) {
   }
   event = event || `update:${key.toString()}`;
   const cloneFn = (val) => !clone ? val : typeof clone === "function" ? clone(val) : cloneFnJSON(val);
-  const getValue2 = () => isDef(props[key]) ? cloneFn(props[key]) : defaultValue;
+  const getValue = () => isDef(props[key]) ? cloneFn(props[key]) : defaultValue;
   const triggerEmit = (value) => {
     if (shouldEmit) {
       if (shouldEmit(value))
@@ -1671,7 +1671,7 @@ function useVModel(props, key, emit, options = {}) {
     }
   };
   if (passive) {
-    const initialValue = getValue2();
+    const initialValue = getValue();
     const proxy = ref(initialValue);
     let isUpdating = false;
     watch(
@@ -1696,7 +1696,7 @@ function useVModel(props, key, emit, options = {}) {
   } else {
     return computed({
       get() {
-        return getValue2();
+        return getValue();
       },
       set(value) {
         triggerEmit(value);
