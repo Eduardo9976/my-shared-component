@@ -1,11 +1,13 @@
 import { defineCustomElement } from 'vue'
 import SharedButton from './components/SharedButton.vue'
 
-// Importar os estilos CSS
+// Importar os estilos CSS do Nuxt UI e Tailwind
 import './assets/main.css'
 
 // Converte o componente Vue em um Custom Element
-const SharedButtonElement = defineCustomElement(SharedButton)
+const SharedButtonElement = defineCustomElement(SharedButton, {
+  shadowRoot: false // Desabilita shadow DOM para facilitar uso
+})
 
 // Registra o Custom Element no navegador
 if (!customElements.get('shared-button')) {

@@ -38,7 +38,10 @@ export default defineConfig({
                 assetFileNames: '[name].[ext]'
             }
         },
+        // Configurações para web component sem shadow DOM
+        cssCodeSplit: false,
         assetsInlineLimit: 0,
-        cssCodeSplit: false
+        // Garantir que todos os estilos sejam incluídos
+        minify: false
     }
 });
