@@ -14,7 +14,6 @@
 </template>
 
 <script setup lang="ts">
-// Importar estilos diretamente no componente
 import { ref } from 'vue';
 import '../assets/main.css'
 

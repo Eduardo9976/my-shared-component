@@ -7,12 +7,12 @@
                     <h3 class="text-lg font-semibold">Card XPTO</h3>
                 </div>
             </template>
-            
+
             <div class="space-y-3">
                 <p class="text-gray-600">
                     Card do Edu usando UCard no Nuxt UI web component
                 </p>
-                
+
                 <div class="flex items-center gap-2">
                     <UBadge color="success" variant="soft">
                         <UIcon name="i-lucide-check" class="w-3 h-3" />
@@ -23,9 +23,9 @@
                         Atenção
                     </UBadge>
                 </div>
-                
+
                 <UProgress :value="75" color="primary" />
-                
+
                 <div class="flex gap-2">
                     <UButton color="primary" variant="solid" size="sm">
                         <UIcon name="i-lucide-heart" class="w-4 h-4" />
@@ -37,7 +37,7 @@
                     </UButton>
                 </div>
             </div>
-            
+
             <template #footer>
                 <div class="flex justify-between items-center text-sm text-gray-500">
                     <span>Criado em {{ new Date().toLocaleDateString() }}</span>
@@ -51,21 +51,6 @@
 </template>
 
 <script setup lang="ts">
-// Importar estilos diretamente no componente
-import { ref } from 'vue';
-import '../assets/main.css'
-
-// Aqui você pode adicionar props, emits, composables, etc.
-// Por exemplo:
-// const props = defineProps<{
-//   title?: string
-//   description?: string
-// }>()
-
-// const emit = defineEmits<{
-//   like: [value: boolean]
-//   share: [value: string]
-// }>()
 </script>
 
 <style scoped>
