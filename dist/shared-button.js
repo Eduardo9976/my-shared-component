@@ -1,4 +1,4 @@
-import { ai as BaseTransition, aj as BaseTransitionPropsValidators, ak as Comment, al as DeprecationTypes, am as EffectScope, an as ErrorCodes, ao as ErrorTypeStrings, L as Fragment, ap as KeepAlive, aq as ReactiveEffect, ar as Static, as as Suspense, T as Teleport, at as Text, au as TrackOpTypes, av as Transition, aw as TransitionGroup, ax as TriggerOpTypes, ay as VueElement, az as assertNumber, aA as callWithAsyncErrorHandling, aB as callWithErrorHandling, aC as camelize, aD as capitalize, aE as cloneVNode, aF as compatUtils, f as computed, ah as createApp, l as createBlock, z as createCommentVNode, H as createElementBlock, a0 as createBaseVNode, aG as createHydrationRenderer, aH as createPropsRestProxy, aI as createRenderer, aJ as createSSRApp, aK as createSlots, aL as createStaticVNode, A as createTextVNode, I as createVNode, aM as customRef, aN as defineAsyncComponent, k as defineComponent, aO as defineCustomElement, aP as defineEmits, aQ as defineExpose, aR as defineModel, aS as defineOptions, aT as defineProps, aU as defineSSRCustomElement, aV as defineSlots, aW as devtools, aX as effect, aY as effectScope, g as getCurrentInstance, aZ as getCurrentScope, a_ as getCurrentWatcher, a$ as getTransitionRawChildren, O as guardReactiveProps, b0 as h, b1 as handleError, h as hasInjectionContext, b2 as hydrate, b3 as hydrateOnIdle, b4 as hydrateOnInteraction, b5 as hydrateOnMediaQuery, b6 as hydrateOnVisible, b7 as initCustomFormatter, b8 as initDirectivesForSSR, a as inject, b9 as isMemoSame, ba as isProxy, bb as isReactive, bc as isReadonly, i as isRef, bd as isRuntimeOnly, be as isShallow, bf as isVNode, ad as markRaw, bg as mergeDefaults, bh as mergeModels, J as mergeProps, W as nextTick, a3 as normalizeClass, N as normalizeProps, S as normalizeStyle, d as onActivated, bi as onBeforeMount, o as onBeforeUnmount, bj as onBeforeUpdate, b as onDeactivated, bk as onErrorCaptured, F as onMounted, bl as onRenderTracked, bm as onRenderTriggered, bn as onScopeDispose, bo as onServerPrefetch, G as onUnmounted, bp as onUpdated, bq as onWatcherCleanup, m as openBlock, br as popScopeId, af as provide, bs as proxyRefs, bt as pushScopeId, bu as queuePostFlushCb, ac as reactive, bv as readonly, r as ref, bw as registerRuntimeCompiler, bx as render, a5 as renderList, p as renderSlot, by as resolveComponent, bz as resolveDirective, a4 as resolveDynamicComponent, bA as resolveFilter, bB as resolveTransitionHooks, bC as setBlockTracking, bD as setDevtoolsHook, bE as setTransitionHooks, ab as shallowReactive, bF as shallowReadonly, bG as shallowRef, bH as ssrContextKey, bI as ssrUtils, bJ as stop, B as toDisplayString, bK as toHandlerKey, bL as toHandlers, bM as toRaw, a8 as toRef, v as toRefs, t as toValue$1, bN as transformVNodeArgs, bO as triggerRef, q as unref, bP as useAttrs, bQ as useCssModule, bR as useCssVars, bS as useHost, ae as useId$1, bT as useModel, bU as useSSRContext, bV as useShadowRoot, X as useSlots, bW as useTemplateRef, bX as useTransitionState, bY as vModelCheckbox, bZ as vModelDynamic, b_ as vModelRadio, b$ as vModelSelect, c0 as vModelText, c1 as vShow, c2 as version, c3 as warn, D as watch, w as watchEffect, c4 as watchPostEffect, c5 as watchSyncEffect, c6 as withAsyncContext, n as withCtx, c7 as withDefaults, c8 as withDirectives, c9 as withKeys, ca as withMemo, K as withModifiers, cb as withScopeId, cc as toRef$1, cd as tryOnMounted, ce as isClient, cf as watchPausable, cg as pxValue, ch as toArray, ci as watchImmediate, cj as tryOnScopeDispose, ck as injectLocal, cl as isObject, cm as makeDestructurable, cn as camelize$1, aa as createSharedComposable, co as isNullish, cp as isEqual, Q as useVModel, s as createContext, C as useForwardExpose, P as Primitive, cq as defaultWindow$1, M as isClient$1, cr as renderSlotFragments, R as unrefElement$1, cs as useEventListener$1, ct as createGlobalState, E as onKeyStroke, cu as createSharedComposable$1, cv as tryOnBeforeUnmount, cw as defu, cx as isIOS, cy as useMounted$1, cz as Slot, cA as computedEager, cB as refAutoReset, Z as useForwardPropsEmits, cC as useEmitAsProps, _ as reactivePick, $ as tv, j as useAppConfig, a2 as _sfc_main$X, cD as get, Y as useLocale, cE as reactiveOmit, a9 as omit, cF as isArrayOfArray, a1 as _sfc_main$Y, cG as _sfc_main$Z, cH as pickLinkProps, cI as _sfc_main$_, a6 as _sfc_main$$ } from "./main.js";
+import { ai as BaseTransition, aj as BaseTransitionPropsValidators, ak as Comment, al as DeprecationTypes, am as EffectScope, an as ErrorCodes, ao as ErrorTypeStrings, L as Fragment, ap as KeepAlive, aq as ReactiveEffect, ar as Static, as as Suspense, T as Teleport, at as Text, au as TrackOpTypes, av as Transition, aw as TransitionGroup, ax as TriggerOpTypes, ay as VueElement, az as assertNumber, aA as callWithAsyncErrorHandling, aB as callWithErrorHandling, aC as camelize, aD as capitalize, aE as cloneVNode, aF as compatUtils, f as computed, ah as createApp, l as createBlock, z as createCommentVNode, H as createElementBlock, a0 as createBaseVNode, aG as createHydrationRenderer, aH as createPropsRestProxy, aI as createRenderer, aJ as createSSRApp, aK as createSlots, aL as createStaticVNode, A as createTextVNode, I as createVNode, aM as customRef, aN as defineAsyncComponent, k as defineComponent, aO as defineCustomElement, aP as defineEmits, aQ as defineExpose, aR as defineModel, aS as defineOptions, aT as defineProps, aU as defineSSRCustomElement, aV as defineSlots, aW as devtools, aX as effect, aY as effectScope, g as getCurrentInstance, aZ as getCurrentScope, a_ as getCurrentWatcher, a$ as getTransitionRawChildren, O as guardReactiveProps, b0 as h, b1 as handleError, h as hasInjectionContext, b2 as hydrate, b3 as hydrateOnIdle, b4 as hydrateOnInteraction, b5 as hydrateOnMediaQuery, b6 as hydrateOnVisible, b7 as initCustomFormatter, b8 as initDirectivesForSSR, a as inject, b9 as isMemoSame, ba as isProxy, bb as isReactive, bc as isReadonly, i as isRef, bd as isRuntimeOnly, be as isShallow, bf as isVNode, ad as markRaw, bg as mergeDefaults, bh as mergeModels, J as mergeProps, W as nextTick, a3 as normalizeClass, N as normalizeProps, S as normalizeStyle, d as onActivated, bi as onBeforeMount, o as onBeforeUnmount, bj as onBeforeUpdate, b as onDeactivated, bk as onErrorCaptured, F as onMounted, bl as onRenderTracked, bm as onRenderTriggered, bn as onScopeDispose, bo as onServerPrefetch, G as onUnmounted, bp as onUpdated, bq as onWatcherCleanup, m as openBlock, br as popScopeId, af as provide, bs as proxyRefs, bt as pushScopeId, bu as queuePostFlushCb, ac as reactive, bv as readonly, r as ref, bw as registerRuntimeCompiler, bx as render, a5 as renderList, p as renderSlot, by as resolveComponent, bz as resolveDirective, a4 as resolveDynamicComponent, bA as resolveFilter, bB as resolveTransitionHooks, bC as setBlockTracking, bD as setDevtoolsHook, bE as setTransitionHooks, ab as shallowReactive, bF as shallowReadonly, bG as shallowRef, bH as ssrContextKey, bI as ssrUtils, bJ as stop, B as toDisplayString, bK as toHandlerKey, bL as toHandlers, bM as toRaw, a8 as toRef, v as toRefs, t as toValue$1, bN as transformVNodeArgs, bO as triggerRef, q as unref, bP as useAttrs, bQ as useCssModule, bR as useCssVars, bS as useHost, ae as useId$1, bT as useModel, bU as useSSRContext, bV as useShadowRoot, X as useSlots, bW as useTemplateRef, bX as useTransitionState, bY as vModelCheckbox, bZ as vModelDynamic, b_ as vModelRadio, b$ as vModelSelect, c0 as vModelText, c1 as vShow, c2 as version, c3 as warn, D as watch, w as watchEffect, c4 as watchPostEffect, c5 as watchSyncEffect, c6 as withAsyncContext, n as withCtx, c7 as withDefaults, c8 as withDirectives, c9 as withKeys, ca as withMemo, K as withModifiers, cb as withScopeId, cc as toRef$1, cd as tryOnMounted, ce as isClient, cf as watchPausable, cg as pxValue, ch as toArray, ci as watchImmediate, cj as tryOnScopeDispose, ck as injectLocal, cl as isObject, cm as makeDestructurable, cn as camelize$1, aa as createSharedComposable, P as Primitive, co as isNullish, cp as isEqual, Q as useVModel, s as createContext, C as useForwardExpose, cq as defaultWindow$1, M as isClient$1, cr as renderSlotFragments, R as unrefElement$1, cs as useEventListener$1, ct as createGlobalState, E as onKeyStroke, cu as useEmitAsProps, cv as createSharedComposable$1, cw as tryOnBeforeUnmount, cx as defu, cy as isIOS, cz as useMounted$1, cA as Slot, cB as computedEager, cC as refAutoReset, Z as useForwardPropsEmits, Y as useLocale, _ as reactivePick, $ as tv, j as useAppConfig, a6 as _sfc_main$1a, a2 as _sfc_main$1b, cD as get, cE as reactiveOmit, a9 as omit, cF as isArrayOfArray, a1 as _sfc_main$1c, cG as _sfc_main$1d, cH as pickLinkProps, cI as _sfc_main$1e } from "./main.js";
 /**
 * vue v3.5.18
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
@@ -2451,6 +2451,44 @@ function useFloating(reference, floating, options) {
     update
   };
 }
+const _sfc_main$19 = /* @__PURE__ */ defineComponent({
+  __name: "VisuallyHidden",
+  props: {
+    feature: { default: "focusable" },
+    asChild: { type: Boolean },
+    as: { default: "span" }
+  },
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        as: _ctx.as,
+        "as-child": _ctx.asChild,
+        "aria-hidden": _ctx.feature === "focusable" ? "true" : void 0,
+        "data-hidden": _ctx.feature === "fully-hidden" ? "" : void 0,
+        tabindex: _ctx.feature === "fully-hidden" ? "-1" : void 0,
+        style: {
+          // See: https://github.com/twbs/bootstrap/blob/master/scss/mixins/_screen-reader.scss
+          position: "absolute",
+          border: 0,
+          width: "1px",
+          height: "1px",
+          padding: 0,
+          margin: "-1px",
+          overflow: "hidden",
+          clip: "rect(0, 0, 0, 0)",
+          clipPath: "inset(50%)",
+          whiteSpace: "nowrap",
+          wordWrap: "normal"
+        }
+      }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 8, ["as", "as-child", "aria-hidden", "data-hidden", "tabindex"]);
+    };
+  }
+});
 function isValueEqualOrExist(base, current) {
   if (isNullish(base))
     return false;
@@ -2507,7 +2545,7 @@ function useSingleOrMultipleValue(props, emits) {
   };
 }
 const [injectConfigProviderContext, provideConfigProviderContext] = createContext("ConfigProvider");
-const _sfc_main$W = /* @__PURE__ */ defineComponent({
+const _sfc_main$18 = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -2541,7 +2579,7 @@ function useDirection(dir) {
   return computed(() => dir?.value || context2.dir?.value || "ltr");
 }
 const [injectAccordionRootContext, provideAccordionRootContext] = createContext("AccordionRoot");
-const _sfc_main$V = /* @__PURE__ */ defineComponent({
+const _sfc_main$17 = /* @__PURE__ */ defineComponent({
   __name: "AccordionRoot",
   props: {
     collapsible: { type: Boolean, default: false },
@@ -2589,7 +2627,7 @@ const _sfc_main$V = /* @__PURE__ */ defineComponent({
   }
 });
 const [injectCollapsibleRootContext, provideCollapsibleRootContext] = createContext("CollapsibleRoot");
-const _sfc_main$U = /* @__PURE__ */ defineComponent({
+const _sfc_main$16 = /* @__PURE__ */ defineComponent({
   __name: "CollapsibleRoot",
   props: {
     defaultOpen: { type: Boolean, default: false },
@@ -2706,7 +2744,7 @@ function findNextFocusableElement(elements, currentElement, options, iterations 
   return candidate;
 }
 const [injectAccordionItemContext, provideAccordionItemContext] = createContext("AccordionItem");
-const _sfc_main$T = /* @__PURE__ */ defineComponent({
+const _sfc_main$15 = /* @__PURE__ */ defineComponent({
   __name: "AccordionItem",
   props: {
     disabled: { type: Boolean },
@@ -2759,7 +2797,7 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
       );
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$U), {
+      return openBlock(), createBlock(unref(_sfc_main$16), {
         "data-orientation": unref(rootContext).orientation,
         "data-disabled": dataDisabled.value,
         "data-state": dataState.value,
@@ -2978,7 +3016,7 @@ const Presence = defineComponent({
     };
   }
 });
-const _sfc_main$S = /* @__PURE__ */ defineComponent({
+const _sfc_main$14 = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -3070,7 +3108,7 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$R = /* @__PURE__ */ defineComponent({
+const _sfc_main$13 = /* @__PURE__ */ defineComponent({
   __name: "AccordionContent",
   props: {
     forceMount: { type: Boolean },
@@ -3083,7 +3121,7 @@ const _sfc_main$R = /* @__PURE__ */ defineComponent({
     const itemContext = injectAccordionItemContext();
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$S), {
+      return openBlock(), createBlock(unref(_sfc_main$14), {
         role: "region",
         "as-child": props.asChild,
         as: _ctx.as,
@@ -3103,7 +3141,7 @@ const _sfc_main$R = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$Q = /* @__PURE__ */ defineComponent({
+const _sfc_main$12 = /* @__PURE__ */ defineComponent({
   __name: "AccordionHeader",
   props: {
     asChild: { type: Boolean },
@@ -3130,7 +3168,7 @@ const _sfc_main$Q = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$P = /* @__PURE__ */ defineComponent({
+const _sfc_main$11 = /* @__PURE__ */ defineComponent({
   __name: "CollapsibleTrigger",
   props: {
     asChild: { type: Boolean },
@@ -3160,7 +3198,7 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$O = /* @__PURE__ */ defineComponent({
+const _sfc_main$10 = /* @__PURE__ */ defineComponent({
   __name: "AccordionTrigger",
   props: {
     asChild: { type: Boolean },
@@ -3178,7 +3216,7 @@ const _sfc_main$O = /* @__PURE__ */ defineComponent({
       rootContext.changeModelValue(itemContext.value.value);
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$P), {
+      return openBlock(), createBlock(unref(_sfc_main$11), {
         id: unref(itemContext).triggerId,
         ref: unref(itemContext).currentRef,
         "data-reka-collection-item": "",
@@ -3197,6 +3235,77 @@ const _sfc_main$O = /* @__PURE__ */ defineComponent({
         ]),
         _: 3
       }, 8, ["id", "as", "as-child", "aria-disabled", "aria-expanded", "data-disabled", "data-orientation", "data-state", "disabled"]);
+    };
+  }
+});
+const [injectDialogRootContext, provideDialogRootContext] = createContext("DialogRoot");
+const _sfc_main$$ = /* @__PURE__ */ defineComponent({
+  ...{
+    inheritAttrs: false
+  },
+  __name: "DialogRoot",
+  props: {
+    open: { type: Boolean, default: void 0 },
+    defaultOpen: { type: Boolean, default: false },
+    modal: { type: Boolean, default: true }
+  },
+  emits: ["update:open"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emit = __emit;
+    const open = useVModel(props, "open", emit, {
+      defaultValue: props.defaultOpen,
+      passive: props.open === void 0
+    });
+    const triggerElement = ref();
+    const contentElement = ref();
+    const { modal } = toRefs(props);
+    provideDialogRootContext({
+      open,
+      modal,
+      openModal: () => {
+        open.value = true;
+      },
+      onOpenChange: (value) => {
+        open.value = value;
+      },
+      onOpenToggle: () => {
+        open.value = !open.value;
+      },
+      contentId: "",
+      titleId: "",
+      descriptionId: "",
+      triggerElement,
+      contentElement
+    });
+    return (_ctx, _cache) => {
+      return renderSlot(_ctx.$slots, "default", {
+        open: unref(open),
+        close: () => open.value = false
+      });
+    };
+  }
+});
+const _sfc_main$_ = /* @__PURE__ */ defineComponent({
+  __name: "DialogClose",
+  props: {
+    asChild: { type: Boolean },
+    as: { default: "button" }
+  },
+  setup(__props) {
+    const props = __props;
+    useForwardExpose();
+    const rootContext = injectDialogRootContext();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), mergeProps(props, {
+        type: _ctx.as === "button" ? "button" : void 0,
+        onClick: _cache[0] || (_cache[0] = ($event) => unref(rootContext).onOpenChange(false))
+      }), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16, ["type"]);
     };
   }
 });
@@ -3355,7 +3464,7 @@ function focus(element, { select = false } = {}) {
     }
   }
 }
-const _sfc_main$N = /* @__PURE__ */ defineComponent({
+const _sfc_main$Z = /* @__PURE__ */ defineComponent({
   __name: "FocusScope",
   props: {
     loop: { type: Boolean, default: false },
@@ -3627,7 +3736,7 @@ const context = reactive({
   layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
   branches: /* @__PURE__ */ new Set()
 });
-const _sfc_main$M = /* @__PURE__ */ defineComponent({
+const _sfc_main$Y = /* @__PURE__ */ defineComponent({
   __name: "DismissableLayer",
   props: {
     disableOutsidePointerEvents: { type: Boolean, default: false },
@@ -3730,6 +3839,65 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
         ]),
         _: 3
       }, 8, ["as-child", "as", "style", "onFocusCapture", "onBlurCapture", "onPointerdownCapture"]);
+    };
+  }
+});
+const _sfc_main$X = /* @__PURE__ */ defineComponent({
+  __name: "DialogContentImpl",
+  props: {
+    forceMount: { type: Boolean },
+    trapFocus: { type: Boolean },
+    disableOutsidePointerEvents: { type: Boolean },
+    asChild: { type: Boolean },
+    as: {}
+  },
+  emits: ["escapeKeyDown", "pointerDownOutside", "focusOutside", "interactOutside", "openAutoFocus", "closeAutoFocus"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emits = __emit;
+    const rootContext = injectDialogRootContext();
+    const { forwardRef, currentElement: contentElement } = useForwardExpose();
+    rootContext.titleId ||= useId(void 0, "reka-dialog-title");
+    rootContext.descriptionId ||= useId(void 0, "reka-dialog-description");
+    onMounted(() => {
+      rootContext.contentElement = contentElement;
+      if (getActiveElement() !== document.body)
+        rootContext.triggerElement.value = getActiveElement();
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$Z), {
+        "as-child": "",
+        loop: "",
+        trapped: props.trapFocus,
+        onMountAutoFocus: _cache[5] || (_cache[5] = ($event) => emits("openAutoFocus", $event)),
+        onUnmountAutoFocus: _cache[6] || (_cache[6] = ($event) => emits("closeAutoFocus", $event))
+      }, {
+        default: withCtx(() => [
+          createVNode(unref(_sfc_main$Y), mergeProps({
+            id: unref(rootContext).contentId,
+            ref: unref(forwardRef),
+            as: _ctx.as,
+            "as-child": _ctx.asChild,
+            "disable-outside-pointer-events": _ctx.disableOutsidePointerEvents,
+            role: "dialog",
+            "aria-describedby": unref(rootContext).descriptionId,
+            "aria-labelledby": unref(rootContext).titleId,
+            "data-state": unref(getOpenState)(unref(rootContext).open.value)
+          }, _ctx.$attrs, {
+            onDismiss: _cache[0] || (_cache[0] = ($event) => unref(rootContext).onOpenChange(false)),
+            onEscapeKeyDown: _cache[1] || (_cache[1] = ($event) => emits("escapeKeyDown", $event)),
+            onFocusOutside: _cache[2] || (_cache[2] = ($event) => emits("focusOutside", $event)),
+            onInteractOutside: _cache[3] || (_cache[3] = ($event) => emits("interactOutside", $event)),
+            onPointerDownOutside: _cache[4] || (_cache[4] = ($event) => emits("pointerDownOutside", $event))
+          }), {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default")
+            ]),
+            _: 3
+          }, 16, ["id", "as", "as-child", "disable-outside-pointer-events", "aria-describedby", "aria-labelledby", "data-state"])
+        ]),
+        _: 3
+      }, 8, ["trapped"]);
     };
   }
 });
@@ -3865,6 +4033,170 @@ function useHideOthers(target) {
       undo();
   });
 }
+const _sfc_main$W = /* @__PURE__ */ defineComponent({
+  __name: "DialogContentModal",
+  props: {
+    forceMount: { type: Boolean },
+    trapFocus: { type: Boolean },
+    disableOutsidePointerEvents: { type: Boolean },
+    asChild: { type: Boolean },
+    as: {}
+  },
+  emits: ["escapeKeyDown", "pointerDownOutside", "focusOutside", "interactOutside", "openAutoFocus", "closeAutoFocus"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emits = __emit;
+    const rootContext = injectDialogRootContext();
+    const emitsAsProps = useEmitAsProps(emits);
+    const { forwardRef, currentElement } = useForwardExpose();
+    useHideOthers(currentElement);
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(_sfc_main$X, mergeProps({ ...props, ...unref(emitsAsProps) }, {
+        ref: unref(forwardRef),
+        "trap-focus": unref(rootContext).open.value,
+        "disable-outside-pointer-events": true,
+        onCloseAutoFocus: _cache[0] || (_cache[0] = (event) => {
+          if (!event.defaultPrevented) {
+            event.preventDefault();
+            unref(rootContext).triggerElement.value?.focus();
+          }
+        }),
+        onPointerDownOutside: _cache[1] || (_cache[1] = (event) => {
+          const originalEvent = event.detail.originalEvent;
+          const ctrlLeftClick = originalEvent.button === 0 && originalEvent.ctrlKey === true;
+          const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
+          if (isRightClick) event.preventDefault();
+        }),
+        onFocusOutside: _cache[2] || (_cache[2] = (event) => {
+          event.preventDefault();
+        })
+      }), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16, ["trap-focus"]);
+    };
+  }
+});
+const _sfc_main$V = /* @__PURE__ */ defineComponent({
+  __name: "DialogContentNonModal",
+  props: {
+    forceMount: { type: Boolean },
+    trapFocus: { type: Boolean },
+    disableOutsidePointerEvents: { type: Boolean },
+    asChild: { type: Boolean },
+    as: {}
+  },
+  emits: ["escapeKeyDown", "pointerDownOutside", "focusOutside", "interactOutside", "openAutoFocus", "closeAutoFocus"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emits = __emit;
+    const emitsAsProps = useEmitAsProps(emits);
+    useForwardExpose();
+    const rootContext = injectDialogRootContext();
+    const hasInteractedOutsideRef = ref(false);
+    const hasPointerDownOutsideRef = ref(false);
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(_sfc_main$X, mergeProps({ ...props, ...unref(emitsAsProps) }, {
+        "trap-focus": false,
+        "disable-outside-pointer-events": false,
+        onCloseAutoFocus: _cache[0] || (_cache[0] = (event) => {
+          if (!event.defaultPrevented) {
+            if (!hasInteractedOutsideRef.value) unref(rootContext).triggerElement.value?.focus();
+            event.preventDefault();
+          }
+          hasInteractedOutsideRef.value = false;
+          hasPointerDownOutsideRef.value = false;
+        }),
+        onInteractOutside: _cache[1] || (_cache[1] = (event) => {
+          if (!event.defaultPrevented) {
+            hasInteractedOutsideRef.value = true;
+            if (event.detail.originalEvent.type === "pointerdown") {
+              hasPointerDownOutsideRef.value = true;
+            }
+          }
+          const target = event.target;
+          const targetIsTrigger = unref(rootContext).triggerElement.value?.contains(target);
+          if (targetIsTrigger) event.preventDefault();
+          if (event.detail.originalEvent.type === "focusin" && hasPointerDownOutsideRef.value) {
+            event.preventDefault();
+          }
+        })
+      }), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16);
+    };
+  }
+});
+const _sfc_main$U = /* @__PURE__ */ defineComponent({
+  __name: "DialogContent",
+  props: {
+    forceMount: { type: Boolean },
+    disableOutsidePointerEvents: { type: Boolean },
+    asChild: { type: Boolean },
+    as: {}
+  },
+  emits: ["escapeKeyDown", "pointerDownOutside", "focusOutside", "interactOutside", "openAutoFocus", "closeAutoFocus"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emits = __emit;
+    const rootContext = injectDialogRootContext();
+    const emitsAsProps = useEmitAsProps(emits);
+    const { forwardRef } = useForwardExpose();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Presence), {
+        present: _ctx.forceMount || unref(rootContext).open.value
+      }, {
+        default: withCtx(() => [
+          unref(rootContext).modal.value ? (openBlock(), createBlock(_sfc_main$W, mergeProps({
+            key: 0,
+            ref: unref(forwardRef)
+          }, { ...props, ...unref(emitsAsProps), ..._ctx.$attrs }), {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default")
+            ]),
+            _: 3
+          }, 16)) : (openBlock(), createBlock(_sfc_main$V, mergeProps({
+            key: 1,
+            ref: unref(forwardRef)
+          }, { ...props, ...unref(emitsAsProps), ..._ctx.$attrs }), {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default")
+            ]),
+            _: 3
+          }, 16))
+        ]),
+        _: 3
+      }, 8, ["present"]);
+    };
+  }
+});
+const _sfc_main$T = /* @__PURE__ */ defineComponent({
+  __name: "DialogDescription",
+  props: {
+    asChild: { type: Boolean },
+    as: { default: "p" }
+  },
+  setup(__props) {
+    const props = __props;
+    useForwardExpose();
+    const rootContext = injectDialogRootContext();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), mergeProps(props, {
+        id: unref(rootContext).descriptionId
+      }), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16, ["id"]);
+    };
+  }
+});
 const useBodyLockStackCount = createSharedComposable$1(() => {
   const map = ref(/* @__PURE__ */ new Map());
   const initialOverflow = ref();
@@ -3960,7 +4292,64 @@ function preventDefault(rawEvent) {
     e.preventDefault();
   return false;
 }
-const _sfc_main$L = /* @__PURE__ */ defineComponent({
+const _sfc_main$S = /* @__PURE__ */ defineComponent({
+  __name: "DialogOverlayImpl",
+  props: {
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    const rootContext = injectDialogRootContext();
+    useBodyScrollLock(true);
+    useForwardExpose();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        as: _ctx.as,
+        "as-child": _ctx.asChild,
+        "data-state": unref(rootContext).open.value ? "open" : "closed",
+        style: { "pointer-events": "auto" }
+      }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 8, ["as", "as-child", "data-state"]);
+    };
+  }
+});
+const _sfc_main$R = /* @__PURE__ */ defineComponent({
+  __name: "DialogOverlay",
+  props: {
+    forceMount: { type: Boolean },
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    const rootContext = injectDialogRootContext();
+    const { forwardRef } = useForwardExpose();
+    return (_ctx, _cache) => {
+      return unref(rootContext)?.modal.value ? (openBlock(), createBlock(unref(Presence), {
+        key: 0,
+        present: _ctx.forceMount || unref(rootContext).open.value
+      }, {
+        default: withCtx(() => [
+          createVNode(_sfc_main$S, mergeProps(_ctx.$attrs, {
+            ref: unref(forwardRef),
+            as: _ctx.as,
+            "as-child": _ctx.asChild
+          }), {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default")
+            ]),
+            _: 3
+          }, 16, ["as", "as-child"])
+        ]),
+        _: 3
+      }, 8, ["present"])) : createCommentVNode("", true);
+    };
+  }
+});
+const _sfc_main$Q = /* @__PURE__ */ defineComponent({
   __name: "Teleport",
   props: {
     to: { default: "body" },
@@ -3979,6 +4368,60 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
       }, [
         renderSlot(_ctx.$slots, "default")
       ], 8, ["to", "disabled", "defer"])) : createCommentVNode("", true);
+    };
+  }
+});
+const _sfc_main$P = /* @__PURE__ */ defineComponent({
+  __name: "DialogTitle",
+  props: {
+    asChild: { type: Boolean },
+    as: { default: "h2" }
+  },
+  setup(__props) {
+    const props = __props;
+    const rootContext = injectDialogRootContext();
+    useForwardExpose();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), mergeProps(props, {
+        id: unref(rootContext).titleId
+      }), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16, ["id"]);
+    };
+  }
+});
+const _sfc_main$O = /* @__PURE__ */ defineComponent({
+  __name: "DialogTrigger",
+  props: {
+    asChild: { type: Boolean },
+    as: { default: "button" }
+  },
+  setup(__props) {
+    const props = __props;
+    const rootContext = injectDialogRootContext();
+    const { forwardRef, currentElement } = useForwardExpose();
+    rootContext.contentId ||= useId(void 0, "reka-dialog-content");
+    onMounted(() => {
+      rootContext.triggerElement.value = currentElement.value;
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), mergeProps(props, {
+        ref: unref(forwardRef),
+        type: _ctx.as === "button" ? "button" : void 0,
+        "aria-haspopup": "dialog",
+        "aria-expanded": unref(rootContext).open.value || false,
+        "aria-controls": unref(rootContext).open.value ? unref(rootContext).contentId : void 0,
+        "data-state": unref(rootContext).open.value ? "open" : "closed",
+        onClick: unref(rootContext).onOpenToggle
+      }), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16, ["type", "aria-expanded", "aria-controls", "data-state", "onClick"]);
     };
   }
 });
@@ -4068,7 +4511,7 @@ function focusFirst(candidates, preventScroll = false) {
   }
 }
 const [injectRovingFocusGroupContext, provideRovingFocusGroupContext] = createContext("RovingFocusGroup");
-const _sfc_main$K = /* @__PURE__ */ defineComponent({
+const _sfc_main$N = /* @__PURE__ */ defineComponent({
   __name: "RovingFocusGroup",
   props: {
     orientation: { default: void 0 },
@@ -4167,7 +4610,7 @@ const _sfc_main$K = /* @__PURE__ */ defineComponent({
   }
 });
 const [injectPopperRootContext, providePopperRootContext] = createContext("PopperRoot");
-const _sfc_main$J = /* @__PURE__ */ defineComponent({
+const _sfc_main$M = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -4183,7 +4626,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$I = /* @__PURE__ */ defineComponent({
+const _sfc_main$L = /* @__PURE__ */ defineComponent({
   __name: "PopperAnchor",
   props: {
     reference: {},
@@ -4219,7 +4662,7 @@ const _hoisted_2 = {
   key: 1,
   d: "M0 0L4.58579 4.58579C5.36683 5.36683 6.63316 5.36684 7.41421 4.58579L12 0"
 };
-const _sfc_main$H = /* @__PURE__ */ defineComponent({
+const _sfc_main$K = /* @__PURE__ */ defineComponent({
   __name: "Arrow",
   props: {
     width: { default: 10 },
@@ -4342,7 +4785,7 @@ const PopperContentPropsDefaultValue = {
   prioritizePosition: false
 };
 const [injectPopperContentContext, providePopperContentContext] = createContext("PopperContent");
-const _sfc_main$G = /* @__PURE__ */ defineComponent({
+const _sfc_main$J = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -4537,7 +4980,7 @@ const OPPOSITE_SIDE = {
   bottom: "top",
   left: "right"
 };
-const _sfc_main$F = /* @__PURE__ */ defineComponent({
+const _sfc_main$I = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -4579,7 +5022,7 @@ const _sfc_main$F = /* @__PURE__ */ defineComponent({
           visibility: unref(contentContext).shouldHideArrow.value ? "hidden" : void 0
         })
       }, [
-        createVNode(_sfc_main$H, mergeProps(_ctx.$attrs, {
+        createVNode(_sfc_main$K, mergeProps(_ctx.$attrs, {
           ref: unref(forwardRef),
           style: {
             display: "block"
@@ -4643,7 +5086,7 @@ function getNextMatch(values, search, currentMatch) {
   );
   return nextMatch !== currentMatch ? nextMatch : void 0;
 }
-const _sfc_main$E = /* @__PURE__ */ defineComponent({
+const _sfc_main$H = /* @__PURE__ */ defineComponent({
   __name: "MenuArrow",
   props: {
     width: {},
@@ -4655,7 +5098,7 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$F), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$I), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -4679,7 +5122,7 @@ function useIsUsingKeyboardImpl() {
 const useIsUsingKeyboard = createSharedComposable$1(useIsUsingKeyboardImpl);
 const [injectMenuContext, provideMenuContext] = createContext(["MenuRoot", "MenuSub"], "MenuContext");
 const [injectMenuRootContext, provideMenuRootContext] = createContext("MenuRoot");
-const _sfc_main$D = /* @__PURE__ */ defineComponent({
+const _sfc_main$G = /* @__PURE__ */ defineComponent({
   __name: "MenuRoot",
   props: {
     open: { type: Boolean, default: false },
@@ -4714,7 +5157,7 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
       modal
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$J), null, {
+      return openBlock(), createBlock(unref(_sfc_main$M), null, {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -4757,7 +5200,7 @@ function createFocusGuard() {
   return element;
 }
 const [injectMenuContentContext, provideMenuContentContext] = createContext("MenuContent");
-const _sfc_main$C = /* @__PURE__ */ defineComponent({
+const _sfc_main$F = /* @__PURE__ */ defineComponent({
   __name: "MenuContentImpl",
   props: /* @__PURE__ */ mergeDefaults({
     loop: { type: Boolean },
@@ -4905,14 +5348,14 @@ const _sfc_main$C = /* @__PURE__ */ defineComponent({
       }
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$N), {
+      return openBlock(), createBlock(unref(_sfc_main$Z), {
         "as-child": "",
         trapped: unref(trapFocus),
         onMountAutoFocus: handleMountAutoFocus,
         onUnmountAutoFocus: _cache[7] || (_cache[7] = ($event) => emits("closeAutoFocus", $event))
       }, {
         default: withCtx(() => [
-          createVNode(unref(_sfc_main$M), {
+          createVNode(unref(_sfc_main$Y), {
             "as-child": "",
             "disable-outside-pointer-events": unref(disableOutsidePointerEvents),
             onEscapeKeyDown: _cache[2] || (_cache[2] = ($event) => emits("escapeKeyDown", $event)),
@@ -4922,7 +5365,7 @@ const _sfc_main$C = /* @__PURE__ */ defineComponent({
             onDismiss: _cache[6] || (_cache[6] = ($event) => emits("dismiss"))
           }, {
             default: withCtx(() => [
-              createVNode(unref(_sfc_main$K), {
+              createVNode(unref(_sfc_main$N), {
                 ref_key: "rovingFocusGroupRef",
                 ref: rovingFocusGroupRef,
                 "current-tab-stop-id": currentItemId.value,
@@ -4937,7 +5380,7 @@ const _sfc_main$C = /* @__PURE__ */ defineComponent({
                 })
               }, {
                 default: withCtx(() => [
-                  createVNode(unref(_sfc_main$G), {
+                  createVNode(unref(_sfc_main$J), {
                     ref: unref(forwardRef),
                     role: "menu",
                     as: _ctx.as,
@@ -4981,7 +5424,7 @@ const _sfc_main$C = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$B = /* @__PURE__ */ defineComponent({
+const _sfc_main$E = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -5060,7 +5503,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$A = /* @__PURE__ */ defineComponent({
+const _sfc_main$D = /* @__PURE__ */ defineComponent({
   __name: "MenuItem",
   props: {
     disabled: { type: Boolean },
@@ -5091,7 +5534,7 @@ const _sfc_main$A = /* @__PURE__ */ defineComponent({
       }
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$B, mergeProps(props, {
+      return openBlock(), createBlock(_sfc_main$E, mergeProps(props, {
         ref: unref(forwardRef),
         onClick: handleSelect,
         onPointerdown: _cache[0] || (_cache[0] = () => {
@@ -5123,7 +5566,7 @@ const [injectMenuItemIndicatorContext, provideMenuItemIndicatorContext] = create
   ["MenuCheckboxItem", "MenuRadioItem"],
   "MenuItemIndicatorContext"
 );
-const _sfc_main$z = /* @__PURE__ */ defineComponent({
+const _sfc_main$C = /* @__PURE__ */ defineComponent({
   __name: "MenuItemIndicator",
   props: {
     forceMount: { type: Boolean },
@@ -5155,7 +5598,7 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$y = /* @__PURE__ */ defineComponent({
+const _sfc_main$B = /* @__PURE__ */ defineComponent({
   __name: "MenuCheckboxItem",
   props: {
     modelValue: { type: [Boolean, String], default: false },
@@ -5171,7 +5614,7 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
     const modelValue = useVModel(props, "modelValue", emits);
     provideMenuItemIndicatorContext({ modelValue });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$A, mergeProps({ role: "menuitemcheckbox" }, props, {
+      return openBlock(), createBlock(_sfc_main$D, mergeProps({ role: "menuitemcheckbox" }, props, {
         "aria-checked": unref(isIndeterminate)(unref(modelValue)) ? "mixed" : unref(modelValue),
         "data-state": unref(getCheckedState)(unref(modelValue)),
         onSelect: _cache[0] || (_cache[0] = async (event) => {
@@ -5191,7 +5634,7 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$x = /* @__PURE__ */ defineComponent({
+const _sfc_main$A = /* @__PURE__ */ defineComponent({
   __name: "MenuRootContentModal",
   props: {
     loop: { type: Boolean },
@@ -5222,7 +5665,7 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
     const { forwardRef, currentElement } = useForwardExpose();
     useHideOthers(currentElement);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$C, mergeProps(unref(forwarded), {
+      return openBlock(), createBlock(_sfc_main$F, mergeProps(unref(forwarded), {
         ref: unref(forwardRef),
         "trap-focus": unref(menuContext).open.value,
         "disable-outside-pointer-events": unref(menuContext).open.value,
@@ -5238,7 +5681,7 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$w = /* @__PURE__ */ defineComponent({
+const _sfc_main$z = /* @__PURE__ */ defineComponent({
   __name: "MenuRootContentNonModal",
   props: {
     loop: { type: Boolean },
@@ -5267,7 +5710,7 @@ const _sfc_main$w = /* @__PURE__ */ defineComponent({
     const forwarded = useForwardPropsEmits(props, emits);
     const menuContext = injectMenuContext();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$C, mergeProps(unref(forwarded), {
+      return openBlock(), createBlock(_sfc_main$F, mergeProps(unref(forwarded), {
         "trap-focus": false,
         "disable-outside-pointer-events": false,
         "disable-outside-scroll": false,
@@ -5281,7 +5724,7 @@ const _sfc_main$w = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$v = /* @__PURE__ */ defineComponent({
+const _sfc_main$y = /* @__PURE__ */ defineComponent({
   __name: "MenuContent",
   props: {
     forceMount: { type: Boolean },
@@ -5316,12 +5759,12 @@ const _sfc_main$v = /* @__PURE__ */ defineComponent({
         present: _ctx.forceMount || unref(menuContext).open.value
       }, {
         default: withCtx(() => [
-          unref(rootContext).modal.value ? (openBlock(), createBlock(_sfc_main$x, normalizeProps(mergeProps({ key: 0 }, { ..._ctx.$attrs, ...unref(forwarded) })), {
+          unref(rootContext).modal.value ? (openBlock(), createBlock(_sfc_main$A, normalizeProps(mergeProps({ key: 0 }, { ..._ctx.$attrs, ...unref(forwarded) })), {
             default: withCtx(() => [
               renderSlot(_ctx.$slots, "default")
             ]),
             _: 3
-          }, 16)) : (openBlock(), createBlock(_sfc_main$w, normalizeProps(mergeProps({ key: 1 }, { ..._ctx.$attrs, ...unref(forwarded) })), {
+          }, 16)) : (openBlock(), createBlock(_sfc_main$z, normalizeProps(mergeProps({ key: 1 }, { ..._ctx.$attrs, ...unref(forwarded) })), {
             default: withCtx(() => [
               renderSlot(_ctx.$slots, "default")
             ]),
@@ -5333,7 +5776,7 @@ const _sfc_main$v = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$u = /* @__PURE__ */ defineComponent({
+const _sfc_main$x = /* @__PURE__ */ defineComponent({
   __name: "MenuGroup",
   props: {
     asChild: { type: Boolean },
@@ -5351,7 +5794,7 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$t = /* @__PURE__ */ defineComponent({
+const _sfc_main$w = /* @__PURE__ */ defineComponent({
   __name: "MenuLabel",
   props: {
     asChild: { type: Boolean },
@@ -5369,7 +5812,7 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$s = /* @__PURE__ */ defineComponent({
+const _sfc_main$v = /* @__PURE__ */ defineComponent({
   __name: "MenuPortal",
   props: {
     to: {},
@@ -5380,7 +5823,7 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$L), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$Q), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -5390,7 +5833,7 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
   }
 });
 const [injectMenuRadioGroupContext, provideMenuRadioGroupContext] = createContext("MenuRadioGroup");
-const _sfc_main$r = /* @__PURE__ */ defineComponent({
+const _sfc_main$u = /* @__PURE__ */ defineComponent({
   __name: "MenuRadioGroup",
   props: {
     modelValue: { default: "" },
@@ -5409,7 +5852,7 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
       }
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$u, normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(_sfc_main$x, normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default", { modelValue: unref(modelValue) })
         ]),
@@ -5418,7 +5861,7 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$q = /* @__PURE__ */ defineComponent({
+const _sfc_main$t = /* @__PURE__ */ defineComponent({
   __name: "MenuRadioItem",
   props: {
     value: {},
@@ -5438,7 +5881,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     );
     provideMenuItemIndicatorContext({ modelValue });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$A, mergeProps({ role: "menuitemradio" }, props, {
+      return openBlock(), createBlock(_sfc_main$D, mergeProps({ role: "menuitemradio" }, props, {
         "aria-checked": modelValue.value,
         "data-state": unref(getCheckedState)(modelValue.value),
         onSelect: _cache[0] || (_cache[0] = async (event) => {
@@ -5454,7 +5897,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$p = /* @__PURE__ */ defineComponent({
+const _sfc_main$s = /* @__PURE__ */ defineComponent({
   __name: "MenuSeparator",
   props: {
     asChild: { type: Boolean },
@@ -5476,7 +5919,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
   }
 });
 const [injectMenuSubContext, provideMenuSubContext] = createContext("MenuSub");
-const _sfc_main$o = /* @__PURE__ */ defineComponent({
+const _sfc_main$r = /* @__PURE__ */ defineComponent({
   __name: "MenuSub",
   props: {
     open: { type: Boolean, default: void 0 }
@@ -5516,7 +5959,7 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
       }
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$J), null, {
+      return openBlock(), createBlock(unref(_sfc_main$M), null, {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -5525,7 +5968,7 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$n = /* @__PURE__ */ defineComponent({
+const _sfc_main$q = /* @__PURE__ */ defineComponent({
   __name: "MenuSubContent",
   props: {
     forceMount: { type: Boolean },
@@ -5561,7 +6004,7 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
         present: _ctx.forceMount || unref(menuContext).open.value
       }, {
         default: withCtx(() => [
-          createVNode(_sfc_main$C, mergeProps(unref(forwarded), {
+          createVNode(_sfc_main$F, mergeProps(unref(forwarded), {
             id: unref(menuSubContext).contentId,
             ref: unref(forwardRef),
             "aria-labelledby": unref(menuSubContext).triggerId,
@@ -5605,7 +6048,7 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$m = /* @__PURE__ */ defineComponent({
+const _sfc_main$p = /* @__PURE__ */ defineComponent({
   __name: "MenuAnchor",
   props: {
     reference: {},
@@ -5615,7 +6058,7 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$I), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$L), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -5624,7 +6067,7 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$l = /* @__PURE__ */ defineComponent({
+const _sfc_main$o = /* @__PURE__ */ defineComponent({
   __name: "MenuSubTrigger",
   props: {
     disabled: { type: Boolean },
@@ -5709,9 +6152,9 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
       }
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$m, { "as-child": "" }, {
+      return openBlock(), createBlock(_sfc_main$p, { "as-child": "" }, {
         default: withCtx(() => [
-          createVNode(_sfc_main$B, mergeProps(props, {
+          createVNode(_sfc_main$E, mergeProps(props, {
             id: unref(subContext).triggerId,
             ref: (vnode) => {
               unref(subContext)?.onTriggerChange(vnode?.$el);
@@ -5741,7 +6184,27 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$k = /* @__PURE__ */ defineComponent({
+const _sfc_main$n = /* @__PURE__ */ defineComponent({
+  __name: "DialogPortal",
+  props: {
+    to: {},
+    disabled: { type: Boolean },
+    defer: { type: Boolean },
+    forceMount: { type: Boolean }
+  },
+  setup(__props) {
+    const props = __props;
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$Q), normalizeProps(guardReactiveProps(props)), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16);
+    };
+  }
+});
+const _sfc_main$m = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuArrow",
   props: {
     width: { default: 10 },
@@ -5754,7 +6217,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$E), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$H), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -5763,7 +6226,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$j = /* @__PURE__ */ defineComponent({
+const _sfc_main$l = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuCheckboxItem",
   props: {
     modelValue: { type: [Boolean, String] },
@@ -5779,7 +6242,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
     const emitsAsProps = useEmitAsProps(emits);
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$y), normalizeProps(guardReactiveProps({ ...props, ...unref(emitsAsProps) })), {
+      return openBlock(), createBlock(unref(_sfc_main$B), normalizeProps(guardReactiveProps({ ...props, ...unref(emitsAsProps) })), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -5789,7 +6252,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
   }
 });
 const [injectDropdownMenuRootContext, provideDropdownMenuRootContext] = createContext("DropdownMenuRoot");
-const _sfc_main$i = /* @__PURE__ */ defineComponent({
+const _sfc_main$k = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuRoot",
   props: {
     defaultOpen: { type: Boolean },
@@ -5824,7 +6287,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
       dir
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$D), {
+      return openBlock(), createBlock(unref(_sfc_main$G), {
         open: unref(open),
         "onUpdate:open": _cache[0] || (_cache[0] = ($event) => isRef(open) ? open.value = $event : null),
         dir: unref(dir),
@@ -5838,7 +6301,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$h = /* @__PURE__ */ defineComponent({
+const _sfc_main$j = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuContent",
   props: {
     forceMount: { type: Boolean },
@@ -5882,7 +6345,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
     }
     rootContext.contentId ||= useId(void 0, "reka-dropdown-menu-content");
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$v), mergeProps(unref(forwarded), {
+      return openBlock(), createBlock(unref(_sfc_main$y), mergeProps(unref(forwarded), {
         id: unref(rootContext).contentId,
         "aria-labelledby": unref(rootContext)?.triggerId,
         style: {
@@ -5910,7 +6373,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$g = /* @__PURE__ */ defineComponent({
+const _sfc_main$i = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuGroup",
   props: {
     asChild: { type: Boolean },
@@ -5920,7 +6383,7 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$u), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$x), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -5929,7 +6392,7 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$f = /* @__PURE__ */ defineComponent({
+const _sfc_main$h = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuItem",
   props: {
     disabled: { type: Boolean },
@@ -5944,7 +6407,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     const emitsAsProps = useEmitAsProps(emits);
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$A), normalizeProps(guardReactiveProps({ ...props, ...unref(emitsAsProps) })), {
+      return openBlock(), createBlock(unref(_sfc_main$D), normalizeProps(guardReactiveProps({ ...props, ...unref(emitsAsProps) })), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -5953,7 +6416,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$e = /* @__PURE__ */ defineComponent({
+const _sfc_main$g = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuItemIndicator",
   props: {
     forceMount: { type: Boolean },
@@ -5964,7 +6427,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$z), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$C), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -5973,7 +6436,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$d = /* @__PURE__ */ defineComponent({
+const _sfc_main$f = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuLabel",
   props: {
     asChild: { type: Boolean },
@@ -5983,7 +6446,7 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$t), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$w), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -5992,7 +6455,7 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$c = /* @__PURE__ */ defineComponent({
+const _sfc_main$e = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuPortal",
   props: {
     to: {},
@@ -6003,7 +6466,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$s), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$v), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -6012,7 +6475,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$b = /* @__PURE__ */ defineComponent({
+const _sfc_main$d = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuRadioGroup",
   props: {
     modelValue: {},
@@ -6026,7 +6489,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
     const emitsAsProps = useEmitAsProps(emits);
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$r), normalizeProps(guardReactiveProps({ ...props, ...unref(emitsAsProps) })), {
+      return openBlock(), createBlock(unref(_sfc_main$u), normalizeProps(guardReactiveProps({ ...props, ...unref(emitsAsProps) })), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -6035,7 +6498,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$a = /* @__PURE__ */ defineComponent({
+const _sfc_main$c = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuRadioItem",
   props: {
     value: {},
@@ -6051,7 +6514,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     const forwarded = useForwardPropsEmits(props, emits);
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$q), normalizeProps(guardReactiveProps(unref(forwarded))), {
+      return openBlock(), createBlock(unref(_sfc_main$t), normalizeProps(guardReactiveProps(unref(forwarded))), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -6060,7 +6523,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$9 = /* @__PURE__ */ defineComponent({
+const _sfc_main$b = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuSeparator",
   props: {
     asChild: { type: Boolean },
@@ -6070,7 +6533,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$p), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$s), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -6079,7 +6542,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$8 = /* @__PURE__ */ defineComponent({
+const _sfc_main$a = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuSub",
   props: {
     defaultOpen: { type: Boolean },
@@ -6095,7 +6558,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     });
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$o), {
+      return openBlock(), createBlock(unref(_sfc_main$r), {
         open: unref(open),
         "onUpdate:open": _cache[0] || (_cache[0] = ($event) => isRef(open) ? open.value = $event : null)
       }, {
@@ -6107,7 +6570,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$7 = /* @__PURE__ */ defineComponent({
+const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuSubContent",
   props: {
     forceMount: { type: Boolean },
@@ -6135,7 +6598,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     const forwarded = useForwardPropsEmits(props, emits);
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$n), mergeProps(unref(forwarded), { style: {
+      return openBlock(), createBlock(unref(_sfc_main$q), mergeProps(unref(forwarded), { style: {
         "--reka-dropdown-menu-content-transform-origin": "var(--reka-popper-transform-origin)",
         "--reka-dropdown-menu-content-available-width": "var(--reka-popper-available-width)",
         "--reka-dropdown-menu-content-available-height": "var(--reka-popper-available-height)",
@@ -6150,7 +6613,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+const _sfc_main$8 = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuSubTrigger",
   props: {
     disabled: { type: Boolean },
@@ -6162,7 +6625,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$l), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$o), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -6171,7 +6634,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   __name: "DropdownMenuTrigger",
   props: {
     disabled: { type: Boolean },
@@ -6187,7 +6650,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
     });
     rootContext.triggerId ||= useId(void 0, "reka-dropdown-menu-trigger");
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$m), { "as-child": "" }, {
+      return openBlock(), createBlock(unref(_sfc_main$p), { "as-child": "" }, {
         default: withCtx(() => [
           createVNode(unref(Primitive), {
             id: unref(rootContext).triggerId,
@@ -6246,6 +6709,269 @@ function usePortal(portal) {
     disabled: disabled.value
   }));
 }
+const theme$3 = {
+  "slots": {
+    "overlay": "fixed inset-0 bg-elevated/75",
+    "content": "fixed bg-default divide-y divide-default flex flex-col focus:outline-none",
+    "header": "flex items-center gap-1.5 p-4 sm:px-6 min-h-16",
+    "wrapper": "",
+    "body": "flex-1 overflow-y-auto p-4 sm:p-6",
+    "footer": "flex items-center gap-1.5 p-4 sm:px-6",
+    "title": "text-highlighted font-semibold",
+    "description": "mt-1 text-muted text-sm",
+    "close": "absolute top-4 end-4"
+  },
+  "variants": {
+    "transition": {
+      "true": {
+        "overlay": "data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]",
+        "content": "data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in]"
+      }
+    },
+    "fullscreen": {
+      "true": {
+        "content": "inset-0"
+      },
+      "false": {
+        "content": "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-lg shadow-lg ring ring-default overflow-hidden"
+      }
+    }
+  }
+};
+const _sfc_main$6 = {
+  __name: "Modal",
+  props: {
+    title: { type: String, required: false },
+    description: { type: String, required: false },
+    content: { type: Object, required: false },
+    overlay: { type: Boolean, required: false, default: true },
+    transition: { type: Boolean, required: false, default: true },
+    fullscreen: { type: Boolean, required: false },
+    portal: { type: [Boolean, String], required: false, skipCheck: true, default: true },
+    close: { type: [Boolean, Object], required: false, default: true },
+    closeIcon: { type: String, required: false },
+    dismissible: { type: Boolean, required: false, default: true },
+    class: { type: null, required: false },
+    ui: { type: null, required: false },
+    open: { type: Boolean, required: false },
+    defaultOpen: { type: Boolean, required: false },
+    modal: { type: Boolean, required: false, default: true }
+  },
+  emits: ["after:leave", "after:enter", "close:prevent", "update:open"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emits = __emit;
+    const slots = useSlots();
+    const { t } = useLocale();
+    const appConfig = useAppConfig();
+    const rootProps = useForwardPropsEmits(reactivePick(props, "open", "defaultOpen", "modal"), emits);
+    const portalProps = usePortal(toRef(() => props.portal));
+    const contentProps = toRef(() => props.content);
+    const contentEvents = computed(() => {
+      const defaultEvents = {
+        closeAutoFocus: (e) => e.preventDefault()
+      };
+      if (!props.dismissible) {
+        const events = ["pointerDownOutside", "interactOutside", "escapeKeyDown"];
+        return events.reduce((acc, curr) => {
+          acc[curr] = (e) => {
+            e.preventDefault();
+            emits("close:prevent");
+          };
+          return acc;
+        }, defaultEvents);
+      }
+      return defaultEvents;
+    });
+    const ui = computed(() => tv({ extend: tv(theme$3), ...appConfig.ui?.modal || {} })({
+      transition: props.transition,
+      fullscreen: props.fullscreen
+    }));
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$$), normalizeProps(guardReactiveProps(unref(rootProps))), {
+        default: withCtx(({ open, close }) => [
+          !!slots.default ? (openBlock(), createBlock(unref(_sfc_main$O), {
+            key: 0,
+            "as-child": "",
+            class: normalizeClass(props.class)
+          }, {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default", { open })
+            ]),
+            _: 2
+          }, 1032, ["class"])) : createCommentVNode("", true),
+          createVNode(unref(_sfc_main$n), normalizeProps(guardReactiveProps(unref(portalProps))), {
+            default: withCtx(() => [
+              __props.overlay ? (openBlock(), createBlock(unref(_sfc_main$R), {
+                key: 0,
+                class: normalizeClass(ui.value.overlay({ class: props.ui?.overlay }))
+              }, null, 8, ["class"])) : createCommentVNode("", true),
+              createVNode(unref(_sfc_main$U), mergeProps({
+                class: ui.value.content({ class: [!slots.default && props.class, props.ui?.content] })
+              }, contentProps.value, {
+                onAfterEnter: _cache[0] || (_cache[0] = ($event) => emits("after:enter")),
+                onAfterLeave: _cache[1] || (_cache[1] = ($event) => emits("after:leave"))
+              }, toHandlers(contentEvents.value)), {
+                default: withCtx(() => [
+                  !!slots.content && (__props.title || !!slots.title || (__props.description || !!slots.description)) ? (openBlock(), createBlock(unref(_sfc_main$19), { key: 0 }, {
+                    default: withCtx(() => [
+                      __props.title || !!slots.title ? (openBlock(), createBlock(unref(_sfc_main$P), { key: 0 }, {
+                        default: withCtx(() => [
+                          renderSlot(_ctx.$slots, "title", {}, () => [
+                            createTextVNode(toDisplayString(__props.title), 1)
+                          ])
+                        ]),
+                        _: 3
+                      })) : createCommentVNode("", true),
+                      __props.description || !!slots.description ? (openBlock(), createBlock(unref(_sfc_main$T), { key: 1 }, {
+                        default: withCtx(() => [
+                          renderSlot(_ctx.$slots, "description", {}, () => [
+                            createTextVNode(toDisplayString(__props.description), 1)
+                          ])
+                        ]),
+                        _: 3
+                      })) : createCommentVNode("", true)
+                    ]),
+                    _: 3
+                  })) : createCommentVNode("", true),
+                  renderSlot(_ctx.$slots, "content", { close }, () => [
+                    !!slots.header || (__props.title || !!slots.title) || (__props.description || !!slots.description) || (props.close || !!slots.close) ? (openBlock(), createElementBlock("div", {
+                      key: 0,
+                      class: normalizeClass(ui.value.header({ class: props.ui?.header }))
+                    }, [
+                      renderSlot(_ctx.$slots, "header", { close }, () => [
+                        createBaseVNode("div", {
+                          class: normalizeClass(ui.value.wrapper({ class: props.ui?.wrapper }))
+                        }, [
+                          __props.title || !!slots.title ? (openBlock(), createBlock(unref(_sfc_main$P), {
+                            key: 0,
+                            class: normalizeClass(ui.value.title({ class: props.ui?.title }))
+                          }, {
+                            default: withCtx(() => [
+                              renderSlot(_ctx.$slots, "title", {}, () => [
+                                createTextVNode(toDisplayString(__props.title), 1)
+                              ])
+                            ]),
+                            _: 3
+                          }, 8, ["class"])) : createCommentVNode("", true),
+                          __props.description || !!slots.description ? (openBlock(), createBlock(unref(_sfc_main$T), {
+                            key: 1,
+                            class: normalizeClass(ui.value.description({ class: props.ui?.description }))
+                          }, {
+                            default: withCtx(() => [
+                              renderSlot(_ctx.$slots, "description", {}, () => [
+                                createTextVNode(toDisplayString(__props.description), 1)
+                              ])
+                            ]),
+                            _: 3
+                          }, 8, ["class"])) : createCommentVNode("", true)
+                        ], 2),
+                        renderSlot(_ctx.$slots, "actions"),
+                        props.close || !!slots.close ? (openBlock(), createBlock(unref(_sfc_main$_), {
+                          key: 0,
+                          "as-child": ""
+                        }, {
+                          default: withCtx(() => [
+                            renderSlot(_ctx.$slots, "close", {
+                              close,
+                              ui: ui.value
+                            }, () => [
+                              props.close ? (openBlock(), createBlock(_sfc_main$1a, mergeProps({
+                                key: 0,
+                                icon: __props.closeIcon || unref(appConfig).ui.icons.close,
+                                color: "neutral",
+                                variant: "ghost",
+                                "aria-label": unref(t)("modal.close")
+                              }, typeof props.close === "object" ? props.close : {}, {
+                                class: ui.value.close({ class: props.ui?.close })
+                              }), null, 16, ["icon", "aria-label", "class"])) : createCommentVNode("", true)
+                            ])
+                          ]),
+                          _: 2
+                        }, 1024)) : createCommentVNode("", true)
+                      ])
+                    ], 2)) : createCommentVNode("", true),
+                    !!slots.body ? (openBlock(), createElementBlock("div", {
+                      key: 1,
+                      class: normalizeClass(ui.value.body({ class: props.ui?.body }))
+                    }, [
+                      renderSlot(_ctx.$slots, "body", { close })
+                    ], 2)) : createCommentVNode("", true),
+                    !!slots.footer ? (openBlock(), createElementBlock("div", {
+                      key: 2,
+                      class: normalizeClass(ui.value.footer({ class: props.ui?.footer }))
+                    }, [
+                      renderSlot(_ctx.$slots, "footer", { close })
+                    ], 2)) : createCommentVNode("", true)
+                  ])
+                ]),
+                _: 2
+              }, 1040, ["class"])
+            ]),
+            _: 2
+          }, 1040)
+        ]),
+        _: 3
+      }, 16);
+    };
+  }
+};
+const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+  __name: "TestModal",
+  setup(__props) {
+    const first = ref(false);
+    const second = ref(false);
+    return (_ctx, _cache) => {
+      const _component_UButton = _sfc_main$1a;
+      const _component_UModal = _sfc_main$6;
+      return openBlock(), createBlock(_component_UModal, {
+        open: first.value,
+        "onUpdate:open": _cache[3] || (_cache[3] = ($event) => first.value = $event),
+        title: "First modal",
+        ui: { footer: "justify-end" }
+      }, {
+        footer: withCtx(() => [
+          createVNode(_component_UButton, {
+            label: "Close",
+            color: "neutral",
+            variant: "outline",
+            onClick: _cache[0] || (_cache[0] = ($event) => first.value = false)
+          }),
+          createVNode(_component_UModal, {
+            open: second.value,
+            "onUpdate:open": _cache[2] || (_cache[2] = ($event) => second.value = $event),
+            title: "Second modal",
+            ui: { footer: "justify-end" }
+          }, {
+            footer: withCtx(() => [
+              createVNode(_component_UButton, {
+                label: "Close",
+                color: "neutral",
+                variant: "outline",
+                onClick: _cache[1] || (_cache[1] = ($event) => second.value = false)
+              })
+            ]),
+            default: withCtx(() => [
+              createVNode(_component_UButton, {
+                label: "Open second",
+                color: "neutral"
+              })
+            ]),
+            _: 1
+          }, 8, ["open"])
+        ]),
+        default: withCtx(() => [
+          createVNode(_component_UButton, {
+            color: "neutral",
+            variant: "subtle",
+            label: "Open"
+          })
+        ]),
+        _: 1
+      }, 8, ["open"]);
+    };
+  }
+});
 const theme$2 = {
   "slots": {
     "root": "w-full",
@@ -6293,24 +7019,24 @@ const _sfc_main$4 = {
       disabled: props.disabled
     }));
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$V), mergeProps(unref(rootProps), {
+      return openBlock(), createBlock(unref(_sfc_main$17), mergeProps(unref(rootProps), {
         class: ui.value.root({ class: [props.ui?.root, props.class] })
       }), {
         default: withCtx(() => [
           (openBlock(true), createElementBlock(Fragment, null, renderList(props.items, (item, index) => {
-            return openBlock(), createBlock(unref(_sfc_main$T), {
+            return openBlock(), createBlock(unref(_sfc_main$15), {
               key: index,
               value: item.value || String(index),
               disabled: item.disabled,
               class: normalizeClass(ui.value.item({ class: [props.ui?.item, item.ui?.item, item.class] }))
             }, {
               default: withCtx(({ open }) => [
-                createVNode(unref(_sfc_main$Q), {
+                createVNode(unref(_sfc_main$12), {
                   as: "div",
                   class: normalizeClass(ui.value.header({ class: [props.ui?.header, item.ui?.header] }))
                 }, {
                   default: withCtx(() => [
-                    createVNode(unref(_sfc_main$O), {
+                    createVNode(unref(_sfc_main$10), {
                       class: normalizeClass(ui.value.trigger({ class: [props.ui?.trigger, item.ui?.trigger], disabled: item.disabled }))
                     }, {
                       default: withCtx(() => [
@@ -6319,7 +7045,7 @@ const _sfc_main$4 = {
                           index,
                           open
                         }, () => [
-                          item.icon ? (openBlock(), createBlock(_sfc_main$X, {
+                          item.icon ? (openBlock(), createBlock(_sfc_main$1b, {
                             key: 0,
                             name: item.icon,
                             class: normalizeClass(ui.value.leadingIcon({ class: [props.ui?.leadingIcon, item?.ui?.leadingIcon] }))
@@ -6342,7 +7068,7 @@ const _sfc_main$4 = {
                           index,
                           open
                         }, () => [
-                          createVNode(_sfc_main$X, {
+                          createVNode(_sfc_main$1b, {
                             name: item.trailingIcon || __props.trailingIcon || unref(appConfig).ui.icons.chevronDown,
                             class: normalizeClass(ui.value.trailingIcon({ class: [props.ui?.trailingIcon, item.ui?.trailingIcon] }))
                           }, null, 8, ["name", "class"])
@@ -6353,7 +7079,7 @@ const _sfc_main$4 = {
                   ]),
                   _: 2
                 }, 1032, ["class"]),
-                item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`] ? (openBlock(), createBlock(unref(_sfc_main$R), {
+                item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`] ? (openBlock(), createBlock(unref(_sfc_main$13), {
                   key: 0,
                   class: normalizeClass(ui.value.content({ class: [props.ui?.content, item.ui?.content] }))
                 }, {
@@ -6389,22 +7115,22 @@ const _sfc_main$4 = {
   }
 };
 const DropdownMenu = {
-  Root: _sfc_main$i,
-  Trigger: _sfc_main$5,
-  Portal: _sfc_main$c,
-  Content: _sfc_main$h,
-  Arrow: _sfc_main$k,
-  Item: _sfc_main$f,
-  Group: _sfc_main$g,
-  Separator: _sfc_main$9,
-  CheckboxItem: _sfc_main$j,
-  ItemIndicator: _sfc_main$e,
-  Label: _sfc_main$d,
-  RadioGroup: _sfc_main$b,
-  RadioItem: _sfc_main$a,
-  Sub: _sfc_main$8,
-  SubContent: _sfc_main$7,
-  SubTrigger: _sfc_main$6
+  Root: _sfc_main$k,
+  Trigger: _sfc_main$7,
+  Portal: _sfc_main$e,
+  Content: _sfc_main$j,
+  Arrow: _sfc_main$m,
+  Item: _sfc_main$h,
+  Group: _sfc_main$i,
+  Separator: _sfc_main$b,
+  CheckboxItem: _sfc_main$l,
+  ItemIndicator: _sfc_main$g,
+  Label: _sfc_main$f,
+  RadioGroup: _sfc_main$d,
+  RadioItem: _sfc_main$c,
+  Sub: _sfc_main$a,
+  SubContent: _sfc_main$9,
+  SubTrigger: _sfc_main$8
 };
 const theme$1 = {
   "base": "inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans",
@@ -6666,15 +7392,15 @@ const _sfc_main$2 = {
                 active,
                 index
               }, () => [
-                item.loading ? (openBlock(), createBlock(_sfc_main$X, {
+                item.loading ? (openBlock(), createBlock(_sfc_main$1b, {
                   key: 0,
                   name: __props.loadingIcon || unref(appConfig).ui.icons.loading,
                   class: normalizeClass(__props.ui.itemLeadingIcon({ class: [__props.uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, loading: true }))
-                }, null, 8, ["name", "class"])) : item.icon ? (openBlock(), createBlock(_sfc_main$X, {
+                }, null, 8, ["name", "class"])) : item.icon ? (openBlock(), createBlock(_sfc_main$1b, {
                   key: 1,
                   name: item.icon,
                   class: normalizeClass(__props.ui.itemLeadingIcon({ class: [__props.uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, active }))
-                }, null, 8, ["name", "class"])) : item.avatar ? (openBlock(), createBlock(_sfc_main$Y, mergeProps({
+                }, null, 8, ["name", "class"])) : item.avatar ? (openBlock(), createBlock(_sfc_main$1c, mergeProps({
                   key: 2,
                   size: item.ui?.itemLeadingAvatarSize || props.uiOverride?.itemLeadingAvatarSize || __props.ui.itemLeadingAvatarSize()
                 }, item.avatar, {
@@ -6692,7 +7418,7 @@ const _sfc_main$2 = {
                 }, () => [
                   createTextVNode(toDisplayString(unref(get)(item, props.labelKey)), 1)
                 ]),
-                item.target === "_blank" && __props.externalIcon !== false ? (openBlock(), createBlock(_sfc_main$X, {
+                item.target === "_blank" && __props.externalIcon !== false ? (openBlock(), createBlock(_sfc_main$1b, {
                   key: 0,
                   name: typeof __props.externalIcon === "string" ? __props.externalIcon : unref(appConfig).ui.icons.external,
                   class: normalizeClass(__props.ui.itemLabelExternalIcon({ class: [__props.uiOverride?.itemLabelExternalIcon, item.ui?.itemLabelExternalIcon], color: item?.color, active }))
@@ -6706,7 +7432,7 @@ const _sfc_main$2 = {
                   active,
                   index
                 }, () => [
-                  item.children?.length ? (openBlock(), createBlock(_sfc_main$X, {
+                  item.children?.length ? (openBlock(), createBlock(_sfc_main$1b, {
                     key: 0,
                     name: childrenIcon.value,
                     class: normalizeClass(__props.ui.itemTrailingIcon({ class: [__props.uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color, active }))
@@ -6724,7 +7450,7 @@ const _sfc_main$2 = {
                 ]),
                 createVNode(unref(DropdownMenu).ItemIndicator, { "as-child": "" }, {
                   default: withCtx(() => [
-                    createVNode(_sfc_main$X, {
+                    createVNode(_sfc_main$1b, {
                       name: __props.checkedIcon || unref(appConfig).ui.icons.check,
                       class: normalizeClass(__props.ui.itemTrailingIcon({ class: [__props.uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color }))
                     }, null, 8, ["name", "class"])
@@ -6842,9 +7568,9 @@ const _sfc_main$2 = {
                               onSelect: item.onSelect
                             }, {
                               default: withCtx(() => [
-                                createVNode(_sfc_main$Z, mergeProps({ ref_for: true }, unref(pickLinkProps)(item), { custom: "" }), {
+                                createVNode(_sfc_main$1d, mergeProps({ ref_for: true }, unref(pickLinkProps)(item), { custom: "" }), {
                                   default: withCtx(({ active, ...slotProps }) => [
-                                    createVNode(_sfc_main$_, mergeProps({ ref_for: true }, slotProps, {
+                                    createVNode(_sfc_main$1e, mergeProps({ ref_for: true }, slotProps, {
                                       class: __props.ui.item({ class: [__props.uiOverride?.item, item.ui?.item, item.class], color: item?.color, active })
                                     }), {
                                       default: withCtx(() => [
@@ -7114,9 +7840,9 @@ const _sfc_main$1 = {
       size: props.size
     }));
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$i), normalizeProps(guardReactiveProps(unref(rootProps))), {
+      return openBlock(), createBlock(unref(_sfc_main$k), normalizeProps(guardReactiveProps(unref(rootProps))), {
         default: withCtx(({ open }) => [
-          !!slots.default ? (openBlock(), createBlock(unref(_sfc_main$5), {
+          !!slots.default ? (openBlock(), createBlock(unref(_sfc_main$7), {
             key: 0,
             "as-child": "",
             class: normalizeClass(props.class),
@@ -7140,7 +7866,7 @@ const _sfc_main$1 = {
             "external-icon": __props.externalIcon
           }), createSlots({
             default: withCtx(() => [
-              !!__props.arrow ? (openBlock(), createBlock(unref(_sfc_main$k), mergeProps({ key: 0 }, arrowProps.value, {
+              !!__props.arrow ? (openBlock(), createBlock(unref(_sfc_main$m), mergeProps({ key: 0 }, arrowProps.value, {
                 class: ui.value.arrow({ class: props.ui?.arrow })
               }), null, 16, ["class"])) : createCommentVNode("", true)
             ]),
@@ -7197,10 +7923,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
     ]);
     return (_ctx, _cache) => {
-      const _component_UIcon = _sfc_main$X;
-      const _component_UButton = _sfc_main$$;
+      const _component_UIcon = _sfc_main$1b;
+      const _component_UButton = _sfc_main$1a;
       const _component_UDropdownMenu = _sfc_main$1;
       const _component_UAccordion = _sfc_main$4;
+      const _component_TestModal = _sfc_main$5;
       return openBlock(), createElementBlock("div", _hoisted_1, [
         createVNode(_component_UButton, {
           color: "success",
@@ -7233,7 +7960,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         createVNode(_component_UAccordion, {
           items: accordionItems.value,
           class: "mt-4"
-        }, null, 8, ["items"])
+        }, null, 8, ["items"]),
+        createVNode(_component_TestModal)
       ]);
     };
   }
@@ -7246,14 +7974,15 @@ if (!customElements.get("shared-button")) {
 }
 export {
   Presence as P,
-  _sfc_main$L as _,
+  _sfc_main$19 as _,
   useCollection as a,
-  getTabbableCandidates as b,
+  _sfc_main$Q as b,
   context as c,
-  usePortal as d,
-  _sfc_main$W as e,
+  getTabbableCandidates as d,
+  usePortal as e,
   focusFirst$1 as f,
   getActiveElement as g,
+  _sfc_main$18 as h,
   portalTargetInjectionKey as p,
   useDark as u
 };

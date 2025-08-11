@@ -1,5 +1,5 @@
 import { c as createHooks, t as toValue, i as isRef, h as hasInjectionContext, a as inject, r as ref, w as watchEffect, o as onBeforeUnmount, b as onDeactivated, d as onActivated, g as getCurrentInstance, e as defineNuxtPlugin, u as useNuxtApp, f as computed, j as useAppConfig, k as defineComponent, l as createBlock, m as openBlock, n as withCtx, p as renderSlot, q as unref, P as Primitive, s as createContext, v as toRefs, x as useTimeout, y as useRafFn, z as createCommentVNode, A as createTextVNode, B as toDisplayString, C as useForwardExpose, D as watch, E as onKeyStroke, F as onMounted, G as onUnmounted, H as createElementBlock, I as createVNode, J as mergeProps, K as withModifiers, T as Teleport, L as Fragment, M as isClient, N as normalizeProps$1, O as guardReactiveProps, Q as useVModel, R as unrefElement, S as normalizeStyle, U as useTimeoutFn, V as useState, W as nextTick, X as useSlots, Y as useLocale, Z as useForwardPropsEmits, _ as reactivePick, $ as tv, a0 as createBaseVNode, a1 as _sfc_main$l, a2 as _sfc_main$m, a3 as normalizeClass, a4 as resolveDynamicComponent, a5 as renderList, a6 as _sfc_main$n, a7 as useForwardProps, a8 as toRef, a9 as omit, aa as createSharedComposable, ab as shallowReactive, ac as reactive, ad as markRaw, ae as useId, af as provide, ag as localeContextInjectionKey, ah as createApp } from "./main.js";
-import { u as useDark, a as useCollection, g as getActiveElement, _ as _sfc_main$k, P as Presence, c as context, f as focusFirst, b as getTabbableCandidates, d as usePortal, e as _sfc_main$p, p as portalTargetInjectionKey } from "./shared-button.js";
+import { u as useDark, a as useCollection, _ as _sfc_main$j, g as getActiveElement, b as _sfc_main$k, P as Presence, c as context, f as focusFirst, d as getTabbableCandidates, e as usePortal, h as _sfc_main$p, p as portalTargetInjectionKey } from "./shared-button.js";
 import { _ as _sfc_main$o, a as _export_sfc } from "./card-xpto.js";
 (function polyfill() {
   const relList = document.createElement("link").relList;
@@ -834,44 +834,6 @@ const ui = {
     app2.use(C_58_47Users_47eduardoc_47Documents_47repositories_47shared_45cp_45vue_47node_modules_47_46pnpm_47_64nuxt_43ui_643_463_460__64babel_43parse_5b281630bc34f8f6c46d98745ce85891_47node_modules_47_64nuxt_47ui_47dist_47runtime_47vue_47plugins_47color_45mode_46js);
   }
 };
-const _sfc_main$j = /* @__PURE__ */ defineComponent({
-  __name: "VisuallyHidden",
-  props: {
-    feature: { default: "focusable" },
-    asChild: { type: Boolean },
-    as: { default: "span" }
-  },
-  setup(__props) {
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
-        as: _ctx.as,
-        "as-child": _ctx.asChild,
-        "aria-hidden": _ctx.feature === "focusable" ? "true" : void 0,
-        "data-hidden": _ctx.feature === "fully-hidden" ? "" : void 0,
-        tabindex: _ctx.feature === "fully-hidden" ? "-1" : void 0,
-        style: {
-          // See: https://github.com/twbs/bootstrap/blob/master/scss/mixins/_screen-reader.scss
-          position: "absolute",
-          border: 0,
-          width: "1px",
-          height: "1px",
-          padding: 0,
-          margin: "-1px",
-          overflow: "hidden",
-          clip: "rect(0, 0, 0, 0)",
-          clipPath: "inset(50%)",
-          whiteSpace: "nowrap",
-          wordWrap: "normal"
-        }
-      }, {
-        default: withCtx(() => [
-          renderSlot(_ctx.$slots, "default")
-        ]),
-        _: 3
-      }, 8, ["as", "as-child", "aria-hidden", "data-hidden", "tabindex"]);
-    };
-  }
-});
 const _sfc_main$i = /* @__PURE__ */ defineComponent({
   __name: "ToastAnnounceExclude",
   props: {
