@@ -10,6 +10,8 @@
         </UDropdownMenu>
 
         <UAccordion :items="accordionItems" class="mt-4" />
+
+        <TestModal />
     </div>
 </template>
 
