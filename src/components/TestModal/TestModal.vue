@@ -6,7 +6,6 @@ const second = ref(false)
 </script>
 
 <template>
-  <teleport to="body">
     <UModal v-model:open="first" title="First modal" :ui="{ footer: 'justify-end' }">
       <UButton color="neutral" variant="subtle" label="Open"/>
 
@@ -22,6 +21,5 @@ const second = ref(false)
         </UModal>
       </template>
     </UModal>
-  </teleport>
 </template>
 

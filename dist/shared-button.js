@@ -6924,53 +6924,51 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
     return (_ctx, _cache) => {
       const _component_UButton = _sfc_main$1a;
       const _component_UModal = _sfc_main$6;
-      return openBlock(), createBlock(Teleport, { to: "body" }, [
-        createVNode(_component_UModal, {
-          open: first.value,
-          "onUpdate:open": _cache[3] || (_cache[3] = ($event) => first.value = $event),
-          title: "First modal",
-          ui: { footer: "justify-end" }
-        }, {
-          footer: withCtx(() => [
-            createVNode(_component_UButton, {
-              label: "Close",
-              color: "neutral",
-              variant: "outline",
-              onClick: _cache[0] || (_cache[0] = ($event) => first.value = false)
-            }),
-            createVNode(_component_UModal, {
-              open: second.value,
-              "onUpdate:open": _cache[2] || (_cache[2] = ($event) => second.value = $event),
-              title: "Second modal",
-              ui: { footer: "justify-end" }
-            }, {
-              footer: withCtx(() => [
-                createVNode(_component_UButton, {
-                  label: "Close",
-                  color: "neutral",
-                  variant: "outline",
-                  onClick: _cache[1] || (_cache[1] = ($event) => second.value = false)
-                })
-              ]),
-              default: withCtx(() => [
-                createVNode(_component_UButton, {
-                  label: "Open second",
-                  color: "neutral"
-                })
-              ]),
-              _: 1
-            }, 8, ["open"])
-          ]),
-          default: withCtx(() => [
-            createVNode(_component_UButton, {
-              color: "neutral",
-              variant: "subtle",
-              label: "Open"
-            })
-          ]),
-          _: 1
-        }, 8, ["open"])
-      ]);
+      return openBlock(), createBlock(_component_UModal, {
+        open: first.value,
+        "onUpdate:open": _cache[3] || (_cache[3] = ($event) => first.value = $event),
+        title: "First modal",
+        ui: { footer: "justify-end" }
+      }, {
+        footer: withCtx(() => [
+          createVNode(_component_UButton, {
+            label: "Close",
+            color: "neutral",
+            variant: "outline",
+            onClick: _cache[0] || (_cache[0] = ($event) => first.value = false)
+          }),
+          createVNode(_component_UModal, {
+            open: second.value,
+            "onUpdate:open": _cache[2] || (_cache[2] = ($event) => second.value = $event),
+            title: "Second modal",
+            ui: { footer: "justify-end" }
+          }, {
+            footer: withCtx(() => [
+              createVNode(_component_UButton, {
+                label: "Close",
+                color: "neutral",
+                variant: "outline",
+                onClick: _cache[1] || (_cache[1] = ($event) => second.value = false)
+              })
+            ]),
+            default: withCtx(() => [
+              createVNode(_component_UButton, {
+                label: "Open second",
+                color: "neutral"
+              })
+            ]),
+            _: 1
+          }, 8, ["open"])
+        ]),
+        default: withCtx(() => [
+          createVNode(_component_UButton, {
+            color: "neutral",
+            variant: "subtle",
+            label: "Open"
+          })
+        ]),
+        _: 1
+      }, 8, ["open"]);
     };
   }
 });
