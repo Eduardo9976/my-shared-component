@@ -19,7 +19,6 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import '../../assets/main.css'
 
 const open = ref(false)
 

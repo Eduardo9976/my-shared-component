@@ -1,4 +1,4 @@
-import { k as defineComponent, C as useForwardExpose, Q as useVModel, D as watch, W as nextTick, f as computed, co as isNullish, s as createContext, l as createBlock, m as openBlock, n as withCtx, p as renderSlot, q as unref, P as Primitive, J as mergeProps, X as useSlots, Y as useLocale, Z as useForwardPropsEmits, _ as reactivePick, $ as tv, j as useAppConfig, H as createElementBlock, z as createCommentVNode, I as createVNode, S as normalizeStyle, a3 as normalizeClass, A as createTextVNode, B as toDisplayString, L as Fragment, a5 as renderList, cJ as useButtonGroup, cK as useComponentIcons, a2 as _sfc_main$6, a1 as _sfc_main$7, a0 as createBaseVNode, a6 as _sfc_main$8, aO as defineCustomElement } from "./main.js";
+import { k as defineComponent, C as useForwardExpose, Q as useVModel, D as watch, W as nextTick, f as computed, co as isNullish, s as createContext, l as createBlock, m as openBlock, n as withCtx, p as renderSlot, q as unref, P as Primitive, J as mergeProps, X as useSlots, Y as useLocale, Z as useForwardPropsEmits, _ as reactivePick, $ as tv, j as useAppConfig, H as createElementBlock, z as createCommentVNode, I as createVNode, S as normalizeStyle, a3 as normalizeClass, A as createTextVNode, B as toDisplayString, L as Fragment, a5 as renderList, cK as useButtonGroup, cL as useComponentIcons, a2 as _sfc_main$6, a1 as _sfc_main$7, a0 as createBaseVNode, a6 as _sfc_main$8, aO as defineCustomElement, cJ as tailwindStyles } from "./style.js";
 const DEFAULT_MAX = 100;
 const [injectProgressRootContext, provideProgressRootContext] = createContext("ProgressRoot");
 const isNumber = (v) => typeof v === "number";
@@ -1034,7 +1034,8 @@ function _sfc_render(_ctx, _cache) {
 }
 const CardXPTO = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__scopeId", "data-v-8255ea0b"]]);
 const CardXPTElement = defineCustomElement(CardXPTO, {
-  shadowRoot: true
+  shadowRoot: true,
+  styles: [tailwindStyles]
 });
 if (!customElements.get("card-xpto")) {
   customElements.define("card-xpto", CardXPTElement);

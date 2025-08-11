@@ -1,10 +1,11 @@
 import { defineCustomElement } from 'vue'
 import SharedButton from './SharedButton.ce.vue'
 
-import '../../assets/main.css'
+import tailwindStyles from '../../../dist/style.css?inline'
 
 const SharedButtonElement = defineCustomElement(SharedButton, {
   shadowRoot: true,
+  styles: [tailwindStyles]
 })
 
 if (!customElements.get('shared-button')) {
