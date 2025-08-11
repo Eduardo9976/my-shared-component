@@ -1,19 +1,28 @@
 #!/bin/bash
 
 # Script para push automático baseado na branch
-# Uso: ./push.sh [commit_message]
+# Uso: ./push.sh [commit_message] ou ./push.sh MW-00000 "descrição"
 
 current_branch=$(git branch --show-current)
-commit_message=${1:-"Update from $current_branch branch"}
+
+# Verificar se o primeiro argumento é um ticket Jira
+if [[ $1 =~ ^MW-[0-9]+$ ]]; then
+    jira_ticket=$1
+    commit_message=${2:-"Update from $current_branch branch"}
+    full_message="$jira_ticket - feat: $commit_message"
+else
+    commit_message=${1:-"Update from $current_branch branch"}
+    full_message="MW-00000 - feat: $commit_message"
+fi
 
 echo "🌿 Branch atual: $current_branch"
-echo "📝 Commit message: $commit_message"
+echo "📝 Commit message: $full_message"
 
 # Adicionar todas as mudanças
 git add .
 
 # Fazer commit
-git commit -m "$commit_message"
+git commit -m "$full_message"
 
 # Push baseado na branch
 if [ "$current_branch" = "development" ]; then
