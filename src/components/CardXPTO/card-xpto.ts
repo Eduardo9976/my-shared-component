@@ -1,7 +1,6 @@
 import { defineCustomElement } from 'vue'
 import CardXPTO from './CardXPTO.ce.vue'
-
-import tailwindStyles from '../../../dist/style.css?inline'
+import tailwindStyles from '../../assets/main.css?inline'
 
 const CardXPTElement = defineCustomElement(CardXPTO, {
   shadowRoot: true,
