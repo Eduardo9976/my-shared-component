@@ -7988,7 +7988,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   }
 });
 const SharedButtonElement = defineCustomElement(_sfc_main, {
-  shadowRoot: false
+  shadowRoot: true
 });
 if (!customElements.get("shared-button")) {
   customElements.define("shared-button", SharedButtonElement);

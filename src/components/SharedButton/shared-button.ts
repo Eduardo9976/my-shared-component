@@ -4,7 +4,7 @@ import SharedButton from './SharedButton.ce.vue'
 import '../../assets/main.css'
 
 const SharedButtonElement = defineCustomElement(SharedButton, {
-  shadowRoot: false,
+  shadowRoot: true,
 })
 
 if (!customElements.get('shared-button')) {

@@ -4,7 +4,7 @@ import CardXPTO from './CardXPTO.ce.vue'
 import '../../assets/main.css'
 
 const CardXPTElement = defineCustomElement(CardXPTO, {
-  shadowRoot: false,
+  shadowRoot: true,
 })
 
 if (!customElements.get('card-xpto')) {

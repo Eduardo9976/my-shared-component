@@ -1034,7 +1034,7 @@ function _sfc_render(_ctx, _cache) {
 }
 const CardXPTO = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__scopeId", "data-v-8255ea0b"]]);
 const CardXPTElement = defineCustomElement(CardXPTO, {
-  shadowRoot: false
+  shadowRoot: true
 });
 if (!customElements.get("card-xpto")) {
   customElements.define("card-xpto", CardXPTElement);
