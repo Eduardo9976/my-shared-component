@@ -1,7 +1,7 @@
 import { defineCustomElement } from 'vue'
-import CardXPTO from './components/CardXPTO.ce.vue'
+import CardXPTO from './CardXPTO.ce.vue'
 
-import './assets/main.css'
+import '../../assets/main.css'
 
 const CardXPTElement = defineCustomElement(CardXPTO, {
   shadowRoot: false,

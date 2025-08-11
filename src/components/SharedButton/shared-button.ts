@@ -1,7 +1,7 @@
 import { defineCustomElement } from 'vue'
-import SharedButton from './components/SharedButton.ce.vue'
+import SharedButton from './SharedButton.ce.vue'
 
-import './assets/main.css'
+import '../../assets/main.css'
 
 const SharedButtonElement = defineCustomElement(SharedButton, {
   shadowRoot: false,

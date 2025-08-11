@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import '../assets/main.css'
+import '../../assets/main.css'
 
 const dropdownItems = ref([
   {

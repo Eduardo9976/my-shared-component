@@ -36,8 +36,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         app: './index.html',
-        'shared-button': './src/shared-button.ts',
-        'card-xpto': './src/card-xpto.ts'
+        'shared-button': './src/components/SharedButton/shared-button.ts',
+        'card-xpto': './src/components/CardXPTO/card-xpto.ts'
       },
       output: {
         entryFileNames: (chunkInfo) => {

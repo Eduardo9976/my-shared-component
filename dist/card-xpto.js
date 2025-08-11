@@ -917,129 +917,124 @@ const _sfc_main$1 = {
     };
   }
 };
+const _style_0 = "\n.card-container[data-v-8255ea0b] {\r\n    font-family: var(--ui-font);\n}\r\n";
+const _sfc_main = {};
 const _hoisted_1 = { class: "card-container" };
 const _hoisted_2 = { class: "flex items-center gap-2" };
 const _hoisted_3 = { class: "space-y-3" };
 const _hoisted_4 = { class: "flex items-center gap-2" };
 const _hoisted_5 = { class: "flex gap-2" };
 const _hoisted_6 = { class: "flex justify-between items-center text-sm text-gray-500" };
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "CardXPTO.ce",
-  setup(__props) {
-    return (_ctx, _cache) => {
-      const _component_UIcon = _sfc_main$6;
-      const _component_UBadge = _sfc_main$1;
-      const _component_UProgress = _sfc_main$3;
-      const _component_UButton = _sfc_main$8;
-      const _component_UCard = _sfc_main$2;
-      return openBlock(), createElementBlock("div", _hoisted_1, [
-        createVNode(_component_UCard, { class: "w-full max-w-sm" }, {
-          header: withCtx(() => [
-            createBaseVNode("div", _hoisted_2, [
-              createVNode(_component_UIcon, {
-                name: "i-lucide-star",
-                class: "text-yellow-500"
-              }),
-              _cache[0] || (_cache[0] = createBaseVNode("h3", { class: "text-lg font-semibold" }, "Card XPTO", -1))
-            ])
-          ]),
-          footer: withCtx(() => [
-            createBaseVNode("div", _hoisted_6, [
-              createBaseVNode("span", null, "Criado em " + toDisplayString((/* @__PURE__ */ new Date()).toLocaleDateString()), 1),
-              createVNode(_component_UButton, {
-                color: "primary",
-                variant: "ghost",
-                size: "xs"
-              }, {
-                default: withCtx(() => [
-                  createVNode(_component_UIcon, { name: "i-lucide-more-horizontal" })
-                ]),
-                _: 1
-              })
-            ])
-          ]),
-          default: withCtx(() => [
-            createBaseVNode("div", _hoisted_3, [
-              _cache[5] || (_cache[5] = createBaseVNode("p", { class: "text-gray-600" }, " Card do Edu usando UCard no Nuxt UI web component ", -1)),
-              createBaseVNode("div", _hoisted_4, [
-                createVNode(_component_UBadge, {
-                  color: "success",
-                  variant: "soft"
-                }, {
-                  default: withCtx(() => [
-                    createVNode(_component_UIcon, {
-                      name: "i-lucide-check",
-                      class: "w-3 h-3"
-                    }),
-                    _cache[1] || (_cache[1] = createTextVNode(" Funcionando ", -1))
-                  ]),
-                  _: 1,
-                  __: [1]
+function _sfc_render(_ctx, _cache) {
+  const _component_UIcon = _sfc_main$6;
+  const _component_UBadge = _sfc_main$1;
+  const _component_UProgress = _sfc_main$3;
+  const _component_UButton = _sfc_main$8;
+  const _component_UCard = _sfc_main$2;
+  return openBlock(), createElementBlock("div", _hoisted_1, [
+    createVNode(_component_UCard, { class: "w-full max-w-sm" }, {
+      header: withCtx(() => [
+        createBaseVNode("div", _hoisted_2, [
+          createVNode(_component_UIcon, {
+            name: "i-lucide-star",
+            class: "text-yellow-500"
+          }),
+          _cache[0] || (_cache[0] = createBaseVNode("h3", { class: "text-lg font-semibold" }, "Card XPTO", -1))
+        ])
+      ]),
+      footer: withCtx(() => [
+        createBaseVNode("div", _hoisted_6, [
+          createBaseVNode("span", null, "Criado em " + toDisplayString((/* @__PURE__ */ new Date()).toLocaleDateString()), 1),
+          createVNode(_component_UButton, {
+            color: "primary",
+            variant: "ghost",
+            size: "xs"
+          }, {
+            default: withCtx(() => [
+              createVNode(_component_UIcon, { name: "i-lucide-more-horizontal" })
+            ]),
+            _: 1
+          })
+        ])
+      ]),
+      default: withCtx(() => [
+        createBaseVNode("div", _hoisted_3, [
+          _cache[5] || (_cache[5] = createBaseVNode("p", { class: "text-gray-600" }, " Card do Edu usando UCard no Nuxt UI web component ", -1)),
+          createBaseVNode("div", _hoisted_4, [
+            createVNode(_component_UBadge, {
+              color: "success",
+              variant: "soft"
+            }, {
+              default: withCtx(() => [
+                createVNode(_component_UIcon, {
+                  name: "i-lucide-check",
+                  class: "w-3 h-3"
                 }),
-                createVNode(_component_UBadge, {
-                  color: "warning",
-                  variant: "soft"
-                }, {
-                  default: withCtx(() => [
-                    createVNode(_component_UIcon, {
-                      name: "i-lucide-alert-triangle",
-                      class: "w-3 h-3"
-                    }),
-                    _cache[2] || (_cache[2] = createTextVNode(" Atenção ", -1))
-                  ]),
-                  _: 1,
-                  __: [2]
-                })
+                _cache[1] || (_cache[1] = createTextVNode(" Funcionando ", -1))
               ]),
-              createVNode(_component_UProgress, {
-                value: 75,
-                color: "primary"
-              }),
-              createBaseVNode("div", _hoisted_5, [
-                createVNode(_component_UButton, {
-                  color: "primary",
-                  variant: "solid",
-                  size: "sm"
-                }, {
-                  default: withCtx(() => [
-                    createVNode(_component_UIcon, {
-                      name: "i-lucide-heart",
-                      class: "w-4 h-4"
-                    }),
-                    _cache[3] || (_cache[3] = createTextVNode(" Curtir ", -1))
-                  ]),
-                  _: 1,
-                  __: [3]
+              _: 1,
+              __: [1]
+            }),
+            createVNode(_component_UBadge, {
+              color: "warning",
+              variant: "soft"
+            }, {
+              default: withCtx(() => [
+                createVNode(_component_UIcon, {
+                  name: "i-lucide-alert-triangle",
+                  class: "w-3 h-3"
                 }),
-                createVNode(_component_UButton, {
-                  color: "primary",
-                  variant: "outline",
-                  size: "sm"
-                }, {
-                  default: withCtx(() => [
-                    createVNode(_component_UIcon, {
-                      name: "i-lucide-share",
-                      class: "w-4 h-4"
-                    }),
-                    _cache[4] || (_cache[4] = createTextVNode(" Compartilhar ", -1))
-                  ]),
-                  _: 1,
-                  __: [4]
-                })
-              ])
-            ])
+                _cache[2] || (_cache[2] = createTextVNode(" Atenção ", -1))
+              ]),
+              _: 1,
+              __: [2]
+            })
           ]),
-          _: 1
-        })
-      ]);
-    };
-  }
-});
-const _style_0 = "\n.card-container[data-v-d520b128] {\r\n    font-family: var(--ui-font);\n}\r\n";
-const CardXPTO = /* @__PURE__ */ _export_sfc(_sfc_main, [["styles", [_style_0]], ["__scopeId", "data-v-d520b128"]]);
+          createVNode(_component_UProgress, {
+            value: 75,
+            color: "primary"
+          }),
+          createBaseVNode("div", _hoisted_5, [
+            createVNode(_component_UButton, {
+              color: "primary",
+              variant: "solid",
+              size: "sm"
+            }, {
+              default: withCtx(() => [
+                createVNode(_component_UIcon, {
+                  name: "i-lucide-heart",
+                  class: "w-4 h-4"
+                }),
+                _cache[3] || (_cache[3] = createTextVNode(" Curtir ", -1))
+              ]),
+              _: 1,
+              __: [3]
+            }),
+            createVNode(_component_UButton, {
+              color: "primary",
+              variant: "outline",
+              size: "sm"
+            }, {
+              default: withCtx(() => [
+                createVNode(_component_UIcon, {
+                  name: "i-lucide-share",
+                  class: "w-4 h-4"
+                }),
+                _cache[4] || (_cache[4] = createTextVNode(" Compartilhar ", -1))
+              ]),
+              _: 1,
+              __: [4]
+            })
+          ])
+        ])
+      ]),
+      _: 1
+    })
+  ]);
+}
+const CardXPTO = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__scopeId", "data-v-8255ea0b"]]);
 const CardXPTElement = defineCustomElement(CardXPTO, {
   shadowRoot: false
-  // Desabilita shadow DOM para facilitar uso
 });
 if (!customElements.get("card-xpto")) {
   customElements.define("card-xpto", CardXPTElement);

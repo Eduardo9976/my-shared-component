@@ -7240,7 +7240,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 const SharedButtonElement = defineCustomElement(_sfc_main, {
   shadowRoot: false
-  // Desabilita shadow DOM para facilitar uso
 });
 if (!customElements.get("shared-button")) {
   customElements.define("shared-button", SharedButtonElement);

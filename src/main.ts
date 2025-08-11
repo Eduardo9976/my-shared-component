@@ -3,8 +3,8 @@ import ui from '@nuxt/ui/vue-plugin'
 import App from './App.vue'
 
 import './assets/main.css'
-import './shared-button'
-import './card-xpto'
+import './components/SharedButton/shared-button.ts'
+import './components/CardXPTO/card-xpto.ts'
 
 const app = createApp(App)
 
