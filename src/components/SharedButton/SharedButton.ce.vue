@@ -1,9 +1,11 @@
 <template>
     <div class="border border-blue-500 p-4 bg-blue-100">
-        <UButton color="success" variant="solid" class="font-bold">
-            <UIcon name="i-lucide-check-circle" class="mr-2" />
-            Botão Atualizado - Teste
+        <UButton color="success" variant="solid" class="font-bold" @click="open = true" >
+            <UIcon name="i-lucide-check-circle" class="mr-2"/>
+            Botão Atualizado - open = {{ open }}
         </UButton>
+
+      <br>
 
         <UDropdownMenu :items="dropdownItems" class="mt-4">
             <UButton icon="i-lucide-menu" color="neutral" variant="outline" />
@@ -11,13 +13,19 @@
 
         <UAccordion :items="accordionItems" class="mt-4" />
 
-        <TestModal />
+        <TestModal v-model:open="open" />
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import '../../assets/main.css'
+
+const open = ref(false)
+
+watch(open, (newValue: boolean) => {
+  console.log('open mudou:', newValue)
+})
 
 const dropdownItems = ref([
   {

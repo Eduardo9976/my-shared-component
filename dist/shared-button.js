@@ -6918,57 +6918,70 @@ const _sfc_main$6 = {
 };
 const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   __name: "TestModal",
+  props: {
+    "open": {
+      type: Boolean,
+      default: false
+    },
+    "openModifiers": {}
+  },
+  emits: ["update:open"],
   setup(__props) {
-    const first = ref(false);
+    const first = useModel(__props, "open");
     const second = ref(false);
+    watch(first, (newValue) => {
+      console.log("First changed:", newValue);
+    });
     return (_ctx, _cache) => {
       const _component_UButton = _sfc_main$1a;
       const _component_UModal = _sfc_main$6;
-      return openBlock(), createBlock(_component_UModal, {
-        open: first.value,
-        "onUpdate:open": _cache[3] || (_cache[3] = ($event) => first.value = $event),
-        title: "First modal",
-        ui: { footer: "justify-end" }
-      }, {
-        footer: withCtx(() => [
-          createVNode(_component_UButton, {
-            label: "Close",
-            color: "neutral",
-            variant: "outline",
-            onClick: _cache[0] || (_cache[0] = ($event) => first.value = false)
-          }),
-          createVNode(_component_UModal, {
-            open: second.value,
-            "onUpdate:open": _cache[2] || (_cache[2] = ($event) => second.value = $event),
-            title: "Second modal",
-            ui: { footer: "justify-end" }
-          }, {
-            footer: withCtx(() => [
-              createVNode(_component_UButton, {
-                label: "Close",
-                color: "neutral",
-                variant: "outline",
-                onClick: _cache[1] || (_cache[1] = ($event) => second.value = false)
-              })
-            ]),
-            default: withCtx(() => [
-              createVNode(_component_UButton, {
-                label: "Open second",
-                color: "neutral"
-              })
-            ]),
-            _: 1
-          }, 8, ["open"])
-        ]),
-        default: withCtx(() => [
-          createVNode(_component_UButton, {
-            color: "neutral",
-            variant: "subtle",
-            label: "Open"
-          })
-        ]),
-        _: 1
-      }, 8, ["open"]);
+      return openBlock(), createBlock(Teleport, { to: "body" }, [
+        createVNode(_component_UModal, {
+          open: first.value,
+          "onUpdate:open": _cache[3] || (_cache[3] = ($event) => first.value = $event),
+          title: "First modal",
+          ui: { footer: "justify-end" }
+        }, {
+          footer: withCtx(() => [
+            createVNode(_component_UButton, {
+              label: "Close",
+              color: "neutral",
+              variant: "outline",
+              onClick: _cache[0] || (_cache[0] = ($event) => first.value = false)
+            }),
+            createVNode(_component_UModal, {
+              open: second.value,
+              "onUpdate:open": _cache[2] || (_cache[2] = ($event) => second.value = $event),
+              title: "Second modal",
+              ui: { footer: "justify-end" }
+            }, {
+              footer: withCtx(() => [
+                createVNode(_component_UButton, {
+                  label: "Close",
+                  color: "neutral",
+                  variant: "outline",
+                  onClick: _cache[1] || (_cache[1] = ($event) => second.value = false)
+                })
+              ]),
+              default: withCtx(() => [
+                createVNode(_component_UButton, {
+                  label: "Open second",
+                  color: "neutral"
+                })
+              ]),
+              _: 1
+            }, 8, ["open"])
+          ]),
+          default: withCtx(() => [
+            createVNode(_component_UButton, {
+              color: "neutral",
+              variant: "subtle",
+              label: "Open"
+            })
+          ]),
+          _: 1
+        }, 8, ["open"])
+      ]);
     };
   }
 });
@@ -7891,6 +7904,10 @@ const _hoisted_1 = { class: "border border-blue-500 p-4 bg-blue-100" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "SharedButton.ce",
   setup(__props) {
+    const open = ref(false);
+    watch(open, (newValue) => {
+      console.log("open mudou:", newValue);
+    });
     const dropdownItems = ref([
       {
         label: "Profile",
@@ -7932,18 +7949,19 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         createVNode(_component_UButton, {
           color: "success",
           variant: "solid",
-          class: "font-bold"
+          class: "font-bold",
+          onClick: _cache[0] || (_cache[0] = ($event) => open.value = true)
         }, {
           default: withCtx(() => [
             createVNode(_component_UIcon, {
               name: "i-lucide-check-circle",
               class: "mr-2"
             }),
-            _cache[0] || (_cache[0] = createTextVNode(" Botão Atualizado - Teste ", -1))
+            createTextVNode(" Botão Atualizado - open = " + toDisplayString(open.value), 1)
           ]),
-          _: 1,
-          __: [0]
+          _: 1
         }),
+        _cache[2] || (_cache[2] = createBaseVNode("br", null, null, -1)),
         createVNode(_component_UDropdownMenu, {
           items: dropdownItems.value,
           class: "mt-4"
@@ -7961,7 +7979,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           items: accordionItems.value,
           class: "mt-4"
         }, null, 8, ["items"]),
-        createVNode(_component_TestModal)
+        createVNode(_component_TestModal, {
+          open: open.value,
+          "onUpdate:open": _cache[1] || (_cache[1] = ($event) => open.value = $event)
+        }, null, 8, ["open"])
       ]);
     };
   }

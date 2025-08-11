@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import {ref} from 'vue'
+import {ref, watch} from 'vue'
 
-const first = ref(false)
+const first = defineModel('open', {
+  type: Boolean,
+  default: false
+})
 const second = ref(false)
+
+watch(first, (newValue: boolean) => {
+  console.log('First changed:', newValue)
+})
 </script>
 
 <template>
+  <teleport to="body">
     <UModal v-model:open="first" title="First modal" :ui="{ footer: 'justify-end' }">
       <UButton color="neutral" variant="subtle" label="Open"/>
 
@@ -21,5 +29,6 @@ const second = ref(false)
         </UModal>
       </template>
     </UModal>
+  </teleport>
 </template>
 
