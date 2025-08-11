@@ -25,3 +25,6 @@ dist-ssr
 # Auto-generated type declarations
 auto-imports.d.ts
 components.d.ts
+
+# Git setup documentation
+GIT_SETUP.md

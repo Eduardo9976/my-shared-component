@@ -1,0 +1,19 @@
+# Configuração de branches para push automático
+# Branch: development -> GitHub
+# Branch: main -> GitLab
+
+[remote "github"]
+    url = https://github.com/Eduardo9976/my-shared-component.git
+    fetch = +refs/heads/*:refs/remotes/github/*
+
+[remote "gitlab"]
+    url = ssh://git@ssh.gitlab.miisy.me:29420/meweb/hipster/header.git
+    fetch = +refs/heads/*:refs/remotes/gitlab/*
+
+[branch "development"]
+    remote = github
+    merge = refs/heads/development
+
+[branch "develop"]
+    remote = gitlab
+    merge = refs/heads/develop
