@@ -1,4 +1,5 @@
-import { d as defineComponent, j as useForwardExpose, C as useVModel, m as watch, I as nextTick, k as computed, ca as isNullish, a as createContext, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, P as Primitive, x as mergeProps, J as useSlots, K as useLocale, L as useForwardPropsEmits, M as reactivePick, N as tv, O as useAppConfig, s as createElementBlock, g as createCommentVNode, v as createVNode, E as normalizeStyle, S as normalizeClass, h as createTextVNode, i as toDisplayString, F as Fragment, V as renderList, cy as useButtonGroup, cz as useComponentIcons, R as _sfc_main$6, _ as _sfc_main$7, cr as _export_sfc, Q as createBaseVNode, W as _sfc_main$8, a6 as defineCustomElement, a7 as tailwindStyles } from "./main.js";
+import { M as defineComponent, bC as watch, as as nextTick, q as computed, s as createBlock, aK as openBlock, bH as withCtx, aW as renderSlot, bi as unref, ar as mergeProps, br as useSlots, u as createElementBlock, t as createCommentVNode, at as normalizeClass, I as createVNode, av as normalizeStyle, H as createTextVNode, b9 as toDisplayString, F as Fragment, aV as renderList, bP as _export_sfc, v as createBaseVNode, N as defineCustomElement, bO as tailwindStyles } from "./main.js";
+import { b as useForwardExpose, u as useVModel, i as isNullish, c as createContext, P as Primitive, A as tv, B as useAppConfig, y as useLocale, s as useForwardPropsEmits, z as reactivePick, L as useButtonGroup, M as useComponentIcons, C as _sfc_main$6, H as _sfc_main$7, _ as _sfc_main$8 } from "./Button.js";
 const DEFAULT_MAX = 100;
 const [injectProgressRootContext, provideProgressRootContext] = createContext("ProgressRoot");
 const isNumber = (v) => typeof v === "number";
@@ -123,6 +124,78 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   }
 });
 const theme$2 = {
+  "slots": {
+    "root": "rounded-lg overflow-hidden",
+    "header": "p-4 sm:px-6",
+    "body": "p-4 sm:p-6",
+    "footer": "p-4 sm:px-6"
+  },
+  "variants": {
+    "variant": {
+      "solid": {
+        "root": "bg-inverted text-inverted"
+      },
+      "outline": {
+        "root": "bg-default ring ring-default divide-y divide-default"
+      },
+      "soft": {
+        "root": "bg-elevated/50 divide-y divide-default"
+      },
+      "subtle": {
+        "root": "bg-elevated/50 ring ring-default divide-y divide-default"
+      }
+    }
+  },
+  "defaultVariants": {
+    "variant": "outline"
+  }
+};
+const _sfc_main$3 = {
+  __name: "Card",
+  props: {
+    as: { type: null, required: false },
+    variant: { type: null, required: false },
+    class: { type: null, required: false },
+    ui: { type: null, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const slots = useSlots();
+    const appConfig = useAppConfig();
+    const ui = computed(() => tv({ extend: tv(theme$2), ...appConfig.ui?.card || {} })({
+      variant: props.variant
+    }));
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        as: __props.as,
+        class: normalizeClass(ui.value.root({ class: [props.ui?.root, props.class] }))
+      }, {
+        default: withCtx(() => [
+          !!slots.header ? (openBlock(), createElementBlock("div", {
+            key: 0,
+            class: normalizeClass(ui.value.header({ class: props.ui?.header }))
+          }, [
+            renderSlot(_ctx.$slots, "header")
+          ], 2)) : createCommentVNode("", true),
+          !!slots.default ? (openBlock(), createElementBlock("div", {
+            key: 1,
+            class: normalizeClass(ui.value.body({ class: props.ui?.body }))
+          }, [
+            renderSlot(_ctx.$slots, "default")
+          ], 2)) : createCommentVNode("", true),
+          !!slots.footer ? (openBlock(), createElementBlock("div", {
+            key: 2,
+            class: normalizeClass(ui.value.footer({ class: props.ui?.footer }))
+          }, [
+            renderSlot(_ctx.$slots, "footer")
+          ], 2)) : createCommentVNode("", true)
+        ]),
+        _: 3
+      }, 8, ["as", "class"]);
+    };
+  }
+};
+const theme$1 = {
   "slots": {
     "root": "gap-2",
     "base": "relative overflow-hidden rounded-full bg-accented",
@@ -380,7 +453,7 @@ const theme$2 = {
     "size": "md"
   }
 };
-const _sfc_main$3 = {
+const _sfc_main$2 = {
   __name: "Progress",
   props: {
     as: { type: null, required: false },
@@ -476,7 +549,7 @@ const _sfc_main$3 = {
       }
       return "other";
     }
-    const ui = computed(() => tv({ extend: tv(theme$2), ...appConfig.ui?.progress || {} })({
+    const ui = computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.progress || {} })({
       animation: props.animation,
       size: props.size,
       color: props.color,
@@ -525,78 +598,6 @@ const _sfc_main$3 = {
                 ])
               ], 2);
             }), 128))
-          ], 2)) : createCommentVNode("", true)
-        ]),
-        _: 3
-      }, 8, ["as", "class"]);
-    };
-  }
-};
-const theme$1 = {
-  "slots": {
-    "root": "rounded-lg overflow-hidden",
-    "header": "p-4 sm:px-6",
-    "body": "p-4 sm:p-6",
-    "footer": "p-4 sm:px-6"
-  },
-  "variants": {
-    "variant": {
-      "solid": {
-        "root": "bg-inverted text-inverted"
-      },
-      "outline": {
-        "root": "bg-default ring ring-default divide-y divide-default"
-      },
-      "soft": {
-        "root": "bg-elevated/50 divide-y divide-default"
-      },
-      "subtle": {
-        "root": "bg-elevated/50 ring ring-default divide-y divide-default"
-      }
-    }
-  },
-  "defaultVariants": {
-    "variant": "outline"
-  }
-};
-const _sfc_main$2 = {
-  __name: "Card",
-  props: {
-    as: { type: null, required: false },
-    variant: { type: null, required: false },
-    class: { type: null, required: false },
-    ui: { type: null, required: false }
-  },
-  setup(__props) {
-    const props = __props;
-    const slots = useSlots();
-    const appConfig = useAppConfig();
-    const ui = computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.card || {} })({
-      variant: props.variant
-    }));
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
-        as: __props.as,
-        class: normalizeClass(ui.value.root({ class: [props.ui?.root, props.class] }))
-      }, {
-        default: withCtx(() => [
-          !!slots.header ? (openBlock(), createElementBlock("div", {
-            key: 0,
-            class: normalizeClass(ui.value.header({ class: props.ui?.header }))
-          }, [
-            renderSlot(_ctx.$slots, "header")
-          ], 2)) : createCommentVNode("", true),
-          !!slots.default ? (openBlock(), createElementBlock("div", {
-            key: 1,
-            class: normalizeClass(ui.value.body({ class: props.ui?.body }))
-          }, [
-            renderSlot(_ctx.$slots, "default")
-          ], 2)) : createCommentVNode("", true),
-          !!slots.footer ? (openBlock(), createElementBlock("div", {
-            key: 2,
-            class: normalizeClass(ui.value.footer({ class: props.ui?.footer }))
-          }, [
-            renderSlot(_ctx.$slots, "footer")
           ], 2)) : createCommentVNode("", true)
         ]),
         _: 3
@@ -921,9 +922,9 @@ const _hoisted_6 = { class: "flex justify-between items-center text-sm text-gray
 function _sfc_render(_ctx, _cache) {
   const _component_UIcon = _sfc_main$6;
   const _component_UBadge = _sfc_main$1;
-  const _component_UProgress = _sfc_main$3;
+  const _component_UProgress = _sfc_main$2;
   const _component_UButton = _sfc_main$8;
-  const _component_UCard = _sfc_main$2;
+  const _component_UCard = _sfc_main$3;
   return openBlock(), createElementBlock("div", _hoisted_1, [
     createVNode(_component_UCard, { class: "w-full max-w-sm" }, {
       header: withCtx(() => [
@@ -1033,6 +1034,3 @@ const CardXPTElement = defineCustomElement(CardXPTO, {
 if (!customElements.get("card-xpto")) {
   customElements.define("card-xpto", CardXPTElement);
 }
-export {
-  _sfc_main$3 as _
-};
