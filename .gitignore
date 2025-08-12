@@ -28,3 +28,6 @@ components.d.ts
 
 # Git setup documentation
 GIT_SETUP.md
+
+# Component documentation
+src/components/**/README.md

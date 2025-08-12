@@ -19,9 +19,7 @@ watch(first, (newValue: boolean) => {
       title="First modal"
       :ui="{footer: 'justify-end'}"
     >
-      <UButton color="neutral"
-variant="subtle"
-label="Open" />
+      <UButton color="neutral" variant="subtle" label="Open" />
 
       <template #footer>
         <UButton
@@ -36,8 +34,7 @@ label="Open" />
           title="Second modal"
           :ui="{footer: 'justify-end'}"
         >
-          <UButton label="Open second"
-color="neutral" />
+          <UButton label="Open second" color="neutral" />
 
           <template #footer>
             <UButton

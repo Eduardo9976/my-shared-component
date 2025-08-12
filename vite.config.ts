@@ -36,7 +36,8 @@ export default defineConfig({
       input: {
         app: './index.html',
         'shared-button': './src/components/SharedButton/shared-button.ts',
-        'card-xpto': './src/components/CardXPTO/card-xpto.ts'
+        'card-xpto': './src/components/CardXPTO/card-xpto.ts',
+        'the-header': './src/components/TheHeader/the-header.ts'
       },
       output: {
         entryFileNames: chunkInfo => {
@@ -45,6 +46,9 @@ export default defineConfig({
           }
           if (chunkInfo.name === 'card-xpto') {
             return 'card-xpto.js'
+          }
+          if (chunkInfo.name === 'the-header') {
+            return 'the-header.js'
           }
           return '[name].js'
         },
@@ -56,13 +60,19 @@ export default defineConfig({
           if (assetInfo.name === 'card-xpto.css') {
             return 'card-xpto.css'
           }
+          if (assetInfo.name === 'the-header.css') {
+            return 'the-header.css'
+          }
           return '[name].[ext]'
+        },
+        manualChunks: {
+          'me-icon': ['@mercadoeletronico/me-icon']
         }
       }
     },
-    cssCodeSplit: false,
-    assetsInlineLimit: 0,
-    minify: false,
-    cssMinify: false
+    cssCodeSplit: true,
+    assetsInlineLimit: 4096,
+    minify: true,
+    cssMinify: true
   }
 })

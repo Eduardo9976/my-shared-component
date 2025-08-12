@@ -6,22 +6,17 @@
       class="font-bold"
       @click="open = true"
     >
-      <UIcon name="i-lucide-check-circle"
-class="mr-2" />
+      <UIcon name="i-lucide-check-circle" class="mr-2" />
       Botão Atualizado - open = {{ open }}
     </UButton>
 
     <br />
 
-    <UDropdownMenu :items="dropdownItems"
-class="mt-4">
-      <UButton icon="i-lucide-menu"
-color="neutral"
-variant="outline" />
+    <UDropdownMenu :items="dropdownItems" class="mt-4">
+      <UButton icon="i-lucide-menu" color="neutral" variant="outline" />
     </UDropdownMenu>
 
-    <UAccordion :items="accordionItems"
-class="mt-4" />
+    <UAccordion :items="accordionItems" class="mt-4" />
 
     <TestModal v-model:open="open" />
   </div>
