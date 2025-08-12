@@ -6930,7 +6930,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
     const first = useModel(__props, "open");
     const second = ref(false);
     watch(first, (newValue) => {
-      console.log("First changed:", newValue);
+      console.log("First changed", newValue);
     });
     return (_ctx, _cache) => {
       const _component_UButton = _sfc_main$1a;

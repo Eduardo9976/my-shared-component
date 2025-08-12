@@ -1,4 +1,4 @@
-import { defineCustomElement } from 'vue'
+import {defineCustomElement} from 'vue'
 import CardXPTO from './CardXPTO.ce.vue'
 import tailwindStyles from '../../assets/main.css?inline'
 

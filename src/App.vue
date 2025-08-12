@@ -1,11 +1,9 @@
-<script setup lang="ts">
-</script>
-
 <template>
   <UApp>
-    <shared-button></shared-button>
+    <shared-button />
   </UApp>
 </template>
 
+<script setup lang="ts"></script>
 
 <style scoped></style>

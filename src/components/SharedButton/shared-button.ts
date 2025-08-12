@@ -1,4 +1,4 @@
-import { defineCustomElement } from 'vue'
+import {defineCustomElement} from 'vue'
 import SharedButton from './SharedButton.ce.vue'
 import tailwindStyles from '../../assets/main.css?inline'
 

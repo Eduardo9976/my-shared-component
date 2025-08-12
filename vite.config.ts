@@ -1,5 +1,5 @@
-import { fileURLToPath, URL } from 'node:url'
-import { defineConfig } from 'vite'
+import {fileURLToPath, URL} from 'node:url'
+import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import ui from '@nuxt/ui/vite'
@@ -9,10 +9,10 @@ export default defineConfig({
     vue({
       template: {
         compilerOptions: {
-          isCustomElement: (tag) => tag.includes('-'),
-        },
+          isCustomElement: tag => tag.includes('-')
+        }
       },
-      customElement: true,
+      customElement: true
     }),
     vueDevTools(),
     ui()
@@ -20,7 +20,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
-    },
+    }
   },
   optimizeDeps: {
     exclude: ['@inertiajs/vue3']
@@ -39,7 +39,7 @@ export default defineConfig({
         'card-xpto': './src/components/CardXPTO/card-xpto.ts'
       },
       output: {
-        entryFileNames: (chunkInfo) => {
+        entryFileNames: chunkInfo => {
           if (chunkInfo.name === 'shared-button') {
             return 'shared-button.js'
           }
@@ -49,7 +49,7 @@ export default defineConfig({
           return '[name].js'
         },
         chunkFileNames: '[name].js',
-        assetFileNames: (assetInfo) => {
+        assetFileNames: assetInfo => {
           if (assetInfo.name === 'shared-button.css') {
             return 'shared-button.css'
           }

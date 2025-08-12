@@ -917,7 +917,7 @@ const _sfc_main$1 = {
     };
   }
 };
-const _style_0 = "\n.card-container[data-v-8255ea0b] {\r\n    font-family: var(--ui-font);\n}\r\n";
+const _style_0 = "\n.card-container[data-v-409b3247] {\n  font-family: var(--ui-font);\n}\n";
 const _sfc_main = {};
 const _hoisted_1 = { class: "card-container" };
 const _hoisted_2 = { class: "flex items-center gap-2" };
@@ -1032,7 +1032,7 @@ function _sfc_render(_ctx, _cache) {
     })
   ]);
 }
-const CardXPTO = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__scopeId", "data-v-8255ea0b"]]);
+const CardXPTO = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__scopeId", "data-v-409b3247"]]);
 const CardXPTElement = defineCustomElement(CardXPTO, {
   shadowRoot: true,
   styles: [tailwindStyles]

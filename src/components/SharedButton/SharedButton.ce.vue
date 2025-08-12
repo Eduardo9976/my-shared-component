@@ -1,24 +1,34 @@
 <template>
-    <div class="border border-blue-500 p-4 bg-blue-100">
-        <UButton color="success" variant="solid" class="font-bold" @click="open = true" >
-            <UIcon name="i-lucide-check-circle" class="mr-2"/>
-            Botão Atualizado - open = {{ open }}
-        </UButton>
+  <div class="border border-blue-500 p-4 bg-blue-100">
+    <UButton
+      color="success"
+      variant="solid"
+      class="font-bold"
+      @click="open = true"
+    >
+      <UIcon name="i-lucide-check-circle"
+class="mr-2" />
+      Botão Atualizado - open = {{ open }}
+    </UButton>
 
-      <br>
+    <br />
 
-        <UDropdownMenu :items="dropdownItems" class="mt-4">
-            <UButton icon="i-lucide-menu" color="neutral" variant="outline" />
-        </UDropdownMenu>
+    <UDropdownMenu :items="dropdownItems"
+class="mt-4">
+      <UButton icon="i-lucide-menu"
+color="neutral"
+variant="outline" />
+    </UDropdownMenu>
 
-        <UAccordion :items="accordionItems" class="mt-4" />
+    <UAccordion :items="accordionItems"
+class="mt-4" />
 
-        <TestModal v-model:open="open" />
-    </div>
+    <TestModal v-model:open="open" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import {ref, watch} from 'vue'
 
 const open = ref(false)
 
@@ -50,12 +60,14 @@ const accordionItems = ref([
   {
     label: 'Colors',
     icon: 'i-lucide-swatch-book',
-    content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+    content:
+      'Choose a primary and a neutral color from your Tailwind CSS theme.'
   },
   {
     label: 'Components',
     icon: 'i-lucide-box',
-    content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+    content:
+      'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
   }
 ])
 </script>
