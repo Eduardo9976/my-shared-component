@@ -1,6 +1,1040 @@
-import{d as X,i as U,x as H,g as p,c as z,o as l,w as c,r as x,u as s,n as B,y as E,l as b,b as h,m as u,v as R,A as v,e as V,f as S,F as J,C as K,z as _,ag as Q,bO as W}from"./main.js";import{b as j,d as D,v as O,c as ee,P as C,h as ae,j as te,r as se,t as q,k as T,T as re,U as ie,l as P,_ as ne,m as oe}from"./Button.js";import{_ as le}from"./_plugin-vue_export-helper.js";const $=100,[ue,ce]=ee("ProgressRoot"),A=t=>typeof t=="number";function de(t,a){return O(t)||A(t)&&!Number.isNaN(t)&&t<=a&&t>=0?t:(console.error(`Invalid prop \`value\` of value \`${t}\` supplied to \`ProgressRoot\`. The \`value\` prop must be:
+import { d as defineComponent, i as watch, x as nextTick, g as computed, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, n as mergeProps, y as useSlots, l as createElementBlock, b as createCommentVNode, m as createVNode, v as normalizeStyle, A as normalizeClass, e as createTextVNode, f as toDisplayString, F as Fragment, C as renderList, z as createBaseVNode, ag as defineCustomElement, bO as tailwindStyles } from "./main.js";
+import { b as useForwardExpose, d as useVModel, v as isNullish, c as createContext, P as Primitive, h as useLocale, j as useForwardPropsEmits, r as reactivePick, t as tv, k as useAppConfig, T as useButtonGroup, U as useComponentIcons, l as _sfc_main$6, _ as _sfc_main$7, m as _sfc_main$8 } from "./Button.js";
+import { _ as _export_sfc } from "./_plugin-vue_export-helper.js";
+const DEFAULT_MAX = 100;
+const [injectProgressRootContext, provideProgressRootContext] = createContext("ProgressRoot");
+const isNumber = (v) => typeof v === "number";
+function validateValue(value, max) {
+  const isValidValueError = isNullish(value) || isNumber(value) && !Number.isNaN(value) && value <= max && value >= 0;
+  if (isValidValueError)
+    return value;
+  console.error(`Invalid prop \`value\` of value \`${value}\` supplied to \`ProgressRoot\`. The \`value\` prop must be:
   - a positive number
-  - less than the value passed to \`max\` (or ${$} if no \`max\` prop is set)
+  - less than the value passed to \`max\` (or ${DEFAULT_MAX} if no \`max\` prop is set)
   - \`null\`  or \`undefined\` if the progress is indeterminate.
 
-Defaulting to \`null\`.`),null)}function me(t){return A(t)&&!Number.isNaN(t)&&t>0?t:(console.error(`Invalid prop \`max\` of value \`${t}\` supplied to \`ProgressRoot\`. Only numbers greater than 0 are valid max values. Defaulting to \`${$}\`.`),$)}const ve=X({__name:"ProgressRoot",props:{modelValue:{},max:{default:$},getValueLabel:{type:Function,default:(t,a)=>A(t)?`${Math.round(t/a*$)}%`:void 0},getValueText:{},asChild:{type:Boolean},as:{}},emits:["update:modelValue","update:max"],setup(t,{emit:a}){const e=t,d=a;j();const r=D(e,"modelValue",d,{passive:e.modelValue===void 0}),i=D(e,"max",d,{passive:e.max===void 0});U(()=>r.value,async n=>{const m=de(n,e.max);m!==n&&(await H(),r.value=m)},{immediate:!0}),U(()=>e.max,n=>{const m=me(e.max);m!==n&&(i.value=m)},{immediate:!0});const y=p(()=>O(r.value)?"indeterminate":r.value===i.value?"complete":"loading");return ce({modelValue:r,max:i,progressState:y}),(n,m)=>(l(),z(s(C),{"as-child":n.asChild,as:n.as,"aria-valuemax":s(i),"aria-valuemin":0,"aria-valuenow":A(s(r))?s(r):void 0,"aria-valuetext":n.getValueText?.(s(r),s(i)),"aria-label":n.getValueLabel(s(r),s(i)),role:"progressbar","data-state":y.value,"data-value":s(r)??void 0,"data-max":s(i)},{default:c(()=>[x(n.$slots,"default",{modelValue:s(r)})]),_:3},8,["as-child","as","aria-valuemax","aria-valuenow","aria-valuetext","aria-label","data-state","data-value","data-max"]))}}),fe=X({__name:"ProgressIndicator",props:{asChild:{type:Boolean},as:{}},setup(t){const a=t,e=ue();return j(),(d,r)=>(l(),z(s(C),B(a,{"data-state":s(e).progressState.value,"data-value":s(e).modelValue?.value??void 0,"data-max":s(e).max.value}),{default:c(()=>[x(d.$slots,"default")]),_:3},16,["data-state","data-value","data-max"]))}}),ge={slots:{root:"gap-2",base:"relative overflow-hidden rounded-full bg-accented",indicator:"rounded-full size-full transition-transform duration-200 ease-out",status:"flex justify-end text-dimmed transition-[width] duration-200",steps:"grid items-end",step:"truncate text-end row-start-1 col-start-1 transition-opacity"},variants:{animation:{carousel:"","carousel-inverse":"",swing:"",elastic:""},color:{primary:{indicator:"bg-primary",steps:"text-primary"},secondary:{indicator:"bg-secondary",steps:"text-secondary"},success:{indicator:"bg-success",steps:"text-success"},info:{indicator:"bg-info",steps:"text-info"},warning:{indicator:"bg-warning",steps:"text-warning"},error:{indicator:"bg-error",steps:"text-error"},neutral:{indicator:"bg-inverted",steps:"text-inverted"}},size:{"2xs":{status:"text-xs",steps:"text-xs"},xs:{status:"text-xs",steps:"text-xs"},sm:{status:"text-sm",steps:"text-sm"},md:{status:"text-sm",steps:"text-sm"},lg:{status:"text-sm",steps:"text-sm"},xl:{status:"text-base",steps:"text-base"},"2xl":{status:"text-base",steps:"text-base"}},step:{active:{step:"opacity-100"},first:{step:"opacity-100 text-muted"},other:{step:"opacity-0"},last:{step:""}},orientation:{horizontal:{root:"w-full flex flex-col",base:"w-full",status:"flex-row"},vertical:{root:"h-full flex flex-row-reverse",base:"h-full",status:"flex-col"}},inverted:{true:{status:"self-end"}}},compoundVariants:[{inverted:!0,orientation:"horizontal",class:{step:"text-start",status:"flex-row-reverse"}},{inverted:!0,orientation:"vertical",class:{steps:"items-start",status:"flex-col-reverse"}},{orientation:"horizontal",size:"2xs",class:"h-px"},{orientation:"horizontal",size:"xs",class:"h-0.5"},{orientation:"horizontal",size:"sm",class:"h-1"},{orientation:"horizontal",size:"md",class:"h-2"},{orientation:"horizontal",size:"lg",class:"h-3"},{orientation:"horizontal",size:"xl",class:"h-4"},{orientation:"horizontal",size:"2xl",class:"h-5"},{orientation:"vertical",size:"2xs",class:"w-px"},{orientation:"vertical",size:"xs",class:"w-0.5"},{orientation:"vertical",size:"sm",class:"w-1"},{orientation:"vertical",size:"md",class:"w-2"},{orientation:"vertical",size:"lg",class:"w-3"},{orientation:"vertical",size:"xl",class:"w-4"},{orientation:"vertical",size:"2xl",class:"w-5"},{orientation:"horizontal",animation:"carousel",class:{indicator:"data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"}},{orientation:"vertical",animation:"carousel",class:{indicator:"data-[state=indeterminate]:animate-[carousel-vertical_2s_ease-in-out_infinite]"}},{orientation:"horizontal",animation:"carousel-inverse",class:{indicator:"data-[state=indeterminate]:animate-[carousel-inverse_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]"}},{orientation:"vertical",animation:"carousel-inverse",class:{indicator:"data-[state=indeterminate]:animate-[carousel-inverse-vertical_2s_ease-in-out_infinite]"}},{orientation:"horizontal",animation:"swing",class:{indicator:"data-[state=indeterminate]:animate-[swing_2s_ease-in-out_infinite]"}},{orientation:"vertical",animation:"swing",class:{indicator:"data-[state=indeterminate]:animate-[swing-vertical_2s_ease-in-out_infinite]"}},{orientation:"horizontal",animation:"elastic",class:{indicator:"data-[state=indeterminate]:animate-[elastic_2s_ease-in-out_infinite]"}},{orientation:"vertical",animation:"elastic",class:{indicator:"data-[state=indeterminate]:animate-[elastic-vertical_2s_ease-in-out_infinite]"}}],defaultVariants:{animation:"carousel",color:"primary",size:"md"}},pe={__name:"Progress",props:{as:{type:null,required:!1},max:{type:[Number,Array],required:!1},status:{type:Boolean,required:!1},inverted:{type:Boolean,required:!1,default:!1},size:{type:null,required:!1},color:{type:null,required:!1},orientation:{type:null,required:!1,default:"horizontal"},animation:{type:null,required:!1},class:{type:null,required:!1},ui:{type:null,required:!1},getValueLabel:{type:Function,required:!1},getValueText:{type:Function,required:!1},modelValue:{type:[Number,null],required:!1,default:null}},emits:["update:modelValue","update:max"],setup(t,{emit:a}){const e=t,d=a,r=E(),{dir:i}=ae(),y=T(),n=te(se(e,"getValueLabel","getValueText","modelValue"),d),m=p(()=>n.value.modelValue===null),I=p(()=>Array.isArray(e.max)),g=p(()=>{if(!(m.value||!e.max))return Array.isArray(e.max)?e.max.length-1:Number(e.max)}),f=p(()=>{if(!m.value)switch(!0){case n.value.modelValue<0:return 0;case n.value.modelValue>(g.value??100):return 100;default:return Math.round(n.value.modelValue/(g.value??100)*100)}}),F=p(()=>{if(f.value!==void 0)return e.orientation==="vertical"?{transform:`translateY(${e.inverted?"":"-"}${100-f.value}%)`}:i.value==="rtl"?{transform:`translateX(${e.inverted?"-":""}${100-f.value}%)`}:{transform:`translateX(${e.inverted?"":"-"}${100-f.value}%)`}}),G=p(()=>({[e.orientation==="vertical"?"height":"width"]:f.value?`${f.value}%`:"fit-content"}));function N(o){return o===Number(e.modelValue)}function L(o){return o===0}function Y(o){return o===g.value}function Z(o){return o=Number(o),N(o)&&!L(o)?"active":L(o)&&N(o)?"first":Y(o)&&N(o)?"last":"other"}const w=p(()=>q({extend:q(ge),...y.ui?.progress||{}})({animation:e.animation,size:e.size,color:e.color,orientation:e.orientation,inverted:e.inverted}));return(o,ke)=>(l(),z(s(C),{as:t.as,class:v(w.value.root({class:[e.ui?.root,e.class]}))},{default:c(()=>[!m.value&&(t.status||r.status)?(l(),b("div",{key:0,class:v(w.value.status({class:e.ui?.status})),style:R(G.value)},[x(o.$slots,"status",{percent:f.value},()=>[V(S(f.value)+"% ",1)])],6)):h("",!0),u(s(ve),B(s(n),{max:g.value,class:w.value.base({class:e.ui?.base}),style:{transform:"translateZ(0)"}}),{default:c(()=>[u(s(fe),{class:v(w.value.indicator({class:e.ui?.indicator})),style:R(F.value)},null,8,["class","style"])]),_:1},16,["max","class"]),I.value?(l(),b("div",{key:1,class:v(w.value.steps({class:e.ui?.steps}))},[(l(!0),b(J,null,K(t.max,(M,k)=>(l(),b("div",{key:k,class:v(w.value.step({class:e.ui?.step,step:Z(k)}))},[x(o.$slots,`step-${k}`,{step:M},()=>[V(S(M),1)])],2))),128))],2)):h("",!0)]),_:3},8,["as","class"]))}},xe={slots:{root:"rounded-lg overflow-hidden",header:"p-4 sm:px-6",body:"p-4 sm:p-6",footer:"p-4 sm:px-6"},variants:{variant:{solid:{root:"bg-inverted text-inverted"},outline:{root:"bg-default ring ring-default divide-y divide-default"},soft:{root:"bg-elevated/50 divide-y divide-default"},subtle:{root:"bg-elevated/50 ring ring-default divide-y divide-default"}}},defaultVariants:{variant:"outline"}},ye={__name:"Card",props:{as:{type:null,required:!1},variant:{type:null,required:!1},class:{type:null,required:!1},ui:{type:null,required:!1}},setup(t){const a=t,e=E(),d=T(),r=p(()=>q({extend:q(xe),...d.ui?.card||{}})({variant:a.variant}));return(i,y)=>(l(),z(s(C),{as:t.as,class:v(r.value.root({class:[a.ui?.root,a.class]}))},{default:c(()=>[e.header?(l(),b("div",{key:0,class:v(r.value.header({class:a.ui?.header}))},[x(i.$slots,"header")],2)):h("",!0),e.default?(l(),b("div",{key:1,class:v(r.value.body({class:a.ui?.body}))},[x(i.$slots,"default")],2)):h("",!0),e.footer?(l(),b("div",{key:2,class:v(r.value.footer({class:a.ui?.footer}))},[x(i.$slots,"footer")],2)):h("",!0)]),_:3},8,["as","class"]))}},be={slots:{base:"font-medium inline-flex items-center",label:"truncate",leadingIcon:"shrink-0",leadingAvatar:"shrink-0",leadingAvatarSize:"",trailingIcon:"shrink-0"},variants:{buttonGroup:{horizontal:"not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1]",vertical:"not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none focus-visible:z-[1]"},color:{primary:"",secondary:"",success:"",info:"",warning:"",error:"",neutral:""},variant:{solid:"",outline:"",soft:"",subtle:""},size:{xs:{base:"text-[8px]/3 px-1 py-0.5 gap-1 rounded-sm",leadingIcon:"size-3",leadingAvatarSize:"3xs",trailingIcon:"size-3"},sm:{base:"text-[10px]/3 px-1.5 py-1 gap-1 rounded-sm",leadingIcon:"size-3",leadingAvatarSize:"3xs",trailingIcon:"size-3"},md:{base:"text-xs px-2 py-1 gap-1 rounded-md",leadingIcon:"size-4",leadingAvatarSize:"3xs",trailingIcon:"size-4"},lg:{base:"text-sm px-2 py-1 gap-1.5 rounded-md",leadingIcon:"size-5",leadingAvatarSize:"2xs",trailingIcon:"size-5"},xl:{base:"text-base px-2.5 py-1 gap-1.5 rounded-md",leadingIcon:"size-6",leadingAvatarSize:"2xs",trailingIcon:"size-6"}},square:{true:""}},compoundVariants:[{color:"primary",variant:"solid",class:"bg-primary text-inverted"},{color:"secondary",variant:"solid",class:"bg-secondary text-inverted"},{color:"success",variant:"solid",class:"bg-success text-inverted"},{color:"info",variant:"solid",class:"bg-info text-inverted"},{color:"warning",variant:"solid",class:"bg-warning text-inverted"},{color:"error",variant:"solid",class:"bg-error text-inverted"},{color:"primary",variant:"outline",class:"text-primary ring ring-inset ring-primary/50"},{color:"secondary",variant:"outline",class:"text-secondary ring ring-inset ring-secondary/50"},{color:"success",variant:"outline",class:"text-success ring ring-inset ring-success/50"},{color:"info",variant:"outline",class:"text-info ring ring-inset ring-info/50"},{color:"warning",variant:"outline",class:"text-warning ring ring-inset ring-warning/50"},{color:"error",variant:"outline",class:"text-error ring ring-inset ring-error/50"},{color:"primary",variant:"soft",class:"bg-primary/10 text-primary"},{color:"secondary",variant:"soft",class:"bg-secondary/10 text-secondary"},{color:"success",variant:"soft",class:"bg-success/10 text-success"},{color:"info",variant:"soft",class:"bg-info/10 text-info"},{color:"warning",variant:"soft",class:"bg-warning/10 text-warning"},{color:"error",variant:"soft",class:"bg-error/10 text-error"},{color:"primary",variant:"subtle",class:"bg-primary/10 text-primary ring ring-inset ring-primary/25"},{color:"secondary",variant:"subtle",class:"bg-secondary/10 text-secondary ring ring-inset ring-secondary/25"},{color:"success",variant:"subtle",class:"bg-success/10 text-success ring ring-inset ring-success/25"},{color:"info",variant:"subtle",class:"bg-info/10 text-info ring ring-inset ring-info/25"},{color:"warning",variant:"subtle",class:"bg-warning/10 text-warning ring ring-inset ring-warning/25"},{color:"error",variant:"subtle",class:"bg-error/10 text-error ring ring-inset ring-error/25"},{color:"neutral",variant:"solid",class:"text-inverted bg-inverted"},{color:"neutral",variant:"outline",class:"ring ring-inset ring-accented text-default bg-default"},{color:"neutral",variant:"soft",class:"text-default bg-elevated"},{color:"neutral",variant:"subtle",class:"ring ring-inset ring-accented text-default bg-elevated"},{size:"xs",square:!0,class:"p-0.5"},{size:"sm",square:!0,class:"p-1"},{size:"md",square:!0,class:"p-1"},{size:"lg",square:!0,class:"p-1"},{size:"xl",square:!0,class:"p-1"}],defaultVariants:{color:"primary",variant:"solid",size:"md"}},_e={__name:"Badge",props:{as:{type:null,required:!1,default:"span"},label:{type:[String,Number],required:!1},color:{type:null,required:!1},variant:{type:null,required:!1},size:{type:null,required:!1},square:{type:Boolean,required:!1},class:{type:null,required:!1},ui:{type:null,required:!1},icon:{type:String,required:!1},avatar:{type:Object,required:!1},leading:{type:Boolean,required:!1},leadingIcon:{type:String,required:!1},trailing:{type:Boolean,required:!1},trailingIcon:{type:String,required:!1}},setup(t){const a=t,e=E(),d=T(),{orientation:r,size:i}=re(a),{isLeading:y,isTrailing:n,leadingIconName:m,trailingIconName:I}=ie(a),g=p(()=>q({extend:q(be),...d.ui?.badge||{}})({color:a.color,variant:a.variant,size:i.value||a.size,square:a.square||!e.default&&!a.label,buttonGroup:r.value}));return(f,F)=>(l(),z(s(C),{as:t.as,class:v(g.value.base({class:[a.ui?.base,a.class]}))},{default:c(()=>[x(f.$slots,"leading",{},()=>[s(y)&&s(m)?(l(),z(P,{key:0,name:s(m),class:v(g.value.leadingIcon({class:a.ui?.leadingIcon}))},null,8,["name","class"])):t.avatar?(l(),z(ne,B({key:1,size:a.ui?.leadingAvatarSize||g.value.leadingAvatarSize()},t.avatar,{class:g.value.leadingAvatar({class:a.ui?.leadingAvatar})}),null,16,["size","class"])):h("",!0)]),x(f.$slots,"default",{},()=>[t.label!==void 0&&t.label!==null?(l(),b("span",{key:0,class:v(g.value.label({class:a.ui?.label}))},S(t.label),3)):h("",!0)]),x(f.$slots,"trailing",{},()=>[s(n)&&s(I)?(l(),z(P,{key:0,name:s(I),class:v(g.value.trailingIcon({class:a.ui?.trailingIcon}))},null,8,["name","class"])):h("",!0)])]),_:3},8,["as","class"]))}},ze=".card-container[data-v-251821b5]{font-family:var(--ui-font)}",he={},we={class:"card-container"},Ve={class:"flex items-center gap-2"},qe={class:"space-y-3"},$e={class:"flex items-center gap-2"},Ce={class:"flex gap-2"},Ie={class:"flex justify-between items-center text-sm text-gray-500"};function Se(t,a){const e=P,d=_e,r=pe,i=oe,y=ye;return l(),b("div",we,[u(y,{class:"w-full max-w-sm"},{header:c(()=>[_("div",Ve,[u(e,{name:"i-lucide-star",class:"text-yellow-500"}),a[0]||(a[0]=_("h3",{class:"text-lg font-semibold"},"Card XPTO",-1))])]),footer:c(()=>[_("div",Ie,[_("span",null,"Criado em "+S(new Date().toLocaleDateString()),1),u(i,{color:"primary",variant:"ghost",size:"xs"},{default:c(()=>[u(e,{name:"i-lucide-more-horizontal"})]),_:1})])]),default:c(()=>[_("div",qe,[a[5]||(a[5]=_("p",{class:"text-gray-600"}," Card do Edu usando UCard no Nuxt UI web component ",-1)),_("div",$e,[u(d,{color:"success",variant:"soft"},{default:c(()=>[u(e,{name:"i-lucide-check",class:"w-3 h-3"}),a[1]||(a[1]=V(" Funcionando ",-1))]),_:1,__:[1]}),u(d,{color:"warning",variant:"soft"},{default:c(()=>[u(e,{name:"i-lucide-alert-triangle",class:"w-3 h-3"}),a[2]||(a[2]=V(" Atenção ",-1))]),_:1,__:[2]})]),u(r,{value:75,color:"primary"}),_("div",Ce,[u(i,{color:"primary",variant:"solid",size:"sm"},{default:c(()=>[u(e,{name:"i-lucide-heart",class:"w-4 h-4"}),a[3]||(a[3]=V(" Curtir ",-1))]),_:1,__:[3]}),u(i,{color:"primary",variant:"outline",size:"sm"},{default:c(()=>[u(e,{name:"i-lucide-share",class:"w-4 h-4"}),a[4]||(a[4]=V(" Compartilhar ",-1))]),_:1,__:[4]})])])]),_:1})])}const Ae=le(he,[["render",Se],["styles",[ze]],["__scopeId","data-v-251821b5"]]),Ne=Q(Ae,{shadowRoot:!0,styles:[W]});customElements.get("card-xpto")||customElements.define("card-xpto",Ne);export{pe as _};
+Defaulting to \`null\`.`);
+  return null;
+}
+function validateMax(max) {
+  const isValidMaxError = isNumber(max) && !Number.isNaN(max) && max > 0;
+  if (isValidMaxError)
+    return max;
+  console.error(
+    `Invalid prop \`max\` of value \`${max}\` supplied to \`ProgressRoot\`. Only numbers greater than 0 are valid max values. Defaulting to \`${DEFAULT_MAX}\`.`
+  );
+  return DEFAULT_MAX;
+}
+const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+  __name: "ProgressRoot",
+  props: {
+    modelValue: {},
+    max: { default: DEFAULT_MAX },
+    getValueLabel: { type: Function, default: (value, max) => isNumber(value) ? `${Math.round(value / max * DEFAULT_MAX)}%` : void 0 },
+    getValueText: {},
+    asChild: { type: Boolean },
+    as: {}
+  },
+  emits: ["update:modelValue", "update:max"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emit = __emit;
+    useForwardExpose();
+    const modelValue = useVModel(props, "modelValue", emit, {
+      passive: props.modelValue === void 0
+    });
+    const max = useVModel(props, "max", emit, {
+      passive: props.max === void 0
+    });
+    watch(
+      () => modelValue.value,
+      async (value) => {
+        const correctedValue = validateValue(value, props.max);
+        if (correctedValue !== value) {
+          await nextTick();
+          modelValue.value = correctedValue;
+        }
+      },
+      { immediate: true }
+    );
+    watch(
+      () => props.max,
+      (newMax) => {
+        const correctedMax = validateMax(props.max);
+        if (correctedMax !== newMax)
+          max.value = correctedMax;
+      },
+      { immediate: true }
+    );
+    const progressState = computed(() => {
+      if (isNullish(modelValue.value))
+        return "indeterminate";
+      if (modelValue.value === max.value)
+        return "complete";
+      return "loading";
+    });
+    provideProgressRootContext({
+      modelValue,
+      max,
+      progressState
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        "as-child": _ctx.asChild,
+        as: _ctx.as,
+        "aria-valuemax": unref(max),
+        "aria-valuemin": 0,
+        "aria-valuenow": isNumber(unref(modelValue)) ? unref(modelValue) : void 0,
+        "aria-valuetext": _ctx.getValueText?.(unref(modelValue), unref(max)),
+        "aria-label": _ctx.getValueLabel(unref(modelValue), unref(max)),
+        role: "progressbar",
+        "data-state": progressState.value,
+        "data-value": unref(modelValue) ?? void 0,
+        "data-max": unref(max)
+      }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default", { modelValue: unref(modelValue) })
+        ]),
+        _: 3
+      }, 8, ["as-child", "as", "aria-valuemax", "aria-valuenow", "aria-valuetext", "aria-label", "data-state", "data-value", "data-max"]);
+    };
+  }
+});
+const _sfc_main$4 = /* @__PURE__ */ defineComponent({
+  __name: "ProgressIndicator",
+  props: {
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    const props = __props;
+    const rootContext = injectProgressRootContext();
+    useForwardExpose();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), mergeProps(props, {
+        "data-state": unref(rootContext).progressState.value,
+        "data-value": unref(rootContext).modelValue?.value ?? void 0,
+        "data-max": unref(rootContext).max.value
+      }), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16, ["data-state", "data-value", "data-max"]);
+    };
+  }
+});
+const theme$2 = {
+  "slots": {
+    "root": "gap-2",
+    "base": "relative overflow-hidden rounded-full bg-accented",
+    "indicator": "rounded-full size-full transition-transform duration-200 ease-out",
+    "status": "flex justify-end text-dimmed transition-[width] duration-200",
+    "steps": "grid items-end",
+    "step": "truncate text-end row-start-1 col-start-1 transition-opacity"
+  },
+  "variants": {
+    "animation": {
+      "carousel": "",
+      "carousel-inverse": "",
+      "swing": "",
+      "elastic": ""
+    },
+    "color": {
+      "primary": {
+        "indicator": "bg-primary",
+        "steps": "text-primary"
+      },
+      "secondary": {
+        "indicator": "bg-secondary",
+        "steps": "text-secondary"
+      },
+      "success": {
+        "indicator": "bg-success",
+        "steps": "text-success"
+      },
+      "info": {
+        "indicator": "bg-info",
+        "steps": "text-info"
+      },
+      "warning": {
+        "indicator": "bg-warning",
+        "steps": "text-warning"
+      },
+      "error": {
+        "indicator": "bg-error",
+        "steps": "text-error"
+      },
+      "neutral": {
+        "indicator": "bg-inverted",
+        "steps": "text-inverted"
+      }
+    },
+    "size": {
+      "2xs": {
+        "status": "text-xs",
+        "steps": "text-xs"
+      },
+      "xs": {
+        "status": "text-xs",
+        "steps": "text-xs"
+      },
+      "sm": {
+        "status": "text-sm",
+        "steps": "text-sm"
+      },
+      "md": {
+        "status": "text-sm",
+        "steps": "text-sm"
+      },
+      "lg": {
+        "status": "text-sm",
+        "steps": "text-sm"
+      },
+      "xl": {
+        "status": "text-base",
+        "steps": "text-base"
+      },
+      "2xl": {
+        "status": "text-base",
+        "steps": "text-base"
+      }
+    },
+    "step": {
+      "active": {
+        "step": "opacity-100"
+      },
+      "first": {
+        "step": "opacity-100 text-muted"
+      },
+      "other": {
+        "step": "opacity-0"
+      },
+      "last": {
+        "step": ""
+      }
+    },
+    "orientation": {
+      "horizontal": {
+        "root": "w-full flex flex-col",
+        "base": "w-full",
+        "status": "flex-row"
+      },
+      "vertical": {
+        "root": "h-full flex flex-row-reverse",
+        "base": "h-full",
+        "status": "flex-col"
+      }
+    },
+    "inverted": {
+      "true": {
+        "status": "self-end"
+      }
+    }
+  },
+  "compoundVariants": [
+    {
+      "inverted": true,
+      "orientation": "horizontal",
+      "class": {
+        "step": "text-start",
+        "status": "flex-row-reverse"
+      }
+    },
+    {
+      "inverted": true,
+      "orientation": "vertical",
+      "class": {
+        "steps": "items-start",
+        "status": "flex-col-reverse"
+      }
+    },
+    {
+      "orientation": "horizontal",
+      "size": "2xs",
+      "class": "h-px"
+    },
+    {
+      "orientation": "horizontal",
+      "size": "xs",
+      "class": "h-0.5"
+    },
+    {
+      "orientation": "horizontal",
+      "size": "sm",
+      "class": "h-1"
+    },
+    {
+      "orientation": "horizontal",
+      "size": "md",
+      "class": "h-2"
+    },
+    {
+      "orientation": "horizontal",
+      "size": "lg",
+      "class": "h-3"
+    },
+    {
+      "orientation": "horizontal",
+      "size": "xl",
+      "class": "h-4"
+    },
+    {
+      "orientation": "horizontal",
+      "size": "2xl",
+      "class": "h-5"
+    },
+    {
+      "orientation": "vertical",
+      "size": "2xs",
+      "class": "w-px"
+    },
+    {
+      "orientation": "vertical",
+      "size": "xs",
+      "class": "w-0.5"
+    },
+    {
+      "orientation": "vertical",
+      "size": "sm",
+      "class": "w-1"
+    },
+    {
+      "orientation": "vertical",
+      "size": "md",
+      "class": "w-2"
+    },
+    {
+      "orientation": "vertical",
+      "size": "lg",
+      "class": "w-3"
+    },
+    {
+      "orientation": "vertical",
+      "size": "xl",
+      "class": "w-4"
+    },
+    {
+      "orientation": "vertical",
+      "size": "2xl",
+      "class": "w-5"
+    },
+    {
+      "orientation": "horizontal",
+      "animation": "carousel",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"
+      }
+    },
+    {
+      "orientation": "vertical",
+      "animation": "carousel",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[carousel-vertical_2s_ease-in-out_infinite]"
+      }
+    },
+    {
+      "orientation": "horizontal",
+      "animation": "carousel-inverse",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[carousel-inverse_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]"
+      }
+    },
+    {
+      "orientation": "vertical",
+      "animation": "carousel-inverse",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[carousel-inverse-vertical_2s_ease-in-out_infinite]"
+      }
+    },
+    {
+      "orientation": "horizontal",
+      "animation": "swing",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[swing_2s_ease-in-out_infinite]"
+      }
+    },
+    {
+      "orientation": "vertical",
+      "animation": "swing",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[swing-vertical_2s_ease-in-out_infinite]"
+      }
+    },
+    {
+      "orientation": "horizontal",
+      "animation": "elastic",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[elastic_2s_ease-in-out_infinite]"
+      }
+    },
+    {
+      "orientation": "vertical",
+      "animation": "elastic",
+      "class": {
+        "indicator": "data-[state=indeterminate]:animate-[elastic-vertical_2s_ease-in-out_infinite]"
+      }
+    }
+  ],
+  "defaultVariants": {
+    "animation": "carousel",
+    "color": "primary",
+    "size": "md"
+  }
+};
+const _sfc_main$3 = {
+  __name: "Progress",
+  props: {
+    as: { type: null, required: false },
+    max: { type: [Number, Array], required: false },
+    status: { type: Boolean, required: false },
+    inverted: { type: Boolean, required: false, default: false },
+    size: { type: null, required: false },
+    color: { type: null, required: false },
+    orientation: { type: null, required: false, default: "horizontal" },
+    animation: { type: null, required: false },
+    class: { type: null, required: false },
+    ui: { type: null, required: false },
+    getValueLabel: { type: Function, required: false },
+    getValueText: { type: Function, required: false },
+    modelValue: { type: [Number, null], required: false, default: null }
+  },
+  emits: ["update:modelValue", "update:max"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emits = __emit;
+    const slots = useSlots();
+    const { dir } = useLocale();
+    const appConfig = useAppConfig();
+    const rootProps = useForwardPropsEmits(reactivePick(props, "getValueLabel", "getValueText", "modelValue"), emits);
+    const isIndeterminate = computed(() => rootProps.value.modelValue === null);
+    const hasSteps = computed(() => Array.isArray(props.max));
+    const realMax = computed(() => {
+      if (isIndeterminate.value || !props.max) {
+        return void 0;
+      }
+      if (Array.isArray(props.max)) {
+        return props.max.length - 1;
+      }
+      return Number(props.max);
+    });
+    const percent = computed(() => {
+      if (isIndeterminate.value) {
+        return void 0;
+      }
+      switch (true) {
+        case rootProps.value.modelValue < 0:
+          return 0;
+        case rootProps.value.modelValue > (realMax.value ?? 100):
+          return 100;
+        default:
+          return Math.round(rootProps.value.modelValue / (realMax.value ?? 100) * 100);
+      }
+    });
+    const indicatorStyle = computed(() => {
+      if (percent.value === void 0) {
+        return;
+      }
+      if (props.orientation === "vertical") {
+        return {
+          transform: `translateY(${props.inverted ? "" : "-"}${100 - percent.value}%)`
+        };
+      } else {
+        if (dir.value === "rtl") {
+          return {
+            transform: `translateX(${props.inverted ? "-" : ""}${100 - percent.value}%)`
+          };
+        } else {
+          return {
+            transform: `translateX(${props.inverted ? "" : "-"}${100 - percent.value}%)`
+          };
+        }
+      }
+    });
+    const statusStyle = computed(() => {
+      return {
+        [props.orientation === "vertical" ? "height" : "width"]: percent.value ? `${percent.value}%` : "fit-content"
+      };
+    });
+    function isActive(index) {
+      return index === Number(props.modelValue);
+    }
+    function isFirst(index) {
+      return index === 0;
+    }
+    function isLast(index) {
+      return index === realMax.value;
+    }
+    function stepVariant(index) {
+      index = Number(index);
+      if (isActive(index) && !isFirst(index)) {
+        return "active";
+      }
+      if (isFirst(index) && isActive(index)) {
+        return "first";
+      }
+      if (isLast(index) && isActive(index)) {
+        return "last";
+      }
+      return "other";
+    }
+    const ui = computed(() => tv({ extend: tv(theme$2), ...appConfig.ui?.progress || {} })({
+      animation: props.animation,
+      size: props.size,
+      color: props.color,
+      orientation: props.orientation,
+      inverted: props.inverted
+    }));
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        as: __props.as,
+        class: normalizeClass(ui.value.root({ class: [props.ui?.root, props.class] }))
+      }, {
+        default: withCtx(() => [
+          !isIndeterminate.value && (__props.status || !!slots.status) ? (openBlock(), createElementBlock("div", {
+            key: 0,
+            class: normalizeClass(ui.value.status({ class: props.ui?.status })),
+            style: normalizeStyle(statusStyle.value)
+          }, [
+            renderSlot(_ctx.$slots, "status", { percent: percent.value }, () => [
+              createTextVNode(toDisplayString(percent.value) + "% ", 1)
+            ])
+          ], 6)) : createCommentVNode("", true),
+          createVNode(unref(_sfc_main$5), mergeProps(unref(rootProps), {
+            max: realMax.value,
+            class: ui.value.base({ class: props.ui?.base }),
+            style: { "transform": "translateZ(0)" }
+          }), {
+            default: withCtx(() => [
+              createVNode(unref(_sfc_main$4), {
+                class: normalizeClass(ui.value.indicator({ class: props.ui?.indicator })),
+                style: normalizeStyle(indicatorStyle.value)
+              }, null, 8, ["class", "style"])
+            ]),
+            _: 1
+          }, 16, ["max", "class"]),
+          hasSteps.value ? (openBlock(), createElementBlock("div", {
+            key: 1,
+            class: normalizeClass(ui.value.steps({ class: props.ui?.steps }))
+          }, [
+            (openBlock(true), createElementBlock(Fragment, null, renderList(__props.max, (step, index) => {
+              return openBlock(), createElementBlock("div", {
+                key: index,
+                class: normalizeClass(ui.value.step({ class: props.ui?.step, step: stepVariant(index) }))
+              }, [
+                renderSlot(_ctx.$slots, `step-${index}`, { step }, () => [
+                  createTextVNode(toDisplayString(step), 1)
+                ])
+              ], 2);
+            }), 128))
+          ], 2)) : createCommentVNode("", true)
+        ]),
+        _: 3
+      }, 8, ["as", "class"]);
+    };
+  }
+};
+const theme$1 = {
+  "slots": {
+    "root": "rounded-lg overflow-hidden",
+    "header": "p-4 sm:px-6",
+    "body": "p-4 sm:p-6",
+    "footer": "p-4 sm:px-6"
+  },
+  "variants": {
+    "variant": {
+      "solid": {
+        "root": "bg-inverted text-inverted"
+      },
+      "outline": {
+        "root": "bg-default ring ring-default divide-y divide-default"
+      },
+      "soft": {
+        "root": "bg-elevated/50 divide-y divide-default"
+      },
+      "subtle": {
+        "root": "bg-elevated/50 ring ring-default divide-y divide-default"
+      }
+    }
+  },
+  "defaultVariants": {
+    "variant": "outline"
+  }
+};
+const _sfc_main$2 = {
+  __name: "Card",
+  props: {
+    as: { type: null, required: false },
+    variant: { type: null, required: false },
+    class: { type: null, required: false },
+    ui: { type: null, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const slots = useSlots();
+    const appConfig = useAppConfig();
+    const ui = computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.card || {} })({
+      variant: props.variant
+    }));
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        as: __props.as,
+        class: normalizeClass(ui.value.root({ class: [props.ui?.root, props.class] }))
+      }, {
+        default: withCtx(() => [
+          !!slots.header ? (openBlock(), createElementBlock("div", {
+            key: 0,
+            class: normalizeClass(ui.value.header({ class: props.ui?.header }))
+          }, [
+            renderSlot(_ctx.$slots, "header")
+          ], 2)) : createCommentVNode("", true),
+          !!slots.default ? (openBlock(), createElementBlock("div", {
+            key: 1,
+            class: normalizeClass(ui.value.body({ class: props.ui?.body }))
+          }, [
+            renderSlot(_ctx.$slots, "default")
+          ], 2)) : createCommentVNode("", true),
+          !!slots.footer ? (openBlock(), createElementBlock("div", {
+            key: 2,
+            class: normalizeClass(ui.value.footer({ class: props.ui?.footer }))
+          }, [
+            renderSlot(_ctx.$slots, "footer")
+          ], 2)) : createCommentVNode("", true)
+        ]),
+        _: 3
+      }, 8, ["as", "class"]);
+    };
+  }
+};
+const theme = {
+  "slots": {
+    "base": "font-medium inline-flex items-center",
+    "label": "truncate",
+    "leadingIcon": "shrink-0",
+    "leadingAvatar": "shrink-0",
+    "leadingAvatarSize": "",
+    "trailingIcon": "shrink-0"
+  },
+  "variants": {
+    "buttonGroup": {
+      "horizontal": "not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1]",
+      "vertical": "not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none focus-visible:z-[1]"
+    },
+    "color": {
+      "primary": "",
+      "secondary": "",
+      "success": "",
+      "info": "",
+      "warning": "",
+      "error": "",
+      "neutral": ""
+    },
+    "variant": {
+      "solid": "",
+      "outline": "",
+      "soft": "",
+      "subtle": ""
+    },
+    "size": {
+      "xs": {
+        "base": "text-[8px]/3 px-1 py-0.5 gap-1 rounded-sm",
+        "leadingIcon": "size-3",
+        "leadingAvatarSize": "3xs",
+        "trailingIcon": "size-3"
+      },
+      "sm": {
+        "base": "text-[10px]/3 px-1.5 py-1 gap-1 rounded-sm",
+        "leadingIcon": "size-3",
+        "leadingAvatarSize": "3xs",
+        "trailingIcon": "size-3"
+      },
+      "md": {
+        "base": "text-xs px-2 py-1 gap-1 rounded-md",
+        "leadingIcon": "size-4",
+        "leadingAvatarSize": "3xs",
+        "trailingIcon": "size-4"
+      },
+      "lg": {
+        "base": "text-sm px-2 py-1 gap-1.5 rounded-md",
+        "leadingIcon": "size-5",
+        "leadingAvatarSize": "2xs",
+        "trailingIcon": "size-5"
+      },
+      "xl": {
+        "base": "text-base px-2.5 py-1 gap-1.5 rounded-md",
+        "leadingIcon": "size-6",
+        "leadingAvatarSize": "2xs",
+        "trailingIcon": "size-6"
+      }
+    },
+    "square": {
+      "true": ""
+    }
+  },
+  "compoundVariants": [
+    {
+      "color": "primary",
+      "variant": "solid",
+      "class": "bg-primary text-inverted"
+    },
+    {
+      "color": "secondary",
+      "variant": "solid",
+      "class": "bg-secondary text-inverted"
+    },
+    {
+      "color": "success",
+      "variant": "solid",
+      "class": "bg-success text-inverted"
+    },
+    {
+      "color": "info",
+      "variant": "solid",
+      "class": "bg-info text-inverted"
+    },
+    {
+      "color": "warning",
+      "variant": "solid",
+      "class": "bg-warning text-inverted"
+    },
+    {
+      "color": "error",
+      "variant": "solid",
+      "class": "bg-error text-inverted"
+    },
+    {
+      "color": "primary",
+      "variant": "outline",
+      "class": "text-primary ring ring-inset ring-primary/50"
+    },
+    {
+      "color": "secondary",
+      "variant": "outline",
+      "class": "text-secondary ring ring-inset ring-secondary/50"
+    },
+    {
+      "color": "success",
+      "variant": "outline",
+      "class": "text-success ring ring-inset ring-success/50"
+    },
+    {
+      "color": "info",
+      "variant": "outline",
+      "class": "text-info ring ring-inset ring-info/50"
+    },
+    {
+      "color": "warning",
+      "variant": "outline",
+      "class": "text-warning ring ring-inset ring-warning/50"
+    },
+    {
+      "color": "error",
+      "variant": "outline",
+      "class": "text-error ring ring-inset ring-error/50"
+    },
+    {
+      "color": "primary",
+      "variant": "soft",
+      "class": "bg-primary/10 text-primary"
+    },
+    {
+      "color": "secondary",
+      "variant": "soft",
+      "class": "bg-secondary/10 text-secondary"
+    },
+    {
+      "color": "success",
+      "variant": "soft",
+      "class": "bg-success/10 text-success"
+    },
+    {
+      "color": "info",
+      "variant": "soft",
+      "class": "bg-info/10 text-info"
+    },
+    {
+      "color": "warning",
+      "variant": "soft",
+      "class": "bg-warning/10 text-warning"
+    },
+    {
+      "color": "error",
+      "variant": "soft",
+      "class": "bg-error/10 text-error"
+    },
+    {
+      "color": "primary",
+      "variant": "subtle",
+      "class": "bg-primary/10 text-primary ring ring-inset ring-primary/25"
+    },
+    {
+      "color": "secondary",
+      "variant": "subtle",
+      "class": "bg-secondary/10 text-secondary ring ring-inset ring-secondary/25"
+    },
+    {
+      "color": "success",
+      "variant": "subtle",
+      "class": "bg-success/10 text-success ring ring-inset ring-success/25"
+    },
+    {
+      "color": "info",
+      "variant": "subtle",
+      "class": "bg-info/10 text-info ring ring-inset ring-info/25"
+    },
+    {
+      "color": "warning",
+      "variant": "subtle",
+      "class": "bg-warning/10 text-warning ring ring-inset ring-warning/25"
+    },
+    {
+      "color": "error",
+      "variant": "subtle",
+      "class": "bg-error/10 text-error ring ring-inset ring-error/25"
+    },
+    {
+      "color": "neutral",
+      "variant": "solid",
+      "class": "text-inverted bg-inverted"
+    },
+    {
+      "color": "neutral",
+      "variant": "outline",
+      "class": "ring ring-inset ring-accented text-default bg-default"
+    },
+    {
+      "color": "neutral",
+      "variant": "soft",
+      "class": "text-default bg-elevated"
+    },
+    {
+      "color": "neutral",
+      "variant": "subtle",
+      "class": "ring ring-inset ring-accented text-default bg-elevated"
+    },
+    {
+      "size": "xs",
+      "square": true,
+      "class": "p-0.5"
+    },
+    {
+      "size": "sm",
+      "square": true,
+      "class": "p-1"
+    },
+    {
+      "size": "md",
+      "square": true,
+      "class": "p-1"
+    },
+    {
+      "size": "lg",
+      "square": true,
+      "class": "p-1"
+    },
+    {
+      "size": "xl",
+      "square": true,
+      "class": "p-1"
+    }
+  ],
+  "defaultVariants": {
+    "color": "primary",
+    "variant": "solid",
+    "size": "md"
+  }
+};
+const _sfc_main$1 = {
+  __name: "Badge",
+  props: {
+    as: { type: null, required: false, default: "span" },
+    label: { type: [String, Number], required: false },
+    color: { type: null, required: false },
+    variant: { type: null, required: false },
+    size: { type: null, required: false },
+    square: { type: Boolean, required: false },
+    class: { type: null, required: false },
+    ui: { type: null, required: false },
+    icon: { type: String, required: false },
+    avatar: { type: Object, required: false },
+    leading: { type: Boolean, required: false },
+    leadingIcon: { type: String, required: false },
+    trailing: { type: Boolean, required: false },
+    trailingIcon: { type: String, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const slots = useSlots();
+    const appConfig = useAppConfig();
+    const { orientation, size: buttonGroupSize } = useButtonGroup(props);
+    const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
+    const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.badge || {} })({
+      color: props.color,
+      variant: props.variant,
+      size: buttonGroupSize.value || props.size,
+      square: props.square || !slots.default && !props.label,
+      buttonGroup: orientation.value
+    }));
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        as: __props.as,
+        class: normalizeClass(ui.value.base({ class: [props.ui?.base, props.class] }))
+      }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "leading", {}, () => [
+            unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$6, {
+              key: 0,
+              name: unref(leadingIconName),
+              class: normalizeClass(ui.value.leadingIcon({ class: props.ui?.leadingIcon }))
+            }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$7, mergeProps({
+              key: 1,
+              size: props.ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
+            }, __props.avatar, {
+              class: ui.value.leadingAvatar({ class: props.ui?.leadingAvatar })
+            }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+          ]),
+          renderSlot(_ctx.$slots, "default", {}, () => [
+            __props.label !== void 0 && __props.label !== null ? (openBlock(), createElementBlock("span", {
+              key: 0,
+              class: normalizeClass(ui.value.label({ class: props.ui?.label }))
+            }, toDisplayString(__props.label), 3)) : createCommentVNode("", true)
+          ]),
+          renderSlot(_ctx.$slots, "trailing", {}, () => [
+            unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$6, {
+              key: 0,
+              name: unref(trailingIconName),
+              class: normalizeClass(ui.value.trailingIcon({ class: props.ui?.trailingIcon }))
+            }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+          ])
+        ]),
+        _: 3
+      }, 8, ["as", "class"]);
+    };
+  }
+};
+const _style_0 = "\n.card-container[data-v-251821b5] {\n  font-family: var(--ui-font);\n}\n";
+const _sfc_main = {};
+const _hoisted_1 = { class: "card-container" };
+const _hoisted_2 = { class: "flex items-center gap-2" };
+const _hoisted_3 = { class: "space-y-3" };
+const _hoisted_4 = { class: "flex items-center gap-2" };
+const _hoisted_5 = { class: "flex gap-2" };
+const _hoisted_6 = { class: "flex justify-between items-center text-sm text-gray-500" };
+function _sfc_render(_ctx, _cache) {
+  const _component_UIcon = _sfc_main$6;
+  const _component_UBadge = _sfc_main$1;
+  const _component_UProgress = _sfc_main$3;
+  const _component_UButton = _sfc_main$8;
+  const _component_UCard = _sfc_main$2;
+  return openBlock(), createElementBlock("div", _hoisted_1, [
+    createVNode(_component_UCard, { class: "w-full max-w-sm" }, {
+      header: withCtx(() => [
+        createBaseVNode("div", _hoisted_2, [
+          createVNode(_component_UIcon, {
+            name: "i-lucide-star",
+            class: "text-yellow-500"
+          }),
+          _cache[0] || (_cache[0] = createBaseVNode("h3", { class: "text-lg font-semibold" }, "Card XPTO", -1))
+        ])
+      ]),
+      footer: withCtx(() => [
+        createBaseVNode("div", _hoisted_6, [
+          createBaseVNode("span", null, "Criado em " + toDisplayString((/* @__PURE__ */ new Date()).toLocaleDateString()), 1),
+          createVNode(_component_UButton, {
+            color: "primary",
+            variant: "ghost",
+            size: "xs"
+          }, {
+            default: withCtx(() => [
+              createVNode(_component_UIcon, { name: "i-lucide-more-horizontal" })
+            ]),
+            _: 1
+          })
+        ])
+      ]),
+      default: withCtx(() => [
+        createBaseVNode("div", _hoisted_3, [
+          _cache[5] || (_cache[5] = createBaseVNode("p", { class: "text-gray-600" }, " Card do Edu usando UCard no Nuxt UI web component ", -1)),
+          createBaseVNode("div", _hoisted_4, [
+            createVNode(_component_UBadge, {
+              color: "success",
+              variant: "soft"
+            }, {
+              default: withCtx(() => [
+                createVNode(_component_UIcon, {
+                  name: "i-lucide-check",
+                  class: "w-3 h-3"
+                }),
+                _cache[1] || (_cache[1] = createTextVNode(" Funcionando ", -1))
+              ]),
+              _: 1,
+              __: [1]
+            }),
+            createVNode(_component_UBadge, {
+              color: "warning",
+              variant: "soft"
+            }, {
+              default: withCtx(() => [
+                createVNode(_component_UIcon, {
+                  name: "i-lucide-alert-triangle",
+                  class: "w-3 h-3"
+                }),
+                _cache[2] || (_cache[2] = createTextVNode(" Atenção ", -1))
+              ]),
+              _: 1,
+              __: [2]
+            })
+          ]),
+          createVNode(_component_UProgress, {
+            value: 75,
+            color: "primary"
+          }),
+          createBaseVNode("div", _hoisted_5, [
+            createVNode(_component_UButton, {
+              color: "primary",
+              variant: "solid",
+              size: "sm"
+            }, {
+              default: withCtx(() => [
+                createVNode(_component_UIcon, {
+                  name: "i-lucide-heart",
+                  class: "w-4 h-4"
+                }),
+                _cache[3] || (_cache[3] = createTextVNode(" Curtir ", -1))
+              ]),
+              _: 1,
+              __: [3]
+            }),
+            createVNode(_component_UButton, {
+              color: "primary",
+              variant: "outline",
+              size: "sm"
+            }, {
+              default: withCtx(() => [
+                createVNode(_component_UIcon, {
+                  name: "i-lucide-share",
+                  class: "w-4 h-4"
+                }),
+                _cache[4] || (_cache[4] = createTextVNode(" Compartilhar ", -1))
+              ]),
+              _: 1,
+              __: [4]
+            })
+          ])
+        ])
+      ]),
+      _: 1
+    })
+  ]);
+}
+const CardXPTO = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__scopeId", "data-v-251821b5"]]);
+const CardXPTElement = defineCustomElement(CardXPTO, {
+  shadowRoot: true,
+  styles: [tailwindStyles]
+});
+if (!customElements.get("card-xpto")) {
+  customElements.define("card-xpto", CardXPTElement);
+}
+export {
+  _sfc_main$3 as _
+};

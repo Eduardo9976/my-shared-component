@@ -1,6 +1,8 @@
 <template>
   <UApp>
     <the-header />
+    <shared-button />
+    <card-xpto />
   </UApp>
 </template>
 

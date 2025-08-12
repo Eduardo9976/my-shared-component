@@ -64,15 +64,12 @@ export default defineConfig({
             return 'the-header.css'
           }
           return '[name].[ext]'
-        },
-        manualChunks: {
-          'me-icon': ['@mercadoeletronico/me-icon']
         }
       }
     },
-    cssCodeSplit: true,
-    assetsInlineLimit: 4096,
-    minify: true,
-    cssMinify: true
+    cssCodeSplit: false,
+    assetsInlineLimit: 0,
+    minify: false,
+    cssMinify: false
   }
 })

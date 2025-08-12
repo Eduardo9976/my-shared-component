@@ -1,5 +1,7135 @@
-import{F as cn,d as Be,N as Yn,n as H,a6 as Zn,av as de,aq as bt,aS as er,as as un,aY as dn,ar as pe,i as xe,bf as Se,b4 as Ge,bm as U,g as I,ae as fn,h as tr,a as Q,x as pn,j as gn,u as T,aF as Z,J as bn,bj as nr,a4 as hn,D as ht,aK as Pe,G as Me,t as Ye,k as rr,c as D,o as N,aP as or,bt as sr,w as J,m as vn,l as Ve,b as qe,q as Re,s as ir,r as W,A as ae,e as ar,f as vt,B as Pt,y as lr}from"./main.js";function yn(e){return e?e.flatMap(t=>t.type===cn?yn(t.children):[t]):[]}const yt=Be({name:"PrimitiveSlot",inheritAttrs:!1,setup(e,{attrs:t,slots:n}){return()=>{if(!n.default)return null;const r=yn(n.default()),o=r.findIndex(l=>l.type!==Yn);if(o===-1)return r;const s=r[o];delete s.props?.ref;const i=s.props?H(t,s.props):t,a=Zn({...s,props:{}},i);return r.length===1?a:(r[o]=a,r)}}}),cr=["area","img","input"],mt=Be({name:"Primitive",inheritAttrs:!1,props:{asChild:{type:Boolean,default:!1},as:{type:[String,Object],default:"div"}},setup(e,{attrs:t,slots:n}){const r=e.asChild?"template":e.as;return typeof r=="string"&&cr.includes(r)?()=>de(r,t):r!=="template"?()=>de(e.as,t,{default:n.default}):()=>de(yt,t,{default:n.default})}});function hi(e,t){var n;const r=Se();return tr(()=>{r.value=e()},{...t,flush:(n=void 0)!=null?n:"sync"}),Ge(r)}function Ce(e){return un()?(dn(e),!0):!1}function vi(e){let t=!1,n;const r=bt(!0);return(...o)=>(t||(n=r.run(()=>e(...o)),t=!0),n)}function yi(e){let t=0,n,r;const o=()=>{t-=1,r&&t<=0&&(r.stop(),n=void 0,r=void 0)};return(...s)=>(t+=1,r||(r=bt(!0),n=r.run(()=>e(...s))),Ce(o),n)}const xt=typeof window<"u"&&typeof document<"u";typeof WorkerGlobalScope<"u"&&globalThis instanceof WorkerGlobalScope;const ur=e=>typeof e<"u",dr=Object.prototype.toString,fr=e=>dr.call(e)==="[object Object]",pr=()=>{},mi=gr();function gr(){var e,t;return xt&&((e=window?.navigator)==null?void 0:e.userAgent)&&(/iP(?:ad|hone|od)/.test(window.navigator.userAgent)||((t=window?.navigator)==null?void 0:t.maxTouchPoints)>2&&/iPad|Macintosh/.test(window?.navigator.userAgent))}function br(e){return pe()}function He(e){return Array.isArray(e)?e:[e]}function xi(e,t=1e4){return fn((n,r)=>{let o=U(e),s;const i=()=>setTimeout(()=>{o=U(e),r()},U(t));return Ce(()=>{clearTimeout(s)}),{get(){return n(),o},set(a){o=a,r(),clearTimeout(s),s=i()}}})}function wi(e,t){br()&&er(e,t)}function hr(e,t,n={}){const{immediate:r=!0,immediateCallback:o=!1}=n,s=Se(!1);let i=null;function a(){i&&(clearTimeout(i),i=null)}function l(){s.value=!1,a()}function c(...u){o&&e(),a(),s.value=!0,i=setTimeout(()=>{s.value=!1,i=null,e(...u)},U(t))}return r&&(s.value=!0,xt&&c()),Ce(l),{isPending:Ge(s),start:c,stop:l}}function ki(e=1e3,t={}){const{controls:n=!1,callback:r}=t,o=hr(r??pr,e,t),s=I(()=>!o.isPending.value);return n?{ready:s,...o}:s}function vr(e,t,n){return xe(e,t,{...n,immediate:!0})}const wt=xt?window:void 0;function mn(e){var t;const n=U(e);return(t=n?.$el)!=null?t:n}function yr(...e){const t=[],n=()=>{t.forEach(a=>a()),t.length=0},r=(a,l,c,u)=>(a.addEventListener(l,c,u),()=>a.removeEventListener(l,c,u)),o=I(()=>{const a=He(U(e[0])).filter(l=>l!=null);return a.every(l=>typeof l!="string")?a:void 0}),s=vr(()=>{var a,l;return[(l=(a=o.value)==null?void 0:a.map(c=>mn(c)))!=null?l:[wt].filter(c=>c!=null),He(U(o.value?e[1]:e[0])),He(T(o.value?e[2]:e[1])),U(o.value?e[3]:e[2])]},([a,l,c,u])=>{if(n(),!a?.length||!l?.length||!c?.length)return;const f=fr(u)?{...u}:u;t.push(...a.flatMap(h=>l.flatMap(v=>c.map(x=>r(h,v,x,f)))))},{flush:"post"}),i=()=>{s(),n()};return Ce(n),i}function Si(){const e=Se(!1),t=pe();return t&&gn(()=>{e.value=!0},t),e}function mr(e){return typeof e=="function"?e:typeof e=="string"?t=>t.key===e:Array.isArray(e)?t=>e.includes(t.key):()=>!0}function Ci(...e){let t,n,r={};e.length===3?(t=e[0],n=e[1],r=e[2]):e.length===2?typeof e[1]=="object"?(t=!0,n=e[0],r=e[1]):(t=e[0],n=e[1]):(t=!0,n=e[0]);const{target:o=wt,eventName:s="keydown",passive:i=!1,dedupe:a=!1}=r,l=mr(t);return yr(o,s,u=>{u.repeat&&U(a)||l(u)&&n(u)},i)}function Ai(e,t={}){const{immediate:n=!0,fpsLimit:r=void 0,window:o=wt,once:s=!1}=t,i=Se(!1),a=I(()=>r?1e3/U(r):null);let l=0,c=null;function u(v){if(!i.value||!o)return;l||(l=v);const x=v-l;if(a.value&&x<a.value){c=o.requestAnimationFrame(u);return}if(l=v,e({delta:x,timestamp:v}),s){i.value=!1,c=null;return}c=o.requestAnimationFrame(u)}function f(){!i.value&&o&&(i.value=!0,l=0,c=o.requestAnimationFrame(u))}function h(){i.value=!1,c!=null&&o&&(o.cancelAnimationFrame(c),c=null)}return n&&f(),Ce(h),{isActive:Ge(i),pause:h,resume:f}}function xr(e){return JSON.parse(JSON.stringify(e))}function Ii(e,t,n,r={}){var o,s,i;const{clone:a=!1,passive:l=!1,eventName:c,deep:u=!1,defaultValue:f,shouldEmit:h}=r,v=pe(),x=n||v?.emit||((o=v?.$emit)==null?void 0:o.bind(v))||((i=(s=v?.proxy)==null?void 0:s.$emit)==null?void 0:i.bind(v?.proxy));let m=c;t||(t="modelValue"),m=m||`update:${t.toString()}`;const p=z=>a?typeof a=="function"?a(z):xr(z):z,M=()=>ur(e[t])?p(e[t]):f,w=z=>{h?h(z)&&x(m,z):x(m,z)};if(l){const z=M(),E=Q(z);let B=!1;return xe(()=>e[t],d=>{B||(B=!0,E.value=p(d),pn(()=>B=!1))}),xe(E,d=>{!B&&(d!==e[t]||u)&&w(d)},{deep:u}),E}else return I({get(){return M()},set(z){w(z)}})}function Oi(e,t){const n=typeof e=="string"&&!t?`${e}Context`:t,r=Symbol(n);return[i=>{const a=Z(r,i);if(a||a===null)return a;throw new Error(`Injection \`${r.toString()}\` not found. Component must be used within ${Array.isArray(e)?`one of the following components: ${e.join(", ")}`:`\`${e}\``}`)},i=>(bn(r,i),i)]}function Ze(e){return typeof e=="string"?`'${e}'`:new wr().serialize(e)}const wr=function(){class e{#e=new Map;compare(n,r){const o=typeof n,s=typeof r;return o==="string"&&s==="string"?n.localeCompare(r):o==="number"&&s==="number"?n-r:String.prototype.localeCompare.call(this.serialize(n,!0),this.serialize(r,!0))}serialize(n,r){if(n===null)return"null";switch(typeof n){case"string":return r?n:`'${n}'`;case"bigint":return`${n}n`;case"object":return this.$object(n);case"function":return this.$function(n)}return String(n)}serializeObject(n){const r=Object.prototype.toString.call(n);if(r!=="[object Object]")return this.serializeBuiltInType(r.length<10?`unknown:${r}`:r.slice(8,-1),n);const o=n.constructor,s=o===Object||o===void 0?"":o.name;if(s!==""&&globalThis[s]===o)return this.serializeBuiltInType(s,n);if(typeof n.toJSON=="function"){const i=n.toJSON();return s+(i!==null&&typeof i=="object"?this.$object(i):`(${this.serialize(i)})`)}return this.serializeObjectEntries(s,Object.entries(n))}serializeBuiltInType(n,r){const o=this["$"+n];if(o)return o.call(this,r);if(typeof r?.entries=="function")return this.serializeObjectEntries(n,r.entries());throw new Error(`Cannot serialize ${n}`)}serializeObjectEntries(n,r){const o=Array.from(r).sort((i,a)=>this.compare(i[0],a[0]));let s=`${n}{`;for(let i=0;i<o.length;i++){const[a,l]=o[i];s+=`${this.serialize(a,!0)}:${this.serialize(l)}`,i<o.length-1&&(s+=",")}return s+"}"}$object(n){let r=this.#e.get(n);return r===void 0&&(this.#e.set(n,`#${this.#e.size}`),r=this.serializeObject(n),this.#e.set(n,r)),r}$function(n){const r=Function.prototype.toString.call(n);return r.slice(-15)==="[native code] }"?`${n.name||""}()[native]`:`${n.name}(${n.length})${r.replace(/\s*\n\s*/g,"")}`}$Array(n){let r="[";for(let o=0;o<n.length;o++)r+=this.serialize(n[o]),o<n.length-1&&(r+=",");return r+"]"}$Date(n){try{return`Date(${n.toISOString()})`}catch{return"Date(null)"}}$ArrayBuffer(n){return`ArrayBuffer[${new Uint8Array(n).join(",")}]`}$Set(n){return`Set${this.$Array(Array.from(n).sort((r,o)=>this.compare(r,o)))}`}$Map(n){return this.serializeObjectEntries("Map",n.entries())}}for(const t of["Error","RegExp","URL"])e.prototype["$"+t]=function(n){return`${t}(${n})`};for(const t of["Int8Array","Uint8Array","Uint8ClampedArray","Int16Array","Uint16Array","Int32Array","Uint32Array","Float32Array","Float64Array"])e.prototype["$"+t]=function(n){return`${t}[${n.join(",")}]`};for(const t of["BigInt64Array","BigUint64Array"])e.prototype["$"+t]=function(n){return`${t}[${n.join("n,")}${n.length>0?"n":""}]`};return e}();function xn(e,t){return e===t||Ze(e)===Ze(t)}function ji(e){return e==null}function zi(){const e=pe(),t=Q(),n=I(()=>["#text","#comment"].includes(t.value?.$el.nodeName)?t.value?.$el.nextElementSibling:mn(t)),r=Object.assign({},e.exposed),o={};for(const i in e.props)Object.defineProperty(o,i,{enumerable:!0,configurable:!0,get:()=>e.props[i]});if(Object.keys(r).length>0)for(const i in r)Object.defineProperty(o,i,{enumerable:!0,configurable:!0,get:()=>r[i]});Object.defineProperty(o,"$el",{enumerable:!0,configurable:!0,get:()=>e.vnode.el}),e.exposed=o;function s(i){t.value=i,i&&(Object.defineProperty(o,"$el",{enumerable:!0,configurable:!0,get:()=>i instanceof Element?i:i.$el}),e.exposed=o)}return{forwardRef:s,currentRef:t,currentElement:n}}function kr(e){const t=pe(),n=t?.type.emits,r={};return n?.length||console.warn(`No emitted event found. Please check component: ${t?.type.__name}`),n?.forEach(o=>{r[nr(hn(o))]=(...s)=>e(o,...s)}),r}function Ue(e){if(e===null||typeof e!="object")return!1;const t=Object.getPrototypeOf(e);return t!==null&&t!==Object.prototype&&Object.getPrototypeOf(t)!==null||Symbol.iterator in e?!1:Symbol.toStringTag in e?Object.prototype.toString.call(e)==="[object Module]":!0}function et(e,t,n=".",r){if(!Ue(t))return et(e,{},n,r);const o=Object.assign({},t);for(const s in e){if(s==="__proto__"||s==="constructor")continue;const i=e[s];i!=null&&(r&&r(o,s,i,n)||(Array.isArray(i)&&Array.isArray(o[s])?o[s]=[...i,...o[s]]:Ue(i)&&Ue(o[s])?o[s]=et(i,o[s],(n?`${n}.`:"")+s.toString(),r):o[s]=i))}return o}function Sr(e){return(...t)=>t.reduce((n,r)=>et(n,r,"",e),{})}const kt=Sr();function St(e){const t=pe(),n=Object.keys(t?.type.props??{}).reduce((o,s)=>{const i=(t?.type.props[s]).default;return i!==void 0&&(o[s]=i),o},{}),r=ht(e);return I(()=>{const o={},s=t?.vnode.props??{};return Object.keys(s).forEach(i=>{o[hn(i)]=s[i]}),Object.keys({...n,...o}).reduce((i,a)=>(r.value[a]!==void 0&&(i[a]=r.value[a]),i),{})})}function Pi(e,t){const n=St(e),r=t?kr(t):{};return I(()=>({...n.value,...r}))}function Cr(e){return un()?(dn(e),!0):!1}function Ar(e){let t=0,n,r;const o=()=>{t-=1,r&&t<=0&&(r.stop(),n=void 0,r=void 0)};return(...s)=>(t+=1,r||(r=bt(!0),n=r.run(()=>e(...s))),Cr(o),n)}function qi(e,t){if(typeof Symbol<"u"){const n={...e};return Object.defineProperty(n,Symbol.iterator,{enumerable:!1,value(){let r=0;return{next:()=>({value:t[r++],done:r>t.length})}}}),n}else return Object.assign([...t],e)}function Ir(e){if(!Pe(e))return Me(e);const t=new Proxy({},{get(n,r,o){return T(Reflect.get(e.value,r,o))},set(n,r,o){return Pe(e.value[r])&&!Pe(o)?e.value[r].value=o:e.value[r]=o,!0},deleteProperty(n,r){return Reflect.deleteProperty(e.value,r)},has(n,r){return Reflect.has(e.value,r)},ownKeys(){return Object.keys(e.value)},getOwnPropertyDescriptor(){return{enumerable:!0,configurable:!0}}});return Me(t)}function wn(e){return Ir(I(e))}function Or(e,...t){const n=t.flat(),r=n[0];return wn(()=>Object.fromEntries(typeof r=="function"?Object.entries(Ye(e)).filter(([o,s])=>!r(U(s),o)):Object.entries(Ye(e)).filter(o=>!n.includes(o[0]))))}typeof WorkerGlobalScope<"u"&&globalThis instanceof WorkerGlobalScope;const jr=()=>{};function zr(...e){if(e.length!==1)return ht(...e);const t=e[0];return typeof t=="function"?Ge(fn(()=>({get:t,set:jr}))):Q(t)}function Pr(e,...t){const n=t.flat(),r=n[0];return wn(()=>Object.fromEntries(typeof r=="function"?Object.entries(Ye(e)).filter(([o,s])=>r(U(s),o)):n.map(o=>[o,zr(e,o)])))}function qr(e){const t=Object.create(null);return n=>t[n]||(t[n]=e(n))}const $r=/-(\w)/g,$i=qr(e=>e.replace($r,(t,n)=>n?n.toUpperCase():""));function Er(e,t){const n=tt(e),r=tt(t);return kn(n,r)}function kn(e,t){const n=[],r=new Set([...Object.keys(e.props||{}),...Object.keys(t.props||{})]);if(e.props&&t.props)for(const o of r){const s=e.props[o],i=t.props[o];s&&i?n.push(...kn(e.props?.[o],t.props?.[o])):(s||i)&&n.push(new qt((i||s).key,s?"removed":"added",i,s))}return r.size===0&&e.hash!==t.hash&&n.push(new qt((t||e).key,"changed",t,e)),n}function tt(e,t=""){if(e&&typeof e!="object")return new $t(t,e,Ze(e));const n={},r=[];for(const o in e)n[o]=tt(e[o],t?`${t}.${o}`:o),r.push(n[o].hash);return new $t(t,e,`{${r.join(":")}}`,n)}class qt{constructor(t,n,r,o){this.key=t,this.type=n,this.newValue=r,this.oldValue=o}toString(){return this.toJSON()}toJSON(){switch(this.type){case"added":return`Added   \`${this.key}\``;case"removed":return`Removed \`${this.key}\``;case"changed":return`Changed \`${this.key}\` from \`${this.oldValue?.toString()||"-"}\` to \`${this.newValue.toString()}\``}}}class $t{constructor(t,n,r,o){this.key=t,this.value=n,this.hash=r,this.props=o}toString(){return this.props?`{${Object.keys(this.props).join(",")}}`:JSON.stringify(this.value)}toJSON(){const t=this.key||".";return this.props?`${t}({${Object.keys(this.props).join(",")}})`:`${t}(${this.value})`}}function Tr(e,t){const n={...e};for(const r of t)delete n[r];return n}function Mr(e,t,n){typeof t=="string"&&(t=t.split(".").map(o=>{const s=Number(o);return Number.isNaN(s)?o:s}));let r=e;for(const o of t){if(r==null)return n;r=r[o]}return r!==void 0?r:n}function Ei(e){return Array.isArray(e[0])}function Et(e,t){return!e&&!t?"":[...Array.isArray(e)?e:[e],t].filter(Boolean)}function Rr(e){return(t,n)=>Lr(t,n,T(e))}function Lr(e,t,n){return Mr(n,`messages.${e}`,e).replace(/\{(\w+)\}/g,(o,s)=>`${t?.[s]??`{${s}}`}`)}function Nr(e){const t=I(()=>T(e).name),n=I(()=>T(e).code),r=I(()=>T(e).dir),o=Pe(e)?e:Q(e);return{lang:t,code:n,dir:r,locale:o,t:Rr(e)}}function Br(e){return kt(e,{dir:"ltr"})}const Tt=Br({name:"English",code:"en",messages:{inputMenu:{noMatch:"No matching data",noData:"No data",create:'Create "{label}"'},calendar:{prevYear:"Previous year",nextYear:"Next year",prevMonth:"Previous month",nextMonth:"Next month"},inputNumber:{increment:"Increment",decrement:"Decrement"},commandPalette:{placeholder:"Type a command or search...",noMatch:"No matching data",noData:"No data",close:"Close",back:"Back"},selectMenu:{noMatch:"No matching data",noData:"No data",create:'Create "{label}"',search:"Search..."},toast:{close:"Close"},carousel:{prev:"Prev",next:"Next",dots:"Choose slide to display",goto:"Go to slide {slide}"},modal:{close:"Close"},slideover:{close:"Close"},alert:{close:"Close"},table:{noData:"No data"}}}),Gr=Symbol.for("nuxt-ui.locale-context"),Vr=e=>{const t=e||ht(Z(Gr,Tt));return Nr(I(()=>t.value||Tt))},Ti=Ar(Vr);function nt(e,t={},n){for(const r in e){const o=e[r],s=n?`${n}:${r}`:r;typeof o=="object"&&o!==null?nt(o,t,s):typeof o=="function"&&(t[s]=o)}return t}const Fr={run:e=>e()},Dr=()=>Fr,Sn=typeof console.createTask<"u"?console.createTask:Dr;function Hr(e,t){const n=t.shift(),r=Sn(n);return e.reduce((o,s)=>o.then(()=>r.run(()=>s(...t))),Promise.resolve())}function Ur(e,t){const n=t.shift(),r=Sn(n);return Promise.all(e.map(o=>r.run(()=>o(...t))))}function Ke(e,t){for(const n of[...e])n(t)}class Kr{constructor(){this._hooks={},this._before=void 0,this._after=void 0,this._deprecatedMessages=void 0,this._deprecatedHooks={},this.hook=this.hook.bind(this),this.callHook=this.callHook.bind(this),this.callHookWith=this.callHookWith.bind(this)}hook(t,n,r={}){if(!t||typeof n!="function")return()=>{};const o=t;let s;for(;this._deprecatedHooks[t];)s=this._deprecatedHooks[t],t=s.to;if(s&&!r.allowDeprecated){let i=s.message;i||(i=`${o} hook has been deprecated`+(s.to?`, please use ${s.to}`:"")),this._deprecatedMessages||(this._deprecatedMessages=new Set),this._deprecatedMessages.has(i)||(console.warn(i),this._deprecatedMessages.add(i))}if(!n.name)try{Object.defineProperty(n,"name",{get:()=>"_"+t.replace(/\W+/g,"_")+"_hook_cb",configurable:!0})}catch{}return this._hooks[t]=this._hooks[t]||[],this._hooks[t].push(n),()=>{n&&(this.removeHook(t,n),n=void 0)}}hookOnce(t,n){let r,o=(...s)=>(typeof r=="function"&&r(),r=void 0,o=void 0,n(...s));return r=this.hook(t,o),r}removeHook(t,n){if(this._hooks[t]){const r=this._hooks[t].indexOf(n);r!==-1&&this._hooks[t].splice(r,1),this._hooks[t].length===0&&delete this._hooks[t]}}deprecateHook(t,n){this._deprecatedHooks[t]=typeof n=="string"?{to:n}:n;const r=this._hooks[t]||[];delete this._hooks[t];for(const o of r)this.hook(t,o)}deprecateHooks(t){Object.assign(this._deprecatedHooks,t);for(const n in t)this.deprecateHook(n,t[n])}addHooks(t){const n=nt(t),r=Object.keys(n).map(o=>this.hook(o,n[o]));return()=>{for(const o of r.splice(0,r.length))o()}}removeHooks(t){const n=nt(t);for(const r in n)this.removeHook(r,n[r])}removeAllHooks(){for(const t in this._hooks)delete this._hooks[t]}callHook(t,...n){return n.unshift(t),this.callHookWith(Hr,t,...n)}callHookParallel(t,...n){return n.unshift(t),this.callHookWith(Ur,t,...n)}callHookWith(t,n,...r){const o=this._before||this._after?{name:n,args:r,context:{}}:void 0;this._before&&Ke(this._before,o);const s=t(n in this._hooks?[...this._hooks[n]]:[],r);return s instanceof Promise?s.finally(()=>{this._after&&o&&Ke(this._after,o)}):(this._after&&o&&Ke(this._after,o),s)}beforeEach(t){return this._before=this._before||[],this._before.push(t),()=>{if(this._before!==void 0){const n=this._before.indexOf(t);n!==-1&&this._before.splice(n,1)}}}afterEach(t){return this._after=this._after||[],this._after.push(t),()=>{if(this._after!==void 0){const n=this._after.indexOf(t);n!==-1&&this._after.splice(n,1)}}}}function Wr(){return new Kr}const Cn={ui:{colors:{primary:"green",secondary:"blue",success:"green",info:"blue",warning:"yellow",error:"red",neutral:"slate"},icons:{arrowLeft:"i-lucide-arrow-left",arrowRight:"i-lucide-arrow-right",check:"i-lucide-check",chevronDoubleLeft:"i-lucide-chevrons-left",chevronDoubleRight:"i-lucide-chevrons-right",chevronDown:"i-lucide-chevron-down",chevronLeft:"i-lucide-chevron-left",chevronRight:"i-lucide-chevron-right",chevronUp:"i-lucide-chevron-up",close:"i-lucide-x",ellipsis:"i-lucide-ellipsis",external:"i-lucide-arrow-up-right",file:"i-lucide-file",folder:"i-lucide-folder",folderOpen:"i-lucide-folder-open",loading:"i-lucide-loader-circle",minus:"i-lucide-minus",plus:"i-lucide-plus",search:"i-lucide-search",upload:"i-lucide-upload"}},colorMode:!0};/*!
+import { F as Fragment, d as defineComponent, N as Comment, n as mergeProps, a6 as cloneVNode, av as h, aq as effectScope, aS as onBeforeUnmount, as as getCurrentScope, aY as onScopeDispose, ar as getCurrentInstance, i as watch, bf as shallowRef, b4 as readonly, bm as toValue$1, g as computed, ae as customRef, h as watchEffect, a as ref, x as nextTick, j as onMounted, u as unref, aF as inject, J as provide, bj as toHandlerKey, a4 as camelize$1, D as toRef$1, aK as isRef, G as reactive, t as toRefs, k as onUnmounted, c as createBlock, o as openBlock, aP as mergeModels, bt as useModel, w as withCtx, m as createVNode, l as createElementBlock, b as createCommentVNode, q as normalizeProps, s as guardReactiveProps, r as renderSlot, A as normalizeClass, e as createTextVNode, f as toDisplayString, B as resolveDynamicComponent, y as useSlots } from "./main.js";
+function renderSlotFragments(children) {
+  if (!children)
+    return [];
+  return children.flatMap((child) => {
+    if (child.type === Fragment)
+      return renderSlotFragments(child.children);
+    return [child];
+  });
+}
+const Slot = defineComponent({
+  name: "PrimitiveSlot",
+  inheritAttrs: false,
+  setup(_2, { attrs, slots }) {
+    return () => {
+      if (!slots.default)
+        return null;
+      const children = renderSlotFragments(slots.default());
+      const firstNonCommentChildrenIndex = children.findIndex((child) => child.type !== Comment);
+      if (firstNonCommentChildrenIndex === -1)
+        return children;
+      const firstNonCommentChildren = children[firstNonCommentChildrenIndex];
+      delete firstNonCommentChildren.props?.ref;
+      const mergedProps = firstNonCommentChildren.props ? mergeProps(attrs, firstNonCommentChildren.props) : attrs;
+      const cloned = cloneVNode({ ...firstNonCommentChildren, props: {} }, mergedProps);
+      if (children.length === 1)
+        return cloned;
+      children[firstNonCommentChildrenIndex] = cloned;
+      return children;
+    };
+  }
+});
+const SELF_CLOSING_TAGS = ["area", "img", "input"];
+const Primitive = defineComponent({
+  name: "Primitive",
+  inheritAttrs: false,
+  props: {
+    asChild: {
+      type: Boolean,
+      default: false
+    },
+    as: {
+      type: [String, Object],
+      default: "div"
+    }
+  },
+  setup(props, { attrs, slots }) {
+    const asTag = props.asChild ? "template" : props.as;
+    if (typeof asTag === "string" && SELF_CLOSING_TAGS.includes(asTag))
+      return () => h(asTag, attrs);
+    if (asTag !== "template")
+      return () => h(props.as, attrs, { default: slots.default });
+    return () => h(Slot, attrs, { default: slots.default });
+  }
+});
+function computedEager(fn, options) {
+  var _a;
+  const result = shallowRef();
+  watchEffect(() => {
+    result.value = fn();
+  }, {
+    ...options,
+    flush: (_a = void 0) != null ? _a : "sync"
+  });
+  return readonly(result);
+}
+function tryOnScopeDispose$1(fn) {
+  if (getCurrentScope()) {
+    onScopeDispose(fn);
+    return true;
+  }
+  return false;
+}
+function createGlobalState(stateFactory) {
+  let initialized = false;
+  let state2;
+  const scope = effectScope(true);
+  return (...args) => {
+    if (!initialized) {
+      state2 = scope.run(() => stateFactory(...args));
+      initialized = true;
+    }
+    return state2;
+  };
+}
+function createSharedComposable$1(composable) {
+  let subscribers = 0;
+  let state2;
+  let scope;
+  const dispose = () => {
+    subscribers -= 1;
+    if (scope && subscribers <= 0) {
+      scope.stop();
+      state2 = void 0;
+      scope = void 0;
+    }
+  };
+  return (...args) => {
+    subscribers += 1;
+    if (!scope) {
+      scope = effectScope(true);
+      state2 = scope.run(() => composable(...args));
+    }
+    tryOnScopeDispose$1(dispose);
+    return state2;
+  };
+}
+const isClient = typeof window !== "undefined" && typeof document !== "undefined";
+typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
+const isDef = (val) => typeof val !== "undefined";
+const toString = Object.prototype.toString;
+const isObject = (val) => toString.call(val) === "[object Object]";
+const noop$2 = () => {
+};
+const isIOS = /* @__PURE__ */ getIsIOS();
+function getIsIOS() {
+  var _a, _b;
+  return isClient && ((_a = window == null ? void 0 : window.navigator) == null ? void 0 : _a.userAgent) && (/iP(?:ad|hone|od)/.test(window.navigator.userAgent) || ((_b = window == null ? void 0 : window.navigator) == null ? void 0 : _b.maxTouchPoints) > 2 && /iPad|Macintosh/.test(window == null ? void 0 : window.navigator.userAgent));
+}
+function getLifeCycleTarget(target) {
+  return getCurrentInstance();
+}
+function toArray(value) {
+  return Array.isArray(value) ? value : [value];
+}
+function refAutoReset(defaultValue, afterMs = 1e4) {
+  return customRef((track, trigger) => {
+    let value = toValue$1(defaultValue);
+    let timer;
+    const resetAfter = () => setTimeout(() => {
+      value = toValue$1(defaultValue);
+      trigger();
+    }, toValue$1(afterMs));
+    tryOnScopeDispose$1(() => {
+      clearTimeout(timer);
+    });
+    return {
+      get() {
+        track();
+        return value;
+      },
+      set(newValue) {
+        value = newValue;
+        trigger();
+        clearTimeout(timer);
+        timer = resetAfter();
+      }
+    };
+  });
+}
+function tryOnBeforeUnmount(fn, target) {
+  const instance = getLifeCycleTarget();
+  if (instance)
+    onBeforeUnmount(fn, target);
+}
+function useTimeoutFn(cb, interval, options = {}) {
+  const {
+    immediate = true,
+    immediateCallback = false
+  } = options;
+  const isPending = shallowRef(false);
+  let timer = null;
+  function clear() {
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+  }
+  function stop() {
+    isPending.value = false;
+    clear();
+  }
+  function start(...args) {
+    if (immediateCallback)
+      cb();
+    clear();
+    isPending.value = true;
+    timer = setTimeout(() => {
+      isPending.value = false;
+      timer = null;
+      cb(...args);
+    }, toValue$1(interval));
+  }
+  if (immediate) {
+    isPending.value = true;
+    if (isClient)
+      start();
+  }
+  tryOnScopeDispose$1(stop);
+  return {
+    isPending: readonly(isPending),
+    start,
+    stop
+  };
+}
+function useTimeout(interval = 1e3, options = {}) {
+  const {
+    controls: exposeControls = false,
+    callback
+  } = options;
+  const controls = useTimeoutFn(
+    callback != null ? callback : noop$2,
+    interval,
+    options
+  );
+  const ready = computed(() => !controls.isPending.value);
+  if (exposeControls) {
+    return {
+      ready,
+      ...controls
+    };
+  } else {
+    return ready;
+  }
+}
+function watchImmediate(source, cb, options) {
+  return watch(
+    source,
+    cb,
+    {
+      ...options,
+      immediate: true
+    }
+  );
+}
+const defaultWindow = isClient ? window : void 0;
+function unrefElement(elRef) {
+  var _a;
+  const plain = toValue$1(elRef);
+  return (_a = plain == null ? void 0 : plain.$el) != null ? _a : plain;
+}
+function useEventListener(...args) {
+  const cleanups = [];
+  const cleanup = () => {
+    cleanups.forEach((fn) => fn());
+    cleanups.length = 0;
+  };
+  const register = (el, event, listener, options) => {
+    el.addEventListener(event, listener, options);
+    return () => el.removeEventListener(event, listener, options);
+  };
+  const firstParamTargets = computed(() => {
+    const test = toArray(toValue$1(args[0])).filter((e) => e != null);
+    return test.every((e) => typeof e !== "string") ? test : void 0;
+  });
+  const stopWatch = watchImmediate(
+    () => {
+      var _a, _b;
+      return [
+        (_b = (_a = firstParamTargets.value) == null ? void 0 : _a.map((e) => unrefElement(e))) != null ? _b : [defaultWindow].filter((e) => e != null),
+        toArray(toValue$1(firstParamTargets.value ? args[1] : args[0])),
+        toArray(unref(firstParamTargets.value ? args[2] : args[1])),
+        // @ts-expect-error - TypeScript gets the correct types, but somehow still complains
+        toValue$1(firstParamTargets.value ? args[3] : args[2])
+      ];
+    },
+    ([raw_targets, raw_events, raw_listeners, raw_options]) => {
+      cleanup();
+      if (!(raw_targets == null ? void 0 : raw_targets.length) || !(raw_events == null ? void 0 : raw_events.length) || !(raw_listeners == null ? void 0 : raw_listeners.length))
+        return;
+      const optionsClone = isObject(raw_options) ? { ...raw_options } : raw_options;
+      cleanups.push(
+        ...raw_targets.flatMap(
+          (el) => raw_events.flatMap(
+            (event) => raw_listeners.map((listener) => register(el, event, listener, optionsClone))
+          )
+        )
+      );
+    },
+    { flush: "post" }
+  );
+  const stop = () => {
+    stopWatch();
+    cleanup();
+  };
+  tryOnScopeDispose$1(cleanup);
+  return stop;
+}
+function useMounted() {
+  const isMounted = shallowRef(false);
+  const instance = getCurrentInstance();
+  if (instance) {
+    onMounted(() => {
+      isMounted.value = true;
+    }, instance);
+  }
+  return isMounted;
+}
+function createKeyPredicate(keyFilter) {
+  if (typeof keyFilter === "function")
+    return keyFilter;
+  else if (typeof keyFilter === "string")
+    return (event) => event.key === keyFilter;
+  else if (Array.isArray(keyFilter))
+    return (event) => keyFilter.includes(event.key);
+  return () => true;
+}
+function onKeyStroke(...args) {
+  let key;
+  let handler;
+  let options = {};
+  if (args.length === 3) {
+    key = args[0];
+    handler = args[1];
+    options = args[2];
+  } else if (args.length === 2) {
+    if (typeof args[1] === "object") {
+      key = true;
+      handler = args[0];
+      options = args[1];
+    } else {
+      key = args[0];
+      handler = args[1];
+    }
+  } else {
+    key = true;
+    handler = args[0];
+  }
+  const {
+    target = defaultWindow,
+    eventName = "keydown",
+    passive = false,
+    dedupe = false
+  } = options;
+  const predicate = createKeyPredicate(key);
+  const listener = (e) => {
+    if (e.repeat && toValue$1(dedupe))
+      return;
+    if (predicate(e))
+      handler(e);
+  };
+  return useEventListener(target, eventName, listener, passive);
+}
+function useRafFn(fn, options = {}) {
+  const {
+    immediate = true,
+    fpsLimit = void 0,
+    window: window2 = defaultWindow,
+    once = false
+  } = options;
+  const isActive = shallowRef(false);
+  const intervalLimit = computed(() => {
+    return fpsLimit ? 1e3 / toValue$1(fpsLimit) : null;
+  });
+  let previousFrameTimestamp = 0;
+  let rafId = null;
+  function loop(timestamp2) {
+    if (!isActive.value || !window2)
+      return;
+    if (!previousFrameTimestamp)
+      previousFrameTimestamp = timestamp2;
+    const delta = timestamp2 - previousFrameTimestamp;
+    if (intervalLimit.value && delta < intervalLimit.value) {
+      rafId = window2.requestAnimationFrame(loop);
+      return;
+    }
+    previousFrameTimestamp = timestamp2;
+    fn({ delta, timestamp: timestamp2 });
+    if (once) {
+      isActive.value = false;
+      rafId = null;
+      return;
+    }
+    rafId = window2.requestAnimationFrame(loop);
+  }
+  function resume() {
+    if (!isActive.value && window2) {
+      isActive.value = true;
+      previousFrameTimestamp = 0;
+      rafId = window2.requestAnimationFrame(loop);
+    }
+  }
+  function pause() {
+    isActive.value = false;
+    if (rafId != null && window2) {
+      window2.cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+  if (immediate)
+    resume();
+  tryOnScopeDispose$1(pause);
+  return {
+    isActive: readonly(isActive),
+    pause,
+    resume
+  };
+}
+function cloneFnJSON(source) {
+  return JSON.parse(JSON.stringify(source));
+}
+function useVModel(props, key, emit, options = {}) {
+  var _a, _b, _c;
+  const {
+    clone = false,
+    passive = false,
+    eventName,
+    deep = false,
+    defaultValue,
+    shouldEmit
+  } = options;
+  const vm = getCurrentInstance();
+  const _emit = emit || (vm == null ? void 0 : vm.emit) || ((_a = vm == null ? void 0 : vm.$emit) == null ? void 0 : _a.bind(vm)) || ((_c = (_b = vm == null ? void 0 : vm.proxy) == null ? void 0 : _b.$emit) == null ? void 0 : _c.bind(vm == null ? void 0 : vm.proxy));
+  let event = eventName;
+  if (!key) {
+    key = "modelValue";
+  }
+  event = event || `update:${key.toString()}`;
+  const cloneFn = (val) => !clone ? val : typeof clone === "function" ? clone(val) : cloneFnJSON(val);
+  const getValue2 = () => isDef(props[key]) ? cloneFn(props[key]) : defaultValue;
+  const triggerEmit = (value) => {
+    if (shouldEmit) {
+      if (shouldEmit(value))
+        _emit(event, value);
+    } else {
+      _emit(event, value);
+    }
+  };
+  if (passive) {
+    const initialValue = getValue2();
+    const proxy = ref(initialValue);
+    let isUpdating = false;
+    watch(
+      () => props[key],
+      (v2) => {
+        if (!isUpdating) {
+          isUpdating = true;
+          proxy.value = cloneFn(v2);
+          nextTick(() => isUpdating = false);
+        }
+      }
+    );
+    watch(
+      proxy,
+      (v2) => {
+        if (!isUpdating && (v2 !== props[key] || deep))
+          triggerEmit(v2);
+      },
+      { deep }
+    );
+    return proxy;
+  } else {
+    return computed({
+      get() {
+        return getValue2();
+      },
+      set(value) {
+        triggerEmit(value);
+      }
+    });
+  }
+}
+function createContext(providerComponentName, contextName) {
+  const symbolDescription = typeof providerComponentName === "string" && !contextName ? `${providerComponentName}Context` : contextName;
+  const injectionKey = Symbol(symbolDescription);
+  const injectContext = (fallback) => {
+    const context = inject(injectionKey, fallback);
+    if (context)
+      return context;
+    if (context === null)
+      return context;
+    throw new Error(
+      `Injection \`${injectionKey.toString()}\` not found. Component must be used within ${Array.isArray(providerComponentName) ? `one of the following components: ${providerComponentName.join(
+        ", "
+      )}` : `\`${providerComponentName}\``}`
+    );
+  };
+  const provideContext = (contextValue) => {
+    provide(injectionKey, contextValue);
+    return contextValue;
+  };
+  return [injectContext, provideContext];
+}
+function serialize(o) {
+  return typeof o == "string" ? `'${o}'` : new c().serialize(o);
+}
+const c = /* @__PURE__ */ function() {
+  class o {
+    #t = /* @__PURE__ */ new Map();
+    compare(t, r) {
+      const e = typeof t, n = typeof r;
+      return e === "string" && n === "string" ? t.localeCompare(r) : e === "number" && n === "number" ? t - r : String.prototype.localeCompare.call(this.serialize(t, true), this.serialize(r, true));
+    }
+    serialize(t, r) {
+      if (t === null) return "null";
+      switch (typeof t) {
+        case "string":
+          return r ? t : `'${t}'`;
+        case "bigint":
+          return `${t}n`;
+        case "object":
+          return this.$object(t);
+        case "function":
+          return this.$function(t);
+      }
+      return String(t);
+    }
+    serializeObject(t) {
+      const r = Object.prototype.toString.call(t);
+      if (r !== "[object Object]") return this.serializeBuiltInType(r.length < 10 ? `unknown:${r}` : r.slice(8, -1), t);
+      const e = t.constructor, n = e === Object || e === void 0 ? "" : e.name;
+      if (n !== "" && globalThis[n] === e) return this.serializeBuiltInType(n, t);
+      if (typeof t.toJSON == "function") {
+        const i2 = t.toJSON();
+        return n + (i2 !== null && typeof i2 == "object" ? this.$object(i2) : `(${this.serialize(i2)})`);
+      }
+      return this.serializeObjectEntries(n, Object.entries(t));
+    }
+    serializeBuiltInType(t, r) {
+      const e = this["$" + t];
+      if (e) return e.call(this, r);
+      if (typeof r?.entries == "function") return this.serializeObjectEntries(t, r.entries());
+      throw new Error(`Cannot serialize ${t}`);
+    }
+    serializeObjectEntries(t, r) {
+      const e = Array.from(r).sort((i2, a2) => this.compare(i2[0], a2[0]));
+      let n = `${t}{`;
+      for (let i2 = 0; i2 < e.length; i2++) {
+        const [a2, l2] = e[i2];
+        n += `${this.serialize(a2, true)}:${this.serialize(l2)}`, i2 < e.length - 1 && (n += ",");
+      }
+      return n + "}";
+    }
+    $object(t) {
+      let r = this.#t.get(t);
+      return r === void 0 && (this.#t.set(t, `#${this.#t.size}`), r = this.serializeObject(t), this.#t.set(t, r)), r;
+    }
+    $function(t) {
+      const r = Function.prototype.toString.call(t);
+      return r.slice(-15) === "[native code] }" ? `${t.name || ""}()[native]` : `${t.name}(${t.length})${r.replace(/\s*\n\s*/g, "")}`;
+    }
+    $Array(t) {
+      let r = "[";
+      for (let e = 0; e < t.length; e++) r += this.serialize(t[e]), e < t.length - 1 && (r += ",");
+      return r + "]";
+    }
+    $Date(t) {
+      try {
+        return `Date(${t.toISOString()})`;
+      } catch {
+        return "Date(null)";
+      }
+    }
+    $ArrayBuffer(t) {
+      return `ArrayBuffer[${new Uint8Array(t).join(",")}]`;
+    }
+    $Set(t) {
+      return `Set${this.$Array(Array.from(t).sort((r, e) => this.compare(r, e)))}`;
+    }
+    $Map(t) {
+      return this.serializeObjectEntries("Map", t.entries());
+    }
+  }
+  for (const s of ["Error", "RegExp", "URL"]) o.prototype["$" + s] = function(t) {
+    return `${s}(${t})`;
+  };
+  for (const s of ["Int8Array", "Uint8Array", "Uint8ClampedArray", "Int16Array", "Uint16Array", "Int32Array", "Uint32Array", "Float32Array", "Float64Array"]) o.prototype["$" + s] = function(t) {
+    return `${s}[${t.join(",")}]`;
+  };
+  for (const s of ["BigInt64Array", "BigUint64Array"]) o.prototype["$" + s] = function(t) {
+    return `${s}[${t.join("n,")}${t.length > 0 ? "n" : ""}]`;
+  };
+  return o;
+}();
+function isEqual(object1, object2) {
+  if (object1 === object2) {
+    return true;
+  }
+  if (serialize(object1) === serialize(object2)) {
+    return true;
+  }
+  return false;
+}
+function isNullish(value) {
+  return value === null || value === void 0;
+}
+function useForwardExpose() {
+  const instance = getCurrentInstance();
+  const currentRef = ref();
+  const currentElement = computed(() => {
+    return ["#text", "#comment"].includes(currentRef.value?.$el.nodeName) ? currentRef.value?.$el.nextElementSibling : unrefElement(currentRef);
+  });
+  const localExpose = Object.assign({}, instance.exposed);
+  const ret = {};
+  for (const key in instance.props) {
+    Object.defineProperty(ret, key, {
+      enumerable: true,
+      configurable: true,
+      get: () => instance.props[key]
+    });
+  }
+  if (Object.keys(localExpose).length > 0) {
+    for (const key in localExpose) {
+      Object.defineProperty(ret, key, {
+        enumerable: true,
+        configurable: true,
+        get: () => localExpose[key]
+      });
+    }
+  }
+  Object.defineProperty(ret, "$el", {
+    enumerable: true,
+    configurable: true,
+    get: () => instance.vnode.el
+  });
+  instance.exposed = ret;
+  function forwardRef(ref2) {
+    currentRef.value = ref2;
+    if (!ref2)
+      return;
+    Object.defineProperty(ret, "$el", {
+      enumerable: true,
+      configurable: true,
+      get: () => ref2 instanceof Element ? ref2 : ref2.$el
+    });
+    instance.exposed = ret;
+  }
+  return { forwardRef, currentRef, currentElement };
+}
+function useEmitAsProps(emit) {
+  const vm = getCurrentInstance();
+  const events = vm?.type.emits;
+  const result = {};
+  if (!events?.length) {
+    console.warn(
+      `No emitted event found. Please check component: ${vm?.type.__name}`
+    );
+  }
+  events?.forEach((ev) => {
+    result[toHandlerKey(camelize$1(ev))] = (...arg) => emit(ev, ...arg);
+  });
+  return result;
+}
+function isPlainObject(value) {
+  if (value === null || typeof value !== "object") {
+    return false;
+  }
+  const prototype = Object.getPrototypeOf(value);
+  if (prototype !== null && prototype !== Object.prototype && Object.getPrototypeOf(prototype) !== null) {
+    return false;
+  }
+  if (Symbol.iterator in value) {
+    return false;
+  }
+  if (Symbol.toStringTag in value) {
+    return Object.prototype.toString.call(value) === "[object Module]";
+  }
+  return true;
+}
+function _defu(baseObject, defaults, namespace = ".", merger) {
+  if (!isPlainObject(defaults)) {
+    return _defu(baseObject, {}, namespace, merger);
+  }
+  const object = Object.assign({}, defaults);
+  for (const key in baseObject) {
+    if (key === "__proto__" || key === "constructor") {
+      continue;
+    }
+    const value = baseObject[key];
+    if (value === null || value === void 0) {
+      continue;
+    }
+    if (merger && merger(object, key, value, namespace)) {
+      continue;
+    }
+    if (Array.isArray(value) && Array.isArray(object[key])) {
+      object[key] = [...value, ...object[key]];
+    } else if (isPlainObject(value) && isPlainObject(object[key])) {
+      object[key] = _defu(
+        value,
+        object[key],
+        (namespace ? `${namespace}.` : "") + key.toString(),
+        merger
+      );
+    } else {
+      object[key] = value;
+    }
+  }
+  return object;
+}
+function createDefu(merger) {
+  return (...arguments_) => (
+    // eslint-disable-next-line unicorn/no-array-reduce
+    arguments_.reduce((p2, c2) => _defu(p2, c2, "", merger), {})
+  );
+}
+const defu = createDefu();
+function useForwardProps(props) {
+  const vm = getCurrentInstance();
+  const defaultProps = Object.keys(vm?.type.props ?? {}).reduce((prev, curr) => {
+    const defaultValue = (vm?.type.props[curr]).default;
+    if (defaultValue !== void 0)
+      prev[curr] = defaultValue;
+    return prev;
+  }, {});
+  const refProps = toRef$1(props);
+  return computed(() => {
+    const preservedProps = {};
+    const assignedProps = vm?.vnode.props ?? {};
+    Object.keys(assignedProps).forEach((key) => {
+      preservedProps[camelize$1(key)] = assignedProps[key];
+    });
+    return Object.keys({ ...defaultProps, ...preservedProps }).reduce((prev, curr) => {
+      if (refProps.value[curr] !== void 0)
+        prev[curr] = refProps.value[curr];
+      return prev;
+    }, {});
+  });
+}
+function useForwardPropsEmits(props, emit) {
+  const parsedProps = useForwardProps(props);
+  const emitsAsProps = emit ? useEmitAsProps(emit) : {};
+  return computed(() => ({
+    ...parsedProps.value,
+    ...emitsAsProps
+  }));
+}
+function tryOnScopeDispose(fn) {
+  if (getCurrentScope()) {
+    onScopeDispose(fn);
+    return true;
+  }
+  return false;
+}
+// @__NO_SIDE_EFFECTS__
+function createSharedComposable(composable) {
+  let subscribers = 0;
+  let state2;
+  let scope;
+  const dispose = () => {
+    subscribers -= 1;
+    if (scope && subscribers <= 0) {
+      scope.stop();
+      state2 = void 0;
+      scope = void 0;
+    }
+  };
+  return (...args) => {
+    subscribers += 1;
+    if (!scope) {
+      scope = effectScope(true);
+      state2 = scope.run(() => composable(...args));
+    }
+    tryOnScopeDispose(dispose);
+    return state2;
+  };
+}
+// @__NO_SIDE_EFFECTS__
+function makeDestructurable(obj, arr) {
+  if (typeof Symbol !== "undefined") {
+    const clone = { ...obj };
+    Object.defineProperty(clone, Symbol.iterator, {
+      enumerable: false,
+      value() {
+        let index = 0;
+        return {
+          next: () => ({
+            value: arr[index++],
+            done: index > arr.length
+          })
+        };
+      }
+    });
+    return clone;
+  } else {
+    return Object.assign([...arr], obj);
+  }
+}
+function toReactive(objectRef) {
+  if (!isRef(objectRef))
+    return reactive(objectRef);
+  const proxy = new Proxy({}, {
+    get(_2, p2, receiver) {
+      return unref(Reflect.get(objectRef.value, p2, receiver));
+    },
+    set(_2, p2, value) {
+      if (isRef(objectRef.value[p2]) && !isRef(value))
+        objectRef.value[p2].value = value;
+      else
+        objectRef.value[p2] = value;
+      return true;
+    },
+    deleteProperty(_2, p2) {
+      return Reflect.deleteProperty(objectRef.value, p2);
+    },
+    has(_2, p2) {
+      return Reflect.has(objectRef.value, p2);
+    },
+    ownKeys() {
+      return Object.keys(objectRef.value);
+    },
+    getOwnPropertyDescriptor() {
+      return {
+        enumerable: true,
+        configurable: true
+      };
+    }
+  });
+  return reactive(proxy);
+}
+function reactiveComputed(fn) {
+  return toReactive(computed(fn));
+}
+function reactiveOmit(obj, ...keys) {
+  const flatKeys = keys.flat();
+  const predicate = flatKeys[0];
+  return reactiveComputed(() => typeof predicate === "function" ? Object.fromEntries(Object.entries(toRefs(obj)).filter(([k, v2]) => !predicate(toValue$1(v2), k))) : Object.fromEntries(Object.entries(toRefs(obj)).filter((e) => !flatKeys.includes(e[0]))));
+}
+typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
+const noop$1 = () => {
+};
+function toRef(...args) {
+  if (args.length !== 1)
+    return toRef$1(...args);
+  const r = args[0];
+  return typeof r === "function" ? readonly(customRef(() => ({ get: r, set: noop$1 }))) : ref(r);
+}
+function reactivePick(obj, ...keys) {
+  const flatKeys = keys.flat();
+  const predicate = flatKeys[0];
+  return reactiveComputed(() => typeof predicate === "function" ? Object.fromEntries(Object.entries(toRefs(obj)).filter(([k, v2]) => predicate(toValue$1(v2), k))) : Object.fromEntries(flatKeys.map((k) => [k, toRef(obj, k)])));
+}
+function cacheStringFunction(fn) {
+  const cache = /* @__PURE__ */ Object.create(null);
+  return (str) => {
+    const hit = cache[str];
+    return hit || (cache[str] = fn(str));
+  };
+}
+const camelizeRE = /-(\w)/g;
+const camelize = cacheStringFunction((str) => {
+  return str.replace(camelizeRE, (_2, c2) => c2 ? c2.toUpperCase() : "");
+});
+function diff(obj1, obj2) {
+  const h1 = _toHashedObject(obj1);
+  const h2 = _toHashedObject(obj2);
+  return _diff(h1, h2);
+}
+function _diff(h1, h2) {
+  const diffs = [];
+  const allProps = /* @__PURE__ */ new Set([
+    ...Object.keys(h1.props || {}),
+    ...Object.keys(h2.props || {})
+  ]);
+  if (h1.props && h2.props) {
+    for (const prop of allProps) {
+      const p1 = h1.props[prop];
+      const p2 = h2.props[prop];
+      if (p1 && p2) {
+        diffs.push(..._diff(h1.props?.[prop], h2.props?.[prop]));
+      } else if (p1 || p2) {
+        diffs.push(
+          new DiffEntry((p2 || p1).key, p1 ? "removed" : "added", p2, p1)
+        );
+      }
+    }
+  }
+  if (allProps.size === 0 && h1.hash !== h2.hash) {
+    diffs.push(new DiffEntry((h2 || h1).key, "changed", h2, h1));
+  }
+  return diffs;
+}
+function _toHashedObject(obj, key = "") {
+  if (obj && typeof obj !== "object") {
+    return new DiffHashedObject(key, obj, serialize(obj));
+  }
+  const props = {};
+  const hashes = [];
+  for (const _key in obj) {
+    props[_key] = _toHashedObject(obj[_key], key ? `${key}.${_key}` : _key);
+    hashes.push(props[_key].hash);
+  }
+  return new DiffHashedObject(key, obj, `{${hashes.join(":")}}`, props);
+}
+class DiffEntry {
+  constructor(key, type, newValue, oldValue) {
+    this.key = key;
+    this.type = type;
+    this.newValue = newValue;
+    this.oldValue = oldValue;
+  }
+  toString() {
+    return this.toJSON();
+  }
+  toJSON() {
+    switch (this.type) {
+      case "added": {
+        return `Added   \`${this.key}\``;
+      }
+      case "removed": {
+        return `Removed \`${this.key}\``;
+      }
+      case "changed": {
+        return `Changed \`${this.key}\` from \`${this.oldValue?.toString() || "-"}\` to \`${this.newValue.toString()}\``;
+      }
+    }
+  }
+}
+class DiffHashedObject {
+  constructor(key, value, hash, props) {
+    this.key = key;
+    this.value = value;
+    this.hash = hash;
+    this.props = props;
+  }
+  toString() {
+    if (this.props) {
+      return `{${Object.keys(this.props).join(",")}}`;
+    } else {
+      return JSON.stringify(this.value);
+    }
+  }
+  toJSON() {
+    const k = this.key || ".";
+    if (this.props) {
+      return `${k}({${Object.keys(this.props).join(",")}})`;
+    }
+    return `${k}(${this.value})`;
+  }
+}
+function omit(data, keys) {
+  const result = { ...data };
+  for (const key of keys) {
+    delete result[key];
+  }
+  return result;
+}
+function get(object, path, defaultValue) {
+  if (typeof path === "string") {
+    path = path.split(".").map((key) => {
+      const numKey = Number(key);
+      return Number.isNaN(numKey) ? key : numKey;
+    });
+  }
+  let result = object;
+  for (const key of path) {
+    if (result === void 0 || result === null) {
+      return defaultValue;
+    }
+    result = result[key];
+  }
+  return result !== void 0 ? result : defaultValue;
+}
+function isArrayOfArray(item) {
+  return Array.isArray(item[0]);
+}
+function mergeClasses(appConfigClass, propClass) {
+  if (!appConfigClass && !propClass) {
+    return "";
+  }
+  return [
+    ...Array.isArray(appConfigClass) ? appConfigClass : [appConfigClass],
+    propClass
+  ].filter(Boolean);
+}
+function buildTranslator(locale) {
+  return (path, option) => translate(path, option, unref(locale));
+}
+function translate(path, option, locale) {
+  const prop = get(locale, `messages.${path}`, path);
+  return prop.replace(
+    /\{(\w+)\}/g,
+    (_2, key) => `${option?.[key] ?? `{${key}}`}`
+  );
+}
+function buildLocaleContext(locale) {
+  const lang = computed(() => unref(locale).name);
+  const code = computed(() => unref(locale).code);
+  const dir = computed(() => unref(locale).dir);
+  const localeRef = isRef(locale) ? locale : ref(locale);
+  return {
+    lang,
+    code,
+    dir,
+    locale: localeRef,
+    t: buildTranslator(locale)
+  };
+}
+// @__NO_SIDE_EFFECTS__
+function defineLocale(options) {
+  return defu(options, { dir: "ltr" });
+}
+const en = /* @__PURE__ */ defineLocale({
+  name: "English",
+  code: "en",
+  messages: {
+    inputMenu: {
+      noMatch: "No matching data",
+      noData: "No data",
+      create: 'Create "{label}"'
+    },
+    calendar: {
+      prevYear: "Previous year",
+      nextYear: "Next year",
+      prevMonth: "Previous month",
+      nextMonth: "Next month"
+    },
+    inputNumber: {
+      increment: "Increment",
+      decrement: "Decrement"
+    },
+    commandPalette: {
+      placeholder: "Type a command or search...",
+      noMatch: "No matching data",
+      noData: "No data",
+      close: "Close",
+      back: "Back"
+    },
+    selectMenu: {
+      noMatch: "No matching data",
+      noData: "No data",
+      create: 'Create "{label}"',
+      search: "Search..."
+    },
+    toast: {
+      close: "Close"
+    },
+    carousel: {
+      prev: "Prev",
+      next: "Next",
+      dots: "Choose slide to display",
+      goto: "Go to slide {slide}"
+    },
+    modal: {
+      close: "Close"
+    },
+    slideover: {
+      close: "Close"
+    },
+    alert: {
+      close: "Close"
+    },
+    table: {
+      noData: "No data"
+    }
+  }
+});
+const localeContextInjectionKey = Symbol.for("nuxt-ui.locale-context");
+const _useLocale = (localeOverrides) => {
+  const locale = localeOverrides || toRef$1(inject(localeContextInjectionKey, en));
+  return buildLocaleContext(computed(() => locale.value || en));
+};
+const useLocale = /* @__PURE__ */ createSharedComposable(_useLocale);
+function flatHooks(configHooks, hooks = {}, parentName) {
+  for (const key in configHooks) {
+    const subHook = configHooks[key];
+    const name = parentName ? `${parentName}:${key}` : key;
+    if (typeof subHook === "object" && subHook !== null) {
+      flatHooks(subHook, hooks, name);
+    } else if (typeof subHook === "function") {
+      hooks[name] = subHook;
+    }
+  }
+  return hooks;
+}
+const defaultTask = { run: (function_) => function_() };
+const _createTask = () => defaultTask;
+const createTask = typeof console.createTask !== "undefined" ? console.createTask : _createTask;
+function serialTaskCaller(hooks, args) {
+  const name = args.shift();
+  const task = createTask(name);
+  return hooks.reduce(
+    (promise, hookFunction) => promise.then(() => task.run(() => hookFunction(...args))),
+    Promise.resolve()
+  );
+}
+function parallelTaskCaller(hooks, args) {
+  const name = args.shift();
+  const task = createTask(name);
+  return Promise.all(hooks.map((hook) => task.run(() => hook(...args))));
+}
+function callEachWith(callbacks, arg0) {
+  for (const callback of [...callbacks]) {
+    callback(arg0);
+  }
+}
+class Hookable {
+  constructor() {
+    this._hooks = {};
+    this._before = void 0;
+    this._after = void 0;
+    this._deprecatedMessages = void 0;
+    this._deprecatedHooks = {};
+    this.hook = this.hook.bind(this);
+    this.callHook = this.callHook.bind(this);
+    this.callHookWith = this.callHookWith.bind(this);
+  }
+  hook(name, function_, options = {}) {
+    if (!name || typeof function_ !== "function") {
+      return () => {
+      };
+    }
+    const originalName = name;
+    let dep;
+    while (this._deprecatedHooks[name]) {
+      dep = this._deprecatedHooks[name];
+      name = dep.to;
+    }
+    if (dep && !options.allowDeprecated) {
+      let message = dep.message;
+      if (!message) {
+        message = `${originalName} hook has been deprecated` + (dep.to ? `, please use ${dep.to}` : "");
+      }
+      if (!this._deprecatedMessages) {
+        this._deprecatedMessages = /* @__PURE__ */ new Set();
+      }
+      if (!this._deprecatedMessages.has(message)) {
+        console.warn(message);
+        this._deprecatedMessages.add(message);
+      }
+    }
+    if (!function_.name) {
+      try {
+        Object.defineProperty(function_, "name", {
+          get: () => "_" + name.replace(/\W+/g, "_") + "_hook_cb",
+          configurable: true
+        });
+      } catch {
+      }
+    }
+    this._hooks[name] = this._hooks[name] || [];
+    this._hooks[name].push(function_);
+    return () => {
+      if (function_) {
+        this.removeHook(name, function_);
+        function_ = void 0;
+      }
+    };
+  }
+  hookOnce(name, function_) {
+    let _unreg;
+    let _function = (...arguments_) => {
+      if (typeof _unreg === "function") {
+        _unreg();
+      }
+      _unreg = void 0;
+      _function = void 0;
+      return function_(...arguments_);
+    };
+    _unreg = this.hook(name, _function);
+    return _unreg;
+  }
+  removeHook(name, function_) {
+    if (this._hooks[name]) {
+      const index = this._hooks[name].indexOf(function_);
+      if (index !== -1) {
+        this._hooks[name].splice(index, 1);
+      }
+      if (this._hooks[name].length === 0) {
+        delete this._hooks[name];
+      }
+    }
+  }
+  deprecateHook(name, deprecated) {
+    this._deprecatedHooks[name] = typeof deprecated === "string" ? { to: deprecated } : deprecated;
+    const _hooks = this._hooks[name] || [];
+    delete this._hooks[name];
+    for (const hook of _hooks) {
+      this.hook(name, hook);
+    }
+  }
+  deprecateHooks(deprecatedHooks) {
+    Object.assign(this._deprecatedHooks, deprecatedHooks);
+    for (const name in deprecatedHooks) {
+      this.deprecateHook(name, deprecatedHooks[name]);
+    }
+  }
+  addHooks(configHooks) {
+    const hooks = flatHooks(configHooks);
+    const removeFns = Object.keys(hooks).map(
+      (key) => this.hook(key, hooks[key])
+    );
+    return () => {
+      for (const unreg of removeFns.splice(0, removeFns.length)) {
+        unreg();
+      }
+    };
+  }
+  removeHooks(configHooks) {
+    const hooks = flatHooks(configHooks);
+    for (const key in hooks) {
+      this.removeHook(key, hooks[key]);
+    }
+  }
+  removeAllHooks() {
+    for (const key in this._hooks) {
+      delete this._hooks[key];
+    }
+  }
+  callHook(name, ...arguments_) {
+    arguments_.unshift(name);
+    return this.callHookWith(serialTaskCaller, name, ...arguments_);
+  }
+  callHookParallel(name, ...arguments_) {
+    arguments_.unshift(name);
+    return this.callHookWith(parallelTaskCaller, name, ...arguments_);
+  }
+  callHookWith(caller, name, ...arguments_) {
+    const event = this._before || this._after ? { name, args: arguments_, context: {} } : void 0;
+    if (this._before) {
+      callEachWith(this._before, event);
+    }
+    const result = caller(
+      name in this._hooks ? [...this._hooks[name]] : [],
+      arguments_
+    );
+    if (result instanceof Promise) {
+      return result.finally(() => {
+        if (this._after && event) {
+          callEachWith(this._after, event);
+        }
+      });
+    }
+    if (this._after && event) {
+      callEachWith(this._after, event);
+    }
+    return result;
+  }
+  beforeEach(function_) {
+    this._before = this._before || [];
+    this._before.push(function_);
+    return () => {
+      if (this._before !== void 0) {
+        const index = this._before.indexOf(function_);
+        if (index !== -1) {
+          this._before.splice(index, 1);
+        }
+      }
+    };
+  }
+  afterEach(function_) {
+    this._after = this._after || [];
+    this._after.push(function_);
+    return () => {
+      if (this._after !== void 0) {
+        const index = this._after.indexOf(function_);
+        if (index !== -1) {
+          this._after.splice(index, 1);
+        }
+      }
+    };
+  }
+}
+function createHooks() {
+  return new Hookable();
+}
+const appConfig = { "ui": { "colors": { "primary": "green", "secondary": "blue", "success": "green", "info": "blue", "warning": "yellow", "error": "red", "neutral": "slate" }, "icons": { "arrowLeft": "i-lucide-arrow-left", "arrowRight": "i-lucide-arrow-right", "check": "i-lucide-check", "chevronDoubleLeft": "i-lucide-chevrons-left", "chevronDoubleRight": "i-lucide-chevrons-right", "chevronDown": "i-lucide-chevron-down", "chevronLeft": "i-lucide-chevron-left", "chevronRight": "i-lucide-chevron-right", "chevronUp": "i-lucide-chevron-up", "close": "i-lucide-x", "ellipsis": "i-lucide-ellipsis", "external": "i-lucide-arrow-up-right", "file": "i-lucide-file", "folder": "i-lucide-folder", "folderOpen": "i-lucide-folder-open", "loading": "i-lucide-loader-circle", "minus": "i-lucide-minus", "plus": "i-lucide-plus", "search": "i-lucide-search", "upload": "i-lucide-upload" } }, "colorMode": true };
+/*!
   * vue-router v4.5.1
   * (c) 2025 Eduardo San Martin Morote
   * @license MIT
-  */const _r=()=>{},Le=Array.isArray;function Mt(e,t){return(e.aliasOf||e)===(t.aliasOf||t)}function Qr(e,t){if(Object.keys(e).length!==Object.keys(t).length)return!1;for(const n in e)if(!Jr(e[n],t[n]))return!1;return!0}function Jr(e,t){return Le(e)?Rt(e,t):Le(t)?Rt(t,e):e===t}function Rt(e,t){return Le(t)?e.length===t.length&&e.every((n,r)=>n===t[r]):e.length===1&&e[0]===t}var Lt;(function(e){e.pop="pop",e.push="push"})(Lt||(Lt={}));var Nt;(function(e){e.back="back",e.forward="forward",e.unknown=""})(Nt||(Nt={}));var Bt;(function(e){e[e.aborted=4]="aborted",e[e.cancelled=8]="cancelled",e[e.duplicated=16]="duplicated"})(Bt||(Bt={}));const An=Symbol(""),In=Symbol("");function Gt(e){const t=Z(An),n=Z(In),r=I(()=>{const l=T(e.to);return t.resolve(l)}),o=I(()=>{const{matched:l}=r.value,{length:c}=l,u=l[c-1],f=n.matched;if(!u||!f.length)return-1;const h=f.findIndex(Mt.bind(null,u));if(h>-1)return h;const v=Vt(l[c-2]);return c>1&&Vt(u)===v&&f[f.length-1].path!==v?f.findIndex(Mt.bind(null,l[c-2])):h}),s=I(()=>o.value>-1&&to(n.params,r.value.params)),i=I(()=>o.value>-1&&o.value===n.matched.length-1&&Qr(n.params,r.value.params));function a(l={}){if(eo(l)){const c=t[T(e.replace)?"replace":"push"](T(e.to)).catch(_r);return e.viewTransition&&typeof document<"u"&&"startViewTransition"in document&&document.startViewTransition(()=>c),c}return Promise.resolve()}return{route:r,href:I(()=>r.value.href),isActive:s,isExactActive:i,navigate:a}}function Xr(e){return e.length===1?e[0]:e}const Yr=Be({name:"RouterLink",compatConfig:{MODE:3},props:{to:{type:[String,Object],required:!0},replace:Boolean,activeClass:String,exactActiveClass:String,custom:Boolean,ariaCurrentValue:{type:String,default:"page"},viewTransition:Boolean},useLink:Gt,setup(e,{slots:t}){const n=Me(Gt(e)),{options:r}=Z(An),o=I(()=>({[Ft(e.activeClass,r.linkActiveClass,"router-link-active")]:n.isActive,[Ft(e.exactActiveClass,r.linkExactActiveClass,"router-link-exact-active")]:n.isExactActive}));return()=>{const s=t.default&&Xr(t.default(n));return e.custom?s:de("a",{"aria-current":n.isExactActive?e.ariaCurrentValue:null,href:n.href,onClick:n.navigate,class:o.value},s)}}}),Zr=Yr;function eo(e){if(!(e.metaKey||e.altKey||e.ctrlKey||e.shiftKey)&&!e.defaultPrevented&&!(e.button!==void 0&&e.button!==0)){if(e.currentTarget&&e.currentTarget.getAttribute){const t=e.currentTarget.getAttribute("target");if(/\b_blank\b/i.test(t))return}return e.preventDefault&&e.preventDefault(),!0}}function to(e,t){for(const n in t){const r=t[n],o=e[n];if(typeof r=="string"){if(r!==o)return!1}else if(!Le(o)||o.length!==r.length||r.some((s,i)=>s!==o[i]))return!1}return!0}function Vt(e){return e?e.aliasOf?e.aliasOf.path:e.path:""}const Ft=(e,t,n)=>e??t??n;function no(e){return Z(In)}const ro=Me(Cn),Ae=()=>ro,We={},Mi=(e,t)=>{if(We[e])return We[e];const n=Q(t());return We[e]=n,n};Wr();var Dt=e=>typeof e=="boolean"?`${e}`:e===0?"0":e,F=e=>!e||typeof e!="object"||Object.keys(e).length===0,oo=(e,t)=>JSON.stringify(e)===JSON.stringify(t);function On(e,t){e.forEach(function(n){Array.isArray(n)?On(n,t):t.push(n)})}function jn(e){let t=[];return On(e,t),t}var zn=(...e)=>jn(e).filter(Boolean),Ct=(e,t)=>{let n={},r=Object.keys(e),o=Object.keys(t);for(let s of r)if(o.includes(s)){let i=e[s],a=t[s];Array.isArray(i)||Array.isArray(a)?n[s]=zn(a,i):typeof i=="object"&&typeof a=="object"?n[s]=Ct(i,a):n[s]=a+" "+i}else n[s]=e[s];for(let s of o)r.includes(s)||(n[s]=t[s]);return n},Ht=e=>!e||typeof e!="string"?e:e.replace(/\s+/g," ").trim();const At="-",so=e=>{const t=ao(e),{conflictingClassGroups:n,conflictingClassGroupModifiers:r}=e;return{getClassGroupId:i=>{const a=i.split(At);return a[0]===""&&a.length!==1&&a.shift(),Pn(a,t)||io(i)},getConflictingClassGroupIds:(i,a)=>{const l=n[i]||[];return a&&r[i]?[...l,...r[i]]:l}}},Pn=(e,t)=>{if(e.length===0)return t.classGroupId;const n=e[0],r=t.nextPart.get(n),o=r?Pn(e.slice(1),r):void 0;if(o)return o;if(t.validators.length===0)return;const s=e.join(At);return t.validators.find(({validator:i})=>i(s))?.classGroupId},Ut=/^\[(.+)\]$/,io=e=>{if(Ut.test(e)){const t=Ut.exec(e)[1],n=t?.substring(0,t.indexOf(":"));if(n)return"arbitrary.."+n}},ao=e=>{const{theme:t,classGroups:n}=e,r={nextPart:new Map,validators:[]};for(const o in n)rt(n[o],r,o,t);return r},rt=(e,t,n,r)=>{e.forEach(o=>{if(typeof o=="string"){const s=o===""?t:Kt(t,o);s.classGroupId=n;return}if(typeof o=="function"){if(lo(o)){rt(o(r),t,n,r);return}t.validators.push({validator:o,classGroupId:n});return}Object.entries(o).forEach(([s,i])=>{rt(i,Kt(t,s),n,r)})})},Kt=(e,t)=>{let n=e;return t.split(At).forEach(r=>{n.nextPart.has(r)||n.nextPart.set(r,{nextPart:new Map,validators:[]}),n=n.nextPart.get(r)}),n},lo=e=>e.isThemeGetter,co=e=>{if(e<1)return{get:()=>{},set:()=>{}};let t=0,n=new Map,r=new Map;const o=(s,i)=>{n.set(s,i),t++,t>e&&(t=0,r=n,n=new Map)};return{get(s){let i=n.get(s);if(i!==void 0)return i;if((i=r.get(s))!==void 0)return o(s,i),i},set(s,i){n.has(s)?n.set(s,i):o(s,i)}}},ot="!",st=":",uo=st.length,fo=e=>{const{prefix:t,experimentalParseClassName:n}=e;let r=o=>{const s=[];let i=0,a=0,l=0,c;for(let x=0;x<o.length;x++){let m=o[x];if(i===0&&a===0){if(m===st){s.push(o.slice(l,x)),l=x+uo;continue}if(m==="/"){c=x;continue}}m==="["?i++:m==="]"?i--:m==="("?a++:m===")"&&a--}const u=s.length===0?o:o.substring(l),f=po(u),h=f!==u,v=c&&c>l?c-l:void 0;return{modifiers:s,hasImportantModifier:h,baseClassName:f,maybePostfixModifierPosition:v}};if(t){const o=t+st,s=r;r=i=>i.startsWith(o)?s(i.substring(o.length)):{isExternal:!0,modifiers:[],hasImportantModifier:!1,baseClassName:i,maybePostfixModifierPosition:void 0}}if(n){const o=r;r=s=>n({className:s,parseClassName:o})}return r},po=e=>e.endsWith(ot)?e.substring(0,e.length-1):e.startsWith(ot)?e.substring(1):e,go=e=>{const t=Object.fromEntries(e.orderSensitiveModifiers.map(r=>[r,!0]));return r=>{if(r.length<=1)return r;const o=[];let s=[];return r.forEach(i=>{i[0]==="["||t[i]?(o.push(...s.sort(),i),s=[]):s.push(i)}),o.push(...s.sort()),o}},bo=e=>({cache:co(e.cacheSize),parseClassName:fo(e),sortModifiers:go(e),...so(e)}),ho=/\s+/,vo=(e,t)=>{const{parseClassName:n,getClassGroupId:r,getConflictingClassGroupIds:o,sortModifiers:s}=t,i=[],a=e.trim().split(ho);let l="";for(let c=a.length-1;c>=0;c-=1){const u=a[c],{isExternal:f,modifiers:h,hasImportantModifier:v,baseClassName:x,maybePostfixModifierPosition:m}=n(u);if(f){l=u+(l.length>0?" "+l:l);continue}let p=!!m,M=r(p?x.substring(0,m):x);if(!M){if(!p){l=u+(l.length>0?" "+l:l);continue}if(M=r(x),!M){l=u+(l.length>0?" "+l:l);continue}p=!1}const w=s(h).join(":"),z=v?w+ot:w,E=z+M;if(i.includes(E))continue;i.push(E);const B=o(M,p);for(let d=0;d<B.length;++d){const $=B[d];i.push(z+$)}l=u+(l.length>0?" "+l:l)}return l};function yo(){let e=0,t,n,r="";for(;e<arguments.length;)(t=arguments[e++])&&(n=qn(t))&&(r&&(r+=" "),r+=n);return r}const qn=e=>{if(typeof e=="string")return e;let t,n="";for(let r=0;r<e.length;r++)e[r]&&(t=qn(e[r]))&&(n&&(n+=" "),n+=t);return n};function it(e,...t){let n,r,o,s=i;function i(l){const c=t.reduce((u,f)=>f(u),e());return n=bo(c),r=n.cache.get,o=n.cache.set,s=a,a(l)}function a(l){const c=r(l);if(c)return c;const u=vo(l,n);return o(l,u),u}return function(){return s(yo.apply(null,arguments))}}const L=e=>{const t=n=>n[e]||[];return t.isThemeGetter=!0,t},$n=/^\[(?:(\w[\w-]*):)?(.+)\]$/i,En=/^\((?:(\w[\w-]*):)?(.+)\)$/i,mo=/^\d+\/\d+$/,xo=/^(\d+(\.\d+)?)?(xs|sm|md|lg|xl)$/,wo=/\d+(%|px|r?em|[sdl]?v([hwib]|min|max)|pt|pc|in|cm|mm|cap|ch|ex|r?lh|cq(w|h|i|b|min|max))|\b(calc|min|max|clamp)\(.+\)|^0$/,ko=/^(rgba?|hsla?|hwb|(ok)?(lab|lch))\(.+\)$/,So=/^(inset_)?-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/,Co=/^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/,ue=e=>mo.test(e),O=e=>!!e&&!Number.isNaN(Number(e)),se=e=>!!e&&Number.isInteger(Number(e)),Wt=e=>e.endsWith("%")&&O(e.slice(0,-1)),ne=e=>xo.test(e),Ao=()=>!0,Io=e=>wo.test(e)&&!ko.test(e),It=()=>!1,Oo=e=>So.test(e),jo=e=>Co.test(e),zo=e=>!g(e)&&!b(e),Po=e=>ge(e,Rn,It),g=e=>$n.test(e),ie=e=>ge(e,Ln,Io),_e=e=>ge(e,Vo,O),qo=e=>ge(e,Tn,It),$o=e=>ge(e,Mn,jo),Eo=e=>ge(e,It,Oo),b=e=>En.test(e),Oe=e=>be(e,Ln),To=e=>be(e,Fo),Mo=e=>be(e,Tn),Ro=e=>be(e,Rn),Lo=e=>be(e,Mn),No=e=>be(e,Do,!0),ge=(e,t,n)=>{const r=$n.exec(e);return r?r[1]?t(r[1]):n(r[2]):!1},be=(e,t,n=!1)=>{const r=En.exec(e);return r?r[1]?t(r[1]):n:!1},Tn=e=>e==="position",Bo=new Set(["image","url"]),Mn=e=>Bo.has(e),Go=new Set(["length","size","percentage"]),Rn=e=>Go.has(e),Ln=e=>e==="length",Vo=e=>e==="number",Fo=e=>e==="family-name",Do=e=>e==="shadow",at=()=>{const e=L("color"),t=L("font"),n=L("text"),r=L("font-weight"),o=L("tracking"),s=L("leading"),i=L("breakpoint"),a=L("container"),l=L("spacing"),c=L("radius"),u=L("shadow"),f=L("inset-shadow"),h=L("drop-shadow"),v=L("blur"),x=L("perspective"),m=L("aspect"),p=L("ease"),M=L("animate"),w=()=>["auto","avoid","all","avoid-page","page","left","right","column"],z=()=>["bottom","center","left","left-bottom","left-top","right","right-bottom","right-top","top"],E=()=>["auto","hidden","clip","visible","scroll"],B=()=>["auto","contain","none"],d=()=>[b,g,l],$=()=>[ue,"full","auto",...d()],K=()=>[se,"none","subgrid",b,g],_=()=>["auto",{span:["full",se,b,g]},b,g],V=()=>[se,"auto",b,g],Ie=()=>["auto","min","max","fr",b,g],A=()=>["start","end","center","between","around","evenly","stretch","baseline"],S=()=>["start","end","center","stretch"],k=()=>["auto",...d()],j=()=>[ue,"auto","full","dvw","dvh","lvw","lvh","svw","svh","min","max","fit",...d()],y=()=>[e,b,g],q=()=>[Wt,ie],C=()=>["","none","full",c,b,g],P=()=>["",O,Oe,ie],R=()=>["solid","dashed","dotted","double"],X=()=>["normal","multiply","screen","overlay","darken","lighten","color-dodge","color-burn","hard-light","soft-light","difference","exclusion","hue","saturation","color","luminosity"],G=()=>["","none",v,b,g],oe=()=>["center","top","top-right","right","bottom-right","bottom","bottom-left","left","top-left",b,g],ee=()=>["none",O,b,g],te=()=>["none",O,b,g],le=()=>[O,b,g],ce=()=>[ue,"full",...d()];return{cacheSize:500,theme:{animate:["spin","ping","pulse","bounce"],aspect:["video"],blur:[ne],breakpoint:[ne],color:[Ao],container:[ne],"drop-shadow":[ne],ease:["in","out","in-out"],font:[zo],"font-weight":["thin","extralight","light","normal","medium","semibold","bold","extrabold","black"],"inset-shadow":[ne],leading:["none","tight","snug","normal","relaxed","loose"],perspective:["dramatic","near","normal","midrange","distant","none"],radius:[ne],shadow:[ne],spacing:["px",O],text:[ne],tracking:["tighter","tight","normal","wide","wider","widest"]},classGroups:{aspect:[{aspect:["auto","square",ue,g,b,m]}],container:["container"],columns:[{columns:[O,g,b,a]}],"break-after":[{"break-after":w()}],"break-before":[{"break-before":w()}],"break-inside":[{"break-inside":["auto","avoid","avoid-page","avoid-column"]}],"box-decoration":[{"box-decoration":["slice","clone"]}],box:[{box:["border","content"]}],display:["block","inline-block","inline","flex","inline-flex","table","inline-table","table-caption","table-cell","table-column","table-column-group","table-footer-group","table-header-group","table-row-group","table-row","flow-root","grid","inline-grid","contents","list-item","hidden"],sr:["sr-only","not-sr-only"],float:[{float:["right","left","none","start","end"]}],clear:[{clear:["left","right","both","none","start","end"]}],isolation:["isolate","isolation-auto"],"object-fit":[{object:["contain","cover","fill","none","scale-down"]}],"object-position":[{object:[...z(),g,b]}],overflow:[{overflow:E()}],"overflow-x":[{"overflow-x":E()}],"overflow-y":[{"overflow-y":E()}],overscroll:[{overscroll:B()}],"overscroll-x":[{"overscroll-x":B()}],"overscroll-y":[{"overscroll-y":B()}],position:["static","fixed","absolute","relative","sticky"],inset:[{inset:$()}],"inset-x":[{"inset-x":$()}],"inset-y":[{"inset-y":$()}],start:[{start:$()}],end:[{end:$()}],top:[{top:$()}],right:[{right:$()}],bottom:[{bottom:$()}],left:[{left:$()}],visibility:["visible","invisible","collapse"],z:[{z:[se,"auto",b,g]}],basis:[{basis:[ue,"full","auto",a,...d()]}],"flex-direction":[{flex:["row","row-reverse","col","col-reverse"]}],"flex-wrap":[{flex:["nowrap","wrap","wrap-reverse"]}],flex:[{flex:[O,ue,"auto","initial","none",g]}],grow:[{grow:["",O,b,g]}],shrink:[{shrink:["",O,b,g]}],order:[{order:[se,"first","last","none",b,g]}],"grid-cols":[{"grid-cols":K()}],"col-start-end":[{col:_()}],"col-start":[{"col-start":V()}],"col-end":[{"col-end":V()}],"grid-rows":[{"grid-rows":K()}],"row-start-end":[{row:_()}],"row-start":[{"row-start":V()}],"row-end":[{"row-end":V()}],"grid-flow":[{"grid-flow":["row","col","dense","row-dense","col-dense"]}],"auto-cols":[{"auto-cols":Ie()}],"auto-rows":[{"auto-rows":Ie()}],gap:[{gap:d()}],"gap-x":[{"gap-x":d()}],"gap-y":[{"gap-y":d()}],"justify-content":[{justify:[...A(),"normal"]}],"justify-items":[{"justify-items":[...S(),"normal"]}],"justify-self":[{"justify-self":["auto",...S()]}],"align-content":[{content:["normal",...A()]}],"align-items":[{items:[...S(),"baseline"]}],"align-self":[{self:["auto",...S(),"baseline"]}],"place-content":[{"place-content":A()}],"place-items":[{"place-items":[...S(),"baseline"]}],"place-self":[{"place-self":["auto",...S()]}],p:[{p:d()}],px:[{px:d()}],py:[{py:d()}],ps:[{ps:d()}],pe:[{pe:d()}],pt:[{pt:d()}],pr:[{pr:d()}],pb:[{pb:d()}],pl:[{pl:d()}],m:[{m:k()}],mx:[{mx:k()}],my:[{my:k()}],ms:[{ms:k()}],me:[{me:k()}],mt:[{mt:k()}],mr:[{mr:k()}],mb:[{mb:k()}],ml:[{ml:k()}],"space-x":[{"space-x":d()}],"space-x-reverse":["space-x-reverse"],"space-y":[{"space-y":d()}],"space-y-reverse":["space-y-reverse"],size:[{size:j()}],w:[{w:[a,"screen",...j()]}],"min-w":[{"min-w":[a,"screen","none",...j()]}],"max-w":[{"max-w":[a,"screen","none","prose",{screen:[i]},...j()]}],h:[{h:["screen",...j()]}],"min-h":[{"min-h":["screen","none",...j()]}],"max-h":[{"max-h":["screen",...j()]}],"font-size":[{text:["base",n,Oe,ie]}],"font-smoothing":["antialiased","subpixel-antialiased"],"font-style":["italic","not-italic"],"font-weight":[{font:[r,b,_e]}],"font-stretch":[{"font-stretch":["ultra-condensed","extra-condensed","condensed","semi-condensed","normal","semi-expanded","expanded","extra-expanded","ultra-expanded",Wt,g]}],"font-family":[{font:[To,g,t]}],"fvn-normal":["normal-nums"],"fvn-ordinal":["ordinal"],"fvn-slashed-zero":["slashed-zero"],"fvn-figure":["lining-nums","oldstyle-nums"],"fvn-spacing":["proportional-nums","tabular-nums"],"fvn-fraction":["diagonal-fractions","stacked-fractions"],tracking:[{tracking:[o,b,g]}],"line-clamp":[{"line-clamp":[O,"none",b,_e]}],leading:[{leading:[s,...d()]}],"list-image":[{"list-image":["none",b,g]}],"list-style-position":[{list:["inside","outside"]}],"list-style-type":[{list:["disc","decimal","none",b,g]}],"text-alignment":[{text:["left","center","right","justify","start","end"]}],"placeholder-color":[{placeholder:y()}],"text-color":[{text:y()}],"text-decoration":["underline","overline","line-through","no-underline"],"text-decoration-style":[{decoration:[...R(),"wavy"]}],"text-decoration-thickness":[{decoration:[O,"from-font","auto",b,ie]}],"text-decoration-color":[{decoration:y()}],"underline-offset":[{"underline-offset":[O,"auto",b,g]}],"text-transform":["uppercase","lowercase","capitalize","normal-case"],"text-overflow":["truncate","text-ellipsis","text-clip"],"text-wrap":[{text:["wrap","nowrap","balance","pretty"]}],indent:[{indent:d()}],"vertical-align":[{align:["baseline","top","middle","bottom","text-top","text-bottom","sub","super",b,g]}],whitespace:[{whitespace:["normal","nowrap","pre","pre-line","pre-wrap","break-spaces"]}],break:[{break:["normal","words","all","keep"]}],hyphens:[{hyphens:["none","manual","auto"]}],content:[{content:["none",b,g]}],"bg-attachment":[{bg:["fixed","local","scroll"]}],"bg-clip":[{"bg-clip":["border","padding","content","text"]}],"bg-origin":[{"bg-origin":["border","padding","content"]}],"bg-position":[{bg:[...z(),Mo,qo]}],"bg-repeat":[{bg:["no-repeat",{repeat:["","x","y","space","round"]}]}],"bg-size":[{bg:["auto","cover","contain",Ro,Po]}],"bg-image":[{bg:["none",{linear:[{to:["t","tr","r","br","b","bl","l","tl"]},se,b,g],radial:["",b,g],conic:[se,b,g]},Lo,$o]}],"bg-color":[{bg:y()}],"gradient-from-pos":[{from:q()}],"gradient-via-pos":[{via:q()}],"gradient-to-pos":[{to:q()}],"gradient-from":[{from:y()}],"gradient-via":[{via:y()}],"gradient-to":[{to:y()}],rounded:[{rounded:C()}],"rounded-s":[{"rounded-s":C()}],"rounded-e":[{"rounded-e":C()}],"rounded-t":[{"rounded-t":C()}],"rounded-r":[{"rounded-r":C()}],"rounded-b":[{"rounded-b":C()}],"rounded-l":[{"rounded-l":C()}],"rounded-ss":[{"rounded-ss":C()}],"rounded-se":[{"rounded-se":C()}],"rounded-ee":[{"rounded-ee":C()}],"rounded-es":[{"rounded-es":C()}],"rounded-tl":[{"rounded-tl":C()}],"rounded-tr":[{"rounded-tr":C()}],"rounded-br":[{"rounded-br":C()}],"rounded-bl":[{"rounded-bl":C()}],"border-w":[{border:P()}],"border-w-x":[{"border-x":P()}],"border-w-y":[{"border-y":P()}],"border-w-s":[{"border-s":P()}],"border-w-e":[{"border-e":P()}],"border-w-t":[{"border-t":P()}],"border-w-r":[{"border-r":P()}],"border-w-b":[{"border-b":P()}],"border-w-l":[{"border-l":P()}],"divide-x":[{"divide-x":P()}],"divide-x-reverse":["divide-x-reverse"],"divide-y":[{"divide-y":P()}],"divide-y-reverse":["divide-y-reverse"],"border-style":[{border:[...R(),"hidden","none"]}],"divide-style":[{divide:[...R(),"hidden","none"]}],"border-color":[{border:y()}],"border-color-x":[{"border-x":y()}],"border-color-y":[{"border-y":y()}],"border-color-s":[{"border-s":y()}],"border-color-e":[{"border-e":y()}],"border-color-t":[{"border-t":y()}],"border-color-r":[{"border-r":y()}],"border-color-b":[{"border-b":y()}],"border-color-l":[{"border-l":y()}],"divide-color":[{divide:y()}],"outline-style":[{outline:[...R(),"none","hidden"]}],"outline-offset":[{"outline-offset":[O,b,g]}],"outline-w":[{outline:["",O,Oe,ie]}],"outline-color":[{outline:[e]}],shadow:[{shadow:["","none",u,No,Eo]}],"shadow-color":[{shadow:y()}],"inset-shadow":[{"inset-shadow":["none",b,g,f]}],"inset-shadow-color":[{"inset-shadow":y()}],"ring-w":[{ring:P()}],"ring-w-inset":["ring-inset"],"ring-color":[{ring:y()}],"ring-offset-w":[{"ring-offset":[O,ie]}],"ring-offset-color":[{"ring-offset":y()}],"inset-ring-w":[{"inset-ring":P()}],"inset-ring-color":[{"inset-ring":y()}],opacity:[{opacity:[O,b,g]}],"mix-blend":[{"mix-blend":[...X(),"plus-darker","plus-lighter"]}],"bg-blend":[{"bg-blend":X()}],filter:[{filter:["","none",b,g]}],blur:[{blur:G()}],brightness:[{brightness:[O,b,g]}],contrast:[{contrast:[O,b,g]}],"drop-shadow":[{"drop-shadow":["","none",h,b,g]}],grayscale:[{grayscale:["",O,b,g]}],"hue-rotate":[{"hue-rotate":[O,b,g]}],invert:[{invert:["",O,b,g]}],saturate:[{saturate:[O,b,g]}],sepia:[{sepia:["",O,b,g]}],"backdrop-filter":[{"backdrop-filter":["","none",b,g]}],"backdrop-blur":[{"backdrop-blur":G()}],"backdrop-brightness":[{"backdrop-brightness":[O,b,g]}],"backdrop-contrast":[{"backdrop-contrast":[O,b,g]}],"backdrop-grayscale":[{"backdrop-grayscale":["",O,b,g]}],"backdrop-hue-rotate":[{"backdrop-hue-rotate":[O,b,g]}],"backdrop-invert":[{"backdrop-invert":["",O,b,g]}],"backdrop-opacity":[{"backdrop-opacity":[O,b,g]}],"backdrop-saturate":[{"backdrop-saturate":[O,b,g]}],"backdrop-sepia":[{"backdrop-sepia":["",O,b,g]}],"border-collapse":[{border:["collapse","separate"]}],"border-spacing":[{"border-spacing":d()}],"border-spacing-x":[{"border-spacing-x":d()}],"border-spacing-y":[{"border-spacing-y":d()}],"table-layout":[{table:["auto","fixed"]}],caption:[{caption:["top","bottom"]}],transition:[{transition:["","all","colors","opacity","shadow","transform","none",b,g]}],"transition-behavior":[{transition:["normal","discrete"]}],duration:[{duration:[O,"initial",b,g]}],ease:[{ease:["linear","initial",p,b,g]}],delay:[{delay:[O,b,g]}],animate:[{animate:["none",M,b,g]}],backface:[{backface:["hidden","visible"]}],perspective:[{perspective:[x,b,g]}],"perspective-origin":[{"perspective-origin":oe()}],rotate:[{rotate:ee()}],"rotate-x":[{"rotate-x":ee()}],"rotate-y":[{"rotate-y":ee()}],"rotate-z":[{"rotate-z":ee()}],scale:[{scale:te()}],"scale-x":[{"scale-x":te()}],"scale-y":[{"scale-y":te()}],"scale-z":[{"scale-z":te()}],"scale-3d":["scale-3d"],skew:[{skew:le()}],"skew-x":[{"skew-x":le()}],"skew-y":[{"skew-y":le()}],transform:[{transform:[b,g,"","none","gpu","cpu"]}],"transform-origin":[{origin:oe()}],"transform-style":[{transform:["3d","flat"]}],translate:[{translate:ce()}],"translate-x":[{"translate-x":ce()}],"translate-y":[{"translate-y":ce()}],"translate-z":[{"translate-z":ce()}],"translate-none":["translate-none"],accent:[{accent:y()}],appearance:[{appearance:["none","auto"]}],"caret-color":[{caret:y()}],"color-scheme":[{scheme:["normal","dark","light","light-dark","only-dark","only-light"]}],cursor:[{cursor:["auto","default","pointer","wait","text","move","help","not-allowed","none","context-menu","progress","cell","crosshair","vertical-text","alias","copy","no-drop","grab","grabbing","all-scroll","col-resize","row-resize","n-resize","e-resize","s-resize","w-resize","ne-resize","nw-resize","se-resize","sw-resize","ew-resize","ns-resize","nesw-resize","nwse-resize","zoom-in","zoom-out",b,g]}],"field-sizing":[{"field-sizing":["fixed","content"]}],"pointer-events":[{"pointer-events":["auto","none"]}],resize:[{resize:["none","","y","x"]}],"scroll-behavior":[{scroll:["auto","smooth"]}],"scroll-m":[{"scroll-m":d()}],"scroll-mx":[{"scroll-mx":d()}],"scroll-my":[{"scroll-my":d()}],"scroll-ms":[{"scroll-ms":d()}],"scroll-me":[{"scroll-me":d()}],"scroll-mt":[{"scroll-mt":d()}],"scroll-mr":[{"scroll-mr":d()}],"scroll-mb":[{"scroll-mb":d()}],"scroll-ml":[{"scroll-ml":d()}],"scroll-p":[{"scroll-p":d()}],"scroll-px":[{"scroll-px":d()}],"scroll-py":[{"scroll-py":d()}],"scroll-ps":[{"scroll-ps":d()}],"scroll-pe":[{"scroll-pe":d()}],"scroll-pt":[{"scroll-pt":d()}],"scroll-pr":[{"scroll-pr":d()}],"scroll-pb":[{"scroll-pb":d()}],"scroll-pl":[{"scroll-pl":d()}],"snap-align":[{snap:["start","end","center","align-none"]}],"snap-stop":[{snap:["normal","always"]}],"snap-type":[{snap:["none","x","y","both"]}],"snap-strictness":[{snap:["mandatory","proximity"]}],touch:[{touch:["auto","none","manipulation"]}],"touch-x":[{"touch-pan":["x","left","right"]}],"touch-y":[{"touch-pan":["y","up","down"]}],"touch-pz":["touch-pinch-zoom"],select:[{select:["none","text","all","auto"]}],"will-change":[{"will-change":["auto","scroll","contents","transform",b,g]}],fill:[{fill:["none",...y()]}],"stroke-w":[{stroke:[O,Oe,ie,_e]}],stroke:[{stroke:["none",...y()]}],"forced-color-adjust":[{"forced-color-adjust":["auto","none"]}]},conflictingClassGroups:{overflow:["overflow-x","overflow-y"],overscroll:["overscroll-x","overscroll-y"],inset:["inset-x","inset-y","start","end","top","right","bottom","left"],"inset-x":["right","left"],"inset-y":["top","bottom"],flex:["basis","grow","shrink"],gap:["gap-x","gap-y"],p:["px","py","ps","pe","pt","pr","pb","pl"],px:["pr","pl"],py:["pt","pb"],m:["mx","my","ms","me","mt","mr","mb","ml"],mx:["mr","ml"],my:["mt","mb"],size:["w","h"],"font-size":["leading"],"fvn-normal":["fvn-ordinal","fvn-slashed-zero","fvn-figure","fvn-spacing","fvn-fraction"],"fvn-ordinal":["fvn-normal"],"fvn-slashed-zero":["fvn-normal"],"fvn-figure":["fvn-normal"],"fvn-spacing":["fvn-normal"],"fvn-fraction":["fvn-normal"],"line-clamp":["display","overflow"],rounded:["rounded-s","rounded-e","rounded-t","rounded-r","rounded-b","rounded-l","rounded-ss","rounded-se","rounded-ee","rounded-es","rounded-tl","rounded-tr","rounded-br","rounded-bl"],"rounded-s":["rounded-ss","rounded-es"],"rounded-e":["rounded-se","rounded-ee"],"rounded-t":["rounded-tl","rounded-tr"],"rounded-r":["rounded-tr","rounded-br"],"rounded-b":["rounded-br","rounded-bl"],"rounded-l":["rounded-tl","rounded-bl"],"border-spacing":["border-spacing-x","border-spacing-y"],"border-w":["border-w-s","border-w-e","border-w-t","border-w-r","border-w-b","border-w-l"],"border-w-x":["border-w-r","border-w-l"],"border-w-y":["border-w-t","border-w-b"],"border-color":["border-color-s","border-color-e","border-color-t","border-color-r","border-color-b","border-color-l"],"border-color-x":["border-color-r","border-color-l"],"border-color-y":["border-color-t","border-color-b"],translate:["translate-x","translate-y","translate-none"],"translate-none":["translate","translate-x","translate-y","translate-z"],"scroll-m":["scroll-mx","scroll-my","scroll-ms","scroll-me","scroll-mt","scroll-mr","scroll-mb","scroll-ml"],"scroll-mx":["scroll-mr","scroll-ml"],"scroll-my":["scroll-mt","scroll-mb"],"scroll-p":["scroll-px","scroll-py","scroll-ps","scroll-pe","scroll-pt","scroll-pr","scroll-pb","scroll-pl"],"scroll-px":["scroll-pr","scroll-pl"],"scroll-py":["scroll-pt","scroll-pb"],touch:["touch-x","touch-y","touch-pz"],"touch-x":["touch"],"touch-y":["touch"],"touch-pz":["touch"]},conflictingClassGroupModifiers:{"font-size":["leading"]},orderSensitiveModifiers:["before","after","placeholder","file","marker","selection","first-line","first-letter","backdrop","*","**"]}},Ho=(e,{cacheSize:t,prefix:n,experimentalParseClassName:r,extend:o={},override:s={}})=>(me(e,"cacheSize",t),me(e,"prefix",n),me(e,"experimentalParseClassName",r),je(e.theme,s.theme),je(e.classGroups,s.classGroups),je(e.conflictingClassGroups,s.conflictingClassGroups),je(e.conflictingClassGroupModifiers,s.conflictingClassGroupModifiers),me(e,"orderSensitiveModifiers",s.orderSensitiveModifiers),ze(e.theme,o.theme),ze(e.classGroups,o.classGroups),ze(e.conflictingClassGroups,o.conflictingClassGroups),ze(e.conflictingClassGroupModifiers,o.conflictingClassGroupModifiers),Nn(e,o,"orderSensitiveModifiers"),e),me=(e,t,n)=>{n!==void 0&&(e[t]=n)},je=(e,t)=>{if(t)for(const n in t)me(e,n,t[n])},ze=(e,t)=>{if(t)for(const n in t)Nn(e,t,n)},Nn=(e,t,n)=>{const r=t[n];r!==void 0&&(e[n]=e[n]?e[n].concat(r):r)},Uo=(e,...t)=>typeof e=="function"?it(at,e,...t):it(()=>Ho(at(),e),...t),Ko=it(at);var Wo={twMerge:!0,twMergeConfig:{},responsiveVariants:!1},Bn=e=>e||void 0,we=(...e)=>Bn(jn(e).filter(Boolean).join(" ")),Qe=null,Y={},lt=!1,he=(...e)=>t=>t.twMerge?((!Qe||lt)&&(lt=!1,Qe=F(Y)?Ko:Uo({...Y,extend:{theme:Y.theme,classGroups:Y.classGroups,conflictingClassGroupModifiers:Y.conflictingClassGroupModifiers,conflictingClassGroups:Y.conflictingClassGroups,...Y.extend}})),Bn(Qe(we(e)))):we(e),_t=(e,t)=>{for(let n in t)e.hasOwnProperty(n)?e[n]=we(e[n],t[n]):e[n]=t[n];return e},_o=(e,t)=>{let{extend:n=null,slots:r={},variants:o={},compoundVariants:s=[],compoundSlots:i=[],defaultVariants:a={}}=e,l={...Wo,...t},c=n!=null&&n.base?we(n.base,e?.base):e?.base,u=n!=null&&n.variants&&!F(n.variants)?Ct(o,n.variants):o,f=n!=null&&n.defaultVariants&&!F(n.defaultVariants)?{...n.defaultVariants,...a}:a;!F(l.twMergeConfig)&&!oo(l.twMergeConfig,Y)&&(lt=!0,Y=l.twMergeConfig);let h=F(n?.slots),v=F(r)?{}:{base:we(e?.base,h&&n?.base),...r},x=h?v:_t({...n?.slots},F(v)?{base:e?.base}:v),m=F(n?.compoundVariants)?s:zn(n?.compoundVariants,s),p=w=>{if(F(u)&&F(r)&&h)return he(c,w?.class,w?.className)(l);if(m&&!Array.isArray(m))throw new TypeError(`The "compoundVariants" prop must be an array. Received: ${typeof m}`);if(i&&!Array.isArray(i))throw new TypeError(`The "compoundSlots" prop must be an array. Received: ${typeof i}`);let z=(A,S,k=[],j)=>{let y=k;if(typeof S=="string")y=y.concat(Ht(S).split(" ").map(q=>`${A}:${q}`));else if(Array.isArray(S))y=y.concat(S.reduce((q,C)=>q.concat(`${A}:${C}`),[]));else if(typeof S=="object"&&typeof j=="string"){for(let q in S)if(S.hasOwnProperty(q)&&q===j){let C=S[q];if(C&&typeof C=="string"){let P=Ht(C);y[j]?y[j]=y[j].concat(P.split(" ").map(R=>`${A}:${R}`)):y[j]=P.split(" ").map(R=>`${A}:${R}`)}else Array.isArray(C)&&C.length>0&&(y[j]=C.reduce((P,R)=>P.concat(`${A}:${R}`),[]))}}return y},E=(A,S=u,k=null,j=null)=>{var y;let q=S[A];if(!q||F(q))return null;let C=(y=j?.[A])!=null?y:w?.[A];if(C===null)return null;let P=Dt(C),R=Array.isArray(l.responsiveVariants)&&l.responsiveVariants.length>0||l.responsiveVariants===!0,X=f?.[A],G=[];if(typeof P=="object"&&R)for(let[te,le]of Object.entries(P)){let ce=q[le];if(te==="initial"){X=le;continue}Array.isArray(l.responsiveVariants)&&!l.responsiveVariants.includes(te)||(G=z(te,ce,G,k))}let oe=P!=null&&typeof P!="object"?P:Dt(X),ee=q[oe||"false"];return typeof G=="object"&&typeof k=="string"&&G[k]?_t(G,ee):G.length>0?(G.push(ee),k==="base"?G.join(" "):G):ee},B=()=>u?Object.keys(u).map(A=>E(A,u)):null,d=(A,S)=>{if(!u||typeof u!="object")return null;let k=new Array;for(let j in u){let y=E(j,u,A,S),q=A==="base"&&typeof y=="string"?y:y&&y[A];q&&(k[k.length]=q)}return k},$={};for(let A in w)w[A]!==void 0&&($[A]=w[A]);let K=(A,S)=>{var k;let j=typeof w?.[A]=="object"?{[A]:(k=w[A])==null?void 0:k.initial}:{};return{...f,...$,...j,...S}},_=(A=[],S)=>{let k=[];for(let{class:j,className:y,...q}of A){let C=!0;for(let[P,R]of Object.entries(q)){let X=K(P,S)[P];if(Array.isArray(R)){if(!R.includes(X)){C=!1;break}}else{let G=oe=>oe==null||oe===!1;if(G(R)&&G(X))continue;if(X!==R){C=!1;break}}}C&&(j&&k.push(j),y&&k.push(y))}return k},V=A=>{let S=_(m,A);if(!Array.isArray(S))return S;let k={};for(let j of S)if(typeof j=="string"&&(k.base=he(k.base,j)(l)),typeof j=="object")for(let[y,q]of Object.entries(j))k[y]=he(k[y],q)(l);return k},Ie=A=>{if(i.length<1)return null;let S={};for(let{slots:k=[],class:j,className:y,...q}of i){if(!F(q)){let C=!0;for(let P of Object.keys(q)){let R=K(P,A)[P];if(R===void 0||(Array.isArray(q[P])?!q[P].includes(R):q[P]!==R)){C=!1;break}}if(!C)continue}for(let C of k)S[C]=S[C]||[],S[C].push([j,y])}return S};if(!F(r)||!h){let A={};if(typeof x=="object"&&!F(x))for(let S of Object.keys(x))A[S]=k=>{var j,y;return he(x[S],d(S,k),((j=V(k))!=null?j:[])[S],((y=Ie(k))!=null?y:[])[S],k?.class,k?.className)(l)};return A}return he(c,B(),_(m),w?.class,w?.className)(l)},M=()=>{if(!(!u||typeof u!="object"))return Object.keys(u)};return p.variantKeys=M(),p.extend=n,p.base=c,p.slots=x,p.variants=u,p.defaultVariants=f,p.compoundSlots=i,p.compoundVariants=m,p},Qo=e=>(t,n)=>_o(t,n?Ct(e,n):e);const Jo=Cn,re=Qo(Jo.ui?.tv),Gn=/^[a-z0-9]+(-[a-z0-9]+)*$/,Fe=(e,t,n,r="")=>{const o=e.split(":");if(e.slice(0,1)==="@"){if(o.length<2||o.length>3)return null;r=o.shift().slice(1)}if(o.length>3||!o.length)return null;if(o.length>1){const a=o.pop(),l=o.pop(),c={provider:o.length>0?o[0]:r,prefix:l,name:a};return t&&!$e(c)?null:c}const s=o[0],i=s.split("-");if(i.length>1){const a={provider:r,prefix:i.shift(),name:i.join("-")};return t&&!$e(a)?null:a}if(n&&r===""){const a={provider:r,prefix:"",name:s};return t&&!$e(a,n)?null:a}return null},$e=(e,t)=>e?!!((t&&e.prefix===""||e.prefix)&&e.name):!1,Vn=Object.freeze({left:0,top:0,width:16,height:16}),Ne=Object.freeze({rotate:0,vFlip:!1,hFlip:!1}),De=Object.freeze({...Vn,...Ne}),ct=Object.freeze({...De,body:"",hidden:!1});function Xo(e,t){const n={};!e.hFlip!=!t.hFlip&&(n.hFlip=!0),!e.vFlip!=!t.vFlip&&(n.vFlip=!0);const r=((e.rotate||0)+(t.rotate||0))%4;return r&&(n.rotate=r),n}function Qt(e,t){const n=Xo(e,t);for(const r in ct)r in Ne?r in e&&!(r in n)&&(n[r]=Ne[r]):r in t?n[r]=t[r]:r in e&&(n[r]=e[r]);return n}function Yo(e,t){const n=e.icons,r=e.aliases||Object.create(null),o=Object.create(null);function s(i){if(n[i])return o[i]=[];if(!(i in o)){o[i]=null;const a=r[i]&&r[i].parent,l=a&&s(a);l&&(o[i]=[a].concat(l))}return o[i]}return Object.keys(n).concat(Object.keys(r)).forEach(s),o}function Zo(e,t,n){const r=e.icons,o=e.aliases||Object.create(null);let s={};function i(a){s=Qt(r[a]||o[a],s)}return i(t),n.forEach(i),Qt(e,s)}function Fn(e,t){const n=[];if(typeof e!="object"||typeof e.icons!="object")return n;e.not_found instanceof Array&&e.not_found.forEach(o=>{t(o,null),n.push(o)});const r=Yo(e);for(const o in r){const s=r[o];s&&(t(o,Zo(e,o,s)),n.push(o))}return n}const es={provider:"",aliases:{},not_found:{},...Vn};function Je(e,t){for(const n in t)if(n in e&&typeof e[n]!=typeof t[n])return!1;return!0}function Dn(e){if(typeof e!="object"||e===null)return null;const t=e;if(typeof t.prefix!="string"||!e.icons||typeof e.icons!="object"||!Je(e,es))return null;const n=t.icons;for(const o in n){const s=n[o];if(!o||typeof s.body!="string"||!Je(s,ct))return null}const r=t.aliases||Object.create(null);for(const o in r){const s=r[o],i=s.parent;if(!o||typeof i!="string"||!n[i]&&!r[i]||!Je(s,ct))return null}return t}const Jt=Object.create(null);function ts(e,t){return{provider:e,prefix:t,icons:Object.create(null),missing:new Set}}function fe(e,t){const n=Jt[e]||(Jt[e]=Object.create(null));return n[t]||(n[t]=ts(e,t))}function Hn(e,t){return Dn(t)?Fn(t,(n,r)=>{r?e.icons[n]=r:e.missing.add(n)}):[]}function ns(e,t,n){try{if(typeof n.body=="string")return e.icons[t]={...n},!0}catch{}return!1}let ke=!1;function Un(e){return typeof e=="boolean"&&(ke=e),ke}function rs(e){const t=typeof e=="string"?Fe(e,!0,ke):e;if(t){const n=fe(t.provider,t.prefix),r=t.name;return n.icons[r]||(n.missing.has(r)?null:void 0)}}function os(e,t){const n=Fe(e,!0,ke);if(!n)return!1;const r=fe(n.provider,n.prefix);return t?ns(r,n.name,t):(r.missing.add(n.name),!0)}function ss(e,t){if(typeof e!="object")return!1;if(typeof t!="string"&&(t=e.provider||""),ke&&!t&&!e.prefix){let o=!1;return Dn(e)&&(e.prefix="",Fn(e,(s,i)=>{os(s,i)&&(o=!0)})),o}const n=e.prefix;if(!$e({prefix:n,name:"a"}))return!1;const r=fe(t,n);return!!Hn(r,e)}const Kn=Object.freeze({width:null,height:null}),Wn=Object.freeze({...Kn,...Ne}),is=/(-?[0-9.]*[0-9]+[0-9.]*)/g,as=/^-?[0-9.]*[0-9]+[0-9.]*$/g;function Xt(e,t,n){if(t===1)return e;if(n=n||100,typeof e=="number")return Math.ceil(e*t*n)/n;if(typeof e!="string")return e;const r=e.split(is);if(r===null||!r.length)return e;const o=[];let s=r.shift(),i=as.test(s);for(;;){if(i){const a=parseFloat(s);isNaN(a)?o.push(s):o.push(Math.ceil(a*t*n)/n)}else o.push(s);if(s=r.shift(),s===void 0)return o.join("");i=!i}}function ls(e,t="defs"){let n="";const r=e.indexOf("<"+t);for(;r>=0;){const o=e.indexOf(">",r),s=e.indexOf("</"+t);if(o===-1||s===-1)break;const i=e.indexOf(">",s);if(i===-1)break;n+=e.slice(o+1,s).trim(),e=e.slice(0,r).trim()+e.slice(i+1)}return{defs:n,content:e}}function cs(e,t){return e?"<defs>"+e+"</defs>"+t:t}function us(e,t,n){const r=ls(e);return cs(r.defs,t+r.content+n)}const ds=e=>e==="unset"||e==="undefined"||e==="none";function fs(e,t){const n={...De,...e},r={...Wn,...t},o={left:n.left,top:n.top,width:n.width,height:n.height};let s=n.body;[n,r].forEach(m=>{const p=[],M=m.hFlip,w=m.vFlip;let z=m.rotate;M?w?z+=2:(p.push("translate("+(o.width+o.left).toString()+" "+(0-o.top).toString()+")"),p.push("scale(-1 1)"),o.top=o.left=0):w&&(p.push("translate("+(0-o.left).toString()+" "+(o.height+o.top).toString()+")"),p.push("scale(1 -1)"),o.top=o.left=0);let E;switch(z<0&&(z-=Math.floor(z/4)*4),z=z%4,z){case 1:E=o.height/2+o.top,p.unshift("rotate(90 "+E.toString()+" "+E.toString()+")");break;case 2:p.unshift("rotate(180 "+(o.width/2+o.left).toString()+" "+(o.height/2+o.top).toString()+")");break;case 3:E=o.width/2+o.left,p.unshift("rotate(-90 "+E.toString()+" "+E.toString()+")");break}z%2===1&&(o.left!==o.top&&(E=o.left,o.left=o.top,o.top=E),o.width!==o.height&&(E=o.width,o.width=o.height,o.height=E)),p.length&&(s=us(s,'<g transform="'+p.join(" ")+'">',"</g>"))});const i=r.width,a=r.height,l=o.width,c=o.height;let u,f;i===null?(f=a===null?"1em":a==="auto"?c:a,u=Xt(f,l/c)):(u=i==="auto"?l:i,f=a===null?Xt(u,c/l):a==="auto"?c:a);const h={},v=(m,p)=>{ds(p)||(h[m]=p.toString())};v("width",u),v("height",f);const x=[o.left,o.top,l,c];return h.viewBox=x.join(" "),{attributes:h,viewBox:x,body:s}}const ps=/\sid="(\S+)"/g,gs="IconifyId"+Date.now().toString(16)+(Math.random()*16777216|0).toString(16);let bs=0;function hs(e,t=gs){const n=[];let r;for(;r=ps.exec(e);)n.push(r[1]);if(!n.length)return e;const o="suffix"+(Math.random()*16777216|Date.now()).toString(16);return n.forEach(s=>{const i=typeof t=="function"?t(s):t+(bs++).toString(),a=s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");e=e.replace(new RegExp('([#;"])('+a+')([")]|\\.[a-z])',"g"),"$1"+i+o+"$3")}),e=e.replace(new RegExp(o,"g"),""),e}const ut=Object.create(null);function vs(e,t){ut[e]=t}function dt(e){return ut[e]||ut[""]}function Ot(e){let t;if(typeof e.resources=="string")t=[e.resources];else if(t=e.resources,!(t instanceof Array)||!t.length)return null;return{resources:t,path:e.path||"/",maxURL:e.maxURL||500,rotate:e.rotate||750,timeout:e.timeout||5e3,random:e.random===!0,index:e.index||0,dataAfterTimeout:e.dataAfterTimeout!==!1}}const jt=Object.create(null),ve=["https://api.simplesvg.com","https://api.unisvg.com"],Ee=[];for(;ve.length>0;)ve.length===1||Math.random()>.5?Ee.push(ve.shift()):Ee.push(ve.pop());jt[""]=Ot({resources:["https://api.iconify.design"].concat(Ee)});function ys(e,t){const n=Ot(t);return n===null?!1:(jt[e]=n,!0)}function zt(e){return jt[e]}const ms=()=>{let e;try{if(e=fetch,typeof e=="function")return e}catch{}};let Yt=ms();function xs(e,t){const n=zt(e);if(!n)return 0;let r;if(!n.maxURL)r=0;else{let o=0;n.resources.forEach(i=>{o=Math.max(o,i.length)});const s=t+".json?icons=";r=n.maxURL-o-n.path.length-s.length}return r}function ws(e){return e===404}const ks=(e,t,n)=>{const r=[],o=xs(e,t),s="icons";let i={type:s,provider:e,prefix:t,icons:[]},a=0;return n.forEach((l,c)=>{a+=l.length+1,a>=o&&c>0&&(r.push(i),i={type:s,provider:e,prefix:t,icons:[]},a=l.length),i.icons.push(l)}),r.push(i),r};function Ss(e){if(typeof e=="string"){const t=zt(e);if(t)return t.path}return"/"}const Cs=(e,t,n)=>{if(!Yt){n("abort",424);return}let r=Ss(t.provider);switch(t.type){case"icons":{const s=t.prefix,a=t.icons.join(","),l=new URLSearchParams({icons:a});r+=s+".json?"+l.toString();break}case"custom":{const s=t.uri;r+=s.slice(0,1)==="/"?s.slice(1):s;break}default:n("abort",400);return}let o=503;Yt(e+r).then(s=>{const i=s.status;if(i!==200){setTimeout(()=>{n(ws(i)?"abort":"next",i)});return}return o=501,s.json()}).then(s=>{if(typeof s!="object"||s===null){setTimeout(()=>{s===404?n("abort",s):n("next",o)});return}setTimeout(()=>{n("success",s)})}).catch(()=>{n("next",o)})},As={prepare:ks,send:Cs};function Is(e){const t={loaded:[],missing:[],pending:[]},n=Object.create(null);e.sort((o,s)=>o.provider!==s.provider?o.provider.localeCompare(s.provider):o.prefix!==s.prefix?o.prefix.localeCompare(s.prefix):o.name.localeCompare(s.name));let r={provider:"",prefix:"",name:""};return e.forEach(o=>{if(r.name===o.name&&r.prefix===o.prefix&&r.provider===o.provider)return;r=o;const s=o.provider,i=o.prefix,a=o.name,l=n[s]||(n[s]=Object.create(null)),c=l[i]||(l[i]=fe(s,i));let u;a in c.icons?u=t.loaded:i===""||c.missing.has(a)?u=t.missing:u=t.pending;const f={provider:s,prefix:i,name:a};u.push(f)}),t}function _n(e,t){e.forEach(n=>{const r=n.loaderCallbacks;r&&(n.loaderCallbacks=r.filter(o=>o.id!==t))})}function Os(e){e.pendingCallbacksFlag||(e.pendingCallbacksFlag=!0,setTimeout(()=>{e.pendingCallbacksFlag=!1;const t=e.loaderCallbacks?e.loaderCallbacks.slice(0):[];if(!t.length)return;let n=!1;const r=e.provider,o=e.prefix;t.forEach(s=>{const i=s.icons,a=i.pending.length;i.pending=i.pending.filter(l=>{if(l.prefix!==o)return!0;const c=l.name;if(e.icons[c])i.loaded.push({provider:r,prefix:o,name:c});else if(e.missing.has(c))i.missing.push({provider:r,prefix:o,name:c});else return n=!0,!0;return!1}),i.pending.length!==a&&(n||_n([e],s.id),s.callback(i.loaded.slice(0),i.missing.slice(0),i.pending.slice(0),s.abort))})}))}let js=0;function zs(e,t,n){const r=js++,o=_n.bind(null,n,r);if(!t.pending.length)return o;const s={id:r,icons:t,callback:e,abort:o};return n.forEach(i=>{(i.loaderCallbacks||(i.loaderCallbacks=[])).push(s)}),o}function Ps(e,t=!0,n=!1){const r=[];return e.forEach(o=>{const s=typeof o=="string"?Fe(o,t,n):o;s&&r.push(s)}),r}var qs={resources:[],index:0,timeout:2e3,rotate:750,random:!1,dataAfterTimeout:!1};function $s(e,t,n,r){const o=e.resources.length,s=e.random?Math.floor(Math.random()*o):e.index;let i;if(e.random){let d=e.resources.slice(0);for(i=[];d.length>1;){const $=Math.floor(Math.random()*d.length);i.push(d[$]),d=d.slice(0,$).concat(d.slice($+1))}i=i.concat(d)}else i=e.resources.slice(s).concat(e.resources.slice(0,s));const a=Date.now();let l="pending",c=0,u,f=null,h=[],v=[];typeof r=="function"&&v.push(r);function x(){f&&(clearTimeout(f),f=null)}function m(){l==="pending"&&(l="aborted"),x(),h.forEach(d=>{d.status==="pending"&&(d.status="aborted")}),h=[]}function p(d,$){$&&(v=[]),typeof d=="function"&&v.push(d)}function M(){return{startTime:a,payload:t,status:l,queriesSent:c,queriesPending:h.length,subscribe:p,abort:m}}function w(){l="failed",v.forEach(d=>{d(void 0,u)})}function z(){h.forEach(d=>{d.status==="pending"&&(d.status="aborted")}),h=[]}function E(d,$,K){const _=$!=="success";switch(h=h.filter(V=>V!==d),l){case"pending":break;case"failed":if(_||!e.dataAfterTimeout)return;break;default:return}if($==="abort"){u=K,w();return}if(_){u=K,h.length||(i.length?B():w());return}if(x(),z(),!e.random){const V=e.resources.indexOf(d.resource);V!==-1&&V!==e.index&&(e.index=V)}l="completed",v.forEach(V=>{V(K)})}function B(){if(l!=="pending")return;x();const d=i.shift();if(d===void 0){if(h.length){f=setTimeout(()=>{x(),l==="pending"&&(z(),w())},e.timeout);return}w();return}const $={status:"pending",resource:d,callback:(K,_)=>{E($,K,_)}};h.push($),c++,f=setTimeout(B,e.rotate),n(d,t,$.callback)}return setTimeout(B),M}function Qn(e){const t={...qs,...e};let n=[];function r(){n=n.filter(a=>a().status==="pending")}function o(a,l,c){const u=$s(t,a,l,(f,h)=>{r(),c&&c(f,h)});return n.push(u),u}function s(a){return n.find(l=>a(l))||null}return{query:o,find:s,setIndex:a=>{t.index=a},getIndex:()=>t.index,cleanup:r}}function Zt(){}const Xe=Object.create(null);function Es(e){if(!Xe[e]){const t=zt(e);if(!t)return;const n=Qn(t),r={config:t,redundancy:n};Xe[e]=r}return Xe[e]}function Ts(e,t,n){let r,o;if(typeof e=="string"){const s=dt(e);if(!s)return n(void 0,424),Zt;o=s.send;const i=Es(e);i&&(r=i.redundancy)}else{const s=Ot(e);if(s){r=Qn(s);const i=e.resources?e.resources[0]:"",a=dt(i);a&&(o=a.send)}}return!r||!o?(n(void 0,424),Zt):r.query(t,o,n)().abort}function en(){}function Ms(e){e.iconsLoaderFlag||(e.iconsLoaderFlag=!0,setTimeout(()=>{e.iconsLoaderFlag=!1,Os(e)}))}function Rs(e){const t=[],n=[];return e.forEach(r=>{(r.match(Gn)?t:n).push(r)}),{valid:t,invalid:n}}function ye(e,t,n){function r(){const o=e.pendingIcons;t.forEach(s=>{o&&o.delete(s),e.icons[s]||e.missing.add(s)})}if(n&&typeof n=="object")try{if(!Hn(e,n).length){r();return}}catch(o){console.error(o)}r(),Ms(e)}function tn(e,t){e instanceof Promise?e.then(n=>{t(n)}).catch(()=>{t(null)}):t(e)}function Ls(e,t){e.iconsToLoad?e.iconsToLoad=e.iconsToLoad.concat(t).sort():e.iconsToLoad=t,e.iconsQueueFlag||(e.iconsQueueFlag=!0,setTimeout(()=>{e.iconsQueueFlag=!1;const{provider:n,prefix:r}=e,o=e.iconsToLoad;if(delete e.iconsToLoad,!o||!o.length)return;const s=e.loadIcon;if(e.loadIcons&&(o.length>1||!s)){tn(e.loadIcons(o,r,n),u=>{ye(e,o,u)});return}if(s){o.forEach(u=>{const f=s(u,r,n);tn(f,h=>{const v=h?{prefix:r,icons:{[u]:h}}:null;ye(e,[u],v)})});return}const{valid:i,invalid:a}=Rs(o);if(a.length&&ye(e,a,null),!i.length)return;const l=r.match(Gn)?dt(n):null;if(!l){ye(e,i,null);return}l.prepare(n,r,i).forEach(u=>{Ts(n,u,f=>{ye(e,u.icons,f)})})}))}const Ns=(e,t)=>{const n=Ps(e,!0,Un()),r=Is(n);if(!r.pending.length){let l=!0;return t&&setTimeout(()=>{l&&t(r.loaded,r.missing,r.pending,en)}),()=>{l=!1}}const o=Object.create(null),s=[];let i,a;return r.pending.forEach(l=>{const{provider:c,prefix:u}=l;if(u===a&&c===i)return;i=c,a=u,s.push(fe(c,u));const f=o[c]||(o[c]=Object.create(null));f[u]||(f[u]=[])}),r.pending.forEach(l=>{const{provider:c,prefix:u,name:f}=l,h=fe(c,u),v=h.pendingIcons||(h.pendingIcons=new Set);v.has(f)||(v.add(f),o[c][u].push(f))}),s.forEach(l=>{const c=o[l.provider][l.prefix];c.length&&Ls(l,c)}),t?zs(t,r,s):en};function Bs(e,t){const n={...e};for(const r in t){const o=t[r],s=typeof o;r in Kn?(o===null||o&&(s==="string"||s==="number"))&&(n[r]=o):s===typeof n[r]&&(n[r]=r==="rotate"?o%4:o)}return n}const Gs=/[\s,]+/;function Vs(e,t){t.split(Gs).forEach(n=>{switch(n.trim()){case"horizontal":e.hFlip=!0;break;case"vertical":e.vFlip=!0;break}})}function Fs(e,t=0){const n=e.replace(/^-?[0-9.]*/,"");function r(o){for(;o<0;)o+=4;return o%4}if(n===""){const o=parseInt(e);return isNaN(o)?0:r(o)}else if(n!==e){let o=0;switch(n){case"%":o=25;break;case"deg":o=90}if(o){let s=parseFloat(e.slice(0,e.length-n.length));return isNaN(s)?0:(s=s/o,s%1===0?r(s):0)}}return t}function Ds(e,t){let n=e.indexOf("xlink:")===-1?"":' xmlns:xlink="http://www.w3.org/1999/xlink"';for(const r in t)n+=" "+r+'="'+t[r]+'"';return'<svg xmlns="http://www.w3.org/2000/svg"'+n+">"+e+"</svg>"}function Hs(e){return e.replace(/"/g,"'").replace(/%/g,"%25").replace(/#/g,"%23").replace(/</g,"%3C").replace(/>/g,"%3E").replace(/\s+/g," ")}function Us(e){return"data:image/svg+xml,"+Hs(e)}function Ks(e){return'url("'+Us(e)+'")'}const nn={...Wn,inline:!1},Ws={xmlns:"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink","aria-hidden":!0,role:"img"},_s={display:"inline-block"},ft={backgroundColor:"currentColor"},Jn={backgroundColor:"transparent"},rn={Image:"var(--svg)",Repeat:"no-repeat",Size:"100% 100%"},on={webkitMask:ft,mask:ft,background:Jn};for(const e in on){const t=on[e];for(const n in rn)t[e+n]=rn[n]}const Te={};["horizontal","vertical"].forEach(e=>{const t=e.slice(0,1)+"Flip";Te[e+"-flip"]=t,Te[e.slice(0,1)+"-flip"]=t,Te[e+"Flip"]=t});function sn(e){return e+(e.match(/^[-0-9.]+$/)?"px":"")}const an=(e,t)=>{const n=Bs(nn,t),r={...Ws},o=t.mode||"svg",s={},i=t.style,a=typeof i=="object"&&!(i instanceof Array)?i:{};for(let m in t){const p=t[m];if(p!==void 0)switch(m){case"icon":case"style":case"onLoad":case"mode":case"ssr":break;case"inline":case"hFlip":case"vFlip":n[m]=p===!0||p==="true"||p===1;break;case"flip":typeof p=="string"&&Vs(n,p);break;case"color":s.color=p;break;case"rotate":typeof p=="string"?n[m]=Fs(p):typeof p=="number"&&(n[m]=p);break;case"ariaHidden":case"aria-hidden":p!==!0&&p!=="true"&&delete r["aria-hidden"];break;default:{const M=Te[m];M?(p===!0||p==="true"||p===1)&&(n[M]=!0):nn[m]===void 0&&(r[m]=p)}}}const l=fs(e,n),c=l.attributes;if(n.inline&&(s.verticalAlign="-0.125em"),o==="svg"){r.style={...s,...a},Object.assign(r,c);let m=0,p=t.id;return typeof p=="string"&&(p=p.replace(/-/g,"_")),r.innerHTML=hs(l.body,p?()=>p+"ID"+m++:"iconifyVue"),de("svg",r)}const{body:u,width:f,height:h}=e,v=o==="mask"||(o==="bg"?!1:u.indexOf("currentColor")!==-1),x=Ds(u,{...c,width:f+"",height:h+""});return r.style={...s,"--svg":Ks(x),width:sn(c.width),height:sn(c.height),..._s,...v?ft:Jn,...a},de("span",r)};Un(!0);vs("",As);if(typeof document<"u"&&typeof window<"u"){const e=window;if(e.IconifyPreload!==void 0){const t=e.IconifyPreload,n="Invalid IconifyPreload syntax.";typeof t=="object"&&t!==null&&(t instanceof Array?t:[t]).forEach(r=>{try{(typeof r!="object"||r===null||r instanceof Array||typeof r.icons!="object"||typeof r.prefix!="string"||!ss(r))&&console.error(n)}catch{console.error(n)}})}if(e.IconifyProviders!==void 0){const t=e.IconifyProviders;if(typeof t=="object"&&t!==null)for(let n in t){const r="IconifyProviders["+n+"] is invalid.";try{const o=t[n];if(typeof o!="object"||!o||o.resources===void 0)continue;ys(n,o)||console.error(r)}catch{console.error(r)}}}}const Qs={...De,body:""},Js=Be((e,{emit:t})=>{const n=Q(null);function r(){n.value&&(n.value.abort?.(),n.value=null)}const o=Q(!!e.ssr),s=Q(""),i=Se(null);function a(){const c=e.icon;if(typeof c=="object"&&c!==null&&typeof c.body=="string")return s.value="",{data:c};let u;if(typeof c!="string"||(u=Fe(c,!1,!0))===null)return null;let f=rs(u);if(!f){const x=n.value;return(!x||x.name!==c)&&(f===null?n.value={name:c}:n.value={name:c,abort:Ns([u],l)}),null}r(),s.value!==c&&(s.value=c,pn(()=>{t("load",c)}));const h=e.customise;if(h){f=Object.assign({},f);const x=h(f.body,u.name,u.prefix,u.provider);typeof x=="string"&&(f.body=x)}const v=["iconify"];return u.prefix!==""&&v.push("iconify--"+u.prefix),u.provider!==""&&v.push("iconify--"+u.provider),{data:f,classes:v}}function l(){const c=a();c?c.data!==i.value?.data&&(i.value=c):i.value=null}return o.value?l():gn(()=>{o.value=!0,l()}),xe(()=>e.icon,l),rr(r),()=>{const c=i.value;if(!c)return an(Qs,e);let u=e;return c.classes&&(u={...e,class:c.classes.join(" ")}),an({...De,...c.data},u)}},{props:["icon","mode","ssr","width","height","style","color","inline","rotate","hFlip","horizontalFlip","vFlip","verticalFlip","flip","id","ariaHidden","customise","title"],emits:["load"]}),pt={__name:"Icon",props:{name:{type:String,required:!0}},setup(e){return(t,n)=>(N(),D(T(Js),{icon:e.name.replace(/^i-/,"")},null,8,["icon"]))}},Xs="img",ln=Symbol("nuxt-ui.avatar-group");function Xn(e){const t=Z(ln,void 0),n=I(()=>e.size??t?.value.size);return bn(ln,I(()=>({size:n.value}))),{size:n}}const Ys={slots:{root:"relative inline-flex items-center justify-center shrink-0",base:"rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap"},variants:{color:{primary:"bg-primary",secondary:"bg-secondary",success:"bg-success",info:"bg-info",warning:"bg-warning",error:"bg-error",neutral:"bg-inverted"},size:{"3xs":"h-[4px] min-w-[4px] text-[4px]","2xs":"h-[5px] min-w-[5px] text-[5px]",xs:"h-[6px] min-w-[6px] text-[6px]",sm:"h-[7px] min-w-[7px] text-[7px]",md:"h-[8px] min-w-[8px] text-[8px]",lg:"h-[9px] min-w-[9px] text-[9px]",xl:"h-[10px] min-w-[10px] text-[10px]","2xl":"h-[11px] min-w-[11px] text-[11px]","3xl":"h-[12px] min-w-[12px] text-[12px]"},position:{"top-right":"top-0 right-0","bottom-right":"bottom-0 right-0","top-left":"top-0 left-0","bottom-left":"bottom-0 left-0"},inset:{false:""},standalone:{false:"absolute"}},compoundVariants:[{position:"top-right",inset:!1,class:"-translate-y-1/2 translate-x-1/2 transform"},{position:"bottom-right",inset:!1,class:"translate-y-1/2 translate-x-1/2 transform"},{position:"top-left",inset:!1,class:"-translate-y-1/2 -translate-x-1/2 transform"},{position:"bottom-left",inset:!1,class:"translate-y-1/2 -translate-x-1/2 transform"}],defaultVariants:{size:"md",color:"primary",position:"top-right"}},Zs=Object.assign({inheritAttrs:!1},{__name:"Chip",props:or({as:{type:null,required:!1},text:{type:[String,Number],required:!1},color:{type:null,required:!1},size:{type:null,required:!1},position:{type:null,required:!1},inset:{type:Boolean,required:!1,default:!1},standalone:{type:Boolean,required:!1,default:!1},class:{type:null,required:!1},ui:{type:null,required:!1}},{show:{type:Boolean,default:!0},showModifiers:{}}),emits:["update:show"],setup(e){const t=e,n=sr(e,"show",{type:Boolean,default:!0}),{size:r}=Xn(t),o=Ae(),s=I(()=>re({extend:re(Ys),...o.ui?.chip||{}})({color:t.color,size:r.value,position:t.position,inset:t.inset,standalone:t.standalone}));return(i,a)=>(N(),D(T(mt),{as:e.as,class:ae(s.value.root({class:[t.ui?.root,t.class]}))},{default:J(()=>[vn(T(yt),Re(ir(i.$attrs)),{default:J(()=>[W(i.$slots,"default")]),_:3},16),n.value?(N(),Ve("span",{key:0,class:ae(s.value.base({class:t.ui?.base}))},[W(i.$slots,"content",{},()=>[ar(vt(e.text),1)])],2)):qe("",!0)]),_:3},8,["as","class"]))}}),ei={slots:{root:"inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated",image:"h-full w-full rounded-[inherit] object-cover",fallback:"font-medium leading-none text-muted truncate",icon:"text-muted shrink-0"},variants:{size:{"3xs":{root:"size-4 text-[8px]"},"2xs":{root:"size-5 text-[10px]"},xs:{root:"size-6 text-xs"},sm:{root:"size-7 text-sm"},md:{root:"size-8 text-base"},lg:{root:"size-9 text-lg"},xl:{root:"size-10 text-xl"},"2xl":{root:"size-11 text-[22px]"},"3xl":{root:"size-12 text-2xl"}}},defaultVariants:{size:"md"}},ti=Object.assign({inheritAttrs:!1},{__name:"Avatar",props:{as:{type:null,required:!1,default:"span"},src:{type:String,required:!1},alt:{type:String,required:!1},icon:{type:String,required:!1},text:{type:String,required:!1},size:{type:null,required:!1},chip:{type:[Boolean,Object],required:!1},class:{type:null,required:!1},style:{type:null,required:!1},ui:{type:null,required:!1}},setup(e){const t=e,n=I(()=>t.text||(t.alt||"").split(" ").map(c=>c.charAt(0)).join("").substring(0,2)),r=Ae(),{size:o}=Xn(t),s=I(()=>re({extend:re(ei),...r.ui?.avatar||{}})({size:o.value})),i=I(()=>({"3xs":16,"2xs":20,xs:24,sm:28,md:32,lg:36,xl:40,"2xl":44,"3xl":48})[t.size||"md"]),a=Q(!1);xe(()=>t.src,()=>{a.value&&(a.value=!1)});function l(){a.value=!0}return(c,u)=>(N(),D(Pt(t.chip?Zs:T(mt)),H({as:e.as},t.chip?typeof t.chip=="object"?{inset:!0,...t.chip}:{inset:!0}:{},{class:s.value.root({class:[t.ui?.root,t.class]}),style:t.style}),{default:J(()=>[e.src&&!a.value?(N(),D(Pt(T(Xs)),H({key:0,role:"img",src:e.src,alt:e.alt,width:i.value,height:i.value},c.$attrs,{class:s.value.image({class:t.ui?.image}),onError:l}),null,16,["src","alt","width","height","class"])):(N(),D(T(yt),Re(H({key:1},c.$attrs)),{default:J(()=>[W(c.$slots,"default",{},()=>[e.icon?(N(),D(pt,{key:0,name:e.icon,class:ae(s.value.icon({class:t.ui?.icon}))},null,8,["name","class"])):(N(),Ve("span",{key:1,class:ae(s.value.fallback({class:t.ui?.fallback}))},vt(n.value||" "),3))])]),_:3},16))]),_:3},16,["as","class","style"]))}});function ni(e){const t=Ae(),n=I(()=>U(e)),r=I(()=>n.value.icon&&n.value.leading||n.value.icon&&!n.value.trailing||n.value.loading&&!n.value.trailing||!!n.value.leadingIcon),o=I(()=>n.value.icon&&n.value.trailing||n.value.loading&&n.value.trailing||!!n.value.trailingIcon),s=I(()=>n.value.loading?n.value.loadingIcon||t.ui.icons.loading:n.value.leadingIcon||n.value.icon),i=I(()=>n.value.loading&&!r.value?n.value.loadingIcon||t.ui.icons.loading:n.value.trailingIcon||n.value.icon);return{isLeading:r,isTrailing:o,leadingIconName:s,trailingIconName:i}}const ri=Symbol("nuxt-ui.button-group");function oi(e){const t=Z(ri,void 0);return{orientation:I(()=>t?.value.orientation),size:I(()=>e?.size??t?.value.size)}}const si=Symbol("nuxt-ui.form-loading");function ii(e){const t=Object.keys(e),n=t.filter(s=>s.startsWith("aria-")),r=t.filter(s=>s.startsWith("data-")),o=["active","activeClass","ariaCurrentValue","as","disabled","exact","exactActiveClass","exactHash","exactQuery","external","href","download","inactiveClass","noPrefetch","noRel","prefetch","prefetchedClass","rel","replace","target","to","type","title","onClick",...n,...r];return Pr(e,...o)}function ai(e,t){const n=Er(e,t).reduce((s,i)=>(i.type==="added"&&s.add(i.key),s),new Set),r=Object.fromEntries(Object.entries(e).filter(([s])=>!n.has(s))),o=Object.fromEntries(Object.entries(t).filter(([s])=>!n.has(s)));return xn(r,o)}const li=/^[\s\w\0+.-]{2,}:([/\\]{1,2})/,ci=/^[\s\w\0+.-]{2,}:([/\\]{2})?/,ui=/^([/\\]\s*){2,}[^/\\]/;function di(e,t={}){return typeof t=="boolean"&&(t={acceptRelative:t}),t.strict?li.test(e):ci.test(e)||(t.acceptRelative?ui.test(e):!1)}const gt={__name:"LinkBase",props:{as:{type:String,required:!1,default:"button"},type:{type:String,required:!1,default:"button"},disabled:{type:Boolean,required:!1},onClick:{type:[Function,Array],required:!1},href:{type:String,required:!1},navigate:{type:Function,required:!1},target:{type:[String,Object,null],required:!1},rel:{type:[String,Object,null],required:!1},active:{type:Boolean,required:!1},isExternal:{type:Boolean,required:!1}},setup(e){const t=e;function n(r){if(t.disabled){r.stopPropagation(),r.preventDefault();return}if(t.onClick)for(const o of Array.isArray(t.onClick)?t.onClick:[t.onClick])o(r);t.href&&t.navigate&&!t.isExternal&&t.navigate(r)}return(r,o)=>(N(),D(T(mt),H(e.href?{as:"a",href:e.disabled?void 0:e.href,"aria-disabled":e.disabled?"true":void 0,role:e.disabled?"link":void 0,tabindex:e.disabled?-1:void 0}:e.as==="button"?{as:e.as,type:e.type,disabled:e.disabled}:{as:e.as},{rel:e.rel,target:e.target,onClick:n}),{default:J(()=>[W(r.$slots,"default")]),_:3},16,["rel","target"]))}},fi={base:"focus-visible:outline-primary",variants:{active:{true:"text-primary",false:"text-muted"},disabled:{true:"cursor-not-allowed opacity-75"}},compoundVariants:[{active:!1,disabled:!1,class:["hover:text-default","transition-colors"]}]},pi=Object.assign({inheritAttrs:!1},{__name:"Link",props:{as:{type:null,required:!1,default:"button"},type:{type:null,required:!1,default:"button"},disabled:{type:Boolean,required:!1},active:{type:Boolean,required:!1,default:void 0},exact:{type:Boolean,required:!1},exactQuery:{type:[Boolean,String],required:!1},exactHash:{type:Boolean,required:!1},inactiveClass:{type:String,required:!1,default:""},custom:{type:Boolean,required:!1},raw:{type:Boolean,required:!1},class:{type:null,required:!1},to:{type:null,required:!1},href:{type:null,required:!1},external:{type:Boolean,required:!1},target:{type:[String,Object,null],required:!1},rel:{type:[String,Object,null],required:!1},noRel:{type:Boolean,required:!1},prefetchedClass:{type:String,required:!1},prefetch:{type:Boolean,required:!1},prefetchOn:{type:[String,Object],required:!1},noPrefetch:{type:Boolean,required:!1},activeClass:{type:String,required:!1,default:""},exactActiveClass:{type:String,required:!1},ariaCurrentValue:{type:String,required:!1,default:"page"},viewTransition:{type:Boolean,required:!1},replace:{type:Boolean,required:!1}},setup(e){const t=e,n=no(),r=Ae(),o=St(Or(t,"as","type","disabled","active","exact","exactQuery","exactHash","activeClass","inactiveClass","to","href","raw","custom","class")),s=I(()=>re({extend:re(fi),...kt({variants:{active:{true:t.activeClass,false:t.inactiveClass}}},r.ui?.link||{})})),i=I(()=>t.to??t.href),a=I(()=>t.external?!0:i.value?typeof i.value=="string"&&di(i.value,{acceptRelative:!0}):!1);function l({route:u,isActive:f,isExactActive:h}){if(t.active!==void 0)return t.active;if(!i.value)return!1;if(t.exactQuery==="partial"){if(!ai(u.query,n.query))return!1}else if(t.exactQuery===!0&&!xn(u.query,n.query))return!1;return t.exactHash&&u.hash!==n.hash?!1:!!(t.exact&&h||!t.exact&&f)}function c({route:u,isActive:f,isExactActive:h}={}){const v=l({route:u,isActive:f,isExactActive:h});return t.raw?[t.class,v?t.activeClass:t.inactiveClass]:s.value({class:t.class,active:v,disabled:t.disabled})}return(u,f)=>!a.value&&i.value?(N(),D(T(Zr),H({key:0},T(o),{to:i.value,custom:""}),{default:J(({href:h,navigate:v,route:x,isActive:m,isExactActive:p})=>[e.custom?W(u.$slots,"default",Re(H({key:0},{...u.$attrs,...e.exact&&p?{"aria-current":t.ariaCurrentValue}:{},as:e.as,type:e.type,disabled:e.disabled,href:h,navigate:v,active:l({route:x,isActive:m,isExactActive:p})}))):(N(),D(gt,H({key:1},{...u.$attrs,...e.exact&&p?{"aria-current":t.ariaCurrentValue}:{},as:e.as,type:e.type,disabled:e.disabled,href:h,navigate:v},{class:c({route:x,isActive:m,isExactActive:p})}),{default:J(()=>[W(u.$slots,"default",{active:l({route:x,isActive:m,isExactActive:p})})]),_:2},1040,["class"]))]),_:3},16,["to"])):(N(),Ve(cn,{key:1},[e.custom?W(u.$slots,"default",Re(H({key:0},{...u.$attrs,as:e.as,type:e.type,disabled:e.disabled,href:i.value,target:a.value?"_blank":void 0,active:e.active,isExternal:a.value}))):(N(),D(gt,H({key:1},{...u.$attrs,as:e.as,type:e.type,disabled:e.disabled,href:i.value,target:a.value?"_blank":void 0,isExternal:a.value},{class:c()}),{default:J(()=>[W(u.$slots,"default",{active:e.active})]),_:3},16,["class"]))],64))}}),gi={slots:{base:["rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75","transition-colors"],label:"truncate",leadingIcon:"shrink-0",leadingAvatar:"shrink-0",leadingAvatarSize:"",trailingIcon:"shrink-0"},variants:{buttonGroup:{horizontal:"not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1]",vertical:"not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none focus-visible:z-[1]"},color:{primary:"",secondary:"",success:"",info:"",warning:"",error:"",neutral:""},variant:{solid:"",outline:"",soft:"",subtle:"",ghost:"",link:""},size:{xs:{base:"px-2 py-1 text-xs gap-1",leadingIcon:"size-4",leadingAvatarSize:"3xs",trailingIcon:"size-4"},sm:{base:"px-2.5 py-1.5 text-xs gap-1.5",leadingIcon:"size-4",leadingAvatarSize:"3xs",trailingIcon:"size-4"},md:{base:"px-2.5 py-1.5 text-sm gap-1.5",leadingIcon:"size-5",leadingAvatarSize:"2xs",trailingIcon:"size-5"},lg:{base:"px-3 py-2 text-sm gap-2",leadingIcon:"size-5",leadingAvatarSize:"2xs",trailingIcon:"size-5"},xl:{base:"px-3 py-2 text-base gap-2",leadingIcon:"size-6",leadingAvatarSize:"xs",trailingIcon:"size-6"}},block:{true:{base:"w-full justify-center",trailingIcon:"ms-auto"}},square:{true:""},leading:{true:""},trailing:{true:""},loading:{true:""},active:{true:{base:""},false:{base:""}}},compoundVariants:[{color:"primary",variant:"solid",class:"text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"},{color:"secondary",variant:"solid",class:"text-inverted bg-secondary hover:bg-secondary/75 active:bg-secondary/75 disabled:bg-secondary aria-disabled:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"},{color:"success",variant:"solid",class:"text-inverted bg-success hover:bg-success/75 active:bg-success/75 disabled:bg-success aria-disabled:bg-success focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success"},{color:"info",variant:"solid",class:"text-inverted bg-info hover:bg-info/75 active:bg-info/75 disabled:bg-info aria-disabled:bg-info focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-info"},{color:"warning",variant:"solid",class:"text-inverted bg-warning hover:bg-warning/75 active:bg-warning/75 disabled:bg-warning aria-disabled:bg-warning focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-warning"},{color:"error",variant:"solid",class:"text-inverted bg-error hover:bg-error/75 active:bg-error/75 disabled:bg-error aria-disabled:bg-error focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-error"},{color:"primary",variant:"outline",class:"ring ring-inset ring-primary/50 text-primary hover:bg-primary/10 active:bg-primary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"},{color:"secondary",variant:"outline",class:"ring ring-inset ring-secondary/50 text-secondary hover:bg-secondary/10 active:bg-secondary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary"},{color:"success",variant:"outline",class:"ring ring-inset ring-success/50 text-success hover:bg-success/10 active:bg-success/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-success"},{color:"info",variant:"outline",class:"ring ring-inset ring-info/50 text-info hover:bg-info/10 active:bg-info/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-info"},{color:"warning",variant:"outline",class:"ring ring-inset ring-warning/50 text-warning hover:bg-warning/10 active:bg-warning/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-warning"},{color:"error",variant:"outline",class:"ring ring-inset ring-error/50 text-error hover:bg-error/10 active:bg-error/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-error"},{color:"primary",variant:"soft",class:"text-primary bg-primary/10 hover:bg-primary/15 active:bg-primary/15 focus:outline-none focus-visible:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10"},{color:"secondary",variant:"soft",class:"text-secondary bg-secondary/10 hover:bg-secondary/15 active:bg-secondary/15 focus:outline-none focus-visible:bg-secondary/15 disabled:bg-secondary/10 aria-disabled:bg-secondary/10"},{color:"success",variant:"soft",class:"text-success bg-success/10 hover:bg-success/15 active:bg-success/15 focus:outline-none focus-visible:bg-success/15 disabled:bg-success/10 aria-disabled:bg-success/10"},{color:"info",variant:"soft",class:"text-info bg-info/10 hover:bg-info/15 active:bg-info/15 focus:outline-none focus-visible:bg-info/15 disabled:bg-info/10 aria-disabled:bg-info/10"},{color:"warning",variant:"soft",class:"text-warning bg-warning/10 hover:bg-warning/15 active:bg-warning/15 focus:outline-none focus-visible:bg-warning/15 disabled:bg-warning/10 aria-disabled:bg-warning/10"},{color:"error",variant:"soft",class:"text-error bg-error/10 hover:bg-error/15 active:bg-error/15 focus:outline-none focus-visible:bg-error/15 disabled:bg-error/10 aria-disabled:bg-error/10"},{color:"primary",variant:"subtle",class:"text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"},{color:"secondary",variant:"subtle",class:"text-secondary ring ring-inset ring-secondary/25 bg-secondary/10 hover:bg-secondary/15 active:bg-secondary/15 disabled:bg-secondary/10 aria-disabled:bg-secondary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary"},{color:"success",variant:"subtle",class:"text-success ring ring-inset ring-success/25 bg-success/10 hover:bg-success/15 active:bg-success/15 disabled:bg-success/10 aria-disabled:bg-success/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-success"},{color:"info",variant:"subtle",class:"text-info ring ring-inset ring-info/25 bg-info/10 hover:bg-info/15 active:bg-info/15 disabled:bg-info/10 aria-disabled:bg-info/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-info"},{color:"warning",variant:"subtle",class:"text-warning ring ring-inset ring-warning/25 bg-warning/10 hover:bg-warning/15 active:bg-warning/15 disabled:bg-warning/10 aria-disabled:bg-warning/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-warning"},{color:"error",variant:"subtle",class:"text-error ring ring-inset ring-error/25 bg-error/10 hover:bg-error/15 active:bg-error/15 disabled:bg-error/10 aria-disabled:bg-error/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-error"},{color:"primary",variant:"ghost",class:"text-primary hover:bg-primary/10 active:bg-primary/10 focus:outline-none focus-visible:bg-primary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"},{color:"secondary",variant:"ghost",class:"text-secondary hover:bg-secondary/10 active:bg-secondary/10 focus:outline-none focus-visible:bg-secondary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"},{color:"success",variant:"ghost",class:"text-success hover:bg-success/10 active:bg-success/10 focus:outline-none focus-visible:bg-success/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"},{color:"info",variant:"ghost",class:"text-info hover:bg-info/10 active:bg-info/10 focus:outline-none focus-visible:bg-info/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"},{color:"warning",variant:"ghost",class:"text-warning hover:bg-warning/10 active:bg-warning/10 focus:outline-none focus-visible:bg-warning/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"},{color:"error",variant:"ghost",class:"text-error hover:bg-error/10 active:bg-error/10 focus:outline-none focus-visible:bg-error/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"},{color:"primary",variant:"link",class:"text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"},{color:"secondary",variant:"link",class:"text-secondary hover:text-secondary/75 active:text-secondary/75 disabled:text-secondary aria-disabled:text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-secondary"},{color:"success",variant:"link",class:"text-success hover:text-success/75 active:text-success/75 disabled:text-success aria-disabled:text-success focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-success"},{color:"info",variant:"link",class:"text-info hover:text-info/75 active:text-info/75 disabled:text-info aria-disabled:text-info focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-info"},{color:"warning",variant:"link",class:"text-warning hover:text-warning/75 active:text-warning/75 disabled:text-warning aria-disabled:text-warning focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-warning"},{color:"error",variant:"link",class:"text-error hover:text-error/75 active:text-error/75 disabled:text-error aria-disabled:text-error focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error"},{color:"neutral",variant:"solid",class:"text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted"},{color:"neutral",variant:"outline",class:"ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default focus:outline-none focus-visible:ring-2 focus-visible:ring-inverted"},{color:"neutral",variant:"soft",class:"text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 focus:outline-none focus-visible:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated"},{color:"neutral",variant:"subtle",class:"ring ring-inset ring-accented text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated focus:outline-none focus-visible:ring-2 focus-visible:ring-inverted"},{color:"neutral",variant:"ghost",class:"text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent"},{color:"neutral",variant:"link",class:"text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted"},{size:"xs",square:!0,class:"p-1"},{size:"sm",square:!0,class:"p-1.5"},{size:"md",square:!0,class:"p-1.5"},{size:"lg",square:!0,class:"p-2"},{size:"xl",square:!0,class:"p-2"},{loading:!0,leading:!0,class:{leadingIcon:"animate-spin"}},{loading:!0,leading:!1,trailing:!0,class:{trailingIcon:"animate-spin"}}],defaultVariants:{color:"primary",variant:"solid",size:"md"}},Ri={__name:"Button",props:{label:{type:String,required:!1},color:{type:null,required:!1},activeColor:{type:null,required:!1},variant:{type:null,required:!1},activeVariant:{type:null,required:!1},size:{type:null,required:!1},square:{type:Boolean,required:!1},block:{type:Boolean,required:!1},loadingAuto:{type:Boolean,required:!1},onClick:{type:[Function,Array],required:!1},class:{type:null,required:!1},ui:{type:null,required:!1},icon:{type:String,required:!1},avatar:{type:Object,required:!1},leading:{type:Boolean,required:!1},leadingIcon:{type:String,required:!1},trailing:{type:Boolean,required:!1},trailingIcon:{type:String,required:!1},loading:{type:Boolean,required:!1},loadingIcon:{type:String,required:!1},as:{type:null,required:!1},type:{type:null,required:!1},disabled:{type:Boolean,required:!1},active:{type:Boolean,required:!1},exact:{type:Boolean,required:!1},exactQuery:{type:[Boolean,String],required:!1},exactHash:{type:Boolean,required:!1},inactiveClass:{type:String,required:!1},to:{type:null,required:!1},href:{type:null,required:!1},external:{type:Boolean,required:!1},target:{type:[String,Object,null],required:!1},rel:{type:[String,Object,null],required:!1},noRel:{type:Boolean,required:!1},prefetchedClass:{type:String,required:!1},prefetch:{type:Boolean,required:!1},prefetchOn:{type:[String,Object],required:!1},noPrefetch:{type:Boolean,required:!1},activeClass:{type:String,required:!1},exactActiveClass:{type:String,required:!1},ariaCurrentValue:{type:String,required:!1},viewTransition:{type:Boolean,required:!1},replace:{type:Boolean,required:!1}},setup(e){const t=e,n=lr(),r=Ae(),{orientation:o,size:s}=oi(t),i=St(ii(t)),a=Q(!1),l=Z(si,void 0);async function c(p){a.value=!0;const M=Array.isArray(t.onClick)?t.onClick:[t.onClick];try{await Promise.all(M.map(w=>w?.(p)))}finally{a.value=!1}}const u=I(()=>t.loading||t.loadingAuto&&(a.value||l?.value&&t.type==="submit")),{isLeading:f,isTrailing:h,leadingIconName:v,trailingIconName:x}=ni(I(()=>({...t,loading:u.value}))),m=I(()=>re({extend:re(gi),...kt({variants:{active:{true:{base:Et(r.ui?.button?.variants?.active?.true?.base,t.activeClass)},false:{base:Et(r.ui?.button?.variants?.active?.false?.base,t.inactiveClass)}}}},r.ui?.button||{})})({color:t.color,variant:t.variant,size:s.value,loading:u.value,block:t.block,square:t.square||!n.default&&!t.label,leading:f.value,trailing:h.value,buttonGroup:o.value}));return(p,M)=>(N(),D(pi,H({type:e.type,disabled:e.disabled||u.value},T(Tr)(T(i),["type","disabled","onClick"]),{custom:""}),{default:J(({active:w,...z})=>[vn(gt,H(z,{class:m.value.base({class:[t.ui?.base,t.class],active:w,...w&&e.activeVariant?{variant:e.activeVariant}:{},...w&&e.activeColor?{color:e.activeColor}:{}}),onClick:c}),{default:J(()=>[W(p.$slots,"leading",{},()=>[T(f)&&T(v)?(N(),D(pt,{key:0,name:T(v),class:ae(m.value.leadingIcon({class:t.ui?.leadingIcon,active:w}))},null,8,["name","class"])):e.avatar?(N(),D(ti,H({key:1,size:t.ui?.leadingAvatarSize||m.value.leadingAvatarSize()},e.avatar,{class:m.value.leadingAvatar({class:t.ui?.leadingAvatar,active:w})}),null,16,["size","class"])):qe("",!0)]),W(p.$slots,"default",{},()=>[e.label!==void 0&&e.label!==null?(N(),Ve("span",{key:0,class:ae(m.value.label({class:t.ui?.label,active:w}))},vt(e.label),3)):qe("",!0)]),W(p.$slots,"trailing",{},()=>[T(h)&&T(x)?(N(),D(pt,{key:0,name:T(x),class:ae(m.value.trailingIcon({class:t.ui?.trailingIcon,active:w}))},null,8,["name","class"])):qe("",!0)])]),_:2},1040,["class"])]),_:3},16,["type","disabled"]))}};export{vi as A,kr as B,yi as C,wi as D,kt as E,mi as F,Si as G,hi as H,xi as I,qi as J,$i as K,Mr as L,Or as M,Ei as N,pi as O,mt as P,ii as Q,gt as R,yt as S,oi as T,ni as U,ti as _,Ai as a,zi as b,Oi as c,Ii as d,mn as e,hr as f,Mi as g,Ti as h,xt as i,Pi as j,Ae as k,pt as l,Ri as m,St as n,Ci as o,Tr as p,Ar as q,Pr as r,Gr as s,re as t,ki as u,ji as v,xn as w,wt as x,yn as y,yr as z};
+  */
+const noop = () => {
+};
+const isArray = Array.isArray;
+function isSameRouteRecord(a2, b) {
+  return (a2.aliasOf || a2) === (b.aliasOf || b);
+}
+function isSameRouteLocationParams(a2, b) {
+  if (Object.keys(a2).length !== Object.keys(b).length)
+    return false;
+  for (const key in a2) {
+    if (!isSameRouteLocationParamsValue(a2[key], b[key]))
+      return false;
+  }
+  return true;
+}
+function isSameRouteLocationParamsValue(a2, b) {
+  return isArray(a2) ? isEquivalentArray(a2, b) : isArray(b) ? isEquivalentArray(b, a2) : a2 === b;
+}
+function isEquivalentArray(a2, b) {
+  return isArray(b) ? a2.length === b.length && a2.every((value, i2) => value === b[i2]) : a2.length === 1 && a2[0] === b;
+}
+var NavigationType;
+(function(NavigationType2) {
+  NavigationType2["pop"] = "pop";
+  NavigationType2["push"] = "push";
+})(NavigationType || (NavigationType = {}));
+var NavigationDirection;
+(function(NavigationDirection2) {
+  NavigationDirection2["back"] = "back";
+  NavigationDirection2["forward"] = "forward";
+  NavigationDirection2["unknown"] = "";
+})(NavigationDirection || (NavigationDirection = {}));
+var NavigationFailureType;
+(function(NavigationFailureType2) {
+  NavigationFailureType2[NavigationFailureType2["aborted"] = 4] = "aborted";
+  NavigationFailureType2[NavigationFailureType2["cancelled"] = 8] = "cancelled";
+  NavigationFailureType2[NavigationFailureType2["duplicated"] = 16] = "duplicated";
+})(NavigationFailureType || (NavigationFailureType = {}));
+const routerKey = Symbol("");
+const routeLocationKey = Symbol("");
+function useLink(props) {
+  const router = inject(routerKey);
+  const currentRoute = inject(routeLocationKey);
+  const route = computed(() => {
+    const to = unref(props.to);
+    return router.resolve(to);
+  });
+  const activeRecordIndex = computed(() => {
+    const { matched } = route.value;
+    const { length } = matched;
+    const routeMatched = matched[length - 1];
+    const currentMatched = currentRoute.matched;
+    if (!routeMatched || !currentMatched.length)
+      return -1;
+    const index = currentMatched.findIndex(isSameRouteRecord.bind(null, routeMatched));
+    if (index > -1)
+      return index;
+    const parentRecordPath = getOriginalPath(matched[length - 2]);
+    return (
+      // we are dealing with nested routes
+      length > 1 && // if the parent and matched route have the same path, this link is
+      // referring to the empty child. Or we currently are on a different
+      // child of the same parent
+      getOriginalPath(routeMatched) === parentRecordPath && // avoid comparing the child with its parent
+      currentMatched[currentMatched.length - 1].path !== parentRecordPath ? currentMatched.findIndex(isSameRouteRecord.bind(null, matched[length - 2])) : index
+    );
+  });
+  const isActive = computed(() => activeRecordIndex.value > -1 && includesParams(currentRoute.params, route.value.params));
+  const isExactActive = computed(() => activeRecordIndex.value > -1 && activeRecordIndex.value === currentRoute.matched.length - 1 && isSameRouteLocationParams(currentRoute.params, route.value.params));
+  function navigate(e = {}) {
+    if (guardEvent(e)) {
+      const p2 = router[unref(props.replace) ? "replace" : "push"](
+        unref(props.to)
+        // avoid uncaught errors are they are logged anyway
+      ).catch(noop);
+      if (props.viewTransition && typeof document !== "undefined" && "startViewTransition" in document) {
+        document.startViewTransition(() => p2);
+      }
+      return p2;
+    }
+    return Promise.resolve();
+  }
+  return {
+    route,
+    href: computed(() => route.value.href),
+    isActive,
+    isExactActive,
+    navigate
+  };
+}
+function preferSingleVNode(vnodes) {
+  return vnodes.length === 1 ? vnodes[0] : vnodes;
+}
+const RouterLinkImpl = /* @__PURE__ */ defineComponent({
+  name: "RouterLink",
+  compatConfig: { MODE: 3 },
+  props: {
+    to: {
+      type: [String, Object],
+      required: true
+    },
+    replace: Boolean,
+    activeClass: String,
+    // inactiveClass: String,
+    exactActiveClass: String,
+    custom: Boolean,
+    ariaCurrentValue: {
+      type: String,
+      default: "page"
+    },
+    viewTransition: Boolean
+  },
+  useLink,
+  setup(props, { slots }) {
+    const link = reactive(useLink(props));
+    const { options } = inject(routerKey);
+    const elClass = computed(() => ({
+      [getLinkClass(props.activeClass, options.linkActiveClass, "router-link-active")]: link.isActive,
+      // [getLinkClass(
+      //   props.inactiveClass,
+      //   options.linkInactiveClass,
+      //   'router-link-inactive'
+      // )]: !link.isExactActive,
+      [getLinkClass(props.exactActiveClass, options.linkExactActiveClass, "router-link-exact-active")]: link.isExactActive
+    }));
+    return () => {
+      const children = slots.default && preferSingleVNode(slots.default(link));
+      return props.custom ? children : h("a", {
+        "aria-current": link.isExactActive ? props.ariaCurrentValue : null,
+        href: link.href,
+        // this would override user added attrs but Vue will still add
+        // the listener, so we end up triggering both
+        onClick: link.navigate,
+        class: elClass.value
+      }, children);
+    };
+  }
+});
+const RouterLink = RouterLinkImpl;
+function guardEvent(e) {
+  if (e.metaKey || e.altKey || e.ctrlKey || e.shiftKey)
+    return;
+  if (e.defaultPrevented)
+    return;
+  if (e.button !== void 0 && e.button !== 0)
+    return;
+  if (e.currentTarget && e.currentTarget.getAttribute) {
+    const target = e.currentTarget.getAttribute("target");
+    if (/\b_blank\b/i.test(target))
+      return;
+  }
+  if (e.preventDefault)
+    e.preventDefault();
+  return true;
+}
+function includesParams(outer, inner) {
+  for (const key in inner) {
+    const innerValue = inner[key];
+    const outerValue = outer[key];
+    if (typeof innerValue === "string") {
+      if (innerValue !== outerValue)
+        return false;
+    } else {
+      if (!isArray(outerValue) || outerValue.length !== innerValue.length || innerValue.some((value, i2) => value !== outerValue[i2]))
+        return false;
+    }
+  }
+  return true;
+}
+function getOriginalPath(record) {
+  return record ? record.aliasOf ? record.aliasOf.path : record.path : "";
+}
+const getLinkClass = (propClass, globalClass, defaultClass) => propClass != null ? propClass : globalClass != null ? globalClass : defaultClass;
+function useRoute(_name) {
+  return inject(routeLocationKey);
+}
+const _appConfig = reactive(appConfig);
+const useAppConfig = () => _appConfig;
+const state = {};
+const useState = (key, init) => {
+  if (state[key]) {
+    return state[key];
+  }
+  const value = ref(init());
+  state[key] = value;
+  return value;
+};
+createHooks();
+var l = (e) => typeof e == "boolean" ? `${e}` : e === 0 ? "0" : e, u = (e) => !e || typeof e != "object" || Object.keys(e).length === 0, x$1 = (e, o) => JSON.stringify(e) === JSON.stringify(o);
+function i(e, o) {
+  e.forEach(function(r) {
+    Array.isArray(r) ? i(r, o) : o.push(r);
+  });
+}
+function y(e) {
+  let o = [];
+  return i(e, o), o;
+}
+var a = (...e) => y(e).filter(Boolean), p = (e, o) => {
+  let r = {}, c2 = Object.keys(e), f = Object.keys(o);
+  for (let t of c2) if (f.includes(t)) {
+    let s = e[t], n = o[t];
+    Array.isArray(s) || Array.isArray(n) ? r[t] = a(n, s) : typeof s == "object" && typeof n == "object" ? r[t] = p(s, n) : r[t] = n + " " + s;
+  } else r[t] = e[t];
+  for (let t of f) c2.includes(t) || (r[t] = o[t]);
+  return r;
+}, g = (e) => !e || typeof e != "string" ? e : e.replace(/\s+/g, " ").trim();
+const CLASS_PART_SEPARATOR = "-";
+const createClassGroupUtils = (config) => {
+  const classMap = createClassMap(config);
+  const {
+    conflictingClassGroups,
+    conflictingClassGroupModifiers
+  } = config;
+  const getClassGroupId = (className) => {
+    const classParts = className.split(CLASS_PART_SEPARATOR);
+    if (classParts[0] === "" && classParts.length !== 1) {
+      classParts.shift();
+    }
+    return getGroupRecursive(classParts, classMap) || getGroupIdForArbitraryProperty(className);
+  };
+  const getConflictingClassGroupIds = (classGroupId, hasPostfixModifier) => {
+    const conflicts = conflictingClassGroups[classGroupId] || [];
+    if (hasPostfixModifier && conflictingClassGroupModifiers[classGroupId]) {
+      return [...conflicts, ...conflictingClassGroupModifiers[classGroupId]];
+    }
+    return conflicts;
+  };
+  return {
+    getClassGroupId,
+    getConflictingClassGroupIds
+  };
+};
+const getGroupRecursive = (classParts, classPartObject) => {
+  if (classParts.length === 0) {
+    return classPartObject.classGroupId;
+  }
+  const currentClassPart = classParts[0];
+  const nextClassPartObject = classPartObject.nextPart.get(currentClassPart);
+  const classGroupFromNextClassPart = nextClassPartObject ? getGroupRecursive(classParts.slice(1), nextClassPartObject) : void 0;
+  if (classGroupFromNextClassPart) {
+    return classGroupFromNextClassPart;
+  }
+  if (classPartObject.validators.length === 0) {
+    return void 0;
+  }
+  const classRest = classParts.join(CLASS_PART_SEPARATOR);
+  return classPartObject.validators.find(({
+    validator
+  }) => validator(classRest))?.classGroupId;
+};
+const arbitraryPropertyRegex = /^\[(.+)\]$/;
+const getGroupIdForArbitraryProperty = (className) => {
+  if (arbitraryPropertyRegex.test(className)) {
+    const arbitraryPropertyClassName = arbitraryPropertyRegex.exec(className)[1];
+    const property = arbitraryPropertyClassName?.substring(0, arbitraryPropertyClassName.indexOf(":"));
+    if (property) {
+      return "arbitrary.." + property;
+    }
+  }
+};
+const createClassMap = (config) => {
+  const {
+    theme: theme2,
+    classGroups
+  } = config;
+  const classMap = {
+    nextPart: /* @__PURE__ */ new Map(),
+    validators: []
+  };
+  for (const classGroupId in classGroups) {
+    processClassesRecursively(classGroups[classGroupId], classMap, classGroupId, theme2);
+  }
+  return classMap;
+};
+const processClassesRecursively = (classGroup, classPartObject, classGroupId, theme2) => {
+  classGroup.forEach((classDefinition) => {
+    if (typeof classDefinition === "string") {
+      const classPartObjectToEdit = classDefinition === "" ? classPartObject : getPart(classPartObject, classDefinition);
+      classPartObjectToEdit.classGroupId = classGroupId;
+      return;
+    }
+    if (typeof classDefinition === "function") {
+      if (isThemeGetter(classDefinition)) {
+        processClassesRecursively(classDefinition(theme2), classPartObject, classGroupId, theme2);
+        return;
+      }
+      classPartObject.validators.push({
+        validator: classDefinition,
+        classGroupId
+      });
+      return;
+    }
+    Object.entries(classDefinition).forEach(([key, classGroup2]) => {
+      processClassesRecursively(classGroup2, getPart(classPartObject, key), classGroupId, theme2);
+    });
+  });
+};
+const getPart = (classPartObject, path) => {
+  let currentClassPartObject = classPartObject;
+  path.split(CLASS_PART_SEPARATOR).forEach((pathPart) => {
+    if (!currentClassPartObject.nextPart.has(pathPart)) {
+      currentClassPartObject.nextPart.set(pathPart, {
+        nextPart: /* @__PURE__ */ new Map(),
+        validators: []
+      });
+    }
+    currentClassPartObject = currentClassPartObject.nextPart.get(pathPart);
+  });
+  return currentClassPartObject;
+};
+const isThemeGetter = (func) => func.isThemeGetter;
+const createLruCache = (maxCacheSize) => {
+  if (maxCacheSize < 1) {
+    return {
+      get: () => void 0,
+      set: () => {
+      }
+    };
+  }
+  let cacheSize = 0;
+  let cache = /* @__PURE__ */ new Map();
+  let previousCache = /* @__PURE__ */ new Map();
+  const update = (key, value) => {
+    cache.set(key, value);
+    cacheSize++;
+    if (cacheSize > maxCacheSize) {
+      cacheSize = 0;
+      previousCache = cache;
+      cache = /* @__PURE__ */ new Map();
+    }
+  };
+  return {
+    get(key) {
+      let value = cache.get(key);
+      if (value !== void 0) {
+        return value;
+      }
+      if ((value = previousCache.get(key)) !== void 0) {
+        update(key, value);
+        return value;
+      }
+    },
+    set(key, value) {
+      if (cache.has(key)) {
+        cache.set(key, value);
+      } else {
+        update(key, value);
+      }
+    }
+  };
+};
+const IMPORTANT_MODIFIER = "!";
+const MODIFIER_SEPARATOR = ":";
+const MODIFIER_SEPARATOR_LENGTH = MODIFIER_SEPARATOR.length;
+const createParseClassName = (config) => {
+  const {
+    prefix,
+    experimentalParseClassName
+  } = config;
+  let parseClassName = (className) => {
+    const modifiers = [];
+    let bracketDepth = 0;
+    let parenDepth = 0;
+    let modifierStart = 0;
+    let postfixModifierPosition;
+    for (let index = 0; index < className.length; index++) {
+      let currentCharacter = className[index];
+      if (bracketDepth === 0 && parenDepth === 0) {
+        if (currentCharacter === MODIFIER_SEPARATOR) {
+          modifiers.push(className.slice(modifierStart, index));
+          modifierStart = index + MODIFIER_SEPARATOR_LENGTH;
+          continue;
+        }
+        if (currentCharacter === "/") {
+          postfixModifierPosition = index;
+          continue;
+        }
+      }
+      if (currentCharacter === "[") {
+        bracketDepth++;
+      } else if (currentCharacter === "]") {
+        bracketDepth--;
+      } else if (currentCharacter === "(") {
+        parenDepth++;
+      } else if (currentCharacter === ")") {
+        parenDepth--;
+      }
+    }
+    const baseClassNameWithImportantModifier = modifiers.length === 0 ? className : className.substring(modifierStart);
+    const baseClassName = stripImportantModifier(baseClassNameWithImportantModifier);
+    const hasImportantModifier = baseClassName !== baseClassNameWithImportantModifier;
+    const maybePostfixModifierPosition = postfixModifierPosition && postfixModifierPosition > modifierStart ? postfixModifierPosition - modifierStart : void 0;
+    return {
+      modifiers,
+      hasImportantModifier,
+      baseClassName,
+      maybePostfixModifierPosition
+    };
+  };
+  if (prefix) {
+    const fullPrefix = prefix + MODIFIER_SEPARATOR;
+    const parseClassNameOriginal = parseClassName;
+    parseClassName = (className) => className.startsWith(fullPrefix) ? parseClassNameOriginal(className.substring(fullPrefix.length)) : {
+      isExternal: true,
+      modifiers: [],
+      hasImportantModifier: false,
+      baseClassName: className,
+      maybePostfixModifierPosition: void 0
+    };
+  }
+  if (experimentalParseClassName) {
+    const parseClassNameOriginal = parseClassName;
+    parseClassName = (className) => experimentalParseClassName({
+      className,
+      parseClassName: parseClassNameOriginal
+    });
+  }
+  return parseClassName;
+};
+const stripImportantModifier = (baseClassName) => {
+  if (baseClassName.endsWith(IMPORTANT_MODIFIER)) {
+    return baseClassName.substring(0, baseClassName.length - 1);
+  }
+  if (baseClassName.startsWith(IMPORTANT_MODIFIER)) {
+    return baseClassName.substring(1);
+  }
+  return baseClassName;
+};
+const createSortModifiers = (config) => {
+  const orderSensitiveModifiers = Object.fromEntries(config.orderSensitiveModifiers.map((modifier) => [modifier, true]));
+  const sortModifiers = (modifiers) => {
+    if (modifiers.length <= 1) {
+      return modifiers;
+    }
+    const sortedModifiers = [];
+    let unsortedModifiers = [];
+    modifiers.forEach((modifier) => {
+      const isPositionSensitive = modifier[0] === "[" || orderSensitiveModifiers[modifier];
+      if (isPositionSensitive) {
+        sortedModifiers.push(...unsortedModifiers.sort(), modifier);
+        unsortedModifiers = [];
+      } else {
+        unsortedModifiers.push(modifier);
+      }
+    });
+    sortedModifiers.push(...unsortedModifiers.sort());
+    return sortedModifiers;
+  };
+  return sortModifiers;
+};
+const createConfigUtils = (config) => ({
+  cache: createLruCache(config.cacheSize),
+  parseClassName: createParseClassName(config),
+  sortModifiers: createSortModifiers(config),
+  ...createClassGroupUtils(config)
+});
+const SPLIT_CLASSES_REGEX = /\s+/;
+const mergeClassList = (classList, configUtils) => {
+  const {
+    parseClassName,
+    getClassGroupId,
+    getConflictingClassGroupIds,
+    sortModifiers
+  } = configUtils;
+  const classGroupsInConflict = [];
+  const classNames = classList.trim().split(SPLIT_CLASSES_REGEX);
+  let result = "";
+  for (let index = classNames.length - 1; index >= 0; index -= 1) {
+    const originalClassName = classNames[index];
+    const {
+      isExternal,
+      modifiers,
+      hasImportantModifier,
+      baseClassName,
+      maybePostfixModifierPosition
+    } = parseClassName(originalClassName);
+    if (isExternal) {
+      result = originalClassName + (result.length > 0 ? " " + result : result);
+      continue;
+    }
+    let hasPostfixModifier = !!maybePostfixModifierPosition;
+    let classGroupId = getClassGroupId(hasPostfixModifier ? baseClassName.substring(0, maybePostfixModifierPosition) : baseClassName);
+    if (!classGroupId) {
+      if (!hasPostfixModifier) {
+        result = originalClassName + (result.length > 0 ? " " + result : result);
+        continue;
+      }
+      classGroupId = getClassGroupId(baseClassName);
+      if (!classGroupId) {
+        result = originalClassName + (result.length > 0 ? " " + result : result);
+        continue;
+      }
+      hasPostfixModifier = false;
+    }
+    const variantModifier = sortModifiers(modifiers).join(":");
+    const modifierId = hasImportantModifier ? variantModifier + IMPORTANT_MODIFIER : variantModifier;
+    const classId = modifierId + classGroupId;
+    if (classGroupsInConflict.includes(classId)) {
+      continue;
+    }
+    classGroupsInConflict.push(classId);
+    const conflictGroups = getConflictingClassGroupIds(classGroupId, hasPostfixModifier);
+    for (let i2 = 0; i2 < conflictGroups.length; ++i2) {
+      const group = conflictGroups[i2];
+      classGroupsInConflict.push(modifierId + group);
+    }
+    result = originalClassName + (result.length > 0 ? " " + result : result);
+  }
+  return result;
+};
+function twJoin() {
+  let index = 0;
+  let argument;
+  let resolvedValue;
+  let string = "";
+  while (index < arguments.length) {
+    if (argument = arguments[index++]) {
+      if (resolvedValue = toValue(argument)) {
+        string && (string += " ");
+        string += resolvedValue;
+      }
+    }
+  }
+  return string;
+}
+const toValue = (mix) => {
+  if (typeof mix === "string") {
+    return mix;
+  }
+  let resolvedValue;
+  let string = "";
+  for (let k = 0; k < mix.length; k++) {
+    if (mix[k]) {
+      if (resolvedValue = toValue(mix[k])) {
+        string && (string += " ");
+        string += resolvedValue;
+      }
+    }
+  }
+  return string;
+};
+function createTailwindMerge(createConfigFirst, ...createConfigRest) {
+  let configUtils;
+  let cacheGet;
+  let cacheSet;
+  let functionToCall = initTailwindMerge;
+  function initTailwindMerge(classList) {
+    const config = createConfigRest.reduce((previousConfig, createConfigCurrent) => createConfigCurrent(previousConfig), createConfigFirst());
+    configUtils = createConfigUtils(config);
+    cacheGet = configUtils.cache.get;
+    cacheSet = configUtils.cache.set;
+    functionToCall = tailwindMerge;
+    return tailwindMerge(classList);
+  }
+  function tailwindMerge(classList) {
+    const cachedResult = cacheGet(classList);
+    if (cachedResult) {
+      return cachedResult;
+    }
+    const result = mergeClassList(classList, configUtils);
+    cacheSet(classList, result);
+    return result;
+  }
+  return function callTailwindMerge() {
+    return functionToCall(twJoin.apply(null, arguments));
+  };
+}
+const fromTheme = (key) => {
+  const themeGetter = (theme2) => theme2[key] || [];
+  themeGetter.isThemeGetter = true;
+  return themeGetter;
+};
+const arbitraryValueRegex = /^\[(?:(\w[\w-]*):)?(.+)\]$/i;
+const arbitraryVariableRegex = /^\((?:(\w[\w-]*):)?(.+)\)$/i;
+const fractionRegex = /^\d+\/\d+$/;
+const tshirtUnitRegex = /^(\d+(\.\d+)?)?(xs|sm|md|lg|xl)$/;
+const lengthUnitRegex = /\d+(%|px|r?em|[sdl]?v([hwib]|min|max)|pt|pc|in|cm|mm|cap|ch|ex|r?lh|cq(w|h|i|b|min|max))|\b(calc|min|max|clamp)\(.+\)|^0$/;
+const colorFunctionRegex = /^(rgba?|hsla?|hwb|(ok)?(lab|lch))\(.+\)$/;
+const shadowRegex = /^(inset_)?-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/;
+const imageRegex = /^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/;
+const isFraction = (value) => fractionRegex.test(value);
+const isNumber = (value) => Boolean(value) && !Number.isNaN(Number(value));
+const isInteger = (value) => Boolean(value) && Number.isInteger(Number(value));
+const isPercent = (value) => value.endsWith("%") && isNumber(value.slice(0, -1));
+const isTshirtSize = (value) => tshirtUnitRegex.test(value);
+const isAny = () => true;
+const isLengthOnly = (value) => (
+  // `colorFunctionRegex` check is necessary because color functions can have percentages in them which which would be incorrectly classified as lengths.
+  // For example, `hsl(0 0% 0%)` would be classified as a length without this check.
+  // I could also use lookbehind assertion in `lengthUnitRegex` but that isn't supported widely enough.
+  lengthUnitRegex.test(value) && !colorFunctionRegex.test(value)
+);
+const isNever = () => false;
+const isShadow = (value) => shadowRegex.test(value);
+const isImage = (value) => imageRegex.test(value);
+const isAnyNonArbitrary = (value) => !isArbitraryValue(value) && !isArbitraryVariable(value);
+const isArbitrarySize = (value) => getIsArbitraryValue(value, isLabelSize, isNever);
+const isArbitraryValue = (value) => arbitraryValueRegex.test(value);
+const isArbitraryLength = (value) => getIsArbitraryValue(value, isLabelLength, isLengthOnly);
+const isArbitraryNumber = (value) => getIsArbitraryValue(value, isLabelNumber, isNumber);
+const isArbitraryPosition = (value) => getIsArbitraryValue(value, isLabelPosition, isNever);
+const isArbitraryImage = (value) => getIsArbitraryValue(value, isLabelImage, isImage);
+const isArbitraryShadow = (value) => getIsArbitraryValue(value, isNever, isShadow);
+const isArbitraryVariable = (value) => arbitraryVariableRegex.test(value);
+const isArbitraryVariableLength = (value) => getIsArbitraryVariable(value, isLabelLength);
+const isArbitraryVariableFamilyName = (value) => getIsArbitraryVariable(value, isLabelFamilyName);
+const isArbitraryVariablePosition = (value) => getIsArbitraryVariable(value, isLabelPosition);
+const isArbitraryVariableSize = (value) => getIsArbitraryVariable(value, isLabelSize);
+const isArbitraryVariableImage = (value) => getIsArbitraryVariable(value, isLabelImage);
+const isArbitraryVariableShadow = (value) => getIsArbitraryVariable(value, isLabelShadow, true);
+const getIsArbitraryValue = (value, testLabel, testValue) => {
+  const result = arbitraryValueRegex.exec(value);
+  if (result) {
+    if (result[1]) {
+      return testLabel(result[1]);
+    }
+    return testValue(result[2]);
+  }
+  return false;
+};
+const getIsArbitraryVariable = (value, testLabel, shouldMatchNoLabel = false) => {
+  const result = arbitraryVariableRegex.exec(value);
+  if (result) {
+    if (result[1]) {
+      return testLabel(result[1]);
+    }
+    return shouldMatchNoLabel;
+  }
+  return false;
+};
+const isLabelPosition = (label) => label === "position";
+const imageLabels = /* @__PURE__ */ new Set(["image", "url"]);
+const isLabelImage = (label) => imageLabels.has(label);
+const sizeLabels = /* @__PURE__ */ new Set(["length", "size", "percentage"]);
+const isLabelSize = (label) => sizeLabels.has(label);
+const isLabelLength = (label) => label === "length";
+const isLabelNumber = (label) => label === "number";
+const isLabelFamilyName = (label) => label === "family-name";
+const isLabelShadow = (label) => label === "shadow";
+const getDefaultConfig = () => {
+  const themeColor = fromTheme("color");
+  const themeFont = fromTheme("font");
+  const themeText = fromTheme("text");
+  const themeFontWeight = fromTheme("font-weight");
+  const themeTracking = fromTheme("tracking");
+  const themeLeading = fromTheme("leading");
+  const themeBreakpoint = fromTheme("breakpoint");
+  const themeContainer = fromTheme("container");
+  const themeSpacing = fromTheme("spacing");
+  const themeRadius = fromTheme("radius");
+  const themeShadow = fromTheme("shadow");
+  const themeInsetShadow = fromTheme("inset-shadow");
+  const themeDropShadow = fromTheme("drop-shadow");
+  const themeBlur = fromTheme("blur");
+  const themePerspective = fromTheme("perspective");
+  const themeAspect = fromTheme("aspect");
+  const themeEase = fromTheme("ease");
+  const themeAnimate = fromTheme("animate");
+  const scaleBreak = () => ["auto", "avoid", "all", "avoid-page", "page", "left", "right", "column"];
+  const scalePosition = () => ["bottom", "center", "left", "left-bottom", "left-top", "right", "right-bottom", "right-top", "top"];
+  const scaleOverflow = () => ["auto", "hidden", "clip", "visible", "scroll"];
+  const scaleOverscroll = () => ["auto", "contain", "none"];
+  const scaleUnambiguousSpacing = () => [isArbitraryVariable, isArbitraryValue, themeSpacing];
+  const scaleInset = () => [isFraction, "full", "auto", ...scaleUnambiguousSpacing()];
+  const scaleGridTemplateColsRows = () => [isInteger, "none", "subgrid", isArbitraryVariable, isArbitraryValue];
+  const scaleGridColRowStartAndEnd = () => ["auto", {
+    span: ["full", isInteger, isArbitraryVariable, isArbitraryValue]
+  }, isArbitraryVariable, isArbitraryValue];
+  const scaleGridColRowStartOrEnd = () => [isInteger, "auto", isArbitraryVariable, isArbitraryValue];
+  const scaleGridAutoColsRows = () => ["auto", "min", "max", "fr", isArbitraryVariable, isArbitraryValue];
+  const scaleAlignPrimaryAxis = () => ["start", "end", "center", "between", "around", "evenly", "stretch", "baseline"];
+  const scaleAlignSecondaryAxis = () => ["start", "end", "center", "stretch"];
+  const scaleMargin = () => ["auto", ...scaleUnambiguousSpacing()];
+  const scaleSizing = () => [isFraction, "auto", "full", "dvw", "dvh", "lvw", "lvh", "svw", "svh", "min", "max", "fit", ...scaleUnambiguousSpacing()];
+  const scaleColor = () => [themeColor, isArbitraryVariable, isArbitraryValue];
+  const scaleGradientStopPosition = () => [isPercent, isArbitraryLength];
+  const scaleRadius = () => [
+    // Deprecated since Tailwind CSS v4.0.0
+    "",
+    "none",
+    "full",
+    themeRadius,
+    isArbitraryVariable,
+    isArbitraryValue
+  ];
+  const scaleBorderWidth = () => ["", isNumber, isArbitraryVariableLength, isArbitraryLength];
+  const scaleLineStyle = () => ["solid", "dashed", "dotted", "double"];
+  const scaleBlendMode = () => ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"];
+  const scaleBlur = () => [
+    // Deprecated since Tailwind CSS v4.0.0
+    "",
+    "none",
+    themeBlur,
+    isArbitraryVariable,
+    isArbitraryValue
+  ];
+  const scaleOrigin = () => ["center", "top", "top-right", "right", "bottom-right", "bottom", "bottom-left", "left", "top-left", isArbitraryVariable, isArbitraryValue];
+  const scaleRotate = () => ["none", isNumber, isArbitraryVariable, isArbitraryValue];
+  const scaleScale = () => ["none", isNumber, isArbitraryVariable, isArbitraryValue];
+  const scaleSkew = () => [isNumber, isArbitraryVariable, isArbitraryValue];
+  const scaleTranslate = () => [isFraction, "full", ...scaleUnambiguousSpacing()];
+  return {
+    cacheSize: 500,
+    theme: {
+      animate: ["spin", "ping", "pulse", "bounce"],
+      aspect: ["video"],
+      blur: [isTshirtSize],
+      breakpoint: [isTshirtSize],
+      color: [isAny],
+      container: [isTshirtSize],
+      "drop-shadow": [isTshirtSize],
+      ease: ["in", "out", "in-out"],
+      font: [isAnyNonArbitrary],
+      "font-weight": ["thin", "extralight", "light", "normal", "medium", "semibold", "bold", "extrabold", "black"],
+      "inset-shadow": [isTshirtSize],
+      leading: ["none", "tight", "snug", "normal", "relaxed", "loose"],
+      perspective: ["dramatic", "near", "normal", "midrange", "distant", "none"],
+      radius: [isTshirtSize],
+      shadow: [isTshirtSize],
+      spacing: ["px", isNumber],
+      text: [isTshirtSize],
+      tracking: ["tighter", "tight", "normal", "wide", "wider", "widest"]
+    },
+    classGroups: {
+      // --------------
+      // --- Layout ---
+      // --------------
+      /**
+       * Aspect Ratio
+       * @see https://tailwindcss.com/docs/aspect-ratio
+       */
+      aspect: [{
+        aspect: ["auto", "square", isFraction, isArbitraryValue, isArbitraryVariable, themeAspect]
+      }],
+      /**
+       * Container
+       * @see https://tailwindcss.com/docs/container
+       * @deprecated since Tailwind CSS v4.0.0
+       */
+      container: ["container"],
+      /**
+       * Columns
+       * @see https://tailwindcss.com/docs/columns
+       */
+      columns: [{
+        columns: [isNumber, isArbitraryValue, isArbitraryVariable, themeContainer]
+      }],
+      /**
+       * Break After
+       * @see https://tailwindcss.com/docs/break-after
+       */
+      "break-after": [{
+        "break-after": scaleBreak()
+      }],
+      /**
+       * Break Before
+       * @see https://tailwindcss.com/docs/break-before
+       */
+      "break-before": [{
+        "break-before": scaleBreak()
+      }],
+      /**
+       * Break Inside
+       * @see https://tailwindcss.com/docs/break-inside
+       */
+      "break-inside": [{
+        "break-inside": ["auto", "avoid", "avoid-page", "avoid-column"]
+      }],
+      /**
+       * Box Decoration Break
+       * @see https://tailwindcss.com/docs/box-decoration-break
+       */
+      "box-decoration": [{
+        "box-decoration": ["slice", "clone"]
+      }],
+      /**
+       * Box Sizing
+       * @see https://tailwindcss.com/docs/box-sizing
+       */
+      box: [{
+        box: ["border", "content"]
+      }],
+      /**
+       * Display
+       * @see https://tailwindcss.com/docs/display
+       */
+      display: ["block", "inline-block", "inline", "flex", "inline-flex", "table", "inline-table", "table-caption", "table-cell", "table-column", "table-column-group", "table-footer-group", "table-header-group", "table-row-group", "table-row", "flow-root", "grid", "inline-grid", "contents", "list-item", "hidden"],
+      /**
+       * Screen Reader Only
+       * @see https://tailwindcss.com/docs/display#screen-reader-only
+       */
+      sr: ["sr-only", "not-sr-only"],
+      /**
+       * Floats
+       * @see https://tailwindcss.com/docs/float
+       */
+      float: [{
+        float: ["right", "left", "none", "start", "end"]
+      }],
+      /**
+       * Clear
+       * @see https://tailwindcss.com/docs/clear
+       */
+      clear: [{
+        clear: ["left", "right", "both", "none", "start", "end"]
+      }],
+      /**
+       * Isolation
+       * @see https://tailwindcss.com/docs/isolation
+       */
+      isolation: ["isolate", "isolation-auto"],
+      /**
+       * Object Fit
+       * @see https://tailwindcss.com/docs/object-fit
+       */
+      "object-fit": [{
+        object: ["contain", "cover", "fill", "none", "scale-down"]
+      }],
+      /**
+       * Object Position
+       * @see https://tailwindcss.com/docs/object-position
+       */
+      "object-position": [{
+        object: [...scalePosition(), isArbitraryValue, isArbitraryVariable]
+      }],
+      /**
+       * Overflow
+       * @see https://tailwindcss.com/docs/overflow
+       */
+      overflow: [{
+        overflow: scaleOverflow()
+      }],
+      /**
+       * Overflow X
+       * @see https://tailwindcss.com/docs/overflow
+       */
+      "overflow-x": [{
+        "overflow-x": scaleOverflow()
+      }],
+      /**
+       * Overflow Y
+       * @see https://tailwindcss.com/docs/overflow
+       */
+      "overflow-y": [{
+        "overflow-y": scaleOverflow()
+      }],
+      /**
+       * Overscroll Behavior
+       * @see https://tailwindcss.com/docs/overscroll-behavior
+       */
+      overscroll: [{
+        overscroll: scaleOverscroll()
+      }],
+      /**
+       * Overscroll Behavior X
+       * @see https://tailwindcss.com/docs/overscroll-behavior
+       */
+      "overscroll-x": [{
+        "overscroll-x": scaleOverscroll()
+      }],
+      /**
+       * Overscroll Behavior Y
+       * @see https://tailwindcss.com/docs/overscroll-behavior
+       */
+      "overscroll-y": [{
+        "overscroll-y": scaleOverscroll()
+      }],
+      /**
+       * Position
+       * @see https://tailwindcss.com/docs/position
+       */
+      position: ["static", "fixed", "absolute", "relative", "sticky"],
+      /**
+       * Top / Right / Bottom / Left
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      inset: [{
+        inset: scaleInset()
+      }],
+      /**
+       * Right / Left
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      "inset-x": [{
+        "inset-x": scaleInset()
+      }],
+      /**
+       * Top / Bottom
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      "inset-y": [{
+        "inset-y": scaleInset()
+      }],
+      /**
+       * Start
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      start: [{
+        start: scaleInset()
+      }],
+      /**
+       * End
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      end: [{
+        end: scaleInset()
+      }],
+      /**
+       * Top
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      top: [{
+        top: scaleInset()
+      }],
+      /**
+       * Right
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      right: [{
+        right: scaleInset()
+      }],
+      /**
+       * Bottom
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      bottom: [{
+        bottom: scaleInset()
+      }],
+      /**
+       * Left
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */
+      left: [{
+        left: scaleInset()
+      }],
+      /**
+       * Visibility
+       * @see https://tailwindcss.com/docs/visibility
+       */
+      visibility: ["visible", "invisible", "collapse"],
+      /**
+       * Z-Index
+       * @see https://tailwindcss.com/docs/z-index
+       */
+      z: [{
+        z: [isInteger, "auto", isArbitraryVariable, isArbitraryValue]
+      }],
+      // ------------------------
+      // --- Flexbox and Grid ---
+      // ------------------------
+      /**
+       * Flex Basis
+       * @see https://tailwindcss.com/docs/flex-basis
+       */
+      basis: [{
+        basis: [isFraction, "full", "auto", themeContainer, ...scaleUnambiguousSpacing()]
+      }],
+      /**
+       * Flex Direction
+       * @see https://tailwindcss.com/docs/flex-direction
+       */
+      "flex-direction": [{
+        flex: ["row", "row-reverse", "col", "col-reverse"]
+      }],
+      /**
+       * Flex Wrap
+       * @see https://tailwindcss.com/docs/flex-wrap
+       */
+      "flex-wrap": [{
+        flex: ["nowrap", "wrap", "wrap-reverse"]
+      }],
+      /**
+       * Flex
+       * @see https://tailwindcss.com/docs/flex
+       */
+      flex: [{
+        flex: [isNumber, isFraction, "auto", "initial", "none", isArbitraryValue]
+      }],
+      /**
+       * Flex Grow
+       * @see https://tailwindcss.com/docs/flex-grow
+       */
+      grow: [{
+        grow: ["", isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Flex Shrink
+       * @see https://tailwindcss.com/docs/flex-shrink
+       */
+      shrink: [{
+        shrink: ["", isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Order
+       * @see https://tailwindcss.com/docs/order
+       */
+      order: [{
+        order: [isInteger, "first", "last", "none", isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Grid Template Columns
+       * @see https://tailwindcss.com/docs/grid-template-columns
+       */
+      "grid-cols": [{
+        "grid-cols": scaleGridTemplateColsRows()
+      }],
+      /**
+       * Grid Column Start / End
+       * @see https://tailwindcss.com/docs/grid-column
+       */
+      "col-start-end": [{
+        col: scaleGridColRowStartAndEnd()
+      }],
+      /**
+       * Grid Column Start
+       * @see https://tailwindcss.com/docs/grid-column
+       */
+      "col-start": [{
+        "col-start": scaleGridColRowStartOrEnd()
+      }],
+      /**
+       * Grid Column End
+       * @see https://tailwindcss.com/docs/grid-column
+       */
+      "col-end": [{
+        "col-end": scaleGridColRowStartOrEnd()
+      }],
+      /**
+       * Grid Template Rows
+       * @see https://tailwindcss.com/docs/grid-template-rows
+       */
+      "grid-rows": [{
+        "grid-rows": scaleGridTemplateColsRows()
+      }],
+      /**
+       * Grid Row Start / End
+       * @see https://tailwindcss.com/docs/grid-row
+       */
+      "row-start-end": [{
+        row: scaleGridColRowStartAndEnd()
+      }],
+      /**
+       * Grid Row Start
+       * @see https://tailwindcss.com/docs/grid-row
+       */
+      "row-start": [{
+        "row-start": scaleGridColRowStartOrEnd()
+      }],
+      /**
+       * Grid Row End
+       * @see https://tailwindcss.com/docs/grid-row
+       */
+      "row-end": [{
+        "row-end": scaleGridColRowStartOrEnd()
+      }],
+      /**
+       * Grid Auto Flow
+       * @see https://tailwindcss.com/docs/grid-auto-flow
+       */
+      "grid-flow": [{
+        "grid-flow": ["row", "col", "dense", "row-dense", "col-dense"]
+      }],
+      /**
+       * Grid Auto Columns
+       * @see https://tailwindcss.com/docs/grid-auto-columns
+       */
+      "auto-cols": [{
+        "auto-cols": scaleGridAutoColsRows()
+      }],
+      /**
+       * Grid Auto Rows
+       * @see https://tailwindcss.com/docs/grid-auto-rows
+       */
+      "auto-rows": [{
+        "auto-rows": scaleGridAutoColsRows()
+      }],
+      /**
+       * Gap
+       * @see https://tailwindcss.com/docs/gap
+       */
+      gap: [{
+        gap: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Gap X
+       * @see https://tailwindcss.com/docs/gap
+       */
+      "gap-x": [{
+        "gap-x": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Gap Y
+       * @see https://tailwindcss.com/docs/gap
+       */
+      "gap-y": [{
+        "gap-y": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Justify Content
+       * @see https://tailwindcss.com/docs/justify-content
+       */
+      "justify-content": [{
+        justify: [...scaleAlignPrimaryAxis(), "normal"]
+      }],
+      /**
+       * Justify Items
+       * @see https://tailwindcss.com/docs/justify-items
+       */
+      "justify-items": [{
+        "justify-items": [...scaleAlignSecondaryAxis(), "normal"]
+      }],
+      /**
+       * Justify Self
+       * @see https://tailwindcss.com/docs/justify-self
+       */
+      "justify-self": [{
+        "justify-self": ["auto", ...scaleAlignSecondaryAxis()]
+      }],
+      /**
+       * Align Content
+       * @see https://tailwindcss.com/docs/align-content
+       */
+      "align-content": [{
+        content: ["normal", ...scaleAlignPrimaryAxis()]
+      }],
+      /**
+       * Align Items
+       * @see https://tailwindcss.com/docs/align-items
+       */
+      "align-items": [{
+        items: [...scaleAlignSecondaryAxis(), "baseline"]
+      }],
+      /**
+       * Align Self
+       * @see https://tailwindcss.com/docs/align-self
+       */
+      "align-self": [{
+        self: ["auto", ...scaleAlignSecondaryAxis(), "baseline"]
+      }],
+      /**
+       * Place Content
+       * @see https://tailwindcss.com/docs/place-content
+       */
+      "place-content": [{
+        "place-content": scaleAlignPrimaryAxis()
+      }],
+      /**
+       * Place Items
+       * @see https://tailwindcss.com/docs/place-items
+       */
+      "place-items": [{
+        "place-items": [...scaleAlignSecondaryAxis(), "baseline"]
+      }],
+      /**
+       * Place Self
+       * @see https://tailwindcss.com/docs/place-self
+       */
+      "place-self": [{
+        "place-self": ["auto", ...scaleAlignSecondaryAxis()]
+      }],
+      // Spacing
+      /**
+       * Padding
+       * @see https://tailwindcss.com/docs/padding
+       */
+      p: [{
+        p: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding X
+       * @see https://tailwindcss.com/docs/padding
+       */
+      px: [{
+        px: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Y
+       * @see https://tailwindcss.com/docs/padding
+       */
+      py: [{
+        py: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Start
+       * @see https://tailwindcss.com/docs/padding
+       */
+      ps: [{
+        ps: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding End
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pe: [{
+        pe: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Top
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pt: [{
+        pt: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Right
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pr: [{
+        pr: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Bottom
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pb: [{
+        pb: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Padding Left
+       * @see https://tailwindcss.com/docs/padding
+       */
+      pl: [{
+        pl: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Margin
+       * @see https://tailwindcss.com/docs/margin
+       */
+      m: [{
+        m: scaleMargin()
+      }],
+      /**
+       * Margin X
+       * @see https://tailwindcss.com/docs/margin
+       */
+      mx: [{
+        mx: scaleMargin()
+      }],
+      /**
+       * Margin Y
+       * @see https://tailwindcss.com/docs/margin
+       */
+      my: [{
+        my: scaleMargin()
+      }],
+      /**
+       * Margin Start
+       * @see https://tailwindcss.com/docs/margin
+       */
+      ms: [{
+        ms: scaleMargin()
+      }],
+      /**
+       * Margin End
+       * @see https://tailwindcss.com/docs/margin
+       */
+      me: [{
+        me: scaleMargin()
+      }],
+      /**
+       * Margin Top
+       * @see https://tailwindcss.com/docs/margin
+       */
+      mt: [{
+        mt: scaleMargin()
+      }],
+      /**
+       * Margin Right
+       * @see https://tailwindcss.com/docs/margin
+       */
+      mr: [{
+        mr: scaleMargin()
+      }],
+      /**
+       * Margin Bottom
+       * @see https://tailwindcss.com/docs/margin
+       */
+      mb: [{
+        mb: scaleMargin()
+      }],
+      /**
+       * Margin Left
+       * @see https://tailwindcss.com/docs/margin
+       */
+      ml: [{
+        ml: scaleMargin()
+      }],
+      /**
+       * Space Between X
+       * @see https://tailwindcss.com/docs/margin#adding-space-between-children
+       */
+      "space-x": [{
+        "space-x": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Space Between X Reverse
+       * @see https://tailwindcss.com/docs/margin#adding-space-between-children
+       */
+      "space-x-reverse": ["space-x-reverse"],
+      /**
+       * Space Between Y
+       * @see https://tailwindcss.com/docs/margin#adding-space-between-children
+       */
+      "space-y": [{
+        "space-y": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Space Between Y Reverse
+       * @see https://tailwindcss.com/docs/margin#adding-space-between-children
+       */
+      "space-y-reverse": ["space-y-reverse"],
+      // --------------
+      // --- Sizing ---
+      // --------------
+      /**
+       * Size
+       * @see https://tailwindcss.com/docs/width#setting-both-width-and-height
+       */
+      size: [{
+        size: scaleSizing()
+      }],
+      /**
+       * Width
+       * @see https://tailwindcss.com/docs/width
+       */
+      w: [{
+        w: [themeContainer, "screen", ...scaleSizing()]
+      }],
+      /**
+       * Min-Width
+       * @see https://tailwindcss.com/docs/min-width
+       */
+      "min-w": [{
+        "min-w": [
+          themeContainer,
+          "screen",
+          /** Deprecated. @see https://github.com/tailwindlabs/tailwindcss.com/issues/2027#issuecomment-2620152757 */
+          "none",
+          ...scaleSizing()
+        ]
+      }],
+      /**
+       * Max-Width
+       * @see https://tailwindcss.com/docs/max-width
+       */
+      "max-w": [{
+        "max-w": [
+          themeContainer,
+          "screen",
+          "none",
+          /** Deprecated since Tailwind CSS v4.0.0. @see https://github.com/tailwindlabs/tailwindcss.com/issues/2027#issuecomment-2620152757 */
+          "prose",
+          /** Deprecated since Tailwind CSS v4.0.0. @see https://github.com/tailwindlabs/tailwindcss.com/issues/2027#issuecomment-2620152757 */
+          {
+            screen: [themeBreakpoint]
+          },
+          ...scaleSizing()
+        ]
+      }],
+      /**
+       * Height
+       * @see https://tailwindcss.com/docs/height
+       */
+      h: [{
+        h: ["screen", ...scaleSizing()]
+      }],
+      /**
+       * Min-Height
+       * @see https://tailwindcss.com/docs/min-height
+       */
+      "min-h": [{
+        "min-h": ["screen", "none", ...scaleSizing()]
+      }],
+      /**
+       * Max-Height
+       * @see https://tailwindcss.com/docs/max-height
+       */
+      "max-h": [{
+        "max-h": ["screen", ...scaleSizing()]
+      }],
+      // ------------------
+      // --- Typography ---
+      // ------------------
+      /**
+       * Font Size
+       * @see https://tailwindcss.com/docs/font-size
+       */
+      "font-size": [{
+        text: ["base", themeText, isArbitraryVariableLength, isArbitraryLength]
+      }],
+      /**
+       * Font Smoothing
+       * @see https://tailwindcss.com/docs/font-smoothing
+       */
+      "font-smoothing": ["antialiased", "subpixel-antialiased"],
+      /**
+       * Font Style
+       * @see https://tailwindcss.com/docs/font-style
+       */
+      "font-style": ["italic", "not-italic"],
+      /**
+       * Font Weight
+       * @see https://tailwindcss.com/docs/font-weight
+       */
+      "font-weight": [{
+        font: [themeFontWeight, isArbitraryVariable, isArbitraryNumber]
+      }],
+      /**
+       * Font Stretch
+       * @see https://tailwindcss.com/docs/font-stretch
+       */
+      "font-stretch": [{
+        "font-stretch": ["ultra-condensed", "extra-condensed", "condensed", "semi-condensed", "normal", "semi-expanded", "expanded", "extra-expanded", "ultra-expanded", isPercent, isArbitraryValue]
+      }],
+      /**
+       * Font Family
+       * @see https://tailwindcss.com/docs/font-family
+       */
+      "font-family": [{
+        font: [isArbitraryVariableFamilyName, isArbitraryValue, themeFont]
+      }],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      "fvn-normal": ["normal-nums"],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      "fvn-ordinal": ["ordinal"],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      "fvn-slashed-zero": ["slashed-zero"],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      "fvn-figure": ["lining-nums", "oldstyle-nums"],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      "fvn-spacing": ["proportional-nums", "tabular-nums"],
+      /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */
+      "fvn-fraction": ["diagonal-fractions", "stacked-fractions"],
+      /**
+       * Letter Spacing
+       * @see https://tailwindcss.com/docs/letter-spacing
+       */
+      tracking: [{
+        tracking: [themeTracking, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Line Clamp
+       * @see https://tailwindcss.com/docs/line-clamp
+       */
+      "line-clamp": [{
+        "line-clamp": [isNumber, "none", isArbitraryVariable, isArbitraryNumber]
+      }],
+      /**
+       * Line Height
+       * @see https://tailwindcss.com/docs/line-height
+       */
+      leading: [{
+        leading: [
+          /** Deprecated since Tailwind CSS v4.0.0. @see https://github.com/tailwindlabs/tailwindcss.com/issues/2027#issuecomment-2620152757 */
+          themeLeading,
+          ...scaleUnambiguousSpacing()
+        ]
+      }],
+      /**
+       * List Style Image
+       * @see https://tailwindcss.com/docs/list-style-image
+       */
+      "list-image": [{
+        "list-image": ["none", isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * List Style Position
+       * @see https://tailwindcss.com/docs/list-style-position
+       */
+      "list-style-position": [{
+        list: ["inside", "outside"]
+      }],
+      /**
+       * List Style Type
+       * @see https://tailwindcss.com/docs/list-style-type
+       */
+      "list-style-type": [{
+        list: ["disc", "decimal", "none", isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Text Alignment
+       * @see https://tailwindcss.com/docs/text-align
+       */
+      "text-alignment": [{
+        text: ["left", "center", "right", "justify", "start", "end"]
+      }],
+      /**
+       * Placeholder Color
+       * @deprecated since Tailwind CSS v3.0.0
+       * @see https://v3.tailwindcss.com/docs/placeholder-color
+       */
+      "placeholder-color": [{
+        placeholder: scaleColor()
+      }],
+      /**
+       * Text Color
+       * @see https://tailwindcss.com/docs/text-color
+       */
+      "text-color": [{
+        text: scaleColor()
+      }],
+      /**
+       * Text Decoration
+       * @see https://tailwindcss.com/docs/text-decoration
+       */
+      "text-decoration": ["underline", "overline", "line-through", "no-underline"],
+      /**
+       * Text Decoration Style
+       * @see https://tailwindcss.com/docs/text-decoration-style
+       */
+      "text-decoration-style": [{
+        decoration: [...scaleLineStyle(), "wavy"]
+      }],
+      /**
+       * Text Decoration Thickness
+       * @see https://tailwindcss.com/docs/text-decoration-thickness
+       */
+      "text-decoration-thickness": [{
+        decoration: [isNumber, "from-font", "auto", isArbitraryVariable, isArbitraryLength]
+      }],
+      /**
+       * Text Decoration Color
+       * @see https://tailwindcss.com/docs/text-decoration-color
+       */
+      "text-decoration-color": [{
+        decoration: scaleColor()
+      }],
+      /**
+       * Text Underline Offset
+       * @see https://tailwindcss.com/docs/text-underline-offset
+       */
+      "underline-offset": [{
+        "underline-offset": [isNumber, "auto", isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Text Transform
+       * @see https://tailwindcss.com/docs/text-transform
+       */
+      "text-transform": ["uppercase", "lowercase", "capitalize", "normal-case"],
+      /**
+       * Text Overflow
+       * @see https://tailwindcss.com/docs/text-overflow
+       */
+      "text-overflow": ["truncate", "text-ellipsis", "text-clip"],
+      /**
+       * Text Wrap
+       * @see https://tailwindcss.com/docs/text-wrap
+       */
+      "text-wrap": [{
+        text: ["wrap", "nowrap", "balance", "pretty"]
+      }],
+      /**
+       * Text Indent
+       * @see https://tailwindcss.com/docs/text-indent
+       */
+      indent: [{
+        indent: scaleUnambiguousSpacing()
+      }],
+      /**
+       * Vertical Alignment
+       * @see https://tailwindcss.com/docs/vertical-align
+       */
+      "vertical-align": [{
+        align: ["baseline", "top", "middle", "bottom", "text-top", "text-bottom", "sub", "super", isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Whitespace
+       * @see https://tailwindcss.com/docs/whitespace
+       */
+      whitespace: [{
+        whitespace: ["normal", "nowrap", "pre", "pre-line", "pre-wrap", "break-spaces"]
+      }],
+      /**
+       * Word Break
+       * @see https://tailwindcss.com/docs/word-break
+       */
+      break: [{
+        break: ["normal", "words", "all", "keep"]
+      }],
+      /**
+       * Hyphens
+       * @see https://tailwindcss.com/docs/hyphens
+       */
+      hyphens: [{
+        hyphens: ["none", "manual", "auto"]
+      }],
+      /**
+       * Content
+       * @see https://tailwindcss.com/docs/content
+       */
+      content: [{
+        content: ["none", isArbitraryVariable, isArbitraryValue]
+      }],
+      // -------------------
+      // --- Backgrounds ---
+      // -------------------
+      /**
+       * Background Attachment
+       * @see https://tailwindcss.com/docs/background-attachment
+       */
+      "bg-attachment": [{
+        bg: ["fixed", "local", "scroll"]
+      }],
+      /**
+       * Background Clip
+       * @see https://tailwindcss.com/docs/background-clip
+       */
+      "bg-clip": [{
+        "bg-clip": ["border", "padding", "content", "text"]
+      }],
+      /**
+       * Background Origin
+       * @see https://tailwindcss.com/docs/background-origin
+       */
+      "bg-origin": [{
+        "bg-origin": ["border", "padding", "content"]
+      }],
+      /**
+       * Background Position
+       * @see https://tailwindcss.com/docs/background-position
+       */
+      "bg-position": [{
+        bg: [...scalePosition(), isArbitraryVariablePosition, isArbitraryPosition]
+      }],
+      /**
+       * Background Repeat
+       * @see https://tailwindcss.com/docs/background-repeat
+       */
+      "bg-repeat": [{
+        bg: ["no-repeat", {
+          repeat: ["", "x", "y", "space", "round"]
+        }]
+      }],
+      /**
+       * Background Size
+       * @see https://tailwindcss.com/docs/background-size
+       */
+      "bg-size": [{
+        bg: ["auto", "cover", "contain", isArbitraryVariableSize, isArbitrarySize]
+      }],
+      /**
+       * Background Image
+       * @see https://tailwindcss.com/docs/background-image
+       */
+      "bg-image": [{
+        bg: ["none", {
+          linear: [{
+            to: ["t", "tr", "r", "br", "b", "bl", "l", "tl"]
+          }, isInteger, isArbitraryVariable, isArbitraryValue],
+          radial: ["", isArbitraryVariable, isArbitraryValue],
+          conic: [isInteger, isArbitraryVariable, isArbitraryValue]
+        }, isArbitraryVariableImage, isArbitraryImage]
+      }],
+      /**
+       * Background Color
+       * @see https://tailwindcss.com/docs/background-color
+       */
+      "bg-color": [{
+        bg: scaleColor()
+      }],
+      /**
+       * Gradient Color Stops From Position
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      "gradient-from-pos": [{
+        from: scaleGradientStopPosition()
+      }],
+      /**
+       * Gradient Color Stops Via Position
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      "gradient-via-pos": [{
+        via: scaleGradientStopPosition()
+      }],
+      /**
+       * Gradient Color Stops To Position
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      "gradient-to-pos": [{
+        to: scaleGradientStopPosition()
+      }],
+      /**
+       * Gradient Color Stops From
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      "gradient-from": [{
+        from: scaleColor()
+      }],
+      /**
+       * Gradient Color Stops Via
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      "gradient-via": [{
+        via: scaleColor()
+      }],
+      /**
+       * Gradient Color Stops To
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */
+      "gradient-to": [{
+        to: scaleColor()
+      }],
+      // ---------------
+      // --- Borders ---
+      // ---------------
+      /**
+       * Border Radius
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      rounded: [{
+        rounded: scaleRadius()
+      }],
+      /**
+       * Border Radius Start
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-s": [{
+        "rounded-s": scaleRadius()
+      }],
+      /**
+       * Border Radius End
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-e": [{
+        "rounded-e": scaleRadius()
+      }],
+      /**
+       * Border Radius Top
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-t": [{
+        "rounded-t": scaleRadius()
+      }],
+      /**
+       * Border Radius Right
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-r": [{
+        "rounded-r": scaleRadius()
+      }],
+      /**
+       * Border Radius Bottom
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-b": [{
+        "rounded-b": scaleRadius()
+      }],
+      /**
+       * Border Radius Left
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-l": [{
+        "rounded-l": scaleRadius()
+      }],
+      /**
+       * Border Radius Start Start
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-ss": [{
+        "rounded-ss": scaleRadius()
+      }],
+      /**
+       * Border Radius Start End
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-se": [{
+        "rounded-se": scaleRadius()
+      }],
+      /**
+       * Border Radius End End
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-ee": [{
+        "rounded-ee": scaleRadius()
+      }],
+      /**
+       * Border Radius End Start
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-es": [{
+        "rounded-es": scaleRadius()
+      }],
+      /**
+       * Border Radius Top Left
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-tl": [{
+        "rounded-tl": scaleRadius()
+      }],
+      /**
+       * Border Radius Top Right
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-tr": [{
+        "rounded-tr": scaleRadius()
+      }],
+      /**
+       * Border Radius Bottom Right
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-br": [{
+        "rounded-br": scaleRadius()
+      }],
+      /**
+       * Border Radius Bottom Left
+       * @see https://tailwindcss.com/docs/border-radius
+       */
+      "rounded-bl": [{
+        "rounded-bl": scaleRadius()
+      }],
+      /**
+       * Border Width
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w": [{
+        border: scaleBorderWidth()
+      }],
+      /**
+       * Border Width X
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-x": [{
+        "border-x": scaleBorderWidth()
+      }],
+      /**
+       * Border Width Y
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-y": [{
+        "border-y": scaleBorderWidth()
+      }],
+      /**
+       * Border Width Start
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-s": [{
+        "border-s": scaleBorderWidth()
+      }],
+      /**
+       * Border Width End
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-e": [{
+        "border-e": scaleBorderWidth()
+      }],
+      /**
+       * Border Width Top
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-t": [{
+        "border-t": scaleBorderWidth()
+      }],
+      /**
+       * Border Width Right
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-r": [{
+        "border-r": scaleBorderWidth()
+      }],
+      /**
+       * Border Width Bottom
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-b": [{
+        "border-b": scaleBorderWidth()
+      }],
+      /**
+       * Border Width Left
+       * @see https://tailwindcss.com/docs/border-width
+       */
+      "border-w-l": [{
+        "border-l": scaleBorderWidth()
+      }],
+      /**
+       * Divide Width X
+       * @see https://tailwindcss.com/docs/border-width#between-children
+       */
+      "divide-x": [{
+        "divide-x": scaleBorderWidth()
+      }],
+      /**
+       * Divide Width X Reverse
+       * @see https://tailwindcss.com/docs/border-width#between-children
+       */
+      "divide-x-reverse": ["divide-x-reverse"],
+      /**
+       * Divide Width Y
+       * @see https://tailwindcss.com/docs/border-width#between-children
+       */
+      "divide-y": [{
+        "divide-y": scaleBorderWidth()
+      }],
+      /**
+       * Divide Width Y Reverse
+       * @see https://tailwindcss.com/docs/border-width#between-children
+       */
+      "divide-y-reverse": ["divide-y-reverse"],
+      /**
+       * Border Style
+       * @see https://tailwindcss.com/docs/border-style
+       */
+      "border-style": [{
+        border: [...scaleLineStyle(), "hidden", "none"]
+      }],
+      /**
+       * Divide Style
+       * @see https://tailwindcss.com/docs/border-style#setting-the-divider-style
+       */
+      "divide-style": [{
+        divide: [...scaleLineStyle(), "hidden", "none"]
+      }],
+      /**
+       * Border Color
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color": [{
+        border: scaleColor()
+      }],
+      /**
+       * Border Color X
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-x": [{
+        "border-x": scaleColor()
+      }],
+      /**
+       * Border Color Y
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-y": [{
+        "border-y": scaleColor()
+      }],
+      /**
+       * Border Color S
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-s": [{
+        "border-s": scaleColor()
+      }],
+      /**
+       * Border Color E
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-e": [{
+        "border-e": scaleColor()
+      }],
+      /**
+       * Border Color Top
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-t": [{
+        "border-t": scaleColor()
+      }],
+      /**
+       * Border Color Right
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-r": [{
+        "border-r": scaleColor()
+      }],
+      /**
+       * Border Color Bottom
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-b": [{
+        "border-b": scaleColor()
+      }],
+      /**
+       * Border Color Left
+       * @see https://tailwindcss.com/docs/border-color
+       */
+      "border-color-l": [{
+        "border-l": scaleColor()
+      }],
+      /**
+       * Divide Color
+       * @see https://tailwindcss.com/docs/divide-color
+       */
+      "divide-color": [{
+        divide: scaleColor()
+      }],
+      /**
+       * Outline Style
+       * @see https://tailwindcss.com/docs/outline-style
+       */
+      "outline-style": [{
+        outline: [...scaleLineStyle(), "none", "hidden"]
+      }],
+      /**
+       * Outline Offset
+       * @see https://tailwindcss.com/docs/outline-offset
+       */
+      "outline-offset": [{
+        "outline-offset": [isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Outline Width
+       * @see https://tailwindcss.com/docs/outline-width
+       */
+      "outline-w": [{
+        outline: ["", isNumber, isArbitraryVariableLength, isArbitraryLength]
+      }],
+      /**
+       * Outline Color
+       * @see https://tailwindcss.com/docs/outline-color
+       */
+      "outline-color": [{
+        outline: [themeColor]
+      }],
+      // ---------------
+      // --- Effects ---
+      // ---------------
+      /**
+       * Box Shadow
+       * @see https://tailwindcss.com/docs/box-shadow
+       */
+      shadow: [{
+        shadow: [
+          // Deprecated since Tailwind CSS v4.0.0
+          "",
+          "none",
+          themeShadow,
+          isArbitraryVariableShadow,
+          isArbitraryShadow
+        ]
+      }],
+      /**
+       * Box Shadow Color
+       * @see https://tailwindcss.com/docs/box-shadow#setting-the-shadow-color
+       */
+      "shadow-color": [{
+        shadow: scaleColor()
+      }],
+      /**
+       * Inset Box Shadow
+       * @see https://tailwindcss.com/docs/box-shadow#adding-an-inset-shadow
+       */
+      "inset-shadow": [{
+        "inset-shadow": ["none", isArbitraryVariable, isArbitraryValue, themeInsetShadow]
+      }],
+      /**
+       * Inset Box Shadow Color
+       * @see https://tailwindcss.com/docs/box-shadow#setting-the-inset-shadow-color
+       */
+      "inset-shadow-color": [{
+        "inset-shadow": scaleColor()
+      }],
+      /**
+       * Ring Width
+       * @see https://tailwindcss.com/docs/box-shadow#adding-a-ring
+       */
+      "ring-w": [{
+        ring: scaleBorderWidth()
+      }],
+      /**
+       * Ring Width Inset
+       * @see https://v3.tailwindcss.com/docs/ring-width#inset-rings
+       * @deprecated since Tailwind CSS v4.0.0
+       * @see https://github.com/tailwindlabs/tailwindcss/blob/v4.0.0/packages/tailwindcss/src/utilities.ts#L4158
+       */
+      "ring-w-inset": ["ring-inset"],
+      /**
+       * Ring Color
+       * @see https://tailwindcss.com/docs/box-shadow#setting-the-ring-color
+       */
+      "ring-color": [{
+        ring: scaleColor()
+      }],
+      /**
+       * Ring Offset Width
+       * @see https://v3.tailwindcss.com/docs/ring-offset-width
+       * @deprecated since Tailwind CSS v4.0.0
+       * @see https://github.com/tailwindlabs/tailwindcss/blob/v4.0.0/packages/tailwindcss/src/utilities.ts#L4158
+       */
+      "ring-offset-w": [{
+        "ring-offset": [isNumber, isArbitraryLength]
+      }],
+      /**
+       * Ring Offset Color
+       * @see https://v3.tailwindcss.com/docs/ring-offset-color
+       * @deprecated since Tailwind CSS v4.0.0
+       * @see https://github.com/tailwindlabs/tailwindcss/blob/v4.0.0/packages/tailwindcss/src/utilities.ts#L4158
+       */
+      "ring-offset-color": [{
+        "ring-offset": scaleColor()
+      }],
+      /**
+       * Inset Ring Width
+       * @see https://tailwindcss.com/docs/box-shadow#adding-an-inset-ring
+       */
+      "inset-ring-w": [{
+        "inset-ring": scaleBorderWidth()
+      }],
+      /**
+       * Inset Ring Color
+       * @see https://tailwindcss.com/docs/box-shadow#setting-the-inset-ring-color
+       */
+      "inset-ring-color": [{
+        "inset-ring": scaleColor()
+      }],
+      /**
+       * Opacity
+       * @see https://tailwindcss.com/docs/opacity
+       */
+      opacity: [{
+        opacity: [isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Mix Blend Mode
+       * @see https://tailwindcss.com/docs/mix-blend-mode
+       */
+      "mix-blend": [{
+        "mix-blend": [...scaleBlendMode(), "plus-darker", "plus-lighter"]
+      }],
+      /**
+       * Background Blend Mode
+       * @see https://tailwindcss.com/docs/background-blend-mode
+       */
+      "bg-blend": [{
+        "bg-blend": scaleBlendMode()
+      }],
+      // ---------------
+      // --- Filters ---
+      // ---------------
+      /**
+       * Filter
+       * @see https://tailwindcss.com/docs/filter
+       */
+      filter: [{
+        filter: [
+          // Deprecated since Tailwind CSS v3.0.0
+          "",
+          "none",
+          isArbitraryVariable,
+          isArbitraryValue
+        ]
+      }],
+      /**
+       * Blur
+       * @see https://tailwindcss.com/docs/blur
+       */
+      blur: [{
+        blur: scaleBlur()
+      }],
+      /**
+       * Brightness
+       * @see https://tailwindcss.com/docs/brightness
+       */
+      brightness: [{
+        brightness: [isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Contrast
+       * @see https://tailwindcss.com/docs/contrast
+       */
+      contrast: [{
+        contrast: [isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Drop Shadow
+       * @see https://tailwindcss.com/docs/drop-shadow
+       */
+      "drop-shadow": [{
+        "drop-shadow": [
+          // Deprecated since Tailwind CSS v4.0.0
+          "",
+          "none",
+          themeDropShadow,
+          isArbitraryVariable,
+          isArbitraryValue
+        ]
+      }],
+      /**
+       * Grayscale
+       * @see https://tailwindcss.com/docs/grayscale
+       */
+      grayscale: [{
+        grayscale: ["", isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Hue Rotate
+       * @see https://tailwindcss.com/docs/hue-rotate
+       */
+      "hue-rotate": [{
+        "hue-rotate": [isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Invert
+       * @see https://tailwindcss.com/docs/invert
+       */
+      invert: [{
+        invert: ["", isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Saturate
+       * @see https://tailwindcss.com/docs/saturate
+       */
+      saturate: [{
+        saturate: [isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Sepia
+       * @see https://tailwindcss.com/docs/sepia
+       */
+      sepia: [{
+        sepia: ["", isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Filter
+       * @see https://tailwindcss.com/docs/backdrop-filter
+       */
+      "backdrop-filter": [{
+        "backdrop-filter": [
+          // Deprecated since Tailwind CSS v3.0.0
+          "",
+          "none",
+          isArbitraryVariable,
+          isArbitraryValue
+        ]
+      }],
+      /**
+       * Backdrop Blur
+       * @see https://tailwindcss.com/docs/backdrop-blur
+       */
+      "backdrop-blur": [{
+        "backdrop-blur": scaleBlur()
+      }],
+      /**
+       * Backdrop Brightness
+       * @see https://tailwindcss.com/docs/backdrop-brightness
+       */
+      "backdrop-brightness": [{
+        "backdrop-brightness": [isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Contrast
+       * @see https://tailwindcss.com/docs/backdrop-contrast
+       */
+      "backdrop-contrast": [{
+        "backdrop-contrast": [isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Grayscale
+       * @see https://tailwindcss.com/docs/backdrop-grayscale
+       */
+      "backdrop-grayscale": [{
+        "backdrop-grayscale": ["", isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Hue Rotate
+       * @see https://tailwindcss.com/docs/backdrop-hue-rotate
+       */
+      "backdrop-hue-rotate": [{
+        "backdrop-hue-rotate": [isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Invert
+       * @see https://tailwindcss.com/docs/backdrop-invert
+       */
+      "backdrop-invert": [{
+        "backdrop-invert": ["", isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Opacity
+       * @see https://tailwindcss.com/docs/backdrop-opacity
+       */
+      "backdrop-opacity": [{
+        "backdrop-opacity": [isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Saturate
+       * @see https://tailwindcss.com/docs/backdrop-saturate
+       */
+      "backdrop-saturate": [{
+        "backdrop-saturate": [isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Backdrop Sepia
+       * @see https://tailwindcss.com/docs/backdrop-sepia
+       */
+      "backdrop-sepia": [{
+        "backdrop-sepia": ["", isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      // --------------
+      // --- Tables ---
+      // --------------
+      /**
+       * Border Collapse
+       * @see https://tailwindcss.com/docs/border-collapse
+       */
+      "border-collapse": [{
+        border: ["collapse", "separate"]
+      }],
+      /**
+       * Border Spacing
+       * @see https://tailwindcss.com/docs/border-spacing
+       */
+      "border-spacing": [{
+        "border-spacing": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Border Spacing X
+       * @see https://tailwindcss.com/docs/border-spacing
+       */
+      "border-spacing-x": [{
+        "border-spacing-x": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Border Spacing Y
+       * @see https://tailwindcss.com/docs/border-spacing
+       */
+      "border-spacing-y": [{
+        "border-spacing-y": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Table Layout
+       * @see https://tailwindcss.com/docs/table-layout
+       */
+      "table-layout": [{
+        table: ["auto", "fixed"]
+      }],
+      /**
+       * Caption Side
+       * @see https://tailwindcss.com/docs/caption-side
+       */
+      caption: [{
+        caption: ["top", "bottom"]
+      }],
+      // ---------------------------------
+      // --- Transitions and Animation ---
+      // ---------------------------------
+      /**
+       * Transition Property
+       * @see https://tailwindcss.com/docs/transition-property
+       */
+      transition: [{
+        transition: ["", "all", "colors", "opacity", "shadow", "transform", "none", isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Transition Behavior
+       * @see https://tailwindcss.com/docs/transition-behavior
+       */
+      "transition-behavior": [{
+        transition: ["normal", "discrete"]
+      }],
+      /**
+       * Transition Duration
+       * @see https://tailwindcss.com/docs/transition-duration
+       */
+      duration: [{
+        duration: [isNumber, "initial", isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Transition Timing Function
+       * @see https://tailwindcss.com/docs/transition-timing-function
+       */
+      ease: [{
+        ease: ["linear", "initial", themeEase, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Transition Delay
+       * @see https://tailwindcss.com/docs/transition-delay
+       */
+      delay: [{
+        delay: [isNumber, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Animation
+       * @see https://tailwindcss.com/docs/animation
+       */
+      animate: [{
+        animate: ["none", themeAnimate, isArbitraryVariable, isArbitraryValue]
+      }],
+      // ------------------
+      // --- Transforms ---
+      // ------------------
+      /**
+       * Backface Visibility
+       * @see https://tailwindcss.com/docs/backface-visibility
+       */
+      backface: [{
+        backface: ["hidden", "visible"]
+      }],
+      /**
+       * Perspective
+       * @see https://tailwindcss.com/docs/perspective
+       */
+      perspective: [{
+        perspective: [themePerspective, isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Perspective Origin
+       * @see https://tailwindcss.com/docs/perspective-origin
+       */
+      "perspective-origin": [{
+        "perspective-origin": scaleOrigin()
+      }],
+      /**
+       * Rotate
+       * @see https://tailwindcss.com/docs/rotate
+       */
+      rotate: [{
+        rotate: scaleRotate()
+      }],
+      /**
+       * Rotate X
+       * @see https://tailwindcss.com/docs/rotate
+       */
+      "rotate-x": [{
+        "rotate-x": scaleRotate()
+      }],
+      /**
+       * Rotate Y
+       * @see https://tailwindcss.com/docs/rotate
+       */
+      "rotate-y": [{
+        "rotate-y": scaleRotate()
+      }],
+      /**
+       * Rotate Z
+       * @see https://tailwindcss.com/docs/rotate
+       */
+      "rotate-z": [{
+        "rotate-z": scaleRotate()
+      }],
+      /**
+       * Scale
+       * @see https://tailwindcss.com/docs/scale
+       */
+      scale: [{
+        scale: scaleScale()
+      }],
+      /**
+       * Scale X
+       * @see https://tailwindcss.com/docs/scale
+       */
+      "scale-x": [{
+        "scale-x": scaleScale()
+      }],
+      /**
+       * Scale Y
+       * @see https://tailwindcss.com/docs/scale
+       */
+      "scale-y": [{
+        "scale-y": scaleScale()
+      }],
+      /**
+       * Scale Z
+       * @see https://tailwindcss.com/docs/scale
+       */
+      "scale-z": [{
+        "scale-z": scaleScale()
+      }],
+      /**
+       * Scale 3D
+       * @see https://tailwindcss.com/docs/scale
+       */
+      "scale-3d": ["scale-3d"],
+      /**
+       * Skew
+       * @see https://tailwindcss.com/docs/skew
+       */
+      skew: [{
+        skew: scaleSkew()
+      }],
+      /**
+       * Skew X
+       * @see https://tailwindcss.com/docs/skew
+       */
+      "skew-x": [{
+        "skew-x": scaleSkew()
+      }],
+      /**
+       * Skew Y
+       * @see https://tailwindcss.com/docs/skew
+       */
+      "skew-y": [{
+        "skew-y": scaleSkew()
+      }],
+      /**
+       * Transform
+       * @see https://tailwindcss.com/docs/transform
+       */
+      transform: [{
+        transform: [isArbitraryVariable, isArbitraryValue, "", "none", "gpu", "cpu"]
+      }],
+      /**
+       * Transform Origin
+       * @see https://tailwindcss.com/docs/transform-origin
+       */
+      "transform-origin": [{
+        origin: scaleOrigin()
+      }],
+      /**
+       * Transform Style
+       * @see https://tailwindcss.com/docs/transform-style
+       */
+      "transform-style": [{
+        transform: ["3d", "flat"]
+      }],
+      /**
+       * Translate
+       * @see https://tailwindcss.com/docs/translate
+       */
+      translate: [{
+        translate: scaleTranslate()
+      }],
+      /**
+       * Translate X
+       * @see https://tailwindcss.com/docs/translate
+       */
+      "translate-x": [{
+        "translate-x": scaleTranslate()
+      }],
+      /**
+       * Translate Y
+       * @see https://tailwindcss.com/docs/translate
+       */
+      "translate-y": [{
+        "translate-y": scaleTranslate()
+      }],
+      /**
+       * Translate Z
+       * @see https://tailwindcss.com/docs/translate
+       */
+      "translate-z": [{
+        "translate-z": scaleTranslate()
+      }],
+      /**
+       * Translate None
+       * @see https://tailwindcss.com/docs/translate
+       */
+      "translate-none": ["translate-none"],
+      // ---------------------
+      // --- Interactivity ---
+      // ---------------------
+      /**
+       * Accent Color
+       * @see https://tailwindcss.com/docs/accent-color
+       */
+      accent: [{
+        accent: scaleColor()
+      }],
+      /**
+       * Appearance
+       * @see https://tailwindcss.com/docs/appearance
+       */
+      appearance: [{
+        appearance: ["none", "auto"]
+      }],
+      /**
+       * Caret Color
+       * @see https://tailwindcss.com/docs/just-in-time-mode#caret-color-utilities
+       */
+      "caret-color": [{
+        caret: scaleColor()
+      }],
+      /**
+       * Color Scheme
+       * @see https://tailwindcss.com/docs/color-scheme
+       */
+      "color-scheme": [{
+        scheme: ["normal", "dark", "light", "light-dark", "only-dark", "only-light"]
+      }],
+      /**
+       * Cursor
+       * @see https://tailwindcss.com/docs/cursor
+       */
+      cursor: [{
+        cursor: ["auto", "default", "pointer", "wait", "text", "move", "help", "not-allowed", "none", "context-menu", "progress", "cell", "crosshair", "vertical-text", "alias", "copy", "no-drop", "grab", "grabbing", "all-scroll", "col-resize", "row-resize", "n-resize", "e-resize", "s-resize", "w-resize", "ne-resize", "nw-resize", "se-resize", "sw-resize", "ew-resize", "ns-resize", "nesw-resize", "nwse-resize", "zoom-in", "zoom-out", isArbitraryVariable, isArbitraryValue]
+      }],
+      /**
+       * Field Sizing
+       * @see https://tailwindcss.com/docs/field-sizing
+       */
+      "field-sizing": [{
+        "field-sizing": ["fixed", "content"]
+      }],
+      /**
+       * Pointer Events
+       * @see https://tailwindcss.com/docs/pointer-events
+       */
+      "pointer-events": [{
+        "pointer-events": ["auto", "none"]
+      }],
+      /**
+       * Resize
+       * @see https://tailwindcss.com/docs/resize
+       */
+      resize: [{
+        resize: ["none", "", "y", "x"]
+      }],
+      /**
+       * Scroll Behavior
+       * @see https://tailwindcss.com/docs/scroll-behavior
+       */
+      "scroll-behavior": [{
+        scroll: ["auto", "smooth"]
+      }],
+      /**
+       * Scroll Margin
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-m": [{
+        "scroll-m": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin X
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-mx": [{
+        "scroll-mx": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Y
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-my": [{
+        "scroll-my": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Start
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-ms": [{
+        "scroll-ms": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin End
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-me": [{
+        "scroll-me": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Top
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-mt": [{
+        "scroll-mt": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Right
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-mr": [{
+        "scroll-mr": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Bottom
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-mb": [{
+        "scroll-mb": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Margin Left
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */
+      "scroll-ml": [{
+        "scroll-ml": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-p": [{
+        "scroll-p": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding X
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-px": [{
+        "scroll-px": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Y
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-py": [{
+        "scroll-py": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Start
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-ps": [{
+        "scroll-ps": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding End
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-pe": [{
+        "scroll-pe": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Top
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-pt": [{
+        "scroll-pt": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Right
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-pr": [{
+        "scroll-pr": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Bottom
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-pb": [{
+        "scroll-pb": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Padding Left
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */
+      "scroll-pl": [{
+        "scroll-pl": scaleUnambiguousSpacing()
+      }],
+      /**
+       * Scroll Snap Align
+       * @see https://tailwindcss.com/docs/scroll-snap-align
+       */
+      "snap-align": [{
+        snap: ["start", "end", "center", "align-none"]
+      }],
+      /**
+       * Scroll Snap Stop
+       * @see https://tailwindcss.com/docs/scroll-snap-stop
+       */
+      "snap-stop": [{
+        snap: ["normal", "always"]
+      }],
+      /**
+       * Scroll Snap Type
+       * @see https://tailwindcss.com/docs/scroll-snap-type
+       */
+      "snap-type": [{
+        snap: ["none", "x", "y", "both"]
+      }],
+      /**
+       * Scroll Snap Type Strictness
+       * @see https://tailwindcss.com/docs/scroll-snap-type
+       */
+      "snap-strictness": [{
+        snap: ["mandatory", "proximity"]
+      }],
+      /**
+       * Touch Action
+       * @see https://tailwindcss.com/docs/touch-action
+       */
+      touch: [{
+        touch: ["auto", "none", "manipulation"]
+      }],
+      /**
+       * Touch Action X
+       * @see https://tailwindcss.com/docs/touch-action
+       */
+      "touch-x": [{
+        "touch-pan": ["x", "left", "right"]
+      }],
+      /**
+       * Touch Action Y
+       * @see https://tailwindcss.com/docs/touch-action
+       */
+      "touch-y": [{
+        "touch-pan": ["y", "up", "down"]
+      }],
+      /**
+       * Touch Action Pinch Zoom
+       * @see https://tailwindcss.com/docs/touch-action
+       */
+      "touch-pz": ["touch-pinch-zoom"],
+      /**
+       * User Select
+       * @see https://tailwindcss.com/docs/user-select
+       */
+      select: [{
+        select: ["none", "text", "all", "auto"]
+      }],
+      /**
+       * Will Change
+       * @see https://tailwindcss.com/docs/will-change
+       */
+      "will-change": [{
+        "will-change": ["auto", "scroll", "contents", "transform", isArbitraryVariable, isArbitraryValue]
+      }],
+      // -----------
+      // --- SVG ---
+      // -----------
+      /**
+       * Fill
+       * @see https://tailwindcss.com/docs/fill
+       */
+      fill: [{
+        fill: ["none", ...scaleColor()]
+      }],
+      /**
+       * Stroke Width
+       * @see https://tailwindcss.com/docs/stroke-width
+       */
+      "stroke-w": [{
+        stroke: [isNumber, isArbitraryVariableLength, isArbitraryLength, isArbitraryNumber]
+      }],
+      /**
+       * Stroke
+       * @see https://tailwindcss.com/docs/stroke
+       */
+      stroke: [{
+        stroke: ["none", ...scaleColor()]
+      }],
+      // ---------------------
+      // --- Accessibility ---
+      // ---------------------
+      /**
+       * Forced Color Adjust
+       * @see https://tailwindcss.com/docs/forced-color-adjust
+       */
+      "forced-color-adjust": [{
+        "forced-color-adjust": ["auto", "none"]
+      }]
+    },
+    conflictingClassGroups: {
+      overflow: ["overflow-x", "overflow-y"],
+      overscroll: ["overscroll-x", "overscroll-y"],
+      inset: ["inset-x", "inset-y", "start", "end", "top", "right", "bottom", "left"],
+      "inset-x": ["right", "left"],
+      "inset-y": ["top", "bottom"],
+      flex: ["basis", "grow", "shrink"],
+      gap: ["gap-x", "gap-y"],
+      p: ["px", "py", "ps", "pe", "pt", "pr", "pb", "pl"],
+      px: ["pr", "pl"],
+      py: ["pt", "pb"],
+      m: ["mx", "my", "ms", "me", "mt", "mr", "mb", "ml"],
+      mx: ["mr", "ml"],
+      my: ["mt", "mb"],
+      size: ["w", "h"],
+      "font-size": ["leading"],
+      "fvn-normal": ["fvn-ordinal", "fvn-slashed-zero", "fvn-figure", "fvn-spacing", "fvn-fraction"],
+      "fvn-ordinal": ["fvn-normal"],
+      "fvn-slashed-zero": ["fvn-normal"],
+      "fvn-figure": ["fvn-normal"],
+      "fvn-spacing": ["fvn-normal"],
+      "fvn-fraction": ["fvn-normal"],
+      "line-clamp": ["display", "overflow"],
+      rounded: ["rounded-s", "rounded-e", "rounded-t", "rounded-r", "rounded-b", "rounded-l", "rounded-ss", "rounded-se", "rounded-ee", "rounded-es", "rounded-tl", "rounded-tr", "rounded-br", "rounded-bl"],
+      "rounded-s": ["rounded-ss", "rounded-es"],
+      "rounded-e": ["rounded-se", "rounded-ee"],
+      "rounded-t": ["rounded-tl", "rounded-tr"],
+      "rounded-r": ["rounded-tr", "rounded-br"],
+      "rounded-b": ["rounded-br", "rounded-bl"],
+      "rounded-l": ["rounded-tl", "rounded-bl"],
+      "border-spacing": ["border-spacing-x", "border-spacing-y"],
+      "border-w": ["border-w-s", "border-w-e", "border-w-t", "border-w-r", "border-w-b", "border-w-l"],
+      "border-w-x": ["border-w-r", "border-w-l"],
+      "border-w-y": ["border-w-t", "border-w-b"],
+      "border-color": ["border-color-s", "border-color-e", "border-color-t", "border-color-r", "border-color-b", "border-color-l"],
+      "border-color-x": ["border-color-r", "border-color-l"],
+      "border-color-y": ["border-color-t", "border-color-b"],
+      translate: ["translate-x", "translate-y", "translate-none"],
+      "translate-none": ["translate", "translate-x", "translate-y", "translate-z"],
+      "scroll-m": ["scroll-mx", "scroll-my", "scroll-ms", "scroll-me", "scroll-mt", "scroll-mr", "scroll-mb", "scroll-ml"],
+      "scroll-mx": ["scroll-mr", "scroll-ml"],
+      "scroll-my": ["scroll-mt", "scroll-mb"],
+      "scroll-p": ["scroll-px", "scroll-py", "scroll-ps", "scroll-pe", "scroll-pt", "scroll-pr", "scroll-pb", "scroll-pl"],
+      "scroll-px": ["scroll-pr", "scroll-pl"],
+      "scroll-py": ["scroll-pt", "scroll-pb"],
+      touch: ["touch-x", "touch-y", "touch-pz"],
+      "touch-x": ["touch"],
+      "touch-y": ["touch"],
+      "touch-pz": ["touch"]
+    },
+    conflictingClassGroupModifiers: {
+      "font-size": ["leading"]
+    },
+    orderSensitiveModifiers: ["before", "after", "placeholder", "file", "marker", "selection", "first-line", "first-letter", "backdrop", "*", "**"]
+  };
+};
+const mergeConfigs = (baseConfig, {
+  cacheSize,
+  prefix,
+  experimentalParseClassName,
+  extend = {},
+  override = {}
+}) => {
+  overrideProperty(baseConfig, "cacheSize", cacheSize);
+  overrideProperty(baseConfig, "prefix", prefix);
+  overrideProperty(baseConfig, "experimentalParseClassName", experimentalParseClassName);
+  overrideConfigProperties(baseConfig.theme, override.theme);
+  overrideConfigProperties(baseConfig.classGroups, override.classGroups);
+  overrideConfigProperties(baseConfig.conflictingClassGroups, override.conflictingClassGroups);
+  overrideConfigProperties(baseConfig.conflictingClassGroupModifiers, override.conflictingClassGroupModifiers);
+  overrideProperty(baseConfig, "orderSensitiveModifiers", override.orderSensitiveModifiers);
+  mergeConfigProperties(baseConfig.theme, extend.theme);
+  mergeConfigProperties(baseConfig.classGroups, extend.classGroups);
+  mergeConfigProperties(baseConfig.conflictingClassGroups, extend.conflictingClassGroups);
+  mergeConfigProperties(baseConfig.conflictingClassGroupModifiers, extend.conflictingClassGroupModifiers);
+  mergeArrayProperties(baseConfig, extend, "orderSensitiveModifiers");
+  return baseConfig;
+};
+const overrideProperty = (baseObject, overrideKey, overrideValue) => {
+  if (overrideValue !== void 0) {
+    baseObject[overrideKey] = overrideValue;
+  }
+};
+const overrideConfigProperties = (baseObject, overrideObject) => {
+  if (overrideObject) {
+    for (const key in overrideObject) {
+      overrideProperty(baseObject, key, overrideObject[key]);
+    }
+  }
+};
+const mergeConfigProperties = (baseObject, mergeObject) => {
+  if (mergeObject) {
+    for (const key in mergeObject) {
+      mergeArrayProperties(baseObject, mergeObject, key);
+    }
+  }
+};
+const mergeArrayProperties = (baseObject, mergeObject, key) => {
+  const mergeValue = mergeObject[key];
+  if (mergeValue !== void 0) {
+    baseObject[key] = baseObject[key] ? baseObject[key].concat(mergeValue) : mergeValue;
+  }
+};
+const extendTailwindMerge = (configExtension, ...createConfig) => typeof configExtension === "function" ? createTailwindMerge(getDefaultConfig, configExtension, ...createConfig) : createTailwindMerge(() => mergeConfigs(getDefaultConfig(), configExtension), ...createConfig);
+const twMerge = /* @__PURE__ */ createTailwindMerge(getDefaultConfig);
+var ie = { twMerge: true, twMergeConfig: {}, responsiveVariants: false }, x = (s) => s || void 0, N = (...s) => x(y(s).filter(Boolean).join(" ")), R = null, v = {}, q = false, M = (...s) => (b$1) => b$1.twMerge ? ((!R || q) && (q = false, R = u(v) ? twMerge : extendTailwindMerge({ ...v, extend: { theme: v.theme, classGroups: v.classGroups, conflictingClassGroupModifiers: v.conflictingClassGroupModifiers, conflictingClassGroups: v.conflictingClassGroups, ...v.extend } })), x(R(N(s)))) : N(s), _ = (s, b) => {
+  for (let e in b) s.hasOwnProperty(e) ? s[e] = N(s[e], b[e]) : s[e] = b[e];
+  return s;
+}, ce = (s, b$1) => {
+  let { extend: e = null, slots: O = {}, variants: U = {}, compoundVariants: W = [], compoundSlots: C = [], defaultVariants: z = {} } = s, m = { ...ie, ...b$1 }, k = e != null && e.base ? N(e.base, s == null ? void 0 : s.base) : s == null ? void 0 : s.base, g$1 = e != null && e.variants && !u(e.variants) ? p(U, e.variants) : U, w = e != null && e.defaultVariants && !u(e.defaultVariants) ? { ...e.defaultVariants, ...z } : z;
+  !u(m.twMergeConfig) && !x$1(m.twMergeConfig, v) && (q = true, v = m.twMergeConfig);
+  let S = u(e == null ? void 0 : e.slots), T = u(O) ? {} : { base: N(s == null ? void 0 : s.base, S && (e == null ? void 0 : e.base)), ...O }, j = S ? T : _({ ...e == null ? void 0 : e.slots }, u(T) ? { base: s == null ? void 0 : s.base } : T), h$1 = u(e == null ? void 0 : e.compoundVariants) ? W : a(e == null ? void 0 : e.compoundVariants, W), V = (l$1) => {
+    if (u(g$1) && u(O) && S) return M(k, l$1 == null ? void 0 : l$1.class, l$1 == null ? void 0 : l$1.className)(m);
+    if (h$1 && !Array.isArray(h$1)) throw new TypeError(`The "compoundVariants" prop must be an array. Received: ${typeof h$1}`);
+    if (C && !Array.isArray(C)) throw new TypeError(`The "compoundSlots" prop must be an array. Received: ${typeof C}`);
+    let P = (a2, n, t = [], i2) => {
+      let r = t;
+      if (typeof n == "string") r = r.concat(g(n).split(" ").map((o) => `${a2}:${o}`));
+      else if (Array.isArray(n)) r = r.concat(n.reduce((o, c2) => o.concat(`${a2}:${c2}`), []));
+      else if (typeof n == "object" && typeof i2 == "string") {
+        for (let o in n) if (n.hasOwnProperty(o) && o === i2) {
+          let c2 = n[o];
+          if (c2 && typeof c2 == "string") {
+            let u2 = g(c2);
+            r[i2] ? r[i2] = r[i2].concat(u2.split(" ").map((f) => `${a2}:${f}`)) : r[i2] = u2.split(" ").map((f) => `${a2}:${f}`);
+          } else Array.isArray(c2) && c2.length > 0 && (r[i2] = c2.reduce((u2, f) => u2.concat(`${a2}:${f}`), []));
+        }
+      }
+      return r;
+    }, D = (a$1, n = g$1, t = null, i2 = null) => {
+      var L;
+      let r = n[a$1];
+      if (!r || u(r)) return null;
+      let o = (L = i2 == null ? void 0 : i2[a$1]) != null ? L : l$1 == null ? void 0 : l$1[a$1];
+      if (o === null) return null;
+      let c2 = l(o), u$1 = Array.isArray(m.responsiveVariants) && m.responsiveVariants.length > 0 || m.responsiveVariants === true, f = w == null ? void 0 : w[a$1], d = [];
+      if (typeof c2 == "object" && u$1) for (let [E, Q] of Object.entries(c2)) {
+        let ne = r[Q];
+        if (E === "initial") {
+          f = Q;
+          continue;
+        }
+        Array.isArray(m.responsiveVariants) && !m.responsiveVariants.includes(E) || (d = P(E, ne, d, t));
+      }
+      let $ = c2 != null && typeof c2 != "object" ? c2 : l(f), A = r[$ || "false"];
+      return typeof d == "object" && typeof t == "string" && d[t] ? _(d, A) : d.length > 0 ? (d.push(A), t === "base" ? d.join(" ") : d) : A;
+    }, p2 = () => g$1 ? Object.keys(g$1).map((a2) => D(a2, g$1)) : null, ee = (a2, n) => {
+      if (!g$1 || typeof g$1 != "object") return null;
+      let t = new Array();
+      for (let i2 in g$1) {
+        let r = D(i2, g$1, a2, n), o = a2 === "base" && typeof r == "string" ? r : r && r[a2];
+        o && (t[t.length] = o);
+      }
+      return t;
+    }, H = {};
+    for (let a2 in l$1) l$1[a2] !== void 0 && (H[a2] = l$1[a2]);
+    let I = (a2, n) => {
+      var i2;
+      let t = typeof (l$1 == null ? void 0 : l$1[a2]) == "object" ? { [a2]: (i2 = l$1[a2]) == null ? void 0 : i2.initial } : {};
+      return { ...w, ...H, ...t, ...n };
+    }, J = (a2 = [], n) => {
+      let t = [];
+      for (let { class: i2, className: r, ...o } of a2) {
+        let c2 = true;
+        for (let [u2, f] of Object.entries(o)) {
+          let d = I(u2, n)[u2];
+          if (Array.isArray(f)) {
+            if (!f.includes(d)) {
+              c2 = false;
+              break;
+            }
+          } else {
+            let $ = (A) => A == null || A === false;
+            if ($(f) && $(d)) continue;
+            if (d !== f) {
+              c2 = false;
+              break;
+            }
+          }
+        }
+        c2 && (i2 && t.push(i2), r && t.push(r));
+      }
+      return t;
+    }, te = (a2) => {
+      let n = J(h$1, a2);
+      if (!Array.isArray(n)) return n;
+      let t = {};
+      for (let i2 of n) if (typeof i2 == "string" && (t.base = M(t.base, i2)(m)), typeof i2 == "object") for (let [r, o] of Object.entries(i2)) t[r] = M(t[r], o)(m);
+      return t;
+    }, ae = (a2) => {
+      if (C.length < 1) return null;
+      let n = {};
+      for (let { slots: t = [], class: i2, className: r, ...o } of C) {
+        if (!u(o)) {
+          let c2 = true;
+          for (let u2 of Object.keys(o)) {
+            let f = I(u2, a2)[u2];
+            if (f === void 0 || (Array.isArray(o[u2]) ? !o[u2].includes(f) : o[u2] !== f)) {
+              c2 = false;
+              break;
+            }
+          }
+          if (!c2) continue;
+        }
+        for (let c2 of t) n[c2] = n[c2] || [], n[c2].push([i2, r]);
+      }
+      return n;
+    };
+    if (!u(O) || !S) {
+      let a2 = {};
+      if (typeof j == "object" && !u(j)) for (let n of Object.keys(j)) a2[n] = (t) => {
+        var i2, r;
+        return M(j[n], ee(n, t), ((i2 = te(t)) != null ? i2 : [])[n], ((r = ae(t)) != null ? r : [])[n], t == null ? void 0 : t.class, t == null ? void 0 : t.className)(m);
+      };
+      return a2;
+    }
+    return M(k, p2(), J(h$1), l$1 == null ? void 0 : l$1.class, l$1 == null ? void 0 : l$1.className)(m);
+  }, K = () => {
+    if (!(!g$1 || typeof g$1 != "object")) return Object.keys(g$1);
+  };
+  return V.variantKeys = K(), V.extend = e, V.base = k, V.slots = j, V.variants = g$1, V.defaultVariants = w, V.compoundSlots = C, V.compoundVariants = h$1, V;
+}, fe = (s) => (b, e) => ce(b, e ? p(s, e) : s);
+const appConfigTv = appConfig;
+const tv = /* @__PURE__ */ fe(appConfigTv.ui?.tv);
+const matchIconName = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+const stringToIcon = (value, validate, allowSimpleName, provider = "") => {
+  const colonSeparated = value.split(":");
+  if (value.slice(0, 1) === "@") {
+    if (colonSeparated.length < 2 || colonSeparated.length > 3) {
+      return null;
+    }
+    provider = colonSeparated.shift().slice(1);
+  }
+  if (colonSeparated.length > 3 || !colonSeparated.length) {
+    return null;
+  }
+  if (colonSeparated.length > 1) {
+    const name2 = colonSeparated.pop();
+    const prefix = colonSeparated.pop();
+    const result = {
+      // Allow provider without '@': "provider:prefix:name"
+      provider: colonSeparated.length > 0 ? colonSeparated[0] : provider,
+      prefix,
+      name: name2
+    };
+    return validate && !validateIconName(result) ? null : result;
+  }
+  const name = colonSeparated[0];
+  const dashSeparated = name.split("-");
+  if (dashSeparated.length > 1) {
+    const result = {
+      provider,
+      prefix: dashSeparated.shift(),
+      name: dashSeparated.join("-")
+    };
+    return validate && !validateIconName(result) ? null : result;
+  }
+  if (allowSimpleName && provider === "") {
+    const result = {
+      provider,
+      prefix: "",
+      name
+    };
+    return validate && !validateIconName(result, allowSimpleName) ? null : result;
+  }
+  return null;
+};
+const validateIconName = (icon, allowSimpleName) => {
+  if (!icon) {
+    return false;
+  }
+  return !!// Check prefix: cannot be empty, unless allowSimpleName is enabled
+  // Check name: cannot be empty
+  ((allowSimpleName && icon.prefix === "" || !!icon.prefix) && !!icon.name);
+};
+const defaultIconDimensions = Object.freeze(
+  {
+    left: 0,
+    top: 0,
+    width: 16,
+    height: 16
+  }
+);
+const defaultIconTransformations = Object.freeze({
+  rotate: 0,
+  vFlip: false,
+  hFlip: false
+});
+const defaultIconProps = Object.freeze({
+  ...defaultIconDimensions,
+  ...defaultIconTransformations
+});
+const defaultExtendedIconProps = Object.freeze({
+  ...defaultIconProps,
+  body: "",
+  hidden: false
+});
+function mergeIconTransformations(obj1, obj2) {
+  const result = {};
+  if (!obj1.hFlip !== !obj2.hFlip) {
+    result.hFlip = true;
+  }
+  if (!obj1.vFlip !== !obj2.vFlip) {
+    result.vFlip = true;
+  }
+  const rotate = ((obj1.rotate || 0) + (obj2.rotate || 0)) % 4;
+  if (rotate) {
+    result.rotate = rotate;
+  }
+  return result;
+}
+function mergeIconData(parent, child) {
+  const result = mergeIconTransformations(parent, child);
+  for (const key in defaultExtendedIconProps) {
+    if (key in defaultIconTransformations) {
+      if (key in parent && !(key in result)) {
+        result[key] = defaultIconTransformations[key];
+      }
+    } else if (key in child) {
+      result[key] = child[key];
+    } else if (key in parent) {
+      result[key] = parent[key];
+    }
+  }
+  return result;
+}
+function getIconsTree(data, names) {
+  const icons = data.icons;
+  const aliases = data.aliases || /* @__PURE__ */ Object.create(null);
+  const resolved = /* @__PURE__ */ Object.create(null);
+  function resolve(name) {
+    if (icons[name]) {
+      return resolved[name] = [];
+    }
+    if (!(name in resolved)) {
+      resolved[name] = null;
+      const parent = aliases[name] && aliases[name].parent;
+      const value = parent && resolve(parent);
+      if (value) {
+        resolved[name] = [parent].concat(value);
+      }
+    }
+    return resolved[name];
+  }
+  Object.keys(icons).concat(Object.keys(aliases)).forEach(resolve);
+  return resolved;
+}
+function internalGetIconData(data, name, tree) {
+  const icons = data.icons;
+  const aliases = data.aliases || /* @__PURE__ */ Object.create(null);
+  let currentProps = {};
+  function parse(name2) {
+    currentProps = mergeIconData(
+      icons[name2] || aliases[name2],
+      currentProps
+    );
+  }
+  parse(name);
+  tree.forEach(parse);
+  return mergeIconData(data, currentProps);
+}
+function parseIconSet(data, callback) {
+  const names = [];
+  if (typeof data !== "object" || typeof data.icons !== "object") {
+    return names;
+  }
+  if (data.not_found instanceof Array) {
+    data.not_found.forEach((name) => {
+      callback(name, null);
+      names.push(name);
+    });
+  }
+  const tree = getIconsTree(data);
+  for (const name in tree) {
+    const item = tree[name];
+    if (item) {
+      callback(name, internalGetIconData(data, name, item));
+      names.push(name);
+    }
+  }
+  return names;
+}
+const optionalPropertyDefaults = {
+  provider: "",
+  aliases: {},
+  not_found: {},
+  ...defaultIconDimensions
+};
+function checkOptionalProps(item, defaults) {
+  for (const prop in defaults) {
+    if (prop in item && typeof item[prop] !== typeof defaults[prop]) {
+      return false;
+    }
+  }
+  return true;
+}
+function quicklyValidateIconSet(obj) {
+  if (typeof obj !== "object" || obj === null) {
+    return null;
+  }
+  const data = obj;
+  if (typeof data.prefix !== "string" || !obj.icons || typeof obj.icons !== "object") {
+    return null;
+  }
+  if (!checkOptionalProps(obj, optionalPropertyDefaults)) {
+    return null;
+  }
+  const icons = data.icons;
+  for (const name in icons) {
+    const icon = icons[name];
+    if (
+      // Name cannot be empty
+      !name || // Must have body
+      typeof icon.body !== "string" || // Check other props
+      !checkOptionalProps(
+        icon,
+        defaultExtendedIconProps
+      )
+    ) {
+      return null;
+    }
+  }
+  const aliases = data.aliases || /* @__PURE__ */ Object.create(null);
+  for (const name in aliases) {
+    const icon = aliases[name];
+    const parent = icon.parent;
+    if (
+      // Name cannot be empty
+      !name || // Parent must be set and point to existing icon
+      typeof parent !== "string" || !icons[parent] && !aliases[parent] || // Check other props
+      !checkOptionalProps(
+        icon,
+        defaultExtendedIconProps
+      )
+    ) {
+      return null;
+    }
+  }
+  return data;
+}
+const dataStorage = /* @__PURE__ */ Object.create(null);
+function newStorage(provider, prefix) {
+  return {
+    provider,
+    prefix,
+    icons: /* @__PURE__ */ Object.create(null),
+    missing: /* @__PURE__ */ new Set()
+  };
+}
+function getStorage(provider, prefix) {
+  const providerStorage = dataStorage[provider] || (dataStorage[provider] = /* @__PURE__ */ Object.create(null));
+  return providerStorage[prefix] || (providerStorage[prefix] = newStorage(provider, prefix));
+}
+function addIconSet(storage2, data) {
+  if (!quicklyValidateIconSet(data)) {
+    return [];
+  }
+  return parseIconSet(data, (name, icon) => {
+    if (icon) {
+      storage2.icons[name] = icon;
+    } else {
+      storage2.missing.add(name);
+    }
+  });
+}
+function addIconToStorage(storage2, name, icon) {
+  try {
+    if (typeof icon.body === "string") {
+      storage2.icons[name] = { ...icon };
+      return true;
+    }
+  } catch (err) {
+  }
+  return false;
+}
+let simpleNames = false;
+function allowSimpleNames(allow) {
+  if (typeof allow === "boolean") {
+    simpleNames = allow;
+  }
+  return simpleNames;
+}
+function getIconData(name) {
+  const icon = typeof name === "string" ? stringToIcon(name, true, simpleNames) : name;
+  if (icon) {
+    const storage2 = getStorage(icon.provider, icon.prefix);
+    const iconName = icon.name;
+    return storage2.icons[iconName] || (storage2.missing.has(iconName) ? null : void 0);
+  }
+}
+function addIcon(name, data) {
+  const icon = stringToIcon(name, true, simpleNames);
+  if (!icon) {
+    return false;
+  }
+  const storage2 = getStorage(icon.provider, icon.prefix);
+  if (data) {
+    return addIconToStorage(storage2, icon.name, data);
+  } else {
+    storage2.missing.add(icon.name);
+    return true;
+  }
+}
+function addCollection(data, provider) {
+  if (typeof data !== "object") {
+    return false;
+  }
+  if (typeof provider !== "string") {
+    provider = data.provider || "";
+  }
+  if (simpleNames && !provider && !data.prefix) {
+    let added = false;
+    if (quicklyValidateIconSet(data)) {
+      data.prefix = "";
+      parseIconSet(data, (name, icon) => {
+        if (addIcon(name, icon)) {
+          added = true;
+        }
+      });
+    }
+    return added;
+  }
+  const prefix = data.prefix;
+  if (!validateIconName({
+    prefix,
+    name: "a"
+  })) {
+    return false;
+  }
+  const storage2 = getStorage(provider, prefix);
+  return !!addIconSet(storage2, data);
+}
+const defaultIconSizeCustomisations = Object.freeze({
+  width: null,
+  height: null
+});
+const defaultIconCustomisations = Object.freeze({
+  // Dimensions
+  ...defaultIconSizeCustomisations,
+  // Transformations
+  ...defaultIconTransformations
+});
+const unitsSplit = /(-?[0-9.]*[0-9]+[0-9.]*)/g;
+const unitsTest = /^-?[0-9.]*[0-9]+[0-9.]*$/g;
+function calculateSize(size, ratio, precision) {
+  if (ratio === 1) {
+    return size;
+  }
+  precision = precision || 100;
+  if (typeof size === "number") {
+    return Math.ceil(size * ratio * precision) / precision;
+  }
+  if (typeof size !== "string") {
+    return size;
+  }
+  const oldParts = size.split(unitsSplit);
+  if (oldParts === null || !oldParts.length) {
+    return size;
+  }
+  const newParts = [];
+  let code = oldParts.shift();
+  let isNumber2 = unitsTest.test(code);
+  while (true) {
+    if (isNumber2) {
+      const num = parseFloat(code);
+      if (isNaN(num)) {
+        newParts.push(code);
+      } else {
+        newParts.push(Math.ceil(num * ratio * precision) / precision);
+      }
+    } else {
+      newParts.push(code);
+    }
+    code = oldParts.shift();
+    if (code === void 0) {
+      return newParts.join("");
+    }
+    isNumber2 = !isNumber2;
+  }
+}
+function splitSVGDefs(content, tag = "defs") {
+  let defs = "";
+  const index = content.indexOf("<" + tag);
+  while (index >= 0) {
+    const start = content.indexOf(">", index);
+    const end = content.indexOf("</" + tag);
+    if (start === -1 || end === -1) {
+      break;
+    }
+    const endEnd = content.indexOf(">", end);
+    if (endEnd === -1) {
+      break;
+    }
+    defs += content.slice(start + 1, end).trim();
+    content = content.slice(0, index).trim() + content.slice(endEnd + 1);
+  }
+  return {
+    defs,
+    content
+  };
+}
+function mergeDefsAndContent(defs, content) {
+  return defs ? "<defs>" + defs + "</defs>" + content : content;
+}
+function wrapSVGContent(body, start, end) {
+  const split = splitSVGDefs(body);
+  return mergeDefsAndContent(split.defs, start + split.content + end);
+}
+const isUnsetKeyword = (value) => value === "unset" || value === "undefined" || value === "none";
+function iconToSVG(icon, customisations) {
+  const fullIcon = {
+    ...defaultIconProps,
+    ...icon
+  };
+  const fullCustomisations = {
+    ...defaultIconCustomisations,
+    ...customisations
+  };
+  const box = {
+    left: fullIcon.left,
+    top: fullIcon.top,
+    width: fullIcon.width,
+    height: fullIcon.height
+  };
+  let body = fullIcon.body;
+  [fullIcon, fullCustomisations].forEach((props) => {
+    const transformations = [];
+    const hFlip = props.hFlip;
+    const vFlip = props.vFlip;
+    let rotation = props.rotate;
+    if (hFlip) {
+      if (vFlip) {
+        rotation += 2;
+      } else {
+        transformations.push(
+          "translate(" + (box.width + box.left).toString() + " " + (0 - box.top).toString() + ")"
+        );
+        transformations.push("scale(-1 1)");
+        box.top = box.left = 0;
+      }
+    } else if (vFlip) {
+      transformations.push(
+        "translate(" + (0 - box.left).toString() + " " + (box.height + box.top).toString() + ")"
+      );
+      transformations.push("scale(1 -1)");
+      box.top = box.left = 0;
+    }
+    let tempValue;
+    if (rotation < 0) {
+      rotation -= Math.floor(rotation / 4) * 4;
+    }
+    rotation = rotation % 4;
+    switch (rotation) {
+      case 1:
+        tempValue = box.height / 2 + box.top;
+        transformations.unshift(
+          "rotate(90 " + tempValue.toString() + " " + tempValue.toString() + ")"
+        );
+        break;
+      case 2:
+        transformations.unshift(
+          "rotate(180 " + (box.width / 2 + box.left).toString() + " " + (box.height / 2 + box.top).toString() + ")"
+        );
+        break;
+      case 3:
+        tempValue = box.width / 2 + box.left;
+        transformations.unshift(
+          "rotate(-90 " + tempValue.toString() + " " + tempValue.toString() + ")"
+        );
+        break;
+    }
+    if (rotation % 2 === 1) {
+      if (box.left !== box.top) {
+        tempValue = box.left;
+        box.left = box.top;
+        box.top = tempValue;
+      }
+      if (box.width !== box.height) {
+        tempValue = box.width;
+        box.width = box.height;
+        box.height = tempValue;
+      }
+    }
+    if (transformations.length) {
+      body = wrapSVGContent(
+        body,
+        '<g transform="' + transformations.join(" ") + '">',
+        "</g>"
+      );
+    }
+  });
+  const customisationsWidth = fullCustomisations.width;
+  const customisationsHeight = fullCustomisations.height;
+  const boxWidth = box.width;
+  const boxHeight = box.height;
+  let width;
+  let height;
+  if (customisationsWidth === null) {
+    height = customisationsHeight === null ? "1em" : customisationsHeight === "auto" ? boxHeight : customisationsHeight;
+    width = calculateSize(height, boxWidth / boxHeight);
+  } else {
+    width = customisationsWidth === "auto" ? boxWidth : customisationsWidth;
+    height = customisationsHeight === null ? calculateSize(width, boxHeight / boxWidth) : customisationsHeight === "auto" ? boxHeight : customisationsHeight;
+  }
+  const attributes = {};
+  const setAttr = (prop, value) => {
+    if (!isUnsetKeyword(value)) {
+      attributes[prop] = value.toString();
+    }
+  };
+  setAttr("width", width);
+  setAttr("height", height);
+  const viewBox = [box.left, box.top, boxWidth, boxHeight];
+  attributes.viewBox = viewBox.join(" ");
+  return {
+    attributes,
+    viewBox,
+    body
+  };
+}
+const regex = /\sid="(\S+)"/g;
+const randomPrefix = "IconifyId" + Date.now().toString(16) + (Math.random() * 16777216 | 0).toString(16);
+let counter = 0;
+function replaceIDs(body, prefix = randomPrefix) {
+  const ids = [];
+  let match;
+  while (match = regex.exec(body)) {
+    ids.push(match[1]);
+  }
+  if (!ids.length) {
+    return body;
+  }
+  const suffix = "suffix" + (Math.random() * 16777216 | Date.now()).toString(16);
+  ids.forEach((id) => {
+    const newID = typeof prefix === "function" ? prefix(id) : prefix + (counter++).toString();
+    const escapedID = id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    body = body.replace(
+      // Allowed characters before id: [#;"]
+      // Allowed characters after id: [)"], .[a-z]
+      new RegExp('([#;"])(' + escapedID + ')([")]|\\.[a-z])', "g"),
+      "$1" + newID + suffix + "$3"
+    );
+  });
+  body = body.replace(new RegExp(suffix, "g"), "");
+  return body;
+}
+const storage = /* @__PURE__ */ Object.create(null);
+function setAPIModule(provider, item) {
+  storage[provider] = item;
+}
+function getAPIModule(provider) {
+  return storage[provider] || storage[""];
+}
+function createAPIConfig(source) {
+  let resources;
+  if (typeof source.resources === "string") {
+    resources = [source.resources];
+  } else {
+    resources = source.resources;
+    if (!(resources instanceof Array) || !resources.length) {
+      return null;
+    }
+  }
+  const result = {
+    // API hosts
+    resources,
+    // Root path
+    path: source.path || "/",
+    // URL length limit
+    maxURL: source.maxURL || 500,
+    // Timeout before next host is used.
+    rotate: source.rotate || 750,
+    // Timeout before failing query.
+    timeout: source.timeout || 5e3,
+    // Randomise default API end point.
+    random: source.random === true,
+    // Start index
+    index: source.index || 0,
+    // Receive data after time out (used if time out kicks in first, then API module sends data anyway).
+    dataAfterTimeout: source.dataAfterTimeout !== false
+  };
+  return result;
+}
+const configStorage = /* @__PURE__ */ Object.create(null);
+const fallBackAPISources = [
+  "https://api.simplesvg.com",
+  "https://api.unisvg.com"
+];
+const fallBackAPI = [];
+while (fallBackAPISources.length > 0) {
+  if (fallBackAPISources.length === 1) {
+    fallBackAPI.push(fallBackAPISources.shift());
+  } else {
+    if (Math.random() > 0.5) {
+      fallBackAPI.push(fallBackAPISources.shift());
+    } else {
+      fallBackAPI.push(fallBackAPISources.pop());
+    }
+  }
+}
+configStorage[""] = createAPIConfig({
+  resources: ["https://api.iconify.design"].concat(fallBackAPI)
+});
+function addAPIProvider(provider, customConfig) {
+  const config = createAPIConfig(customConfig);
+  if (config === null) {
+    return false;
+  }
+  configStorage[provider] = config;
+  return true;
+}
+function getAPIConfig(provider) {
+  return configStorage[provider];
+}
+const detectFetch = () => {
+  let callback;
+  try {
+    callback = fetch;
+    if (typeof callback === "function") {
+      return callback;
+    }
+  } catch (err) {
+  }
+};
+let fetchModule = detectFetch();
+function calculateMaxLength(provider, prefix) {
+  const config = getAPIConfig(provider);
+  if (!config) {
+    return 0;
+  }
+  let result;
+  if (!config.maxURL) {
+    result = 0;
+  } else {
+    let maxHostLength = 0;
+    config.resources.forEach((item) => {
+      const host = item;
+      maxHostLength = Math.max(maxHostLength, host.length);
+    });
+    const url = prefix + ".json?icons=";
+    result = config.maxURL - maxHostLength - config.path.length - url.length;
+  }
+  return result;
+}
+function shouldAbort(status) {
+  return status === 404;
+}
+const prepare = (provider, prefix, icons) => {
+  const results = [];
+  const maxLength = calculateMaxLength(provider, prefix);
+  const type = "icons";
+  let item = {
+    type,
+    provider,
+    prefix,
+    icons: []
+  };
+  let length = 0;
+  icons.forEach((name, index) => {
+    length += name.length + 1;
+    if (length >= maxLength && index > 0) {
+      results.push(item);
+      item = {
+        type,
+        provider,
+        prefix,
+        icons: []
+      };
+      length = name.length;
+    }
+    item.icons.push(name);
+  });
+  results.push(item);
+  return results;
+};
+function getPath(provider) {
+  if (typeof provider === "string") {
+    const config = getAPIConfig(provider);
+    if (config) {
+      return config.path;
+    }
+  }
+  return "/";
+}
+const send = (host, params, callback) => {
+  if (!fetchModule) {
+    callback("abort", 424);
+    return;
+  }
+  let path = getPath(params.provider);
+  switch (params.type) {
+    case "icons": {
+      const prefix = params.prefix;
+      const icons = params.icons;
+      const iconsList = icons.join(",");
+      const urlParams = new URLSearchParams({
+        icons: iconsList
+      });
+      path += prefix + ".json?" + urlParams.toString();
+      break;
+    }
+    case "custom": {
+      const uri = params.uri;
+      path += uri.slice(0, 1) === "/" ? uri.slice(1) : uri;
+      break;
+    }
+    default:
+      callback("abort", 400);
+      return;
+  }
+  let defaultError = 503;
+  fetchModule(host + path).then((response) => {
+    const status = response.status;
+    if (status !== 200) {
+      setTimeout(() => {
+        callback(shouldAbort(status) ? "abort" : "next", status);
+      });
+      return;
+    }
+    defaultError = 501;
+    return response.json();
+  }).then((data) => {
+    if (typeof data !== "object" || data === null) {
+      setTimeout(() => {
+        if (data === 404) {
+          callback("abort", data);
+        } else {
+          callback("next", defaultError);
+        }
+      });
+      return;
+    }
+    setTimeout(() => {
+      callback("success", data);
+    });
+  }).catch(() => {
+    callback("next", defaultError);
+  });
+};
+const fetchAPIModule = {
+  prepare,
+  send
+};
+function sortIcons(icons) {
+  const result = {
+    loaded: [],
+    missing: [],
+    pending: []
+  };
+  const storage2 = /* @__PURE__ */ Object.create(null);
+  icons.sort((a2, b) => {
+    if (a2.provider !== b.provider) {
+      return a2.provider.localeCompare(b.provider);
+    }
+    if (a2.prefix !== b.prefix) {
+      return a2.prefix.localeCompare(b.prefix);
+    }
+    return a2.name.localeCompare(b.name);
+  });
+  let lastIcon = {
+    provider: "",
+    prefix: "",
+    name: ""
+  };
+  icons.forEach((icon) => {
+    if (lastIcon.name === icon.name && lastIcon.prefix === icon.prefix && lastIcon.provider === icon.provider) {
+      return;
+    }
+    lastIcon = icon;
+    const provider = icon.provider;
+    const prefix = icon.prefix;
+    const name = icon.name;
+    const providerStorage = storage2[provider] || (storage2[provider] = /* @__PURE__ */ Object.create(null));
+    const localStorage = providerStorage[prefix] || (providerStorage[prefix] = getStorage(provider, prefix));
+    let list;
+    if (name in localStorage.icons) {
+      list = result.loaded;
+    } else if (prefix === "" || localStorage.missing.has(name)) {
+      list = result.missing;
+    } else {
+      list = result.pending;
+    }
+    const item = {
+      provider,
+      prefix,
+      name
+    };
+    list.push(item);
+  });
+  return result;
+}
+function removeCallback(storages, id) {
+  storages.forEach((storage2) => {
+    const items = storage2.loaderCallbacks;
+    if (items) {
+      storage2.loaderCallbacks = items.filter((row) => row.id !== id);
+    }
+  });
+}
+function updateCallbacks(storage2) {
+  if (!storage2.pendingCallbacksFlag) {
+    storage2.pendingCallbacksFlag = true;
+    setTimeout(() => {
+      storage2.pendingCallbacksFlag = false;
+      const items = storage2.loaderCallbacks ? storage2.loaderCallbacks.slice(0) : [];
+      if (!items.length) {
+        return;
+      }
+      let hasPending = false;
+      const provider = storage2.provider;
+      const prefix = storage2.prefix;
+      items.forEach((item) => {
+        const icons = item.icons;
+        const oldLength = icons.pending.length;
+        icons.pending = icons.pending.filter((icon) => {
+          if (icon.prefix !== prefix) {
+            return true;
+          }
+          const name = icon.name;
+          if (storage2.icons[name]) {
+            icons.loaded.push({
+              provider,
+              prefix,
+              name
+            });
+          } else if (storage2.missing.has(name)) {
+            icons.missing.push({
+              provider,
+              prefix,
+              name
+            });
+          } else {
+            hasPending = true;
+            return true;
+          }
+          return false;
+        });
+        if (icons.pending.length !== oldLength) {
+          if (!hasPending) {
+            removeCallback([storage2], item.id);
+          }
+          item.callback(
+            icons.loaded.slice(0),
+            icons.missing.slice(0),
+            icons.pending.slice(0),
+            item.abort
+          );
+        }
+      });
+    });
+  }
+}
+let idCounter = 0;
+function storeCallback(callback, icons, pendingSources) {
+  const id = idCounter++;
+  const abort = removeCallback.bind(null, pendingSources, id);
+  if (!icons.pending.length) {
+    return abort;
+  }
+  const item = {
+    id,
+    icons,
+    callback,
+    abort
+  };
+  pendingSources.forEach((storage2) => {
+    (storage2.loaderCallbacks || (storage2.loaderCallbacks = [])).push(item);
+  });
+  return abort;
+}
+function listToIcons(list, validate = true, simpleNames2 = false) {
+  const result = [];
+  list.forEach((item) => {
+    const icon = typeof item === "string" ? stringToIcon(item, validate, simpleNames2) : item;
+    if (icon) {
+      result.push(icon);
+    }
+  });
+  return result;
+}
+var defaultConfig = {
+  resources: [],
+  index: 0,
+  timeout: 2e3,
+  rotate: 750,
+  random: false,
+  dataAfterTimeout: false
+};
+function sendQuery(config, payload, query, done) {
+  const resourcesCount = config.resources.length;
+  const startIndex = config.random ? Math.floor(Math.random() * resourcesCount) : config.index;
+  let resources;
+  if (config.random) {
+    let list = config.resources.slice(0);
+    resources = [];
+    while (list.length > 1) {
+      const nextIndex = Math.floor(Math.random() * list.length);
+      resources.push(list[nextIndex]);
+      list = list.slice(0, nextIndex).concat(list.slice(nextIndex + 1));
+    }
+    resources = resources.concat(list);
+  } else {
+    resources = config.resources.slice(startIndex).concat(config.resources.slice(0, startIndex));
+  }
+  const startTime = Date.now();
+  let status = "pending";
+  let queriesSent = 0;
+  let lastError;
+  let timer = null;
+  let queue = [];
+  let doneCallbacks = [];
+  if (typeof done === "function") {
+    doneCallbacks.push(done);
+  }
+  function resetTimer() {
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+  }
+  function abort() {
+    if (status === "pending") {
+      status = "aborted";
+    }
+    resetTimer();
+    queue.forEach((item) => {
+      if (item.status === "pending") {
+        item.status = "aborted";
+      }
+    });
+    queue = [];
+  }
+  function subscribe(callback, overwrite) {
+    if (overwrite) {
+      doneCallbacks = [];
+    }
+    if (typeof callback === "function") {
+      doneCallbacks.push(callback);
+    }
+  }
+  function getQueryStatus() {
+    return {
+      startTime,
+      payload,
+      status,
+      queriesSent,
+      queriesPending: queue.length,
+      subscribe,
+      abort
+    };
+  }
+  function failQuery() {
+    status = "failed";
+    doneCallbacks.forEach((callback) => {
+      callback(void 0, lastError);
+    });
+  }
+  function clearQueue() {
+    queue.forEach((item) => {
+      if (item.status === "pending") {
+        item.status = "aborted";
+      }
+    });
+    queue = [];
+  }
+  function moduleResponse(item, response, data) {
+    const isError = response !== "success";
+    queue = queue.filter((queued) => queued !== item);
+    switch (status) {
+      case "pending":
+        break;
+      case "failed":
+        if (isError || !config.dataAfterTimeout) {
+          return;
+        }
+        break;
+      default:
+        return;
+    }
+    if (response === "abort") {
+      lastError = data;
+      failQuery();
+      return;
+    }
+    if (isError) {
+      lastError = data;
+      if (!queue.length) {
+        if (!resources.length) {
+          failQuery();
+        } else {
+          execNext();
+        }
+      }
+      return;
+    }
+    resetTimer();
+    clearQueue();
+    if (!config.random) {
+      const index = config.resources.indexOf(item.resource);
+      if (index !== -1 && index !== config.index) {
+        config.index = index;
+      }
+    }
+    status = "completed";
+    doneCallbacks.forEach((callback) => {
+      callback(data);
+    });
+  }
+  function execNext() {
+    if (status !== "pending") {
+      return;
+    }
+    resetTimer();
+    const resource = resources.shift();
+    if (resource === void 0) {
+      if (queue.length) {
+        timer = setTimeout(() => {
+          resetTimer();
+          if (status === "pending") {
+            clearQueue();
+            failQuery();
+          }
+        }, config.timeout);
+        return;
+      }
+      failQuery();
+      return;
+    }
+    const item = {
+      status: "pending",
+      resource,
+      callback: (status2, data) => {
+        moduleResponse(item, status2, data);
+      }
+    };
+    queue.push(item);
+    queriesSent++;
+    timer = setTimeout(execNext, config.rotate);
+    query(resource, payload, item.callback);
+  }
+  setTimeout(execNext);
+  return getQueryStatus;
+}
+function initRedundancy(cfg) {
+  const config = {
+    ...defaultConfig,
+    ...cfg
+  };
+  let queries = [];
+  function cleanup() {
+    queries = queries.filter((item) => item().status === "pending");
+  }
+  function query(payload, queryCallback, doneCallback) {
+    const query2 = sendQuery(
+      config,
+      payload,
+      queryCallback,
+      (data, error) => {
+        cleanup();
+        if (doneCallback) {
+          doneCallback(data, error);
+        }
+      }
+    );
+    queries.push(query2);
+    return query2;
+  }
+  function find(callback) {
+    return queries.find((value) => {
+      return callback(value);
+    }) || null;
+  }
+  const instance = {
+    query,
+    find,
+    setIndex: (index) => {
+      config.index = index;
+    },
+    getIndex: () => config.index,
+    cleanup
+  };
+  return instance;
+}
+function emptyCallback$1() {
+}
+const redundancyCache = /* @__PURE__ */ Object.create(null);
+function getRedundancyCache(provider) {
+  if (!redundancyCache[provider]) {
+    const config = getAPIConfig(provider);
+    if (!config) {
+      return;
+    }
+    const redundancy = initRedundancy(config);
+    const cachedReundancy = {
+      config,
+      redundancy
+    };
+    redundancyCache[provider] = cachedReundancy;
+  }
+  return redundancyCache[provider];
+}
+function sendAPIQuery(target, query, callback) {
+  let redundancy;
+  let send2;
+  if (typeof target === "string") {
+    const api = getAPIModule(target);
+    if (!api) {
+      callback(void 0, 424);
+      return emptyCallback$1;
+    }
+    send2 = api.send;
+    const cached = getRedundancyCache(target);
+    if (cached) {
+      redundancy = cached.redundancy;
+    }
+  } else {
+    const config = createAPIConfig(target);
+    if (config) {
+      redundancy = initRedundancy(config);
+      const moduleKey = target.resources ? target.resources[0] : "";
+      const api = getAPIModule(moduleKey);
+      if (api) {
+        send2 = api.send;
+      }
+    }
+  }
+  if (!redundancy || !send2) {
+    callback(void 0, 424);
+    return emptyCallback$1;
+  }
+  return redundancy.query(query, send2, callback)().abort;
+}
+function emptyCallback() {
+}
+function loadedNewIcons(storage2) {
+  if (!storage2.iconsLoaderFlag) {
+    storage2.iconsLoaderFlag = true;
+    setTimeout(() => {
+      storage2.iconsLoaderFlag = false;
+      updateCallbacks(storage2);
+    });
+  }
+}
+function checkIconNamesForAPI(icons) {
+  const valid = [];
+  const invalid = [];
+  icons.forEach((name) => {
+    (name.match(matchIconName) ? valid : invalid).push(name);
+  });
+  return {
+    valid,
+    invalid
+  };
+}
+function parseLoaderResponse(storage2, icons, data) {
+  function checkMissing() {
+    const pending = storage2.pendingIcons;
+    icons.forEach((name) => {
+      if (pending) {
+        pending.delete(name);
+      }
+      if (!storage2.icons[name]) {
+        storage2.missing.add(name);
+      }
+    });
+  }
+  if (data && typeof data === "object") {
+    try {
+      const parsed = addIconSet(storage2, data);
+      if (!parsed.length) {
+        checkMissing();
+        return;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  checkMissing();
+  loadedNewIcons(storage2);
+}
+function parsePossiblyAsyncResponse(response, callback) {
+  if (response instanceof Promise) {
+    response.then((data) => {
+      callback(data);
+    }).catch(() => {
+      callback(null);
+    });
+  } else {
+    callback(response);
+  }
+}
+function loadNewIcons(storage2, icons) {
+  if (!storage2.iconsToLoad) {
+    storage2.iconsToLoad = icons;
+  } else {
+    storage2.iconsToLoad = storage2.iconsToLoad.concat(icons).sort();
+  }
+  if (!storage2.iconsQueueFlag) {
+    storage2.iconsQueueFlag = true;
+    setTimeout(() => {
+      storage2.iconsQueueFlag = false;
+      const { provider, prefix } = storage2;
+      const icons2 = storage2.iconsToLoad;
+      delete storage2.iconsToLoad;
+      if (!icons2 || !icons2.length) {
+        return;
+      }
+      const customIconLoader = storage2.loadIcon;
+      if (storage2.loadIcons && (icons2.length > 1 || !customIconLoader)) {
+        parsePossiblyAsyncResponse(
+          storage2.loadIcons(icons2, prefix, provider),
+          (data) => {
+            parseLoaderResponse(storage2, icons2, data);
+          }
+        );
+        return;
+      }
+      if (customIconLoader) {
+        icons2.forEach((name) => {
+          const response = customIconLoader(name, prefix, provider);
+          parsePossiblyAsyncResponse(response, (data) => {
+            const iconSet = data ? {
+              prefix,
+              icons: {
+                [name]: data
+              }
+            } : null;
+            parseLoaderResponse(storage2, [name], iconSet);
+          });
+        });
+        return;
+      }
+      const { valid, invalid } = checkIconNamesForAPI(icons2);
+      if (invalid.length) {
+        parseLoaderResponse(storage2, invalid, null);
+      }
+      if (!valid.length) {
+        return;
+      }
+      const api = prefix.match(matchIconName) ? getAPIModule(provider) : null;
+      if (!api) {
+        parseLoaderResponse(storage2, valid, null);
+        return;
+      }
+      const params = api.prepare(provider, prefix, valid);
+      params.forEach((item) => {
+        sendAPIQuery(provider, item, (data) => {
+          parseLoaderResponse(storage2, item.icons, data);
+        });
+      });
+    });
+  }
+}
+const loadIcons = (icons, callback) => {
+  const cleanedIcons = listToIcons(icons, true, allowSimpleNames());
+  const sortedIcons = sortIcons(cleanedIcons);
+  if (!sortedIcons.pending.length) {
+    let callCallback = true;
+    if (callback) {
+      setTimeout(() => {
+        if (callCallback) {
+          callback(
+            sortedIcons.loaded,
+            sortedIcons.missing,
+            sortedIcons.pending,
+            emptyCallback
+          );
+        }
+      });
+    }
+    return () => {
+      callCallback = false;
+    };
+  }
+  const newIcons = /* @__PURE__ */ Object.create(null);
+  const sources = [];
+  let lastProvider, lastPrefix;
+  sortedIcons.pending.forEach((icon) => {
+    const { provider, prefix } = icon;
+    if (prefix === lastPrefix && provider === lastProvider) {
+      return;
+    }
+    lastProvider = provider;
+    lastPrefix = prefix;
+    sources.push(getStorage(provider, prefix));
+    const providerNewIcons = newIcons[provider] || (newIcons[provider] = /* @__PURE__ */ Object.create(null));
+    if (!providerNewIcons[prefix]) {
+      providerNewIcons[prefix] = [];
+    }
+  });
+  sortedIcons.pending.forEach((icon) => {
+    const { provider, prefix, name } = icon;
+    const storage2 = getStorage(provider, prefix);
+    const pendingQueue = storage2.pendingIcons || (storage2.pendingIcons = /* @__PURE__ */ new Set());
+    if (!pendingQueue.has(name)) {
+      pendingQueue.add(name);
+      newIcons[provider][prefix].push(name);
+    }
+  });
+  sources.forEach((storage2) => {
+    const list = newIcons[storage2.provider][storage2.prefix];
+    if (list.length) {
+      loadNewIcons(storage2, list);
+    }
+  });
+  return callback ? storeCallback(callback, sortedIcons, sources) : emptyCallback;
+};
+function mergeCustomisations(defaults, item) {
+  const result = {
+    ...defaults
+  };
+  for (const key in item) {
+    const value = item[key];
+    const valueType = typeof value;
+    if (key in defaultIconSizeCustomisations) {
+      if (value === null || value && (valueType === "string" || valueType === "number")) {
+        result[key] = value;
+      }
+    } else if (valueType === typeof result[key]) {
+      result[key] = key === "rotate" ? value % 4 : value;
+    }
+  }
+  return result;
+}
+const separator = /[\s,]+/;
+function flipFromString(custom, flip) {
+  flip.split(separator).forEach((str) => {
+    const value = str.trim();
+    switch (value) {
+      case "horizontal":
+        custom.hFlip = true;
+        break;
+      case "vertical":
+        custom.vFlip = true;
+        break;
+    }
+  });
+}
+function rotateFromString(value, defaultValue = 0) {
+  const units = value.replace(/^-?[0-9.]*/, "");
+  function cleanup(value2) {
+    while (value2 < 0) {
+      value2 += 4;
+    }
+    return value2 % 4;
+  }
+  if (units === "") {
+    const num = parseInt(value);
+    return isNaN(num) ? 0 : cleanup(num);
+  } else if (units !== value) {
+    let split = 0;
+    switch (units) {
+      case "%":
+        split = 25;
+        break;
+      case "deg":
+        split = 90;
+    }
+    if (split) {
+      let num = parseFloat(value.slice(0, value.length - units.length));
+      if (isNaN(num)) {
+        return 0;
+      }
+      num = num / split;
+      return num % 1 === 0 ? cleanup(num) : 0;
+    }
+  }
+  return defaultValue;
+}
+function iconToHTML(body, attributes) {
+  let renderAttribsHTML = body.indexOf("xlink:") === -1 ? "" : ' xmlns:xlink="http://www.w3.org/1999/xlink"';
+  for (const attr in attributes) {
+    renderAttribsHTML += " " + attr + '="' + attributes[attr] + '"';
+  }
+  return '<svg xmlns="http://www.w3.org/2000/svg"' + renderAttribsHTML + ">" + body + "</svg>";
+}
+function encodeSVGforURL(svg) {
+  return svg.replace(/"/g, "'").replace(/%/g, "%25").replace(/#/g, "%23").replace(/</g, "%3C").replace(/>/g, "%3E").replace(/\s+/g, " ");
+}
+function svgToData(svg) {
+  return "data:image/svg+xml," + encodeSVGforURL(svg);
+}
+function svgToURL(svg) {
+  return 'url("' + svgToData(svg) + '")';
+}
+const defaultExtendedIconCustomisations = {
+  ...defaultIconCustomisations,
+  inline: false
+};
+const svgDefaults = {
+  "xmlns": "http://www.w3.org/2000/svg",
+  "xmlns:xlink": "http://www.w3.org/1999/xlink",
+  "aria-hidden": true,
+  "role": "img"
+};
+const commonProps = {
+  display: "inline-block"
+};
+const monotoneProps = {
+  backgroundColor: "currentColor"
+};
+const coloredProps = {
+  backgroundColor: "transparent"
+};
+const propsToAdd = {
+  Image: "var(--svg)",
+  Repeat: "no-repeat",
+  Size: "100% 100%"
+};
+const propsToAddTo = {
+  webkitMask: monotoneProps,
+  mask: monotoneProps,
+  background: coloredProps
+};
+for (const prefix in propsToAddTo) {
+  const list = propsToAddTo[prefix];
+  for (const prop in propsToAdd) {
+    list[prefix + prop] = propsToAdd[prop];
+  }
+}
+const customisationAliases = {};
+["horizontal", "vertical"].forEach((prefix) => {
+  const attr = prefix.slice(0, 1) + "Flip";
+  customisationAliases[prefix + "-flip"] = attr;
+  customisationAliases[prefix.slice(0, 1) + "-flip"] = attr;
+  customisationAliases[prefix + "Flip"] = attr;
+});
+function fixSize(value) {
+  return value + (value.match(/^[-0-9.]+$/) ? "px" : "");
+}
+const render = (icon, props) => {
+  const customisations = mergeCustomisations(defaultExtendedIconCustomisations, props);
+  const componentProps = { ...svgDefaults };
+  const mode = props.mode || "svg";
+  const style = {};
+  const propsStyle = props.style;
+  const customStyle = typeof propsStyle === "object" && !(propsStyle instanceof Array) ? propsStyle : {};
+  for (let key in props) {
+    const value = props[key];
+    if (value === void 0) {
+      continue;
+    }
+    switch (key) {
+      // Properties to ignore
+      case "icon":
+      case "style":
+      case "onLoad":
+      case "mode":
+      case "ssr":
+        break;
+      // Boolean attributes
+      case "inline":
+      case "hFlip":
+      case "vFlip":
+        customisations[key] = value === true || value === "true" || value === 1;
+        break;
+      // Flip as string: 'horizontal,vertical'
+      case "flip":
+        if (typeof value === "string") {
+          flipFromString(customisations, value);
+        }
+        break;
+      // Color: override style
+      case "color":
+        style.color = value;
+        break;
+      // Rotation as string
+      case "rotate":
+        if (typeof value === "string") {
+          customisations[key] = rotateFromString(value);
+        } else if (typeof value === "number") {
+          customisations[key] = value;
+        }
+        break;
+      // Remove aria-hidden
+      case "ariaHidden":
+      case "aria-hidden":
+        if (value !== true && value !== "true") {
+          delete componentProps["aria-hidden"];
+        }
+        break;
+      default: {
+        const alias = customisationAliases[key];
+        if (alias) {
+          if (value === true || value === "true" || value === 1) {
+            customisations[alias] = true;
+          }
+        } else if (defaultExtendedIconCustomisations[key] === void 0) {
+          componentProps[key] = value;
+        }
+      }
+    }
+  }
+  const item = iconToSVG(icon, customisations);
+  const renderAttribs = item.attributes;
+  if (customisations.inline) {
+    style.verticalAlign = "-0.125em";
+  }
+  if (mode === "svg") {
+    componentProps.style = {
+      ...style,
+      ...customStyle
+    };
+    Object.assign(componentProps, renderAttribs);
+    let localCounter = 0;
+    let id = props.id;
+    if (typeof id === "string") {
+      id = id.replace(/-/g, "_");
+    }
+    componentProps["innerHTML"] = replaceIDs(item.body, id ? () => id + "ID" + localCounter++ : "iconifyVue");
+    return h("svg", componentProps);
+  }
+  const { body, width, height } = icon;
+  const useMask = mode === "mask" || (mode === "bg" ? false : body.indexOf("currentColor") !== -1);
+  const html = iconToHTML(body, {
+    ...renderAttribs,
+    width: width + "",
+    height: height + ""
+  });
+  componentProps.style = {
+    ...style,
+    "--svg": svgToURL(html),
+    "width": fixSize(renderAttribs.width),
+    "height": fixSize(renderAttribs.height),
+    ...commonProps,
+    ...useMask ? monotoneProps : coloredProps,
+    ...customStyle
+  };
+  return h("span", componentProps);
+};
+allowSimpleNames(true);
+setAPIModule("", fetchAPIModule);
+if (typeof document !== "undefined" && typeof window !== "undefined") {
+  const _window = window;
+  if (_window.IconifyPreload !== void 0) {
+    const preload = _window.IconifyPreload;
+    const err = "Invalid IconifyPreload syntax.";
+    if (typeof preload === "object" && preload !== null) {
+      (preload instanceof Array ? preload : [preload]).forEach((item) => {
+        try {
+          if (
+            // Check if item is an object and not null/array
+            typeof item !== "object" || item === null || item instanceof Array || // Check for 'icons' and 'prefix'
+            typeof item.icons !== "object" || typeof item.prefix !== "string" || // Add icon set
+            !addCollection(item)
+          ) {
+            console.error(err);
+          }
+        } catch (e) {
+          console.error(err);
+        }
+      });
+    }
+  }
+  if (_window.IconifyProviders !== void 0) {
+    const providers = _window.IconifyProviders;
+    if (typeof providers === "object" && providers !== null) {
+      for (let key in providers) {
+        const err = "IconifyProviders[" + key + "] is invalid.";
+        try {
+          const value = providers[key];
+          if (typeof value !== "object" || !value || value.resources === void 0) {
+            continue;
+          }
+          if (!addAPIProvider(key, value)) {
+            console.error(err);
+          }
+        } catch (e) {
+          console.error(err);
+        }
+      }
+    }
+  }
+}
+const emptyIcon = {
+  ...defaultIconProps,
+  body: ""
+};
+const Icon = defineComponent((props, { emit }) => {
+  const loader = ref(null);
+  function abortLoading() {
+    if (loader.value) {
+      loader.value.abort?.();
+      loader.value = null;
+    }
+  }
+  const rendering = ref(!!props.ssr);
+  const lastRenderedIconName = ref("");
+  const iconData = shallowRef(null);
+  function getIcon2() {
+    const icon = props.icon;
+    if (typeof icon === "object" && icon !== null && typeof icon.body === "string") {
+      lastRenderedIconName.value = "";
+      return {
+        data: icon
+      };
+    }
+    let iconName;
+    if (typeof icon !== "string" || (iconName = stringToIcon(icon, false, true)) === null) {
+      return null;
+    }
+    let data = getIconData(iconName);
+    if (!data) {
+      const oldState = loader.value;
+      if (!oldState || oldState.name !== icon) {
+        if (data === null) {
+          loader.value = {
+            name: icon
+          };
+        } else {
+          loader.value = {
+            name: icon,
+            abort: loadIcons([iconName], updateIconData)
+          };
+        }
+      }
+      return null;
+    }
+    abortLoading();
+    if (lastRenderedIconName.value !== icon) {
+      lastRenderedIconName.value = icon;
+      nextTick(() => {
+        emit("load", icon);
+      });
+    }
+    const customise = props.customise;
+    if (customise) {
+      data = Object.assign({}, data);
+      const customised = customise(data.body, iconName.name, iconName.prefix, iconName.provider);
+      if (typeof customised === "string") {
+        data.body = customised;
+      }
+    }
+    const classes = ["iconify"];
+    if (iconName.prefix !== "") {
+      classes.push("iconify--" + iconName.prefix);
+    }
+    if (iconName.provider !== "") {
+      classes.push("iconify--" + iconName.provider);
+    }
+    return { data, classes };
+  }
+  function updateIconData() {
+    const icon = getIcon2();
+    if (!icon) {
+      iconData.value = null;
+    } else if (icon.data !== iconData.value?.data) {
+      iconData.value = icon;
+    }
+  }
+  if (rendering.value) {
+    updateIconData();
+  } else {
+    onMounted(() => {
+      rendering.value = true;
+      updateIconData();
+    });
+  }
+  watch(() => props.icon, updateIconData);
+  onUnmounted(abortLoading);
+  return () => {
+    const icon = iconData.value;
+    if (!icon) {
+      return render(emptyIcon, props);
+    }
+    let newProps = props;
+    if (icon.classes) {
+      newProps = {
+        ...props,
+        class: icon.classes.join(" ")
+      };
+    }
+    return render({
+      ...defaultIconProps,
+      ...icon.data
+    }, newProps);
+  };
+}, {
+  props: [
+    // Icon and render mode
+    "icon",
+    "mode",
+    "ssr",
+    // Layout and style
+    "width",
+    "height",
+    "style",
+    "color",
+    "inline",
+    // Transformations
+    "rotate",
+    "hFlip",
+    "horizontalFlip",
+    "vFlip",
+    "verticalFlip",
+    "flip",
+    // Misc
+    "id",
+    "ariaHidden",
+    "customise",
+    "title"
+  ],
+  emits: ["load"]
+});
+const _sfc_main$5 = {
+  __name: "Icon",
+  props: {
+    name: { type: String, required: true }
+  },
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Icon), {
+        icon: __props.name.replace(/^i-/, "")
+      }, null, 8, ["icon"]);
+    };
+  }
+};
+const ImageComponent = "img";
+const avatarGroupInjectionKey = Symbol("nuxt-ui.avatar-group");
+function useAvatarGroup(props) {
+  const avatarGroup = inject(avatarGroupInjectionKey, void 0);
+  const size = computed(() => props.size ?? avatarGroup?.value.size);
+  provide(avatarGroupInjectionKey, computed(() => ({ size: size.value })));
+  return {
+    size
+  };
+}
+const theme$3 = {
+  "slots": {
+    "root": "relative inline-flex items-center justify-center shrink-0",
+    "base": "rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap"
+  },
+  "variants": {
+    "color": {
+      "primary": "bg-primary",
+      "secondary": "bg-secondary",
+      "success": "bg-success",
+      "info": "bg-info",
+      "warning": "bg-warning",
+      "error": "bg-error",
+      "neutral": "bg-inverted"
+    },
+    "size": {
+      "3xs": "h-[4px] min-w-[4px] text-[4px]",
+      "2xs": "h-[5px] min-w-[5px] text-[5px]",
+      "xs": "h-[6px] min-w-[6px] text-[6px]",
+      "sm": "h-[7px] min-w-[7px] text-[7px]",
+      "md": "h-[8px] min-w-[8px] text-[8px]",
+      "lg": "h-[9px] min-w-[9px] text-[9px]",
+      "xl": "h-[10px] min-w-[10px] text-[10px]",
+      "2xl": "h-[11px] min-w-[11px] text-[11px]",
+      "3xl": "h-[12px] min-w-[12px] text-[12px]"
+    },
+    "position": {
+      "top-right": "top-0 right-0",
+      "bottom-right": "bottom-0 right-0",
+      "top-left": "top-0 left-0",
+      "bottom-left": "bottom-0 left-0"
+    },
+    "inset": {
+      "false": ""
+    },
+    "standalone": {
+      "false": "absolute"
+    }
+  },
+  "compoundVariants": [
+    {
+      "position": "top-right",
+      "inset": false,
+      "class": "-translate-y-1/2 translate-x-1/2 transform"
+    },
+    {
+      "position": "bottom-right",
+      "inset": false,
+      "class": "translate-y-1/2 translate-x-1/2 transform"
+    },
+    {
+      "position": "top-left",
+      "inset": false,
+      "class": "-translate-y-1/2 -translate-x-1/2 transform"
+    },
+    {
+      "position": "bottom-left",
+      "inset": false,
+      "class": "translate-y-1/2 -translate-x-1/2 transform"
+    }
+  ],
+  "defaultVariants": {
+    "size": "md",
+    "color": "primary",
+    "position": "top-right"
+  }
+};
+const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
+  __name: "Chip",
+  props: /* @__PURE__ */ mergeModels({
+    as: { type: null, required: false },
+    text: { type: [String, Number], required: false },
+    color: { type: null, required: false },
+    size: { type: null, required: false },
+    position: { type: null, required: false },
+    inset: { type: Boolean, required: false, default: false },
+    standalone: { type: Boolean, required: false, default: false },
+    class: { type: null, required: false },
+    ui: { type: null, required: false }
+  }, {
+    "show": { type: Boolean, ...{ default: true } },
+    "showModifiers": {}
+  }),
+  emits: ["update:show"],
+  setup(__props) {
+    const props = __props;
+    const show = useModel(__props, "show", { type: Boolean, ...{ default: true } });
+    const { size } = useAvatarGroup(props);
+    const appConfig2 = useAppConfig();
+    const ui = computed(() => tv({ extend: tv(theme$3), ...appConfig2.ui?.chip || {} })({
+      color: props.color,
+      size: size.value,
+      position: props.position,
+      inset: props.inset,
+      standalone: props.standalone
+    }));
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        as: __props.as,
+        class: normalizeClass(ui.value.root({ class: [props.ui?.root, props.class] }))
+      }, {
+        default: withCtx(() => [
+          createVNode(unref(Slot), normalizeProps(guardReactiveProps(_ctx.$attrs)), {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default")
+            ]),
+            _: 3
+          }, 16),
+          show.value ? (openBlock(), createElementBlock("span", {
+            key: 0,
+            class: normalizeClass(ui.value.base({ class: props.ui?.base }))
+          }, [
+            renderSlot(_ctx.$slots, "content", {}, () => [
+              createTextVNode(toDisplayString(__props.text), 1)
+            ])
+          ], 2)) : createCommentVNode("", true)
+        ]),
+        _: 3
+      }, 8, ["as", "class"]);
+    };
+  }
+});
+const theme$2 = {
+  "slots": {
+    "root": "inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated",
+    "image": "h-full w-full rounded-[inherit] object-cover",
+    "fallback": "font-medium leading-none text-muted truncate",
+    "icon": "text-muted shrink-0"
+  },
+  "variants": {
+    "size": {
+      "3xs": {
+        "root": "size-4 text-[8px]"
+      },
+      "2xs": {
+        "root": "size-5 text-[10px]"
+      },
+      "xs": {
+        "root": "size-6 text-xs"
+      },
+      "sm": {
+        "root": "size-7 text-sm"
+      },
+      "md": {
+        "root": "size-8 text-base"
+      },
+      "lg": {
+        "root": "size-9 text-lg"
+      },
+      "xl": {
+        "root": "size-10 text-xl"
+      },
+      "2xl": {
+        "root": "size-11 text-[22px]"
+      },
+      "3xl": {
+        "root": "size-12 text-2xl"
+      }
+    }
+  },
+  "defaultVariants": {
+    "size": "md"
+  }
+};
+const _sfc_main$3 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
+  __name: "Avatar",
+  props: {
+    as: { type: null, required: false, default: "span" },
+    src: { type: String, required: false },
+    alt: { type: String, required: false },
+    icon: { type: String, required: false },
+    text: { type: String, required: false },
+    size: { type: null, required: false },
+    chip: { type: [Boolean, Object], required: false },
+    class: { type: null, required: false },
+    style: { type: null, required: false },
+    ui: { type: null, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const fallback = computed(() => props.text || (props.alt || "").split(" ").map((word) => word.charAt(0)).join("").substring(0, 2));
+    const appConfig2 = useAppConfig();
+    const { size } = useAvatarGroup(props);
+    const ui = computed(() => tv({ extend: tv(theme$2), ...appConfig2.ui?.avatar || {} })({
+      size: size.value
+    }));
+    const sizePx = computed(() => ({
+      "3xs": 16,
+      "2xs": 20,
+      "xs": 24,
+      "sm": 28,
+      "md": 32,
+      "lg": 36,
+      "xl": 40,
+      "2xl": 44,
+      "3xl": 48
+    })[props.size || "md"]);
+    const error = ref(false);
+    watch(() => props.src, () => {
+      if (error.value) {
+        error.value = false;
+      }
+    });
+    function onError() {
+      error.value = true;
+    }
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(resolveDynamicComponent(props.chip ? _sfc_main$4 : unref(Primitive)), mergeProps({ as: __props.as }, props.chip ? typeof props.chip === "object" ? { inset: true, ...props.chip } : { inset: true } : {}, {
+        class: ui.value.root({ class: [props.ui?.root, props.class] }),
+        style: props.style
+      }), {
+        default: withCtx(() => [
+          __props.src && !error.value ? (openBlock(), createBlock(resolveDynamicComponent(unref(ImageComponent)), mergeProps({
+            key: 0,
+            role: "img",
+            src: __props.src,
+            alt: __props.alt,
+            width: sizePx.value,
+            height: sizePx.value
+          }, _ctx.$attrs, {
+            class: ui.value.image({ class: props.ui?.image }),
+            onError
+          }), null, 16, ["src", "alt", "width", "height", "class"])) : (openBlock(), createBlock(unref(Slot), normalizeProps(mergeProps({ key: 1 }, _ctx.$attrs)), {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default", {}, () => [
+                __props.icon ? (openBlock(), createBlock(_sfc_main$5, {
+                  key: 0,
+                  name: __props.icon,
+                  class: normalizeClass(ui.value.icon({ class: props.ui?.icon }))
+                }, null, 8, ["name", "class"])) : (openBlock(), createElementBlock("span", {
+                  key: 1,
+                  class: normalizeClass(ui.value.fallback({ class: props.ui?.fallback }))
+                }, toDisplayString(fallback.value || " "), 3))
+              ])
+            ]),
+            _: 3
+          }, 16))
+        ]),
+        _: 3
+      }, 16, ["as", "class", "style"]);
+    };
+  }
+});
+function useComponentIcons(componentProps) {
+  const appConfig2 = useAppConfig();
+  const props = computed(() => toValue$1(componentProps));
+  const isLeading = computed(() => props.value.icon && props.value.leading || props.value.icon && !props.value.trailing || props.value.loading && !props.value.trailing || !!props.value.leadingIcon);
+  const isTrailing = computed(() => props.value.icon && props.value.trailing || props.value.loading && props.value.trailing || !!props.value.trailingIcon);
+  const leadingIconName = computed(() => {
+    if (props.value.loading) {
+      return props.value.loadingIcon || appConfig2.ui.icons.loading;
+    }
+    return props.value.leadingIcon || props.value.icon;
+  });
+  const trailingIconName = computed(() => {
+    if (props.value.loading && !isLeading.value) {
+      return props.value.loadingIcon || appConfig2.ui.icons.loading;
+    }
+    return props.value.trailingIcon || props.value.icon;
+  });
+  return {
+    isLeading,
+    isTrailing,
+    leadingIconName,
+    trailingIconName
+  };
+}
+const buttonGroupInjectionKey = Symbol("nuxt-ui.button-group");
+function useButtonGroup(props) {
+  const buttonGroup = inject(buttonGroupInjectionKey, void 0);
+  return {
+    orientation: computed(() => buttonGroup?.value.orientation),
+    size: computed(() => props?.size ?? buttonGroup?.value.size)
+  };
+}
+const formLoadingInjectionKey = Symbol("nuxt-ui.form-loading");
+function pickLinkProps(link) {
+  const keys = Object.keys(link);
+  const ariaKeys = keys.filter((key) => key.startsWith("aria-"));
+  const dataKeys = keys.filter((key) => key.startsWith("data-"));
+  const propsToInclude = [
+    "active",
+    "activeClass",
+    "ariaCurrentValue",
+    "as",
+    "disabled",
+    "exact",
+    "exactActiveClass",
+    "exactHash",
+    "exactQuery",
+    "external",
+    "href",
+    "download",
+    "inactiveClass",
+    "noPrefetch",
+    "noRel",
+    "prefetch",
+    "prefetchedClass",
+    "rel",
+    "replace",
+    "target",
+    "to",
+    "type",
+    "title",
+    "onClick",
+    ...ariaKeys,
+    ...dataKeys
+  ];
+  return reactivePick(link, ...propsToInclude);
+}
+function isPartiallyEqual(item1, item2) {
+  const diffedKeys = diff(item1, item2).reduce((filtered, q2) => {
+    if (q2.type === "added") {
+      filtered.add(q2.key);
+    }
+    return filtered;
+  }, /* @__PURE__ */ new Set());
+  const item1Filtered = Object.fromEntries(Object.entries(item1).filter(([key]) => !diffedKeys.has(key)));
+  const item2Filtered = Object.fromEntries(Object.entries(item2).filter(([key]) => !diffedKeys.has(key)));
+  return isEqual(item1Filtered, item2Filtered);
+}
+const PROTOCOL_STRICT_REGEX = /^[\s\w\0+.-]{2,}:([/\\]{1,2})/;
+const PROTOCOL_REGEX = /^[\s\w\0+.-]{2,}:([/\\]{2})?/;
+const PROTOCOL_RELATIVE_REGEX = /^([/\\]\s*){2,}[^/\\]/;
+function hasProtocol(inputString, opts = {}) {
+  if (typeof opts === "boolean") {
+    opts = { acceptRelative: opts };
+  }
+  if (opts.strict) {
+    return PROTOCOL_STRICT_REGEX.test(inputString);
+  }
+  return PROTOCOL_REGEX.test(inputString) || (opts.acceptRelative ? PROTOCOL_RELATIVE_REGEX.test(inputString) : false);
+}
+const _sfc_main$2 = {
+  __name: "LinkBase",
+  props: {
+    as: { type: String, required: false, default: "button" },
+    type: { type: String, required: false, default: "button" },
+    disabled: { type: Boolean, required: false },
+    onClick: { type: [Function, Array], required: false },
+    href: { type: String, required: false },
+    navigate: { type: Function, required: false },
+    target: { type: [String, Object, null], required: false },
+    rel: { type: [String, Object, null], required: false },
+    active: { type: Boolean, required: false },
+    isExternal: { type: Boolean, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    function onClickWrapper(e) {
+      if (props.disabled) {
+        e.stopPropagation();
+        e.preventDefault();
+        return;
+      }
+      if (props.onClick) {
+        for (const onClick of Array.isArray(props.onClick) ? props.onClick : [props.onClick]) {
+          onClick(e);
+        }
+      }
+      if (props.href && props.navigate && !props.isExternal) {
+        props.navigate(e);
+      }
+    }
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), mergeProps(__props.href ? {
+        "as": "a",
+        "href": __props.disabled ? void 0 : __props.href,
+        "aria-disabled": __props.disabled ? "true" : void 0,
+        "role": __props.disabled ? "link" : void 0,
+        "tabindex": __props.disabled ? -1 : void 0
+      } : __props.as === "button" ? {
+        as: __props.as,
+        type: __props.type,
+        disabled: __props.disabled
+      } : {
+        as: __props.as
+      }, {
+        rel: __props.rel,
+        target: __props.target,
+        onClick: onClickWrapper
+      }), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16, ["rel", "target"]);
+    };
+  }
+};
+const theme$1 = {
+  "base": "focus-visible:outline-primary",
+  "variants": {
+    "active": {
+      "true": "text-primary",
+      "false": "text-muted"
+    },
+    "disabled": {
+      "true": "cursor-not-allowed opacity-75"
+    }
+  },
+  "compoundVariants": [
+    {
+      "active": false,
+      "disabled": false,
+      "class": [
+        "hover:text-default",
+        "transition-colors"
+      ]
+    }
+  ]
+};
+const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
+  __name: "Link",
+  props: {
+    as: { type: null, required: false, default: "button" },
+    type: { type: null, required: false, default: "button" },
+    disabled: { type: Boolean, required: false },
+    active: { type: Boolean, required: false, default: void 0 },
+    exact: { type: Boolean, required: false },
+    exactQuery: { type: [Boolean, String], required: false },
+    exactHash: { type: Boolean, required: false },
+    inactiveClass: { type: String, required: false, default: "" },
+    custom: { type: Boolean, required: false },
+    raw: { type: Boolean, required: false },
+    class: { type: null, required: false },
+    to: { type: null, required: false },
+    href: { type: null, required: false },
+    external: { type: Boolean, required: false },
+    target: { type: [String, Object, null], required: false },
+    rel: { type: [String, Object, null], required: false },
+    noRel: { type: Boolean, required: false },
+    prefetchedClass: { type: String, required: false },
+    prefetch: { type: Boolean, required: false },
+    prefetchOn: { type: [String, Object], required: false },
+    noPrefetch: { type: Boolean, required: false },
+    activeClass: { type: String, required: false, default: "" },
+    exactActiveClass: { type: String, required: false },
+    ariaCurrentValue: { type: String, required: false, default: "page" },
+    viewTransition: { type: Boolean, required: false },
+    replace: { type: Boolean, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const route = useRoute();
+    const appConfig2 = useAppConfig();
+    const routerLinkProps = useForwardProps(reactiveOmit(props, "as", "type", "disabled", "active", "exact", "exactQuery", "exactHash", "activeClass", "inactiveClass", "to", "href", "raw", "custom", "class"));
+    const ui = computed(() => tv({
+      extend: tv(theme$1),
+      ...defu({
+        variants: {
+          active: {
+            true: props.activeClass,
+            false: props.inactiveClass
+          }
+        }
+      }, appConfig2.ui?.link || {})
+    }));
+    const to = computed(() => props.to ?? props.href);
+    const isExternal = computed(() => {
+      if (props.external) {
+        return true;
+      }
+      if (!to.value) {
+        return false;
+      }
+      return typeof to.value === "string" && hasProtocol(to.value, { acceptRelative: true });
+    });
+    function isLinkActive({ route: linkRoute, isActive, isExactActive }) {
+      if (props.active !== void 0) {
+        return props.active;
+      }
+      if (!to.value) {
+        return false;
+      }
+      if (props.exactQuery === "partial") {
+        if (!isPartiallyEqual(linkRoute.query, route.query)) return false;
+      } else if (props.exactQuery === true) {
+        if (!isEqual(linkRoute.query, route.query)) return false;
+      }
+      if (props.exactHash && linkRoute.hash !== route.hash) {
+        return false;
+      }
+      if (props.exact && isExactActive) {
+        return true;
+      }
+      if (!props.exact && isActive) {
+        return true;
+      }
+      return false;
+    }
+    function resolveLinkClass({ route: route2, isActive, isExactActive } = {}) {
+      const active = isLinkActive({ route: route2, isActive, isExactActive });
+      if (props.raw) {
+        return [props.class, active ? props.activeClass : props.inactiveClass];
+      }
+      return ui.value({ class: props.class, active, disabled: props.disabled });
+    }
+    return (_ctx, _cache) => {
+      return !isExternal.value && !!to.value ? (openBlock(), createBlock(unref(RouterLink), mergeProps({ key: 0 }, unref(routerLinkProps), {
+        to: to.value,
+        custom: ""
+      }), {
+        default: withCtx(({ href, navigate, route: linkRoute, isActive, isExactActive }) => [
+          __props.custom ? renderSlot(_ctx.$slots, "default", normalizeProps(mergeProps({ key: 0 }, {
+            ..._ctx.$attrs,
+            ...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
+            as: __props.as,
+            type: __props.type,
+            disabled: __props.disabled,
+            href,
+            navigate,
+            active: isLinkActive({ route: linkRoute, isActive, isExactActive })
+          }))) : (openBlock(), createBlock(_sfc_main$2, mergeProps({ key: 1 }, {
+            ..._ctx.$attrs,
+            ...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
+            as: __props.as,
+            type: __props.type,
+            disabled: __props.disabled,
+            href,
+            navigate
+          }, {
+            class: resolveLinkClass({ route: linkRoute, isActive, isExactActive })
+          }), {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default", {
+                active: isLinkActive({ route: linkRoute, isActive, isExactActive })
+              })
+            ]),
+            _: 2
+          }, 1040, ["class"]))
+        ]),
+        _: 3
+      }, 16, ["to"])) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
+        __props.custom ? renderSlot(_ctx.$slots, "default", normalizeProps(mergeProps({ key: 0 }, {
+          ..._ctx.$attrs,
+          as: __props.as,
+          type: __props.type,
+          disabled: __props.disabled,
+          href: to.value,
+          target: isExternal.value ? "_blank" : void 0,
+          active: __props.active,
+          isExternal: isExternal.value
+        }))) : (openBlock(), createBlock(_sfc_main$2, mergeProps({ key: 1 }, {
+          ..._ctx.$attrs,
+          as: __props.as,
+          type: __props.type,
+          disabled: __props.disabled,
+          href: to.value,
+          target: isExternal.value ? "_blank" : void 0,
+          isExternal: isExternal.value
+        }, {
+          class: resolveLinkClass()
+        }), {
+          default: withCtx(() => [
+            renderSlot(_ctx.$slots, "default", { active: __props.active })
+          ]),
+          _: 3
+        }, 16, ["class"]))
+      ], 64));
+    };
+  }
+});
+const theme = {
+  "slots": {
+    "base": [
+      "rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75",
+      "transition-colors"
+    ],
+    "label": "truncate",
+    "leadingIcon": "shrink-0",
+    "leadingAvatar": "shrink-0",
+    "leadingAvatarSize": "",
+    "trailingIcon": "shrink-0"
+  },
+  "variants": {
+    "buttonGroup": {
+      "horizontal": "not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1]",
+      "vertical": "not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none focus-visible:z-[1]"
+    },
+    "color": {
+      "primary": "",
+      "secondary": "",
+      "success": "",
+      "info": "",
+      "warning": "",
+      "error": "",
+      "neutral": ""
+    },
+    "variant": {
+      "solid": "",
+      "outline": "",
+      "soft": "",
+      "subtle": "",
+      "ghost": "",
+      "link": ""
+    },
+    "size": {
+      "xs": {
+        "base": "px-2 py-1 text-xs gap-1",
+        "leadingIcon": "size-4",
+        "leadingAvatarSize": "3xs",
+        "trailingIcon": "size-4"
+      },
+      "sm": {
+        "base": "px-2.5 py-1.5 text-xs gap-1.5",
+        "leadingIcon": "size-4",
+        "leadingAvatarSize": "3xs",
+        "trailingIcon": "size-4"
+      },
+      "md": {
+        "base": "px-2.5 py-1.5 text-sm gap-1.5",
+        "leadingIcon": "size-5",
+        "leadingAvatarSize": "2xs",
+        "trailingIcon": "size-5"
+      },
+      "lg": {
+        "base": "px-3 py-2 text-sm gap-2",
+        "leadingIcon": "size-5",
+        "leadingAvatarSize": "2xs",
+        "trailingIcon": "size-5"
+      },
+      "xl": {
+        "base": "px-3 py-2 text-base gap-2",
+        "leadingIcon": "size-6",
+        "leadingAvatarSize": "xs",
+        "trailingIcon": "size-6"
+      }
+    },
+    "block": {
+      "true": {
+        "base": "w-full justify-center",
+        "trailingIcon": "ms-auto"
+      }
+    },
+    "square": {
+      "true": ""
+    },
+    "leading": {
+      "true": ""
+    },
+    "trailing": {
+      "true": ""
+    },
+    "loading": {
+      "true": ""
+    },
+    "active": {
+      "true": {
+        "base": ""
+      },
+      "false": {
+        "base": ""
+      }
+    }
+  },
+  "compoundVariants": [
+    {
+      "color": "primary",
+      "variant": "solid",
+      "class": "text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+    },
+    {
+      "color": "secondary",
+      "variant": "solid",
+      "class": "text-inverted bg-secondary hover:bg-secondary/75 active:bg-secondary/75 disabled:bg-secondary aria-disabled:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+    },
+    {
+      "color": "success",
+      "variant": "solid",
+      "class": "text-inverted bg-success hover:bg-success/75 active:bg-success/75 disabled:bg-success aria-disabled:bg-success focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success"
+    },
+    {
+      "color": "info",
+      "variant": "solid",
+      "class": "text-inverted bg-info hover:bg-info/75 active:bg-info/75 disabled:bg-info aria-disabled:bg-info focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-info"
+    },
+    {
+      "color": "warning",
+      "variant": "solid",
+      "class": "text-inverted bg-warning hover:bg-warning/75 active:bg-warning/75 disabled:bg-warning aria-disabled:bg-warning focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-warning"
+    },
+    {
+      "color": "error",
+      "variant": "solid",
+      "class": "text-inverted bg-error hover:bg-error/75 active:bg-error/75 disabled:bg-error aria-disabled:bg-error focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-error"
+    },
+    {
+      "color": "primary",
+      "variant": "outline",
+      "class": "ring ring-inset ring-primary/50 text-primary hover:bg-primary/10 active:bg-primary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+    },
+    {
+      "color": "secondary",
+      "variant": "outline",
+      "class": "ring ring-inset ring-secondary/50 text-secondary hover:bg-secondary/10 active:bg-secondary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+    },
+    {
+      "color": "success",
+      "variant": "outline",
+      "class": "ring ring-inset ring-success/50 text-success hover:bg-success/10 active:bg-success/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-success"
+    },
+    {
+      "color": "info",
+      "variant": "outline",
+      "class": "ring ring-inset ring-info/50 text-info hover:bg-info/10 active:bg-info/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-info"
+    },
+    {
+      "color": "warning",
+      "variant": "outline",
+      "class": "ring ring-inset ring-warning/50 text-warning hover:bg-warning/10 active:bg-warning/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-warning"
+    },
+    {
+      "color": "error",
+      "variant": "outline",
+      "class": "ring ring-inset ring-error/50 text-error hover:bg-error/10 active:bg-error/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-error"
+    },
+    {
+      "color": "primary",
+      "variant": "soft",
+      "class": "text-primary bg-primary/10 hover:bg-primary/15 active:bg-primary/15 focus:outline-none focus-visible:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10"
+    },
+    {
+      "color": "secondary",
+      "variant": "soft",
+      "class": "text-secondary bg-secondary/10 hover:bg-secondary/15 active:bg-secondary/15 focus:outline-none focus-visible:bg-secondary/15 disabled:bg-secondary/10 aria-disabled:bg-secondary/10"
+    },
+    {
+      "color": "success",
+      "variant": "soft",
+      "class": "text-success bg-success/10 hover:bg-success/15 active:bg-success/15 focus:outline-none focus-visible:bg-success/15 disabled:bg-success/10 aria-disabled:bg-success/10"
+    },
+    {
+      "color": "info",
+      "variant": "soft",
+      "class": "text-info bg-info/10 hover:bg-info/15 active:bg-info/15 focus:outline-none focus-visible:bg-info/15 disabled:bg-info/10 aria-disabled:bg-info/10"
+    },
+    {
+      "color": "warning",
+      "variant": "soft",
+      "class": "text-warning bg-warning/10 hover:bg-warning/15 active:bg-warning/15 focus:outline-none focus-visible:bg-warning/15 disabled:bg-warning/10 aria-disabled:bg-warning/10"
+    },
+    {
+      "color": "error",
+      "variant": "soft",
+      "class": "text-error bg-error/10 hover:bg-error/15 active:bg-error/15 focus:outline-none focus-visible:bg-error/15 disabled:bg-error/10 aria-disabled:bg-error/10"
+    },
+    {
+      "color": "primary",
+      "variant": "subtle",
+      "class": "text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+    },
+    {
+      "color": "secondary",
+      "variant": "subtle",
+      "class": "text-secondary ring ring-inset ring-secondary/25 bg-secondary/10 hover:bg-secondary/15 active:bg-secondary/15 disabled:bg-secondary/10 aria-disabled:bg-secondary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+    },
+    {
+      "color": "success",
+      "variant": "subtle",
+      "class": "text-success ring ring-inset ring-success/25 bg-success/10 hover:bg-success/15 active:bg-success/15 disabled:bg-success/10 aria-disabled:bg-success/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-success"
+    },
+    {
+      "color": "info",
+      "variant": "subtle",
+      "class": "text-info ring ring-inset ring-info/25 bg-info/10 hover:bg-info/15 active:bg-info/15 disabled:bg-info/10 aria-disabled:bg-info/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-info"
+    },
+    {
+      "color": "warning",
+      "variant": "subtle",
+      "class": "text-warning ring ring-inset ring-warning/25 bg-warning/10 hover:bg-warning/15 active:bg-warning/15 disabled:bg-warning/10 aria-disabled:bg-warning/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-warning"
+    },
+    {
+      "color": "error",
+      "variant": "subtle",
+      "class": "text-error ring ring-inset ring-error/25 bg-error/10 hover:bg-error/15 active:bg-error/15 disabled:bg-error/10 aria-disabled:bg-error/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-error"
+    },
+    {
+      "color": "primary",
+      "variant": "ghost",
+      "class": "text-primary hover:bg-primary/10 active:bg-primary/10 focus:outline-none focus-visible:bg-primary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+    },
+    {
+      "color": "secondary",
+      "variant": "ghost",
+      "class": "text-secondary hover:bg-secondary/10 active:bg-secondary/10 focus:outline-none focus-visible:bg-secondary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+    },
+    {
+      "color": "success",
+      "variant": "ghost",
+      "class": "text-success hover:bg-success/10 active:bg-success/10 focus:outline-none focus-visible:bg-success/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+    },
+    {
+      "color": "info",
+      "variant": "ghost",
+      "class": "text-info hover:bg-info/10 active:bg-info/10 focus:outline-none focus-visible:bg-info/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+    },
+    {
+      "color": "warning",
+      "variant": "ghost",
+      "class": "text-warning hover:bg-warning/10 active:bg-warning/10 focus:outline-none focus-visible:bg-warning/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+    },
+    {
+      "color": "error",
+      "variant": "ghost",
+      "class": "text-error hover:bg-error/10 active:bg-error/10 focus:outline-none focus-visible:bg-error/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+    },
+    {
+      "color": "primary",
+      "variant": "link",
+      "class": "text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+    },
+    {
+      "color": "secondary",
+      "variant": "link",
+      "class": "text-secondary hover:text-secondary/75 active:text-secondary/75 disabled:text-secondary aria-disabled:text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-secondary"
+    },
+    {
+      "color": "success",
+      "variant": "link",
+      "class": "text-success hover:text-success/75 active:text-success/75 disabled:text-success aria-disabled:text-success focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-success"
+    },
+    {
+      "color": "info",
+      "variant": "link",
+      "class": "text-info hover:text-info/75 active:text-info/75 disabled:text-info aria-disabled:text-info focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-info"
+    },
+    {
+      "color": "warning",
+      "variant": "link",
+      "class": "text-warning hover:text-warning/75 active:text-warning/75 disabled:text-warning aria-disabled:text-warning focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-warning"
+    },
+    {
+      "color": "error",
+      "variant": "link",
+      "class": "text-error hover:text-error/75 active:text-error/75 disabled:text-error aria-disabled:text-error focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error"
+    },
+    {
+      "color": "neutral",
+      "variant": "solid",
+      "class": "text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted"
+    },
+    {
+      "color": "neutral",
+      "variant": "outline",
+      "class": "ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default focus:outline-none focus-visible:ring-2 focus-visible:ring-inverted"
+    },
+    {
+      "color": "neutral",
+      "variant": "soft",
+      "class": "text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 focus:outline-none focus-visible:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated"
+    },
+    {
+      "color": "neutral",
+      "variant": "subtle",
+      "class": "ring ring-inset ring-accented text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated focus:outline-none focus-visible:ring-2 focus-visible:ring-inverted"
+    },
+    {
+      "color": "neutral",
+      "variant": "ghost",
+      "class": "text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent"
+    },
+    {
+      "color": "neutral",
+      "variant": "link",
+      "class": "text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted"
+    },
+    {
+      "size": "xs",
+      "square": true,
+      "class": "p-1"
+    },
+    {
+      "size": "sm",
+      "square": true,
+      "class": "p-1.5"
+    },
+    {
+      "size": "md",
+      "square": true,
+      "class": "p-1.5"
+    },
+    {
+      "size": "lg",
+      "square": true,
+      "class": "p-2"
+    },
+    {
+      "size": "xl",
+      "square": true,
+      "class": "p-2"
+    },
+    {
+      "loading": true,
+      "leading": true,
+      "class": {
+        "leadingIcon": "animate-spin"
+      }
+    },
+    {
+      "loading": true,
+      "leading": false,
+      "trailing": true,
+      "class": {
+        "trailingIcon": "animate-spin"
+      }
+    }
+  ],
+  "defaultVariants": {
+    "color": "primary",
+    "variant": "solid",
+    "size": "md"
+  }
+};
+const _sfc_main = {
+  __name: "Button",
+  props: {
+    label: { type: String, required: false },
+    color: { type: null, required: false },
+    activeColor: { type: null, required: false },
+    variant: { type: null, required: false },
+    activeVariant: { type: null, required: false },
+    size: { type: null, required: false },
+    square: { type: Boolean, required: false },
+    block: { type: Boolean, required: false },
+    loadingAuto: { type: Boolean, required: false },
+    onClick: { type: [Function, Array], required: false },
+    class: { type: null, required: false },
+    ui: { type: null, required: false },
+    icon: { type: String, required: false },
+    avatar: { type: Object, required: false },
+    leading: { type: Boolean, required: false },
+    leadingIcon: { type: String, required: false },
+    trailing: { type: Boolean, required: false },
+    trailingIcon: { type: String, required: false },
+    loading: { type: Boolean, required: false },
+    loadingIcon: { type: String, required: false },
+    as: { type: null, required: false },
+    type: { type: null, required: false },
+    disabled: { type: Boolean, required: false },
+    active: { type: Boolean, required: false },
+    exact: { type: Boolean, required: false },
+    exactQuery: { type: [Boolean, String], required: false },
+    exactHash: { type: Boolean, required: false },
+    inactiveClass: { type: String, required: false },
+    to: { type: null, required: false },
+    href: { type: null, required: false },
+    external: { type: Boolean, required: false },
+    target: { type: [String, Object, null], required: false },
+    rel: { type: [String, Object, null], required: false },
+    noRel: { type: Boolean, required: false },
+    prefetchedClass: { type: String, required: false },
+    prefetch: { type: Boolean, required: false },
+    prefetchOn: { type: [String, Object], required: false },
+    noPrefetch: { type: Boolean, required: false },
+    activeClass: { type: String, required: false },
+    exactActiveClass: { type: String, required: false },
+    ariaCurrentValue: { type: String, required: false },
+    viewTransition: { type: Boolean, required: false },
+    replace: { type: Boolean, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const slots = useSlots();
+    const appConfig2 = useAppConfig();
+    const { orientation, size: buttonSize } = useButtonGroup(props);
+    const linkProps = useForwardProps(pickLinkProps(props));
+    const loadingAutoState = ref(false);
+    const formLoading = inject(formLoadingInjectionKey, void 0);
+    async function onClickWrapper(event) {
+      loadingAutoState.value = true;
+      const callbacks = Array.isArray(props.onClick) ? props.onClick : [props.onClick];
+      try {
+        await Promise.all(callbacks.map((fn) => fn?.(event)));
+      } finally {
+        loadingAutoState.value = false;
+      }
+    }
+    const isLoading = computed(() => {
+      return props.loading || props.loadingAuto && (loadingAutoState.value || formLoading?.value && props.type === "submit");
+    });
+    const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(
+      computed(() => ({ ...props, loading: isLoading.value }))
+    );
+    const ui = computed(() => tv({
+      extend: tv(theme),
+      ...defu({
+        variants: {
+          active: {
+            true: {
+              base: mergeClasses(appConfig2.ui?.button?.variants?.active?.true?.base, props.activeClass)
+            },
+            false: {
+              base: mergeClasses(appConfig2.ui?.button?.variants?.active?.false?.base, props.inactiveClass)
+            }
+          }
+        }
+      }, appConfig2.ui?.button || {})
+    })({
+      color: props.color,
+      variant: props.variant,
+      size: buttonSize.value,
+      loading: isLoading.value,
+      block: props.block,
+      square: props.square || !slots.default && !props.label,
+      leading: isLeading.value,
+      trailing: isTrailing.value,
+      buttonGroup: orientation.value
+    }));
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(_sfc_main$1, mergeProps({
+        type: __props.type,
+        disabled: __props.disabled || isLoading.value
+      }, unref(omit)(unref(linkProps), ["type", "disabled", "onClick"]), { custom: "" }), {
+        default: withCtx(({ active, ...slotProps }) => [
+          createVNode(_sfc_main$2, mergeProps(slotProps, {
+            class: ui.value.base({
+              class: [props.ui?.base, props.class],
+              active,
+              ...active && __props.activeVariant ? { variant: __props.activeVariant } : {},
+              ...active && __props.activeColor ? { color: __props.activeColor } : {}
+            }),
+            onClick: onClickWrapper
+          }), {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "leading", {}, () => [
+                unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$5, {
+                  key: 0,
+                  name: unref(leadingIconName),
+                  class: normalizeClass(ui.value.leadingIcon({ class: props.ui?.leadingIcon, active }))
+                }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$3, mergeProps({
+                  key: 1,
+                  size: props.ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
+                }, __props.avatar, {
+                  class: ui.value.leadingAvatar({ class: props.ui?.leadingAvatar, active })
+                }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+              ]),
+              renderSlot(_ctx.$slots, "default", {}, () => [
+                __props.label !== void 0 && __props.label !== null ? (openBlock(), createElementBlock("span", {
+                  key: 0,
+                  class: normalizeClass(ui.value.label({ class: props.ui?.label, active }))
+                }, toDisplayString(__props.label), 3)) : createCommentVNode("", true)
+              ]),
+              renderSlot(_ctx.$slots, "trailing", {}, () => [
+                unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$5, {
+                  key: 0,
+                  name: unref(trailingIconName),
+                  class: normalizeClass(ui.value.trailingIcon({ class: props.ui?.trailingIcon, active }))
+                }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+              ])
+            ]),
+            _: 2
+          }, 1040, ["class"])
+        ]),
+        _: 3
+      }, 16, ["type", "disabled"]);
+    };
+  }
+};
+export {
+  createGlobalState as A,
+  useEmitAsProps as B,
+  createSharedComposable$1 as C,
+  tryOnBeforeUnmount as D,
+  defu as E,
+  isIOS as F,
+  useMounted as G,
+  computedEager as H,
+  refAutoReset as I,
+  makeDestructurable as J,
+  camelize as K,
+  get as L,
+  reactiveOmit as M,
+  isArrayOfArray as N,
+  _sfc_main$1 as O,
+  Primitive as P,
+  pickLinkProps as Q,
+  _sfc_main$2 as R,
+  Slot as S,
+  useButtonGroup as T,
+  useComponentIcons as U,
+  _sfc_main$3 as _,
+  useRafFn as a,
+  useForwardExpose as b,
+  createContext as c,
+  useVModel as d,
+  unrefElement as e,
+  useTimeoutFn as f,
+  useState as g,
+  useLocale as h,
+  isClient as i,
+  useForwardPropsEmits as j,
+  useAppConfig as k,
+  _sfc_main$5 as l,
+  _sfc_main as m,
+  useForwardProps as n,
+  onKeyStroke as o,
+  omit as p,
+  createSharedComposable as q,
+  reactivePick as r,
+  localeContextInjectionKey as s,
+  tv as t,
+  useTimeout as u,
+  isNullish as v,
+  isEqual as w,
+  defaultWindow as x,
+  renderSlotFragments as y,
+  useEventListener as z
+};

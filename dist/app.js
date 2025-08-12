@@ -1,1 +1,1501 @@
-import{d as D,c as m,o as p,w as g,r as E,u as o,t as ce,a as k,b as S,e as Q,f as Z,g as A,h as Ce,i as Ie,j as se,k as xe,l as B,m as _,n as O,p as J,T as Be,F as N,q as j,s as X,v as Ee,x as Pe,y as Me,z as ke,A as L,B as H,C as ee,D as W,E as qe,G as Le,H as Ne,I as Ke,J as ye,K as Ve}from"./main.js";import{P as K,c as de,u as je,a as $e,b as M,o as Oe,i as ze,d as Ue,e as we,f as He,g as We,h as Xe,j as Ye,r as pe,t as te,k as Se,_ as Ge,l as Je,m as ne,n as De,p as Qe,q as Ze,s as et}from"./Button.js";import{u as fe,_ as _e,g as ie,a as tt,P as st,c as ge,f as re,b as ot,d as at,e as nt,p as rt}from"./shared-button.js";import{_ as it}from"./card-xpto.js";import"./the-header.js";/* empty css       */import"./_plugin-vue_export-helper.js";(function(){const a=document.createElement("link").relList;if(a&&a.supports&&a.supports("modulepreload"))return;for(const d of document.querySelectorAll('link[rel="modulepreload"]'))t(d);new MutationObserver(d=>{for(const l of d)if(l.type==="childList")for(const f of l.addedNodes)f.tagName==="LINK"&&f.rel==="modulepreload"&&t(f)}).observe(document,{childList:!0,subtree:!0});function r(d){const l={};return d.integrity&&(l.integrity=d.integrity),d.referrerPolicy&&(l.referrerPolicy=d.referrerPolicy),d.crossOrigin==="use-credentials"?l.credentials="include":d.crossOrigin==="anonymous"?l.credentials="omit":l.credentials="same-origin",l}function t(d){if(d.ep)return;d.ep=!0;const l=r(d);fetch(d.href,l)}})();const Re=D({__name:"ToastAnnounceExclude",props:{altText:{},asChild:{type:Boolean},as:{}},setup(e){return(a,r)=>(p(),m(o(K),{as:a.as,"as-child":a.asChild,"data-reka-toast-announce-exclude":"","data-reka-toast-announce-alt":a.altText||void 0},{default:g(()=>[E(a.$slots,"default")]),_:3},8,["as","as-child","data-reka-toast-announce-alt"]))}}),[oe,lt]=de("ToastProvider"),ut=D({inheritAttrs:!1,__name:"ToastProvider",props:{label:{default:"Notification"},duration:{default:5e3},swipeDirection:{default:"right"},swipeThreshold:{default:50}},setup(e){const a=e,{label:r,duration:t,swipeDirection:d,swipeThreshold:l}=ce(a);fe({isProvider:!0});const f=k(),n=k(0),c=k(!1),s=k(!1);if(a.label&&typeof a.label=="string"&&!a.label.trim()){const u="Invalid prop `label` supplied to `ToastProvider`. Expected non-empty `string`.";throw new Error(u)}return lt({label:r,duration:t,swipeDirection:d,swipeThreshold:l,toastCount:n,viewport:f,onViewportChange(u){f.value=u},onToastAdd(){n.value++},onToastRemove(){n.value--},isFocusedToastEscapeKeyDownRef:c,isClosePausedRef:s}),(u,i)=>E(u.$slots,"default")}}),ct=D({__name:"ToastAnnounce",setup(e){const a=oe(),r=je(1e3),t=k(!1);return $e(()=>{t.value=!0}),(d,l)=>o(r)||t.value?(p(),m(o(_e),{key:0},{default:g(()=>[Q(Z(o(a).label.value)+" ",1),E(d.$slots,"default")]),_:3})):S("",!0)}}),dt="toast.swipeStart",pt="toast.swipeMove",ft="toast.swipeCancel",vt="toast.swipeEnd",le="toast.viewportPause",ue="toast.viewportResume";function G(e,a,r){const t=r.originalEvent.currentTarget,d=new CustomEvent(e,{bubbles:!1,cancelable:!0,detail:r});a&&t.addEventListener(e,a,{once:!0}),t.dispatchEvent(d)}function he(e,a,r=0){const t=Math.abs(e.x),d=Math.abs(e.y),l=t>d;return a==="left"||a==="right"?l&&t>r:!l&&d>r}function mt(e){return e.nodeType===e.ELEMENT_NODE}function Ae(e){const a=[];return Array.from(e.childNodes).forEach(t=>{if(t.nodeType===t.TEXT_NODE&&t.textContent&&a.push(t.textContent),mt(t)){const d=t.ariaHidden||t.hidden||t.style.display==="none",l=t.dataset.rekaToastAnnounceExclude==="";if(!d)if(l){const f=t.dataset.rekaToastAnnounceAlt;f&&a.push(f)}else a.push(...Ae(t))}}),a}const[yt,wt]=de("ToastRoot"),gt=D({inheritAttrs:!1,__name:"ToastRootImpl",props:{type:{},open:{type:Boolean,default:!1},duration:{},asChild:{type:Boolean},as:{default:"li"}},emits:["close","escapeKeyDown","pause","resume","swipeStart","swipeMove","swipeCancel","swipeEnd"],setup(e,{emit:a}){const r=e,t=a,{forwardRef:d,currentElement:l}=M(),{CollectionItem:f}=fe(),n=oe(),c=k(null),s=k(null),u=A(()=>typeof r.duration=="number"?r.duration:n.duration.value),i=k(0),w=k(u.value),$=k(0),x=k(u.value),v=$e(()=>{const T=new Date().getTime()-i.value;x.value=Math.max(w.value-T,0)},{fpsLimit:60});function h(T){T<=0||T===Number.POSITIVE_INFINITY||ze&&(window.clearTimeout($.value),i.value=new Date().getTime(),$.value=window.setTimeout(b,T))}function b(T){const P=T?.pointerType==="";l.value?.contains(ie())&&P&&n.viewport.value?.focus(),P&&(n.isClosePausedRef.value=!1),t("close")}const C=A(()=>l.value?Ae(l.value):null);if(r.type&&!["foreground","background"].includes(r.type)){const T="Invalid prop `type` supplied to `Toast`. Expected `foreground | background`.";throw new Error(T)}return Ce(T=>{const P=n.viewport.value;if(P){const y=()=>{h(w.value),v.resume(),t("resume")},R=()=>{const q=new Date().getTime()-i.value;w.value=w.value-q,window.clearTimeout($.value),v.pause(),t("pause")};return P.addEventListener(le,R),P.addEventListener(ue,y),()=>{P.removeEventListener(le,R),P.removeEventListener(ue,y)}}}),Ie(()=>[r.open,u.value],()=>{w.value=u.value,r.open&&!n.isClosePausedRef.value&&h(u.value)},{immediate:!0}),Oe("Escape",T=>{t("escapeKeyDown",T),T.defaultPrevented||(n.isFocusedToastEscapeKeyDownRef.value=!0,b())}),se(()=>{n.onToastAdd()}),xe(()=>{n.onToastRemove()}),wt({onClose:b}),(T,P)=>(p(),B(N,null,[C.value?(p(),m(ct,{key:0,role:"alert","aria-live":T.type==="foreground"?"assertive":"polite","aria-atomic":"true"},{default:g(()=>[Q(Z(C.value),1)]),_:1},8,["aria-live"])):S("",!0),o(n).viewport.value?(p(),m(Be,{key:1,to:o(n).viewport.value},[_(o(f),null,{default:g(()=>[_(o(K),O({ref:o(d),role:"alert","aria-live":"off","aria-atomic":"true",tabindex:"0"},T.$attrs,{as:T.as,"as-child":T.asChild,"data-state":T.open?"open":"closed","data-swipe-direction":o(n).swipeDirection.value,style:{userSelect:"none",touchAction:"none"},onPointerdown:P[0]||(P[0]=J(y=>{c.value={x:y.clientX,y:y.clientY}},["left"])),onPointermove:P[1]||(P[1]=y=>{if(!c.value)return;const R=y.clientX-c.value.x,q=y.clientY-c.value.y,z=!!s.value,F=["left","right"].includes(o(n).swipeDirection.value),I=["left","up"].includes(o(n).swipeDirection.value)?Math.min:Math.max,ve=F?I(0,R):0,Y=F?0:I(0,q),U=y.pointerType==="touch"?10:2,V={x:ve,y:Y},me={originalEvent:y,delta:V};z?(s.value=V,o(G)(o(pt),ae=>t("swipeMove",ae),me)):o(he)(V,o(n).swipeDirection.value,U)?(s.value=V,o(G)(o(dt),ae=>t("swipeStart",ae),me),y.target.setPointerCapture(y.pointerId)):(Math.abs(R)>U||Math.abs(q)>U)&&(c.value=null)}),onPointerup:P[2]||(P[2]=y=>{const R=s.value,q=y.target;if(q.hasPointerCapture(y.pointerId)&&q.releasePointerCapture(y.pointerId),s.value=null,c.value=null,R){const z=y.currentTarget,F={originalEvent:y,delta:R};o(he)(R,o(n).swipeDirection.value,o(n).swipeThreshold.value)?o(G)(o(vt),I=>t("swipeEnd",I),F):o(G)(o(ft),I=>t("swipeCancel",I),F),z?.addEventListener("click",I=>I.preventDefault(),{once:!0})}})}),{default:g(()=>[E(T.$slots,"default",{remaining:x.value,duration:u.value})]),_:3},16,["as","as-child","data-state","data-swipe-direction"])]),_:3})],8,["to"])):S("",!0)],64))}}),Fe=D({__name:"ToastClose",props:{asChild:{type:Boolean},as:{default:"button"}},setup(e){const a=e,r=yt(),{forwardRef:t}=M();return(d,l)=>(p(),m(Re,{"as-child":""},{default:g(()=>[_(o(K),O(a,{ref:o(t),type:d.as==="button"?"button":void 0,onClick:o(r).onClose}),{default:g(()=>[E(d.$slots,"default")]),_:3},16,["type","onClick"])]),_:3}))}}),be=D({__name:"ToastAction",props:{altText:{},asChild:{type:Boolean},as:{}},setup(e){if(!e.altText)throw new Error("Missing prop `altText` expected on `ToastAction`");const{forwardRef:r}=M();return(t,d)=>t.altText?(p(),m(Re,{key:0,"alt-text":t.altText,"as-child":""},{default:g(()=>[_(Fe,{ref:o(r),as:t.as,"as-child":t.asChild},{default:g(()=>[E(t.$slots,"default")]),_:3},8,["as","as-child"])]),_:3},8,["alt-text"])):S("",!0)}}),ht=D({__name:"ToastDescription",props:{asChild:{type:Boolean},as:{}},setup(e){const a=e;return M(),(r,t)=>(p(),m(o(K),j(X(a)),{default:g(()=>[E(r.$slots,"default")]),_:3},16))}}),bt=D({__name:"ToastPortal",props:{to:{},disabled:{type:Boolean},defer:{type:Boolean},forceMount:{type:Boolean}},setup(e){const a=e;return(r,t)=>(p(),m(o(tt),j(X(a)),{default:g(()=>[E(r.$slots,"default")]),_:3},16))}}),Tt=D({__name:"ToastRoot",props:{defaultOpen:{type:Boolean,default:!0},forceMount:{type:Boolean},type:{default:"foreground"},open:{type:Boolean,default:void 0},duration:{},asChild:{type:Boolean},as:{default:"li"}},emits:["escapeKeyDown","pause","resume","swipeStart","swipeMove","swipeCancel","swipeEnd","update:open"],setup(e,{emit:a}){const r=e,t=a,{forwardRef:d}=M(),l=Ue(r,"open",t,{defaultValue:r.defaultOpen,passive:r.open===void 0});return(f,n)=>(p(),m(o(st),{present:f.forceMount||o(l)},{default:g(()=>[_(gt,O({ref:o(d),open:o(l),type:f.type,as:f.as,"as-child":f.asChild,duration:f.duration},f.$attrs,{onClose:n[0]||(n[0]=c=>l.value=!1),onPause:n[1]||(n[1]=c=>t("pause")),onResume:n[2]||(n[2]=c=>t("resume")),onEscapeKeyDown:n[3]||(n[3]=c=>t("escapeKeyDown",c)),onSwipeStart:n[4]||(n[4]=c=>{t("swipeStart",c),c.defaultPrevented||c.currentTarget.setAttribute("data-swipe","start")}),onSwipeMove:n[5]||(n[5]=c=>{if(t("swipeMove",c),!c.defaultPrevented){const{x:s,y:u}=c.detail.delta,i=c.currentTarget;i.setAttribute("data-swipe","move"),i.style.setProperty("--reka-toast-swipe-move-x",`${s}px`),i.style.setProperty("--reka-toast-swipe-move-y",`${u}px`)}}),onSwipeCancel:n[6]||(n[6]=c=>{if(t("swipeCancel",c),!c.defaultPrevented){const s=c.currentTarget;s.setAttribute("data-swipe","cancel"),s.style.removeProperty("--reka-toast-swipe-move-x"),s.style.removeProperty("--reka-toast-swipe-move-y"),s.style.removeProperty("--reka-toast-swipe-end-x"),s.style.removeProperty("--reka-toast-swipe-end-y")}}),onSwipeEnd:n[7]||(n[7]=c=>{if(t("swipeEnd",c),!c.defaultPrevented){const{x:s,y:u}=c.detail.delta,i=c.currentTarget;i.setAttribute("data-swipe","end"),i.style.removeProperty("--reka-toast-swipe-move-x"),i.style.removeProperty("--reka-toast-swipe-move-y"),i.style.setProperty("--reka-toast-swipe-end-x",`${s}px`),i.style.setProperty("--reka-toast-swipe-end-y",`${u}px`),l.value=!1}})}),{default:g(({remaining:c,duration:s})=>[E(f.$slots,"default",{remaining:c,duration:s,open:o(l)})]),_:3},16,["open","type","as","as-child","duration"])]),_:3},8,["present"]))}}),Ct=D({__name:"ToastTitle",props:{asChild:{type:Boolean},as:{}},setup(e){const a=e;return M(),(r,t)=>(p(),m(o(K),j(X(a)),{default:g(()=>[E(r.$slots,"default")]),_:3},16))}}),Te=D({__name:"FocusProxy",emits:["focusFromOutsideViewport"],setup(e,{emit:a}){const r=a,t=oe();return(d,l)=>(p(),m(o(_e),{"aria-hidden":"true",tabindex:"0",style:{position:"fixed"},onFocus:l[0]||(l[0]=f=>{const n=f.relatedTarget;!o(t).viewport.value?.contains(n)&&r("focusFromOutsideViewport")})},{default:g(()=>[E(d.$slots,"default")]),_:3}))}}),xt=D({__name:"DismissableLayerBranch",props:{asChild:{type:Boolean},as:{}},setup(e){const a=e,{forwardRef:r,currentElement:t}=M();return se(()=>{ge.branches.add(t.value)}),xe(()=>{ge.branches.delete(t.value)}),(d,l)=>(p(),m(o(K),O({ref:o(r)},a),{default:g(()=>[E(d.$slots,"default")]),_:3},16))}}),Et=D({inheritAttrs:!1,__name:"ToastViewport",props:{hotkey:{default:()=>["F8"]},label:{type:[String,Function],default:"Notifications ({hotkey})"},asChild:{type:Boolean},as:{default:"ol"}},setup(e){const a=e,{hotkey:r,label:t}=ce(a),{forwardRef:d,currentElement:l}=M(),{CollectionSlot:f,getItems:n}=fe(),c=oe(),s=A(()=>c.toastCount.value>0),u=k(),i=k(),w=A(()=>r.value.join("+").replace(/Key/g,"").replace(/Digit/g,""));Oe(r.value,()=>{l.value.focus()}),se(()=>{c.onViewportChange(l.value)}),Ce(x=>{const v=l.value;if(s.value&&v){const h=()=>{if(!c.isClosePausedRef.value){const y=new CustomEvent(le);v.dispatchEvent(y),c.isClosePausedRef.value=!0}},b=()=>{if(c.isClosePausedRef.value){const y=new CustomEvent(ue);v.dispatchEvent(y),c.isClosePausedRef.value=!1}},C=y=>{!v.contains(y.relatedTarget)&&b()},T=()=>{v.contains(ie())||b()},P=y=>{const R=y.altKey||y.ctrlKey||y.metaKey;if(y.key==="Tab"&&!R){const z=ie(),F=y.shiftKey;if(y.target===v&&F){u.value?.focus();return}const Y=$({tabbingDirection:F?"backwards":"forwards"}),U=Y.findIndex(V=>V===z);re(Y.slice(U+1))?y.preventDefault():F?u.value?.focus():i.value?.focus()}};v.addEventListener("focusin",h),v.addEventListener("focusout",C),v.addEventListener("pointermove",h),v.addEventListener("pointerleave",T),v.addEventListener("keydown",P),window.addEventListener("blur",h),window.addEventListener("focus",b),x(()=>{v.removeEventListener("focusin",h),v.removeEventListener("focusout",C),v.removeEventListener("pointermove",h),v.removeEventListener("pointerleave",T),v.removeEventListener("keydown",P),window.removeEventListener("blur",h),window.removeEventListener("focus",b)})}});function $({tabbingDirection:x}){const h=n().map(b=>b.ref).map(b=>{const C=[b,...ot(b)];return x==="forwards"?C:C.reverse()});return(x==="forwards"?h.reverse():h).flat()}return(x,v)=>(p(),m(o(xt),{role:"region","aria-label":typeof o(t)=="string"?o(t).replace("{hotkey}",w.value):o(t)(w.value),tabindex:"-1",style:Ee({pointerEvents:s.value?void 0:"none"})},{default:g(()=>[s.value?(p(),m(Te,{key:0,ref:h=>{u.value=o(we)(h)},onFocusFromOutsideViewport:v[0]||(v[0]=()=>{const h=$({tabbingDirection:"forwards"});o(re)(h)})},null,512)):S("",!0),_(o(f),null,{default:g(()=>[_(o(K),O({ref:o(d),tabindex:"-1",as:x.as,"as-child":x.asChild},x.$attrs),{default:g(()=>[E(x.$slots,"default")]),_:3},16,["as","as-child"])]),_:3}),s.value?(p(),m(Te,{key:1,ref:h=>{i.value=o(we)(h)},onFocusFromOutsideViewport:v[1]||(v[1]=()=>{const h=$({tabbingDirection:"backwards"});o(re)(h)})},null,512)):S("",!0)]),_:3},8,["aria-label","style"]))}}),[Wt,Pt]=de("TooltipProvider"),kt=D({inheritAttrs:!1,__name:"TooltipProvider",props:{delayDuration:{default:700},skipDelayDuration:{default:300},disableHoverableContent:{type:Boolean,default:!1},disableClosingTrigger:{type:Boolean},disabled:{type:Boolean},ignoreNonKeyboardFocus:{type:Boolean,default:!1}},setup(e){const a=e,{delayDuration:r,skipDelayDuration:t,disableHoverableContent:d,disableClosingTrigger:l,ignoreNonKeyboardFocus:f,disabled:n}=ce(a);M();const c=k(!0),s=k(!1),{start:u,stop:i}=He(()=>{c.value=!0},t,{immediate:!1});return Pt({isOpenDelayed:c,delayDuration:r,onOpen(){i(),c.value=!1},onClose(){u()},isPointerInTransitRef:s,disableHoverableContent:d,disableClosingTrigger:l,disabled:n,ignoreNonKeyboardFocus:f}),(w,$)=>E(w.$slots,"default")}});function $t(){const e=We("toasts",()=>[]),a=k(!1),r=[],t=()=>`${Date.now()}-${Math.random().toString(36).slice(2,9)}`;async function d(){if(!(a.value||r.length===0)){for(a.value=!0;r.length>0;){const s=r.shift();await Pe(),e.value=[...e.value,s].slice(-5)}a.value=!1}}function l(s){const u={id:t(),open:!0,...s};return r.push(u),d(),u}function f(s,u){const i=e.value.findIndex(w=>w.id===s);i!==-1&&(e.value[i]={...e.value[i],...u})}function n(s){const u=e.value.findIndex(i=>i.id===s);u!==-1&&(e.value[u]={...e.value[u],open:!1}),setTimeout(()=>{e.value=e.value.filter(i=>i.id!==s)},200)}function c(){e.value=[]}return{toasts:e,add:l,update:f,remove:n,clear:c}}const Ot={slots:{root:"relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none",wrapper:"w-0 flex-1 flex flex-col",title:"text-sm font-medium text-highlighted",description:"text-sm text-muted",icon:"shrink-0 size-5",avatar:"shrink-0",avatarSize:"2xl",actions:"flex gap-1.5 shrink-0",progress:"absolute inset-x-0 bottom-0",close:"p-0"},variants:{color:{primary:{root:"focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",icon:"text-primary"},secondary:{root:"focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-secondary",icon:"text-secondary"},success:{root:"focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-success",icon:"text-success"},info:{root:"focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-info",icon:"text-info"},warning:{root:"focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-warning",icon:"text-warning"},error:{root:"focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error",icon:"text-error"},neutral:{root:"focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted",icon:"text-highlighted"}},orientation:{horizontal:{root:"items-center",actions:"items-center"},vertical:{root:"items-start",actions:"items-start mt-2.5"}},title:{true:{description:"mt-1"}}},defaultVariants:{color:"primary"}},St={__name:"Toast",props:{as:{type:null,required:!1},title:{type:[String,Object,Function],required:!1},description:{type:[String,Object,Function],required:!1},icon:{type:String,required:!1},avatar:{type:Object,required:!1},color:{type:null,required:!1},orientation:{type:null,required:!1,default:"vertical"},close:{type:[Boolean,Object],required:!1,default:!0},closeIcon:{type:String,required:!1},actions:{type:Array,required:!1},progress:{type:[Boolean,Object],required:!1,default:!0},class:{type:null,required:!1},ui:{type:null,required:!1},defaultOpen:{type:Boolean,required:!1},open:{type:Boolean,required:!1},type:{type:String,required:!1},duration:{type:Number,required:!1}},emits:["escapeKeyDown","pause","resume","swipeStart","swipeMove","swipeCancel","swipeEnd","update:open"],setup(e,{expose:a,emit:r}){const t=e,d=r,l=Me(),{t:f}=Xe(),n=Se(),c=Ye(pe(t,"as","defaultOpen","open","duration","type"),d),s=A(()=>te({extend:te(Ot),...n.ui?.toast||{}})({color:t.color,orientation:t.orientation,title:!!t.title||!!l.title})),u=k(),i=k(0);return se(()=>{u.value&&Pe(()=>{i.value=u.value?.$el?.getBoundingClientRect()?.height})}),a({height:i}),(w,$)=>(p(),m(o(Tt),O({ref_key:"el",ref:u},o(c),{"data-orientation":e.orientation,class:s.value.root({class:[t.ui?.root,t.class]}),style:{"--height":i.value}}),{default:g(({remaining:x,duration:v,open:h})=>[E(w.$slots,"leading",{},()=>[e.avatar?(p(),m(Ge,O({key:0,size:t.ui?.avatarSize||s.value.avatarSize()},e.avatar,{class:s.value.avatar({class:t.ui?.avatar})}),null,16,["size","class"])):e.icon?(p(),m(Je,{key:1,name:e.icon,class:L(s.value.icon({class:t.ui?.icon}))},null,8,["name","class"])):S("",!0)]),ke("div",{class:L(s.value.wrapper({class:t.ui?.wrapper}))},[e.title||l.title?(p(),m(o(Ct),{key:0,class:L(s.value.title({class:t.ui?.title}))},{default:g(()=>[E(w.$slots,"title",{},()=>[typeof e.title=="function"?(p(),m(H(e.title()),{key:0})):typeof e.title=="object"?(p(),m(H(e.title),{key:1})):(p(),B(N,{key:2},[Q(Z(e.title),1)],64))])]),_:3},8,["class"])):S("",!0),e.description||l.description?(p(),m(o(ht),{key:1,class:L(s.value.description({class:t.ui?.description}))},{default:g(()=>[E(w.$slots,"description",{},()=>[typeof e.description=="function"?(p(),m(H(e.description()),{key:0})):typeof e.description=="object"?(p(),m(H(e.description),{key:1})):(p(),B(N,{key:2},[Q(Z(e.description),1)],64))])]),_:3},8,["class"])):S("",!0),e.orientation==="vertical"&&(e.actions?.length||l.actions)?(p(),B("div",{key:2,class:L(s.value.actions({class:t.ui?.actions}))},[E(w.$slots,"actions",{},()=>[(p(!0),B(N,null,ee(e.actions,(b,C)=>(p(),m(o(be),{key:C,"alt-text":b.label||"Action","as-child":"",onClick:$[0]||($[0]=J(()=>{},["stop"]))},{default:g(()=>[_(ne,O({size:"xs",color:e.color},{ref_for:!0},b),null,16,["color"])]),_:2},1032,["alt-text"]))),128))])],2)):S("",!0)],2),e.orientation==="horizontal"&&(e.actions?.length||l.actions)||e.close?(p(),B("div",{key:0,class:L(s.value.actions({class:t.ui?.actions,orientation:"horizontal"}))},[e.orientation==="horizontal"&&(e.actions?.length||l.actions)?E(w.$slots,"actions",{key:0},()=>[(p(!0),B(N,null,ee(e.actions,(b,C)=>(p(),m(o(be),{key:C,"alt-text":b.label||"Action","as-child":"",onClick:$[1]||($[1]=J(()=>{},["stop"]))},{default:g(()=>[_(ne,O({size:"xs",color:e.color},{ref_for:!0},b),null,16,["color"])]),_:2},1032,["alt-text"]))),128))]):S("",!0),e.close||l.close?(p(),m(o(Fe),{key:1,"as-child":""},{default:g(()=>[E(w.$slots,"close",{ui:s.value},()=>[e.close?(p(),m(ne,O({key:0,icon:e.closeIcon||o(n).ui.icons.close,color:"neutral",variant:"link","aria-label":o(f)("toast.close")},typeof e.close=="object"?e.close:{},{class:s.value.close({class:t.ui?.close}),onClick:$[2]||($[2]=J(()=>{},["stop"]))}),null,16,["icon","aria-label","class"])):S("",!0)])]),_:3})):S("",!0)],2)):S("",!0),e.progress&&h&&x>0&&v?(p(),m(it,O({key:1,"model-value":x/v*100,color:e.color},typeof e.progress=="object"?e.progress:{},{size:"sm",class:s.value.progress({class:t.ui?.progress})}),null,16,["model-value","color","class"])):S("",!0)]),_:3},16,["data-orientation","class","style"]))}},Dt={slots:{viewport:"fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none",base:"pointer-events-auto absolute inset-x-0 z-(--index) transform-(--transform) data-[expanded=false]:data-[front=false]:h-(--front-height) data-[expanded=false]:data-[front=false]:*:opacity-0 data-[front=false]:*:transition-opacity data-[front=false]:*:duration-100 data-[state=closed]:animate-[toast-closed_200ms_ease-in-out] data-[state=closed]:data-[expanded=false]:data-[front=false]:animate-[toast-collapsed-closed_200ms_ease-in-out] data-[swipe=move]:transition-none transition-[transform,translate,height] duration-200 ease-out"},variants:{position:{"top-left":{viewport:"left-4"},"top-center":{viewport:"left-1/2 transform -translate-x-1/2"},"top-right":{viewport:"right-4"},"bottom-left":{viewport:"left-4"},"bottom-center":{viewport:"left-1/2 transform -translate-x-1/2"},"bottom-right":{viewport:"right-4"}},swipeDirection:{up:"data-[swipe=end]:animate-[toast-slide-up_200ms_ease-out]",right:"data-[swipe=end]:animate-[toast-slide-right_200ms_ease-out]",down:"data-[swipe=end]:animate-[toast-slide-down_200ms_ease-out]",left:"data-[swipe=end]:animate-[toast-slide-left_200ms_ease-out]"}},compoundVariants:[{position:["top-left","top-center","top-right"],class:{viewport:"top-4",base:"top-0 data-[state=open]:animate-[slide-in-from-top_200ms_ease-in-out]"}},{position:["bottom-left","bottom-center","bottom-right"],class:{viewport:"bottom-4",base:"bottom-0 data-[state=open]:animate-[slide-in-from-bottom_200ms_ease-in-out]"}},{swipeDirection:["left","right"],class:"data-[swipe=move]:translate-x-(--reka-toast-swipe-move-x) data-[swipe=end]:translate-x-(--reka-toast-swipe-end-x) data-[swipe=cancel]:translate-x-0"},{swipeDirection:["up","down"],class:"data-[swipe=move]:translate-y-(--reka-toast-swipe-move-y) data-[swipe=end]:translate-y-(--reka-toast-swipe-end-y) data-[swipe=cancel]:translate-y-0"}],defaultVariants:{position:"bottom-right"}},_t={name:"Toaster"},Rt=Object.assign(_t,{props:{position:{type:null,required:!1},expand:{type:Boolean,required:!1,default:!0},progress:{type:Boolean,required:!1,default:!0},portal:{type:[Boolean,String],required:!1,skipCheck:!0,default:!0},class:{type:null,required:!1},ui:{type:null,required:!1},label:{type:String,required:!1},duration:{type:Number,required:!1,default:5e3},swipeThreshold:{type:Number,required:!1}},setup(e){const a=e,{toasts:r,remove:t}=$t(),d=Se(),l=De(pe(a,"duration","label","swipeThreshold")),f=at(W(()=>a.portal)),n=A(()=>{switch(a.position){case"top-center":return"up";case"top-right":case"bottom-right":return"right";case"bottom-center":return"down";case"top-left":case"bottom-left":return"left"}return"right"}),c=A(()=>te({extend:te(Dt),...d.ui?.toaster||{}})({position:a.position,swipeDirection:n.value}));function s(h,b){h||t(b)}const u=k(!1),i=A(()=>a.expand||u.value),w=k([]),$=A(()=>w.value.reduce((h,{height:b})=>h+b+16,0)),x=A(()=>w.value[w.value.length-1]?.height||0);function v(h){return w.value.slice(h+1).reduce((b,{height:C})=>b+C+16,0)}return(h,b)=>(p(),m(o(ut),O({"swipe-direction":n.value},o(l)),{default:g(()=>[E(h.$slots,"default"),(p(!0),B(N,null,ee(o(r),(C,T)=>(p(),m(St,O({key:C.id,ref_for:!0,ref_key:"refs",ref:w,progress:e.progress},{ref_for:!0},o(Qe)(C,["id","close"]),{close:C.close,"data-expanded":i.value,"data-front":!i.value&&T===o(r).length-1,style:{"--index":T-o(r).length+o(r).length,"--before":o(r).length-1-T,"--offset":v(T),"--scale":i.value?"1":"calc(1 - var(--before) * var(--scale-factor))","--translate":i.value?"calc(var(--offset) * var(--translate-factor))":"calc(var(--before) * var(--gap))","--transform":"translateY(var(--translate)) scale(var(--scale))"},class:c.value.base({class:[a.ui?.base,C.onClick?"cursor-pointer":void 0]}),"onUpdate:open":P=>s(P,C.id),onClick:P=>C.onClick&&C.onClick(C)}),null,16,["progress","close","data-expanded","data-front","style","class","onUpdate:open","onClick"]))),128)),_(o(bt),j(X(o(f))),{default:g(()=>[_(o(Et),{"data-expanded":i.value,class:L(c.value.viewport({class:[a.ui?.viewport,a.class]})),style:Ee({"--scale-factor":"0.05","--translate-factor":e.position?.startsWith("top")?"1px":"-1px","--gap":e.position?.startsWith("top")?"16px":"-16px","--front-height":`${x.value}px`,"--height":`${$.value}px`}),onMouseenter:b[0]||(b[0]=C=>u.value=!0),onMouseleave:b[1]||(b[1]=C=>u.value=!1)},null,8,["data-expanded","class","style"])]),_:1},16)]),_:3},16,["swipe-direction"]))}});function At(){const e=qe([]),a=(s,u)=>{const{props:i,defaultOpen:w,destroyOnClose:$}=u||{},x=Le({id:Symbol(import.meta.dev?"useOverlay":""),isOpen:!!w,component:Ne(s),isMounted:!!w,destroyOnClose:!!$,originalProps:i||{},props:{...i}});return e.push(x),{...x,open:v=>r(x.id,v),close:v=>t(x.id,v),patch:v=>f(x.id,v)}},r=(s,u)=>{const i=n(s);return u?i.props={...i.originalProps,...u}:i.props={...i.originalProps},i.isOpen=!0,i.isMounted=!0,{id:s,isMounted:i.isMounted,isOpen:i.isOpen,result:new Promise(w=>i.resolvePromise=w)}},t=(s,u)=>{const i=n(s);i.isOpen=!1,i.resolvePromise&&(i.resolvePromise(u),i.resolvePromise=void 0)},d=()=>{e.forEach(s=>t(s.id))},l=s=>{const u=n(s);if(u.isMounted=!1,u.destroyOnClose){const i=e.findIndex(w=>w.id===s);e.splice(i,1)}},f=(s,u)=>{const i=n(s);i.props={...i.props,...u}},n=s=>{const u=e.find(i=>i.id===s);if(!u)throw new Error("Overlay not found");return u};return{overlays:e,open:r,close:t,closeAll:d,create:a,patch:f,unmount:l,isOpen:s=>n(s).isOpen}}const Ft=Ze(At),It={__name:"OverlayProvider",setup(e){const{overlays:a,unmount:r,close:t}=Ft(),d=A(()=>a.filter(n=>n.isMounted)),l=n=>{t(n),r(n)},f=(n,c)=>{t(n,c)};return(n,c)=>(p(!0),B(N,null,ee(d.value,s=>(p(),m(H(s.component),O({key:s.id},{ref_for:!0},s.props,{open:s.isOpen,"onUpdate:open":u=>s.isOpen=u,onClose:u=>f(s.id,u),"onAfter:leave":u=>l(s.id)}),null,16,["open","onUpdate:open","onClose","onAfter:leave"]))),128))}},Bt={name:"App"},Mt=Object.assign(Bt,{props:{tooltip:{type:Object,required:!1},toaster:{type:[Object,null],required:!1},locale:{type:null,required:!1},portal:{type:null,required:!1,default:"body"},scrollBody:{type:[Boolean,Object],required:!1},nonce:{type:String,required:!1}},setup(e){const a=e,r=De(pe(a,"scrollBody")),t=W(()=>a.tooltip),d=W(()=>a.toaster),l=W(()=>a.locale);ye(et,l);const f=W(()=>a.portal);return ye(rt,f),(n,c)=>(p(),m(o(nt),O({"use-id":()=>Ke(),dir:l.value?.dir,locale:l.value?.code},o(r)),{default:g(()=>[_(o(kt),j(X(t.value)),{default:g(()=>[e.toaster!==null?(p(),m(Rt,j(O({key:0},d.value)),{default:g(()=>[E(n.$slots,"default")]),_:3},16)):E(n.$slots,"default",{key:1}),_(It)]),_:3},16)]),_:3},16,["use-id","dir","locale"]))}}),qt=D({__name:"App",setup(e){return(a,r)=>{const t=Mt;return p(),m(t,null,{default:g(()=>r[0]||(r[0]=[ke("the-header",null,null,-1)])),_:1,__:[0]})}}}),Lt=Ve(qt);Lt.mount("#app");
+import { d as defineComponent, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, t as toRefs, a as ref, b as createCommentVNode, e as createTextVNode, f as toDisplayString, g as computed, h as watchEffect, i as watch, j as onMounted, k as onUnmounted, l as createElementBlock, m as createVNode, n as mergeProps, p as withModifiers, T as Teleport, F as Fragment, q as normalizeProps, s as guardReactiveProps, v as normalizeStyle, x as nextTick, y as useSlots, z as createBaseVNode, A as normalizeClass, B as resolveDynamicComponent, C as renderList, D as toRef, E as shallowReactive, G as reactive, H as markRaw, I as useId, J as provide, K as createApp } from "./main.js";
+import { P as Primitive, c as createContext, u as useTimeout, a as useRafFn, b as useForwardExpose, o as onKeyStroke, i as isClient, d as useVModel, e as unrefElement, f as useTimeoutFn, g as useState, h as useLocale, j as useForwardPropsEmits, r as reactivePick, t as tv, k as useAppConfig, _ as _sfc_main$l, l as _sfc_main$m, m as _sfc_main$n, n as useForwardProps, p as omit, q as createSharedComposable, s as localeContextInjectionKey } from "./Button.js";
+import { u as useCollection, _ as _sfc_main$j, g as getActiveElement, a as _sfc_main$k, P as Presence, c as context, f as focusFirst, b as getTabbableCandidates, d as usePortal, e as _sfc_main$p, p as portalTargetInjectionKey } from "./shared-button.js";
+import { _ as _sfc_main$o } from "./card-xpto.js";
+import "./the-header.js";
+import "./_plugin-vue_export-helper.js";
+(function polyfill() {
+  const relList = document.createElement("link").relList;
+  if (relList && relList.supports && relList.supports("modulepreload")) return;
+  for (const link of document.querySelectorAll('link[rel="modulepreload"]')) processPreload(link);
+  new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type !== "childList") continue;
+      for (const node of mutation.addedNodes) if (node.tagName === "LINK" && node.rel === "modulepreload") processPreload(node);
+    }
+  }).observe(document, {
+    childList: true,
+    subtree: true
+  });
+  function getFetchOpts(link) {
+    const fetchOpts = {};
+    if (link.integrity) fetchOpts.integrity = link.integrity;
+    if (link.referrerPolicy) fetchOpts.referrerPolicy = link.referrerPolicy;
+    if (link.crossOrigin === "use-credentials") fetchOpts.credentials = "include";
+    else if (link.crossOrigin === "anonymous") fetchOpts.credentials = "omit";
+    else fetchOpts.credentials = "same-origin";
+    return fetchOpts;
+  }
+  function processPreload(link) {
+    if (link.ep) return;
+    link.ep = true;
+    const fetchOpts = getFetchOpts(link);
+    fetch(link.href, fetchOpts);
+  }
+})();
+const _sfc_main$i = /* @__PURE__ */ defineComponent({
+  __name: "ToastAnnounceExclude",
+  props: {
+    altText: {},
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        as: _ctx.as,
+        "as-child": _ctx.asChild,
+        "data-reka-toast-announce-exclude": "",
+        "data-reka-toast-announce-alt": _ctx.altText || void 0
+      }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 8, ["as", "as-child", "data-reka-toast-announce-alt"]);
+    };
+  }
+});
+const [injectToastProviderContext, provideToastProviderContext] = createContext("ToastProvider");
+const _sfc_main$h = /* @__PURE__ */ defineComponent({
+  ...{
+    inheritAttrs: false
+  },
+  __name: "ToastProvider",
+  props: {
+    label: { default: "Notification" },
+    duration: { default: 5e3 },
+    swipeDirection: { default: "right" },
+    swipeThreshold: { default: 50 }
+  },
+  setup(__props) {
+    const props = __props;
+    const { label, duration, swipeDirection, swipeThreshold } = toRefs(props);
+    useCollection({ isProvider: true });
+    const viewport = ref();
+    const toastCount = ref(0);
+    const isFocusedToastEscapeKeyDownRef = ref(false);
+    const isClosePausedRef = ref(false);
+    if (props.label && typeof props.label === "string" && !props.label.trim()) {
+      const error = "Invalid prop `label` supplied to `ToastProvider`. Expected non-empty `string`.";
+      throw new Error(error);
+    }
+    provideToastProviderContext({
+      label,
+      duration,
+      swipeDirection,
+      swipeThreshold,
+      toastCount,
+      viewport,
+      onViewportChange(el) {
+        viewport.value = el;
+      },
+      onToastAdd() {
+        toastCount.value++;
+      },
+      onToastRemove() {
+        toastCount.value--;
+      },
+      isFocusedToastEscapeKeyDownRef,
+      isClosePausedRef
+    });
+    return (_ctx, _cache) => {
+      return renderSlot(_ctx.$slots, "default");
+    };
+  }
+});
+const _sfc_main$g = /* @__PURE__ */ defineComponent({
+  __name: "ToastAnnounce",
+  setup(__props) {
+    const providerContext = injectToastProviderContext();
+    const isAnnounced = useTimeout(1e3);
+    const renderAnnounceText = ref(false);
+    useRafFn(() => {
+      renderAnnounceText.value = true;
+    });
+    return (_ctx, _cache) => {
+      return unref(isAnnounced) || renderAnnounceText.value ? (openBlock(), createBlock(unref(_sfc_main$j), { key: 0 }, {
+        default: withCtx(() => [
+          createTextVNode(toDisplayString(unref(providerContext).label.value) + " ", 1),
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      })) : createCommentVNode("", true);
+    };
+  }
+});
+const TOAST_SWIPE_START = "toast.swipeStart";
+const TOAST_SWIPE_MOVE = "toast.swipeMove";
+const TOAST_SWIPE_CANCEL = "toast.swipeCancel";
+const TOAST_SWIPE_END = "toast.swipeEnd";
+const VIEWPORT_PAUSE = "toast.viewportPause";
+const VIEWPORT_RESUME = "toast.viewportResume";
+function handleAndDispatchCustomEvent(name, handler, detail) {
+  const currentTarget = detail.originalEvent.currentTarget;
+  const event = new CustomEvent(name, {
+    bubbles: false,
+    cancelable: true,
+    detail
+  });
+  if (handler)
+    currentTarget.addEventListener(name, handler, { once: true });
+  currentTarget.dispatchEvent(event);
+}
+function isDeltaInDirection(delta, direction, threshold = 0) {
+  const deltaX = Math.abs(delta.x);
+  const deltaY = Math.abs(delta.y);
+  const isDeltaX = deltaX > deltaY;
+  if (direction === "left" || direction === "right")
+    return isDeltaX && deltaX > threshold;
+  else
+    return !isDeltaX && deltaY > threshold;
+}
+function isHTMLElement(node) {
+  return node.nodeType === node.ELEMENT_NODE;
+}
+function getAnnounceTextContent(container) {
+  const textContent = [];
+  const childNodes = Array.from(container.childNodes);
+  childNodes.forEach((node) => {
+    if (node.nodeType === node.TEXT_NODE && node.textContent)
+      textContent.push(node.textContent);
+    if (isHTMLElement(node)) {
+      const isHidden = node.ariaHidden || node.hidden || node.style.display === "none";
+      const isExcluded = node.dataset.rekaToastAnnounceExclude === "";
+      if (!isHidden) {
+        if (isExcluded) {
+          const altText = node.dataset.rekaToastAnnounceAlt;
+          if (altText)
+            textContent.push(altText);
+        } else {
+          textContent.push(...getAnnounceTextContent(node));
+        }
+      }
+    }
+  });
+  return textContent;
+}
+const [injectToastRootContext, provideToastRootContext] = createContext("ToastRoot");
+const _sfc_main$f = /* @__PURE__ */ defineComponent({
+  ...{
+    inheritAttrs: false
+  },
+  __name: "ToastRootImpl",
+  props: {
+    type: {},
+    open: { type: Boolean, default: false },
+    duration: {},
+    asChild: { type: Boolean },
+    as: { default: "li" }
+  },
+  emits: ["close", "escapeKeyDown", "pause", "resume", "swipeStart", "swipeMove", "swipeCancel", "swipeEnd"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emits = __emit;
+    const { forwardRef, currentElement } = useForwardExpose();
+    const { CollectionItem } = useCollection();
+    const providerContext = injectToastProviderContext();
+    const pointerStartRef = ref(null);
+    const swipeDeltaRef = ref(null);
+    const duration = computed(
+      () => typeof props.duration === "number" ? props.duration : providerContext.duration.value
+    );
+    const closeTimerStartTimeRef = ref(0);
+    const closeTimerRemainingTimeRef = ref(duration.value);
+    const closeTimerRef = ref(0);
+    const remainingTime = ref(duration.value);
+    const remainingRaf = useRafFn(() => {
+      const elapsedTime = (/* @__PURE__ */ new Date()).getTime() - closeTimerStartTimeRef.value;
+      remainingTime.value = Math.max(closeTimerRemainingTimeRef.value - elapsedTime, 0);
+    }, { fpsLimit: 60 });
+    function startTimer(duration2) {
+      if (duration2 <= 0 || duration2 === Number.POSITIVE_INFINITY)
+        return;
+      if (!isClient)
+        return;
+      window.clearTimeout(closeTimerRef.value);
+      closeTimerStartTimeRef.value = (/* @__PURE__ */ new Date()).getTime();
+      closeTimerRef.value = window.setTimeout(handleClose, duration2);
+    }
+    function handleClose(event) {
+      const isNonPointerEvent = event?.pointerType === "";
+      const isFocusInToast = currentElement.value?.contains(getActiveElement());
+      if (isFocusInToast && isNonPointerEvent)
+        providerContext.viewport.value?.focus();
+      if (isNonPointerEvent) {
+        providerContext.isClosePausedRef.value = false;
+      }
+      emits("close");
+    }
+    const announceTextContent = computed(() => currentElement.value ? getAnnounceTextContent(currentElement.value) : null);
+    if (props.type && !["foreground", "background"].includes(props.type)) {
+      const error = "Invalid prop `type` supplied to `Toast`. Expected `foreground | background`.";
+      throw new Error(error);
+    }
+    watchEffect((cleanupFn) => {
+      const viewport = providerContext.viewport.value;
+      if (viewport) {
+        const handleResume = () => {
+          startTimer(closeTimerRemainingTimeRef.value);
+          remainingRaf.resume();
+          emits("resume");
+        };
+        const handlePause = () => {
+          const elapsedTime = (/* @__PURE__ */ new Date()).getTime() - closeTimerStartTimeRef.value;
+          closeTimerRemainingTimeRef.value = closeTimerRemainingTimeRef.value - elapsedTime;
+          window.clearTimeout(closeTimerRef.value);
+          remainingRaf.pause();
+          emits("pause");
+        };
+        viewport.addEventListener(VIEWPORT_PAUSE, handlePause);
+        viewport.addEventListener(VIEWPORT_RESUME, handleResume);
+        return () => {
+          viewport.removeEventListener(VIEWPORT_PAUSE, handlePause);
+          viewport.removeEventListener(VIEWPORT_RESUME, handleResume);
+        };
+      }
+    });
+    watch(() => [props.open, duration.value], () => {
+      closeTimerRemainingTimeRef.value = duration.value;
+      if (props.open && !providerContext.isClosePausedRef.value)
+        startTimer(duration.value);
+    }, { immediate: true });
+    onKeyStroke("Escape", (event) => {
+      emits("escapeKeyDown", event);
+      if (!event.defaultPrevented) {
+        providerContext.isFocusedToastEscapeKeyDownRef.value = true;
+        handleClose();
+      }
+    });
+    onMounted(() => {
+      providerContext.onToastAdd();
+    });
+    onUnmounted(() => {
+      providerContext.onToastRemove();
+    });
+    provideToastRootContext({ onClose: handleClose });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock(Fragment, null, [
+        announceTextContent.value ? (openBlock(), createBlock(_sfc_main$g, {
+          key: 0,
+          role: "alert",
+          "aria-live": _ctx.type === "foreground" ? "assertive" : "polite",
+          "aria-atomic": "true"
+        }, {
+          default: withCtx(() => [
+            createTextVNode(toDisplayString(announceTextContent.value), 1)
+          ]),
+          _: 1
+        }, 8, ["aria-live"])) : createCommentVNode("", true),
+        unref(providerContext).viewport.value ? (openBlock(), createBlock(Teleport, {
+          key: 1,
+          to: unref(providerContext).viewport.value
+        }, [
+          createVNode(unref(CollectionItem), null, {
+            default: withCtx(() => [
+              createVNode(unref(Primitive), mergeProps({
+                ref: unref(forwardRef),
+                role: "alert",
+                "aria-live": "off",
+                "aria-atomic": "true",
+                tabindex: "0"
+              }, _ctx.$attrs, {
+                as: _ctx.as,
+                "as-child": _ctx.asChild,
+                "data-state": _ctx.open ? "open" : "closed",
+                "data-swipe-direction": unref(providerContext).swipeDirection.value,
+                style: { userSelect: "none", touchAction: "none" },
+                onPointerdown: _cache[0] || (_cache[0] = withModifiers((event) => {
+                  pointerStartRef.value = { x: event.clientX, y: event.clientY };
+                }, ["left"])),
+                onPointermove: _cache[1] || (_cache[1] = (event) => {
+                  if (!pointerStartRef.value) return;
+                  const x = event.clientX - pointerStartRef.value.x;
+                  const y = event.clientY - pointerStartRef.value.y;
+                  const hasSwipeMoveStarted = Boolean(swipeDeltaRef.value);
+                  const isHorizontalSwipe = ["left", "right"].includes(unref(providerContext).swipeDirection.value);
+                  const clamp = ["left", "up"].includes(unref(providerContext).swipeDirection.value) ? Math.min : Math.max;
+                  const clampedX = isHorizontalSwipe ? clamp(0, x) : 0;
+                  const clampedY = !isHorizontalSwipe ? clamp(0, y) : 0;
+                  const moveStartBuffer = event.pointerType === "touch" ? 10 : 2;
+                  const delta = { x: clampedX, y: clampedY };
+                  const eventDetail = { originalEvent: event, delta };
+                  if (hasSwipeMoveStarted) {
+                    swipeDeltaRef.value = delta;
+                    unref(handleAndDispatchCustomEvent)(unref(TOAST_SWIPE_MOVE), (ev) => emits("swipeMove", ev), eventDetail);
+                  } else if (unref(isDeltaInDirection)(delta, unref(providerContext).swipeDirection.value, moveStartBuffer)) {
+                    swipeDeltaRef.value = delta;
+                    unref(handleAndDispatchCustomEvent)(unref(TOAST_SWIPE_START), (ev) => emits("swipeStart", ev), eventDetail);
+                    event.target.setPointerCapture(event.pointerId);
+                  } else if (Math.abs(x) > moveStartBuffer || Math.abs(y) > moveStartBuffer) {
+                    pointerStartRef.value = null;
+                  }
+                }),
+                onPointerup: _cache[2] || (_cache[2] = (event) => {
+                  const delta = swipeDeltaRef.value;
+                  const target = event.target;
+                  if (target.hasPointerCapture(event.pointerId)) {
+                    target.releasePointerCapture(event.pointerId);
+                  }
+                  swipeDeltaRef.value = null;
+                  pointerStartRef.value = null;
+                  if (delta) {
+                    const toast = event.currentTarget;
+                    const eventDetail = { originalEvent: event, delta };
+                    if (unref(isDeltaInDirection)(delta, unref(providerContext).swipeDirection.value, unref(providerContext).swipeThreshold.value)) {
+                      unref(handleAndDispatchCustomEvent)(unref(TOAST_SWIPE_END), (ev) => emits("swipeEnd", ev), eventDetail);
+                    } else {
+                      unref(handleAndDispatchCustomEvent)(unref(TOAST_SWIPE_CANCEL), (ev) => emits("swipeCancel", ev), eventDetail);
+                    }
+                    toast?.addEventListener("click", (event2) => event2.preventDefault(), {
+                      once: true
+                    });
+                  }
+                })
+              }), {
+                default: withCtx(() => [
+                  renderSlot(_ctx.$slots, "default", {
+                    remaining: remainingTime.value,
+                    duration: duration.value
+                  })
+                ]),
+                _: 3
+              }, 16, ["as", "as-child", "data-state", "data-swipe-direction"])
+            ]),
+            _: 3
+          })
+        ], 8, ["to"])) : createCommentVNode("", true)
+      ], 64);
+    };
+  }
+});
+const _sfc_main$e = /* @__PURE__ */ defineComponent({
+  __name: "ToastClose",
+  props: {
+    asChild: { type: Boolean },
+    as: { default: "button" }
+  },
+  setup(__props) {
+    const props = __props;
+    const rootContext = injectToastRootContext();
+    const { forwardRef } = useForwardExpose();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(_sfc_main$i, { "as-child": "" }, {
+        default: withCtx(() => [
+          createVNode(unref(Primitive), mergeProps(props, {
+            ref: unref(forwardRef),
+            type: _ctx.as === "button" ? "button" : void 0,
+            onClick: unref(rootContext).onClose
+          }), {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default")
+            ]),
+            _: 3
+          }, 16, ["type", "onClick"])
+        ]),
+        _: 3
+      });
+    };
+  }
+});
+const _sfc_main$d = /* @__PURE__ */ defineComponent({
+  __name: "ToastAction",
+  props: {
+    altText: {},
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    const props = __props;
+    if (!props.altText)
+      throw new Error("Missing prop `altText` expected on `ToastAction`");
+    const { forwardRef } = useForwardExpose();
+    return (_ctx, _cache) => {
+      return _ctx.altText ? (openBlock(), createBlock(_sfc_main$i, {
+        key: 0,
+        "alt-text": _ctx.altText,
+        "as-child": ""
+      }, {
+        default: withCtx(() => [
+          createVNode(_sfc_main$e, {
+            ref: unref(forwardRef),
+            as: _ctx.as,
+            "as-child": _ctx.asChild
+          }, {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default")
+            ]),
+            _: 3
+          }, 8, ["as", "as-child"])
+        ]),
+        _: 3
+      }, 8, ["alt-text"])) : createCommentVNode("", true);
+    };
+  }
+});
+const _sfc_main$c = /* @__PURE__ */ defineComponent({
+  __name: "ToastDescription",
+  props: {
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    const props = __props;
+    useForwardExpose();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), normalizeProps(guardReactiveProps(props)), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16);
+    };
+  }
+});
+const _sfc_main$b = /* @__PURE__ */ defineComponent({
+  __name: "ToastPortal",
+  props: {
+    to: {},
+    disabled: { type: Boolean },
+    defer: { type: Boolean },
+    forceMount: { type: Boolean }
+  },
+  setup(__props) {
+    const props = __props;
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$k), normalizeProps(guardReactiveProps(props)), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16);
+    };
+  }
+});
+const _sfc_main$a = /* @__PURE__ */ defineComponent({
+  __name: "ToastRoot",
+  props: {
+    defaultOpen: { type: Boolean, default: true },
+    forceMount: { type: Boolean },
+    type: { default: "foreground" },
+    open: { type: Boolean, default: void 0 },
+    duration: {},
+    asChild: { type: Boolean },
+    as: { default: "li" }
+  },
+  emits: ["escapeKeyDown", "pause", "resume", "swipeStart", "swipeMove", "swipeCancel", "swipeEnd", "update:open"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emits = __emit;
+    const { forwardRef } = useForwardExpose();
+    const open = useVModel(props, "open", emits, {
+      defaultValue: props.defaultOpen,
+      passive: props.open === void 0
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Presence), {
+        present: _ctx.forceMount || unref(open)
+      }, {
+        default: withCtx(() => [
+          createVNode(_sfc_main$f, mergeProps({
+            ref: unref(forwardRef),
+            open: unref(open),
+            type: _ctx.type,
+            as: _ctx.as,
+            "as-child": _ctx.asChild,
+            duration: _ctx.duration
+          }, _ctx.$attrs, {
+            onClose: _cache[0] || (_cache[0] = ($event) => open.value = false),
+            onPause: _cache[1] || (_cache[1] = ($event) => emits("pause")),
+            onResume: _cache[2] || (_cache[2] = ($event) => emits("resume")),
+            onEscapeKeyDown: _cache[3] || (_cache[3] = ($event) => emits("escapeKeyDown", $event)),
+            onSwipeStart: _cache[4] || (_cache[4] = (event) => {
+              emits("swipeStart", event);
+              if (!event.defaultPrevented) {
+                event.currentTarget.setAttribute("data-swipe", "start");
+              }
+            }),
+            onSwipeMove: _cache[5] || (_cache[5] = (event) => {
+              emits("swipeMove", event);
+              if (!event.defaultPrevented) {
+                const { x, y } = event.detail.delta;
+                const target = event.currentTarget;
+                target.setAttribute("data-swipe", "move");
+                target.style.setProperty("--reka-toast-swipe-move-x", `${x}px`);
+                target.style.setProperty("--reka-toast-swipe-move-y", `${y}px`);
+              }
+            }),
+            onSwipeCancel: _cache[6] || (_cache[6] = (event) => {
+              emits("swipeCancel", event);
+              if (!event.defaultPrevented) {
+                const target = event.currentTarget;
+                target.setAttribute("data-swipe", "cancel");
+                target.style.removeProperty("--reka-toast-swipe-move-x");
+                target.style.removeProperty("--reka-toast-swipe-move-y");
+                target.style.removeProperty("--reka-toast-swipe-end-x");
+                target.style.removeProperty("--reka-toast-swipe-end-y");
+              }
+            }),
+            onSwipeEnd: _cache[7] || (_cache[7] = (event) => {
+              emits("swipeEnd", event);
+              if (!event.defaultPrevented) {
+                const { x, y } = event.detail.delta;
+                const target = event.currentTarget;
+                target.setAttribute("data-swipe", "end");
+                target.style.removeProperty("--reka-toast-swipe-move-x");
+                target.style.removeProperty("--reka-toast-swipe-move-y");
+                target.style.setProperty("--reka-toast-swipe-end-x", `${x}px`);
+                target.style.setProperty("--reka-toast-swipe-end-y", `${y}px`);
+                open.value = false;
+              }
+            })
+          }), {
+            default: withCtx(({ remaining, duration: _duration }) => [
+              renderSlot(_ctx.$slots, "default", {
+                remaining,
+                duration: _duration,
+                open: unref(open)
+              })
+            ]),
+            _: 3
+          }, 16, ["open", "type", "as", "as-child", "duration"])
+        ]),
+        _: 3
+      }, 8, ["present"]);
+    };
+  }
+});
+const _sfc_main$9 = /* @__PURE__ */ defineComponent({
+  __name: "ToastTitle",
+  props: {
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    const props = __props;
+    useForwardExpose();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), normalizeProps(guardReactiveProps(props)), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16);
+    };
+  }
+});
+const _sfc_main$8 = /* @__PURE__ */ defineComponent({
+  __name: "FocusProxy",
+  emits: ["focusFromOutsideViewport"],
+  setup(__props, { emit: __emit }) {
+    const emits = __emit;
+    const providerContext = injectToastProviderContext();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$j), {
+        "aria-hidden": "true",
+        tabindex: "0",
+        style: { "position": "fixed" },
+        onFocus: _cache[0] || (_cache[0] = (event) => {
+          const prevFocusedElement = event.relatedTarget;
+          const isFocusFromOutsideViewport = !unref(providerContext).viewport.value?.contains(prevFocusedElement);
+          if (isFocusFromOutsideViewport) emits("focusFromOutsideViewport");
+        })
+      }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      });
+    };
+  }
+});
+const _sfc_main$7 = /* @__PURE__ */ defineComponent({
+  __name: "DismissableLayerBranch",
+  props: {
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    const props = __props;
+    const { forwardRef, currentElement } = useForwardExpose();
+    onMounted(() => {
+      context.branches.add(currentElement.value);
+    });
+    onUnmounted(() => {
+      context.branches.delete(currentElement.value);
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), mergeProps({ ref: unref(forwardRef) }, props), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16);
+    };
+  }
+});
+const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+  ...{
+    inheritAttrs: false
+  },
+  __name: "ToastViewport",
+  props: {
+    hotkey: { default: () => ["F8"] },
+    label: { type: [String, Function], default: "Notifications ({hotkey})" },
+    asChild: { type: Boolean },
+    as: { default: "ol" }
+  },
+  setup(__props) {
+    const props = __props;
+    const { hotkey, label } = toRefs(props);
+    const { forwardRef, currentElement } = useForwardExpose();
+    const { CollectionSlot, getItems } = useCollection();
+    const providerContext = injectToastProviderContext();
+    const hasToasts = computed(() => providerContext.toastCount.value > 0);
+    const headFocusProxyRef = ref();
+    const tailFocusProxyRef = ref();
+    const hotkeyMessage = computed(() => hotkey.value.join("+").replace(/Key/g, "").replace(/Digit/g, ""));
+    onKeyStroke(hotkey.value, () => {
+      currentElement.value.focus();
+    });
+    onMounted(() => {
+      providerContext.onViewportChange(currentElement.value);
+    });
+    watchEffect((cleanupFn) => {
+      const viewport = currentElement.value;
+      if (hasToasts.value && viewport) {
+        const handlePause = () => {
+          if (!providerContext.isClosePausedRef.value) {
+            const pauseEvent = new CustomEvent(VIEWPORT_PAUSE);
+            viewport.dispatchEvent(pauseEvent);
+            providerContext.isClosePausedRef.value = true;
+          }
+        };
+        const handleResume = () => {
+          if (providerContext.isClosePausedRef.value) {
+            const resumeEvent = new CustomEvent(VIEWPORT_RESUME);
+            viewport.dispatchEvent(resumeEvent);
+            providerContext.isClosePausedRef.value = false;
+          }
+        };
+        const handleFocusOutResume = (event) => {
+          const isFocusMovingOutside = !viewport.contains(event.relatedTarget);
+          if (isFocusMovingOutside)
+            handleResume();
+        };
+        const handlePointerLeaveResume = () => {
+          const isFocusInside = viewport.contains(getActiveElement());
+          if (!isFocusInside)
+            handleResume();
+        };
+        const handleKeyDown = (event) => {
+          const isMetaKey = event.altKey || event.ctrlKey || event.metaKey;
+          const isTabKey = event.key === "Tab" && !isMetaKey;
+          if (isTabKey) {
+            const focusedElement = getActiveElement();
+            const isTabbingBackwards = event.shiftKey;
+            const targetIsViewport = event.target === viewport;
+            if (targetIsViewport && isTabbingBackwards) {
+              headFocusProxyRef.value?.focus();
+              return;
+            }
+            const tabbingDirection = isTabbingBackwards ? "backwards" : "forwards";
+            const sortedCandidates = getSortedTabbableCandidates({ tabbingDirection });
+            const index = sortedCandidates.findIndex((candidate) => candidate === focusedElement);
+            if (focusFirst(sortedCandidates.slice(index + 1))) {
+              event.preventDefault();
+            } else {
+              isTabbingBackwards ? headFocusProxyRef.value?.focus() : tailFocusProxyRef.value?.focus();
+            }
+          }
+        };
+        viewport.addEventListener("focusin", handlePause);
+        viewport.addEventListener("focusout", handleFocusOutResume);
+        viewport.addEventListener("pointermove", handlePause);
+        viewport.addEventListener("pointerleave", handlePointerLeaveResume);
+        viewport.addEventListener("keydown", handleKeyDown);
+        window.addEventListener("blur", handlePause);
+        window.addEventListener("focus", handleResume);
+        cleanupFn(() => {
+          viewport.removeEventListener("focusin", handlePause);
+          viewport.removeEventListener("focusout", handleFocusOutResume);
+          viewport.removeEventListener("pointermove", handlePause);
+          viewport.removeEventListener("pointerleave", handlePointerLeaveResume);
+          viewport.removeEventListener("keydown", handleKeyDown);
+          window.removeEventListener("blur", handlePause);
+          window.removeEventListener("focus", handleResume);
+        });
+      }
+    });
+    function getSortedTabbableCandidates({ tabbingDirection }) {
+      const toastItems = getItems().map((i) => i.ref);
+      const tabbableCandidates = toastItems.map((toastNode) => {
+        const toastTabbableCandidates = [toastNode, ...getTabbableCandidates(toastNode)];
+        return tabbingDirection === "forwards" ? toastTabbableCandidates : toastTabbableCandidates.reverse();
+      });
+      return (tabbingDirection === "forwards" ? tabbableCandidates.reverse() : tabbableCandidates).flat();
+    }
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$7), {
+        role: "region",
+        "aria-label": typeof unref(label) === "string" ? unref(label).replace("{hotkey}", hotkeyMessage.value) : unref(label)(hotkeyMessage.value),
+        tabindex: "-1",
+        style: normalizeStyle({
+          // incase list has size when empty (e.g. padding), we remove pointer events so
+          // it doesn't prevent interactions with page elements that it overlays
+          pointerEvents: hasToasts.value ? void 0 : "none"
+        })
+      }, {
+        default: withCtx(() => [
+          hasToasts.value ? (openBlock(), createBlock(_sfc_main$8, {
+            key: 0,
+            ref: (node) => {
+              headFocusProxyRef.value = unref(unrefElement)(node);
+              return void 0;
+            },
+            onFocusFromOutsideViewport: _cache[0] || (_cache[0] = () => {
+              const tabbableCandidates = getSortedTabbableCandidates({
+                tabbingDirection: "forwards"
+              });
+              unref(focusFirst)(tabbableCandidates);
+            })
+          }, null, 512)) : createCommentVNode("", true),
+          createVNode(unref(CollectionSlot), null, {
+            default: withCtx(() => [
+              createVNode(unref(Primitive), mergeProps({
+                ref: unref(forwardRef),
+                tabindex: "-1",
+                as: _ctx.as,
+                "as-child": _ctx.asChild
+              }, _ctx.$attrs), {
+                default: withCtx(() => [
+                  renderSlot(_ctx.$slots, "default")
+                ]),
+                _: 3
+              }, 16, ["as", "as-child"])
+            ]),
+            _: 3
+          }),
+          hasToasts.value ? (openBlock(), createBlock(_sfc_main$8, {
+            key: 1,
+            ref: (node) => {
+              tailFocusProxyRef.value = unref(unrefElement)(node);
+              return void 0;
+            },
+            onFocusFromOutsideViewport: _cache[1] || (_cache[1] = () => {
+              const tabbableCandidates = getSortedTabbableCandidates({
+                tabbingDirection: "backwards"
+              });
+              unref(focusFirst)(tabbableCandidates);
+            })
+          }, null, 512)) : createCommentVNode("", true)
+        ]),
+        _: 3
+      }, 8, ["aria-label", "style"]);
+    };
+  }
+});
+const [injectTooltipProviderContext, provideTooltipProviderContext] = createContext("TooltipProvider");
+const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+  ...{
+    inheritAttrs: false
+  },
+  __name: "TooltipProvider",
+  props: {
+    delayDuration: { default: 700 },
+    skipDelayDuration: { default: 300 },
+    disableHoverableContent: { type: Boolean, default: false },
+    disableClosingTrigger: { type: Boolean },
+    disabled: { type: Boolean },
+    ignoreNonKeyboardFocus: { type: Boolean, default: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const { delayDuration, skipDelayDuration, disableHoverableContent, disableClosingTrigger, ignoreNonKeyboardFocus, disabled } = toRefs(props);
+    useForwardExpose();
+    const isOpenDelayed = ref(true);
+    const isPointerInTransitRef = ref(false);
+    const { start: startTimer, stop: clearTimer } = useTimeoutFn(() => {
+      isOpenDelayed.value = true;
+    }, skipDelayDuration, { immediate: false });
+    provideTooltipProviderContext({
+      isOpenDelayed,
+      delayDuration,
+      onOpen() {
+        clearTimer();
+        isOpenDelayed.value = false;
+      },
+      onClose() {
+        startTimer();
+      },
+      isPointerInTransitRef,
+      disableHoverableContent,
+      disableClosingTrigger,
+      disabled,
+      ignoreNonKeyboardFocus
+    });
+    return (_ctx, _cache) => {
+      return renderSlot(_ctx.$slots, "default");
+    };
+  }
+});
+function useToast() {
+  const toasts = useState("toasts", () => []);
+  const running = ref(false);
+  const queue = [];
+  const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+  async function processQueue() {
+    if (running.value || queue.length === 0) {
+      return;
+    }
+    running.value = true;
+    while (queue.length > 0) {
+      const toast = queue.shift();
+      await nextTick();
+      toasts.value = [...toasts.value, toast].slice(-5);
+    }
+    running.value = false;
+  }
+  function add(toast) {
+    const body = {
+      id: generateId(),
+      open: true,
+      ...toast
+    };
+    queue.push(body);
+    processQueue();
+    return body;
+  }
+  function update(id, toast) {
+    const index = toasts.value.findIndex((t) => t.id === id);
+    if (index !== -1) {
+      toasts.value[index] = {
+        ...toasts.value[index],
+        ...toast
+      };
+    }
+  }
+  function remove(id) {
+    const index = toasts.value.findIndex((t) => t.id === id);
+    if (index !== -1) {
+      toasts.value[index] = {
+        ...toasts.value[index],
+        open: false
+      };
+    }
+    setTimeout(() => {
+      toasts.value = toasts.value.filter((t) => t.id !== id);
+    }, 200);
+  }
+  function clear() {
+    toasts.value = [];
+  }
+  return {
+    toasts,
+    add,
+    update,
+    remove,
+    clear
+  };
+}
+const theme$1 = {
+  "slots": {
+    "root": "relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none",
+    "wrapper": "w-0 flex-1 flex flex-col",
+    "title": "text-sm font-medium text-highlighted",
+    "description": "text-sm text-muted",
+    "icon": "shrink-0 size-5",
+    "avatar": "shrink-0",
+    "avatarSize": "2xl",
+    "actions": "flex gap-1.5 shrink-0",
+    "progress": "absolute inset-x-0 bottom-0",
+    "close": "p-0"
+  },
+  "variants": {
+    "color": {
+      "primary": {
+        "root": "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
+        "icon": "text-primary"
+      },
+      "secondary": {
+        "root": "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-secondary",
+        "icon": "text-secondary"
+      },
+      "success": {
+        "root": "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-success",
+        "icon": "text-success"
+      },
+      "info": {
+        "root": "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-info",
+        "icon": "text-info"
+      },
+      "warning": {
+        "root": "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-warning",
+        "icon": "text-warning"
+      },
+      "error": {
+        "root": "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error",
+        "icon": "text-error"
+      },
+      "neutral": {
+        "root": "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted",
+        "icon": "text-highlighted"
+      }
+    },
+    "orientation": {
+      "horizontal": {
+        "root": "items-center",
+        "actions": "items-center"
+      },
+      "vertical": {
+        "root": "items-start",
+        "actions": "items-start mt-2.5"
+      }
+    },
+    "title": {
+      "true": {
+        "description": "mt-1"
+      }
+    }
+  },
+  "defaultVariants": {
+    "color": "primary"
+  }
+};
+const _sfc_main$4 = {
+  __name: "Toast",
+  props: {
+    as: { type: null, required: false },
+    title: { type: [String, Object, Function], required: false },
+    description: { type: [String, Object, Function], required: false },
+    icon: { type: String, required: false },
+    avatar: { type: Object, required: false },
+    color: { type: null, required: false },
+    orientation: { type: null, required: false, default: "vertical" },
+    close: { type: [Boolean, Object], required: false, default: true },
+    closeIcon: { type: String, required: false },
+    actions: { type: Array, required: false },
+    progress: { type: [Boolean, Object], required: false, default: true },
+    class: { type: null, required: false },
+    ui: { type: null, required: false },
+    defaultOpen: { type: Boolean, required: false },
+    open: { type: Boolean, required: false },
+    type: { type: String, required: false },
+    duration: { type: Number, required: false }
+  },
+  emits: ["escapeKeyDown", "pause", "resume", "swipeStart", "swipeMove", "swipeCancel", "swipeEnd", "update:open"],
+  setup(__props, { expose: __expose, emit: __emit }) {
+    const props = __props;
+    const emits = __emit;
+    const slots = useSlots();
+    const { t } = useLocale();
+    const appConfig = useAppConfig();
+    const rootProps = useForwardPropsEmits(reactivePick(props, "as", "defaultOpen", "open", "duration", "type"), emits);
+    const ui = computed(() => tv({ extend: tv(theme$1), ...appConfig.ui?.toast || {} })({
+      color: props.color,
+      orientation: props.orientation,
+      title: !!props.title || !!slots.title
+    }));
+    const el = ref();
+    const height = ref(0);
+    onMounted(() => {
+      if (!el.value) {
+        return;
+      }
+      nextTick(() => {
+        height.value = el.value?.$el?.getBoundingClientRect()?.height;
+      });
+    });
+    __expose({
+      height
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$a), mergeProps({
+        ref_key: "el",
+        ref: el
+      }, unref(rootProps), {
+        "data-orientation": __props.orientation,
+        class: ui.value.root({ class: [props.ui?.root, props.class] }),
+        style: { "--height": height.value }
+      }), {
+        default: withCtx(({ remaining, duration, open }) => [
+          renderSlot(_ctx.$slots, "leading", {}, () => [
+            __props.avatar ? (openBlock(), createBlock(_sfc_main$l, mergeProps({
+              key: 0,
+              size: props.ui?.avatarSize || ui.value.avatarSize()
+            }, __props.avatar, {
+              class: ui.value.avatar({ class: props.ui?.avatar })
+            }), null, 16, ["size", "class"])) : __props.icon ? (openBlock(), createBlock(_sfc_main$m, {
+              key: 1,
+              name: __props.icon,
+              class: normalizeClass(ui.value.icon({ class: props.ui?.icon }))
+            }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+          ]),
+          createBaseVNode("div", {
+            class: normalizeClass(ui.value.wrapper({ class: props.ui?.wrapper }))
+          }, [
+            __props.title || !!slots.title ? (openBlock(), createBlock(unref(_sfc_main$9), {
+              key: 0,
+              class: normalizeClass(ui.value.title({ class: props.ui?.title }))
+            }, {
+              default: withCtx(() => [
+                renderSlot(_ctx.$slots, "title", {}, () => [
+                  typeof __props.title === "function" ? (openBlock(), createBlock(resolveDynamicComponent(__props.title()), { key: 0 })) : typeof __props.title === "object" ? (openBlock(), createBlock(resolveDynamicComponent(__props.title), { key: 1 })) : (openBlock(), createElementBlock(Fragment, { key: 2 }, [
+                    createTextVNode(toDisplayString(__props.title), 1)
+                  ], 64))
+                ])
+              ]),
+              _: 3
+            }, 8, ["class"])) : createCommentVNode("", true),
+            __props.description || !!slots.description ? (openBlock(), createBlock(unref(_sfc_main$c), {
+              key: 1,
+              class: normalizeClass(ui.value.description({ class: props.ui?.description }))
+            }, {
+              default: withCtx(() => [
+                renderSlot(_ctx.$slots, "description", {}, () => [
+                  typeof __props.description === "function" ? (openBlock(), createBlock(resolveDynamicComponent(__props.description()), { key: 0 })) : typeof __props.description === "object" ? (openBlock(), createBlock(resolveDynamicComponent(__props.description), { key: 1 })) : (openBlock(), createElementBlock(Fragment, { key: 2 }, [
+                    createTextVNode(toDisplayString(__props.description), 1)
+                  ], 64))
+                ])
+              ]),
+              _: 3
+            }, 8, ["class"])) : createCommentVNode("", true),
+            __props.orientation === "vertical" && (__props.actions?.length || !!slots.actions) ? (openBlock(), createElementBlock("div", {
+              key: 2,
+              class: normalizeClass(ui.value.actions({ class: props.ui?.actions }))
+            }, [
+              renderSlot(_ctx.$slots, "actions", {}, () => [
+                (openBlock(true), createElementBlock(Fragment, null, renderList(__props.actions, (action, index) => {
+                  return openBlock(), createBlock(unref(_sfc_main$d), {
+                    key: index,
+                    "alt-text": action.label || "Action",
+                    "as-child": "",
+                    onClick: _cache[0] || (_cache[0] = withModifiers(() => {
+                    }, ["stop"]))
+                  }, {
+                    default: withCtx(() => [
+                      createVNode(_sfc_main$n, mergeProps({
+                        size: "xs",
+                        color: __props.color
+                      }, { ref_for: true }, action), null, 16, ["color"])
+                    ]),
+                    _: 2
+                  }, 1032, ["alt-text"]);
+                }), 128))
+              ])
+            ], 2)) : createCommentVNode("", true)
+          ], 2),
+          __props.orientation === "horizontal" && (__props.actions?.length || !!slots.actions) || __props.close ? (openBlock(), createElementBlock("div", {
+            key: 0,
+            class: normalizeClass(ui.value.actions({ class: props.ui?.actions, orientation: "horizontal" }))
+          }, [
+            __props.orientation === "horizontal" && (__props.actions?.length || !!slots.actions) ? renderSlot(_ctx.$slots, "actions", { key: 0 }, () => [
+              (openBlock(true), createElementBlock(Fragment, null, renderList(__props.actions, (action, index) => {
+                return openBlock(), createBlock(unref(_sfc_main$d), {
+                  key: index,
+                  "alt-text": action.label || "Action",
+                  "as-child": "",
+                  onClick: _cache[1] || (_cache[1] = withModifiers(() => {
+                  }, ["stop"]))
+                }, {
+                  default: withCtx(() => [
+                    createVNode(_sfc_main$n, mergeProps({
+                      size: "xs",
+                      color: __props.color
+                    }, { ref_for: true }, action), null, 16, ["color"])
+                  ]),
+                  _: 2
+                }, 1032, ["alt-text"]);
+              }), 128))
+            ]) : createCommentVNode("", true),
+            __props.close || !!slots.close ? (openBlock(), createBlock(unref(_sfc_main$e), {
+              key: 1,
+              "as-child": ""
+            }, {
+              default: withCtx(() => [
+                renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
+                  __props.close ? (openBlock(), createBlock(_sfc_main$n, mergeProps({
+                    key: 0,
+                    icon: __props.closeIcon || unref(appConfig).ui.icons.close,
+                    color: "neutral",
+                    variant: "link",
+                    "aria-label": unref(t)("toast.close")
+                  }, typeof __props.close === "object" ? __props.close : {}, {
+                    class: ui.value.close({ class: props.ui?.close }),
+                    onClick: _cache[2] || (_cache[2] = withModifiers(() => {
+                    }, ["stop"]))
+                  }), null, 16, ["icon", "aria-label", "class"])) : createCommentVNode("", true)
+                ])
+              ]),
+              _: 3
+            })) : createCommentVNode("", true)
+          ], 2)) : createCommentVNode("", true),
+          __props.progress && open && remaining > 0 && duration ? (openBlock(), createBlock(_sfc_main$o, mergeProps({
+            key: 1,
+            "model-value": remaining / duration * 100,
+            color: __props.color
+          }, typeof __props.progress === "object" ? __props.progress : {}, {
+            size: "sm",
+            class: ui.value.progress({ class: props.ui?.progress })
+          }), null, 16, ["model-value", "color", "class"])) : createCommentVNode("", true)
+        ]),
+        _: 3
+      }, 16, ["data-orientation", "class", "style"]);
+    };
+  }
+};
+const theme = {
+  "slots": {
+    "viewport": "fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none",
+    "base": "pointer-events-auto absolute inset-x-0 z-(--index) transform-(--transform) data-[expanded=false]:data-[front=false]:h-(--front-height) data-[expanded=false]:data-[front=false]:*:opacity-0 data-[front=false]:*:transition-opacity data-[front=false]:*:duration-100 data-[state=closed]:animate-[toast-closed_200ms_ease-in-out] data-[state=closed]:data-[expanded=false]:data-[front=false]:animate-[toast-collapsed-closed_200ms_ease-in-out] data-[swipe=move]:transition-none transition-[transform,translate,height] duration-200 ease-out"
+  },
+  "variants": {
+    "position": {
+      "top-left": {
+        "viewport": "left-4"
+      },
+      "top-center": {
+        "viewport": "left-1/2 transform -translate-x-1/2"
+      },
+      "top-right": {
+        "viewport": "right-4"
+      },
+      "bottom-left": {
+        "viewport": "left-4"
+      },
+      "bottom-center": {
+        "viewport": "left-1/2 transform -translate-x-1/2"
+      },
+      "bottom-right": {
+        "viewport": "right-4"
+      }
+    },
+    "swipeDirection": {
+      "up": "data-[swipe=end]:animate-[toast-slide-up_200ms_ease-out]",
+      "right": "data-[swipe=end]:animate-[toast-slide-right_200ms_ease-out]",
+      "down": "data-[swipe=end]:animate-[toast-slide-down_200ms_ease-out]",
+      "left": "data-[swipe=end]:animate-[toast-slide-left_200ms_ease-out]"
+    }
+  },
+  "compoundVariants": [
+    {
+      "position": [
+        "top-left",
+        "top-center",
+        "top-right"
+      ],
+      "class": {
+        "viewport": "top-4",
+        "base": "top-0 data-[state=open]:animate-[slide-in-from-top_200ms_ease-in-out]"
+      }
+    },
+    {
+      "position": [
+        "bottom-left",
+        "bottom-center",
+        "bottom-right"
+      ],
+      "class": {
+        "viewport": "bottom-4",
+        "base": "bottom-0 data-[state=open]:animate-[slide-in-from-bottom_200ms_ease-in-out]"
+      }
+    },
+    {
+      "swipeDirection": [
+        "left",
+        "right"
+      ],
+      "class": "data-[swipe=move]:translate-x-(--reka-toast-swipe-move-x) data-[swipe=end]:translate-x-(--reka-toast-swipe-end-x) data-[swipe=cancel]:translate-x-0"
+    },
+    {
+      "swipeDirection": [
+        "up",
+        "down"
+      ],
+      "class": "data-[swipe=move]:translate-y-(--reka-toast-swipe-move-y) data-[swipe=end]:translate-y-(--reka-toast-swipe-end-y) data-[swipe=cancel]:translate-y-0"
+    }
+  ],
+  "defaultVariants": {
+    "position": "bottom-right"
+  }
+};
+const __default__$1 = {
+  name: "Toaster"
+};
+const _sfc_main$3 = /* @__PURE__ */ Object.assign(__default__$1, {
+  props: {
+    position: { type: null, required: false },
+    expand: { type: Boolean, required: false, default: true },
+    progress: { type: Boolean, required: false, default: true },
+    portal: { type: [Boolean, String], required: false, skipCheck: true, default: true },
+    class: { type: null, required: false },
+    ui: { type: null, required: false },
+    label: { type: String, required: false },
+    duration: { type: Number, required: false, default: 5e3 },
+    swipeThreshold: { type: Number, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const { toasts, remove } = useToast();
+    const appConfig = useAppConfig();
+    const providerProps = useForwardProps(reactivePick(props, "duration", "label", "swipeThreshold"));
+    const portalProps = usePortal(toRef(() => props.portal));
+    const swipeDirection = computed(() => {
+      switch (props.position) {
+        case "top-center":
+          return "up";
+        case "top-right":
+        case "bottom-right":
+          return "right";
+        case "bottom-center":
+          return "down";
+        case "top-left":
+        case "bottom-left":
+          return "left";
+      }
+      return "right";
+    });
+    const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.toaster || {} })({
+      position: props.position,
+      swipeDirection: swipeDirection.value
+    }));
+    function onUpdateOpen(value, id) {
+      if (value) {
+        return;
+      }
+      remove(id);
+    }
+    const hovered = ref(false);
+    const expanded = computed(() => props.expand || hovered.value);
+    const refs = ref([]);
+    const height = computed(() => refs.value.reduce((acc, { height: height2 }) => acc + height2 + 16, 0));
+    const frontHeight = computed(() => refs.value[refs.value.length - 1]?.height || 0);
+    function getOffset(index) {
+      return refs.value.slice(index + 1).reduce((acc, { height: height2 }) => acc + height2 + 16, 0);
+    }
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$h), mergeProps({ "swipe-direction": swipeDirection.value }, unref(providerProps)), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default"),
+          (openBlock(true), createElementBlock(Fragment, null, renderList(unref(toasts), (toast, index) => {
+            return openBlock(), createBlock(_sfc_main$4, mergeProps({
+              key: toast.id,
+              ref_for: true,
+              ref_key: "refs",
+              ref: refs,
+              progress: __props.progress
+            }, { ref_for: true }, unref(omit)(toast, ["id", "close"]), {
+              close: toast.close,
+              "data-expanded": expanded.value,
+              "data-front": !expanded.value && index === unref(toasts).length - 1,
+              style: {
+                "--index": index - unref(toasts).length + unref(toasts).length,
+                "--before": unref(toasts).length - 1 - index,
+                "--offset": getOffset(index),
+                "--scale": expanded.value ? "1" : "calc(1 - var(--before) * var(--scale-factor))",
+                "--translate": expanded.value ? "calc(var(--offset) * var(--translate-factor))" : "calc(var(--before) * var(--gap))",
+                "--transform": "translateY(var(--translate)) scale(var(--scale))"
+              },
+              class: ui.value.base({ class: [props.ui?.base, toast.onClick ? "cursor-pointer" : void 0] }),
+              "onUpdate:open": ($event) => onUpdateOpen($event, toast.id),
+              onClick: ($event) => toast.onClick && toast.onClick(toast)
+            }), null, 16, ["progress", "close", "data-expanded", "data-front", "style", "class", "onUpdate:open", "onClick"]);
+          }), 128)),
+          createVNode(unref(_sfc_main$b), normalizeProps(guardReactiveProps(unref(portalProps))), {
+            default: withCtx(() => [
+              createVNode(unref(_sfc_main$6), {
+                "data-expanded": expanded.value,
+                class: normalizeClass(ui.value.viewport({ class: [props.ui?.viewport, props.class] })),
+                style: normalizeStyle({
+                  "--scale-factor": "0.05",
+                  "--translate-factor": __props.position?.startsWith("top") ? "1px" : "-1px",
+                  "--gap": __props.position?.startsWith("top") ? "16px" : "-16px",
+                  "--front-height": `${frontHeight.value}px`,
+                  "--height": `${height.value}px`
+                }),
+                onMouseenter: _cache[0] || (_cache[0] = ($event) => hovered.value = true),
+                onMouseleave: _cache[1] || (_cache[1] = ($event) => hovered.value = false)
+              }, null, 8, ["data-expanded", "class", "style"])
+            ]),
+            _: 1
+          }, 16)
+        ]),
+        _: 3
+      }, 16, ["swipe-direction"]);
+    };
+  }
+});
+function _useOverlay() {
+  const overlays = shallowReactive([]);
+  const create = (component, _options) => {
+    const { props, defaultOpen, destroyOnClose } = _options || {};
+    const options = reactive({
+      id: Symbol(import.meta.dev ? "useOverlay" : ""),
+      isOpen: !!defaultOpen,
+      component: markRaw(component),
+      isMounted: !!defaultOpen,
+      destroyOnClose: !!destroyOnClose,
+      originalProps: props || {},
+      props: { ...props }
+    });
+    overlays.push(options);
+    return {
+      ...options,
+      open: (props2) => open(options.id, props2),
+      close: (value) => close(options.id, value),
+      patch: (props2) => patch(options.id, props2)
+    };
+  };
+  const open = (id, props) => {
+    const overlay = getOverlay(id);
+    if (props) {
+      overlay.props = { ...overlay.originalProps, ...props };
+    } else {
+      overlay.props = { ...overlay.originalProps };
+    }
+    overlay.isOpen = true;
+    overlay.isMounted = true;
+    return {
+      id,
+      isMounted: overlay.isMounted,
+      isOpen: overlay.isOpen,
+      result: new Promise((resolve) => overlay.resolvePromise = resolve)
+    };
+  };
+  const close = (id, value) => {
+    const overlay = getOverlay(id);
+    overlay.isOpen = false;
+    if (overlay.resolvePromise) {
+      overlay.resolvePromise(value);
+      overlay.resolvePromise = void 0;
+    }
+  };
+  const closeAll = () => {
+    overlays.forEach((overlay) => close(overlay.id));
+  };
+  const unmount = (id) => {
+    const overlay = getOverlay(id);
+    overlay.isMounted = false;
+    if (overlay.destroyOnClose) {
+      const index = overlays.findIndex((overlay2) => overlay2.id === id);
+      overlays.splice(index, 1);
+    }
+  };
+  const patch = (id, props) => {
+    const overlay = getOverlay(id);
+    overlay.props = { ...overlay.props, ...props };
+  };
+  const getOverlay = (id) => {
+    const overlay = overlays.find((overlay2) => overlay2.id === id);
+    if (!overlay) {
+      throw new Error("Overlay not found");
+    }
+    return overlay;
+  };
+  const isOpen = (id) => {
+    const overlay = getOverlay(id);
+    return overlay.isOpen;
+  };
+  return {
+    overlays,
+    open,
+    close,
+    closeAll,
+    create,
+    patch,
+    unmount,
+    isOpen
+  };
+}
+const useOverlay = /* @__PURE__ */ createSharedComposable(_useOverlay);
+const _sfc_main$2 = {
+  __name: "OverlayProvider",
+  setup(__props) {
+    const { overlays, unmount, close } = useOverlay();
+    const mountedOverlays = computed(() => overlays.filter((overlay) => overlay.isMounted));
+    const onAfterLeave = (id) => {
+      close(id);
+      unmount(id);
+    };
+    const onClose = (id, value) => {
+      close(id, value);
+    };
+    return (_ctx, _cache) => {
+      return openBlock(true), createElementBlock(Fragment, null, renderList(mountedOverlays.value, (overlay) => {
+        return openBlock(), createBlock(resolveDynamicComponent(overlay.component), mergeProps({
+          key: overlay.id
+        }, { ref_for: true }, overlay.props, {
+          open: overlay.isOpen,
+          "onUpdate:open": ($event) => overlay.isOpen = $event,
+          onClose: (value) => onClose(overlay.id, value),
+          "onAfter:leave": ($event) => onAfterLeave(overlay.id)
+        }), null, 16, ["open", "onUpdate:open", "onClose", "onAfter:leave"]);
+      }), 128);
+    };
+  }
+};
+const __default__ = {
+  name: "App"
+};
+const _sfc_main$1 = /* @__PURE__ */ Object.assign(__default__, {
+  props: {
+    tooltip: { type: Object, required: false },
+    toaster: { type: [Object, null], required: false },
+    locale: { type: null, required: false },
+    portal: { type: null, required: false, default: "body" },
+    scrollBody: { type: [Boolean, Object], required: false },
+    nonce: { type: String, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const configProviderProps = useForwardProps(reactivePick(props, "scrollBody"));
+    const tooltipProps = toRef(() => props.tooltip);
+    const toasterProps = toRef(() => props.toaster);
+    const locale = toRef(() => props.locale);
+    provide(localeContextInjectionKey, locale);
+    const portal = toRef(() => props.portal);
+    provide(portalTargetInjectionKey, portal);
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(_sfc_main$p), mergeProps({
+        "use-id": () => useId(),
+        dir: locale.value?.dir,
+        locale: locale.value?.code
+      }, unref(configProviderProps)), {
+        default: withCtx(() => [
+          createVNode(unref(_sfc_main$5), normalizeProps(guardReactiveProps(tooltipProps.value)), {
+            default: withCtx(() => [
+              __props.toaster !== null ? (openBlock(), createBlock(_sfc_main$3, normalizeProps(mergeProps({ key: 0 }, toasterProps.value)), {
+                default: withCtx(() => [
+                  renderSlot(_ctx.$slots, "default")
+                ]),
+                _: 3
+              }, 16)) : renderSlot(_ctx.$slots, "default", { key: 1 }),
+              createVNode(_sfc_main$2)
+            ]),
+            _: 3
+          }, 16)
+        ]),
+        _: 3
+      }, 16, ["use-id", "dir", "locale"]);
+    };
+  }
+});
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "App",
+  setup(__props) {
+    return (_ctx, _cache) => {
+      const _component_UApp = _sfc_main$1;
+      return openBlock(), createBlock(_component_UApp, null, {
+        default: withCtx(() => _cache[0] || (_cache[0] = [
+          createBaseVNode("the-header", null, null, -1),
+          createBaseVNode("shared-button", null, null, -1),
+          createBaseVNode("card-xpto", null, null, -1)
+        ])),
+        _: 1,
+        __: [0]
+      });
+    };
+  }
+});
+const app = createApp(_sfc_main);
+app.mount("#app");
