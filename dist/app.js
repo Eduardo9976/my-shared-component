@@ -1,6 +1,9 @@
-import { d as defineComponent, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, P as Primitive, a as createContext, t as toRefs, b as ref, e as useTimeout, f as useRafFn, g as createCommentVNode, h as createTextVNode, i as toDisplayString, j as useForwardExpose, k as computed, l as watchEffect, m as watch, n as onKeyStroke, p as onMounted, q as onUnmounted, s as createElementBlock, v as createVNode, x as mergeProps, y as withModifiers, T as Teleport, F as Fragment, z as isClient, A as normalizeProps, B as guardReactiveProps, C as useVModel, D as unrefElement, E as normalizeStyle, G as useTimeoutFn, H as useState, I as nextTick, J as useSlots, K as useLocale, L as useForwardPropsEmits, M as reactivePick, N as tv, O as useAppConfig, Q as createBaseVNode, _ as _sfc_main$q, R as _sfc_main$r, S as normalizeClass, U as resolveDynamicComponent, V as renderList, W as _sfc_main$s, X as useForwardProps, Y as toRef, Z as omit, $ as createSharedComposable, a0 as shallowReactive, a1 as reactive, a2 as markRaw, a3 as useId, a4 as provide, a5 as localeContextInjectionKey, a6 as defineCustomElement, a7 as tailwindStyles, a8 as createApp } from "./main.js";
-import { u as useCollection, _ as _sfc_main$o, g as getActiveElement, a as _sfc_main$p, P as Presence, c as context, f as focusFirst, b as getTabbableCandidates, d as usePortal, e as _sfc_main$u, p as portalTargetInjectionKey } from "./shared-button.js";
-import { _ as _sfc_main$t, a as _export_sfc } from "./card-xpto.js";
+import { d as defineComponent, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, t as toRefs, a as ref, b as createCommentVNode, e as createTextVNode, f as toDisplayString, g as computed, h as watchEffect, i as watch, j as onMounted, k as onUnmounted, l as createElementBlock, m as createVNode, n as mergeProps, p as withModifiers, T as Teleport, F as Fragment, q as normalizeProps, s as guardReactiveProps, v as normalizeStyle, x as nextTick, y as useSlots, z as createBaseVNode, A as normalizeClass, B as resolveDynamicComponent, C as renderList, D as toRef, E as shallowReactive, G as reactive, H as markRaw, I as useId, J as provide, K as createApp } from "./main.js";
+import { P as Primitive, c as createContext, u as useTimeout, a as useRafFn, b as useForwardExpose, o as onKeyStroke, i as isClient, d as useVModel, e as unrefElement, f as useTimeoutFn, g as useState, h as useLocale, j as useForwardPropsEmits, r as reactivePick, t as tv, k as useAppConfig, _ as _sfc_main$l, l as _sfc_main$m, m as _sfc_main$n, n as useForwardProps, p as omit, q as createSharedComposable, s as localeContextInjectionKey } from "./Button.js";
+import { u as useCollection, _ as _sfc_main$j, g as getActiveElement, a as _sfc_main$k, P as Presence, c as context, f as focusFirst, b as getTabbableCandidates, d as usePortal, e as _sfc_main$p, p as portalTargetInjectionKey } from "./shared-button.js";
+import { _ as _sfc_main$o } from "./card-xpto.js";
+import "./the-header.js";
+import "./_plugin-vue_export-helper.js";
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) return;
@@ -30,7 +33,7 @@ import { _ as _sfc_main$t, a as _export_sfc } from "./card-xpto.js";
     fetch(link.href, fetchOpts);
   }
 })();
-const _sfc_main$n = /* @__PURE__ */ defineComponent({
+const _sfc_main$i = /* @__PURE__ */ defineComponent({
   __name: "ToastAnnounceExclude",
   props: {
     altText: {},
@@ -54,7 +57,7 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
   }
 });
 const [injectToastProviderContext, provideToastProviderContext] = createContext("ToastProvider");
-const _sfc_main$m = /* @__PURE__ */ defineComponent({
+const _sfc_main$h = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -101,7 +104,7 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$l = /* @__PURE__ */ defineComponent({
+const _sfc_main$g = /* @__PURE__ */ defineComponent({
   __name: "ToastAnnounce",
   setup(__props) {
     const providerContext = injectToastProviderContext();
@@ -111,7 +114,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
       renderAnnounceText.value = true;
     });
     return (_ctx, _cache) => {
-      return unref(isAnnounced) || renderAnnounceText.value ? (openBlock(), createBlock(unref(_sfc_main$o), { key: 0 }, {
+      return unref(isAnnounced) || renderAnnounceText.value ? (openBlock(), createBlock(unref(_sfc_main$j), { key: 0 }, {
         default: withCtx(() => [
           createTextVNode(toDisplayString(unref(providerContext).label.value) + " ", 1),
           renderSlot(_ctx.$slots, "default")
@@ -173,7 +176,7 @@ function getAnnounceTextContent(container) {
   return textContent;
 }
 const [injectToastRootContext, provideToastRootContext] = createContext("ToastRoot");
-const _sfc_main$k = /* @__PURE__ */ defineComponent({
+const _sfc_main$f = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -273,7 +276,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
     provideToastRootContext({ onClose: handleClose });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock(Fragment, null, [
-        announceTextContent.value ? (openBlock(), createBlock(_sfc_main$l, {
+        announceTextContent.value ? (openBlock(), createBlock(_sfc_main$g, {
           key: 0,
           role: "alert",
           "aria-live": _ctx.type === "foreground" ? "assertive" : "polite",
@@ -366,7 +369,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$j = /* @__PURE__ */ defineComponent({
+const _sfc_main$e = /* @__PURE__ */ defineComponent({
   __name: "ToastClose",
   props: {
     asChild: { type: Boolean },
@@ -377,7 +380,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
     const rootContext = injectToastRootContext();
     const { forwardRef } = useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$n, { "as-child": "" }, {
+      return openBlock(), createBlock(_sfc_main$i, { "as-child": "" }, {
         default: withCtx(() => [
           createVNode(unref(Primitive), mergeProps(props, {
             ref: unref(forwardRef),
@@ -395,7 +398,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$i = /* @__PURE__ */ defineComponent({
+const _sfc_main$d = /* @__PURE__ */ defineComponent({
   __name: "ToastAction",
   props: {
     altText: {},
@@ -408,13 +411,13 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
       throw new Error("Missing prop `altText` expected on `ToastAction`");
     const { forwardRef } = useForwardExpose();
     return (_ctx, _cache) => {
-      return _ctx.altText ? (openBlock(), createBlock(_sfc_main$n, {
+      return _ctx.altText ? (openBlock(), createBlock(_sfc_main$i, {
         key: 0,
         "alt-text": _ctx.altText,
         "as-child": ""
       }, {
         default: withCtx(() => [
-          createVNode(_sfc_main$j, {
+          createVNode(_sfc_main$e, {
             ref: unref(forwardRef),
             as: _ctx.as,
             "as-child": _ctx.asChild
@@ -430,7 +433,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$h = /* @__PURE__ */ defineComponent({
+const _sfc_main$c = /* @__PURE__ */ defineComponent({
   __name: "ToastDescription",
   props: {
     asChild: { type: Boolean },
@@ -449,7 +452,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$g = /* @__PURE__ */ defineComponent({
+const _sfc_main$b = /* @__PURE__ */ defineComponent({
   __name: "ToastPortal",
   props: {
     to: {},
@@ -460,7 +463,7 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$p), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$k), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -469,7 +472,7 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$f = /* @__PURE__ */ defineComponent({
+const _sfc_main$a = /* @__PURE__ */ defineComponent({
   __name: "ToastRoot",
   props: {
     defaultOpen: { type: Boolean, default: true },
@@ -494,7 +497,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
         present: _ctx.forceMount || unref(open)
       }, {
         default: withCtx(() => [
-          createVNode(_sfc_main$k, mergeProps({
+          createVNode(_sfc_main$f, mergeProps({
             ref: unref(forwardRef),
             open: unref(open),
             type: _ctx.type,
@@ -562,7 +565,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$e = /* @__PURE__ */ defineComponent({
+const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "ToastTitle",
   props: {
     asChild: { type: Boolean },
@@ -581,14 +584,14 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$d = /* @__PURE__ */ defineComponent({
+const _sfc_main$8 = /* @__PURE__ */ defineComponent({
   __name: "FocusProxy",
   emits: ["focusFromOutsideViewport"],
   setup(__props, { emit: __emit }) {
     const emits = __emit;
     const providerContext = injectToastProviderContext();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$o), {
+      return openBlock(), createBlock(unref(_sfc_main$j), {
         "aria-hidden": "true",
         tabindex: "0",
         style: { "position": "fixed" },
@@ -606,7 +609,7 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$c = /* @__PURE__ */ defineComponent({
+const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   __name: "DismissableLayerBranch",
   props: {
     asChild: { type: Boolean },
@@ -631,7 +634,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$b = /* @__PURE__ */ defineComponent({
+const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -733,7 +736,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
       return (tabbingDirection === "forwards" ? tabbableCandidates.reverse() : tabbableCandidates).flat();
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$c), {
+      return openBlock(), createBlock(unref(_sfc_main$7), {
         role: "region",
         "aria-label": typeof unref(label) === "string" ? unref(label).replace("{hotkey}", hotkeyMessage.value) : unref(label)(hotkeyMessage.value),
         tabindex: "-1",
@@ -744,7 +747,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
         })
       }, {
         default: withCtx(() => [
-          hasToasts.value ? (openBlock(), createBlock(_sfc_main$d, {
+          hasToasts.value ? (openBlock(), createBlock(_sfc_main$8, {
             key: 0,
             ref: (node) => {
               headFocusProxyRef.value = unref(unrefElement)(node);
@@ -773,7 +776,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
             ]),
             _: 3
           }),
-          hasToasts.value ? (openBlock(), createBlock(_sfc_main$d, {
+          hasToasts.value ? (openBlock(), createBlock(_sfc_main$8, {
             key: 1,
             ref: (node) => {
               tailFocusProxyRef.value = unref(unrefElement)(node);
@@ -793,7 +796,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
   }
 });
 const [injectTooltipProviderContext, provideTooltipProviderContext] = createContext("TooltipProvider");
-const _sfc_main$a = /* @__PURE__ */ defineComponent({
+const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -959,7 +962,7 @@ const theme$1 = {
     "color": "primary"
   }
 };
-const _sfc_main$9 = {
+const _sfc_main$4 = {
   __name: "Toast",
   props: {
     as: { type: null, required: false },
@@ -1007,7 +1010,7 @@ const _sfc_main$9 = {
       height
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$f), mergeProps({
+      return openBlock(), createBlock(unref(_sfc_main$a), mergeProps({
         ref_key: "el",
         ref: el
       }, unref(rootProps), {
@@ -1017,12 +1020,12 @@ const _sfc_main$9 = {
       }), {
         default: withCtx(({ remaining, duration, open }) => [
           renderSlot(_ctx.$slots, "leading", {}, () => [
-            __props.avatar ? (openBlock(), createBlock(_sfc_main$q, mergeProps({
+            __props.avatar ? (openBlock(), createBlock(_sfc_main$l, mergeProps({
               key: 0,
               size: props.ui?.avatarSize || ui.value.avatarSize()
             }, __props.avatar, {
               class: ui.value.avatar({ class: props.ui?.avatar })
-            }), null, 16, ["size", "class"])) : __props.icon ? (openBlock(), createBlock(_sfc_main$r, {
+            }), null, 16, ["size", "class"])) : __props.icon ? (openBlock(), createBlock(_sfc_main$m, {
               key: 1,
               name: __props.icon,
               class: normalizeClass(ui.value.icon({ class: props.ui?.icon }))
@@ -1031,7 +1034,7 @@ const _sfc_main$9 = {
           createBaseVNode("div", {
             class: normalizeClass(ui.value.wrapper({ class: props.ui?.wrapper }))
           }, [
-            __props.title || !!slots.title ? (openBlock(), createBlock(unref(_sfc_main$e), {
+            __props.title || !!slots.title ? (openBlock(), createBlock(unref(_sfc_main$9), {
               key: 0,
               class: normalizeClass(ui.value.title({ class: props.ui?.title }))
             }, {
@@ -1044,7 +1047,7 @@ const _sfc_main$9 = {
               ]),
               _: 3
             }, 8, ["class"])) : createCommentVNode("", true),
-            __props.description || !!slots.description ? (openBlock(), createBlock(unref(_sfc_main$h), {
+            __props.description || !!slots.description ? (openBlock(), createBlock(unref(_sfc_main$c), {
               key: 1,
               class: normalizeClass(ui.value.description({ class: props.ui?.description }))
             }, {
@@ -1063,7 +1066,7 @@ const _sfc_main$9 = {
             }, [
               renderSlot(_ctx.$slots, "actions", {}, () => [
                 (openBlock(true), createElementBlock(Fragment, null, renderList(__props.actions, (action, index) => {
-                  return openBlock(), createBlock(unref(_sfc_main$i), {
+                  return openBlock(), createBlock(unref(_sfc_main$d), {
                     key: index,
                     "alt-text": action.label || "Action",
                     "as-child": "",
@@ -1071,7 +1074,7 @@ const _sfc_main$9 = {
                     }, ["stop"]))
                   }, {
                     default: withCtx(() => [
-                      createVNode(_sfc_main$s, mergeProps({
+                      createVNode(_sfc_main$n, mergeProps({
                         size: "xs",
                         color: __props.color
                       }, { ref_for: true }, action), null, 16, ["color"])
@@ -1088,7 +1091,7 @@ const _sfc_main$9 = {
           }, [
             __props.orientation === "horizontal" && (__props.actions?.length || !!slots.actions) ? renderSlot(_ctx.$slots, "actions", { key: 0 }, () => [
               (openBlock(true), createElementBlock(Fragment, null, renderList(__props.actions, (action, index) => {
-                return openBlock(), createBlock(unref(_sfc_main$i), {
+                return openBlock(), createBlock(unref(_sfc_main$d), {
                   key: index,
                   "alt-text": action.label || "Action",
                   "as-child": "",
@@ -1096,7 +1099,7 @@ const _sfc_main$9 = {
                   }, ["stop"]))
                 }, {
                   default: withCtx(() => [
-                    createVNode(_sfc_main$s, mergeProps({
+                    createVNode(_sfc_main$n, mergeProps({
                       size: "xs",
                       color: __props.color
                     }, { ref_for: true }, action), null, 16, ["color"])
@@ -1105,13 +1108,13 @@ const _sfc_main$9 = {
                 }, 1032, ["alt-text"]);
               }), 128))
             ]) : createCommentVNode("", true),
-            __props.close || !!slots.close ? (openBlock(), createBlock(unref(_sfc_main$j), {
+            __props.close || !!slots.close ? (openBlock(), createBlock(unref(_sfc_main$e), {
               key: 1,
               "as-child": ""
             }, {
               default: withCtx(() => [
                 renderSlot(_ctx.$slots, "close", { ui: ui.value }, () => [
-                  __props.close ? (openBlock(), createBlock(_sfc_main$s, mergeProps({
+                  __props.close ? (openBlock(), createBlock(_sfc_main$n, mergeProps({
                     key: 0,
                     icon: __props.closeIcon || unref(appConfig).ui.icons.close,
                     color: "neutral",
@@ -1127,7 +1130,7 @@ const _sfc_main$9 = {
               _: 3
             })) : createCommentVNode("", true)
           ], 2)) : createCommentVNode("", true),
-          __props.progress && open && remaining > 0 && duration ? (openBlock(), createBlock(_sfc_main$t, mergeProps({
+          __props.progress && open && remaining > 0 && duration ? (openBlock(), createBlock(_sfc_main$o, mergeProps({
             key: 1,
             "model-value": remaining / duration * 100,
             color: __props.color
@@ -1219,7 +1222,7 @@ const theme = {
 const __default__$1 = {
   name: "Toaster"
 };
-const _sfc_main$8 = /* @__PURE__ */ Object.assign(__default__$1, {
+const _sfc_main$3 = /* @__PURE__ */ Object.assign(__default__$1, {
   props: {
     position: { type: null, required: false },
     expand: { type: Boolean, required: false, default: true },
@@ -1271,11 +1274,11 @@ const _sfc_main$8 = /* @__PURE__ */ Object.assign(__default__$1, {
       return refs.value.slice(index + 1).reduce((acc, { height: height2 }) => acc + height2 + 16, 0);
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$m), mergeProps({ "swipe-direction": swipeDirection.value }, unref(providerProps)), {
+      return openBlock(), createBlock(unref(_sfc_main$h), mergeProps({ "swipe-direction": swipeDirection.value }, unref(providerProps)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default"),
           (openBlock(true), createElementBlock(Fragment, null, renderList(unref(toasts), (toast, index) => {
-            return openBlock(), createBlock(_sfc_main$9, mergeProps({
+            return openBlock(), createBlock(_sfc_main$4, mergeProps({
               key: toast.id,
               ref_for: true,
               ref_key: "refs",
@@ -1298,9 +1301,9 @@ const _sfc_main$8 = /* @__PURE__ */ Object.assign(__default__$1, {
               onClick: ($event) => toast.onClick && toast.onClick(toast)
             }), null, 16, ["progress", "close", "data-expanded", "data-front", "style", "class", "onUpdate:open", "onClick"]);
           }), 128)),
-          createVNode(unref(_sfc_main$g), normalizeProps(guardReactiveProps(unref(portalProps))), {
+          createVNode(unref(_sfc_main$b), normalizeProps(guardReactiveProps(unref(portalProps))), {
             default: withCtx(() => [
-              createVNode(unref(_sfc_main$b), {
+              createVNode(unref(_sfc_main$6), {
                 "data-expanded": expanded.value,
                 class: normalizeClass(ui.value.viewport({ class: [props.ui?.viewport, props.class] })),
                 style: normalizeStyle({
@@ -1405,7 +1408,7 @@ function _useOverlay() {
   };
 }
 const useOverlay = /* @__PURE__ */ createSharedComposable(_useOverlay);
-const _sfc_main$7 = {
+const _sfc_main$2 = {
   __name: "OverlayProvider",
   setup(__props) {
     const { overlays, unmount, close } = useOverlay();
@@ -1434,7 +1437,7 @@ const _sfc_main$7 = {
 const __default__ = {
   name: "App"
 };
-const _sfc_main$6 = /* @__PURE__ */ Object.assign(__default__, {
+const _sfc_main$1 = /* @__PURE__ */ Object.assign(__default__, {
   props: {
     tooltip: { type: Object, required: false },
     toaster: { type: [Object, null], required: false },
@@ -1453,21 +1456,21 @@ const _sfc_main$6 = /* @__PURE__ */ Object.assign(__default__, {
     const portal = toRef(() => props.portal);
     provide(portalTargetInjectionKey, portal);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$u), mergeProps({
+      return openBlock(), createBlock(unref(_sfc_main$p), mergeProps({
         "use-id": () => useId(),
         dir: locale.value?.dir,
         locale: locale.value?.code
       }, unref(configProviderProps)), {
         default: withCtx(() => [
-          createVNode(unref(_sfc_main$a), normalizeProps(guardReactiveProps(tooltipProps.value)), {
+          createVNode(unref(_sfc_main$5), normalizeProps(guardReactiveProps(tooltipProps.value)), {
             default: withCtx(() => [
-              __props.toaster !== null ? (openBlock(), createBlock(_sfc_main$8, normalizeProps(mergeProps({ key: 0 }, toasterProps.value)), {
+              __props.toaster !== null ? (openBlock(), createBlock(_sfc_main$3, normalizeProps(mergeProps({ key: 0 }, toasterProps.value)), {
                 default: withCtx(() => [
                   renderSlot(_ctx.$slots, "default")
                 ]),
                 _: 3
               }, 16)) : renderSlot(_ctx.$slots, "default", { key: 1 }),
-              createVNode(_sfc_main$7)
+              createVNode(_sfc_main$2)
             ]),
             _: 3
           }, 16)
@@ -1477,230 +1480,11 @@ const _sfc_main$6 = /* @__PURE__ */ Object.assign(__default__, {
     };
   }
 });
-function useSanitizeURL(url) {
-  try {
-    const parsed = new URL(url, window.location.origin);
-    const isSafeProtocol = ["http:", "https:"].includes(parsed.protocol);
-    if (!isSafeProtocol) {
-      return "#";
-    }
-    return parsed.href;
-  } catch {
-    return "#";
-  }
-}
-const _hoisted_1$4 = ["href", "target"];
-const _hoisted_2 = ["src"];
-const _sfc_main$5 = /* @__PURE__ */ defineComponent({
-  __name: "TheHeaderBrand",
-  props: {
-    brand: { type: Object }
-  },
-  setup(__props) {
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", null, [
-        createBaseVNode("a", {
-          href: unref(useSanitizeURL)(_ctx.brand.link),
-          target: _ctx.brand.newTab ? "_blank" : "_self"
-        }, [
-          createBaseVNode("img", {
-            src: _ctx.brand.logo,
-            alt: "logo"
-          }, null, 8, _hoisted_2)
-        ], 8, _hoisted_1$4)
-      ]);
-    };
-  }
-});
-const _hoisted_1$3 = ["aria-label"];
-const _sfc_main$4 = /* @__PURE__ */ defineComponent({
-  __name: "MeIcon",
-  props: {
-    name: { type: String },
-    size: { default: "md", type: String },
-    color: { default: void 0, type: String },
-    ariaLabel: { default: void 0, type: String }
-  },
-  setup(__props) {
-    const props = __props;
-    const iconClasses = computed(() => ["me-icon", `icon-${props.name}`]);
-    const sizeClasses = computed(() => {
-      const sizeMap = {
-        xs: "me-icon-xs",
-        sm: "me-icon-sm",
-        md: "me-icon-md",
-        lg: "me-icon-lg",
-        xl: "me-icon-xl",
-        "2xl": "me-icon-2xl"
-      };
-      return sizeMap[props.size] || sizeMap.md;
-    });
-    const iconStyles = computed(() => {
-      const baseStyles = {};
-      if (props.color) {
-        baseStyles.color = props.color;
-      }
-      return baseStyles;
-    });
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("i", {
-        class: normalizeClass([
-          ...iconClasses.value,
-          sizeClasses.value,
-          "inline-flex items-center justify-center"
-        ]),
-        style: normalizeStyle(iconStyles.value),
-        "aria-label": _ctx.ariaLabel,
-        role: "img"
-      }, null, 14, _hoisted_1$3);
-    };
-  }
-});
-const _style_0 = "\n.me-icon-xs[data-v-2bfff6f4] {\n  font-size: 0.75rem !important;\n  width: 0.75rem !important;\n  height: 0.75rem !important;\n}\n.me-icon-sm[data-v-2bfff6f4] {\n  font-size: 0.875rem !important;\n  width: 0.875rem !important;\n  height: 0.875rem !important;\n}\n.me-icon-md[data-v-2bfff6f4] {\n  font-size: 1rem !important;\n  width: 1rem !important;\n  height: 1rem !important;\n}\n.me-icon-lg[data-v-2bfff6f4] {\n  font-size: 1.25rem !important;\n  width: 1.25rem !important;\n  height: 1.25rem !important;\n}\n.me-icon-xl[data-v-2bfff6f4] {\n  font-size: 1.5rem !important;\n  width: 1.5rem !important;\n  height: 1.5rem !important;\n}\n.me-icon-2xl[data-v-2bfff6f4] {\n  font-size: 2rem !important;\n  width: 2rem !important;\n  height: 2rem !important;\n}\n";
-const MeIcon = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["styles", [_style_0]], ["__scopeId", "data-v-2bfff6f4"]]);
-const _hoisted_1$2 = { class: "grid place-items-center gap-1" };
-const _sfc_main$3 = /* @__PURE__ */ defineComponent({
-  __name: "TheHeaderNavigationItem",
-  props: {
-    iconName: { type: String },
-    label: { type: String },
-    iconColor: { type: String }
-  },
-  setup(__props) {
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1$2, [
-        createBaseVNode("div", null, [
-          createVNode(MeIcon, {
-            name: _ctx.iconName,
-            size: "xl",
-            color: _ctx.iconColor
-          }, null, 8, ["name", "color"])
-        ]),
-        createBaseVNode("p", {
-          class: "text-xs",
-          style: normalizeStyle({ color: _ctx.iconColor })
-        }, toDisplayString(_ctx.label), 5)
-      ]);
-    };
-  }
-});
-const _hoisted_1$1 = { class: "flex justify-center gap-7" };
-const _sfc_main$2 = /* @__PURE__ */ defineComponent({
-  __name: "TheHeaderNavigation",
-  props: {
-    iconColor: { type: String },
-    items: { type: Array }
-  },
-  setup(__props) {
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1$1, [
-        (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.items, (item) => {
-          return openBlock(), createBlock(_sfc_main$3, {
-            key: item.label,
-            "icon-name": item.iconName,
-            label: item.label,
-            "icon-color": _ctx.iconColor
-          }, null, 8, ["icon-name", "label", "icon-color"]);
-        }), 128))
-      ]);
-    };
-  }
-});
-const _hoisted_1 = { class: "flex justify-between items-center" };
-const _sfc_main$1 = /* @__PURE__ */ defineComponent({
-  __name: "TheHeader.ce",
-  setup(__props) {
-    const brand = ref({
-      logo: "https://eletrods.me.com.br/logo.svg",
-      link: "https://me.com.br",
-      newTab: true,
-      background: {
-        primaryColor: "#343434",
-        secondaryColor: "#009900",
-        iconColor: "peachPuff"
-        // repeatImage: 'https://conteudo.imguol.com.br/c/home/46/2020/03/02/balaio-do-kotscho-150-1583157444753_100x100.jpg.webp',
-        // mainImage: 'https://conteudo.imguol.com.br/c/noticias/90/2019/04/01/leonardo-sakamoto-1554157201028_v2_100x100.jpg.webp',
-      }
-    });
-    const navigationItems = ref([
-      {
-        iconName: "objects-column",
-        label: "Dashboard",
-        route: "/dashboard"
-      },
-      {
-        iconName: "store",
-        label: "Fornecedores",
-        route: "/fornecedores"
-      }
-    ]);
-    const headerClasses = computed(() => {
-      const baseClasses = "p-4 shadow-lg";
-      return `${baseClasses} text-white`;
-    });
-    const headerStyles = computed(() => {
-      const styles = {};
-      const bg = brand.value.background || {};
-      const hasMainImage = Boolean(bg.mainImage);
-      const hasRepeatImage = Boolean(bg.repeatImage);
-      const hasPrimaryColor = Boolean(bg.primaryColor);
-      const hasSecondaryColor = Boolean(bg.secondaryColor);
-      if (hasMainImage && hasRepeatImage && bg.mainImage && bg.repeatImage) {
-        styles.backgroundImage = `url(${bg.mainImage}), url(${bg.repeatImage})`;
-        styles.backgroundSize = "cover, auto";
-        styles.backgroundPosition = "center, center";
-        styles.backgroundRepeat = "no-repeat, repeat";
-      } else if (hasMainImage && hasPrimaryColor && bg.mainImage && bg.primaryColor) {
-        styles.backgroundColor = bg.primaryColor;
-        styles.backgroundImage = `url(${bg.mainImage})`;
-        styles.backgroundSize = "contain";
-        styles.backgroundPosition = "center";
-        styles.backgroundRepeat = "no-repeat";
-      } else if (hasRepeatImage && !hasMainImage && bg.repeatImage) {
-        styles.backgroundImage = `url(${bg.repeatImage})`;
-        styles.backgroundSize = "auto";
-        styles.backgroundPosition = "center";
-        styles.backgroundRepeat = "repeat";
-      } else if (hasPrimaryColor && hasSecondaryColor && !hasMainImage && !hasRepeatImage && bg.primaryColor && bg.secondaryColor) {
-        styles.background = `linear-gradient(135deg, ${bg.primaryColor} 0%, ${bg.secondaryColor} 100%)`;
-      } else if (hasPrimaryColor && !hasSecondaryColor && !hasMainImage && !hasRepeatImage && bg.primaryColor) {
-        styles.backgroundColor = bg.primaryColor;
-      } else {
-        styles.backgroundColor = "var(--ui-primary)";
-      }
-      return styles;
-    });
-    const iconColor = computed(() => {
-      return brand.value.background?.iconColor || "white";
-    });
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("header", {
-        class: normalizeClass(headerClasses.value),
-        style: normalizeStyle(headerStyles.value)
-      }, [
-        createBaseVNode("nav", _hoisted_1, [
-          createVNode(_sfc_main$5, { brand: brand.value }, null, 8, ["brand"]),
-          createVNode(_sfc_main$2, {
-            "icon-color": iconColor.value,
-            items: navigationItems.value
-          }, null, 8, ["icon-color", "items"])
-        ])
-      ], 6);
-    };
-  }
-});
-const TheHeaderElement = defineCustomElement(_sfc_main$1, {
-  shadowRoot: true,
-  styles: [tailwindStyles]
-});
-if (!customElements.get("the-header")) {
-  customElements.define("the-header", TheHeaderElement);
-}
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "App",
   setup(__props) {
     return (_ctx, _cache) => {
-      const _component_UApp = _sfc_main$6;
+      const _component_UApp = _sfc_main$1;
       return openBlock(), createBlock(_component_UApp, null, {
         default: withCtx(() => _cache[0] || (_cache[0] = [
           createBaseVNode("the-header", null, null, -1),

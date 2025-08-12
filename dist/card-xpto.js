@@ -1,4 +1,6 @@
-import { d as defineComponent, j as useForwardExpose, C as useVModel, m as watch, I as nextTick, k as computed, ca as isNullish, a as createContext, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, P as Primitive, x as mergeProps, J as useSlots, K as useLocale, L as useForwardPropsEmits, M as reactivePick, N as tv, O as useAppConfig, s as createElementBlock, g as createCommentVNode, v as createVNode, E as normalizeStyle, S as normalizeClass, h as createTextVNode, i as toDisplayString, F as Fragment, V as renderList, cx as useButtonGroup, cy as useComponentIcons, R as _sfc_main$6, _ as _sfc_main$7, Q as createBaseVNode, W as _sfc_main$8, a6 as defineCustomElement, a7 as tailwindStyles } from "./main.js";
+import { d as defineComponent, i as watch, x as nextTick, g as computed, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, n as mergeProps, y as useSlots, l as createElementBlock, b as createCommentVNode, m as createVNode, v as normalizeStyle, A as normalizeClass, e as createTextVNode, f as toDisplayString, F as Fragment, C as renderList, z as createBaseVNode, ag as defineCustomElement, bO as tailwindStyles } from "./main.js";
+import { b as useForwardExpose, d as useVModel, v as isNullish, c as createContext, P as Primitive, h as useLocale, j as useForwardPropsEmits, r as reactivePick, t as tv, k as useAppConfig, T as useButtonGroup, U as useComponentIcons, l as _sfc_main$6, _ as _sfc_main$7, m as _sfc_main$8 } from "./Button.js";
+import { _ as _export_sfc } from "./_plugin-vue_export-helper.js";
 const DEFAULT_MAX = 100;
 const [injectProgressRootContext, provideProgressRootContext] = createContext("ProgressRoot");
 const isNumber = (v) => typeof v === "number";
@@ -532,13 +534,6 @@ const _sfc_main$3 = {
     };
   }
 };
-const _export_sfc = (sfc, props) => {
-  const target = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target[key] = val;
-  }
-  return target;
-};
 const theme$1 = {
   "slots": {
     "root": "rounded-lg overflow-hidden",
@@ -1041,6 +1036,5 @@ if (!customElements.get("card-xpto")) {
   customElements.define("card-xpto", CardXPTElement);
 }
 export {
-  _sfc_main$3 as _,
-  _export_sfc as a
+  _sfc_main$3 as _
 };

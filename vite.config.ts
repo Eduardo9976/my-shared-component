@@ -37,7 +37,7 @@ export default defineConfig({
         app: './index.html',
         'shared-button': './src/components/SharedButton/shared-button.ts',
         'card-xpto': './src/components/CardXPTO/card-xpto.ts',
-        // 'the-header': './src/components/TheHeader/the-header.ts'
+        'the-header': './src/components/TheHeader/the-header.ts'
       },
       output: {
         entryFileNames: chunkInfo => {

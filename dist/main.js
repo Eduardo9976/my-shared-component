@@ -20,14 +20,14 @@ const isOn = (key) => key.charCodeAt(0) === 111 && key.charCodeAt(1) === 110 && 
 const isModelListener = (key) => key.startsWith("onUpdate:");
 const extend = Object.assign;
 const remove = (arr, el) => {
-  const i2 = arr.indexOf(el);
-  if (i2 > -1) {
-    arr.splice(i2, 1);
+  const i = arr.indexOf(el);
+  if (i > -1) {
+    arr.splice(i, 1);
   }
 };
 const hasOwnProperty$1 = Object.prototype.hasOwnProperty;
 const hasOwn = (val, key) => hasOwnProperty$1.call(val, key);
-const isArray$1 = Array.isArray;
+const isArray = Array.isArray;
 const isMap = (val) => toTypeString(val) === "[object Map]";
 const isSet = (val) => toTypeString(val) === "[object Set]";
 const isDate = (val) => toTypeString(val) === "[object Date]";
@@ -35,42 +35,42 @@ const isRegExp = (val) => toTypeString(val) === "[object RegExp]";
 const isFunction = (val) => typeof val === "function";
 const isString = (val) => typeof val === "string";
 const isSymbol = (val) => typeof val === "symbol";
-const isObject$1 = (val) => val !== null && typeof val === "object";
+const isObject = (val) => val !== null && typeof val === "object";
 const isPromise = (val) => {
-  return (isObject$1(val) || isFunction(val)) && isFunction(val.then) && isFunction(val.catch);
+  return (isObject(val) || isFunction(val)) && isFunction(val.then) && isFunction(val.catch);
 };
 const objectToString = Object.prototype.toString;
 const toTypeString = (value) => objectToString.call(value);
 const toRawType = (value) => {
   return toTypeString(value).slice(8, -1);
 };
-const isPlainObject$1 = (val) => toTypeString(val) === "[object Object]";
+const isPlainObject = (val) => toTypeString(val) === "[object Object]";
 const isIntegerKey = (key) => isString(key) && key !== "NaN" && key[0] !== "-" && "" + parseInt(key, 10) === key;
 const isReservedProp = /* @__PURE__ */ makeMap(
   // the leading comma is intentional so empty string "" is also included
   ",key,ref,ref_for,ref_key,onVnodeBeforeMount,onVnodeMounted,onVnodeBeforeUpdate,onVnodeUpdated,onVnodeBeforeUnmount,onVnodeUnmounted"
 );
-const cacheStringFunction$1 = (fn) => {
+const cacheStringFunction = (fn) => {
   const cache = /* @__PURE__ */ Object.create(null);
   return (str) => {
     const hit = cache[str];
     return hit || (cache[str] = fn(str));
   };
 };
-const camelizeRE$1 = /-(\w)/g;
-const camelize$1 = cacheStringFunction$1(
+const camelizeRE = /-(\w)/g;
+const camelize = cacheStringFunction(
   (str) => {
-    return str.replace(camelizeRE$1, (_2, c2) => c2 ? c2.toUpperCase() : "");
+    return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : "");
   }
 );
 const hyphenateRE = /\B([A-Z])/g;
-const hyphenate = cacheStringFunction$1(
+const hyphenate = cacheStringFunction(
   (str) => str.replace(hyphenateRE, "-$1").toLowerCase()
 );
-const capitalize = cacheStringFunction$1((str) => {
+const capitalize = cacheStringFunction((str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 });
-const toHandlerKey = cacheStringFunction$1(
+const toHandlerKey = cacheStringFunction(
   (str) => {
     const s = str ? `on${capitalize(str)}` : ``;
     return s;
@@ -78,8 +78,8 @@ const toHandlerKey = cacheStringFunction$1(
 );
 const hasChanged = (value, oldValue) => !Object.is(value, oldValue);
 const invokeArrayFns = (fns, ...arg) => {
-  for (let i2 = 0; i2 < fns.length; i2++) {
-    fns[i2](...arg);
+  for (let i = 0; i < fns.length; i++) {
+    fns[i](...arg);
   }
 };
 const def = (obj, key, value, writable = false) => {
@@ -105,10 +105,10 @@ const getGlobalThis = () => {
 const GLOBALS_ALLOWED = "Infinity,undefined,NaN,isFinite,isNaN,parseFloat,parseInt,decodeURI,decodeURIComponent,encodeURI,encodeURIComponent,Math,Number,Date,Array,Object,Boolean,String,RegExp,Map,Set,JSON,Intl,BigInt,console,Error,Symbol";
 const isGloballyAllowed = /* @__PURE__ */ makeMap(GLOBALS_ALLOWED);
 function normalizeStyle(value) {
-  if (isArray$1(value)) {
+  if (isArray(value)) {
     const res = {};
-    for (let i2 = 0; i2 < value.length; i2++) {
-      const item = value[i2];
+    for (let i = 0; i < value.length; i++) {
+      const item = value[i];
       const normalized = isString(item) ? parseStringStyle(item) : normalizeStyle(item);
       if (normalized) {
         for (const key in normalized) {
@@ -117,7 +117,7 @@ function normalizeStyle(value) {
       }
     }
     return res;
-  } else if (isString(value) || isObject$1(value)) {
+  } else if (isString(value) || isObject(value)) {
     return value;
   }
 }
@@ -138,14 +138,14 @@ function normalizeClass(value) {
   let res = "";
   if (isString(value)) {
     res = value;
-  } else if (isArray$1(value)) {
-    for (let i2 = 0; i2 < value.length; i2++) {
-      const normalized = normalizeClass(value[i2]);
+  } else if (isArray(value)) {
+    for (let i = 0; i < value.length; i++) {
+      const normalized = normalizeClass(value[i]);
       if (normalized) {
         res += normalized + " ";
       }
     }
-  } else if (isObject$1(value)) {
+  } else if (isObject(value)) {
     for (const name in value) {
       if (value[name]) {
         res += name + " ";
@@ -170,51 +170,51 @@ const isSpecialBooleanAttr = /* @__PURE__ */ makeMap(specialBooleanAttrs);
 function includeBooleanAttr(value) {
   return !!value || value === "";
 }
-function looseCompareArrays(a2, b) {
-  if (a2.length !== b.length) return false;
+function looseCompareArrays(a, b) {
+  if (a.length !== b.length) return false;
   let equal = true;
-  for (let i2 = 0; equal && i2 < a2.length; i2++) {
-    equal = looseEqual(a2[i2], b[i2]);
+  for (let i = 0; equal && i < a.length; i++) {
+    equal = looseEqual(a[i], b[i]);
   }
   return equal;
 }
-function looseEqual(a2, b) {
-  if (a2 === b) return true;
-  let aValidType = isDate(a2);
+function looseEqual(a, b) {
+  if (a === b) return true;
+  let aValidType = isDate(a);
   let bValidType = isDate(b);
   if (aValidType || bValidType) {
-    return aValidType && bValidType ? a2.getTime() === b.getTime() : false;
+    return aValidType && bValidType ? a.getTime() === b.getTime() : false;
   }
-  aValidType = isSymbol(a2);
+  aValidType = isSymbol(a);
   bValidType = isSymbol(b);
   if (aValidType || bValidType) {
-    return a2 === b;
+    return a === b;
   }
-  aValidType = isArray$1(a2);
-  bValidType = isArray$1(b);
+  aValidType = isArray(a);
+  bValidType = isArray(b);
   if (aValidType || bValidType) {
-    return aValidType && bValidType ? looseCompareArrays(a2, b) : false;
+    return aValidType && bValidType ? looseCompareArrays(a, b) : false;
   }
-  aValidType = isObject$1(a2);
-  bValidType = isObject$1(b);
+  aValidType = isObject(a);
+  bValidType = isObject(b);
   if (aValidType || bValidType) {
     if (!aValidType || !bValidType) {
       return false;
     }
-    const aKeysCount = Object.keys(a2).length;
+    const aKeysCount = Object.keys(a).length;
     const bKeysCount = Object.keys(b).length;
     if (aKeysCount !== bKeysCount) {
       return false;
     }
-    for (const key in a2) {
-      const aHasKey = a2.hasOwnProperty(key);
+    for (const key in a) {
+      const aHasKey = a.hasOwnProperty(key);
       const bHasKey = b.hasOwnProperty(key);
-      if (aHasKey && !bHasKey || !aHasKey && bHasKey || !looseEqual(a2[key], b[key])) {
+      if (aHasKey && !bHasKey || !aHasKey && bHasKey || !looseEqual(a[key], b[key])) {
         return false;
       }
     }
   }
-  return String(a2) === String(b);
+  return String(a) === String(b);
 }
 function looseIndexOf(arr, val) {
   return arr.findIndex((item) => looseEqual(item, val));
@@ -223,7 +223,7 @@ const isRef$1 = (val) => {
   return !!(val && val["__v_isRef"] === true);
 };
 const toDisplayString = (val) => {
-  return isString(val) ? val : val == null ? "" : isArray$1(val) || isObject$1(val) && (val.toString === objectToString || !isFunction(val.toString)) ? isRef$1(val) ? toDisplayString(val.value) : JSON.stringify(val, replacer, 2) : String(val);
+  return isString(val) ? val : val == null ? "" : isArray(val) || isObject(val) && (val.toString === objectToString || !isFunction(val.toString)) ? isRef$1(val) ? toDisplayString(val.value) : JSON.stringify(val, replacer, 2) : String(val);
 };
 const replacer = (_key, val) => {
   if (isRef$1(val)) {
@@ -231,8 +231,8 @@ const replacer = (_key, val) => {
   } else if (isMap(val)) {
     return {
       [`Map(${val.size})`]: [...val.entries()].reduce(
-        (entries, [key, val2], i2) => {
-          entries[stringifySymbol(key, i2) + " =>"] = val2;
+        (entries, [key, val2], i) => {
+          entries[stringifySymbol(key, i) + " =>"] = val2;
           return entries;
         },
         {}
@@ -240,21 +240,21 @@ const replacer = (_key, val) => {
     };
   } else if (isSet(val)) {
     return {
-      [`Set(${val.size})`]: [...val.values()].map((v2) => stringifySymbol(v2))
+      [`Set(${val.size})`]: [...val.values()].map((v) => stringifySymbol(v))
     };
   } else if (isSymbol(val)) {
     return stringifySymbol(val);
-  } else if (isObject$1(val) && !isArray$1(val) && !isPlainObject$1(val)) {
+  } else if (isObject(val) && !isArray(val) && !isPlainObject(val)) {
     return String(val);
   }
   return val;
 };
-const stringifySymbol = (v2, i2 = "") => {
+const stringifySymbol = (v, i = "") => {
   var _a;
   return (
     // Symbol.description in es2019+ so we need to cast here to pass
     // the lib: es2016 check
-    isSymbol(v2) ? `Symbol(${(_a = v2.description) != null ? _a : i2})` : v2
+    isSymbol(v) ? `Symbol(${(_a = v.description) != null ? _a : i})` : v
   );
 };
 function normalizeCssVarValue(value) {
@@ -293,14 +293,14 @@ class EffectScope {
   pause() {
     if (this._active) {
       this._isPaused = true;
-      let i2, l2;
+      let i, l;
       if (this.scopes) {
-        for (i2 = 0, l2 = this.scopes.length; i2 < l2; i2++) {
-          this.scopes[i2].pause();
+        for (i = 0, l = this.scopes.length; i < l; i++) {
+          this.scopes[i].pause();
         }
       }
-      for (i2 = 0, l2 = this.effects.length; i2 < l2; i2++) {
-        this.effects[i2].pause();
+      for (i = 0, l = this.effects.length; i < l; i++) {
+        this.effects[i].pause();
       }
     }
   }
@@ -311,14 +311,14 @@ class EffectScope {
     if (this._active) {
       if (this._isPaused) {
         this._isPaused = false;
-        let i2, l2;
+        let i, l;
         if (this.scopes) {
-          for (i2 = 0, l2 = this.scopes.length; i2 < l2; i2++) {
-            this.scopes[i2].resume();
+          for (i = 0, l = this.scopes.length; i < l; i++) {
+            this.scopes[i].resume();
           }
         }
-        for (i2 = 0, l2 = this.effects.length; i2 < l2; i2++) {
-          this.effects[i2].resume();
+        for (i = 0, l = this.effects.length; i < l; i++) {
+          this.effects[i].resume();
         }
       }
     }
@@ -357,18 +357,18 @@ class EffectScope {
   stop(fromParent) {
     if (this._active) {
       this._active = false;
-      let i2, l2;
-      for (i2 = 0, l2 = this.effects.length; i2 < l2; i2++) {
-        this.effects[i2].stop();
+      let i, l;
+      for (i = 0, l = this.effects.length; i < l; i++) {
+        this.effects[i].stop();
       }
       this.effects.length = 0;
-      for (i2 = 0, l2 = this.cleanups.length; i2 < l2; i2++) {
-        this.cleanups[i2]();
+      for (i = 0, l = this.cleanups.length; i < l; i++) {
+        this.cleanups[i]();
       }
       this.cleanups.length = 0;
       if (this.scopes) {
-        for (i2 = 0, l2 = this.scopes.length; i2 < l2; i2++) {
-          this.scopes[i2].stop(true);
+        for (i = 0, l = this.scopes.length; i < l; i++) {
+          this.scopes[i].stop(true);
         }
         this.scopes.length = 0;
       }
@@ -623,8 +623,8 @@ function removeSub(link, soft = false) {
     dep.subs = prevSub;
     if (!prevSub && dep.computed) {
       dep.computed.flags &= -5;
-      for (let l2 = dep.computed.deps; l2; l2 = l2.nextDep) {
-        removeSub(l2, true);
+      for (let l = dep.computed.deps; l; l = l.nextDep) {
+        removeSub(l, true);
       }
     }
   }
@@ -768,8 +768,8 @@ function addSub(link) {
     const computed2 = link.dep.computed;
     if (computed2 && !link.dep.subs) {
       computed2.flags |= 4 | 16;
-      for (let l2 = computed2.deps; l2; l2 = l2.nextDep) {
-        addSub(l2);
+      for (let l = computed2.deps; l; l = l.nextDep) {
+        addSub(l);
       }
     }
     const currentTail = link.dep.subs;
@@ -824,7 +824,7 @@ function trigger(target, type, key, newValue, oldValue, oldTarget) {
   if (type === "clear") {
     depsMap.forEach(run);
   } else {
-    const targetIsArray = isArray$1(target);
+    const targetIsArray = isArray(target);
     const isArrayIndex = targetIsArray && isIntegerKey(key);
     if (targetIsArray && key === "length") {
       const newLength = Number(newValue);
@@ -877,7 +877,7 @@ function reactiveReadArray(array) {
   const raw = toRaw(array);
   if (raw === array) return raw;
   track(raw, "iterate", ARRAY_ITERATE_KEY);
-  return isShallow(array) ? raw : raw.map(toReactive$1);
+  return isShallow(array) ? raw : raw.map(toReactive);
 }
 function shallowReadArray(arr) {
   track(arr = toRaw(arr), "iterate", ARRAY_ITERATE_KEY);
@@ -886,16 +886,16 @@ function shallowReadArray(arr) {
 const arrayInstrumentations = {
   __proto__: null,
   [Symbol.iterator]() {
-    return iterator(this, Symbol.iterator, toReactive$1);
+    return iterator(this, Symbol.iterator, toReactive);
   },
   concat(...args) {
     return reactiveReadArray(this).concat(
-      ...args.map((x2) => isArray$1(x2) ? reactiveReadArray(x2) : x2)
+      ...args.map((x) => isArray(x) ? reactiveReadArray(x) : x)
     );
   },
   entries() {
     return iterator(this, "entries", (value) => {
-      value[1] = toReactive$1(value[1]);
+      value[1] = toReactive(value[1]);
       return value;
     });
   },
@@ -903,16 +903,16 @@ const arrayInstrumentations = {
     return apply(this, "every", fn, thisArg, void 0, arguments);
   },
   filter(fn, thisArg) {
-    return apply(this, "filter", fn, thisArg, (v2) => v2.map(toReactive$1), arguments);
+    return apply(this, "filter", fn, thisArg, (v) => v.map(toReactive), arguments);
   },
   find(fn, thisArg) {
-    return apply(this, "find", fn, thisArg, toReactive$1, arguments);
+    return apply(this, "find", fn, thisArg, toReactive, arguments);
   },
   findIndex(fn, thisArg) {
     return apply(this, "findIndex", fn, thisArg, void 0, arguments);
   },
   findLast(fn, thisArg) {
-    return apply(this, "findLast", fn, thisArg, toReactive$1, arguments);
+    return apply(this, "findLast", fn, thisArg, toReactive, arguments);
   },
   findLastIndex(fn, thisArg) {
     return apply(this, "findLastIndex", fn, thisArg, void 0, arguments);
@@ -927,8 +927,8 @@ const arrayInstrumentations = {
   indexOf(...args) {
     return searchProxy(this, "indexOf", args);
   },
-  join(separator2) {
-    return reactiveReadArray(this).join(separator2);
+  join(separator) {
+    return reactiveReadArray(this).join(separator);
   },
   // keys() iterator only reads `length`, no optimisation required
   lastIndexOf(...args) {
@@ -972,7 +972,7 @@ const arrayInstrumentations = {
     return noTracking(this, "unshift", args);
   },
   values() {
-    return iterator(this, "values", toReactive$1);
+    return iterator(this, "values", toReactive);
   }
 };
 function iterator(self2, method, wrapValue) {
@@ -997,13 +997,13 @@ function apply(self2, method, fn, thisArg, wrappedRetFn, args) {
   const methodFn = arr[method];
   if (methodFn !== arrayProto[method]) {
     const result2 = methodFn.apply(self2, args);
-    return needsWrap ? toReactive$1(result2) : result2;
+    return needsWrap ? toReactive(result2) : result2;
   }
   let wrappedFn = fn;
   if (arr !== self2) {
     if (needsWrap) {
       wrappedFn = function(item, index) {
-        return fn.call(this, toReactive$1(item), index, self2);
+        return fn.call(this, toReactive(item), index, self2);
       };
     } else if (fn.length > 2) {
       wrappedFn = function(item, index) {
@@ -1020,7 +1020,7 @@ function reduce(self2, method, fn, args) {
   if (arr !== self2) {
     if (!isShallow(self2)) {
       wrappedFn = function(acc, item, index) {
-        return fn.call(this, acc, toReactive$1(item), index, self2);
+        return fn.call(this, acc, toReactive(item), index, self2);
       };
     } else if (fn.length > 3) {
       wrappedFn = function(acc, item, index) {
@@ -1080,7 +1080,7 @@ class BaseReactiveHandler {
       }
       return;
     }
-    const targetIsArray = isArray$1(target);
+    const targetIsArray = isArray(target);
     if (!isReadonly2) {
       let fn;
       if (targetIsArray && (fn = arrayInstrumentations[key])) {
@@ -1110,7 +1110,7 @@ class BaseReactiveHandler {
     if (isRef(res)) {
       return targetIsArray && isIntegerKey(key) ? res : res.value;
     }
-    if (isObject$1(res)) {
+    if (isObject(res)) {
       return isReadonly2 ? readonly(res) : reactive(res);
     }
     return res;
@@ -1128,7 +1128,7 @@ class MutableReactiveHandler extends BaseReactiveHandler {
         oldValue = toRaw(oldValue);
         value = toRaw(value);
       }
-      if (!isArray$1(target) && isRef(oldValue) && !isRef(value)) {
+      if (!isArray(target) && isRef(oldValue) && !isRef(value)) {
         if (isOldValueReadonly) {
           return false;
         } else {
@@ -1137,7 +1137,7 @@ class MutableReactiveHandler extends BaseReactiveHandler {
         }
       }
     }
-    const hadKey = isArray$1(target) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key);
+    const hadKey = isArray(target) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key);
     const result = Reflect.set(
       target,
       key,
@@ -1173,7 +1173,7 @@ class MutableReactiveHandler extends BaseReactiveHandler {
     track(
       target,
       "iterate",
-      isArray$1(target) ? "length" : ITERATE_KEY
+      isArray(target) ? "length" : ITERATE_KEY
     );
     return Reflect.ownKeys(target);
   }
@@ -1194,7 +1194,7 @@ const readonlyHandlers = /* @__PURE__ */ new ReadonlyReactiveHandler();
 const shallowReactiveHandlers = /* @__PURE__ */ new MutableReactiveHandler(true);
 const shallowReadonlyHandlers = /* @__PURE__ */ new ReadonlyReactiveHandler(true);
 const toShallow = (value) => value;
-const getProto = (v2) => Reflect.getPrototypeOf(v2);
+const getProto = (v) => Reflect.getPrototypeOf(v);
 function createIterableMethod(method, isReadonly2, isShallow2) {
   return function(...args) {
     const target = this["__v_raw"];
@@ -1203,7 +1203,7 @@ function createIterableMethod(method, isReadonly2, isShallow2) {
     const isPair = method === "entries" || method === Symbol.iterator && targetIsMap;
     const isKeyOnly = method === "keys" && targetIsMap;
     const innerIterator = target[method](...args);
-    const wrap = isShallow2 ? toShallow : isReadonly2 ? toReadonly : toReactive$1;
+    const wrap = isShallow2 ? toShallow : isReadonly2 ? toReadonly : toReactive;
     !isReadonly2 && track(
       rawTarget,
       "iterate",
@@ -1243,7 +1243,7 @@ function createInstrumentations(readonly2, shallow) {
         track(rawTarget, "get", rawKey);
       }
       const { has } = getProto(rawTarget);
-      const wrap = shallow ? toShallow : readonly2 ? toReadonly : toReactive$1;
+      const wrap = shallow ? toShallow : readonly2 ? toReadonly : toReactive;
       if (has.call(rawTarget, key)) {
         return wrap(target.get(key));
       } else if (has.call(rawTarget, rawKey)) {
@@ -1273,7 +1273,7 @@ function createInstrumentations(readonly2, shallow) {
       const observed = this;
       const target = observed["__v_raw"];
       const rawTarget = toRaw(target);
-      const wrap = shallow ? toShallow : readonly2 ? toReadonly : toReactive$1;
+      const wrap = shallow ? toShallow : readonly2 ? toReadonly : toReactive;
       !readonly2 && track(rawTarget, "iterate", ITERATE_KEY);
       return target.forEach((value, key) => {
         return callback.call(thisArg, wrap(value), wrap(key), observed);
@@ -1306,13 +1306,13 @@ function createInstrumentations(readonly2, shallow) {
           value = toRaw(value);
         }
         const target = toRaw(this);
-        const { has, get: get2 } = getProto(target);
+        const { has, get } = getProto(target);
         let hadKey = has.call(target, key);
         if (!hadKey) {
           key = toRaw(key);
           hadKey = has.call(target, key);
         }
-        const oldValue = get2.call(target, key);
+        const oldValue = get.call(target, key);
         target.set(key, value);
         if (!hadKey) {
           trigger(target, "add", key, value);
@@ -1323,13 +1323,13 @@ function createInstrumentations(readonly2, shallow) {
       },
       delete(key) {
         const target = toRaw(this);
-        const { has, get: get2 } = getProto(target);
+        const { has, get } = getProto(target);
         let hadKey = has.call(target, key);
         if (!hadKey) {
           key = toRaw(key);
           hadKey = has.call(target, key);
         }
-        get2 ? get2.call(target, key) : void 0;
+        get ? get.call(target, key) : void 0;
         const result = target.delete(key);
         if (hadKey) {
           trigger(target, "delete", key, void 0);
@@ -1453,7 +1453,7 @@ function shallowReadonly(target) {
   );
 }
 function createReactiveObject(target, isReadonly2, baseHandlers, collectionHandlers, proxyMap) {
-  if (!isObject$1(target)) {
+  if (!isObject(target)) {
     return target;
   }
   if (target["__v_raw"] && !(isReadonly2 && target["__v_isReactive"])) {
@@ -1499,8 +1499,8 @@ function markRaw(value) {
   }
   return value;
 }
-const toReactive$1 = (value) => isObject$1(value) ? reactive(value) : value;
-const toReadonly = (value) => isObject$1(value) ? readonly(value) : value;
+const toReactive = (value) => isObject(value) ? reactive(value) : value;
+const toReadonly = (value) => isObject(value) ? readonly(value) : value;
 function isRef(r) {
   return r ? r["__v_isRef"] === true : false;
 }
@@ -1522,7 +1522,7 @@ class RefImpl {
     this["__v_isRef"] = true;
     this["__v_isShallow"] = false;
     this._rawValue = isShallow2 ? value : toRaw(value);
-    this._value = isShallow2 ? value : toReactive$1(value);
+    this._value = isShallow2 ? value : toReactive(value);
     this["__v_isShallow"] = isShallow2;
   }
   get value() {
@@ -1537,7 +1537,7 @@ class RefImpl {
     newValue = useDirectValue ? newValue : toRaw(newValue);
     if (hasChanged(newValue, oldValue)) {
       this._rawValue = newValue;
-      this._value = useDirectValue ? newValue : toReactive$1(newValue);
+      this._value = useDirectValue ? newValue : toReactive(newValue);
       {
         this.dep.trigger();
       }
@@ -1554,7 +1554,7 @@ function triggerRef(ref2) {
 function unref(ref2) {
   return isRef(ref2) ? ref2.value : ref2;
 }
-function toValue$1(source) {
+function toValue(source) {
   return isFunction(source) ? source() : unref(source);
 }
 const shallowUnwrapHandlers = {
@@ -1577,8 +1577,8 @@ class CustomRefImpl {
     this["__v_isRef"] = true;
     this._value = void 0;
     const dep = this.dep = new Dep();
-    const { get: get2, set } = factory(dep.track.bind(dep), dep.trigger.bind(dep));
-    this._get = get2;
+    const { get, set } = factory(dep.track.bind(dep), dep.trigger.bind(dep));
+    this._get = get;
     this._set = set;
   }
   get value() {
@@ -1592,7 +1592,7 @@ function customRef(factory) {
   return new CustomRefImpl(factory);
 }
 function toRefs(object) {
-  const ret = isArray$1(object) ? new Array(object.length) : {};
+  const ret = isArray(object) ? new Array(object.length) : {};
   for (const key in object) {
     ret[key] = propertyToRef(object, key);
   }
@@ -1628,12 +1628,12 @@ class GetterRefImpl {
     return this._value = this._getter();
   }
 }
-function toRef$1(source, key, defaultValue) {
+function toRef(source, key, defaultValue) {
   if (isRef(source)) {
     return source;
   } else if (isFunction(source)) {
     return new GetterRefImpl(source);
-  } else if (isObject$1(source) && arguments.length > 1) {
+  } else if (isObject(source) && arguments.length > 1) {
     return propertyToRef(source, key, defaultValue);
   } else {
     return ref(source);
@@ -1740,7 +1740,7 @@ function watch$1(source, cb, options = EMPTY_OBJ) {
   } else if (isReactive(source)) {
     getter = () => reactiveGetter(source);
     forceTrigger = true;
-  } else if (isArray$1(source)) {
+  } else if (isArray(source)) {
     isMultiSource = true;
     forceTrigger = source.some((s) => isReactive(s) || isShallow(s));
     getter = () => source.map((s) => {
@@ -1803,7 +1803,7 @@ function watch$1(source, cb, options = EMPTY_OBJ) {
     }
     if (cb) {
       const newValue = effect2.run();
-      if (deep || forceTrigger || (isMultiSource ? newValue.some((v2, i2) => hasChanged(v2, oldValue[i2])) : hasChanged(newValue, oldValue))) {
+      if (deep || forceTrigger || (isMultiSource ? newValue.some((v, i) => hasChanged(v, oldValue[i])) : hasChanged(newValue, oldValue))) {
         if (cleanup) {
           cleanup();
         }
@@ -1863,7 +1863,7 @@ function watch$1(source, cb, options = EMPTY_OBJ) {
   return watchHandle;
 }
 function traverse(value, depth = Infinity, seen) {
-  if (depth <= 0 || !isObject$1(value) || value["__v_skip"]) {
+  if (depth <= 0 || !isObject(value) || value["__v_skip"]) {
     return value;
   }
   seen = seen || /* @__PURE__ */ new Set();
@@ -1874,15 +1874,15 @@ function traverse(value, depth = Infinity, seen) {
   depth--;
   if (isRef(value)) {
     traverse(value.value, depth, seen);
-  } else if (isArray$1(value)) {
-    for (let i2 = 0; i2 < value.length; i2++) {
-      traverse(value[i2], depth, seen);
+  } else if (isArray(value)) {
+    for (let i = 0; i < value.length; i++) {
+      traverse(value[i], depth, seen);
     }
   } else if (isSet(value) || isMap(value)) {
-    value.forEach((v2) => {
-      traverse(v2, depth, seen);
+    value.forEach((v) => {
+      traverse(v, depth, seen);
     });
-  } else if (isPlainObject$1(value)) {
+  } else if (isPlainObject(value)) {
     for (const key in value) {
       traverse(value[key], depth, seen);
     }
@@ -1921,9 +1921,9 @@ function warn$1(msg, ...args) {
       11,
       [
         // eslint-disable-next-line no-restricted-syntax
-        msg + args.map((a2) => {
+        msg + args.map((a) => {
           var _a, _b;
-          return (_b = (_a = a2.toString) == null ? void 0 : _a.call(a2)) != null ? _b : JSON.stringify(a2);
+          return (_b = (_a = a.toString) == null ? void 0 : _a.call(a)) != null ? _b : JSON.stringify(a);
         }).join(""),
         instance && instance.proxy,
         trace.map(
@@ -1967,8 +1967,8 @@ function getComponentTrace() {
 }
 function formatTrace(trace) {
   const logs = [];
-  trace.forEach((entry, i2) => {
-    logs.push(...i2 === 0 ? [] : [`
+  trace.forEach((entry, i) => {
+    logs.push(...i === 0 ? [] : [`
 `], ...formatTraceEntry(entry));
   });
   return logs;
@@ -2094,10 +2094,10 @@ function callWithAsyncErrorHandling(fn, instance, type, args) {
     }
     return res;
   }
-  if (isArray$1(fn)) {
+  if (isArray(fn)) {
     const values = [];
-    for (let i2 = 0; i2 < fn.length; i2++) {
-      values.push(callWithAsyncErrorHandling(fn[i2], instance, type, args));
+    for (let i = 0; i < fn.length; i++) {
+      values.push(callWithAsyncErrorHandling(fn[i], instance, type, args));
     }
     return values;
   }
@@ -2112,8 +2112,8 @@ function handleError(err, instance, type, throwInDev = true) {
     while (cur) {
       const errorCapturedHooks = cur.ec;
       if (errorCapturedHooks) {
-        for (let i2 = 0; i2 < errorCapturedHooks.length; i2++) {
-          if (errorCapturedHooks[i2](err, exposedInstance, errorInfo) === false) {
+        for (let i = 0; i < errorCapturedHooks.length; i++) {
+          if (errorCapturedHooks[i](err, exposedInstance, errorInfo) === false) {
             return;
           }
         }
@@ -2186,7 +2186,7 @@ function queueFlush() {
   }
 }
 function queuePostFlushCb(cb) {
-  if (!isArray$1(cb)) {
+  if (!isArray(cb)) {
     if (activePostFlushCbs && cb.id === -1) {
       activePostFlushCbs.splice(postFlushIndex + 1, 0, cb);
     } else if (!(cb.flags & 1)) {
@@ -2198,15 +2198,15 @@ function queuePostFlushCb(cb) {
   }
   queueFlush();
 }
-function flushPreFlushCbs(instance, seen, i2 = flushIndex + 1) {
-  for (; i2 < queue.length; i2++) {
-    const cb = queue[i2];
+function flushPreFlushCbs(instance, seen, i = flushIndex + 1) {
+  for (; i < queue.length; i++) {
+    const cb = queue[i];
     if (cb && cb.flags & 2) {
       if (instance && cb.id !== instance.uid) {
         continue;
       }
-      queue.splice(i2, 1);
-      i2--;
+      queue.splice(i, 1);
+      i--;
       if (cb.flags & 4) {
         cb.flags &= -2;
       }
@@ -2220,7 +2220,7 @@ function flushPreFlushCbs(instance, seen, i2 = flushIndex + 1) {
 function flushPostFlushCbs(seen) {
   if (pendingPostFlushCbs.length) {
     const deduped = [...new Set(pendingPostFlushCbs)].sort(
-      (a2, b) => getId(a2) - getId(b)
+      (a, b) => getId(a) - getId(b)
     );
     pendingPostFlushCbs.length = 0;
     if (activePostFlushCbs) {
@@ -2355,8 +2355,8 @@ function withDirectives(vnode, directives) {
   }
   const instance = getComponentPublicInstance(currentRenderingInstance);
   const bindings = vnode.dirs || (vnode.dirs = []);
-  for (let i2 = 0; i2 < directives.length; i2++) {
-    let [dir, value, arg, modifiers = EMPTY_OBJ] = directives[i2];
+  for (let i = 0; i < directives.length; i++) {
+    let [dir, value, arg, modifiers = EMPTY_OBJ] = directives[i];
     if (dir) {
       if (isFunction(dir)) {
         dir = {
@@ -2382,10 +2382,10 @@ function withDirectives(vnode, directives) {
 function invokeDirectiveHook(vnode, prevVNode, instance, name) {
   const bindings = vnode.dirs;
   const oldBindings = prevVNode && prevVNode.dirs;
-  for (let i2 = 0; i2 < bindings.length; i2++) {
-    const binding = bindings[i2];
+  for (let i = 0; i < bindings.length; i++) {
+    const binding = bindings[i];
     if (oldBindings) {
-      binding.oldValue = oldBindings[i2].value;
+      binding.oldValue = oldBindings[i].value;
     }
     let hook = binding.dir[name];
     if (hook) {
@@ -2595,8 +2595,8 @@ const TeleportImpl = {
     doRemove && hostRemove(anchor);
     if (shapeFlag & 16) {
       const shouldRemove = doRemove || !isTeleportDisabled(props);
-      for (let i2 = 0; i2 < children.length; i2++) {
-        const child = children[i2];
+      for (let i = 0; i < children.length; i++) {
+        const child = children[i];
         unmount(
           child,
           parentComponent,
@@ -2621,9 +2621,9 @@ function moveTeleport(vnode, container, parentAnchor, { o: { insert }, m: move }
   }
   if (!isReorder || isTeleportDisabled(props)) {
     if (shapeFlag & 16) {
-      for (let i2 = 0; i2 < children.length; i2++) {
+      for (let i = 0; i < children.length; i++) {
         move(
-          children[i2],
+          children[i],
           container,
           parentAnchor,
           2
@@ -2723,19 +2723,19 @@ function prepareAnchor(target, vnode, createText, insert) {
 const leaveCbKey = Symbol("_leaveCb");
 const enterCbKey$1 = Symbol("_enterCb");
 function useTransitionState() {
-  const state2 = {
+  const state = {
     isMounted: false,
     isLeaving: false,
     isUnmounting: false,
     leavingVNodes: /* @__PURE__ */ new Map()
   };
   onMounted(() => {
-    state2.isMounted = true;
+    state.isMounted = true;
   });
   onBeforeUnmount(() => {
-    state2.isUnmounting = true;
+    state.isUnmounting = true;
   });
-  return state2;
+  return state;
 }
 const TransitionHookValidator = [Function, Array];
 const BaseTransitionPropsValidators = {
@@ -2767,7 +2767,7 @@ const BaseTransitionImpl = {
   props: BaseTransitionPropsValidators,
   setup(props, { slots }) {
     const instance = getCurrentInstance();
-    const state2 = useTransitionState();
+    const state = useTransitionState();
     return () => {
       const children = slots.default && getTransitionRawChildren(slots.default(), true);
       if (!children || !children.length) {
@@ -2776,7 +2776,7 @@ const BaseTransitionImpl = {
       const child = findNonCommentChild(children);
       const rawProps = toRaw(props);
       const { mode } = rawProps;
-      if (state2.isLeaving) {
+      if (state.isLeaving) {
         return emptyPlaceholder(child);
       }
       const innerChild = getInnerChild$1(child);
@@ -2786,7 +2786,7 @@ const BaseTransitionImpl = {
       let enterHooks = resolveTransitionHooks(
         innerChild,
         rawProps,
-        state2,
+        state,
         instance,
         // #11061, ensure enterHooks is fresh after clone
         (hooks) => enterHooks = hooks
@@ -2799,14 +2799,14 @@ const BaseTransitionImpl = {
         let leavingHooks = resolveTransitionHooks(
           oldInnerChild,
           rawProps,
-          state2,
+          state,
           instance
         );
         setTransitionHooks(oldInnerChild, leavingHooks);
         if (mode === "out-in" && innerChild.type !== Comment) {
-          state2.isLeaving = true;
+          state.isLeaving = true;
           leavingHooks.afterLeave = () => {
-            state2.isLeaving = false;
+            state.isLeaving = false;
             if (!(instance.job.flags & 8)) {
               instance.update();
             }
@@ -2817,7 +2817,7 @@ const BaseTransitionImpl = {
         } else if (mode === "in-out" && innerChild.type !== Comment) {
           leavingHooks.delayLeave = (el, earlyRemove, delayedLeave) => {
             const leavingVNodesCache = getLeavingNodesForType(
-              state2,
+              state,
               oldInnerChild
             );
             leavingVNodesCache[String(oldInnerChild.key)] = oldInnerChild;
@@ -2846,9 +2846,9 @@ const BaseTransitionImpl = {
 function findNonCommentChild(children) {
   let child = children[0];
   if (children.length > 1) {
-    for (const c2 of children) {
-      if (c2.type !== Comment) {
-        child = c2;
+    for (const c of children) {
+      if (c.type !== Comment) {
+        child = c;
         break;
       }
     }
@@ -2856,8 +2856,8 @@ function findNonCommentChild(children) {
   return child;
 }
 const BaseTransition = BaseTransitionImpl;
-function getLeavingNodesForType(state2, vnode) {
-  const { leavingVNodes } = state2;
+function getLeavingNodesForType(state, vnode) {
+  const { leavingVNodes } = state;
   let leavingVNodesCache = leavingVNodes.get(vnode.type);
   if (!leavingVNodesCache) {
     leavingVNodesCache = /* @__PURE__ */ Object.create(null);
@@ -2865,7 +2865,7 @@ function getLeavingNodesForType(state2, vnode) {
   }
   return leavingVNodesCache;
 }
-function resolveTransitionHooks(vnode, props, state2, instance, postClone) {
+function resolveTransitionHooks(vnode, props, state, instance, postClone) {
   const {
     appear,
     mode,
@@ -2884,7 +2884,7 @@ function resolveTransitionHooks(vnode, props, state2, instance, postClone) {
     onAppearCancelled
   } = props;
   const key = String(vnode.key);
-  const leavingVNodesCache = getLeavingNodesForType(state2, vnode);
+  const leavingVNodesCache = getLeavingNodesForType(state, vnode);
   const callHook2 = (hook, args) => {
     hook && callWithAsyncErrorHandling(
       hook,
@@ -2896,7 +2896,7 @@ function resolveTransitionHooks(vnode, props, state2, instance, postClone) {
   const callAsyncHook = (hook, args) => {
     const done = args[1];
     callHook2(hook, args);
-    if (isArray$1(hook)) {
+    if (isArray(hook)) {
       if (hook.every((hook2) => hook2.length <= 1)) done();
     } else if (hook.length <= 1) {
       done();
@@ -2907,7 +2907,7 @@ function resolveTransitionHooks(vnode, props, state2, instance, postClone) {
     persisted,
     beforeEnter(el) {
       let hook = onBeforeEnter;
-      if (!state2.isMounted) {
+      if (!state.isMounted) {
         if (appear) {
           hook = onBeforeAppear || onBeforeEnter;
         } else {
@@ -2930,7 +2930,7 @@ function resolveTransitionHooks(vnode, props, state2, instance, postClone) {
       let hook = onEnter;
       let afterHook = onAfterEnter;
       let cancelHook = onEnterCancelled;
-      if (!state2.isMounted) {
+      if (!state.isMounted) {
         if (appear) {
           hook = onAppear || onEnter;
           afterHook = onAfterAppear || onAfterEnter;
@@ -2967,7 +2967,7 @@ function resolveTransitionHooks(vnode, props, state2, instance, postClone) {
           /* cancelled */
         );
       }
-      if (state2.isUnmounting) {
+      if (state.isUnmounting) {
         return remove2();
       }
       callHook2(onBeforeLeave, [el]);
@@ -2997,7 +2997,7 @@ function resolveTransitionHooks(vnode, props, state2, instance, postClone) {
       const hooks2 = resolveTransitionHooks(
         vnode2,
         props,
-        state2,
+        state,
         instance,
         postClone
       );
@@ -3048,9 +3048,9 @@ function setTransitionHooks(vnode, hooks) {
 function getTransitionRawChildren(children, keepComment = false, parentKey) {
   let ret = [];
   let keyedFragmentCount = 0;
-  for (let i2 = 0; i2 < children.length; i2++) {
-    let child = children[i2];
-    const key = parentKey == null ? child.key : String(parentKey) + String(child.key != null ? child.key : i2);
+  for (let i = 0; i < children.length; i++) {
+    let child = children[i];
+    const key = parentKey == null ? child.key : String(parentKey) + String(child.key != null ? child.key : i);
     if (child.type === Fragment) {
       if (child.patchFlag & 128) keyedFragmentCount++;
       ret = ret.concat(
@@ -3061,8 +3061,8 @@ function getTransitionRawChildren(children, keepComment = false, parentKey) {
     }
   }
   if (keyedFragmentCount > 1) {
-    for (let i2 = 0; i2 < ret.length; i2++) {
-      ret[i2].patchFlag = -2;
+    for (let i = 0; i < ret.length; i++) {
+      ret[i].patchFlag = -2;
     }
   }
   return ret;
@@ -3077,9 +3077,9 @@ function defineComponent(options, extraOptions) {
   ) : options;
 }
 function useId() {
-  const i2 = getCurrentInstance();
-  if (i2) {
-    return (i2.appContext.config.idPrefix || "v") + "-" + i2.ids[0] + i2.ids[1]++;
+  const i = getCurrentInstance();
+  if (i) {
+    return (i.appContext.config.idPrefix || "v") + "-" + i.ids[0] + i.ids[1]++;
   }
   return "";
 }
@@ -3087,10 +3087,10 @@ function markAsyncBoundary(instance) {
   instance.ids = [instance.ids[0] + instance.ids[2]++ + "-", 0, 0];
 }
 function useTemplateRef(key) {
-  const i2 = getCurrentInstance();
+  const i = getCurrentInstance();
   const r = shallowRef(null);
-  if (i2) {
-    const refs = i2.refs === EMPTY_OBJ ? i2.refs = {} : i2.refs;
+  if (i) {
+    const refs = i.refs === EMPTY_OBJ ? i.refs = {} : i.refs;
     {
       Object.defineProperty(refs, key, {
         enumerable: true,
@@ -3103,11 +3103,11 @@ function useTemplateRef(key) {
   return ret;
 }
 function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
-  if (isArray$1(rawRef)) {
+  if (isArray(rawRef)) {
     rawRef.forEach(
-      (r, i2) => setRef(
+      (r, i) => setRef(
         r,
-        oldRawRef && (isArray$1(oldRawRef) ? oldRawRef[i2] : oldRawRef),
+        oldRawRef && (isArray(oldRawRef) ? oldRawRef[i] : oldRawRef),
         parentSuspense,
         vnode,
         isUnmount
@@ -3151,9 +3151,9 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
         if (rawRef.f) {
           const existing = _isString ? canSetSetupRef(ref3) ? setupState[ref3] : refs[ref3] : ref3.value;
           if (isUnmount) {
-            isArray$1(existing) && remove(existing, refValue);
+            isArray(existing) && remove(existing, refValue);
           } else {
-            if (!isArray$1(existing)) {
+            if (!isArray(existing)) {
               if (_isString) {
                 refs[ref3] = [refValue];
                 if (canSetSetupRef(ref3)) {
@@ -3286,10 +3286,10 @@ function createHydrationFunctions(rendererInternals) {
         if (domType === 1 || domType === 3) {
           nextNode = node;
           const needToAdoptContent = !vnode.children.length;
-          for (let i2 = 0; i2 < vnode.staticCount; i2++) {
+          for (let i = 0; i < vnode.staticCount; i++) {
             if (needToAdoptContent)
               vnode.children += nextNode.nodeType === 1 ? nextNode.outerHTML : nextNode.data;
-            if (i2 === vnode.staticCount - 1) {
+            if (i === vnode.staticCount - 1) {
               vnode.anchor = nextNode;
             }
             nextNode = nextSibling(nextNode);
@@ -3496,13 +3496,13 @@ function createHydrationFunctions(rendererInternals) {
   const hydrateChildren = (node, parentVNode, container, parentComponent, parentSuspense, slotScopeIds, optimized) => {
     optimized = optimized || !!parentVNode.dynamicChildren;
     const children = parentVNode.children;
-    const l2 = children.length;
-    for (let i2 = 0; i2 < l2; i2++) {
-      const vnode = optimized ? children[i2] : children[i2] = normalizeVNode(children[i2]);
+    const l = children.length;
+    for (let i = 0; i < l; i++) {
+      const vnode = optimized ? children[i] : children[i] = normalizeVNode(children[i]);
       const isText = vnode.type === Text;
       if (node) {
         if (isText && !optimized) {
-          if (i2 + 1 < l2 && normalizeVNode(children[i2 + 1]).type === Text) {
+          if (i + 1 < l && normalizeVNode(children[i + 1]).type === Text) {
             insert(
               createText(
                 node.data.slice(vnode.children.length)
@@ -3739,14 +3739,14 @@ const hydrateOnInteraction = (interactions = []) => (hydrate2, forEach) => {
   };
   const teardown = () => {
     forEach((el) => {
-      for (const i2 of interactions) {
-        el.removeEventListener(i2, doHydrate);
+      for (const i of interactions) {
+        el.removeEventListener(i, doHydrate);
       }
     });
   };
   forEach((el) => {
-    for (const i2 of interactions) {
-      el.addEventListener(i2, doHydrate, { once: true });
+    for (const i of interactions) {
+      el.addEventListener(i, doHydrate, { once: true });
     }
   });
   return teardown;
@@ -3774,7 +3774,7 @@ function forEachElement(node, cb) {
     cb(node);
   }
 }
-const isAsyncWrapper = (i2) => !!i2.type.__asyncLoader;
+const isAsyncWrapper = (i) => !!i.type.__asyncLoader;
 /*! #__NO_SIDE_EFFECTS__ */
 // @__NO_SIDE_EFFECTS__
 function defineAsyncComponent(source) {
@@ -3922,10 +3922,10 @@ function defineAsyncComponent(source) {
   });
 }
 function createInnerComp(comp, parent) {
-  const { ref: ref22, props, children, ce: ce2 } = parent.vnode;
+  const { ref: ref22, props, children, ce } = parent.vnode;
   const vnode = createVNode(comp, props, children);
   vnode.ref = ref22;
-  vnode.ce = ce2;
+  vnode.ce = ce;
   delete parent.vnode.ce;
   return vnode;
 }
@@ -4123,7 +4123,7 @@ const KeepAliveImpl = {
 };
 const KeepAlive = KeepAliveImpl;
 function matches(pattern, name) {
-  if (isArray$1(pattern)) {
+  if (isArray(pattern)) {
     return pattern.some((p2) => matches(p2, name));
   } else if (isString(pattern)) {
     return pattern.split(",").includes(name);
@@ -4247,7 +4247,7 @@ function resolveAsset(type, name, warnMissing = true, maybeSelfReference = false
         Component,
         false
       );
-      if (selfName && (selfName === name || selfName === camelize$1(name) || selfName === capitalize(camelize$1(name)))) {
+      if (selfName && (selfName === name || selfName === camelize(name) || selfName === capitalize(camelize(name)))) {
         return Component;
       }
     }
@@ -4264,12 +4264,12 @@ function resolveAsset(type, name, warnMissing = true, maybeSelfReference = false
   }
 }
 function resolve(registry, name) {
-  return registry && (registry[name] || registry[camelize$1(name)] || registry[capitalize(camelize$1(name))]);
+  return registry && (registry[name] || registry[camelize(name)] || registry[capitalize(camelize(name))]);
 }
 function renderList(source, renderItem, cache, index) {
   let ret;
   const cached = cache && cache[index];
-  const sourceIsArray = isArray$1(source);
+  const sourceIsArray = isArray(source);
   if (sourceIsArray || isString(source)) {
     const sourceIsReactiveArray = sourceIsArray && isReactive(source);
     let needsWrap = false;
@@ -4280,31 +4280,31 @@ function renderList(source, renderItem, cache, index) {
       source = shallowReadArray(source);
     }
     ret = new Array(source.length);
-    for (let i2 = 0, l2 = source.length; i2 < l2; i2++) {
-      ret[i2] = renderItem(
-        needsWrap ? isReadonlySource ? toReadonly(toReactive$1(source[i2])) : toReactive$1(source[i2]) : source[i2],
-        i2,
+    for (let i = 0, l = source.length; i < l; i++) {
+      ret[i] = renderItem(
+        needsWrap ? isReadonlySource ? toReadonly(toReactive(source[i])) : toReactive(source[i]) : source[i],
+        i,
         void 0,
-        cached && cached[i2]
+        cached && cached[i]
       );
     }
   } else if (typeof source === "number") {
     ret = new Array(source);
-    for (let i2 = 0; i2 < source; i2++) {
-      ret[i2] = renderItem(i2 + 1, i2, void 0, cached && cached[i2]);
+    for (let i = 0; i < source; i++) {
+      ret[i] = renderItem(i + 1, i, void 0, cached && cached[i]);
     }
-  } else if (isObject$1(source)) {
+  } else if (isObject(source)) {
     if (source[Symbol.iterator]) {
       ret = Array.from(
         source,
-        (item, i2) => renderItem(item, i2, void 0, cached && cached[i2])
+        (item, i) => renderItem(item, i, void 0, cached && cached[i])
       );
     } else {
       const keys = Object.keys(source);
       ret = new Array(keys.length);
-      for (let i2 = 0, l2 = keys.length; i2 < l2; i2++) {
-        const key = keys[i2];
-        ret[i2] = renderItem(source[key], key, i2, cached && cached[i2]);
+      for (let i = 0, l = keys.length; i < l; i++) {
+        const key = keys[i];
+        ret[i] = renderItem(source[key], key, i, cached && cached[i]);
       }
     }
   } else {
@@ -4316,9 +4316,9 @@ function renderList(source, renderItem, cache, index) {
   return ret;
 }
 function createSlots(slots, dynamicSlots) {
-  for (let i2 = 0; i2 < dynamicSlots.length; i2++) {
-    const slot = dynamicSlots[i2];
-    if (isArray$1(slot)) {
+  for (let i = 0; i < dynamicSlots.length; i++) {
+    const slot = dynamicSlots[i];
+    if (isArray(slot)) {
       for (let j = 0; j < slot.length; j++) {
         slots[slot[j].name] = slot[j].fn;
       }
@@ -4384,35 +4384,35 @@ function toHandlers(obj, preserveCaseIfNecessary) {
   }
   return ret;
 }
-const getPublicInstance = (i2) => {
-  if (!i2) return null;
-  if (isStatefulComponent(i2)) return getComponentPublicInstance(i2);
-  return getPublicInstance(i2.parent);
+const getPublicInstance = (i) => {
+  if (!i) return null;
+  if (isStatefulComponent(i)) return getComponentPublicInstance(i);
+  return getPublicInstance(i.parent);
 };
 const publicPropertiesMap = (
   // Move PURE marker to new line to workaround compiler discarding it
   // due to type annotation
   /* @__PURE__ */ extend(/* @__PURE__ */ Object.create(null), {
-    $: (i2) => i2,
-    $el: (i2) => i2.vnode.el,
-    $data: (i2) => i2.data,
-    $props: (i2) => i2.props,
-    $attrs: (i2) => i2.attrs,
-    $slots: (i2) => i2.slots,
-    $refs: (i2) => i2.refs,
-    $parent: (i2) => getPublicInstance(i2.parent),
-    $root: (i2) => getPublicInstance(i2.root),
-    $host: (i2) => i2.ce,
-    $emit: (i2) => i2.emit,
-    $options: (i2) => resolveMergedOptions(i2),
-    $forceUpdate: (i2) => i2.f || (i2.f = () => {
-      queueJob(i2.update);
+    $: (i) => i,
+    $el: (i) => i.vnode.el,
+    $data: (i) => i.data,
+    $props: (i) => i.props,
+    $attrs: (i) => i.attrs,
+    $slots: (i) => i.slots,
+    $refs: (i) => i.refs,
+    $parent: (i) => getPublicInstance(i.parent),
+    $root: (i) => getPublicInstance(i.root),
+    $host: (i) => i.ce,
+    $emit: (i) => i.emit,
+    $options: (i) => resolveMergedOptions(i),
+    $forceUpdate: (i) => i.f || (i.f = () => {
+      queueJob(i.update);
     }),
-    $nextTick: (i2) => i2.n || (i2.n = nextTick.bind(i2.proxy)),
-    $watch: (i2) => instanceWatch.bind(i2)
+    $nextTick: (i) => i.n || (i.n = nextTick.bind(i.proxy)),
+    $watch: (i) => instanceWatch.bind(i)
   })
 );
-const hasSetupBinding = (state2, key) => state2 !== EMPTY_OBJ && !state2.__isScriptSetup && hasOwn(state2, key);
+const hasSetupBinding = (state, key) => state !== EMPTY_OBJ && !state.__isScriptSetup && hasOwn(state, key);
 const PublicInstanceProxyHandlers = {
   get({ _: instance }, key) {
     if (key === "__v_skip") {
@@ -4519,7 +4519,7 @@ const RuntimeCompiledPublicInstanceProxyHandlers = /* @__PURE__ */ extend({}, Pu
     }
     return PublicInstanceProxyHandlers.get(target, key, target);
   },
-  has(_2, key) {
+  has(_, key) {
     const has = key[0] !== "_" && !isGloballyAllowed(key);
     return has;
   }
@@ -4549,11 +4549,11 @@ function useAttrs() {
   return getContext().attrs;
 }
 function getContext(calledFunctionName) {
-  const i2 = getCurrentInstance();
-  return i2.setupContext || (i2.setupContext = createSetupContext(i2));
+  const i = getCurrentInstance();
+  return i.setupContext || (i.setupContext = createSetupContext(i));
 }
 function normalizePropsOrEmits(props) {
-  return isArray$1(props) ? props.reduce(
+  return isArray(props) ? props.reduce(
     (normalized, p2) => (normalized[p2] = null, normalized),
     {}
   ) : props;
@@ -4564,7 +4564,7 @@ function mergeDefaults(raw, defaults) {
     if (key.startsWith("__skip")) continue;
     let opt = props[key];
     if (opt) {
-      if (isArray$1(opt) || isFunction(opt)) {
+      if (isArray(opt) || isFunction(opt)) {
         opt = props[key] = { type: opt, default: defaults[key] };
       } else {
         opt.default = defaults[key];
@@ -4578,10 +4578,10 @@ function mergeDefaults(raw, defaults) {
   }
   return props;
 }
-function mergeModels(a2, b) {
-  if (!a2 || !b) return a2 || b;
-  if (isArray$1(a2) && isArray$1(b)) return a2.concat(b);
-  return extend({}, normalizePropsOrEmits(a2), normalizePropsOrEmits(b));
+function mergeModels(a, b) {
+  if (!a || !b) return a || b;
+  if (isArray(a) && isArray(b)) return a.concat(b);
+  return extend({}, normalizePropsOrEmits(a), normalizePropsOrEmits(b));
 }
 function createPropsRestProxy(props, excludedKeys) {
   const ret = {};
@@ -4665,7 +4665,7 @@ function applyOptions(instance) {
   }
   if (dataOptions) {
     const data = dataOptions.call(publicThis, publicThis);
-    if (!isObject$1(data)) ;
+    if (!isObject(data)) ;
     else {
       instance.data = reactive(data);
     }
@@ -4674,17 +4674,17 @@ function applyOptions(instance) {
   if (computedOptions) {
     for (const key in computedOptions) {
       const opt = computedOptions[key];
-      const get2 = isFunction(opt) ? opt.bind(publicThis, publicThis) : isFunction(opt.get) ? opt.get.bind(publicThis, publicThis) : NOOP;
+      const get = isFunction(opt) ? opt.bind(publicThis, publicThis) : isFunction(opt.get) ? opt.get.bind(publicThis, publicThis) : NOOP;
       const set = !isFunction(opt) && isFunction(opt.set) ? opt.set.bind(publicThis) : NOOP;
-      const c2 = computed({
-        get: get2,
+      const c = computed({
+        get,
         set
       });
       Object.defineProperty(ctx, key, {
         enumerable: true,
         configurable: true,
-        get: () => c2.value,
-        set: (v2) => c2.value = v2
+        get: () => c.value,
+        set: (v) => c.value = v
       });
     }
   }
@@ -4703,7 +4703,7 @@ function applyOptions(instance) {
     callHook$1(created, instance, "c");
   }
   function registerLifecycleHook(register, hook) {
-    if (isArray$1(hook)) {
+    if (isArray(hook)) {
       hook.forEach((_hook) => register(_hook.bind(publicThis)));
     } else if (hook) {
       register(hook.bind(publicThis));
@@ -4721,7 +4721,7 @@ function applyOptions(instance) {
   registerLifecycleHook(onBeforeUnmount, beforeUnmount);
   registerLifecycleHook(onUnmounted, unmounted);
   registerLifecycleHook(onServerPrefetch, serverPrefetch);
-  if (isArray$1(expose)) {
+  if (isArray(expose)) {
     if (expose.length) {
       const exposed = instance.exposed || (instance.exposed = {});
       expose.forEach((key) => {
@@ -4748,13 +4748,13 @@ function applyOptions(instance) {
   }
 }
 function resolveInjections(injectOptions, ctx, checkDuplicateProperties = NOOP) {
-  if (isArray$1(injectOptions)) {
+  if (isArray(injectOptions)) {
     injectOptions = normalizeInject(injectOptions);
   }
   for (const key in injectOptions) {
     const opt = injectOptions[key];
     let injected;
-    if (isObject$1(opt)) {
+    if (isObject(opt)) {
       if ("default" in opt) {
         injected = inject(
           opt.from || key,
@@ -4772,7 +4772,7 @@ function resolveInjections(injectOptions, ctx, checkDuplicateProperties = NOOP) 
         enumerable: true,
         configurable: true,
         get: () => injected.value,
-        set: (v2) => injected.value = v2
+        set: (v) => injected.value = v
       });
     } else {
       ctx[key] = injected;
@@ -4781,7 +4781,7 @@ function resolveInjections(injectOptions, ctx, checkDuplicateProperties = NOOP) 
 }
 function callHook$1(hook, instance, type) {
   callWithAsyncErrorHandling(
-    isArray$1(hook) ? hook.map((h2) => h2.bind(instance.proxy)) : hook.bind(instance.proxy),
+    isArray(hook) ? hook.map((h2) => h2.bind(instance.proxy)) : hook.bind(instance.proxy),
     instance,
     type
   );
@@ -4799,8 +4799,8 @@ function createWatcher(raw, ctx, publicThis, key) {
     {
       watch(getter, raw.bind(publicThis));
     }
-  } else if (isObject$1(raw)) {
-    if (isArray$1(raw)) {
+  } else if (isObject(raw)) {
+    if (isArray(raw)) {
       raw.forEach((r) => createWatcher(r, ctx, publicThis, key));
     } else {
       const handler = isFunction(raw.handler) ? raw.handler.bind(publicThis) : ctx[raw.handler];
@@ -4835,7 +4835,7 @@ function resolveMergedOptions(instance) {
     }
     mergeOptions(resolved, base, optionMergeStrategies);
   }
-  if (isObject$1(base)) {
+  if (isObject(base)) {
     cache.set(base, resolved);
   }
   return resolved;
@@ -4908,10 +4908,10 @@ function mergeInject(to, from) {
   return mergeObjectOptions(normalizeInject(to), normalizeInject(from));
 }
 function normalizeInject(raw) {
-  if (isArray$1(raw)) {
+  if (isArray(raw)) {
     const res = {};
-    for (let i2 = 0; i2 < raw.length; i2++) {
-      res[raw[i2]] = raw[i2];
+    for (let i = 0; i < raw.length; i++) {
+      res[raw[i]] = raw[i];
     }
     return res;
   }
@@ -4925,7 +4925,7 @@ function mergeObjectOptions(to, from) {
 }
 function mergeEmitsOrPropsOptions(to, from) {
   if (to) {
-    if (isArray$1(to) && isArray$1(from)) {
+    if (isArray(to) && isArray(from)) {
       return [.../* @__PURE__ */ new Set([...to, ...from])];
     }
     return extend(
@@ -4973,7 +4973,7 @@ function createAppAPI(render2, hydrate2) {
     if (!isFunction(rootComponent)) {
       rootComponent = extend({}, rootComponent);
     }
-    if (rootProps != null && !isObject$1(rootProps)) {
+    if (rootProps != null && !isObject(rootProps)) {
       rootProps = null;
     }
     const context = createAppContext();
@@ -4991,7 +4991,7 @@ function createAppAPI(render2, hydrate2) {
       get config() {
         return context.config;
       },
-      set config(v2) {
+      set config(v) {
       },
       use(plugin, ...options) {
         if (installedPlugins.has(plugin)) ;
@@ -5144,8 +5144,8 @@ function updateProps(instance, rawProps, rawPrevProps, optimized) {
   ) {
     if (patchFlag & 8) {
       const propsToUpdate = instance.vnode.dynamicProps;
-      for (let i2 = 0; i2 < propsToUpdate.length; i2++) {
-        let key = propsToUpdate[i2];
+      for (let i = 0; i < propsToUpdate.length; i++) {
+        let key = propsToUpdate[i];
         if (isEmitListener(instance.emitsOptions, key)) {
           continue;
         }
@@ -5157,7 +5157,7 @@ function updateProps(instance, rawProps, rawPrevProps, optimized) {
               hasAttrsChanged = true;
             }
           } else {
-            const camelizedKey = camelize$1(key);
+            const camelizedKey = camelize(key);
             props[camelizedKey] = resolvePropValue(
               options,
               rawCurrentProps,
@@ -5227,7 +5227,7 @@ function setFullProps(instance, rawProps, props, attrs) {
       }
       const value = rawProps[key];
       let camelKey;
-      if (options && hasOwn(options, camelKey = camelize$1(key))) {
+      if (options && hasOwn(options, camelKey = camelize(key))) {
         if (!needCastKeys || !needCastKeys.includes(camelKey)) {
           props[camelKey] = value;
         } else {
@@ -5244,8 +5244,8 @@ function setFullProps(instance, rawProps, props, attrs) {
   if (needCastKeys) {
     const rawCurrentProps = toRaw(props);
     const castValues = rawCastValues || EMPTY_OBJ;
-    for (let i2 = 0; i2 < needCastKeys.length; i2++) {
-      const key = needCastKeys[i2];
+    for (let i = 0; i < needCastKeys.length; i++) {
+      const key = needCastKeys[i];
       props[key] = resolvePropValue(
         options,
         rawCurrentProps,
@@ -5328,28 +5328,28 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
     }
   }
   if (!raw && !hasExtends) {
-    if (isObject$1(comp)) {
+    if (isObject(comp)) {
       cache.set(comp, EMPTY_ARR);
     }
     return EMPTY_ARR;
   }
-  if (isArray$1(raw)) {
-    for (let i2 = 0; i2 < raw.length; i2++) {
-      const normalizedKey = camelize$1(raw[i2]);
+  if (isArray(raw)) {
+    for (let i = 0; i < raw.length; i++) {
+      const normalizedKey = camelize(raw[i]);
       if (validatePropName(normalizedKey)) {
         normalized[normalizedKey] = EMPTY_OBJ;
       }
     }
   } else if (raw) {
     for (const key in raw) {
-      const normalizedKey = camelize$1(key);
+      const normalizedKey = camelize(key);
       if (validatePropName(normalizedKey)) {
         const opt = raw[key];
-        const prop = normalized[normalizedKey] = isArray$1(opt) || isFunction(opt) ? { type: opt } : extend({}, opt);
+        const prop = normalized[normalizedKey] = isArray(opt) || isFunction(opt) ? { type: opt } : extend({}, opt);
         const propType = prop.type;
         let shouldCast = false;
         let shouldCastTrue = true;
-        if (isArray$1(propType)) {
+        if (isArray(propType)) {
           for (let index = 0; index < propType.length; ++index) {
             const type = propType[index];
             const typeName = isFunction(type) && type.name;
@@ -5378,7 +5378,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
     }
   }
   const res = [normalized, needCastKeys];
-  if (isObject$1(comp)) {
+  if (isObject(comp)) {
     cache.set(comp, res);
   }
   return res;
@@ -5390,7 +5390,7 @@ function validatePropName(key) {
   return false;
 }
 const isInternalKey = (key) => key === "_" || key === "__" || key === "_ctx" || key === "$stable";
-const normalizeSlotValue = (value) => isArray$1(value) ? value.map(normalizeVNode) : [normalizeVNode(value)];
+const normalizeSlotValue = (value) => isArray(value) ? value.map(normalizeVNode) : [normalizeVNode(value)];
 const normalizeSlot = (key, rawSlot, ctx) => {
   if (rawSlot._n) {
     return rawSlot;
@@ -5739,8 +5739,8 @@ function baseCreateRenderer(options, createHydrationFns) {
       hostSetScopeId(el, scopeId);
     }
     if (slotScopeIds) {
-      for (let i2 = 0; i2 < slotScopeIds.length; i2++) {
-        hostSetScopeId(el, slotScopeIds[i2]);
+      for (let i = 0; i < slotScopeIds.length; i++) {
+        hostSetScopeId(el, slotScopeIds[i]);
       }
     }
     if (parentComponent) {
@@ -5758,8 +5758,8 @@ function baseCreateRenderer(options, createHydrationFns) {
     }
   };
   const mountChildren = (children, container, anchor, parentComponent, parentSuspense, namespace, slotScopeIds, optimized, start = 0) => {
-    for (let i2 = start; i2 < children.length; i2++) {
-      const child = children[i2] = optimized ? cloneIfMounted(children[i2]) : normalizeVNode(children[i2]);
+    for (let i = start; i < children.length; i++) {
+      const child = children[i] = optimized ? cloneIfMounted(children[i]) : normalizeVNode(children[i]);
       patch(
         null,
         child,
@@ -5828,8 +5828,8 @@ function baseCreateRenderer(options, createHydrationFns) {
         }
         if (patchFlag & 8) {
           const propsToUpdate = n2.dynamicProps;
-          for (let i2 = 0; i2 < propsToUpdate.length; i2++) {
-            const key = propsToUpdate[i2];
+          for (let i = 0; i < propsToUpdate.length; i++) {
+            const key = propsToUpdate[i];
             const prev = oldProps[key];
             const next = newProps[key];
             if (next !== prev || key === "value") {
@@ -5854,9 +5854,9 @@ function baseCreateRenderer(options, createHydrationFns) {
     }
   };
   const patchBlockChildren = (oldChildren, newChildren, fallbackContainer, parentComponent, parentSuspense, namespace, slotScopeIds) => {
-    for (let i2 = 0; i2 < newChildren.length; i2++) {
-      const oldVNode = oldChildren[i2];
-      const newVNode = newChildren[i2];
+    for (let i = 0; i < newChildren.length; i++) {
+      const oldVNode = oldChildren[i];
+      const newVNode = newChildren[i];
       const container = (
         // oldVNode may be an errored async setup() component inside Suspense
         // which will not have a mounted element
@@ -6119,7 +6119,7 @@ function baseCreateRenderer(options, createHydrationFns) {
         instance.isMounted = true;
         initialVNode = container = anchor = null;
       } else {
-        let { next, bu, u: u2, parent, vnode } = instance;
+        let { next, bu, u, parent, vnode } = instance;
         {
           const nonHydratedAsyncRoot = locateNonHydratedAsyncRoot(instance);
           if (nonHydratedAsyncRoot) {
@@ -6169,8 +6169,8 @@ function baseCreateRenderer(options, createHydrationFns) {
         if (originNext === null) {
           updateHOCHostEl(instance, nextTree.el);
         }
-        if (u2) {
-          queuePostRenderEffect(u2, parentSuspense);
+        if (u) {
+          queuePostRenderEffect(u, parentSuspense);
         }
         if (vnodeHook = next.props && next.props.onVnodeUpdated) {
           queuePostRenderEffect(
@@ -6285,11 +6285,11 @@ function baseCreateRenderer(options, createHydrationFns) {
     const oldLength = c1.length;
     const newLength = c2.length;
     const commonLength = Math.min(oldLength, newLength);
-    let i2;
-    for (i2 = 0; i2 < commonLength; i2++) {
-      const nextChild = c2[i2] = optimized ? cloneIfMounted(c2[i2]) : normalizeVNode(c2[i2]);
+    let i;
+    for (i = 0; i < commonLength; i++) {
+      const nextChild = c2[i] = optimized ? cloneIfMounted(c2[i]) : normalizeVNode(c2[i]);
       patch(
-        c1[i2],
+        c1[i],
         nextChild,
         container,
         null,
@@ -6324,13 +6324,13 @@ function baseCreateRenderer(options, createHydrationFns) {
     }
   };
   const patchKeyedChildren = (c1, c2, container, parentAnchor, parentComponent, parentSuspense, namespace, slotScopeIds, optimized) => {
-    let i2 = 0;
+    let i = 0;
     const l2 = c2.length;
     let e1 = c1.length - 1;
     let e2 = l2 - 1;
-    while (i2 <= e1 && i2 <= e2) {
-      const n1 = c1[i2];
-      const n2 = c2[i2] = optimized ? cloneIfMounted(c2[i2]) : normalizeVNode(c2[i2]);
+    while (i <= e1 && i <= e2) {
+      const n1 = c1[i];
+      const n2 = c2[i] = optimized ? cloneIfMounted(c2[i]) : normalizeVNode(c2[i]);
       if (isSameVNodeType(n1, n2)) {
         patch(
           n1,
@@ -6346,9 +6346,9 @@ function baseCreateRenderer(options, createHydrationFns) {
       } else {
         break;
       }
-      i2++;
+      i++;
     }
-    while (i2 <= e1 && i2 <= e2) {
+    while (i <= e1 && i <= e2) {
       const n1 = c1[e1];
       const n2 = c2[e2] = optimized ? cloneIfMounted(c2[e2]) : normalizeVNode(c2[e2]);
       if (isSameVNodeType(n1, n2)) {
@@ -6369,14 +6369,14 @@ function baseCreateRenderer(options, createHydrationFns) {
       e1--;
       e2--;
     }
-    if (i2 > e1) {
-      if (i2 <= e2) {
+    if (i > e1) {
+      if (i <= e2) {
         const nextPos = e2 + 1;
         const anchor = nextPos < l2 ? c2[nextPos].el : parentAnchor;
-        while (i2 <= e2) {
+        while (i <= e2) {
           patch(
             null,
-            c2[i2] = optimized ? cloneIfMounted(c2[i2]) : normalizeVNode(c2[i2]),
+            c2[i] = optimized ? cloneIfMounted(c2[i]) : normalizeVNode(c2[i]),
             container,
             anchor,
             parentComponent,
@@ -6385,22 +6385,22 @@ function baseCreateRenderer(options, createHydrationFns) {
             slotScopeIds,
             optimized
           );
-          i2++;
+          i++;
         }
       }
-    } else if (i2 > e2) {
-      while (i2 <= e1) {
-        unmount(c1[i2], parentComponent, parentSuspense, true);
-        i2++;
+    } else if (i > e2) {
+      while (i <= e1) {
+        unmount(c1[i], parentComponent, parentSuspense, true);
+        i++;
       }
     } else {
-      const s1 = i2;
-      const s2 = i2;
+      const s1 = i;
+      const s2 = i;
       const keyToNewIndexMap = /* @__PURE__ */ new Map();
-      for (i2 = s2; i2 <= e2; i2++) {
-        const nextChild = c2[i2] = optimized ? cloneIfMounted(c2[i2]) : normalizeVNode(c2[i2]);
+      for (i = s2; i <= e2; i++) {
+        const nextChild = c2[i] = optimized ? cloneIfMounted(c2[i]) : normalizeVNode(c2[i]);
         if (nextChild.key != null) {
-          keyToNewIndexMap.set(nextChild.key, i2);
+          keyToNewIndexMap.set(nextChild.key, i);
         }
       }
       let j;
@@ -6409,9 +6409,9 @@ function baseCreateRenderer(options, createHydrationFns) {
       let moved = false;
       let maxNewIndexSoFar = 0;
       const newIndexToOldIndexMap = new Array(toBePatched);
-      for (i2 = 0; i2 < toBePatched; i2++) newIndexToOldIndexMap[i2] = 0;
-      for (i2 = s1; i2 <= e1; i2++) {
-        const prevChild = c1[i2];
+      for (i = 0; i < toBePatched; i++) newIndexToOldIndexMap[i] = 0;
+      for (i = s1; i <= e1; i++) {
+        const prevChild = c1[i];
         if (patched >= toBePatched) {
           unmount(prevChild, parentComponent, parentSuspense, true);
           continue;
@@ -6430,7 +6430,7 @@ function baseCreateRenderer(options, createHydrationFns) {
         if (newIndex === void 0) {
           unmount(prevChild, parentComponent, parentSuspense, true);
         } else {
-          newIndexToOldIndexMap[newIndex - s2] = i2 + 1;
+          newIndexToOldIndexMap[newIndex - s2] = i + 1;
           if (newIndex >= maxNewIndexSoFar) {
             maxNewIndexSoFar = newIndex;
           } else {
@@ -6452,15 +6452,15 @@ function baseCreateRenderer(options, createHydrationFns) {
       }
       const increasingNewIndexSequence = moved ? getSequence(newIndexToOldIndexMap) : EMPTY_ARR;
       j = increasingNewIndexSequence.length - 1;
-      for (i2 = toBePatched - 1; i2 >= 0; i2--) {
-        const nextIndex = s2 + i2;
+      for (i = toBePatched - 1; i >= 0; i--) {
+        const nextIndex = s2 + i;
         const nextChild = c2[nextIndex];
         const anchorVNode = c2[nextIndex + 1];
         const anchor = nextIndex + 1 < l2 ? (
           // #13559, fallback to el placeholder for unresolved async component
           anchorVNode.el || anchorVNode.placeholder
         ) : parentAnchor;
-        if (newIndexToOldIndexMap[i2] === 0) {
+        if (newIndexToOldIndexMap[i] === 0) {
           patch(
             null,
             nextChild,
@@ -6473,7 +6473,7 @@ function baseCreateRenderer(options, createHydrationFns) {
             optimized
           );
         } else if (moved) {
-          if (j < 0 || i2 !== increasingNewIndexSequence[j]) {
+          if (j < 0 || i !== increasingNewIndexSequence[j]) {
             move(nextChild, container, anchor, 2);
           } else {
             j--;
@@ -6498,8 +6498,8 @@ function baseCreateRenderer(options, createHydrationFns) {
     }
     if (type === Fragment) {
       hostInsert(el, container, anchor);
-      for (let i2 = 0; i2 < children.length; i2++) {
-        move(children[i2], container, anchor, moveType);
+      for (let i = 0; i < children.length; i++) {
+        move(children[i], container, anchor, moveType);
       }
       hostInsert(vnode.anchor, container, anchor);
       return;
@@ -6665,18 +6665,18 @@ function baseCreateRenderer(options, createHydrationFns) {
       subTree,
       um,
       m,
-      a: a2,
+      a,
       parent,
       slots: { __: slotCacheKeys }
     } = instance;
     invalidateMount(m);
-    invalidateMount(a2);
+    invalidateMount(a);
     if (bum) {
       invokeArrayFns(bum);
     }
-    if (parent && isArray$1(slotCacheKeys)) {
-      slotCacheKeys.forEach((v2) => {
-        parent.renderCache[v2] = void 0;
+    if (parent && isArray(slotCacheKeys)) {
+      slotCacheKeys.forEach((v) => {
+        parent.renderCache[v] = void 0;
       });
     }
     scope.stop();
@@ -6698,8 +6698,8 @@ function baseCreateRenderer(options, createHydrationFns) {
     }
   };
   const unmountChildren = (children, parentComponent, parentSuspense, doRemove = false, optimized = false, start = 0) => {
-    for (let i2 = start; i2 < children.length; i2++) {
-      unmount(children[i2], parentComponent, parentSuspense, doRemove, optimized);
+    for (let i = start; i < children.length; i++) {
+      unmount(children[i], parentComponent, parentSuspense, doRemove, optimized);
     }
   };
   const getNextHostNode = (vnode) => {
@@ -6781,13 +6781,13 @@ function needTransition(parentSuspense, transition) {
 function traverseStaticChildren(n1, n2, shallow = false) {
   const ch1 = n1.children;
   const ch2 = n2.children;
-  if (isArray$1(ch1) && isArray$1(ch2)) {
-    for (let i2 = 0; i2 < ch1.length; i2++) {
-      const c1 = ch1[i2];
-      let c2 = ch2[i2];
+  if (isArray(ch1) && isArray(ch2)) {
+    for (let i = 0; i < ch1.length; i++) {
+      const c1 = ch1[i];
+      let c2 = ch2[i];
       if (c2.shapeFlag & 1 && !c2.dynamicChildren) {
         if (c2.patchFlag <= 0 || c2.patchFlag === 32) {
-          c2 = ch2[i2] = cloneIfMounted(ch2[i2]);
+          c2 = ch2[i] = cloneIfMounted(ch2[i]);
           c2.el = c1.el;
         }
         if (!shallow && c2.patchFlag !== -2)
@@ -6805,40 +6805,40 @@ function traverseStaticChildren(n1, n2, shallow = false) {
 function getSequence(arr) {
   const p2 = arr.slice();
   const result = [0];
-  let i2, j, u2, v2, c2;
+  let i, j, u, v, c;
   const len = arr.length;
-  for (i2 = 0; i2 < len; i2++) {
-    const arrI = arr[i2];
+  for (i = 0; i < len; i++) {
+    const arrI = arr[i];
     if (arrI !== 0) {
       j = result[result.length - 1];
       if (arr[j] < arrI) {
-        p2[i2] = j;
-        result.push(i2);
+        p2[i] = j;
+        result.push(i);
         continue;
       }
-      u2 = 0;
-      v2 = result.length - 1;
-      while (u2 < v2) {
-        c2 = u2 + v2 >> 1;
-        if (arr[result[c2]] < arrI) {
-          u2 = c2 + 1;
+      u = 0;
+      v = result.length - 1;
+      while (u < v) {
+        c = u + v >> 1;
+        if (arr[result[c]] < arrI) {
+          u = c + 1;
         } else {
-          v2 = c2;
+          v = c;
         }
       }
-      if (arrI < arr[result[u2]]) {
-        if (u2 > 0) {
-          p2[i2] = result[u2 - 1];
+      if (arrI < arr[result[u]]) {
+        if (u > 0) {
+          p2[i] = result[u - 1];
         }
-        result[u2] = i2;
+        result[u] = i;
       }
     }
   }
-  u2 = result.length;
-  v2 = result[u2 - 1];
-  while (u2-- > 0) {
-    result[u2] = v2;
-    v2 = p2[v2];
+  u = result.length;
+  v = result[u - 1];
+  while (u-- > 0) {
+    result[u] = v;
+    v = p2[v];
   }
   return result;
 }
@@ -6854,8 +6854,8 @@ function locateNonHydratedAsyncRoot(instance) {
 }
 function invalidateMount(hooks) {
   if (hooks) {
-    for (let i2 = 0; i2 < hooks.length; i2++)
-      hooks[i2].flags |= 8;
+    for (let i = 0; i < hooks.length; i++)
+      hooks[i].flags |= 8;
   }
 }
 const ssrContextKey = Symbol.for("v-scx");
@@ -6961,15 +6961,15 @@ function createPathGetter(ctx, path) {
   const segments = path.split(".");
   return () => {
     let cur = ctx;
-    for (let i2 = 0; i2 < segments.length && cur; i2++) {
-      cur = cur[segments[i2]];
+    for (let i = 0; i < segments.length && cur; i++) {
+      cur = cur[segments[i]];
     }
     return cur;
   };
 }
 function useModel(props, name, options = EMPTY_OBJ) {
-  const i2 = getCurrentInstance();
-  const camelizedName = camelize$1(name);
+  const i = getCurrentInstance();
+  const camelizedName = camelize(name);
   const hyphenatedName = hyphenate(name);
   const modifiers = getModelModifiers(props, camelizedName);
   const res = customRef((track2, trigger2) => {
@@ -6993,13 +6993,13 @@ function useModel(props, name, options = EMPTY_OBJ) {
         if (!hasChanged(emittedValue, localValue) && !(prevSetValue !== EMPTY_OBJ && hasChanged(value, prevSetValue))) {
           return;
         }
-        const rawProps = i2.vnode.props;
+        const rawProps = i.vnode.props;
         if (!(rawProps && // check if parent has passed v-model
         (name in rawProps || camelizedName in rawProps || hyphenatedName in rawProps) && (`onUpdate:${name}` in rawProps || `onUpdate:${camelizedName}` in rawProps || `onUpdate:${hyphenatedName}` in rawProps))) {
           localValue = value;
           trigger2();
         }
-        i2.emit(`update:${name}`, emittedValue);
+        i.emit(`update:${name}`, emittedValue);
         if (hasChanged(value, emittedValue) && hasChanged(value, prevSetValue) && !hasChanged(emittedValue, prevEmittedValue)) {
           trigger2();
         }
@@ -7009,11 +7009,11 @@ function useModel(props, name, options = EMPTY_OBJ) {
     };
   });
   res[Symbol.iterator] = () => {
-    let i22 = 0;
+    let i2 = 0;
     return {
       next() {
-        if (i22 < 2) {
-          return { value: i22++ ? modifiers || EMPTY_OBJ : res, done: false };
+        if (i2 < 2) {
+          return { value: i2++ ? modifiers || EMPTY_OBJ : res, done: false };
         } else {
           return { done: true };
         }
@@ -7023,7 +7023,7 @@ function useModel(props, name, options = EMPTY_OBJ) {
   return res;
 }
 const getModelModifiers = (props, modelName) => {
-  return modelName === "modelValue" || modelName === "model-value" ? props.modelModifiers : props[`${modelName}Modifiers`] || props[`${camelize$1(modelName)}Modifiers`] || props[`${hyphenate(modelName)}Modifiers`];
+  return modelName === "modelValue" || modelName === "model-value" ? props.modelModifiers : props[`${modelName}Modifiers`] || props[`${camelize(modelName)}Modifiers`] || props[`${hyphenate(modelName)}Modifiers`];
 };
 function emit(instance, event, ...rawArgs) {
   if (instance.isUnmounted) return;
@@ -7033,7 +7033,7 @@ function emit(instance, event, ...rawArgs) {
   const modifiers = isModelListener2 && getModelModifiers(props, event.slice(7));
   if (modifiers) {
     if (modifiers.trim) {
-      args = rawArgs.map((a2) => isString(a2) ? a2.trim() : a2);
+      args = rawArgs.map((a) => isString(a) ? a.trim() : a);
     }
     if (modifiers.number) {
       args = rawArgs.map(looseToNumber);
@@ -7041,7 +7041,7 @@ function emit(instance, event, ...rawArgs) {
   }
   let handlerName;
   let handler = props[handlerName = toHandlerKey(event)] || // also try camelCase event handler (#2249)
-  props[handlerName = toHandlerKey(camelize$1(event))];
+  props[handlerName = toHandlerKey(camelize(event))];
   if (!handler && isModelListener2) {
     handler = props[handlerName = toHandlerKey(hyphenate(event))];
   }
@@ -7097,17 +7097,17 @@ function normalizeEmitsOptions(comp, appContext, asMixin = false) {
     }
   }
   if (!raw && !hasExtends) {
-    if (isObject$1(comp)) {
+    if (isObject(comp)) {
       cache.set(comp, null);
     }
     return null;
   }
-  if (isArray$1(raw)) {
+  if (isArray(raw)) {
     raw.forEach((key) => normalized[key] = null);
   } else {
     extend(normalized, raw);
   }
-  if (isObject$1(comp)) {
+  if (isObject(comp)) {
     cache.set(comp, normalized);
   }
   return normalized;
@@ -7224,8 +7224,8 @@ function renderComponentRoot(instance) {
 }
 function filterSingleRoot(children, recurse = true) {
   let singleRoot;
-  for (let i2 = 0; i2 < children.length; i2++) {
-    const child = children[i2];
+  for (let i = 0; i < children.length; i++) {
+    const child = children[i];
     if (isVNode(child)) {
       if (child.type !== Comment || child.children === "v-if") {
         if (singleRoot) {
@@ -7276,8 +7276,8 @@ function shouldUpdateComponent(prevVNode, nextVNode, optimized) {
       return hasPropsChanged(prevProps, nextProps, emits);
     } else if (patchFlag & 8) {
       const dynamicProps = nextVNode.dynamicProps;
-      for (let i2 = 0; i2 < dynamicProps.length; i2++) {
-        const key = dynamicProps[i2];
+      for (let i = 0; i < dynamicProps.length; i++) {
+        const key = dynamicProps[i];
         if (nextProps[key] !== prevProps[key] && !isEmitListener(emits, key)) {
           return true;
         }
@@ -7307,8 +7307,8 @@ function hasPropsChanged(prevProps, nextProps, emitsOptions) {
   if (nextKeys.length !== Object.keys(prevProps).length) {
     return true;
   }
-  for (let i2 = 0; i2 < nextKeys.length; i2++) {
-    const key = nextKeys[i2];
+  for (let i = 0; i < nextKeys.length; i++) {
+    const key = nextKeys[i];
     if (nextProps[key] !== prevProps[key] && !isEmitListener(emitsOptions, key)) {
       return true;
     }
@@ -7851,19 +7851,19 @@ function normalizeSuspenseSlot(s) {
       closeBlock();
     }
   }
-  if (isArray$1(s)) {
+  if (isArray(s)) {
     const singleChild = filterSingleRoot(s);
     s = singleChild;
   }
   s = normalizeVNode(s);
   if (block && !s.dynamicChildren) {
-    s.dynamicChildren = block.filter((c2) => c2 !== s);
+    s.dynamicChildren = block.filter((c) => c !== s);
   }
   return s;
 }
 function queueEffectWithSuspense(fn, suspense) {
   if (suspense && suspense.pendingBranch) {
-    if (isArray$1(fn)) {
+    if (isArray(fn)) {
       suspense.effects.push(...fn);
     } else {
       suspense.effects.push(fn);
@@ -8047,14 +8047,14 @@ function _createVNode(type, props = null, children = null, patchFlag = 0, dynami
     if (klass && !isString(klass)) {
       props.class = normalizeClass(klass);
     }
-    if (isObject$1(style)) {
-      if (isProxy(style) && !isArray$1(style)) {
+    if (isObject(style)) {
+      if (isProxy(style) && !isArray(style)) {
         style = extend({}, style);
       }
       props.style = normalizeStyle(style);
     }
   }
-  const shapeFlag = isString(type) ? 1 : isSuspense(type) ? 128 : isTeleport(type) ? 64 : isObject$1(type) ? 4 : isFunction(type) ? 2 : 0;
+  const shapeFlag = isString(type) ? 1 : isSuspense(type) ? 128 : isTeleport(type) ? 64 : isObject(type) ? 4 : isFunction(type) ? 2 : 0;
   return createBaseVNode(
     type,
     props,
@@ -8083,7 +8083,7 @@ function cloneVNode(vnode, extraProps, mergeRef = false, cloneTransition = false
       // #2078 in the case of <component :is="vnode" ref="extra"/>
       // if the vnode itself already has a ref, cloneVNode will need to merge
       // the refs so the single vnode can be set on multiple refs
-      mergeRef && ref3 ? isArray$1(ref3) ? ref3.concat(normalizeRef(extraProps)) : [ref3, normalizeRef(extraProps)] : normalizeRef(extraProps)
+      mergeRef && ref3 ? isArray(ref3) ? ref3.concat(normalizeRef(extraProps)) : [ref3, normalizeRef(extraProps)] : normalizeRef(extraProps)
     ) : ref3,
     scopeId: vnode.scopeId,
     slotScopeIds: vnode.slotScopeIds,
@@ -8139,7 +8139,7 @@ function createCommentVNode(text = "", asBlock = false) {
 function normalizeVNode(child) {
   if (child == null || typeof child === "boolean") {
     return createVNode(Comment);
-  } else if (isArray$1(child)) {
+  } else if (isArray(child)) {
     return createVNode(
       Fragment,
       null,
@@ -8160,7 +8160,7 @@ function normalizeChildren(vnode, children) {
   const { shapeFlag } = vnode;
   if (children == null) {
     children = null;
-  } else if (isArray$1(children)) {
+  } else if (isArray(children)) {
     type = 16;
   } else if (typeof children === "object") {
     if (shapeFlag & (1 | 64)) {
@@ -8202,8 +8202,8 @@ function normalizeChildren(vnode, children) {
 }
 function mergeProps(...args) {
   const ret = {};
-  for (let i2 = 0; i2 < args.length; i2++) {
-    const toMerge = args[i2];
+  for (let i = 0; i < args.length; i++) {
+    const toMerge = args[i];
     for (const key in toMerge) {
       if (key === "class") {
         if (ret.class !== toMerge.class) {
@@ -8214,7 +8214,7 @@ function mergeProps(...args) {
       } else if (isOn(key)) {
         const existing = ret[key];
         const incoming = toMerge[key];
-        if (incoming && existing !== incoming && !(isArray$1(existing) && existing.includes(incoming))) {
+        if (incoming && existing !== incoming && !(isArray(existing) && existing.includes(incoming))) {
           ret[key] = existing ? [].concat(existing, incoming) : incoming;
         }
       } else if (key !== "") {
@@ -8326,23 +8326,23 @@ const getCurrentInstance = () => currentInstance || currentRenderingInstance;
 let internalSetCurrentInstance;
 let setInSSRSetupState;
 {
-  const g2 = getGlobalThis();
+  const g = getGlobalThis();
   const registerGlobalSetter = (key, setter) => {
     let setters;
-    if (!(setters = g2[key])) setters = g2[key] = [];
+    if (!(setters = g[key])) setters = g[key] = [];
     setters.push(setter);
-    return (v2) => {
-      if (setters.length > 1) setters.forEach((set) => set(v2));
-      else setters[0](v2);
+    return (v) => {
+      if (setters.length > 1) setters.forEach((set) => set(v));
+      else setters[0](v);
     };
   };
   internalSetCurrentInstance = registerGlobalSetter(
     `__VUE_INSTANCE_SETTERS__`,
-    (v2) => currentInstance = v2
+    (v) => currentInstance = v
   );
   setInSSRSetupState = registerGlobalSetter(
     `__VUE_SSR_SETTERS__`,
-    (v2) => isInSSRComponentSetup = v2
+    (v) => isInSSRComponentSetup = v
   );
 }
 const setCurrentInstance = (instance) => {
@@ -8421,7 +8421,7 @@ function handleSetupResult(instance, setupResult, isSSR) {
     } else {
       instance.render = setupResult;
     }
-  } else if (isObject$1(setupResult)) {
+  } else if (isObject(setupResult)) {
     instance.setupState = proxyRefs(setupResult);
   } else ;
   finishComponentSetup(instance, isSSR);
@@ -8430,9 +8430,9 @@ let compile;
 let installWithProxy;
 function registerRuntimeCompiler(_compile) {
   compile = _compile;
-  installWithProxy = (i2) => {
-    if (i2.render._rc) {
-      i2.withProxy = new Proxy(i2.ctx, RuntimeCompiledPublicInstanceProxyHandlers);
+  installWithProxy = (i) => {
+    if (i.render._rc) {
+      i.withProxy = new Proxy(i.ctx, RuntimeCompiledPublicInstanceProxyHandlers);
     }
   };
 }
@@ -8512,7 +8512,7 @@ function getComponentPublicInstance(instance) {
   }
 }
 const classifyRE = /(?:^|[-_])(\w)/g;
-const classify = (str) => str.replace(classifyRE, (c2) => c2.toUpperCase()).replace(/[-_]/g, "");
+const classify = (str) => str.replace(classifyRE, (c) => c.toUpperCase()).replace(/[-_]/g, "");
 function getComponentName(Component, includeInferred = true) {
   return isFunction(Component) ? Component.displayName || Component.name : Component.name || includeInferred && Component.__name;
 }
@@ -8542,13 +8542,13 @@ function isClassComponent(value) {
   return isFunction(value) && "__vccOpts" in value;
 }
 const computed = (getterOrOptions, debugOptions) => {
-  const c2 = computed$1(getterOrOptions, debugOptions, isInSSRComponentSetup);
-  return c2;
+  const c = computed$1(getterOrOptions, debugOptions, isInSSRComponentSetup);
+  return c;
 };
 function h(type, propsOrChildren, children) {
-  const l2 = arguments.length;
-  if (l2 === 2) {
-    if (isObject$1(propsOrChildren) && !isArray$1(propsOrChildren)) {
+  const l = arguments.length;
+  if (l === 2) {
+    if (isObject(propsOrChildren) && !isArray(propsOrChildren)) {
       if (isVNode(propsOrChildren)) {
         return createVNode(type, null, [propsOrChildren]);
       }
@@ -8557,9 +8557,9 @@ function h(type, propsOrChildren, children) {
       return createVNode(type, null, propsOrChildren);
     }
   } else {
-    if (l2 > 3) {
+    if (l > 3) {
       children = Array.prototype.slice.call(arguments, 2);
-    } else if (l2 === 3 && isVNode(children)) {
+    } else if (l === 3 && isVNode(children)) {
       children = [children];
     }
     return createVNode(type, propsOrChildren, children);
@@ -8585,8 +8585,8 @@ function isMemoSame(cached, memo) {
   if (prev.length != memo.length) {
     return false;
   }
-  for (let i2 = 0; i2 < prev.length; i2++) {
-    if (hasChanged(prev[i2], memo[i2])) {
+  for (let i = 0; i < prev.length; i++) {
+    if (hasChanged(prev[i], memo[i])) {
       return false;
     }
   }
@@ -8735,14 +8735,14 @@ const Transition = /* @__PURE__ */ decorate$1(
   (props, { slots }) => h(BaseTransition, resolveTransitionProps(props), slots)
 );
 const callHook = (hook, args = []) => {
-  if (isArray$1(hook)) {
+  if (isArray(hook)) {
     hook.forEach((h2) => h2(...args));
   } else if (hook) {
     hook(...args);
   }
 };
 const hasExplicitCallback = (hook) => {
-  return hook ? isArray$1(hook) ? hook.some((h2) => h2.length > 1) : hook.length > 1 : false;
+  return hook ? isArray(hook) ? hook.some((h2) => h2.length > 1) : hook.length > 1 : false;
 };
 function resolveTransitionProps(rawProps) {
   const baseProps = {};
@@ -8861,7 +8861,7 @@ function resolveTransitionProps(rawProps) {
 function normalizeDuration(duration) {
   if (duration == null) {
     return null;
-  } else if (isObject$1(duration)) {
+  } else if (isObject(duration)) {
     return [NumberOf(duration.enter), NumberOf(duration.leave)];
   } else {
     const n = NumberOf(duration);
@@ -8873,11 +8873,11 @@ function NumberOf(val) {
   return res;
 }
 function addTransitionClass(el, cls) {
-  cls.split(/\s+/).forEach((c2) => c2 && el.classList.add(c2));
+  cls.split(/\s+/).forEach((c) => c && el.classList.add(c));
   (el[vtcKey] || (el[vtcKey] = /* @__PURE__ */ new Set())).add(cls);
 }
 function removeTransitionClass(el, cls) {
-  cls.split(/\s+/).forEach((c2) => c2 && el.classList.remove(c2));
+  cls.split(/\s+/).forEach((c) => c && el.classList.remove(c));
   const _vtc = el[vtcKey];
   if (_vtc) {
     _vtc.delete(cls);
@@ -8967,7 +8967,7 @@ function getTimeout(delays, durations) {
   while (delays.length < durations.length) {
     delays = delays.concat(delays);
   }
-  return Math.max(...durations.map((d, i2) => toMs(d) + toMs(delays[i2])));
+  return Math.max(...durations.map((d, i) => toMs(d) + toMs(delays[i])));
 }
 function toMs(s) {
   if (s === "auto") return 0;
@@ -9082,7 +9082,7 @@ function setVarsOnVNode(vnode, vars) {
   if (vnode.shapeFlag & 1 && vnode.el) {
     setVarsOnNode(vnode.el, vars);
   } else if (vnode.type === Fragment) {
-    vnode.children.forEach((c2) => setVarsOnVNode(c2, vars));
+    vnode.children.forEach((c) => setVarsOnVNode(c, vars));
   } else if (vnode.type === Static) {
     let { el, anchor } = vnode;
     while (el) {
@@ -9155,8 +9155,8 @@ function patchStyle(el, prev, next) {
 }
 const importantRE = /\s*!important$/;
 function setStyle(style, name, val) {
-  if (isArray$1(val)) {
-    val.forEach((v2) => setStyle(style, name, v2));
+  if (isArray(val)) {
+    val.forEach((v) => setStyle(style, name, v));
   } else {
     if (val == null) val = "";
     if (name.startsWith("--")) {
@@ -9182,13 +9182,13 @@ function autoPrefix(style, rawName) {
   if (cached) {
     return cached;
   }
-  let name = camelize$1(rawName);
+  let name = camelize(rawName);
   if (name !== "filter" && name in style) {
     return prefixCache[rawName] = name;
   }
   name = capitalize(name);
-  for (let i2 = 0; i2 < prefixes.length; i2++) {
-    const prefixed = prefixes[i2] + name;
+  for (let i = 0; i < prefixes.length; i++) {
+    const prefixed = prefixes[i] + name;
     if (prefixed in style) {
       return prefixCache[rawName] = prefixed;
     }
@@ -9299,8 +9299,8 @@ function parseName(name) {
   return [event, options];
 }
 let cachedNow = 0;
-const p$1 = /* @__PURE__ */ Promise.resolve();
-const getNow = () => cachedNow || (p$1.then(() => cachedNow = 0), cachedNow = Date.now());
+const p = /* @__PURE__ */ Promise.resolve();
+const getNow = () => cachedNow || (p.then(() => cachedNow = 0), cachedNow = Date.now());
 function createInvoker(initialValue, instance) {
   const invoker = (e) => {
     if (!e._vts) {
@@ -9320,7 +9320,7 @@ function createInvoker(initialValue, instance) {
   return invoker;
 }
 function patchStopImmediatePropagation(e, value) {
-  if (isArray$1(value)) {
+  if (isArray(value)) {
     const originalStop = e.stopImmediatePropagation;
     e.stopImmediatePropagation = () => {
       originalStop.call(e);
@@ -9354,7 +9354,7 @@ const patchProp = (el, key, prevValue, nextValue, namespace, parentComponent) =>
     // #11081 force set props for possible async custom element
     el._isVueCE && (/[A-Z]/.test(key) || !isString(nextValue))
   ) {
-    patchDOMProp(el, camelize$1(key), nextValue, parentComponent, key);
+    patchDOMProp(el, camelize(key), nextValue, parentComponent, key);
   } else {
     if (key === "true-value") {
       el._trueValue = nextValue;
@@ -9402,7 +9402,7 @@ const REMOVAL = {};
 // @__NO_SIDE_EFFECTS__
 function defineCustomElement(options, extraOptions, _createApp) {
   const Comp = /* @__PURE__ */ defineComponent(options, extraOptions);
-  if (isPlainObject$1(Comp)) extend(Comp, extraOptions);
+  if (isPlainObject(Comp)) extend(Comp, extraOptions);
   class VueCustomElement extends VueElement {
     constructor(initialProps) {
       super(Comp, initialProps, _createApp);
@@ -9506,8 +9506,8 @@ class VueElement extends BaseClass {
     if (this._pendingResolve) {
       return;
     }
-    for (let i2 = 0; i2 < this.attributes.length; i2++) {
-      this._setAttr(this.attributes[i2].name);
+    for (let i = 0; i < this.attributes.length; i++) {
+      this._setAttr(this.attributes[i].name);
     }
     this._ob = new MutationObserver((mutations) => {
       for (const m of mutations) {
@@ -9520,14 +9520,14 @@ class VueElement extends BaseClass {
       this._pendingResolve = void 0;
       const { props, styles } = def2;
       let numberProps;
-      if (props && !isArray$1(props)) {
+      if (props && !isArray(props)) {
         for (const key in props) {
           const opt = props[key];
           if (opt === Number || opt && opt.type === Number) {
             if (key in this._props) {
               this._props[key] = toNumber(this._props[key]);
             }
-            (numberProps || (numberProps = /* @__PURE__ */ Object.create(null)))[camelize$1(key)] = true;
+            (numberProps || (numberProps = /* @__PURE__ */ Object.create(null)))[camelize(key)] = true;
           }
         }
       }
@@ -9569,13 +9569,13 @@ class VueElement extends BaseClass {
   }
   _resolveProps(def2) {
     const { props } = def2;
-    const declaredPropKeys = isArray$1(props) ? props : Object.keys(props || {});
+    const declaredPropKeys = isArray(props) ? props : Object.keys(props || {});
     for (const key of Object.keys(this)) {
       if (key[0] !== "_" && declaredPropKeys.includes(key)) {
         this._setProp(key, this[key]);
       }
     }
-    for (const key of declaredPropKeys.map(camelize$1)) {
+    for (const key of declaredPropKeys.map(camelize)) {
       Object.defineProperty(this, key, {
         get() {
           return this._getProp(key);
@@ -9590,7 +9590,7 @@ class VueElement extends BaseClass {
     if (key.startsWith("data-v-")) return;
     const has = this.hasAttribute(key);
     let value = has ? this.getAttribute(key) : REMOVAL;
-    const camelKey = camelize$1(key);
+    const camelKey = camelize(key);
     if (has && this._numberProps && this._numberProps[camelKey]) {
       value = toNumber(value);
     }
@@ -9635,7 +9635,7 @@ class VueElement extends BaseClass {
   _update() {
     const vnode = this._createVNode();
     if (this._app) vnode.appContext = this._app._context;
-    render$1(vnode, this._root);
+    render(vnode, this._root);
   }
   _createVNode() {
     const baseProps = {};
@@ -9652,7 +9652,7 @@ class VueElement extends BaseClass {
           this.dispatchEvent(
             new CustomEvent(
               event,
-              isPlainObject$1(args[0]) ? extend({ detail: args }, args[0]) : { detail: args }
+              isPlainObject(args[0]) ? extend({ detail: args }, args[0]) : { detail: args }
             )
           );
         };
@@ -9676,10 +9676,10 @@ class VueElement extends BaseClass {
       this._styleChildren.add(owner);
     }
     const nonce = this._nonce;
-    for (let i2 = styles.length - 1; i2 >= 0; i2--) {
+    for (let i = styles.length - 1; i >= 0; i--) {
       const s = document.createElement("style");
       if (nonce) s.setAttribute("nonce", nonce);
-      s.textContent = styles[i2];
+      s.textContent = styles[i];
       this.shadowRoot.prepend(s);
     }
   }
@@ -9701,8 +9701,8 @@ class VueElement extends BaseClass {
   _renderSlots() {
     const outlets = (this._teleportTarget || this).querySelectorAll("slot");
     const scopeId = this._instance.type.__scopeId;
-    for (let i2 = 0; i2 < outlets.length; i2++) {
-      const o = outlets[i2];
+    for (let i = 0; i < outlets.length; i++) {
+      const o = outlets[i];
       const slotName = o.getAttribute("name") || "default";
       const content = this._slots[slotName];
       const parent = o.parentNode;
@@ -9782,7 +9782,7 @@ const TransitionGroupImpl = /* @__PURE__ */ decorate({
   }),
   setup(props, { slots }) {
     const instance = getCurrentInstance();
-    const state2 = useTransitionState();
+    const state = useTransitionState();
     let prevChildren;
     let children;
     onUpdated(() => {
@@ -9802,8 +9802,8 @@ const TransitionGroupImpl = /* @__PURE__ */ decorate({
       prevChildren.forEach(recordPosition);
       const movedChildren = prevChildren.filter(applyTranslation);
       forceReflow();
-      movedChildren.forEach((c2) => {
-        const el = c2.el;
+      movedChildren.forEach((c) => {
+        const el = c.el;
         const style = el.style;
         addTransitionClass(el, moveClass);
         style.transform = style.webkitTransform = style.transitionDuration = "";
@@ -9827,8 +9827,8 @@ const TransitionGroupImpl = /* @__PURE__ */ decorate({
       let tag = rawProps.tag || Fragment;
       prevChildren = [];
       if (children) {
-        for (let i2 = 0; i2 < children.length; i2++) {
-          const child = children[i2];
+        for (let i = 0; i < children.length; i++) {
+          const child = children[i];
           if (child.el && child.el instanceof Element) {
             prevChildren.push(child);
             setTransitionHooks(
@@ -9836,7 +9836,7 @@ const TransitionGroupImpl = /* @__PURE__ */ decorate({
               resolveTransitionHooks(
                 child,
                 cssTransitionProps,
-                state2,
+                state,
                 instance
               )
             );
@@ -9848,12 +9848,12 @@ const TransitionGroupImpl = /* @__PURE__ */ decorate({
         }
       }
       children = slots.default ? getTransitionRawChildren(slots.default()) : [];
-      for (let i2 = 0; i2 < children.length; i2++) {
-        const child = children[i2];
+      for (let i = 0; i < children.length; i++) {
+        const child = children[i];
         if (child.key != null) {
           setTransitionHooks(
             child,
-            resolveTransitionHooks(child, cssTransitionProps, state2, instance)
+            resolveTransitionHooks(child, cssTransitionProps, state, instance)
           );
         }
       }
@@ -9862,8 +9862,8 @@ const TransitionGroupImpl = /* @__PURE__ */ decorate({
   }
 });
 const TransitionGroup = TransitionGroupImpl;
-function callPendingCbs(c2) {
-  const el = c2.el;
+function callPendingCbs(c) {
+  const el = c.el;
   if (el[moveCbKey]) {
     el[moveCbKey]();
   }
@@ -9871,19 +9871,19 @@ function callPendingCbs(c2) {
     el[enterCbKey]();
   }
 }
-function recordPosition(c2) {
-  newPositionMap.set(c2, c2.el.getBoundingClientRect());
+function recordPosition(c) {
+  newPositionMap.set(c, c.el.getBoundingClientRect());
 }
-function applyTranslation(c2) {
-  const oldPos = positionMap.get(c2);
-  const newPos = newPositionMap.get(c2);
+function applyTranslation(c) {
+  const oldPos = positionMap.get(c);
+  const newPos = newPositionMap.get(c);
   const dx = oldPos.left - newPos.left;
   const dy = oldPos.top - newPos.top;
   if (dx || dy) {
-    const s = c2.el.style;
+    const s = c.el.style;
     s.transform = s.webkitTransform = `translate(${dx}px,${dy}px)`;
     s.transitionDuration = "0s";
-    return c2;
+    return c;
   }
 }
 function hasCSSTransform(el, root, moveClass) {
@@ -9891,10 +9891,10 @@ function hasCSSTransform(el, root, moveClass) {
   const _vtc = el[vtcKey];
   if (_vtc) {
     _vtc.forEach((cls) => {
-      cls.split(/\s+/).forEach((c2) => c2 && clone.classList.remove(c2));
+      cls.split(/\s+/).forEach((c) => c && clone.classList.remove(c));
     });
   }
-  moveClass.split(/\s+/).forEach((c2) => c2 && clone.classList.add(c2));
+  moveClass.split(/\s+/).forEach((c) => c && clone.classList.add(c));
   clone.style.display = "none";
   const container = root.nodeType === 1 ? root : root.parentNode;
   container.appendChild(clone);
@@ -9904,7 +9904,7 @@ function hasCSSTransform(el, root, moveClass) {
 }
 const getModelAssigner = (vnode) => {
   const fn = vnode.props["onUpdate:modelValue"] || false;
-  return isArray$1(fn) ? (value) => invokeArrayFns(fn, value) : fn;
+  return isArray(fn) ? (value) => invokeArrayFns(fn, value) : fn;
 };
 function onCompositionStart(e) {
   e.target.composing = true;
@@ -9969,14 +9969,14 @@ const vModelText = {
 const vModelCheckbox = {
   // #4096 array checkboxes need to be deep traversed
   deep: true,
-  created(el, _2, vnode) {
+  created(el, _, vnode) {
     el[assignKey] = getModelAssigner(vnode);
     addEventListener(el, "change", () => {
       const modelValue = el._modelValue;
       const elementValue = getValue(el);
       const checked = el.checked;
       const assign = el[assignKey];
-      if (isArray$1(modelValue)) {
+      if (isArray(modelValue)) {
         const index = looseIndexOf(modelValue, elementValue);
         const found = index !== -1;
         if (checked && !found) {
@@ -10009,7 +10009,7 @@ const vModelCheckbox = {
 function setChecked(el, { value, oldValue }, vnode) {
   el._modelValue = value;
   let checked;
-  if (isArray$1(value)) {
+  if (isArray(value)) {
     checked = looseIndexOf(value, vnode.props.value) > -1;
   } else if (isSet(value)) {
     checked = value.has(vnode.props.value);
@@ -10071,18 +10071,18 @@ const vModelSelect = {
 };
 function setSelected(el, value) {
   const isMultiple = el.multiple;
-  const isArrayValue = isArray$1(value);
+  const isArrayValue = isArray(value);
   if (isMultiple && !isArrayValue && !isSet(value)) {
     return;
   }
-  for (let i2 = 0, l2 = el.options.length; i2 < l2; i2++) {
-    const option = el.options[i2];
+  for (let i = 0, l = el.options.length; i < l; i++) {
+    const option = el.options[i];
     const optionValue = getValue(option);
     if (isMultiple) {
       if (isArrayValue) {
         const optionType = typeof optionValue;
         if (optionType === "string" || optionType === "number") {
-          option.selected = value.some((v2) => String(v2) === String(optionValue));
+          option.selected = value.some((v) => String(v) === String(optionValue));
         } else {
           option.selected = looseIndexOf(value, optionValue) > -1;
         }
@@ -10090,7 +10090,7 @@ function setSelected(el, value) {
         option.selected = value.has(optionValue);
       }
     } else if (looseEqual(getValue(option), value)) {
-      if (el.selectedIndex !== i2) el.selectedIndex = i2;
+      if (el.selectedIndex !== i) el.selectedIndex = i;
       return;
     }
   }
@@ -10152,7 +10152,7 @@ function initVModelForSSR() {
     }
   };
   vModelCheckbox.getSSRProps = ({ value }, vnode) => {
-    if (isArray$1(value)) {
+    if (isArray(value)) {
       if (vnode.props && looseIndexOf(value, vnode.props.value) > -1) {
         return { checked: true };
       }
@@ -10196,8 +10196,8 @@ const withModifiers = (fn, modifiers) => {
   const cache = fn._withMods || (fn._withMods = {});
   const cacheKey = modifiers.join(".");
   return cache[cacheKey] || (cache[cacheKey] = (event, ...args) => {
-    for (let i2 = 0; i2 < modifiers.length; i2++) {
-      const guard = modifierGuards[modifiers[i2]];
+    for (let i = 0; i < modifiers.length; i++) {
+      const guard = modifierGuards[modifiers[i]];
       if (guard && guard(event, modifiers)) return;
     }
     return fn(event, ...args);
@@ -10238,7 +10238,7 @@ function ensureHydrationRenderer() {
   enabledHydration = true;
   return renderer;
 }
-const render$1 = (...args) => {
+const render = (...args) => {
   ensureRenderer().render(...args);
 };
 const hydrate = (...args) => {
@@ -10298,7090 +10298,6 @@ const initDirectivesForSSR = () => {
     ssrDirectiveInitialized = true;
     initVModelForSSR();
     initVShowForSSR();
-  }
-};
-function renderSlotFragments(children) {
-  if (!children)
-    return [];
-  return children.flatMap((child) => {
-    if (child.type === Fragment)
-      return renderSlotFragments(child.children);
-    return [child];
-  });
-}
-const Slot = /* @__PURE__ */ defineComponent({
-  name: "PrimitiveSlot",
-  inheritAttrs: false,
-  setup(_2, { attrs, slots }) {
-    return () => {
-      if (!slots.default)
-        return null;
-      const children = renderSlotFragments(slots.default());
-      const firstNonCommentChildrenIndex = children.findIndex((child) => child.type !== Comment);
-      if (firstNonCommentChildrenIndex === -1)
-        return children;
-      const firstNonCommentChildren = children[firstNonCommentChildrenIndex];
-      delete firstNonCommentChildren.props?.ref;
-      const mergedProps = firstNonCommentChildren.props ? mergeProps(attrs, firstNonCommentChildren.props) : attrs;
-      const cloned = cloneVNode({ ...firstNonCommentChildren, props: {} }, mergedProps);
-      if (children.length === 1)
-        return cloned;
-      children[firstNonCommentChildrenIndex] = cloned;
-      return children;
-    };
-  }
-});
-const SELF_CLOSING_TAGS = ["area", "img", "input"];
-const Primitive = /* @__PURE__ */ defineComponent({
-  name: "Primitive",
-  inheritAttrs: false,
-  props: {
-    asChild: {
-      type: Boolean,
-      default: false
-    },
-    as: {
-      type: [String, Object],
-      default: "div"
-    }
-  },
-  setup(props, { attrs, slots }) {
-    const asTag = props.asChild ? "template" : props.as;
-    if (typeof asTag === "string" && SELF_CLOSING_TAGS.includes(asTag))
-      return () => h(asTag, attrs);
-    if (asTag !== "template")
-      return () => h(props.as, attrs, { default: slots.default });
-    return () => h(Slot, attrs, { default: slots.default });
-  }
-});
-function computedEager(fn, options) {
-  var _a;
-  const result = shallowRef();
-  watchEffect(() => {
-    result.value = fn();
-  }, {
-    ...options,
-    flush: (_a = void 0) != null ? _a : "sync"
-  });
-  return readonly(result);
-}
-function tryOnScopeDispose$1(fn) {
-  if (getCurrentScope()) {
-    onScopeDispose(fn);
-    return true;
-  }
-  return false;
-}
-function createGlobalState(stateFactory) {
-  let initialized = false;
-  let state2;
-  const scope = effectScope(true);
-  return (...args) => {
-    if (!initialized) {
-      state2 = scope.run(() => stateFactory(...args));
-      initialized = true;
-    }
-    return state2;
-  };
-}
-function createSharedComposable$1(composable) {
-  let subscribers = 0;
-  let state2;
-  let scope;
-  const dispose = () => {
-    subscribers -= 1;
-    if (scope && subscribers <= 0) {
-      scope.stop();
-      state2 = void 0;
-      scope = void 0;
-    }
-  };
-  return (...args) => {
-    subscribers += 1;
-    if (!scope) {
-      scope = effectScope(true);
-      state2 = scope.run(() => composable(...args));
-    }
-    tryOnScopeDispose$1(dispose);
-    return state2;
-  };
-}
-const isClient = typeof window !== "undefined" && typeof document !== "undefined";
-typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
-const isDef = (val) => typeof val !== "undefined";
-const toString = Object.prototype.toString;
-const isObject = (val) => toString.call(val) === "[object Object]";
-const noop$2 = () => {
-};
-const isIOS = /* @__PURE__ */ getIsIOS();
-function getIsIOS() {
-  var _a, _b;
-  return isClient && ((_a = window == null ? void 0 : window.navigator) == null ? void 0 : _a.userAgent) && (/iP(?:ad|hone|od)/.test(window.navigator.userAgent) || ((_b = window == null ? void 0 : window.navigator) == null ? void 0 : _b.maxTouchPoints) > 2 && /iPad|Macintosh/.test(window == null ? void 0 : window.navigator.userAgent));
-}
-function getLifeCycleTarget(target) {
-  return getCurrentInstance();
-}
-function toArray(value) {
-  return Array.isArray(value) ? value : [value];
-}
-function refAutoReset(defaultValue, afterMs = 1e4) {
-  return customRef((track2, trigger2) => {
-    let value = toValue$1(defaultValue);
-    let timer;
-    const resetAfter = () => setTimeout(() => {
-      value = toValue$1(defaultValue);
-      trigger2();
-    }, toValue$1(afterMs));
-    tryOnScopeDispose$1(() => {
-      clearTimeout(timer);
-    });
-    return {
-      get() {
-        track2();
-        return value;
-      },
-      set(newValue) {
-        value = newValue;
-        trigger2();
-        clearTimeout(timer);
-        timer = resetAfter();
-      }
-    };
-  });
-}
-function tryOnBeforeUnmount(fn, target) {
-  const instance = getLifeCycleTarget();
-  if (instance)
-    onBeforeUnmount(fn, target);
-}
-function useTimeoutFn(cb, interval, options = {}) {
-  const {
-    immediate = true,
-    immediateCallback = false
-  } = options;
-  const isPending = shallowRef(false);
-  let timer = null;
-  function clear() {
-    if (timer) {
-      clearTimeout(timer);
-      timer = null;
-    }
-  }
-  function stop2() {
-    isPending.value = false;
-    clear();
-  }
-  function start(...args) {
-    if (immediateCallback)
-      cb();
-    clear();
-    isPending.value = true;
-    timer = setTimeout(() => {
-      isPending.value = false;
-      timer = null;
-      cb(...args);
-    }, toValue$1(interval));
-  }
-  if (immediate) {
-    isPending.value = true;
-    if (isClient)
-      start();
-  }
-  tryOnScopeDispose$1(stop2);
-  return {
-    isPending: readonly(isPending),
-    start,
-    stop: stop2
-  };
-}
-function useTimeout(interval = 1e3, options = {}) {
-  const {
-    controls: exposeControls = false,
-    callback
-  } = options;
-  const controls = useTimeoutFn(
-    callback != null ? callback : noop$2,
-    interval,
-    options
-  );
-  const ready = computed(() => !controls.isPending.value);
-  if (exposeControls) {
-    return {
-      ready,
-      ...controls
-    };
-  } else {
-    return ready;
-  }
-}
-function watchImmediate(source, cb, options) {
-  return watch(
-    source,
-    cb,
-    {
-      ...options,
-      immediate: true
-    }
-  );
-}
-const defaultWindow = isClient ? window : void 0;
-function unrefElement(elRef) {
-  var _a;
-  const plain = toValue$1(elRef);
-  return (_a = plain == null ? void 0 : plain.$el) != null ? _a : plain;
-}
-function useEventListener(...args) {
-  const cleanups = [];
-  const cleanup = () => {
-    cleanups.forEach((fn) => fn());
-    cleanups.length = 0;
-  };
-  const register = (el, event, listener, options) => {
-    el.addEventListener(event, listener, options);
-    return () => el.removeEventListener(event, listener, options);
-  };
-  const firstParamTargets = computed(() => {
-    const test = toArray(toValue$1(args[0])).filter((e) => e != null);
-    return test.every((e) => typeof e !== "string") ? test : void 0;
-  });
-  const stopWatch = watchImmediate(
-    () => {
-      var _a, _b;
-      return [
-        (_b = (_a = firstParamTargets.value) == null ? void 0 : _a.map((e) => unrefElement(e))) != null ? _b : [defaultWindow].filter((e) => e != null),
-        toArray(toValue$1(firstParamTargets.value ? args[1] : args[0])),
-        toArray(unref(firstParamTargets.value ? args[2] : args[1])),
-        // @ts-expect-error - TypeScript gets the correct types, but somehow still complains
-        toValue$1(firstParamTargets.value ? args[3] : args[2])
-      ];
-    },
-    ([raw_targets, raw_events, raw_listeners, raw_options]) => {
-      cleanup();
-      if (!(raw_targets == null ? void 0 : raw_targets.length) || !(raw_events == null ? void 0 : raw_events.length) || !(raw_listeners == null ? void 0 : raw_listeners.length))
-        return;
-      const optionsClone = isObject(raw_options) ? { ...raw_options } : raw_options;
-      cleanups.push(
-        ...raw_targets.flatMap(
-          (el) => raw_events.flatMap(
-            (event) => raw_listeners.map((listener) => register(el, event, listener, optionsClone))
-          )
-        )
-      );
-    },
-    { flush: "post" }
-  );
-  const stop2 = () => {
-    stopWatch();
-    cleanup();
-  };
-  tryOnScopeDispose$1(cleanup);
-  return stop2;
-}
-function useMounted() {
-  const isMounted = shallowRef(false);
-  const instance = getCurrentInstance();
-  if (instance) {
-    onMounted(() => {
-      isMounted.value = true;
-    }, instance);
-  }
-  return isMounted;
-}
-function createKeyPredicate(keyFilter) {
-  if (typeof keyFilter === "function")
-    return keyFilter;
-  else if (typeof keyFilter === "string")
-    return (event) => event.key === keyFilter;
-  else if (Array.isArray(keyFilter))
-    return (event) => keyFilter.includes(event.key);
-  return () => true;
-}
-function onKeyStroke(...args) {
-  let key;
-  let handler;
-  let options = {};
-  if (args.length === 3) {
-    key = args[0];
-    handler = args[1];
-    options = args[2];
-  } else if (args.length === 2) {
-    if (typeof args[1] === "object") {
-      key = true;
-      handler = args[0];
-      options = args[1];
-    } else {
-      key = args[0];
-      handler = args[1];
-    }
-  } else {
-    key = true;
-    handler = args[0];
-  }
-  const {
-    target = defaultWindow,
-    eventName = "keydown",
-    passive = false,
-    dedupe = false
-  } = options;
-  const predicate = createKeyPredicate(key);
-  const listener = (e) => {
-    if (e.repeat && toValue$1(dedupe))
-      return;
-    if (predicate(e))
-      handler(e);
-  };
-  return useEventListener(target, eventName, listener, passive);
-}
-function useRafFn(fn, options = {}) {
-  const {
-    immediate = true,
-    fpsLimit = void 0,
-    window: window2 = defaultWindow,
-    once = false
-  } = options;
-  const isActive = shallowRef(false);
-  const intervalLimit = computed(() => {
-    return fpsLimit ? 1e3 / toValue$1(fpsLimit) : null;
-  });
-  let previousFrameTimestamp = 0;
-  let rafId = null;
-  function loop(timestamp2) {
-    if (!isActive.value || !window2)
-      return;
-    if (!previousFrameTimestamp)
-      previousFrameTimestamp = timestamp2;
-    const delta = timestamp2 - previousFrameTimestamp;
-    if (intervalLimit.value && delta < intervalLimit.value) {
-      rafId = window2.requestAnimationFrame(loop);
-      return;
-    }
-    previousFrameTimestamp = timestamp2;
-    fn({ delta, timestamp: timestamp2 });
-    if (once) {
-      isActive.value = false;
-      rafId = null;
-      return;
-    }
-    rafId = window2.requestAnimationFrame(loop);
-  }
-  function resume() {
-    if (!isActive.value && window2) {
-      isActive.value = true;
-      previousFrameTimestamp = 0;
-      rafId = window2.requestAnimationFrame(loop);
-    }
-  }
-  function pause() {
-    isActive.value = false;
-    if (rafId != null && window2) {
-      window2.cancelAnimationFrame(rafId);
-      rafId = null;
-    }
-  }
-  if (immediate)
-    resume();
-  tryOnScopeDispose$1(pause);
-  return {
-    isActive: readonly(isActive),
-    pause,
-    resume
-  };
-}
-function cloneFnJSON(source) {
-  return JSON.parse(JSON.stringify(source));
-}
-function useVModel(props, key, emit2, options = {}) {
-  var _a, _b, _c;
-  const {
-    clone = false,
-    passive = false,
-    eventName,
-    deep = false,
-    defaultValue,
-    shouldEmit
-  } = options;
-  const vm = getCurrentInstance();
-  const _emit = emit2 || (vm == null ? void 0 : vm.emit) || ((_a = vm == null ? void 0 : vm.$emit) == null ? void 0 : _a.bind(vm)) || ((_c = (_b = vm == null ? void 0 : vm.proxy) == null ? void 0 : _b.$emit) == null ? void 0 : _c.bind(vm == null ? void 0 : vm.proxy));
-  let event = eventName;
-  if (!key) {
-    key = "modelValue";
-  }
-  event = event || `update:${key.toString()}`;
-  const cloneFn = (val) => !clone ? val : typeof clone === "function" ? clone(val) : cloneFnJSON(val);
-  const getValue2 = () => isDef(props[key]) ? cloneFn(props[key]) : defaultValue;
-  const triggerEmit = (value) => {
-    if (shouldEmit) {
-      if (shouldEmit(value))
-        _emit(event, value);
-    } else {
-      _emit(event, value);
-    }
-  };
-  if (passive) {
-    const initialValue = getValue2();
-    const proxy = ref(initialValue);
-    let isUpdating = false;
-    watch(
-      () => props[key],
-      (v2) => {
-        if (!isUpdating) {
-          isUpdating = true;
-          proxy.value = cloneFn(v2);
-          nextTick(() => isUpdating = false);
-        }
-      }
-    );
-    watch(
-      proxy,
-      (v2) => {
-        if (!isUpdating && (v2 !== props[key] || deep))
-          triggerEmit(v2);
-      },
-      { deep }
-    );
-    return proxy;
-  } else {
-    return computed({
-      get() {
-        return getValue2();
-      },
-      set(value) {
-        triggerEmit(value);
-      }
-    });
-  }
-}
-function createContext(providerComponentName, contextName) {
-  const symbolDescription = typeof providerComponentName === "string" && !contextName ? `${providerComponentName}Context` : contextName;
-  const injectionKey = Symbol(symbolDescription);
-  const injectContext = (fallback) => {
-    const context = inject(injectionKey, fallback);
-    if (context)
-      return context;
-    if (context === null)
-      return context;
-    throw new Error(
-      `Injection \`${injectionKey.toString()}\` not found. Component must be used within ${Array.isArray(providerComponentName) ? `one of the following components: ${providerComponentName.join(
-        ", "
-      )}` : `\`${providerComponentName}\``}`
-    );
-  };
-  const provideContext = (contextValue) => {
-    provide(injectionKey, contextValue);
-    return contextValue;
-  };
-  return [injectContext, provideContext];
-}
-function serialize(o) {
-  return typeof o == "string" ? `'${o}'` : new c().serialize(o);
-}
-const c = /* @__PURE__ */ function() {
-  class o {
-    #t = /* @__PURE__ */ new Map();
-    compare(t, r) {
-      const e = typeof t, n = typeof r;
-      return e === "string" && n === "string" ? t.localeCompare(r) : e === "number" && n === "number" ? t - r : String.prototype.localeCompare.call(this.serialize(t, true), this.serialize(r, true));
-    }
-    serialize(t, r) {
-      if (t === null) return "null";
-      switch (typeof t) {
-        case "string":
-          return r ? t : `'${t}'`;
-        case "bigint":
-          return `${t}n`;
-        case "object":
-          return this.$object(t);
-        case "function":
-          return this.$function(t);
-      }
-      return String(t);
-    }
-    serializeObject(t) {
-      const r = Object.prototype.toString.call(t);
-      if (r !== "[object Object]") return this.serializeBuiltInType(r.length < 10 ? `unknown:${r}` : r.slice(8, -1), t);
-      const e = t.constructor, n = e === Object || e === void 0 ? "" : e.name;
-      if (n !== "" && globalThis[n] === e) return this.serializeBuiltInType(n, t);
-      if (typeof t.toJSON == "function") {
-        const i2 = t.toJSON();
-        return n + (i2 !== null && typeof i2 == "object" ? this.$object(i2) : `(${this.serialize(i2)})`);
-      }
-      return this.serializeObjectEntries(n, Object.entries(t));
-    }
-    serializeBuiltInType(t, r) {
-      const e = this["$" + t];
-      if (e) return e.call(this, r);
-      if (typeof r?.entries == "function") return this.serializeObjectEntries(t, r.entries());
-      throw new Error(`Cannot serialize ${t}`);
-    }
-    serializeObjectEntries(t, r) {
-      const e = Array.from(r).sort((i2, a2) => this.compare(i2[0], a2[0]));
-      let n = `${t}{`;
-      for (let i2 = 0; i2 < e.length; i2++) {
-        const [a2, l2] = e[i2];
-        n += `${this.serialize(a2, true)}:${this.serialize(l2)}`, i2 < e.length - 1 && (n += ",");
-      }
-      return n + "}";
-    }
-    $object(t) {
-      let r = this.#t.get(t);
-      return r === void 0 && (this.#t.set(t, `#${this.#t.size}`), r = this.serializeObject(t), this.#t.set(t, r)), r;
-    }
-    $function(t) {
-      const r = Function.prototype.toString.call(t);
-      return r.slice(-15) === "[native code] }" ? `${t.name || ""}()[native]` : `${t.name}(${t.length})${r.replace(/\s*\n\s*/g, "")}`;
-    }
-    $Array(t) {
-      let r = "[";
-      for (let e = 0; e < t.length; e++) r += this.serialize(t[e]), e < t.length - 1 && (r += ",");
-      return r + "]";
-    }
-    $Date(t) {
-      try {
-        return `Date(${t.toISOString()})`;
-      } catch {
-        return "Date(null)";
-      }
-    }
-    $ArrayBuffer(t) {
-      return `ArrayBuffer[${new Uint8Array(t).join(",")}]`;
-    }
-    $Set(t) {
-      return `Set${this.$Array(Array.from(t).sort((r, e) => this.compare(r, e)))}`;
-    }
-    $Map(t) {
-      return this.serializeObjectEntries("Map", t.entries());
-    }
-  }
-  for (const s of ["Error", "RegExp", "URL"]) o.prototype["$" + s] = function(t) {
-    return `${s}(${t})`;
-  };
-  for (const s of ["Int8Array", "Uint8Array", "Uint8ClampedArray", "Int16Array", "Uint16Array", "Int32Array", "Uint32Array", "Float32Array", "Float64Array"]) o.prototype["$" + s] = function(t) {
-    return `${s}[${t.join(",")}]`;
-  };
-  for (const s of ["BigInt64Array", "BigUint64Array"]) o.prototype["$" + s] = function(t) {
-    return `${s}[${t.join("n,")}${t.length > 0 ? "n" : ""}]`;
-  };
-  return o;
-}();
-function isEqual(object1, object2) {
-  if (object1 === object2) {
-    return true;
-  }
-  if (serialize(object1) === serialize(object2)) {
-    return true;
-  }
-  return false;
-}
-function isNullish(value) {
-  return value === null || value === void 0;
-}
-function useForwardExpose() {
-  const instance = getCurrentInstance();
-  const currentRef = ref();
-  const currentElement = computed(() => {
-    return ["#text", "#comment"].includes(currentRef.value?.$el.nodeName) ? currentRef.value?.$el.nextElementSibling : unrefElement(currentRef);
-  });
-  const localExpose = Object.assign({}, instance.exposed);
-  const ret = {};
-  for (const key in instance.props) {
-    Object.defineProperty(ret, key, {
-      enumerable: true,
-      configurable: true,
-      get: () => instance.props[key]
-    });
-  }
-  if (Object.keys(localExpose).length > 0) {
-    for (const key in localExpose) {
-      Object.defineProperty(ret, key, {
-        enumerable: true,
-        configurable: true,
-        get: () => localExpose[key]
-      });
-    }
-  }
-  Object.defineProperty(ret, "$el", {
-    enumerable: true,
-    configurable: true,
-    get: () => instance.vnode.el
-  });
-  instance.exposed = ret;
-  function forwardRef(ref2) {
-    currentRef.value = ref2;
-    if (!ref2)
-      return;
-    Object.defineProperty(ret, "$el", {
-      enumerable: true,
-      configurable: true,
-      get: () => ref2 instanceof Element ? ref2 : ref2.$el
-    });
-    instance.exposed = ret;
-  }
-  return { forwardRef, currentRef, currentElement };
-}
-function useEmitAsProps(emit2) {
-  const vm = getCurrentInstance();
-  const events = vm?.type.emits;
-  const result = {};
-  if (!events?.length) {
-    console.warn(
-      `No emitted event found. Please check component: ${vm?.type.__name}`
-    );
-  }
-  events?.forEach((ev) => {
-    result[toHandlerKey(camelize$1(ev))] = (...arg) => emit2(ev, ...arg);
-  });
-  return result;
-}
-function isPlainObject(value) {
-  if (value === null || typeof value !== "object") {
-    return false;
-  }
-  const prototype = Object.getPrototypeOf(value);
-  if (prototype !== null && prototype !== Object.prototype && Object.getPrototypeOf(prototype) !== null) {
-    return false;
-  }
-  if (Symbol.iterator in value) {
-    return false;
-  }
-  if (Symbol.toStringTag in value) {
-    return Object.prototype.toString.call(value) === "[object Module]";
-  }
-  return true;
-}
-function _defu(baseObject, defaults, namespace = ".", merger) {
-  if (!isPlainObject(defaults)) {
-    return _defu(baseObject, {}, namespace, merger);
-  }
-  const object = Object.assign({}, defaults);
-  for (const key in baseObject) {
-    if (key === "__proto__" || key === "constructor") {
-      continue;
-    }
-    const value = baseObject[key];
-    if (value === null || value === void 0) {
-      continue;
-    }
-    if (merger && merger(object, key, value, namespace)) {
-      continue;
-    }
-    if (Array.isArray(value) && Array.isArray(object[key])) {
-      object[key] = [...value, ...object[key]];
-    } else if (isPlainObject(value) && isPlainObject(object[key])) {
-      object[key] = _defu(
-        value,
-        object[key],
-        (namespace ? `${namespace}.` : "") + key.toString(),
-        merger
-      );
-    } else {
-      object[key] = value;
-    }
-  }
-  return object;
-}
-function createDefu(merger) {
-  return (...arguments_) => (
-    // eslint-disable-next-line unicorn/no-array-reduce
-    arguments_.reduce((p2, c2) => _defu(p2, c2, "", merger), {})
-  );
-}
-const defu = createDefu();
-function useForwardProps(props) {
-  const vm = getCurrentInstance();
-  const defaultProps = Object.keys(vm?.type.props ?? {}).reduce((prev, curr) => {
-    const defaultValue = (vm?.type.props[curr]).default;
-    if (defaultValue !== void 0)
-      prev[curr] = defaultValue;
-    return prev;
-  }, {});
-  const refProps = toRef$1(props);
-  return computed(() => {
-    const preservedProps = {};
-    const assignedProps = vm?.vnode.props ?? {};
-    Object.keys(assignedProps).forEach((key) => {
-      preservedProps[camelize$1(key)] = assignedProps[key];
-    });
-    return Object.keys({ ...defaultProps, ...preservedProps }).reduce((prev, curr) => {
-      if (refProps.value[curr] !== void 0)
-        prev[curr] = refProps.value[curr];
-      return prev;
-    }, {});
-  });
-}
-function useForwardPropsEmits(props, emit2) {
-  const parsedProps = useForwardProps(props);
-  const emitsAsProps = emit2 ? useEmitAsProps(emit2) : {};
-  return computed(() => ({
-    ...parsedProps.value,
-    ...emitsAsProps
-  }));
-}
-function tryOnScopeDispose(fn) {
-  if (getCurrentScope()) {
-    onScopeDispose(fn);
-    return true;
-  }
-  return false;
-}
-// @__NO_SIDE_EFFECTS__
-function createSharedComposable(composable) {
-  let subscribers = 0;
-  let state2;
-  let scope;
-  const dispose = () => {
-    subscribers -= 1;
-    if (scope && subscribers <= 0) {
-      scope.stop();
-      state2 = void 0;
-      scope = void 0;
-    }
-  };
-  return (...args) => {
-    subscribers += 1;
-    if (!scope) {
-      scope = effectScope(true);
-      state2 = scope.run(() => composable(...args));
-    }
-    tryOnScopeDispose(dispose);
-    return state2;
-  };
-}
-// @__NO_SIDE_EFFECTS__
-function makeDestructurable(obj, arr) {
-  if (typeof Symbol !== "undefined") {
-    const clone = { ...obj };
-    Object.defineProperty(clone, Symbol.iterator, {
-      enumerable: false,
-      value() {
-        let index = 0;
-        return {
-          next: () => ({
-            value: arr[index++],
-            done: index > arr.length
-          })
-        };
-      }
-    });
-    return clone;
-  } else {
-    return Object.assign([...arr], obj);
-  }
-}
-function toReactive(objectRef) {
-  if (!isRef(objectRef))
-    return reactive(objectRef);
-  const proxy = new Proxy({}, {
-    get(_2, p2, receiver) {
-      return unref(Reflect.get(objectRef.value, p2, receiver));
-    },
-    set(_2, p2, value) {
-      if (isRef(objectRef.value[p2]) && !isRef(value))
-        objectRef.value[p2].value = value;
-      else
-        objectRef.value[p2] = value;
-      return true;
-    },
-    deleteProperty(_2, p2) {
-      return Reflect.deleteProperty(objectRef.value, p2);
-    },
-    has(_2, p2) {
-      return Reflect.has(objectRef.value, p2);
-    },
-    ownKeys() {
-      return Object.keys(objectRef.value);
-    },
-    getOwnPropertyDescriptor() {
-      return {
-        enumerable: true,
-        configurable: true
-      };
-    }
-  });
-  return reactive(proxy);
-}
-function reactiveComputed(fn) {
-  return toReactive(computed(fn));
-}
-function reactiveOmit(obj, ...keys) {
-  const flatKeys = keys.flat();
-  const predicate = flatKeys[0];
-  return reactiveComputed(() => typeof predicate === "function" ? Object.fromEntries(Object.entries(toRefs(obj)).filter(([k, v2]) => !predicate(toValue$1(v2), k))) : Object.fromEntries(Object.entries(toRefs(obj)).filter((e) => !flatKeys.includes(e[0]))));
-}
-typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
-const noop$1 = () => {
-};
-function toRef(...args) {
-  if (args.length !== 1)
-    return toRef$1(...args);
-  const r = args[0];
-  return typeof r === "function" ? readonly(customRef(() => ({ get: r, set: noop$1 }))) : ref(r);
-}
-function reactivePick(obj, ...keys) {
-  const flatKeys = keys.flat();
-  const predicate = flatKeys[0];
-  return reactiveComputed(() => typeof predicate === "function" ? Object.fromEntries(Object.entries(toRefs(obj)).filter(([k, v2]) => predicate(toValue$1(v2), k))) : Object.fromEntries(flatKeys.map((k) => [k, toRef(obj, k)])));
-}
-function cacheStringFunction(fn) {
-  const cache = /* @__PURE__ */ Object.create(null);
-  return (str) => {
-    const hit = cache[str];
-    return hit || (cache[str] = fn(str));
-  };
-}
-const camelizeRE = /-(\w)/g;
-const camelize = cacheStringFunction((str) => {
-  return str.replace(camelizeRE, (_2, c2) => c2 ? c2.toUpperCase() : "");
-});
-function diff(obj1, obj2) {
-  const h1 = _toHashedObject(obj1);
-  const h2 = _toHashedObject(obj2);
-  return _diff(h1, h2);
-}
-function _diff(h1, h2) {
-  const diffs = [];
-  const allProps = /* @__PURE__ */ new Set([
-    ...Object.keys(h1.props || {}),
-    ...Object.keys(h2.props || {})
-  ]);
-  if (h1.props && h2.props) {
-    for (const prop of allProps) {
-      const p1 = h1.props[prop];
-      const p2 = h2.props[prop];
-      if (p1 && p2) {
-        diffs.push(..._diff(h1.props?.[prop], h2.props?.[prop]));
-      } else if (p1 || p2) {
-        diffs.push(
-          new DiffEntry((p2 || p1).key, p1 ? "removed" : "added", p2, p1)
-        );
-      }
-    }
-  }
-  if (allProps.size === 0 && h1.hash !== h2.hash) {
-    diffs.push(new DiffEntry((h2 || h1).key, "changed", h2, h1));
-  }
-  return diffs;
-}
-function _toHashedObject(obj, key = "") {
-  if (obj && typeof obj !== "object") {
-    return new DiffHashedObject(key, obj, serialize(obj));
-  }
-  const props = {};
-  const hashes = [];
-  for (const _key in obj) {
-    props[_key] = _toHashedObject(obj[_key], key ? `${key}.${_key}` : _key);
-    hashes.push(props[_key].hash);
-  }
-  return new DiffHashedObject(key, obj, `{${hashes.join(":")}}`, props);
-}
-class DiffEntry {
-  constructor(key, type, newValue, oldValue) {
-    this.key = key;
-    this.type = type;
-    this.newValue = newValue;
-    this.oldValue = oldValue;
-  }
-  toString() {
-    return this.toJSON();
-  }
-  toJSON() {
-    switch (this.type) {
-      case "added": {
-        return `Added   \`${this.key}\``;
-      }
-      case "removed": {
-        return `Removed \`${this.key}\``;
-      }
-      case "changed": {
-        return `Changed \`${this.key}\` from \`${this.oldValue?.toString() || "-"}\` to \`${this.newValue.toString()}\``;
-      }
-    }
-  }
-}
-class DiffHashedObject {
-  constructor(key, value, hash, props) {
-    this.key = key;
-    this.value = value;
-    this.hash = hash;
-    this.props = props;
-  }
-  toString() {
-    if (this.props) {
-      return `{${Object.keys(this.props).join(",")}}`;
-    } else {
-      return JSON.stringify(this.value);
-    }
-  }
-  toJSON() {
-    const k = this.key || ".";
-    if (this.props) {
-      return `${k}({${Object.keys(this.props).join(",")}})`;
-    }
-    return `${k}(${this.value})`;
-  }
-}
-function omit(data, keys) {
-  const result = { ...data };
-  for (const key of keys) {
-    delete result[key];
-  }
-  return result;
-}
-function get(object, path, defaultValue) {
-  if (typeof path === "string") {
-    path = path.split(".").map((key) => {
-      const numKey = Number(key);
-      return Number.isNaN(numKey) ? key : numKey;
-    });
-  }
-  let result = object;
-  for (const key of path) {
-    if (result === void 0 || result === null) {
-      return defaultValue;
-    }
-    result = result[key];
-  }
-  return result !== void 0 ? result : defaultValue;
-}
-function isArrayOfArray(item) {
-  return Array.isArray(item[0]);
-}
-function mergeClasses(appConfigClass, propClass) {
-  if (!appConfigClass && !propClass) {
-    return "";
-  }
-  return [
-    ...Array.isArray(appConfigClass) ? appConfigClass : [appConfigClass],
-    propClass
-  ].filter(Boolean);
-}
-function buildTranslator(locale) {
-  return (path, option) => translate(path, option, unref(locale));
-}
-function translate(path, option, locale) {
-  const prop = get(locale, `messages.${path}`, path);
-  return prop.replace(
-    /\{(\w+)\}/g,
-    (_2, key) => `${option?.[key] ?? `{${key}}`}`
-  );
-}
-function buildLocaleContext(locale) {
-  const lang = computed(() => unref(locale).name);
-  const code = computed(() => unref(locale).code);
-  const dir = computed(() => unref(locale).dir);
-  const localeRef = isRef(locale) ? locale : ref(locale);
-  return {
-    lang,
-    code,
-    dir,
-    locale: localeRef,
-    t: buildTranslator(locale)
-  };
-}
-// @__NO_SIDE_EFFECTS__
-function defineLocale(options) {
-  return defu(options, { dir: "ltr" });
-}
-const en = /* @__PURE__ */ defineLocale({
-  name: "English",
-  code: "en",
-  messages: {
-    inputMenu: {
-      noMatch: "No matching data",
-      noData: "No data",
-      create: 'Create "{label}"'
-    },
-    calendar: {
-      prevYear: "Previous year",
-      nextYear: "Next year",
-      prevMonth: "Previous month",
-      nextMonth: "Next month"
-    },
-    inputNumber: {
-      increment: "Increment",
-      decrement: "Decrement"
-    },
-    commandPalette: {
-      placeholder: "Type a command or search...",
-      noMatch: "No matching data",
-      noData: "No data",
-      close: "Close",
-      back: "Back"
-    },
-    selectMenu: {
-      noMatch: "No matching data",
-      noData: "No data",
-      create: 'Create "{label}"',
-      search: "Search..."
-    },
-    toast: {
-      close: "Close"
-    },
-    carousel: {
-      prev: "Prev",
-      next: "Next",
-      dots: "Choose slide to display",
-      goto: "Go to slide {slide}"
-    },
-    modal: {
-      close: "Close"
-    },
-    slideover: {
-      close: "Close"
-    },
-    alert: {
-      close: "Close"
-    },
-    table: {
-      noData: "No data"
-    }
-  }
-});
-const localeContextInjectionKey = Symbol.for("nuxt-ui.locale-context");
-const _useLocale = (localeOverrides) => {
-  const locale = localeOverrides || toRef$1(inject(localeContextInjectionKey, en));
-  return buildLocaleContext(computed(() => locale.value || en));
-};
-const useLocale = /* @__PURE__ */ createSharedComposable(_useLocale);
-function flatHooks(configHooks, hooks = {}, parentName) {
-  for (const key in configHooks) {
-    const subHook = configHooks[key];
-    const name = parentName ? `${parentName}:${key}` : key;
-    if (typeof subHook === "object" && subHook !== null) {
-      flatHooks(subHook, hooks, name);
-    } else if (typeof subHook === "function") {
-      hooks[name] = subHook;
-    }
-  }
-  return hooks;
-}
-const defaultTask = { run: (function_) => function_() };
-const _createTask = () => defaultTask;
-const createTask = typeof console.createTask !== "undefined" ? console.createTask : _createTask;
-function serialTaskCaller(hooks, args) {
-  const name = args.shift();
-  const task = createTask(name);
-  return hooks.reduce(
-    (promise, hookFunction) => promise.then(() => task.run(() => hookFunction(...args))),
-    Promise.resolve()
-  );
-}
-function parallelTaskCaller(hooks, args) {
-  const name = args.shift();
-  const task = createTask(name);
-  return Promise.all(hooks.map((hook) => task.run(() => hook(...args))));
-}
-function callEachWith(callbacks, arg0) {
-  for (const callback of [...callbacks]) {
-    callback(arg0);
-  }
-}
-class Hookable {
-  constructor() {
-    this._hooks = {};
-    this._before = void 0;
-    this._after = void 0;
-    this._deprecatedMessages = void 0;
-    this._deprecatedHooks = {};
-    this.hook = this.hook.bind(this);
-    this.callHook = this.callHook.bind(this);
-    this.callHookWith = this.callHookWith.bind(this);
-  }
-  hook(name, function_, options = {}) {
-    if (!name || typeof function_ !== "function") {
-      return () => {
-      };
-    }
-    const originalName = name;
-    let dep;
-    while (this._deprecatedHooks[name]) {
-      dep = this._deprecatedHooks[name];
-      name = dep.to;
-    }
-    if (dep && !options.allowDeprecated) {
-      let message = dep.message;
-      if (!message) {
-        message = `${originalName} hook has been deprecated` + (dep.to ? `, please use ${dep.to}` : "");
-      }
-      if (!this._deprecatedMessages) {
-        this._deprecatedMessages = /* @__PURE__ */ new Set();
-      }
-      if (!this._deprecatedMessages.has(message)) {
-        console.warn(message);
-        this._deprecatedMessages.add(message);
-      }
-    }
-    if (!function_.name) {
-      try {
-        Object.defineProperty(function_, "name", {
-          get: () => "_" + name.replace(/\W+/g, "_") + "_hook_cb",
-          configurable: true
-        });
-      } catch {
-      }
-    }
-    this._hooks[name] = this._hooks[name] || [];
-    this._hooks[name].push(function_);
-    return () => {
-      if (function_) {
-        this.removeHook(name, function_);
-        function_ = void 0;
-      }
-    };
-  }
-  hookOnce(name, function_) {
-    let _unreg;
-    let _function = (...arguments_) => {
-      if (typeof _unreg === "function") {
-        _unreg();
-      }
-      _unreg = void 0;
-      _function = void 0;
-      return function_(...arguments_);
-    };
-    _unreg = this.hook(name, _function);
-    return _unreg;
-  }
-  removeHook(name, function_) {
-    if (this._hooks[name]) {
-      const index = this._hooks[name].indexOf(function_);
-      if (index !== -1) {
-        this._hooks[name].splice(index, 1);
-      }
-      if (this._hooks[name].length === 0) {
-        delete this._hooks[name];
-      }
-    }
-  }
-  deprecateHook(name, deprecated) {
-    this._deprecatedHooks[name] = typeof deprecated === "string" ? { to: deprecated } : deprecated;
-    const _hooks = this._hooks[name] || [];
-    delete this._hooks[name];
-    for (const hook of _hooks) {
-      this.hook(name, hook);
-    }
-  }
-  deprecateHooks(deprecatedHooks) {
-    Object.assign(this._deprecatedHooks, deprecatedHooks);
-    for (const name in deprecatedHooks) {
-      this.deprecateHook(name, deprecatedHooks[name]);
-    }
-  }
-  addHooks(configHooks) {
-    const hooks = flatHooks(configHooks);
-    const removeFns = Object.keys(hooks).map(
-      (key) => this.hook(key, hooks[key])
-    );
-    return () => {
-      for (const unreg of removeFns.splice(0, removeFns.length)) {
-        unreg();
-      }
-    };
-  }
-  removeHooks(configHooks) {
-    const hooks = flatHooks(configHooks);
-    for (const key in hooks) {
-      this.removeHook(key, hooks[key]);
-    }
-  }
-  removeAllHooks() {
-    for (const key in this._hooks) {
-      delete this._hooks[key];
-    }
-  }
-  callHook(name, ...arguments_) {
-    arguments_.unshift(name);
-    return this.callHookWith(serialTaskCaller, name, ...arguments_);
-  }
-  callHookParallel(name, ...arguments_) {
-    arguments_.unshift(name);
-    return this.callHookWith(parallelTaskCaller, name, ...arguments_);
-  }
-  callHookWith(caller, name, ...arguments_) {
-    const event = this._before || this._after ? { name, args: arguments_, context: {} } : void 0;
-    if (this._before) {
-      callEachWith(this._before, event);
-    }
-    const result = caller(
-      name in this._hooks ? [...this._hooks[name]] : [],
-      arguments_
-    );
-    if (result instanceof Promise) {
-      return result.finally(() => {
-        if (this._after && event) {
-          callEachWith(this._after, event);
-        }
-      });
-    }
-    if (this._after && event) {
-      callEachWith(this._after, event);
-    }
-    return result;
-  }
-  beforeEach(function_) {
-    this._before = this._before || [];
-    this._before.push(function_);
-    return () => {
-      if (this._before !== void 0) {
-        const index = this._before.indexOf(function_);
-        if (index !== -1) {
-          this._before.splice(index, 1);
-        }
-      }
-    };
-  }
-  afterEach(function_) {
-    this._after = this._after || [];
-    this._after.push(function_);
-    return () => {
-      if (this._after !== void 0) {
-        const index = this._after.indexOf(function_);
-        if (index !== -1) {
-          this._after.splice(index, 1);
-        }
-      }
-    };
-  }
-}
-function createHooks() {
-  return new Hookable();
-}
-const appConfig = { "ui": { "colors": { "primary": "green", "secondary": "blue", "success": "green", "info": "blue", "warning": "yellow", "error": "red", "neutral": "slate" }, "icons": { "arrowLeft": "i-lucide-arrow-left", "arrowRight": "i-lucide-arrow-right", "check": "i-lucide-check", "chevronDoubleLeft": "i-lucide-chevrons-left", "chevronDoubleRight": "i-lucide-chevrons-right", "chevronDown": "i-lucide-chevron-down", "chevronLeft": "i-lucide-chevron-left", "chevronRight": "i-lucide-chevron-right", "chevronUp": "i-lucide-chevron-up", "close": "i-lucide-x", "ellipsis": "i-lucide-ellipsis", "external": "i-lucide-arrow-up-right", "file": "i-lucide-file", "folder": "i-lucide-folder", "folderOpen": "i-lucide-folder-open", "loading": "i-lucide-loader-circle", "minus": "i-lucide-minus", "plus": "i-lucide-plus", "search": "i-lucide-search", "upload": "i-lucide-upload" } }, "colorMode": true };
-/*!
-  * vue-router v4.5.1
-  * (c) 2025 Eduardo San Martin Morote
-  * @license MIT
-  */
-const noop = () => {
-};
-const isArray = Array.isArray;
-function isSameRouteRecord(a2, b) {
-  return (a2.aliasOf || a2) === (b.aliasOf || b);
-}
-function isSameRouteLocationParams(a2, b) {
-  if (Object.keys(a2).length !== Object.keys(b).length)
-    return false;
-  for (const key in a2) {
-    if (!isSameRouteLocationParamsValue(a2[key], b[key]))
-      return false;
-  }
-  return true;
-}
-function isSameRouteLocationParamsValue(a2, b) {
-  return isArray(a2) ? isEquivalentArray(a2, b) : isArray(b) ? isEquivalentArray(b, a2) : a2 === b;
-}
-function isEquivalentArray(a2, b) {
-  return isArray(b) ? a2.length === b.length && a2.every((value, i2) => value === b[i2]) : a2.length === 1 && a2[0] === b;
-}
-var NavigationType;
-(function(NavigationType2) {
-  NavigationType2["pop"] = "pop";
-  NavigationType2["push"] = "push";
-})(NavigationType || (NavigationType = {}));
-var NavigationDirection;
-(function(NavigationDirection2) {
-  NavigationDirection2["back"] = "back";
-  NavigationDirection2["forward"] = "forward";
-  NavigationDirection2["unknown"] = "";
-})(NavigationDirection || (NavigationDirection = {}));
-var NavigationFailureType;
-(function(NavigationFailureType2) {
-  NavigationFailureType2[NavigationFailureType2["aborted"] = 4] = "aborted";
-  NavigationFailureType2[NavigationFailureType2["cancelled"] = 8] = "cancelled";
-  NavigationFailureType2[NavigationFailureType2["duplicated"] = 16] = "duplicated";
-})(NavigationFailureType || (NavigationFailureType = {}));
-const routerKey = Symbol("");
-const routeLocationKey = Symbol("");
-function useLink(props) {
-  const router = inject(routerKey);
-  const currentRoute = inject(routeLocationKey);
-  const route = computed(() => {
-    const to = unref(props.to);
-    return router.resolve(to);
-  });
-  const activeRecordIndex = computed(() => {
-    const { matched } = route.value;
-    const { length } = matched;
-    const routeMatched = matched[length - 1];
-    const currentMatched = currentRoute.matched;
-    if (!routeMatched || !currentMatched.length)
-      return -1;
-    const index = currentMatched.findIndex(isSameRouteRecord.bind(null, routeMatched));
-    if (index > -1)
-      return index;
-    const parentRecordPath = getOriginalPath(matched[length - 2]);
-    return (
-      // we are dealing with nested routes
-      length > 1 && // if the parent and matched route have the same path, this link is
-      // referring to the empty child. Or we currently are on a different
-      // child of the same parent
-      getOriginalPath(routeMatched) === parentRecordPath && // avoid comparing the child with its parent
-      currentMatched[currentMatched.length - 1].path !== parentRecordPath ? currentMatched.findIndex(isSameRouteRecord.bind(null, matched[length - 2])) : index
-    );
-  });
-  const isActive = computed(() => activeRecordIndex.value > -1 && includesParams(currentRoute.params, route.value.params));
-  const isExactActive = computed(() => activeRecordIndex.value > -1 && activeRecordIndex.value === currentRoute.matched.length - 1 && isSameRouteLocationParams(currentRoute.params, route.value.params));
-  function navigate(e = {}) {
-    if (guardEvent(e)) {
-      const p2 = router[unref(props.replace) ? "replace" : "push"](
-        unref(props.to)
-        // avoid uncaught errors are they are logged anyway
-      ).catch(noop);
-      if (props.viewTransition && typeof document !== "undefined" && "startViewTransition" in document) {
-        document.startViewTransition(() => p2);
-      }
-      return p2;
-    }
-    return Promise.resolve();
-  }
-  return {
-    route,
-    href: computed(() => route.value.href),
-    isActive,
-    isExactActive,
-    navigate
-  };
-}
-function preferSingleVNode(vnodes) {
-  return vnodes.length === 1 ? vnodes[0] : vnodes;
-}
-const RouterLinkImpl = /* @__PURE__ */ defineComponent({
-  name: "RouterLink",
-  compatConfig: { MODE: 3 },
-  props: {
-    to: {
-      type: [String, Object],
-      required: true
-    },
-    replace: Boolean,
-    activeClass: String,
-    // inactiveClass: String,
-    exactActiveClass: String,
-    custom: Boolean,
-    ariaCurrentValue: {
-      type: String,
-      default: "page"
-    },
-    viewTransition: Boolean
-  },
-  useLink,
-  setup(props, { slots }) {
-    const link = reactive(useLink(props));
-    const { options } = inject(routerKey);
-    const elClass = computed(() => ({
-      [getLinkClass(props.activeClass, options.linkActiveClass, "router-link-active")]: link.isActive,
-      // [getLinkClass(
-      //   props.inactiveClass,
-      //   options.linkInactiveClass,
-      //   'router-link-inactive'
-      // )]: !link.isExactActive,
-      [getLinkClass(props.exactActiveClass, options.linkExactActiveClass, "router-link-exact-active")]: link.isExactActive
-    }));
-    return () => {
-      const children = slots.default && preferSingleVNode(slots.default(link));
-      return props.custom ? children : h("a", {
-        "aria-current": link.isExactActive ? props.ariaCurrentValue : null,
-        href: link.href,
-        // this would override user added attrs but Vue will still add
-        // the listener, so we end up triggering both
-        onClick: link.navigate,
-        class: elClass.value
-      }, children);
-    };
-  }
-});
-const RouterLink = RouterLinkImpl;
-function guardEvent(e) {
-  if (e.metaKey || e.altKey || e.ctrlKey || e.shiftKey)
-    return;
-  if (e.defaultPrevented)
-    return;
-  if (e.button !== void 0 && e.button !== 0)
-    return;
-  if (e.currentTarget && e.currentTarget.getAttribute) {
-    const target = e.currentTarget.getAttribute("target");
-    if (/\b_blank\b/i.test(target))
-      return;
-  }
-  if (e.preventDefault)
-    e.preventDefault();
-  return true;
-}
-function includesParams(outer, inner) {
-  for (const key in inner) {
-    const innerValue = inner[key];
-    const outerValue = outer[key];
-    if (typeof innerValue === "string") {
-      if (innerValue !== outerValue)
-        return false;
-    } else {
-      if (!isArray(outerValue) || outerValue.length !== innerValue.length || innerValue.some((value, i2) => value !== outerValue[i2]))
-        return false;
-    }
-  }
-  return true;
-}
-function getOriginalPath(record) {
-  return record ? record.aliasOf ? record.aliasOf.path : record.path : "";
-}
-const getLinkClass = (propClass, globalClass, defaultClass) => propClass != null ? propClass : globalClass != null ? globalClass : defaultClass;
-function useRoute(_name) {
-  return inject(routeLocationKey);
-}
-const _appConfig = reactive(appConfig);
-const useAppConfig = () => _appConfig;
-const state = {};
-const useState = (key, init) => {
-  if (state[key]) {
-    return state[key];
-  }
-  const value = ref(init());
-  state[key] = value;
-  return value;
-};
-createHooks();
-var l = (e) => typeof e == "boolean" ? `${e}` : e === 0 ? "0" : e, u = (e) => !e || typeof e != "object" || Object.keys(e).length === 0, x$1 = (e, o) => JSON.stringify(e) === JSON.stringify(o);
-function i(e, o) {
-  e.forEach(function(r) {
-    Array.isArray(r) ? i(r, o) : o.push(r);
-  });
-}
-function y(e) {
-  let o = [];
-  return i(e, o), o;
-}
-var a = (...e) => y(e).filter(Boolean), p = (e, o) => {
-  let r = {}, c2 = Object.keys(e), f = Object.keys(o);
-  for (let t of c2) if (f.includes(t)) {
-    let s = e[t], n = o[t];
-    Array.isArray(s) || Array.isArray(n) ? r[t] = a(n, s) : typeof s == "object" && typeof n == "object" ? r[t] = p(s, n) : r[t] = n + " " + s;
-  } else r[t] = e[t];
-  for (let t of f) c2.includes(t) || (r[t] = o[t]);
-  return r;
-}, g = (e) => !e || typeof e != "string" ? e : e.replace(/\s+/g, " ").trim();
-const CLASS_PART_SEPARATOR = "-";
-const createClassGroupUtils = (config) => {
-  const classMap = createClassMap(config);
-  const {
-    conflictingClassGroups,
-    conflictingClassGroupModifiers
-  } = config;
-  const getClassGroupId = (className) => {
-    const classParts = className.split(CLASS_PART_SEPARATOR);
-    if (classParts[0] === "" && classParts.length !== 1) {
-      classParts.shift();
-    }
-    return getGroupRecursive(classParts, classMap) || getGroupIdForArbitraryProperty(className);
-  };
-  const getConflictingClassGroupIds = (classGroupId, hasPostfixModifier) => {
-    const conflicts = conflictingClassGroups[classGroupId] || [];
-    if (hasPostfixModifier && conflictingClassGroupModifiers[classGroupId]) {
-      return [...conflicts, ...conflictingClassGroupModifiers[classGroupId]];
-    }
-    return conflicts;
-  };
-  return {
-    getClassGroupId,
-    getConflictingClassGroupIds
-  };
-};
-const getGroupRecursive = (classParts, classPartObject) => {
-  if (classParts.length === 0) {
-    return classPartObject.classGroupId;
-  }
-  const currentClassPart = classParts[0];
-  const nextClassPartObject = classPartObject.nextPart.get(currentClassPart);
-  const classGroupFromNextClassPart = nextClassPartObject ? getGroupRecursive(classParts.slice(1), nextClassPartObject) : void 0;
-  if (classGroupFromNextClassPart) {
-    return classGroupFromNextClassPart;
-  }
-  if (classPartObject.validators.length === 0) {
-    return void 0;
-  }
-  const classRest = classParts.join(CLASS_PART_SEPARATOR);
-  return classPartObject.validators.find(({
-    validator
-  }) => validator(classRest))?.classGroupId;
-};
-const arbitraryPropertyRegex = /^\[(.+)\]$/;
-const getGroupIdForArbitraryProperty = (className) => {
-  if (arbitraryPropertyRegex.test(className)) {
-    const arbitraryPropertyClassName = arbitraryPropertyRegex.exec(className)[1];
-    const property = arbitraryPropertyClassName?.substring(0, arbitraryPropertyClassName.indexOf(":"));
-    if (property) {
-      return "arbitrary.." + property;
-    }
-  }
-};
-const createClassMap = (config) => {
-  const {
-    theme: theme2,
-    classGroups
-  } = config;
-  const classMap = {
-    nextPart: /* @__PURE__ */ new Map(),
-    validators: []
-  };
-  for (const classGroupId in classGroups) {
-    processClassesRecursively(classGroups[classGroupId], classMap, classGroupId, theme2);
-  }
-  return classMap;
-};
-const processClassesRecursively = (classGroup, classPartObject, classGroupId, theme2) => {
-  classGroup.forEach((classDefinition) => {
-    if (typeof classDefinition === "string") {
-      const classPartObjectToEdit = classDefinition === "" ? classPartObject : getPart(classPartObject, classDefinition);
-      classPartObjectToEdit.classGroupId = classGroupId;
-      return;
-    }
-    if (typeof classDefinition === "function") {
-      if (isThemeGetter(classDefinition)) {
-        processClassesRecursively(classDefinition(theme2), classPartObject, classGroupId, theme2);
-        return;
-      }
-      classPartObject.validators.push({
-        validator: classDefinition,
-        classGroupId
-      });
-      return;
-    }
-    Object.entries(classDefinition).forEach(([key, classGroup2]) => {
-      processClassesRecursively(classGroup2, getPart(classPartObject, key), classGroupId, theme2);
-    });
-  });
-};
-const getPart = (classPartObject, path) => {
-  let currentClassPartObject = classPartObject;
-  path.split(CLASS_PART_SEPARATOR).forEach((pathPart) => {
-    if (!currentClassPartObject.nextPart.has(pathPart)) {
-      currentClassPartObject.nextPart.set(pathPart, {
-        nextPart: /* @__PURE__ */ new Map(),
-        validators: []
-      });
-    }
-    currentClassPartObject = currentClassPartObject.nextPart.get(pathPart);
-  });
-  return currentClassPartObject;
-};
-const isThemeGetter = (func) => func.isThemeGetter;
-const createLruCache = (maxCacheSize) => {
-  if (maxCacheSize < 1) {
-    return {
-      get: () => void 0,
-      set: () => {
-      }
-    };
-  }
-  let cacheSize = 0;
-  let cache = /* @__PURE__ */ new Map();
-  let previousCache = /* @__PURE__ */ new Map();
-  const update = (key, value) => {
-    cache.set(key, value);
-    cacheSize++;
-    if (cacheSize > maxCacheSize) {
-      cacheSize = 0;
-      previousCache = cache;
-      cache = /* @__PURE__ */ new Map();
-    }
-  };
-  return {
-    get(key) {
-      let value = cache.get(key);
-      if (value !== void 0) {
-        return value;
-      }
-      if ((value = previousCache.get(key)) !== void 0) {
-        update(key, value);
-        return value;
-      }
-    },
-    set(key, value) {
-      if (cache.has(key)) {
-        cache.set(key, value);
-      } else {
-        update(key, value);
-      }
-    }
-  };
-};
-const IMPORTANT_MODIFIER = "!";
-const MODIFIER_SEPARATOR = ":";
-const MODIFIER_SEPARATOR_LENGTH = MODIFIER_SEPARATOR.length;
-const createParseClassName = (config) => {
-  const {
-    prefix,
-    experimentalParseClassName
-  } = config;
-  let parseClassName = (className) => {
-    const modifiers = [];
-    let bracketDepth = 0;
-    let parenDepth = 0;
-    let modifierStart = 0;
-    let postfixModifierPosition;
-    for (let index = 0; index < className.length; index++) {
-      let currentCharacter = className[index];
-      if (bracketDepth === 0 && parenDepth === 0) {
-        if (currentCharacter === MODIFIER_SEPARATOR) {
-          modifiers.push(className.slice(modifierStart, index));
-          modifierStart = index + MODIFIER_SEPARATOR_LENGTH;
-          continue;
-        }
-        if (currentCharacter === "/") {
-          postfixModifierPosition = index;
-          continue;
-        }
-      }
-      if (currentCharacter === "[") {
-        bracketDepth++;
-      } else if (currentCharacter === "]") {
-        bracketDepth--;
-      } else if (currentCharacter === "(") {
-        parenDepth++;
-      } else if (currentCharacter === ")") {
-        parenDepth--;
-      }
-    }
-    const baseClassNameWithImportantModifier = modifiers.length === 0 ? className : className.substring(modifierStart);
-    const baseClassName = stripImportantModifier(baseClassNameWithImportantModifier);
-    const hasImportantModifier = baseClassName !== baseClassNameWithImportantModifier;
-    const maybePostfixModifierPosition = postfixModifierPosition && postfixModifierPosition > modifierStart ? postfixModifierPosition - modifierStart : void 0;
-    return {
-      modifiers,
-      hasImportantModifier,
-      baseClassName,
-      maybePostfixModifierPosition
-    };
-  };
-  if (prefix) {
-    const fullPrefix = prefix + MODIFIER_SEPARATOR;
-    const parseClassNameOriginal = parseClassName;
-    parseClassName = (className) => className.startsWith(fullPrefix) ? parseClassNameOriginal(className.substring(fullPrefix.length)) : {
-      isExternal: true,
-      modifiers: [],
-      hasImportantModifier: false,
-      baseClassName: className,
-      maybePostfixModifierPosition: void 0
-    };
-  }
-  if (experimentalParseClassName) {
-    const parseClassNameOriginal = parseClassName;
-    parseClassName = (className) => experimentalParseClassName({
-      className,
-      parseClassName: parseClassNameOriginal
-    });
-  }
-  return parseClassName;
-};
-const stripImportantModifier = (baseClassName) => {
-  if (baseClassName.endsWith(IMPORTANT_MODIFIER)) {
-    return baseClassName.substring(0, baseClassName.length - 1);
-  }
-  if (baseClassName.startsWith(IMPORTANT_MODIFIER)) {
-    return baseClassName.substring(1);
-  }
-  return baseClassName;
-};
-const createSortModifiers = (config) => {
-  const orderSensitiveModifiers = Object.fromEntries(config.orderSensitiveModifiers.map((modifier) => [modifier, true]));
-  const sortModifiers = (modifiers) => {
-    if (modifiers.length <= 1) {
-      return modifiers;
-    }
-    const sortedModifiers = [];
-    let unsortedModifiers = [];
-    modifiers.forEach((modifier) => {
-      const isPositionSensitive = modifier[0] === "[" || orderSensitiveModifiers[modifier];
-      if (isPositionSensitive) {
-        sortedModifiers.push(...unsortedModifiers.sort(), modifier);
-        unsortedModifiers = [];
-      } else {
-        unsortedModifiers.push(modifier);
-      }
-    });
-    sortedModifiers.push(...unsortedModifiers.sort());
-    return sortedModifiers;
-  };
-  return sortModifiers;
-};
-const createConfigUtils = (config) => ({
-  cache: createLruCache(config.cacheSize),
-  parseClassName: createParseClassName(config),
-  sortModifiers: createSortModifiers(config),
-  ...createClassGroupUtils(config)
-});
-const SPLIT_CLASSES_REGEX = /\s+/;
-const mergeClassList = (classList, configUtils) => {
-  const {
-    parseClassName,
-    getClassGroupId,
-    getConflictingClassGroupIds,
-    sortModifiers
-  } = configUtils;
-  const classGroupsInConflict = [];
-  const classNames = classList.trim().split(SPLIT_CLASSES_REGEX);
-  let result = "";
-  for (let index = classNames.length - 1; index >= 0; index -= 1) {
-    const originalClassName = classNames[index];
-    const {
-      isExternal,
-      modifiers,
-      hasImportantModifier,
-      baseClassName,
-      maybePostfixModifierPosition
-    } = parseClassName(originalClassName);
-    if (isExternal) {
-      result = originalClassName + (result.length > 0 ? " " + result : result);
-      continue;
-    }
-    let hasPostfixModifier = !!maybePostfixModifierPosition;
-    let classGroupId = getClassGroupId(hasPostfixModifier ? baseClassName.substring(0, maybePostfixModifierPosition) : baseClassName);
-    if (!classGroupId) {
-      if (!hasPostfixModifier) {
-        result = originalClassName + (result.length > 0 ? " " + result : result);
-        continue;
-      }
-      classGroupId = getClassGroupId(baseClassName);
-      if (!classGroupId) {
-        result = originalClassName + (result.length > 0 ? " " + result : result);
-        continue;
-      }
-      hasPostfixModifier = false;
-    }
-    const variantModifier = sortModifiers(modifiers).join(":");
-    const modifierId = hasImportantModifier ? variantModifier + IMPORTANT_MODIFIER : variantModifier;
-    const classId = modifierId + classGroupId;
-    if (classGroupsInConflict.includes(classId)) {
-      continue;
-    }
-    classGroupsInConflict.push(classId);
-    const conflictGroups = getConflictingClassGroupIds(classGroupId, hasPostfixModifier);
-    for (let i2 = 0; i2 < conflictGroups.length; ++i2) {
-      const group = conflictGroups[i2];
-      classGroupsInConflict.push(modifierId + group);
-    }
-    result = originalClassName + (result.length > 0 ? " " + result : result);
-  }
-  return result;
-};
-function twJoin() {
-  let index = 0;
-  let argument;
-  let resolvedValue;
-  let string = "";
-  while (index < arguments.length) {
-    if (argument = arguments[index++]) {
-      if (resolvedValue = toValue(argument)) {
-        string && (string += " ");
-        string += resolvedValue;
-      }
-    }
-  }
-  return string;
-}
-const toValue = (mix) => {
-  if (typeof mix === "string") {
-    return mix;
-  }
-  let resolvedValue;
-  let string = "";
-  for (let k = 0; k < mix.length; k++) {
-    if (mix[k]) {
-      if (resolvedValue = toValue(mix[k])) {
-        string && (string += " ");
-        string += resolvedValue;
-      }
-    }
-  }
-  return string;
-};
-function createTailwindMerge(createConfigFirst, ...createConfigRest) {
-  let configUtils;
-  let cacheGet;
-  let cacheSet;
-  let functionToCall = initTailwindMerge;
-  function initTailwindMerge(classList) {
-    const config = createConfigRest.reduce((previousConfig, createConfigCurrent) => createConfigCurrent(previousConfig), createConfigFirst());
-    configUtils = createConfigUtils(config);
-    cacheGet = configUtils.cache.get;
-    cacheSet = configUtils.cache.set;
-    functionToCall = tailwindMerge;
-    return tailwindMerge(classList);
-  }
-  function tailwindMerge(classList) {
-    const cachedResult = cacheGet(classList);
-    if (cachedResult) {
-      return cachedResult;
-    }
-    const result = mergeClassList(classList, configUtils);
-    cacheSet(classList, result);
-    return result;
-  }
-  return function callTailwindMerge() {
-    return functionToCall(twJoin.apply(null, arguments));
-  };
-}
-const fromTheme = (key) => {
-  const themeGetter = (theme2) => theme2[key] || [];
-  themeGetter.isThemeGetter = true;
-  return themeGetter;
-};
-const arbitraryValueRegex = /^\[(?:(\w[\w-]*):)?(.+)\]$/i;
-const arbitraryVariableRegex = /^\((?:(\w[\w-]*):)?(.+)\)$/i;
-const fractionRegex = /^\d+\/\d+$/;
-const tshirtUnitRegex = /^(\d+(\.\d+)?)?(xs|sm|md|lg|xl)$/;
-const lengthUnitRegex = /\d+(%|px|r?em|[sdl]?v([hwib]|min|max)|pt|pc|in|cm|mm|cap|ch|ex|r?lh|cq(w|h|i|b|min|max))|\b(calc|min|max|clamp)\(.+\)|^0$/;
-const colorFunctionRegex = /^(rgba?|hsla?|hwb|(ok)?(lab|lch))\(.+\)$/;
-const shadowRegex = /^(inset_)?-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/;
-const imageRegex = /^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/;
-const isFraction = (value) => fractionRegex.test(value);
-const isNumber = (value) => Boolean(value) && !Number.isNaN(Number(value));
-const isInteger = (value) => Boolean(value) && Number.isInteger(Number(value));
-const isPercent = (value) => value.endsWith("%") && isNumber(value.slice(0, -1));
-const isTshirtSize = (value) => tshirtUnitRegex.test(value);
-const isAny = () => true;
-const isLengthOnly = (value) => (
-  // `colorFunctionRegex` check is necessary because color functions can have percentages in them which which would be incorrectly classified as lengths.
-  // For example, `hsl(0 0% 0%)` would be classified as a length without this check.
-  // I could also use lookbehind assertion in `lengthUnitRegex` but that isn't supported widely enough.
-  lengthUnitRegex.test(value) && !colorFunctionRegex.test(value)
-);
-const isNever = () => false;
-const isShadow = (value) => shadowRegex.test(value);
-const isImage = (value) => imageRegex.test(value);
-const isAnyNonArbitrary = (value) => !isArbitraryValue(value) && !isArbitraryVariable(value);
-const isArbitrarySize = (value) => getIsArbitraryValue(value, isLabelSize, isNever);
-const isArbitraryValue = (value) => arbitraryValueRegex.test(value);
-const isArbitraryLength = (value) => getIsArbitraryValue(value, isLabelLength, isLengthOnly);
-const isArbitraryNumber = (value) => getIsArbitraryValue(value, isLabelNumber, isNumber);
-const isArbitraryPosition = (value) => getIsArbitraryValue(value, isLabelPosition, isNever);
-const isArbitraryImage = (value) => getIsArbitraryValue(value, isLabelImage, isImage);
-const isArbitraryShadow = (value) => getIsArbitraryValue(value, isNever, isShadow);
-const isArbitraryVariable = (value) => arbitraryVariableRegex.test(value);
-const isArbitraryVariableLength = (value) => getIsArbitraryVariable(value, isLabelLength);
-const isArbitraryVariableFamilyName = (value) => getIsArbitraryVariable(value, isLabelFamilyName);
-const isArbitraryVariablePosition = (value) => getIsArbitraryVariable(value, isLabelPosition);
-const isArbitraryVariableSize = (value) => getIsArbitraryVariable(value, isLabelSize);
-const isArbitraryVariableImage = (value) => getIsArbitraryVariable(value, isLabelImage);
-const isArbitraryVariableShadow = (value) => getIsArbitraryVariable(value, isLabelShadow, true);
-const getIsArbitraryValue = (value, testLabel, testValue) => {
-  const result = arbitraryValueRegex.exec(value);
-  if (result) {
-    if (result[1]) {
-      return testLabel(result[1]);
-    }
-    return testValue(result[2]);
-  }
-  return false;
-};
-const getIsArbitraryVariable = (value, testLabel, shouldMatchNoLabel = false) => {
-  const result = arbitraryVariableRegex.exec(value);
-  if (result) {
-    if (result[1]) {
-      return testLabel(result[1]);
-    }
-    return shouldMatchNoLabel;
-  }
-  return false;
-};
-const isLabelPosition = (label) => label === "position";
-const imageLabels = /* @__PURE__ */ new Set(["image", "url"]);
-const isLabelImage = (label) => imageLabels.has(label);
-const sizeLabels = /* @__PURE__ */ new Set(["length", "size", "percentage"]);
-const isLabelSize = (label) => sizeLabels.has(label);
-const isLabelLength = (label) => label === "length";
-const isLabelNumber = (label) => label === "number";
-const isLabelFamilyName = (label) => label === "family-name";
-const isLabelShadow = (label) => label === "shadow";
-const getDefaultConfig = () => {
-  const themeColor = fromTheme("color");
-  const themeFont = fromTheme("font");
-  const themeText = fromTheme("text");
-  const themeFontWeight = fromTheme("font-weight");
-  const themeTracking = fromTheme("tracking");
-  const themeLeading = fromTheme("leading");
-  const themeBreakpoint = fromTheme("breakpoint");
-  const themeContainer = fromTheme("container");
-  const themeSpacing = fromTheme("spacing");
-  const themeRadius = fromTheme("radius");
-  const themeShadow = fromTheme("shadow");
-  const themeInsetShadow = fromTheme("inset-shadow");
-  const themeDropShadow = fromTheme("drop-shadow");
-  const themeBlur = fromTheme("blur");
-  const themePerspective = fromTheme("perspective");
-  const themeAspect = fromTheme("aspect");
-  const themeEase = fromTheme("ease");
-  const themeAnimate = fromTheme("animate");
-  const scaleBreak = () => ["auto", "avoid", "all", "avoid-page", "page", "left", "right", "column"];
-  const scalePosition = () => ["bottom", "center", "left", "left-bottom", "left-top", "right", "right-bottom", "right-top", "top"];
-  const scaleOverflow = () => ["auto", "hidden", "clip", "visible", "scroll"];
-  const scaleOverscroll = () => ["auto", "contain", "none"];
-  const scaleUnambiguousSpacing = () => [isArbitraryVariable, isArbitraryValue, themeSpacing];
-  const scaleInset = () => [isFraction, "full", "auto", ...scaleUnambiguousSpacing()];
-  const scaleGridTemplateColsRows = () => [isInteger, "none", "subgrid", isArbitraryVariable, isArbitraryValue];
-  const scaleGridColRowStartAndEnd = () => ["auto", {
-    span: ["full", isInteger, isArbitraryVariable, isArbitraryValue]
-  }, isArbitraryVariable, isArbitraryValue];
-  const scaleGridColRowStartOrEnd = () => [isInteger, "auto", isArbitraryVariable, isArbitraryValue];
-  const scaleGridAutoColsRows = () => ["auto", "min", "max", "fr", isArbitraryVariable, isArbitraryValue];
-  const scaleAlignPrimaryAxis = () => ["start", "end", "center", "between", "around", "evenly", "stretch", "baseline"];
-  const scaleAlignSecondaryAxis = () => ["start", "end", "center", "stretch"];
-  const scaleMargin = () => ["auto", ...scaleUnambiguousSpacing()];
-  const scaleSizing = () => [isFraction, "auto", "full", "dvw", "dvh", "lvw", "lvh", "svw", "svh", "min", "max", "fit", ...scaleUnambiguousSpacing()];
-  const scaleColor = () => [themeColor, isArbitraryVariable, isArbitraryValue];
-  const scaleGradientStopPosition = () => [isPercent, isArbitraryLength];
-  const scaleRadius = () => [
-    // Deprecated since Tailwind CSS v4.0.0
-    "",
-    "none",
-    "full",
-    themeRadius,
-    isArbitraryVariable,
-    isArbitraryValue
-  ];
-  const scaleBorderWidth = () => ["", isNumber, isArbitraryVariableLength, isArbitraryLength];
-  const scaleLineStyle = () => ["solid", "dashed", "dotted", "double"];
-  const scaleBlendMode = () => ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"];
-  const scaleBlur = () => [
-    // Deprecated since Tailwind CSS v4.0.0
-    "",
-    "none",
-    themeBlur,
-    isArbitraryVariable,
-    isArbitraryValue
-  ];
-  const scaleOrigin = () => ["center", "top", "top-right", "right", "bottom-right", "bottom", "bottom-left", "left", "top-left", isArbitraryVariable, isArbitraryValue];
-  const scaleRotate = () => ["none", isNumber, isArbitraryVariable, isArbitraryValue];
-  const scaleScale = () => ["none", isNumber, isArbitraryVariable, isArbitraryValue];
-  const scaleSkew = () => [isNumber, isArbitraryVariable, isArbitraryValue];
-  const scaleTranslate = () => [isFraction, "full", ...scaleUnambiguousSpacing()];
-  return {
-    cacheSize: 500,
-    theme: {
-      animate: ["spin", "ping", "pulse", "bounce"],
-      aspect: ["video"],
-      blur: [isTshirtSize],
-      breakpoint: [isTshirtSize],
-      color: [isAny],
-      container: [isTshirtSize],
-      "drop-shadow": [isTshirtSize],
-      ease: ["in", "out", "in-out"],
-      font: [isAnyNonArbitrary],
-      "font-weight": ["thin", "extralight", "light", "normal", "medium", "semibold", "bold", "extrabold", "black"],
-      "inset-shadow": [isTshirtSize],
-      leading: ["none", "tight", "snug", "normal", "relaxed", "loose"],
-      perspective: ["dramatic", "near", "normal", "midrange", "distant", "none"],
-      radius: [isTshirtSize],
-      shadow: [isTshirtSize],
-      spacing: ["px", isNumber],
-      text: [isTshirtSize],
-      tracking: ["tighter", "tight", "normal", "wide", "wider", "widest"]
-    },
-    classGroups: {
-      // --------------
-      // --- Layout ---
-      // --------------
-      /**
-       * Aspect Ratio
-       * @see https://tailwindcss.com/docs/aspect-ratio
-       */
-      aspect: [{
-        aspect: ["auto", "square", isFraction, isArbitraryValue, isArbitraryVariable, themeAspect]
-      }],
-      /**
-       * Container
-       * @see https://tailwindcss.com/docs/container
-       * @deprecated since Tailwind CSS v4.0.0
-       */
-      container: ["container"],
-      /**
-       * Columns
-       * @see https://tailwindcss.com/docs/columns
-       */
-      columns: [{
-        columns: [isNumber, isArbitraryValue, isArbitraryVariable, themeContainer]
-      }],
-      /**
-       * Break After
-       * @see https://tailwindcss.com/docs/break-after
-       */
-      "break-after": [{
-        "break-after": scaleBreak()
-      }],
-      /**
-       * Break Before
-       * @see https://tailwindcss.com/docs/break-before
-       */
-      "break-before": [{
-        "break-before": scaleBreak()
-      }],
-      /**
-       * Break Inside
-       * @see https://tailwindcss.com/docs/break-inside
-       */
-      "break-inside": [{
-        "break-inside": ["auto", "avoid", "avoid-page", "avoid-column"]
-      }],
-      /**
-       * Box Decoration Break
-       * @see https://tailwindcss.com/docs/box-decoration-break
-       */
-      "box-decoration": [{
-        "box-decoration": ["slice", "clone"]
-      }],
-      /**
-       * Box Sizing
-       * @see https://tailwindcss.com/docs/box-sizing
-       */
-      box: [{
-        box: ["border", "content"]
-      }],
-      /**
-       * Display
-       * @see https://tailwindcss.com/docs/display
-       */
-      display: ["block", "inline-block", "inline", "flex", "inline-flex", "table", "inline-table", "table-caption", "table-cell", "table-column", "table-column-group", "table-footer-group", "table-header-group", "table-row-group", "table-row", "flow-root", "grid", "inline-grid", "contents", "list-item", "hidden"],
-      /**
-       * Screen Reader Only
-       * @see https://tailwindcss.com/docs/display#screen-reader-only
-       */
-      sr: ["sr-only", "not-sr-only"],
-      /**
-       * Floats
-       * @see https://tailwindcss.com/docs/float
-       */
-      float: [{
-        float: ["right", "left", "none", "start", "end"]
-      }],
-      /**
-       * Clear
-       * @see https://tailwindcss.com/docs/clear
-       */
-      clear: [{
-        clear: ["left", "right", "both", "none", "start", "end"]
-      }],
-      /**
-       * Isolation
-       * @see https://tailwindcss.com/docs/isolation
-       */
-      isolation: ["isolate", "isolation-auto"],
-      /**
-       * Object Fit
-       * @see https://tailwindcss.com/docs/object-fit
-       */
-      "object-fit": [{
-        object: ["contain", "cover", "fill", "none", "scale-down"]
-      }],
-      /**
-       * Object Position
-       * @see https://tailwindcss.com/docs/object-position
-       */
-      "object-position": [{
-        object: [...scalePosition(), isArbitraryValue, isArbitraryVariable]
-      }],
-      /**
-       * Overflow
-       * @see https://tailwindcss.com/docs/overflow
-       */
-      overflow: [{
-        overflow: scaleOverflow()
-      }],
-      /**
-       * Overflow X
-       * @see https://tailwindcss.com/docs/overflow
-       */
-      "overflow-x": [{
-        "overflow-x": scaleOverflow()
-      }],
-      /**
-       * Overflow Y
-       * @see https://tailwindcss.com/docs/overflow
-       */
-      "overflow-y": [{
-        "overflow-y": scaleOverflow()
-      }],
-      /**
-       * Overscroll Behavior
-       * @see https://tailwindcss.com/docs/overscroll-behavior
-       */
-      overscroll: [{
-        overscroll: scaleOverscroll()
-      }],
-      /**
-       * Overscroll Behavior X
-       * @see https://tailwindcss.com/docs/overscroll-behavior
-       */
-      "overscroll-x": [{
-        "overscroll-x": scaleOverscroll()
-      }],
-      /**
-       * Overscroll Behavior Y
-       * @see https://tailwindcss.com/docs/overscroll-behavior
-       */
-      "overscroll-y": [{
-        "overscroll-y": scaleOverscroll()
-      }],
-      /**
-       * Position
-       * @see https://tailwindcss.com/docs/position
-       */
-      position: ["static", "fixed", "absolute", "relative", "sticky"],
-      /**
-       * Top / Right / Bottom / Left
-       * @see https://tailwindcss.com/docs/top-right-bottom-left
-       */
-      inset: [{
-        inset: scaleInset()
-      }],
-      /**
-       * Right / Left
-       * @see https://tailwindcss.com/docs/top-right-bottom-left
-       */
-      "inset-x": [{
-        "inset-x": scaleInset()
-      }],
-      /**
-       * Top / Bottom
-       * @see https://tailwindcss.com/docs/top-right-bottom-left
-       */
-      "inset-y": [{
-        "inset-y": scaleInset()
-      }],
-      /**
-       * Start
-       * @see https://tailwindcss.com/docs/top-right-bottom-left
-       */
-      start: [{
-        start: scaleInset()
-      }],
-      /**
-       * End
-       * @see https://tailwindcss.com/docs/top-right-bottom-left
-       */
-      end: [{
-        end: scaleInset()
-      }],
-      /**
-       * Top
-       * @see https://tailwindcss.com/docs/top-right-bottom-left
-       */
-      top: [{
-        top: scaleInset()
-      }],
-      /**
-       * Right
-       * @see https://tailwindcss.com/docs/top-right-bottom-left
-       */
-      right: [{
-        right: scaleInset()
-      }],
-      /**
-       * Bottom
-       * @see https://tailwindcss.com/docs/top-right-bottom-left
-       */
-      bottom: [{
-        bottom: scaleInset()
-      }],
-      /**
-       * Left
-       * @see https://tailwindcss.com/docs/top-right-bottom-left
-       */
-      left: [{
-        left: scaleInset()
-      }],
-      /**
-       * Visibility
-       * @see https://tailwindcss.com/docs/visibility
-       */
-      visibility: ["visible", "invisible", "collapse"],
-      /**
-       * Z-Index
-       * @see https://tailwindcss.com/docs/z-index
-       */
-      z: [{
-        z: [isInteger, "auto", isArbitraryVariable, isArbitraryValue]
-      }],
-      // ------------------------
-      // --- Flexbox and Grid ---
-      // ------------------------
-      /**
-       * Flex Basis
-       * @see https://tailwindcss.com/docs/flex-basis
-       */
-      basis: [{
-        basis: [isFraction, "full", "auto", themeContainer, ...scaleUnambiguousSpacing()]
-      }],
-      /**
-       * Flex Direction
-       * @see https://tailwindcss.com/docs/flex-direction
-       */
-      "flex-direction": [{
-        flex: ["row", "row-reverse", "col", "col-reverse"]
-      }],
-      /**
-       * Flex Wrap
-       * @see https://tailwindcss.com/docs/flex-wrap
-       */
-      "flex-wrap": [{
-        flex: ["nowrap", "wrap", "wrap-reverse"]
-      }],
-      /**
-       * Flex
-       * @see https://tailwindcss.com/docs/flex
-       */
-      flex: [{
-        flex: [isNumber, isFraction, "auto", "initial", "none", isArbitraryValue]
-      }],
-      /**
-       * Flex Grow
-       * @see https://tailwindcss.com/docs/flex-grow
-       */
-      grow: [{
-        grow: ["", isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Flex Shrink
-       * @see https://tailwindcss.com/docs/flex-shrink
-       */
-      shrink: [{
-        shrink: ["", isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Order
-       * @see https://tailwindcss.com/docs/order
-       */
-      order: [{
-        order: [isInteger, "first", "last", "none", isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Grid Template Columns
-       * @see https://tailwindcss.com/docs/grid-template-columns
-       */
-      "grid-cols": [{
-        "grid-cols": scaleGridTemplateColsRows()
-      }],
-      /**
-       * Grid Column Start / End
-       * @see https://tailwindcss.com/docs/grid-column
-       */
-      "col-start-end": [{
-        col: scaleGridColRowStartAndEnd()
-      }],
-      /**
-       * Grid Column Start
-       * @see https://tailwindcss.com/docs/grid-column
-       */
-      "col-start": [{
-        "col-start": scaleGridColRowStartOrEnd()
-      }],
-      /**
-       * Grid Column End
-       * @see https://tailwindcss.com/docs/grid-column
-       */
-      "col-end": [{
-        "col-end": scaleGridColRowStartOrEnd()
-      }],
-      /**
-       * Grid Template Rows
-       * @see https://tailwindcss.com/docs/grid-template-rows
-       */
-      "grid-rows": [{
-        "grid-rows": scaleGridTemplateColsRows()
-      }],
-      /**
-       * Grid Row Start / End
-       * @see https://tailwindcss.com/docs/grid-row
-       */
-      "row-start-end": [{
-        row: scaleGridColRowStartAndEnd()
-      }],
-      /**
-       * Grid Row Start
-       * @see https://tailwindcss.com/docs/grid-row
-       */
-      "row-start": [{
-        "row-start": scaleGridColRowStartOrEnd()
-      }],
-      /**
-       * Grid Row End
-       * @see https://tailwindcss.com/docs/grid-row
-       */
-      "row-end": [{
-        "row-end": scaleGridColRowStartOrEnd()
-      }],
-      /**
-       * Grid Auto Flow
-       * @see https://tailwindcss.com/docs/grid-auto-flow
-       */
-      "grid-flow": [{
-        "grid-flow": ["row", "col", "dense", "row-dense", "col-dense"]
-      }],
-      /**
-       * Grid Auto Columns
-       * @see https://tailwindcss.com/docs/grid-auto-columns
-       */
-      "auto-cols": [{
-        "auto-cols": scaleGridAutoColsRows()
-      }],
-      /**
-       * Grid Auto Rows
-       * @see https://tailwindcss.com/docs/grid-auto-rows
-       */
-      "auto-rows": [{
-        "auto-rows": scaleGridAutoColsRows()
-      }],
-      /**
-       * Gap
-       * @see https://tailwindcss.com/docs/gap
-       */
-      gap: [{
-        gap: scaleUnambiguousSpacing()
-      }],
-      /**
-       * Gap X
-       * @see https://tailwindcss.com/docs/gap
-       */
-      "gap-x": [{
-        "gap-x": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Gap Y
-       * @see https://tailwindcss.com/docs/gap
-       */
-      "gap-y": [{
-        "gap-y": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Justify Content
-       * @see https://tailwindcss.com/docs/justify-content
-       */
-      "justify-content": [{
-        justify: [...scaleAlignPrimaryAxis(), "normal"]
-      }],
-      /**
-       * Justify Items
-       * @see https://tailwindcss.com/docs/justify-items
-       */
-      "justify-items": [{
-        "justify-items": [...scaleAlignSecondaryAxis(), "normal"]
-      }],
-      /**
-       * Justify Self
-       * @see https://tailwindcss.com/docs/justify-self
-       */
-      "justify-self": [{
-        "justify-self": ["auto", ...scaleAlignSecondaryAxis()]
-      }],
-      /**
-       * Align Content
-       * @see https://tailwindcss.com/docs/align-content
-       */
-      "align-content": [{
-        content: ["normal", ...scaleAlignPrimaryAxis()]
-      }],
-      /**
-       * Align Items
-       * @see https://tailwindcss.com/docs/align-items
-       */
-      "align-items": [{
-        items: [...scaleAlignSecondaryAxis(), "baseline"]
-      }],
-      /**
-       * Align Self
-       * @see https://tailwindcss.com/docs/align-self
-       */
-      "align-self": [{
-        self: ["auto", ...scaleAlignSecondaryAxis(), "baseline"]
-      }],
-      /**
-       * Place Content
-       * @see https://tailwindcss.com/docs/place-content
-       */
-      "place-content": [{
-        "place-content": scaleAlignPrimaryAxis()
-      }],
-      /**
-       * Place Items
-       * @see https://tailwindcss.com/docs/place-items
-       */
-      "place-items": [{
-        "place-items": [...scaleAlignSecondaryAxis(), "baseline"]
-      }],
-      /**
-       * Place Self
-       * @see https://tailwindcss.com/docs/place-self
-       */
-      "place-self": [{
-        "place-self": ["auto", ...scaleAlignSecondaryAxis()]
-      }],
-      // Spacing
-      /**
-       * Padding
-       * @see https://tailwindcss.com/docs/padding
-       */
-      p: [{
-        p: scaleUnambiguousSpacing()
-      }],
-      /**
-       * Padding X
-       * @see https://tailwindcss.com/docs/padding
-       */
-      px: [{
-        px: scaleUnambiguousSpacing()
-      }],
-      /**
-       * Padding Y
-       * @see https://tailwindcss.com/docs/padding
-       */
-      py: [{
-        py: scaleUnambiguousSpacing()
-      }],
-      /**
-       * Padding Start
-       * @see https://tailwindcss.com/docs/padding
-       */
-      ps: [{
-        ps: scaleUnambiguousSpacing()
-      }],
-      /**
-       * Padding End
-       * @see https://tailwindcss.com/docs/padding
-       */
-      pe: [{
-        pe: scaleUnambiguousSpacing()
-      }],
-      /**
-       * Padding Top
-       * @see https://tailwindcss.com/docs/padding
-       */
-      pt: [{
-        pt: scaleUnambiguousSpacing()
-      }],
-      /**
-       * Padding Right
-       * @see https://tailwindcss.com/docs/padding
-       */
-      pr: [{
-        pr: scaleUnambiguousSpacing()
-      }],
-      /**
-       * Padding Bottom
-       * @see https://tailwindcss.com/docs/padding
-       */
-      pb: [{
-        pb: scaleUnambiguousSpacing()
-      }],
-      /**
-       * Padding Left
-       * @see https://tailwindcss.com/docs/padding
-       */
-      pl: [{
-        pl: scaleUnambiguousSpacing()
-      }],
-      /**
-       * Margin
-       * @see https://tailwindcss.com/docs/margin
-       */
-      m: [{
-        m: scaleMargin()
-      }],
-      /**
-       * Margin X
-       * @see https://tailwindcss.com/docs/margin
-       */
-      mx: [{
-        mx: scaleMargin()
-      }],
-      /**
-       * Margin Y
-       * @see https://tailwindcss.com/docs/margin
-       */
-      my: [{
-        my: scaleMargin()
-      }],
-      /**
-       * Margin Start
-       * @see https://tailwindcss.com/docs/margin
-       */
-      ms: [{
-        ms: scaleMargin()
-      }],
-      /**
-       * Margin End
-       * @see https://tailwindcss.com/docs/margin
-       */
-      me: [{
-        me: scaleMargin()
-      }],
-      /**
-       * Margin Top
-       * @see https://tailwindcss.com/docs/margin
-       */
-      mt: [{
-        mt: scaleMargin()
-      }],
-      /**
-       * Margin Right
-       * @see https://tailwindcss.com/docs/margin
-       */
-      mr: [{
-        mr: scaleMargin()
-      }],
-      /**
-       * Margin Bottom
-       * @see https://tailwindcss.com/docs/margin
-       */
-      mb: [{
-        mb: scaleMargin()
-      }],
-      /**
-       * Margin Left
-       * @see https://tailwindcss.com/docs/margin
-       */
-      ml: [{
-        ml: scaleMargin()
-      }],
-      /**
-       * Space Between X
-       * @see https://tailwindcss.com/docs/margin#adding-space-between-children
-       */
-      "space-x": [{
-        "space-x": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Space Between X Reverse
-       * @see https://tailwindcss.com/docs/margin#adding-space-between-children
-       */
-      "space-x-reverse": ["space-x-reverse"],
-      /**
-       * Space Between Y
-       * @see https://tailwindcss.com/docs/margin#adding-space-between-children
-       */
-      "space-y": [{
-        "space-y": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Space Between Y Reverse
-       * @see https://tailwindcss.com/docs/margin#adding-space-between-children
-       */
-      "space-y-reverse": ["space-y-reverse"],
-      // --------------
-      // --- Sizing ---
-      // --------------
-      /**
-       * Size
-       * @see https://tailwindcss.com/docs/width#setting-both-width-and-height
-       */
-      size: [{
-        size: scaleSizing()
-      }],
-      /**
-       * Width
-       * @see https://tailwindcss.com/docs/width
-       */
-      w: [{
-        w: [themeContainer, "screen", ...scaleSizing()]
-      }],
-      /**
-       * Min-Width
-       * @see https://tailwindcss.com/docs/min-width
-       */
-      "min-w": [{
-        "min-w": [
-          themeContainer,
-          "screen",
-          /** Deprecated. @see https://github.com/tailwindlabs/tailwindcss.com/issues/2027#issuecomment-2620152757 */
-          "none",
-          ...scaleSizing()
-        ]
-      }],
-      /**
-       * Max-Width
-       * @see https://tailwindcss.com/docs/max-width
-       */
-      "max-w": [{
-        "max-w": [
-          themeContainer,
-          "screen",
-          "none",
-          /** Deprecated since Tailwind CSS v4.0.0. @see https://github.com/tailwindlabs/tailwindcss.com/issues/2027#issuecomment-2620152757 */
-          "prose",
-          /** Deprecated since Tailwind CSS v4.0.0. @see https://github.com/tailwindlabs/tailwindcss.com/issues/2027#issuecomment-2620152757 */
-          {
-            screen: [themeBreakpoint]
-          },
-          ...scaleSizing()
-        ]
-      }],
-      /**
-       * Height
-       * @see https://tailwindcss.com/docs/height
-       */
-      h: [{
-        h: ["screen", ...scaleSizing()]
-      }],
-      /**
-       * Min-Height
-       * @see https://tailwindcss.com/docs/min-height
-       */
-      "min-h": [{
-        "min-h": ["screen", "none", ...scaleSizing()]
-      }],
-      /**
-       * Max-Height
-       * @see https://tailwindcss.com/docs/max-height
-       */
-      "max-h": [{
-        "max-h": ["screen", ...scaleSizing()]
-      }],
-      // ------------------
-      // --- Typography ---
-      // ------------------
-      /**
-       * Font Size
-       * @see https://tailwindcss.com/docs/font-size
-       */
-      "font-size": [{
-        text: ["base", themeText, isArbitraryVariableLength, isArbitraryLength]
-      }],
-      /**
-       * Font Smoothing
-       * @see https://tailwindcss.com/docs/font-smoothing
-       */
-      "font-smoothing": ["antialiased", "subpixel-antialiased"],
-      /**
-       * Font Style
-       * @see https://tailwindcss.com/docs/font-style
-       */
-      "font-style": ["italic", "not-italic"],
-      /**
-       * Font Weight
-       * @see https://tailwindcss.com/docs/font-weight
-       */
-      "font-weight": [{
-        font: [themeFontWeight, isArbitraryVariable, isArbitraryNumber]
-      }],
-      /**
-       * Font Stretch
-       * @see https://tailwindcss.com/docs/font-stretch
-       */
-      "font-stretch": [{
-        "font-stretch": ["ultra-condensed", "extra-condensed", "condensed", "semi-condensed", "normal", "semi-expanded", "expanded", "extra-expanded", "ultra-expanded", isPercent, isArbitraryValue]
-      }],
-      /**
-       * Font Family
-       * @see https://tailwindcss.com/docs/font-family
-       */
-      "font-family": [{
-        font: [isArbitraryVariableFamilyName, isArbitraryValue, themeFont]
-      }],
-      /**
-       * Font Variant Numeric
-       * @see https://tailwindcss.com/docs/font-variant-numeric
-       */
-      "fvn-normal": ["normal-nums"],
-      /**
-       * Font Variant Numeric
-       * @see https://tailwindcss.com/docs/font-variant-numeric
-       */
-      "fvn-ordinal": ["ordinal"],
-      /**
-       * Font Variant Numeric
-       * @see https://tailwindcss.com/docs/font-variant-numeric
-       */
-      "fvn-slashed-zero": ["slashed-zero"],
-      /**
-       * Font Variant Numeric
-       * @see https://tailwindcss.com/docs/font-variant-numeric
-       */
-      "fvn-figure": ["lining-nums", "oldstyle-nums"],
-      /**
-       * Font Variant Numeric
-       * @see https://tailwindcss.com/docs/font-variant-numeric
-       */
-      "fvn-spacing": ["proportional-nums", "tabular-nums"],
-      /**
-       * Font Variant Numeric
-       * @see https://tailwindcss.com/docs/font-variant-numeric
-       */
-      "fvn-fraction": ["diagonal-fractions", "stacked-fractions"],
-      /**
-       * Letter Spacing
-       * @see https://tailwindcss.com/docs/letter-spacing
-       */
-      tracking: [{
-        tracking: [themeTracking, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Line Clamp
-       * @see https://tailwindcss.com/docs/line-clamp
-       */
-      "line-clamp": [{
-        "line-clamp": [isNumber, "none", isArbitraryVariable, isArbitraryNumber]
-      }],
-      /**
-       * Line Height
-       * @see https://tailwindcss.com/docs/line-height
-       */
-      leading: [{
-        leading: [
-          /** Deprecated since Tailwind CSS v4.0.0. @see https://github.com/tailwindlabs/tailwindcss.com/issues/2027#issuecomment-2620152757 */
-          themeLeading,
-          ...scaleUnambiguousSpacing()
-        ]
-      }],
-      /**
-       * List Style Image
-       * @see https://tailwindcss.com/docs/list-style-image
-       */
-      "list-image": [{
-        "list-image": ["none", isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * List Style Position
-       * @see https://tailwindcss.com/docs/list-style-position
-       */
-      "list-style-position": [{
-        list: ["inside", "outside"]
-      }],
-      /**
-       * List Style Type
-       * @see https://tailwindcss.com/docs/list-style-type
-       */
-      "list-style-type": [{
-        list: ["disc", "decimal", "none", isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Text Alignment
-       * @see https://tailwindcss.com/docs/text-align
-       */
-      "text-alignment": [{
-        text: ["left", "center", "right", "justify", "start", "end"]
-      }],
-      /**
-       * Placeholder Color
-       * @deprecated since Tailwind CSS v3.0.0
-       * @see https://v3.tailwindcss.com/docs/placeholder-color
-       */
-      "placeholder-color": [{
-        placeholder: scaleColor()
-      }],
-      /**
-       * Text Color
-       * @see https://tailwindcss.com/docs/text-color
-       */
-      "text-color": [{
-        text: scaleColor()
-      }],
-      /**
-       * Text Decoration
-       * @see https://tailwindcss.com/docs/text-decoration
-       */
-      "text-decoration": ["underline", "overline", "line-through", "no-underline"],
-      /**
-       * Text Decoration Style
-       * @see https://tailwindcss.com/docs/text-decoration-style
-       */
-      "text-decoration-style": [{
-        decoration: [...scaleLineStyle(), "wavy"]
-      }],
-      /**
-       * Text Decoration Thickness
-       * @see https://tailwindcss.com/docs/text-decoration-thickness
-       */
-      "text-decoration-thickness": [{
-        decoration: [isNumber, "from-font", "auto", isArbitraryVariable, isArbitraryLength]
-      }],
-      /**
-       * Text Decoration Color
-       * @see https://tailwindcss.com/docs/text-decoration-color
-       */
-      "text-decoration-color": [{
-        decoration: scaleColor()
-      }],
-      /**
-       * Text Underline Offset
-       * @see https://tailwindcss.com/docs/text-underline-offset
-       */
-      "underline-offset": [{
-        "underline-offset": [isNumber, "auto", isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Text Transform
-       * @see https://tailwindcss.com/docs/text-transform
-       */
-      "text-transform": ["uppercase", "lowercase", "capitalize", "normal-case"],
-      /**
-       * Text Overflow
-       * @see https://tailwindcss.com/docs/text-overflow
-       */
-      "text-overflow": ["truncate", "text-ellipsis", "text-clip"],
-      /**
-       * Text Wrap
-       * @see https://tailwindcss.com/docs/text-wrap
-       */
-      "text-wrap": [{
-        text: ["wrap", "nowrap", "balance", "pretty"]
-      }],
-      /**
-       * Text Indent
-       * @see https://tailwindcss.com/docs/text-indent
-       */
-      indent: [{
-        indent: scaleUnambiguousSpacing()
-      }],
-      /**
-       * Vertical Alignment
-       * @see https://tailwindcss.com/docs/vertical-align
-       */
-      "vertical-align": [{
-        align: ["baseline", "top", "middle", "bottom", "text-top", "text-bottom", "sub", "super", isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Whitespace
-       * @see https://tailwindcss.com/docs/whitespace
-       */
-      whitespace: [{
-        whitespace: ["normal", "nowrap", "pre", "pre-line", "pre-wrap", "break-spaces"]
-      }],
-      /**
-       * Word Break
-       * @see https://tailwindcss.com/docs/word-break
-       */
-      break: [{
-        break: ["normal", "words", "all", "keep"]
-      }],
-      /**
-       * Hyphens
-       * @see https://tailwindcss.com/docs/hyphens
-       */
-      hyphens: [{
-        hyphens: ["none", "manual", "auto"]
-      }],
-      /**
-       * Content
-       * @see https://tailwindcss.com/docs/content
-       */
-      content: [{
-        content: ["none", isArbitraryVariable, isArbitraryValue]
-      }],
-      // -------------------
-      // --- Backgrounds ---
-      // -------------------
-      /**
-       * Background Attachment
-       * @see https://tailwindcss.com/docs/background-attachment
-       */
-      "bg-attachment": [{
-        bg: ["fixed", "local", "scroll"]
-      }],
-      /**
-       * Background Clip
-       * @see https://tailwindcss.com/docs/background-clip
-       */
-      "bg-clip": [{
-        "bg-clip": ["border", "padding", "content", "text"]
-      }],
-      /**
-       * Background Origin
-       * @see https://tailwindcss.com/docs/background-origin
-       */
-      "bg-origin": [{
-        "bg-origin": ["border", "padding", "content"]
-      }],
-      /**
-       * Background Position
-       * @see https://tailwindcss.com/docs/background-position
-       */
-      "bg-position": [{
-        bg: [...scalePosition(), isArbitraryVariablePosition, isArbitraryPosition]
-      }],
-      /**
-       * Background Repeat
-       * @see https://tailwindcss.com/docs/background-repeat
-       */
-      "bg-repeat": [{
-        bg: ["no-repeat", {
-          repeat: ["", "x", "y", "space", "round"]
-        }]
-      }],
-      /**
-       * Background Size
-       * @see https://tailwindcss.com/docs/background-size
-       */
-      "bg-size": [{
-        bg: ["auto", "cover", "contain", isArbitraryVariableSize, isArbitrarySize]
-      }],
-      /**
-       * Background Image
-       * @see https://tailwindcss.com/docs/background-image
-       */
-      "bg-image": [{
-        bg: ["none", {
-          linear: [{
-            to: ["t", "tr", "r", "br", "b", "bl", "l", "tl"]
-          }, isInteger, isArbitraryVariable, isArbitraryValue],
-          radial: ["", isArbitraryVariable, isArbitraryValue],
-          conic: [isInteger, isArbitraryVariable, isArbitraryValue]
-        }, isArbitraryVariableImage, isArbitraryImage]
-      }],
-      /**
-       * Background Color
-       * @see https://tailwindcss.com/docs/background-color
-       */
-      "bg-color": [{
-        bg: scaleColor()
-      }],
-      /**
-       * Gradient Color Stops From Position
-       * @see https://tailwindcss.com/docs/gradient-color-stops
-       */
-      "gradient-from-pos": [{
-        from: scaleGradientStopPosition()
-      }],
-      /**
-       * Gradient Color Stops Via Position
-       * @see https://tailwindcss.com/docs/gradient-color-stops
-       */
-      "gradient-via-pos": [{
-        via: scaleGradientStopPosition()
-      }],
-      /**
-       * Gradient Color Stops To Position
-       * @see https://tailwindcss.com/docs/gradient-color-stops
-       */
-      "gradient-to-pos": [{
-        to: scaleGradientStopPosition()
-      }],
-      /**
-       * Gradient Color Stops From
-       * @see https://tailwindcss.com/docs/gradient-color-stops
-       */
-      "gradient-from": [{
-        from: scaleColor()
-      }],
-      /**
-       * Gradient Color Stops Via
-       * @see https://tailwindcss.com/docs/gradient-color-stops
-       */
-      "gradient-via": [{
-        via: scaleColor()
-      }],
-      /**
-       * Gradient Color Stops To
-       * @see https://tailwindcss.com/docs/gradient-color-stops
-       */
-      "gradient-to": [{
-        to: scaleColor()
-      }],
-      // ---------------
-      // --- Borders ---
-      // ---------------
-      /**
-       * Border Radius
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      rounded: [{
-        rounded: scaleRadius()
-      }],
-      /**
-       * Border Radius Start
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      "rounded-s": [{
-        "rounded-s": scaleRadius()
-      }],
-      /**
-       * Border Radius End
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      "rounded-e": [{
-        "rounded-e": scaleRadius()
-      }],
-      /**
-       * Border Radius Top
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      "rounded-t": [{
-        "rounded-t": scaleRadius()
-      }],
-      /**
-       * Border Radius Right
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      "rounded-r": [{
-        "rounded-r": scaleRadius()
-      }],
-      /**
-       * Border Radius Bottom
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      "rounded-b": [{
-        "rounded-b": scaleRadius()
-      }],
-      /**
-       * Border Radius Left
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      "rounded-l": [{
-        "rounded-l": scaleRadius()
-      }],
-      /**
-       * Border Radius Start Start
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      "rounded-ss": [{
-        "rounded-ss": scaleRadius()
-      }],
-      /**
-       * Border Radius Start End
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      "rounded-se": [{
-        "rounded-se": scaleRadius()
-      }],
-      /**
-       * Border Radius End End
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      "rounded-ee": [{
-        "rounded-ee": scaleRadius()
-      }],
-      /**
-       * Border Radius End Start
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      "rounded-es": [{
-        "rounded-es": scaleRadius()
-      }],
-      /**
-       * Border Radius Top Left
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      "rounded-tl": [{
-        "rounded-tl": scaleRadius()
-      }],
-      /**
-       * Border Radius Top Right
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      "rounded-tr": [{
-        "rounded-tr": scaleRadius()
-      }],
-      /**
-       * Border Radius Bottom Right
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      "rounded-br": [{
-        "rounded-br": scaleRadius()
-      }],
-      /**
-       * Border Radius Bottom Left
-       * @see https://tailwindcss.com/docs/border-radius
-       */
-      "rounded-bl": [{
-        "rounded-bl": scaleRadius()
-      }],
-      /**
-       * Border Width
-       * @see https://tailwindcss.com/docs/border-width
-       */
-      "border-w": [{
-        border: scaleBorderWidth()
-      }],
-      /**
-       * Border Width X
-       * @see https://tailwindcss.com/docs/border-width
-       */
-      "border-w-x": [{
-        "border-x": scaleBorderWidth()
-      }],
-      /**
-       * Border Width Y
-       * @see https://tailwindcss.com/docs/border-width
-       */
-      "border-w-y": [{
-        "border-y": scaleBorderWidth()
-      }],
-      /**
-       * Border Width Start
-       * @see https://tailwindcss.com/docs/border-width
-       */
-      "border-w-s": [{
-        "border-s": scaleBorderWidth()
-      }],
-      /**
-       * Border Width End
-       * @see https://tailwindcss.com/docs/border-width
-       */
-      "border-w-e": [{
-        "border-e": scaleBorderWidth()
-      }],
-      /**
-       * Border Width Top
-       * @see https://tailwindcss.com/docs/border-width
-       */
-      "border-w-t": [{
-        "border-t": scaleBorderWidth()
-      }],
-      /**
-       * Border Width Right
-       * @see https://tailwindcss.com/docs/border-width
-       */
-      "border-w-r": [{
-        "border-r": scaleBorderWidth()
-      }],
-      /**
-       * Border Width Bottom
-       * @see https://tailwindcss.com/docs/border-width
-       */
-      "border-w-b": [{
-        "border-b": scaleBorderWidth()
-      }],
-      /**
-       * Border Width Left
-       * @see https://tailwindcss.com/docs/border-width
-       */
-      "border-w-l": [{
-        "border-l": scaleBorderWidth()
-      }],
-      /**
-       * Divide Width X
-       * @see https://tailwindcss.com/docs/border-width#between-children
-       */
-      "divide-x": [{
-        "divide-x": scaleBorderWidth()
-      }],
-      /**
-       * Divide Width X Reverse
-       * @see https://tailwindcss.com/docs/border-width#between-children
-       */
-      "divide-x-reverse": ["divide-x-reverse"],
-      /**
-       * Divide Width Y
-       * @see https://tailwindcss.com/docs/border-width#between-children
-       */
-      "divide-y": [{
-        "divide-y": scaleBorderWidth()
-      }],
-      /**
-       * Divide Width Y Reverse
-       * @see https://tailwindcss.com/docs/border-width#between-children
-       */
-      "divide-y-reverse": ["divide-y-reverse"],
-      /**
-       * Border Style
-       * @see https://tailwindcss.com/docs/border-style
-       */
-      "border-style": [{
-        border: [...scaleLineStyle(), "hidden", "none"]
-      }],
-      /**
-       * Divide Style
-       * @see https://tailwindcss.com/docs/border-style#setting-the-divider-style
-       */
-      "divide-style": [{
-        divide: [...scaleLineStyle(), "hidden", "none"]
-      }],
-      /**
-       * Border Color
-       * @see https://tailwindcss.com/docs/border-color
-       */
-      "border-color": [{
-        border: scaleColor()
-      }],
-      /**
-       * Border Color X
-       * @see https://tailwindcss.com/docs/border-color
-       */
-      "border-color-x": [{
-        "border-x": scaleColor()
-      }],
-      /**
-       * Border Color Y
-       * @see https://tailwindcss.com/docs/border-color
-       */
-      "border-color-y": [{
-        "border-y": scaleColor()
-      }],
-      /**
-       * Border Color S
-       * @see https://tailwindcss.com/docs/border-color
-       */
-      "border-color-s": [{
-        "border-s": scaleColor()
-      }],
-      /**
-       * Border Color E
-       * @see https://tailwindcss.com/docs/border-color
-       */
-      "border-color-e": [{
-        "border-e": scaleColor()
-      }],
-      /**
-       * Border Color Top
-       * @see https://tailwindcss.com/docs/border-color
-       */
-      "border-color-t": [{
-        "border-t": scaleColor()
-      }],
-      /**
-       * Border Color Right
-       * @see https://tailwindcss.com/docs/border-color
-       */
-      "border-color-r": [{
-        "border-r": scaleColor()
-      }],
-      /**
-       * Border Color Bottom
-       * @see https://tailwindcss.com/docs/border-color
-       */
-      "border-color-b": [{
-        "border-b": scaleColor()
-      }],
-      /**
-       * Border Color Left
-       * @see https://tailwindcss.com/docs/border-color
-       */
-      "border-color-l": [{
-        "border-l": scaleColor()
-      }],
-      /**
-       * Divide Color
-       * @see https://tailwindcss.com/docs/divide-color
-       */
-      "divide-color": [{
-        divide: scaleColor()
-      }],
-      /**
-       * Outline Style
-       * @see https://tailwindcss.com/docs/outline-style
-       */
-      "outline-style": [{
-        outline: [...scaleLineStyle(), "none", "hidden"]
-      }],
-      /**
-       * Outline Offset
-       * @see https://tailwindcss.com/docs/outline-offset
-       */
-      "outline-offset": [{
-        "outline-offset": [isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Outline Width
-       * @see https://tailwindcss.com/docs/outline-width
-       */
-      "outline-w": [{
-        outline: ["", isNumber, isArbitraryVariableLength, isArbitraryLength]
-      }],
-      /**
-       * Outline Color
-       * @see https://tailwindcss.com/docs/outline-color
-       */
-      "outline-color": [{
-        outline: [themeColor]
-      }],
-      // ---------------
-      // --- Effects ---
-      // ---------------
-      /**
-       * Box Shadow
-       * @see https://tailwindcss.com/docs/box-shadow
-       */
-      shadow: [{
-        shadow: [
-          // Deprecated since Tailwind CSS v4.0.0
-          "",
-          "none",
-          themeShadow,
-          isArbitraryVariableShadow,
-          isArbitraryShadow
-        ]
-      }],
-      /**
-       * Box Shadow Color
-       * @see https://tailwindcss.com/docs/box-shadow#setting-the-shadow-color
-       */
-      "shadow-color": [{
-        shadow: scaleColor()
-      }],
-      /**
-       * Inset Box Shadow
-       * @see https://tailwindcss.com/docs/box-shadow#adding-an-inset-shadow
-       */
-      "inset-shadow": [{
-        "inset-shadow": ["none", isArbitraryVariable, isArbitraryValue, themeInsetShadow]
-      }],
-      /**
-       * Inset Box Shadow Color
-       * @see https://tailwindcss.com/docs/box-shadow#setting-the-inset-shadow-color
-       */
-      "inset-shadow-color": [{
-        "inset-shadow": scaleColor()
-      }],
-      /**
-       * Ring Width
-       * @see https://tailwindcss.com/docs/box-shadow#adding-a-ring
-       */
-      "ring-w": [{
-        ring: scaleBorderWidth()
-      }],
-      /**
-       * Ring Width Inset
-       * @see https://v3.tailwindcss.com/docs/ring-width#inset-rings
-       * @deprecated since Tailwind CSS v4.0.0
-       * @see https://github.com/tailwindlabs/tailwindcss/blob/v4.0.0/packages/tailwindcss/src/utilities.ts#L4158
-       */
-      "ring-w-inset": ["ring-inset"],
-      /**
-       * Ring Color
-       * @see https://tailwindcss.com/docs/box-shadow#setting-the-ring-color
-       */
-      "ring-color": [{
-        ring: scaleColor()
-      }],
-      /**
-       * Ring Offset Width
-       * @see https://v3.tailwindcss.com/docs/ring-offset-width
-       * @deprecated since Tailwind CSS v4.0.0
-       * @see https://github.com/tailwindlabs/tailwindcss/blob/v4.0.0/packages/tailwindcss/src/utilities.ts#L4158
-       */
-      "ring-offset-w": [{
-        "ring-offset": [isNumber, isArbitraryLength]
-      }],
-      /**
-       * Ring Offset Color
-       * @see https://v3.tailwindcss.com/docs/ring-offset-color
-       * @deprecated since Tailwind CSS v4.0.0
-       * @see https://github.com/tailwindlabs/tailwindcss/blob/v4.0.0/packages/tailwindcss/src/utilities.ts#L4158
-       */
-      "ring-offset-color": [{
-        "ring-offset": scaleColor()
-      }],
-      /**
-       * Inset Ring Width
-       * @see https://tailwindcss.com/docs/box-shadow#adding-an-inset-ring
-       */
-      "inset-ring-w": [{
-        "inset-ring": scaleBorderWidth()
-      }],
-      /**
-       * Inset Ring Color
-       * @see https://tailwindcss.com/docs/box-shadow#setting-the-inset-ring-color
-       */
-      "inset-ring-color": [{
-        "inset-ring": scaleColor()
-      }],
-      /**
-       * Opacity
-       * @see https://tailwindcss.com/docs/opacity
-       */
-      opacity: [{
-        opacity: [isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Mix Blend Mode
-       * @see https://tailwindcss.com/docs/mix-blend-mode
-       */
-      "mix-blend": [{
-        "mix-blend": [...scaleBlendMode(), "plus-darker", "plus-lighter"]
-      }],
-      /**
-       * Background Blend Mode
-       * @see https://tailwindcss.com/docs/background-blend-mode
-       */
-      "bg-blend": [{
-        "bg-blend": scaleBlendMode()
-      }],
-      // ---------------
-      // --- Filters ---
-      // ---------------
-      /**
-       * Filter
-       * @see https://tailwindcss.com/docs/filter
-       */
-      filter: [{
-        filter: [
-          // Deprecated since Tailwind CSS v3.0.0
-          "",
-          "none",
-          isArbitraryVariable,
-          isArbitraryValue
-        ]
-      }],
-      /**
-       * Blur
-       * @see https://tailwindcss.com/docs/blur
-       */
-      blur: [{
-        blur: scaleBlur()
-      }],
-      /**
-       * Brightness
-       * @see https://tailwindcss.com/docs/brightness
-       */
-      brightness: [{
-        brightness: [isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Contrast
-       * @see https://tailwindcss.com/docs/contrast
-       */
-      contrast: [{
-        contrast: [isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Drop Shadow
-       * @see https://tailwindcss.com/docs/drop-shadow
-       */
-      "drop-shadow": [{
-        "drop-shadow": [
-          // Deprecated since Tailwind CSS v4.0.0
-          "",
-          "none",
-          themeDropShadow,
-          isArbitraryVariable,
-          isArbitraryValue
-        ]
-      }],
-      /**
-       * Grayscale
-       * @see https://tailwindcss.com/docs/grayscale
-       */
-      grayscale: [{
-        grayscale: ["", isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Hue Rotate
-       * @see https://tailwindcss.com/docs/hue-rotate
-       */
-      "hue-rotate": [{
-        "hue-rotate": [isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Invert
-       * @see https://tailwindcss.com/docs/invert
-       */
-      invert: [{
-        invert: ["", isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Saturate
-       * @see https://tailwindcss.com/docs/saturate
-       */
-      saturate: [{
-        saturate: [isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Sepia
-       * @see https://tailwindcss.com/docs/sepia
-       */
-      sepia: [{
-        sepia: ["", isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Backdrop Filter
-       * @see https://tailwindcss.com/docs/backdrop-filter
-       */
-      "backdrop-filter": [{
-        "backdrop-filter": [
-          // Deprecated since Tailwind CSS v3.0.0
-          "",
-          "none",
-          isArbitraryVariable,
-          isArbitraryValue
-        ]
-      }],
-      /**
-       * Backdrop Blur
-       * @see https://tailwindcss.com/docs/backdrop-blur
-       */
-      "backdrop-blur": [{
-        "backdrop-blur": scaleBlur()
-      }],
-      /**
-       * Backdrop Brightness
-       * @see https://tailwindcss.com/docs/backdrop-brightness
-       */
-      "backdrop-brightness": [{
-        "backdrop-brightness": [isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Backdrop Contrast
-       * @see https://tailwindcss.com/docs/backdrop-contrast
-       */
-      "backdrop-contrast": [{
-        "backdrop-contrast": [isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Backdrop Grayscale
-       * @see https://tailwindcss.com/docs/backdrop-grayscale
-       */
-      "backdrop-grayscale": [{
-        "backdrop-grayscale": ["", isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Backdrop Hue Rotate
-       * @see https://tailwindcss.com/docs/backdrop-hue-rotate
-       */
-      "backdrop-hue-rotate": [{
-        "backdrop-hue-rotate": [isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Backdrop Invert
-       * @see https://tailwindcss.com/docs/backdrop-invert
-       */
-      "backdrop-invert": [{
-        "backdrop-invert": ["", isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Backdrop Opacity
-       * @see https://tailwindcss.com/docs/backdrop-opacity
-       */
-      "backdrop-opacity": [{
-        "backdrop-opacity": [isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Backdrop Saturate
-       * @see https://tailwindcss.com/docs/backdrop-saturate
-       */
-      "backdrop-saturate": [{
-        "backdrop-saturate": [isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Backdrop Sepia
-       * @see https://tailwindcss.com/docs/backdrop-sepia
-       */
-      "backdrop-sepia": [{
-        "backdrop-sepia": ["", isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      // --------------
-      // --- Tables ---
-      // --------------
-      /**
-       * Border Collapse
-       * @see https://tailwindcss.com/docs/border-collapse
-       */
-      "border-collapse": [{
-        border: ["collapse", "separate"]
-      }],
-      /**
-       * Border Spacing
-       * @see https://tailwindcss.com/docs/border-spacing
-       */
-      "border-spacing": [{
-        "border-spacing": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Border Spacing X
-       * @see https://tailwindcss.com/docs/border-spacing
-       */
-      "border-spacing-x": [{
-        "border-spacing-x": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Border Spacing Y
-       * @see https://tailwindcss.com/docs/border-spacing
-       */
-      "border-spacing-y": [{
-        "border-spacing-y": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Table Layout
-       * @see https://tailwindcss.com/docs/table-layout
-       */
-      "table-layout": [{
-        table: ["auto", "fixed"]
-      }],
-      /**
-       * Caption Side
-       * @see https://tailwindcss.com/docs/caption-side
-       */
-      caption: [{
-        caption: ["top", "bottom"]
-      }],
-      // ---------------------------------
-      // --- Transitions and Animation ---
-      // ---------------------------------
-      /**
-       * Transition Property
-       * @see https://tailwindcss.com/docs/transition-property
-       */
-      transition: [{
-        transition: ["", "all", "colors", "opacity", "shadow", "transform", "none", isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Transition Behavior
-       * @see https://tailwindcss.com/docs/transition-behavior
-       */
-      "transition-behavior": [{
-        transition: ["normal", "discrete"]
-      }],
-      /**
-       * Transition Duration
-       * @see https://tailwindcss.com/docs/transition-duration
-       */
-      duration: [{
-        duration: [isNumber, "initial", isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Transition Timing Function
-       * @see https://tailwindcss.com/docs/transition-timing-function
-       */
-      ease: [{
-        ease: ["linear", "initial", themeEase, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Transition Delay
-       * @see https://tailwindcss.com/docs/transition-delay
-       */
-      delay: [{
-        delay: [isNumber, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Animation
-       * @see https://tailwindcss.com/docs/animation
-       */
-      animate: [{
-        animate: ["none", themeAnimate, isArbitraryVariable, isArbitraryValue]
-      }],
-      // ------------------
-      // --- Transforms ---
-      // ------------------
-      /**
-       * Backface Visibility
-       * @see https://tailwindcss.com/docs/backface-visibility
-       */
-      backface: [{
-        backface: ["hidden", "visible"]
-      }],
-      /**
-       * Perspective
-       * @see https://tailwindcss.com/docs/perspective
-       */
-      perspective: [{
-        perspective: [themePerspective, isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Perspective Origin
-       * @see https://tailwindcss.com/docs/perspective-origin
-       */
-      "perspective-origin": [{
-        "perspective-origin": scaleOrigin()
-      }],
-      /**
-       * Rotate
-       * @see https://tailwindcss.com/docs/rotate
-       */
-      rotate: [{
-        rotate: scaleRotate()
-      }],
-      /**
-       * Rotate X
-       * @see https://tailwindcss.com/docs/rotate
-       */
-      "rotate-x": [{
-        "rotate-x": scaleRotate()
-      }],
-      /**
-       * Rotate Y
-       * @see https://tailwindcss.com/docs/rotate
-       */
-      "rotate-y": [{
-        "rotate-y": scaleRotate()
-      }],
-      /**
-       * Rotate Z
-       * @see https://tailwindcss.com/docs/rotate
-       */
-      "rotate-z": [{
-        "rotate-z": scaleRotate()
-      }],
-      /**
-       * Scale
-       * @see https://tailwindcss.com/docs/scale
-       */
-      scale: [{
-        scale: scaleScale()
-      }],
-      /**
-       * Scale X
-       * @see https://tailwindcss.com/docs/scale
-       */
-      "scale-x": [{
-        "scale-x": scaleScale()
-      }],
-      /**
-       * Scale Y
-       * @see https://tailwindcss.com/docs/scale
-       */
-      "scale-y": [{
-        "scale-y": scaleScale()
-      }],
-      /**
-       * Scale Z
-       * @see https://tailwindcss.com/docs/scale
-       */
-      "scale-z": [{
-        "scale-z": scaleScale()
-      }],
-      /**
-       * Scale 3D
-       * @see https://tailwindcss.com/docs/scale
-       */
-      "scale-3d": ["scale-3d"],
-      /**
-       * Skew
-       * @see https://tailwindcss.com/docs/skew
-       */
-      skew: [{
-        skew: scaleSkew()
-      }],
-      /**
-       * Skew X
-       * @see https://tailwindcss.com/docs/skew
-       */
-      "skew-x": [{
-        "skew-x": scaleSkew()
-      }],
-      /**
-       * Skew Y
-       * @see https://tailwindcss.com/docs/skew
-       */
-      "skew-y": [{
-        "skew-y": scaleSkew()
-      }],
-      /**
-       * Transform
-       * @see https://tailwindcss.com/docs/transform
-       */
-      transform: [{
-        transform: [isArbitraryVariable, isArbitraryValue, "", "none", "gpu", "cpu"]
-      }],
-      /**
-       * Transform Origin
-       * @see https://tailwindcss.com/docs/transform-origin
-       */
-      "transform-origin": [{
-        origin: scaleOrigin()
-      }],
-      /**
-       * Transform Style
-       * @see https://tailwindcss.com/docs/transform-style
-       */
-      "transform-style": [{
-        transform: ["3d", "flat"]
-      }],
-      /**
-       * Translate
-       * @see https://tailwindcss.com/docs/translate
-       */
-      translate: [{
-        translate: scaleTranslate()
-      }],
-      /**
-       * Translate X
-       * @see https://tailwindcss.com/docs/translate
-       */
-      "translate-x": [{
-        "translate-x": scaleTranslate()
-      }],
-      /**
-       * Translate Y
-       * @see https://tailwindcss.com/docs/translate
-       */
-      "translate-y": [{
-        "translate-y": scaleTranslate()
-      }],
-      /**
-       * Translate Z
-       * @see https://tailwindcss.com/docs/translate
-       */
-      "translate-z": [{
-        "translate-z": scaleTranslate()
-      }],
-      /**
-       * Translate None
-       * @see https://tailwindcss.com/docs/translate
-       */
-      "translate-none": ["translate-none"],
-      // ---------------------
-      // --- Interactivity ---
-      // ---------------------
-      /**
-       * Accent Color
-       * @see https://tailwindcss.com/docs/accent-color
-       */
-      accent: [{
-        accent: scaleColor()
-      }],
-      /**
-       * Appearance
-       * @see https://tailwindcss.com/docs/appearance
-       */
-      appearance: [{
-        appearance: ["none", "auto"]
-      }],
-      /**
-       * Caret Color
-       * @see https://tailwindcss.com/docs/just-in-time-mode#caret-color-utilities
-       */
-      "caret-color": [{
-        caret: scaleColor()
-      }],
-      /**
-       * Color Scheme
-       * @see https://tailwindcss.com/docs/color-scheme
-       */
-      "color-scheme": [{
-        scheme: ["normal", "dark", "light", "light-dark", "only-dark", "only-light"]
-      }],
-      /**
-       * Cursor
-       * @see https://tailwindcss.com/docs/cursor
-       */
-      cursor: [{
-        cursor: ["auto", "default", "pointer", "wait", "text", "move", "help", "not-allowed", "none", "context-menu", "progress", "cell", "crosshair", "vertical-text", "alias", "copy", "no-drop", "grab", "grabbing", "all-scroll", "col-resize", "row-resize", "n-resize", "e-resize", "s-resize", "w-resize", "ne-resize", "nw-resize", "se-resize", "sw-resize", "ew-resize", "ns-resize", "nesw-resize", "nwse-resize", "zoom-in", "zoom-out", isArbitraryVariable, isArbitraryValue]
-      }],
-      /**
-       * Field Sizing
-       * @see https://tailwindcss.com/docs/field-sizing
-       */
-      "field-sizing": [{
-        "field-sizing": ["fixed", "content"]
-      }],
-      /**
-       * Pointer Events
-       * @see https://tailwindcss.com/docs/pointer-events
-       */
-      "pointer-events": [{
-        "pointer-events": ["auto", "none"]
-      }],
-      /**
-       * Resize
-       * @see https://tailwindcss.com/docs/resize
-       */
-      resize: [{
-        resize: ["none", "", "y", "x"]
-      }],
-      /**
-       * Scroll Behavior
-       * @see https://tailwindcss.com/docs/scroll-behavior
-       */
-      "scroll-behavior": [{
-        scroll: ["auto", "smooth"]
-      }],
-      /**
-       * Scroll Margin
-       * @see https://tailwindcss.com/docs/scroll-margin
-       */
-      "scroll-m": [{
-        "scroll-m": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Margin X
-       * @see https://tailwindcss.com/docs/scroll-margin
-       */
-      "scroll-mx": [{
-        "scroll-mx": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Margin Y
-       * @see https://tailwindcss.com/docs/scroll-margin
-       */
-      "scroll-my": [{
-        "scroll-my": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Margin Start
-       * @see https://tailwindcss.com/docs/scroll-margin
-       */
-      "scroll-ms": [{
-        "scroll-ms": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Margin End
-       * @see https://tailwindcss.com/docs/scroll-margin
-       */
-      "scroll-me": [{
-        "scroll-me": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Margin Top
-       * @see https://tailwindcss.com/docs/scroll-margin
-       */
-      "scroll-mt": [{
-        "scroll-mt": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Margin Right
-       * @see https://tailwindcss.com/docs/scroll-margin
-       */
-      "scroll-mr": [{
-        "scroll-mr": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Margin Bottom
-       * @see https://tailwindcss.com/docs/scroll-margin
-       */
-      "scroll-mb": [{
-        "scroll-mb": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Margin Left
-       * @see https://tailwindcss.com/docs/scroll-margin
-       */
-      "scroll-ml": [{
-        "scroll-ml": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Padding
-       * @see https://tailwindcss.com/docs/scroll-padding
-       */
-      "scroll-p": [{
-        "scroll-p": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Padding X
-       * @see https://tailwindcss.com/docs/scroll-padding
-       */
-      "scroll-px": [{
-        "scroll-px": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Padding Y
-       * @see https://tailwindcss.com/docs/scroll-padding
-       */
-      "scroll-py": [{
-        "scroll-py": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Padding Start
-       * @see https://tailwindcss.com/docs/scroll-padding
-       */
-      "scroll-ps": [{
-        "scroll-ps": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Padding End
-       * @see https://tailwindcss.com/docs/scroll-padding
-       */
-      "scroll-pe": [{
-        "scroll-pe": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Padding Top
-       * @see https://tailwindcss.com/docs/scroll-padding
-       */
-      "scroll-pt": [{
-        "scroll-pt": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Padding Right
-       * @see https://tailwindcss.com/docs/scroll-padding
-       */
-      "scroll-pr": [{
-        "scroll-pr": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Padding Bottom
-       * @see https://tailwindcss.com/docs/scroll-padding
-       */
-      "scroll-pb": [{
-        "scroll-pb": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Padding Left
-       * @see https://tailwindcss.com/docs/scroll-padding
-       */
-      "scroll-pl": [{
-        "scroll-pl": scaleUnambiguousSpacing()
-      }],
-      /**
-       * Scroll Snap Align
-       * @see https://tailwindcss.com/docs/scroll-snap-align
-       */
-      "snap-align": [{
-        snap: ["start", "end", "center", "align-none"]
-      }],
-      /**
-       * Scroll Snap Stop
-       * @see https://tailwindcss.com/docs/scroll-snap-stop
-       */
-      "snap-stop": [{
-        snap: ["normal", "always"]
-      }],
-      /**
-       * Scroll Snap Type
-       * @see https://tailwindcss.com/docs/scroll-snap-type
-       */
-      "snap-type": [{
-        snap: ["none", "x", "y", "both"]
-      }],
-      /**
-       * Scroll Snap Type Strictness
-       * @see https://tailwindcss.com/docs/scroll-snap-type
-       */
-      "snap-strictness": [{
-        snap: ["mandatory", "proximity"]
-      }],
-      /**
-       * Touch Action
-       * @see https://tailwindcss.com/docs/touch-action
-       */
-      touch: [{
-        touch: ["auto", "none", "manipulation"]
-      }],
-      /**
-       * Touch Action X
-       * @see https://tailwindcss.com/docs/touch-action
-       */
-      "touch-x": [{
-        "touch-pan": ["x", "left", "right"]
-      }],
-      /**
-       * Touch Action Y
-       * @see https://tailwindcss.com/docs/touch-action
-       */
-      "touch-y": [{
-        "touch-pan": ["y", "up", "down"]
-      }],
-      /**
-       * Touch Action Pinch Zoom
-       * @see https://tailwindcss.com/docs/touch-action
-       */
-      "touch-pz": ["touch-pinch-zoom"],
-      /**
-       * User Select
-       * @see https://tailwindcss.com/docs/user-select
-       */
-      select: [{
-        select: ["none", "text", "all", "auto"]
-      }],
-      /**
-       * Will Change
-       * @see https://tailwindcss.com/docs/will-change
-       */
-      "will-change": [{
-        "will-change": ["auto", "scroll", "contents", "transform", isArbitraryVariable, isArbitraryValue]
-      }],
-      // -----------
-      // --- SVG ---
-      // -----------
-      /**
-       * Fill
-       * @see https://tailwindcss.com/docs/fill
-       */
-      fill: [{
-        fill: ["none", ...scaleColor()]
-      }],
-      /**
-       * Stroke Width
-       * @see https://tailwindcss.com/docs/stroke-width
-       */
-      "stroke-w": [{
-        stroke: [isNumber, isArbitraryVariableLength, isArbitraryLength, isArbitraryNumber]
-      }],
-      /**
-       * Stroke
-       * @see https://tailwindcss.com/docs/stroke
-       */
-      stroke: [{
-        stroke: ["none", ...scaleColor()]
-      }],
-      // ---------------------
-      // --- Accessibility ---
-      // ---------------------
-      /**
-       * Forced Color Adjust
-       * @see https://tailwindcss.com/docs/forced-color-adjust
-       */
-      "forced-color-adjust": [{
-        "forced-color-adjust": ["auto", "none"]
-      }]
-    },
-    conflictingClassGroups: {
-      overflow: ["overflow-x", "overflow-y"],
-      overscroll: ["overscroll-x", "overscroll-y"],
-      inset: ["inset-x", "inset-y", "start", "end", "top", "right", "bottom", "left"],
-      "inset-x": ["right", "left"],
-      "inset-y": ["top", "bottom"],
-      flex: ["basis", "grow", "shrink"],
-      gap: ["gap-x", "gap-y"],
-      p: ["px", "py", "ps", "pe", "pt", "pr", "pb", "pl"],
-      px: ["pr", "pl"],
-      py: ["pt", "pb"],
-      m: ["mx", "my", "ms", "me", "mt", "mr", "mb", "ml"],
-      mx: ["mr", "ml"],
-      my: ["mt", "mb"],
-      size: ["w", "h"],
-      "font-size": ["leading"],
-      "fvn-normal": ["fvn-ordinal", "fvn-slashed-zero", "fvn-figure", "fvn-spacing", "fvn-fraction"],
-      "fvn-ordinal": ["fvn-normal"],
-      "fvn-slashed-zero": ["fvn-normal"],
-      "fvn-figure": ["fvn-normal"],
-      "fvn-spacing": ["fvn-normal"],
-      "fvn-fraction": ["fvn-normal"],
-      "line-clamp": ["display", "overflow"],
-      rounded: ["rounded-s", "rounded-e", "rounded-t", "rounded-r", "rounded-b", "rounded-l", "rounded-ss", "rounded-se", "rounded-ee", "rounded-es", "rounded-tl", "rounded-tr", "rounded-br", "rounded-bl"],
-      "rounded-s": ["rounded-ss", "rounded-es"],
-      "rounded-e": ["rounded-se", "rounded-ee"],
-      "rounded-t": ["rounded-tl", "rounded-tr"],
-      "rounded-r": ["rounded-tr", "rounded-br"],
-      "rounded-b": ["rounded-br", "rounded-bl"],
-      "rounded-l": ["rounded-tl", "rounded-bl"],
-      "border-spacing": ["border-spacing-x", "border-spacing-y"],
-      "border-w": ["border-w-s", "border-w-e", "border-w-t", "border-w-r", "border-w-b", "border-w-l"],
-      "border-w-x": ["border-w-r", "border-w-l"],
-      "border-w-y": ["border-w-t", "border-w-b"],
-      "border-color": ["border-color-s", "border-color-e", "border-color-t", "border-color-r", "border-color-b", "border-color-l"],
-      "border-color-x": ["border-color-r", "border-color-l"],
-      "border-color-y": ["border-color-t", "border-color-b"],
-      translate: ["translate-x", "translate-y", "translate-none"],
-      "translate-none": ["translate", "translate-x", "translate-y", "translate-z"],
-      "scroll-m": ["scroll-mx", "scroll-my", "scroll-ms", "scroll-me", "scroll-mt", "scroll-mr", "scroll-mb", "scroll-ml"],
-      "scroll-mx": ["scroll-mr", "scroll-ml"],
-      "scroll-my": ["scroll-mt", "scroll-mb"],
-      "scroll-p": ["scroll-px", "scroll-py", "scroll-ps", "scroll-pe", "scroll-pt", "scroll-pr", "scroll-pb", "scroll-pl"],
-      "scroll-px": ["scroll-pr", "scroll-pl"],
-      "scroll-py": ["scroll-pt", "scroll-pb"],
-      touch: ["touch-x", "touch-y", "touch-pz"],
-      "touch-x": ["touch"],
-      "touch-y": ["touch"],
-      "touch-pz": ["touch"]
-    },
-    conflictingClassGroupModifiers: {
-      "font-size": ["leading"]
-    },
-    orderSensitiveModifiers: ["before", "after", "placeholder", "file", "marker", "selection", "first-line", "first-letter", "backdrop", "*", "**"]
-  };
-};
-const mergeConfigs = (baseConfig, {
-  cacheSize,
-  prefix,
-  experimentalParseClassName,
-  extend: extend2 = {},
-  override = {}
-}) => {
-  overrideProperty(baseConfig, "cacheSize", cacheSize);
-  overrideProperty(baseConfig, "prefix", prefix);
-  overrideProperty(baseConfig, "experimentalParseClassName", experimentalParseClassName);
-  overrideConfigProperties(baseConfig.theme, override.theme);
-  overrideConfigProperties(baseConfig.classGroups, override.classGroups);
-  overrideConfigProperties(baseConfig.conflictingClassGroups, override.conflictingClassGroups);
-  overrideConfigProperties(baseConfig.conflictingClassGroupModifiers, override.conflictingClassGroupModifiers);
-  overrideProperty(baseConfig, "orderSensitiveModifiers", override.orderSensitiveModifiers);
-  mergeConfigProperties(baseConfig.theme, extend2.theme);
-  mergeConfigProperties(baseConfig.classGroups, extend2.classGroups);
-  mergeConfigProperties(baseConfig.conflictingClassGroups, extend2.conflictingClassGroups);
-  mergeConfigProperties(baseConfig.conflictingClassGroupModifiers, extend2.conflictingClassGroupModifiers);
-  mergeArrayProperties(baseConfig, extend2, "orderSensitiveModifiers");
-  return baseConfig;
-};
-const overrideProperty = (baseObject, overrideKey, overrideValue) => {
-  if (overrideValue !== void 0) {
-    baseObject[overrideKey] = overrideValue;
-  }
-};
-const overrideConfigProperties = (baseObject, overrideObject) => {
-  if (overrideObject) {
-    for (const key in overrideObject) {
-      overrideProperty(baseObject, key, overrideObject[key]);
-    }
-  }
-};
-const mergeConfigProperties = (baseObject, mergeObject) => {
-  if (mergeObject) {
-    for (const key in mergeObject) {
-      mergeArrayProperties(baseObject, mergeObject, key);
-    }
-  }
-};
-const mergeArrayProperties = (baseObject, mergeObject, key) => {
-  const mergeValue = mergeObject[key];
-  if (mergeValue !== void 0) {
-    baseObject[key] = baseObject[key] ? baseObject[key].concat(mergeValue) : mergeValue;
-  }
-};
-const extendTailwindMerge = (configExtension, ...createConfig) => typeof configExtension === "function" ? createTailwindMerge(getDefaultConfig, configExtension, ...createConfig) : createTailwindMerge(() => mergeConfigs(getDefaultConfig(), configExtension), ...createConfig);
-const twMerge = /* @__PURE__ */ createTailwindMerge(getDefaultConfig);
-var ie = { twMerge: true, twMergeConfig: {}, responsiveVariants: false }, x = (s) => s || void 0, N = (...s) => x(y(s).filter(Boolean).join(" ")), R = null, v = {}, q = false, M = (...s) => (b$1) => b$1.twMerge ? ((!R || q) && (q = false, R = u(v) ? twMerge : extendTailwindMerge({ ...v, extend: { theme: v.theme, classGroups: v.classGroups, conflictingClassGroupModifiers: v.conflictingClassGroupModifiers, conflictingClassGroups: v.conflictingClassGroups, ...v.extend } })), x(R(N(s)))) : N(s), _ = (s, b) => {
-  for (let e in b) s.hasOwnProperty(e) ? s[e] = N(s[e], b[e]) : s[e] = b[e];
-  return s;
-}, ce = (s, b$1) => {
-  let { extend: e = null, slots: O = {}, variants: U = {}, compoundVariants: W = [], compoundSlots: C = [], defaultVariants: z = {} } = s, m = { ...ie, ...b$1 }, k = e != null && e.base ? N(e.base, s == null ? void 0 : s.base) : s == null ? void 0 : s.base, g$1 = e != null && e.variants && !u(e.variants) ? p(U, e.variants) : U, w = e != null && e.defaultVariants && !u(e.defaultVariants) ? { ...e.defaultVariants, ...z } : z;
-  !u(m.twMergeConfig) && !x$1(m.twMergeConfig, v) && (q = true, v = m.twMergeConfig);
-  let S = u(e == null ? void 0 : e.slots), T = u(O) ? {} : { base: N(s == null ? void 0 : s.base, S && (e == null ? void 0 : e.base)), ...O }, j = S ? T : _({ ...e == null ? void 0 : e.slots }, u(T) ? { base: s == null ? void 0 : s.base } : T), h$1 = u(e == null ? void 0 : e.compoundVariants) ? W : a(e == null ? void 0 : e.compoundVariants, W), V = (l$1) => {
-    if (u(g$1) && u(O) && S) return M(k, l$1 == null ? void 0 : l$1.class, l$1 == null ? void 0 : l$1.className)(m);
-    if (h$1 && !Array.isArray(h$1)) throw new TypeError(`The "compoundVariants" prop must be an array. Received: ${typeof h$1}`);
-    if (C && !Array.isArray(C)) throw new TypeError(`The "compoundSlots" prop must be an array. Received: ${typeof C}`);
-    let P = (a2, n, t = [], i2) => {
-      let r = t;
-      if (typeof n == "string") r = r.concat(g(n).split(" ").map((o) => `${a2}:${o}`));
-      else if (Array.isArray(n)) r = r.concat(n.reduce((o, c2) => o.concat(`${a2}:${c2}`), []));
-      else if (typeof n == "object" && typeof i2 == "string") {
-        for (let o in n) if (n.hasOwnProperty(o) && o === i2) {
-          let c2 = n[o];
-          if (c2 && typeof c2 == "string") {
-            let u2 = g(c2);
-            r[i2] ? r[i2] = r[i2].concat(u2.split(" ").map((f) => `${a2}:${f}`)) : r[i2] = u2.split(" ").map((f) => `${a2}:${f}`);
-          } else Array.isArray(c2) && c2.length > 0 && (r[i2] = c2.reduce((u2, f) => u2.concat(`${a2}:${f}`), []));
-        }
-      }
-      return r;
-    }, D = (a$1, n = g$1, t = null, i2 = null) => {
-      var L;
-      let r = n[a$1];
-      if (!r || u(r)) return null;
-      let o = (L = i2 == null ? void 0 : i2[a$1]) != null ? L : l$1 == null ? void 0 : l$1[a$1];
-      if (o === null) return null;
-      let c2 = l(o), u$1 = Array.isArray(m.responsiveVariants) && m.responsiveVariants.length > 0 || m.responsiveVariants === true, f = w == null ? void 0 : w[a$1], d = [];
-      if (typeof c2 == "object" && u$1) for (let [E, Q] of Object.entries(c2)) {
-        let ne = r[Q];
-        if (E === "initial") {
-          f = Q;
-          continue;
-        }
-        Array.isArray(m.responsiveVariants) && !m.responsiveVariants.includes(E) || (d = P(E, ne, d, t));
-      }
-      let $ = c2 != null && typeof c2 != "object" ? c2 : l(f), A = r[$ || "false"];
-      return typeof d == "object" && typeof t == "string" && d[t] ? _(d, A) : d.length > 0 ? (d.push(A), t === "base" ? d.join(" ") : d) : A;
-    }, p2 = () => g$1 ? Object.keys(g$1).map((a2) => D(a2, g$1)) : null, ee = (a2, n) => {
-      if (!g$1 || typeof g$1 != "object") return null;
-      let t = new Array();
-      for (let i2 in g$1) {
-        let r = D(i2, g$1, a2, n), o = a2 === "base" && typeof r == "string" ? r : r && r[a2];
-        o && (t[t.length] = o);
-      }
-      return t;
-    }, H = {};
-    for (let a2 in l$1) l$1[a2] !== void 0 && (H[a2] = l$1[a2]);
-    let I = (a2, n) => {
-      var i2;
-      let t = typeof (l$1 == null ? void 0 : l$1[a2]) == "object" ? { [a2]: (i2 = l$1[a2]) == null ? void 0 : i2.initial } : {};
-      return { ...w, ...H, ...t, ...n };
-    }, J = (a2 = [], n) => {
-      let t = [];
-      for (let { class: i2, className: r, ...o } of a2) {
-        let c2 = true;
-        for (let [u2, f] of Object.entries(o)) {
-          let d = I(u2, n)[u2];
-          if (Array.isArray(f)) {
-            if (!f.includes(d)) {
-              c2 = false;
-              break;
-            }
-          } else {
-            let $ = (A) => A == null || A === false;
-            if ($(f) && $(d)) continue;
-            if (d !== f) {
-              c2 = false;
-              break;
-            }
-          }
-        }
-        c2 && (i2 && t.push(i2), r && t.push(r));
-      }
-      return t;
-    }, te = (a2) => {
-      let n = J(h$1, a2);
-      if (!Array.isArray(n)) return n;
-      let t = {};
-      for (let i2 of n) if (typeof i2 == "string" && (t.base = M(t.base, i2)(m)), typeof i2 == "object") for (let [r, o] of Object.entries(i2)) t[r] = M(t[r], o)(m);
-      return t;
-    }, ae = (a2) => {
-      if (C.length < 1) return null;
-      let n = {};
-      for (let { slots: t = [], class: i2, className: r, ...o } of C) {
-        if (!u(o)) {
-          let c2 = true;
-          for (let u2 of Object.keys(o)) {
-            let f = I(u2, a2)[u2];
-            if (f === void 0 || (Array.isArray(o[u2]) ? !o[u2].includes(f) : o[u2] !== f)) {
-              c2 = false;
-              break;
-            }
-          }
-          if (!c2) continue;
-        }
-        for (let c2 of t) n[c2] = n[c2] || [], n[c2].push([i2, r]);
-      }
-      return n;
-    };
-    if (!u(O) || !S) {
-      let a2 = {};
-      if (typeof j == "object" && !u(j)) for (let n of Object.keys(j)) a2[n] = (t) => {
-        var i2, r;
-        return M(j[n], ee(n, t), ((i2 = te(t)) != null ? i2 : [])[n], ((r = ae(t)) != null ? r : [])[n], t == null ? void 0 : t.class, t == null ? void 0 : t.className)(m);
-      };
-      return a2;
-    }
-    return M(k, p2(), J(h$1), l$1 == null ? void 0 : l$1.class, l$1 == null ? void 0 : l$1.className)(m);
-  }, K = () => {
-    if (!(!g$1 || typeof g$1 != "object")) return Object.keys(g$1);
-  };
-  return V.variantKeys = K(), V.extend = e, V.base = k, V.slots = j, V.variants = g$1, V.defaultVariants = w, V.compoundSlots = C, V.compoundVariants = h$1, V;
-}, fe = (s) => (b, e) => ce(b, e ? p(s, e) : s);
-const appConfigTv = appConfig;
-const tv = /* @__PURE__ */ fe(appConfigTv.ui?.tv);
-const matchIconName = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-const stringToIcon = (value, validate, allowSimpleName, provider = "") => {
-  const colonSeparated = value.split(":");
-  if (value.slice(0, 1) === "@") {
-    if (colonSeparated.length < 2 || colonSeparated.length > 3) {
-      return null;
-    }
-    provider = colonSeparated.shift().slice(1);
-  }
-  if (colonSeparated.length > 3 || !colonSeparated.length) {
-    return null;
-  }
-  if (colonSeparated.length > 1) {
-    const name2 = colonSeparated.pop();
-    const prefix = colonSeparated.pop();
-    const result = {
-      // Allow provider without '@': "provider:prefix:name"
-      provider: colonSeparated.length > 0 ? colonSeparated[0] : provider,
-      prefix,
-      name: name2
-    };
-    return validate && !validateIconName(result) ? null : result;
-  }
-  const name = colonSeparated[0];
-  const dashSeparated = name.split("-");
-  if (dashSeparated.length > 1) {
-    const result = {
-      provider,
-      prefix: dashSeparated.shift(),
-      name: dashSeparated.join("-")
-    };
-    return validate && !validateIconName(result) ? null : result;
-  }
-  if (allowSimpleName && provider === "") {
-    const result = {
-      provider,
-      prefix: "",
-      name
-    };
-    return validate && !validateIconName(result, allowSimpleName) ? null : result;
-  }
-  return null;
-};
-const validateIconName = (icon, allowSimpleName) => {
-  if (!icon) {
-    return false;
-  }
-  return !!// Check prefix: cannot be empty, unless allowSimpleName is enabled
-  // Check name: cannot be empty
-  ((allowSimpleName && icon.prefix === "" || !!icon.prefix) && !!icon.name);
-};
-const defaultIconDimensions = Object.freeze(
-  {
-    left: 0,
-    top: 0,
-    width: 16,
-    height: 16
-  }
-);
-const defaultIconTransformations = Object.freeze({
-  rotate: 0,
-  vFlip: false,
-  hFlip: false
-});
-const defaultIconProps = Object.freeze({
-  ...defaultIconDimensions,
-  ...defaultIconTransformations
-});
-const defaultExtendedIconProps = Object.freeze({
-  ...defaultIconProps,
-  body: "",
-  hidden: false
-});
-function mergeIconTransformations(obj1, obj2) {
-  const result = {};
-  if (!obj1.hFlip !== !obj2.hFlip) {
-    result.hFlip = true;
-  }
-  if (!obj1.vFlip !== !obj2.vFlip) {
-    result.vFlip = true;
-  }
-  const rotate = ((obj1.rotate || 0) + (obj2.rotate || 0)) % 4;
-  if (rotate) {
-    result.rotate = rotate;
-  }
-  return result;
-}
-function mergeIconData(parent, child) {
-  const result = mergeIconTransformations(parent, child);
-  for (const key in defaultExtendedIconProps) {
-    if (key in defaultIconTransformations) {
-      if (key in parent && !(key in result)) {
-        result[key] = defaultIconTransformations[key];
-      }
-    } else if (key in child) {
-      result[key] = child[key];
-    } else if (key in parent) {
-      result[key] = parent[key];
-    }
-  }
-  return result;
-}
-function getIconsTree(data, names) {
-  const icons = data.icons;
-  const aliases = data.aliases || /* @__PURE__ */ Object.create(null);
-  const resolved = /* @__PURE__ */ Object.create(null);
-  function resolve2(name) {
-    if (icons[name]) {
-      return resolved[name] = [];
-    }
-    if (!(name in resolved)) {
-      resolved[name] = null;
-      const parent = aliases[name] && aliases[name].parent;
-      const value = parent && resolve2(parent);
-      if (value) {
-        resolved[name] = [parent].concat(value);
-      }
-    }
-    return resolved[name];
-  }
-  Object.keys(icons).concat(Object.keys(aliases)).forEach(resolve2);
-  return resolved;
-}
-function internalGetIconData(data, name, tree) {
-  const icons = data.icons;
-  const aliases = data.aliases || /* @__PURE__ */ Object.create(null);
-  let currentProps = {};
-  function parse(name2) {
-    currentProps = mergeIconData(
-      icons[name2] || aliases[name2],
-      currentProps
-    );
-  }
-  parse(name);
-  tree.forEach(parse);
-  return mergeIconData(data, currentProps);
-}
-function parseIconSet(data, callback) {
-  const names = [];
-  if (typeof data !== "object" || typeof data.icons !== "object") {
-    return names;
-  }
-  if (data.not_found instanceof Array) {
-    data.not_found.forEach((name) => {
-      callback(name, null);
-      names.push(name);
-    });
-  }
-  const tree = getIconsTree(data);
-  for (const name in tree) {
-    const item = tree[name];
-    if (item) {
-      callback(name, internalGetIconData(data, name, item));
-      names.push(name);
-    }
-  }
-  return names;
-}
-const optionalPropertyDefaults = {
-  provider: "",
-  aliases: {},
-  not_found: {},
-  ...defaultIconDimensions
-};
-function checkOptionalProps(item, defaults) {
-  for (const prop in defaults) {
-    if (prop in item && typeof item[prop] !== typeof defaults[prop]) {
-      return false;
-    }
-  }
-  return true;
-}
-function quicklyValidateIconSet(obj) {
-  if (typeof obj !== "object" || obj === null) {
-    return null;
-  }
-  const data = obj;
-  if (typeof data.prefix !== "string" || !obj.icons || typeof obj.icons !== "object") {
-    return null;
-  }
-  if (!checkOptionalProps(obj, optionalPropertyDefaults)) {
-    return null;
-  }
-  const icons = data.icons;
-  for (const name in icons) {
-    const icon = icons[name];
-    if (
-      // Name cannot be empty
-      !name || // Must have body
-      typeof icon.body !== "string" || // Check other props
-      !checkOptionalProps(
-        icon,
-        defaultExtendedIconProps
-      )
-    ) {
-      return null;
-    }
-  }
-  const aliases = data.aliases || /* @__PURE__ */ Object.create(null);
-  for (const name in aliases) {
-    const icon = aliases[name];
-    const parent = icon.parent;
-    if (
-      // Name cannot be empty
-      !name || // Parent must be set and point to existing icon
-      typeof parent !== "string" || !icons[parent] && !aliases[parent] || // Check other props
-      !checkOptionalProps(
-        icon,
-        defaultExtendedIconProps
-      )
-    ) {
-      return null;
-    }
-  }
-  return data;
-}
-const dataStorage = /* @__PURE__ */ Object.create(null);
-function newStorage(provider, prefix) {
-  return {
-    provider,
-    prefix,
-    icons: /* @__PURE__ */ Object.create(null),
-    missing: /* @__PURE__ */ new Set()
-  };
-}
-function getStorage(provider, prefix) {
-  const providerStorage = dataStorage[provider] || (dataStorage[provider] = /* @__PURE__ */ Object.create(null));
-  return providerStorage[prefix] || (providerStorage[prefix] = newStorage(provider, prefix));
-}
-function addIconSet(storage2, data) {
-  if (!quicklyValidateIconSet(data)) {
-    return [];
-  }
-  return parseIconSet(data, (name, icon) => {
-    if (icon) {
-      storage2.icons[name] = icon;
-    } else {
-      storage2.missing.add(name);
-    }
-  });
-}
-function addIconToStorage(storage2, name, icon) {
-  try {
-    if (typeof icon.body === "string") {
-      storage2.icons[name] = { ...icon };
-      return true;
-    }
-  } catch (err) {
-  }
-  return false;
-}
-let simpleNames = false;
-function allowSimpleNames(allow) {
-  if (typeof allow === "boolean") {
-    simpleNames = allow;
-  }
-  return simpleNames;
-}
-function getIconData(name) {
-  const icon = typeof name === "string" ? stringToIcon(name, true, simpleNames) : name;
-  if (icon) {
-    const storage2 = getStorage(icon.provider, icon.prefix);
-    const iconName = icon.name;
-    return storage2.icons[iconName] || (storage2.missing.has(iconName) ? null : void 0);
-  }
-}
-function addIcon(name, data) {
-  const icon = stringToIcon(name, true, simpleNames);
-  if (!icon) {
-    return false;
-  }
-  const storage2 = getStorage(icon.provider, icon.prefix);
-  if (data) {
-    return addIconToStorage(storage2, icon.name, data);
-  } else {
-    storage2.missing.add(icon.name);
-    return true;
-  }
-}
-function addCollection(data, provider) {
-  if (typeof data !== "object") {
-    return false;
-  }
-  if (typeof provider !== "string") {
-    provider = data.provider || "";
-  }
-  if (simpleNames && !provider && !data.prefix) {
-    let added = false;
-    if (quicklyValidateIconSet(data)) {
-      data.prefix = "";
-      parseIconSet(data, (name, icon) => {
-        if (addIcon(name, icon)) {
-          added = true;
-        }
-      });
-    }
-    return added;
-  }
-  const prefix = data.prefix;
-  if (!validateIconName({
-    prefix,
-    name: "a"
-  })) {
-    return false;
-  }
-  const storage2 = getStorage(provider, prefix);
-  return !!addIconSet(storage2, data);
-}
-const defaultIconSizeCustomisations = Object.freeze({
-  width: null,
-  height: null
-});
-const defaultIconCustomisations = Object.freeze({
-  // Dimensions
-  ...defaultIconSizeCustomisations,
-  // Transformations
-  ...defaultIconTransformations
-});
-const unitsSplit = /(-?[0-9.]*[0-9]+[0-9.]*)/g;
-const unitsTest = /^-?[0-9.]*[0-9]+[0-9.]*$/g;
-function calculateSize(size, ratio, precision) {
-  if (ratio === 1) {
-    return size;
-  }
-  precision = precision || 100;
-  if (typeof size === "number") {
-    return Math.ceil(size * ratio * precision) / precision;
-  }
-  if (typeof size !== "string") {
-    return size;
-  }
-  const oldParts = size.split(unitsSplit);
-  if (oldParts === null || !oldParts.length) {
-    return size;
-  }
-  const newParts = [];
-  let code = oldParts.shift();
-  let isNumber2 = unitsTest.test(code);
-  while (true) {
-    if (isNumber2) {
-      const num = parseFloat(code);
-      if (isNaN(num)) {
-        newParts.push(code);
-      } else {
-        newParts.push(Math.ceil(num * ratio * precision) / precision);
-      }
-    } else {
-      newParts.push(code);
-    }
-    code = oldParts.shift();
-    if (code === void 0) {
-      return newParts.join("");
-    }
-    isNumber2 = !isNumber2;
-  }
-}
-function splitSVGDefs(content, tag = "defs") {
-  let defs = "";
-  const index = content.indexOf("<" + tag);
-  while (index >= 0) {
-    const start = content.indexOf(">", index);
-    const end = content.indexOf("</" + tag);
-    if (start === -1 || end === -1) {
-      break;
-    }
-    const endEnd = content.indexOf(">", end);
-    if (endEnd === -1) {
-      break;
-    }
-    defs += content.slice(start + 1, end).trim();
-    content = content.slice(0, index).trim() + content.slice(endEnd + 1);
-  }
-  return {
-    defs,
-    content
-  };
-}
-function mergeDefsAndContent(defs, content) {
-  return defs ? "<defs>" + defs + "</defs>" + content : content;
-}
-function wrapSVGContent(body, start, end) {
-  const split = splitSVGDefs(body);
-  return mergeDefsAndContent(split.defs, start + split.content + end);
-}
-const isUnsetKeyword = (value) => value === "unset" || value === "undefined" || value === "none";
-function iconToSVG(icon, customisations) {
-  const fullIcon = {
-    ...defaultIconProps,
-    ...icon
-  };
-  const fullCustomisations = {
-    ...defaultIconCustomisations,
-    ...customisations
-  };
-  const box = {
-    left: fullIcon.left,
-    top: fullIcon.top,
-    width: fullIcon.width,
-    height: fullIcon.height
-  };
-  let body = fullIcon.body;
-  [fullIcon, fullCustomisations].forEach((props) => {
-    const transformations = [];
-    const hFlip = props.hFlip;
-    const vFlip = props.vFlip;
-    let rotation = props.rotate;
-    if (hFlip) {
-      if (vFlip) {
-        rotation += 2;
-      } else {
-        transformations.push(
-          "translate(" + (box.width + box.left).toString() + " " + (0 - box.top).toString() + ")"
-        );
-        transformations.push("scale(-1 1)");
-        box.top = box.left = 0;
-      }
-    } else if (vFlip) {
-      transformations.push(
-        "translate(" + (0 - box.left).toString() + " " + (box.height + box.top).toString() + ")"
-      );
-      transformations.push("scale(1 -1)");
-      box.top = box.left = 0;
-    }
-    let tempValue;
-    if (rotation < 0) {
-      rotation -= Math.floor(rotation / 4) * 4;
-    }
-    rotation = rotation % 4;
-    switch (rotation) {
-      case 1:
-        tempValue = box.height / 2 + box.top;
-        transformations.unshift(
-          "rotate(90 " + tempValue.toString() + " " + tempValue.toString() + ")"
-        );
-        break;
-      case 2:
-        transformations.unshift(
-          "rotate(180 " + (box.width / 2 + box.left).toString() + " " + (box.height / 2 + box.top).toString() + ")"
-        );
-        break;
-      case 3:
-        tempValue = box.width / 2 + box.left;
-        transformations.unshift(
-          "rotate(-90 " + tempValue.toString() + " " + tempValue.toString() + ")"
-        );
-        break;
-    }
-    if (rotation % 2 === 1) {
-      if (box.left !== box.top) {
-        tempValue = box.left;
-        box.left = box.top;
-        box.top = tempValue;
-      }
-      if (box.width !== box.height) {
-        tempValue = box.width;
-        box.width = box.height;
-        box.height = tempValue;
-      }
-    }
-    if (transformations.length) {
-      body = wrapSVGContent(
-        body,
-        '<g transform="' + transformations.join(" ") + '">',
-        "</g>"
-      );
-    }
-  });
-  const customisationsWidth = fullCustomisations.width;
-  const customisationsHeight = fullCustomisations.height;
-  const boxWidth = box.width;
-  const boxHeight = box.height;
-  let width;
-  let height;
-  if (customisationsWidth === null) {
-    height = customisationsHeight === null ? "1em" : customisationsHeight === "auto" ? boxHeight : customisationsHeight;
-    width = calculateSize(height, boxWidth / boxHeight);
-  } else {
-    width = customisationsWidth === "auto" ? boxWidth : customisationsWidth;
-    height = customisationsHeight === null ? calculateSize(width, boxHeight / boxWidth) : customisationsHeight === "auto" ? boxHeight : customisationsHeight;
-  }
-  const attributes = {};
-  const setAttr = (prop, value) => {
-    if (!isUnsetKeyword(value)) {
-      attributes[prop] = value.toString();
-    }
-  };
-  setAttr("width", width);
-  setAttr("height", height);
-  const viewBox = [box.left, box.top, boxWidth, boxHeight];
-  attributes.viewBox = viewBox.join(" ");
-  return {
-    attributes,
-    viewBox,
-    body
-  };
-}
-const regex = /\sid="(\S+)"/g;
-const randomPrefix = "IconifyId" + Date.now().toString(16) + (Math.random() * 16777216 | 0).toString(16);
-let counter = 0;
-function replaceIDs(body, prefix = randomPrefix) {
-  const ids = [];
-  let match;
-  while (match = regex.exec(body)) {
-    ids.push(match[1]);
-  }
-  if (!ids.length) {
-    return body;
-  }
-  const suffix = "suffix" + (Math.random() * 16777216 | Date.now()).toString(16);
-  ids.forEach((id) => {
-    const newID = typeof prefix === "function" ? prefix(id) : prefix + (counter++).toString();
-    const escapedID = id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    body = body.replace(
-      // Allowed characters before id: [#;"]
-      // Allowed characters after id: [)"], .[a-z]
-      new RegExp('([#;"])(' + escapedID + ')([")]|\\.[a-z])', "g"),
-      "$1" + newID + suffix + "$3"
-    );
-  });
-  body = body.replace(new RegExp(suffix, "g"), "");
-  return body;
-}
-const storage = /* @__PURE__ */ Object.create(null);
-function setAPIModule(provider, item) {
-  storage[provider] = item;
-}
-function getAPIModule(provider) {
-  return storage[provider] || storage[""];
-}
-function createAPIConfig(source) {
-  let resources;
-  if (typeof source.resources === "string") {
-    resources = [source.resources];
-  } else {
-    resources = source.resources;
-    if (!(resources instanceof Array) || !resources.length) {
-      return null;
-    }
-  }
-  const result = {
-    // API hosts
-    resources,
-    // Root path
-    path: source.path || "/",
-    // URL length limit
-    maxURL: source.maxURL || 500,
-    // Timeout before next host is used.
-    rotate: source.rotate || 750,
-    // Timeout before failing query.
-    timeout: source.timeout || 5e3,
-    // Randomise default API end point.
-    random: source.random === true,
-    // Start index
-    index: source.index || 0,
-    // Receive data after time out (used if time out kicks in first, then API module sends data anyway).
-    dataAfterTimeout: source.dataAfterTimeout !== false
-  };
-  return result;
-}
-const configStorage = /* @__PURE__ */ Object.create(null);
-const fallBackAPISources = [
-  "https://api.simplesvg.com",
-  "https://api.unisvg.com"
-];
-const fallBackAPI = [];
-while (fallBackAPISources.length > 0) {
-  if (fallBackAPISources.length === 1) {
-    fallBackAPI.push(fallBackAPISources.shift());
-  } else {
-    if (Math.random() > 0.5) {
-      fallBackAPI.push(fallBackAPISources.shift());
-    } else {
-      fallBackAPI.push(fallBackAPISources.pop());
-    }
-  }
-}
-configStorage[""] = createAPIConfig({
-  resources: ["https://api.iconify.design"].concat(fallBackAPI)
-});
-function addAPIProvider(provider, customConfig) {
-  const config = createAPIConfig(customConfig);
-  if (config === null) {
-    return false;
-  }
-  configStorage[provider] = config;
-  return true;
-}
-function getAPIConfig(provider) {
-  return configStorage[provider];
-}
-const detectFetch = () => {
-  let callback;
-  try {
-    callback = fetch;
-    if (typeof callback === "function") {
-      return callback;
-    }
-  } catch (err) {
-  }
-};
-let fetchModule = detectFetch();
-function calculateMaxLength(provider, prefix) {
-  const config = getAPIConfig(provider);
-  if (!config) {
-    return 0;
-  }
-  let result;
-  if (!config.maxURL) {
-    result = 0;
-  } else {
-    let maxHostLength = 0;
-    config.resources.forEach((item) => {
-      const host = item;
-      maxHostLength = Math.max(maxHostLength, host.length);
-    });
-    const url = prefix + ".json?icons=";
-    result = config.maxURL - maxHostLength - config.path.length - url.length;
-  }
-  return result;
-}
-function shouldAbort(status) {
-  return status === 404;
-}
-const prepare = (provider, prefix, icons) => {
-  const results = [];
-  const maxLength = calculateMaxLength(provider, prefix);
-  const type = "icons";
-  let item = {
-    type,
-    provider,
-    prefix,
-    icons: []
-  };
-  let length = 0;
-  icons.forEach((name, index) => {
-    length += name.length + 1;
-    if (length >= maxLength && index > 0) {
-      results.push(item);
-      item = {
-        type,
-        provider,
-        prefix,
-        icons: []
-      };
-      length = name.length;
-    }
-    item.icons.push(name);
-  });
-  results.push(item);
-  return results;
-};
-function getPath(provider) {
-  if (typeof provider === "string") {
-    const config = getAPIConfig(provider);
-    if (config) {
-      return config.path;
-    }
-  }
-  return "/";
-}
-const send = (host, params, callback) => {
-  if (!fetchModule) {
-    callback("abort", 424);
-    return;
-  }
-  let path = getPath(params.provider);
-  switch (params.type) {
-    case "icons": {
-      const prefix = params.prefix;
-      const icons = params.icons;
-      const iconsList = icons.join(",");
-      const urlParams = new URLSearchParams({
-        icons: iconsList
-      });
-      path += prefix + ".json?" + urlParams.toString();
-      break;
-    }
-    case "custom": {
-      const uri = params.uri;
-      path += uri.slice(0, 1) === "/" ? uri.slice(1) : uri;
-      break;
-    }
-    default:
-      callback("abort", 400);
-      return;
-  }
-  let defaultError = 503;
-  fetchModule(host + path).then((response) => {
-    const status = response.status;
-    if (status !== 200) {
-      setTimeout(() => {
-        callback(shouldAbort(status) ? "abort" : "next", status);
-      });
-      return;
-    }
-    defaultError = 501;
-    return response.json();
-  }).then((data) => {
-    if (typeof data !== "object" || data === null) {
-      setTimeout(() => {
-        if (data === 404) {
-          callback("abort", data);
-        } else {
-          callback("next", defaultError);
-        }
-      });
-      return;
-    }
-    setTimeout(() => {
-      callback("success", data);
-    });
-  }).catch(() => {
-    callback("next", defaultError);
-  });
-};
-const fetchAPIModule = {
-  prepare,
-  send
-};
-function sortIcons(icons) {
-  const result = {
-    loaded: [],
-    missing: [],
-    pending: []
-  };
-  const storage2 = /* @__PURE__ */ Object.create(null);
-  icons.sort((a2, b) => {
-    if (a2.provider !== b.provider) {
-      return a2.provider.localeCompare(b.provider);
-    }
-    if (a2.prefix !== b.prefix) {
-      return a2.prefix.localeCompare(b.prefix);
-    }
-    return a2.name.localeCompare(b.name);
-  });
-  let lastIcon = {
-    provider: "",
-    prefix: "",
-    name: ""
-  };
-  icons.forEach((icon) => {
-    if (lastIcon.name === icon.name && lastIcon.prefix === icon.prefix && lastIcon.provider === icon.provider) {
-      return;
-    }
-    lastIcon = icon;
-    const provider = icon.provider;
-    const prefix = icon.prefix;
-    const name = icon.name;
-    const providerStorage = storage2[provider] || (storage2[provider] = /* @__PURE__ */ Object.create(null));
-    const localStorage = providerStorage[prefix] || (providerStorage[prefix] = getStorage(provider, prefix));
-    let list;
-    if (name in localStorage.icons) {
-      list = result.loaded;
-    } else if (prefix === "" || localStorage.missing.has(name)) {
-      list = result.missing;
-    } else {
-      list = result.pending;
-    }
-    const item = {
-      provider,
-      prefix,
-      name
-    };
-    list.push(item);
-  });
-  return result;
-}
-function removeCallback(storages, id) {
-  storages.forEach((storage2) => {
-    const items = storage2.loaderCallbacks;
-    if (items) {
-      storage2.loaderCallbacks = items.filter((row) => row.id !== id);
-    }
-  });
-}
-function updateCallbacks(storage2) {
-  if (!storage2.pendingCallbacksFlag) {
-    storage2.pendingCallbacksFlag = true;
-    setTimeout(() => {
-      storage2.pendingCallbacksFlag = false;
-      const items = storage2.loaderCallbacks ? storage2.loaderCallbacks.slice(0) : [];
-      if (!items.length) {
-        return;
-      }
-      let hasPending = false;
-      const provider = storage2.provider;
-      const prefix = storage2.prefix;
-      items.forEach((item) => {
-        const icons = item.icons;
-        const oldLength = icons.pending.length;
-        icons.pending = icons.pending.filter((icon) => {
-          if (icon.prefix !== prefix) {
-            return true;
-          }
-          const name = icon.name;
-          if (storage2.icons[name]) {
-            icons.loaded.push({
-              provider,
-              prefix,
-              name
-            });
-          } else if (storage2.missing.has(name)) {
-            icons.missing.push({
-              provider,
-              prefix,
-              name
-            });
-          } else {
-            hasPending = true;
-            return true;
-          }
-          return false;
-        });
-        if (icons.pending.length !== oldLength) {
-          if (!hasPending) {
-            removeCallback([storage2], item.id);
-          }
-          item.callback(
-            icons.loaded.slice(0),
-            icons.missing.slice(0),
-            icons.pending.slice(0),
-            item.abort
-          );
-        }
-      });
-    });
-  }
-}
-let idCounter = 0;
-function storeCallback(callback, icons, pendingSources) {
-  const id = idCounter++;
-  const abort = removeCallback.bind(null, pendingSources, id);
-  if (!icons.pending.length) {
-    return abort;
-  }
-  const item = {
-    id,
-    icons,
-    callback,
-    abort
-  };
-  pendingSources.forEach((storage2) => {
-    (storage2.loaderCallbacks || (storage2.loaderCallbacks = [])).push(item);
-  });
-  return abort;
-}
-function listToIcons(list, validate = true, simpleNames2 = false) {
-  const result = [];
-  list.forEach((item) => {
-    const icon = typeof item === "string" ? stringToIcon(item, validate, simpleNames2) : item;
-    if (icon) {
-      result.push(icon);
-    }
-  });
-  return result;
-}
-var defaultConfig = {
-  resources: [],
-  index: 0,
-  timeout: 2e3,
-  rotate: 750,
-  random: false,
-  dataAfterTimeout: false
-};
-function sendQuery(config, payload, query, done) {
-  const resourcesCount = config.resources.length;
-  const startIndex = config.random ? Math.floor(Math.random() * resourcesCount) : config.index;
-  let resources;
-  if (config.random) {
-    let list = config.resources.slice(0);
-    resources = [];
-    while (list.length > 1) {
-      const nextIndex = Math.floor(Math.random() * list.length);
-      resources.push(list[nextIndex]);
-      list = list.slice(0, nextIndex).concat(list.slice(nextIndex + 1));
-    }
-    resources = resources.concat(list);
-  } else {
-    resources = config.resources.slice(startIndex).concat(config.resources.slice(0, startIndex));
-  }
-  const startTime = Date.now();
-  let status = "pending";
-  let queriesSent = 0;
-  let lastError;
-  let timer = null;
-  let queue2 = [];
-  let doneCallbacks = [];
-  if (typeof done === "function") {
-    doneCallbacks.push(done);
-  }
-  function resetTimer() {
-    if (timer) {
-      clearTimeout(timer);
-      timer = null;
-    }
-  }
-  function abort() {
-    if (status === "pending") {
-      status = "aborted";
-    }
-    resetTimer();
-    queue2.forEach((item) => {
-      if (item.status === "pending") {
-        item.status = "aborted";
-      }
-    });
-    queue2 = [];
-  }
-  function subscribe(callback, overwrite) {
-    if (overwrite) {
-      doneCallbacks = [];
-    }
-    if (typeof callback === "function") {
-      doneCallbacks.push(callback);
-    }
-  }
-  function getQueryStatus() {
-    return {
-      startTime,
-      payload,
-      status,
-      queriesSent,
-      queriesPending: queue2.length,
-      subscribe,
-      abort
-    };
-  }
-  function failQuery() {
-    status = "failed";
-    doneCallbacks.forEach((callback) => {
-      callback(void 0, lastError);
-    });
-  }
-  function clearQueue() {
-    queue2.forEach((item) => {
-      if (item.status === "pending") {
-        item.status = "aborted";
-      }
-    });
-    queue2 = [];
-  }
-  function moduleResponse(item, response, data) {
-    const isError = response !== "success";
-    queue2 = queue2.filter((queued) => queued !== item);
-    switch (status) {
-      case "pending":
-        break;
-      case "failed":
-        if (isError || !config.dataAfterTimeout) {
-          return;
-        }
-        break;
-      default:
-        return;
-    }
-    if (response === "abort") {
-      lastError = data;
-      failQuery();
-      return;
-    }
-    if (isError) {
-      lastError = data;
-      if (!queue2.length) {
-        if (!resources.length) {
-          failQuery();
-        } else {
-          execNext();
-        }
-      }
-      return;
-    }
-    resetTimer();
-    clearQueue();
-    if (!config.random) {
-      const index = config.resources.indexOf(item.resource);
-      if (index !== -1 && index !== config.index) {
-        config.index = index;
-      }
-    }
-    status = "completed";
-    doneCallbacks.forEach((callback) => {
-      callback(data);
-    });
-  }
-  function execNext() {
-    if (status !== "pending") {
-      return;
-    }
-    resetTimer();
-    const resource = resources.shift();
-    if (resource === void 0) {
-      if (queue2.length) {
-        timer = setTimeout(() => {
-          resetTimer();
-          if (status === "pending") {
-            clearQueue();
-            failQuery();
-          }
-        }, config.timeout);
-        return;
-      }
-      failQuery();
-      return;
-    }
-    const item = {
-      status: "pending",
-      resource,
-      callback: (status2, data) => {
-        moduleResponse(item, status2, data);
-      }
-    };
-    queue2.push(item);
-    queriesSent++;
-    timer = setTimeout(execNext, config.rotate);
-    query(resource, payload, item.callback);
-  }
-  setTimeout(execNext);
-  return getQueryStatus;
-}
-function initRedundancy(cfg) {
-  const config = {
-    ...defaultConfig,
-    ...cfg
-  };
-  let queries = [];
-  function cleanup() {
-    queries = queries.filter((item) => item().status === "pending");
-  }
-  function query(payload, queryCallback, doneCallback) {
-    const query2 = sendQuery(
-      config,
-      payload,
-      queryCallback,
-      (data, error) => {
-        cleanup();
-        if (doneCallback) {
-          doneCallback(data, error);
-        }
-      }
-    );
-    queries.push(query2);
-    return query2;
-  }
-  function find(callback) {
-    return queries.find((value) => {
-      return callback(value);
-    }) || null;
-  }
-  const instance = {
-    query,
-    find,
-    setIndex: (index) => {
-      config.index = index;
-    },
-    getIndex: () => config.index,
-    cleanup
-  };
-  return instance;
-}
-function emptyCallback$1() {
-}
-const redundancyCache = /* @__PURE__ */ Object.create(null);
-function getRedundancyCache(provider) {
-  if (!redundancyCache[provider]) {
-    const config = getAPIConfig(provider);
-    if (!config) {
-      return;
-    }
-    const redundancy = initRedundancy(config);
-    const cachedReundancy = {
-      config,
-      redundancy
-    };
-    redundancyCache[provider] = cachedReundancy;
-  }
-  return redundancyCache[provider];
-}
-function sendAPIQuery(target, query, callback) {
-  let redundancy;
-  let send2;
-  if (typeof target === "string") {
-    const api = getAPIModule(target);
-    if (!api) {
-      callback(void 0, 424);
-      return emptyCallback$1;
-    }
-    send2 = api.send;
-    const cached = getRedundancyCache(target);
-    if (cached) {
-      redundancy = cached.redundancy;
-    }
-  } else {
-    const config = createAPIConfig(target);
-    if (config) {
-      redundancy = initRedundancy(config);
-      const moduleKey = target.resources ? target.resources[0] : "";
-      const api = getAPIModule(moduleKey);
-      if (api) {
-        send2 = api.send;
-      }
-    }
-  }
-  if (!redundancy || !send2) {
-    callback(void 0, 424);
-    return emptyCallback$1;
-  }
-  return redundancy.query(query, send2, callback)().abort;
-}
-function emptyCallback() {
-}
-function loadedNewIcons(storage2) {
-  if (!storage2.iconsLoaderFlag) {
-    storage2.iconsLoaderFlag = true;
-    setTimeout(() => {
-      storage2.iconsLoaderFlag = false;
-      updateCallbacks(storage2);
-    });
-  }
-}
-function checkIconNamesForAPI(icons) {
-  const valid = [];
-  const invalid = [];
-  icons.forEach((name) => {
-    (name.match(matchIconName) ? valid : invalid).push(name);
-  });
-  return {
-    valid,
-    invalid
-  };
-}
-function parseLoaderResponse(storage2, icons, data) {
-  function checkMissing() {
-    const pending = storage2.pendingIcons;
-    icons.forEach((name) => {
-      if (pending) {
-        pending.delete(name);
-      }
-      if (!storage2.icons[name]) {
-        storage2.missing.add(name);
-      }
-    });
-  }
-  if (data && typeof data === "object") {
-    try {
-      const parsed = addIconSet(storage2, data);
-      if (!parsed.length) {
-        checkMissing();
-        return;
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }
-  checkMissing();
-  loadedNewIcons(storage2);
-}
-function parsePossiblyAsyncResponse(response, callback) {
-  if (response instanceof Promise) {
-    response.then((data) => {
-      callback(data);
-    }).catch(() => {
-      callback(null);
-    });
-  } else {
-    callback(response);
-  }
-}
-function loadNewIcons(storage2, icons) {
-  if (!storage2.iconsToLoad) {
-    storage2.iconsToLoad = icons;
-  } else {
-    storage2.iconsToLoad = storage2.iconsToLoad.concat(icons).sort();
-  }
-  if (!storage2.iconsQueueFlag) {
-    storage2.iconsQueueFlag = true;
-    setTimeout(() => {
-      storage2.iconsQueueFlag = false;
-      const { provider, prefix } = storage2;
-      const icons2 = storage2.iconsToLoad;
-      delete storage2.iconsToLoad;
-      if (!icons2 || !icons2.length) {
-        return;
-      }
-      const customIconLoader = storage2.loadIcon;
-      if (storage2.loadIcons && (icons2.length > 1 || !customIconLoader)) {
-        parsePossiblyAsyncResponse(
-          storage2.loadIcons(icons2, prefix, provider),
-          (data) => {
-            parseLoaderResponse(storage2, icons2, data);
-          }
-        );
-        return;
-      }
-      if (customIconLoader) {
-        icons2.forEach((name) => {
-          const response = customIconLoader(name, prefix, provider);
-          parsePossiblyAsyncResponse(response, (data) => {
-            const iconSet = data ? {
-              prefix,
-              icons: {
-                [name]: data
-              }
-            } : null;
-            parseLoaderResponse(storage2, [name], iconSet);
-          });
-        });
-        return;
-      }
-      const { valid, invalid } = checkIconNamesForAPI(icons2);
-      if (invalid.length) {
-        parseLoaderResponse(storage2, invalid, null);
-      }
-      if (!valid.length) {
-        return;
-      }
-      const api = prefix.match(matchIconName) ? getAPIModule(provider) : null;
-      if (!api) {
-        parseLoaderResponse(storage2, valid, null);
-        return;
-      }
-      const params = api.prepare(provider, prefix, valid);
-      params.forEach((item) => {
-        sendAPIQuery(provider, item, (data) => {
-          parseLoaderResponse(storage2, item.icons, data);
-        });
-      });
-    });
-  }
-}
-const loadIcons = (icons, callback) => {
-  const cleanedIcons = listToIcons(icons, true, allowSimpleNames());
-  const sortedIcons = sortIcons(cleanedIcons);
-  if (!sortedIcons.pending.length) {
-    let callCallback = true;
-    if (callback) {
-      setTimeout(() => {
-        if (callCallback) {
-          callback(
-            sortedIcons.loaded,
-            sortedIcons.missing,
-            sortedIcons.pending,
-            emptyCallback
-          );
-        }
-      });
-    }
-    return () => {
-      callCallback = false;
-    };
-  }
-  const newIcons = /* @__PURE__ */ Object.create(null);
-  const sources = [];
-  let lastProvider, lastPrefix;
-  sortedIcons.pending.forEach((icon) => {
-    const { provider, prefix } = icon;
-    if (prefix === lastPrefix && provider === lastProvider) {
-      return;
-    }
-    lastProvider = provider;
-    lastPrefix = prefix;
-    sources.push(getStorage(provider, prefix));
-    const providerNewIcons = newIcons[provider] || (newIcons[provider] = /* @__PURE__ */ Object.create(null));
-    if (!providerNewIcons[prefix]) {
-      providerNewIcons[prefix] = [];
-    }
-  });
-  sortedIcons.pending.forEach((icon) => {
-    const { provider, prefix, name } = icon;
-    const storage2 = getStorage(provider, prefix);
-    const pendingQueue = storage2.pendingIcons || (storage2.pendingIcons = /* @__PURE__ */ new Set());
-    if (!pendingQueue.has(name)) {
-      pendingQueue.add(name);
-      newIcons[provider][prefix].push(name);
-    }
-  });
-  sources.forEach((storage2) => {
-    const list = newIcons[storage2.provider][storage2.prefix];
-    if (list.length) {
-      loadNewIcons(storage2, list);
-    }
-  });
-  return callback ? storeCallback(callback, sortedIcons, sources) : emptyCallback;
-};
-function mergeCustomisations(defaults, item) {
-  const result = {
-    ...defaults
-  };
-  for (const key in item) {
-    const value = item[key];
-    const valueType = typeof value;
-    if (key in defaultIconSizeCustomisations) {
-      if (value === null || value && (valueType === "string" || valueType === "number")) {
-        result[key] = value;
-      }
-    } else if (valueType === typeof result[key]) {
-      result[key] = key === "rotate" ? value % 4 : value;
-    }
-  }
-  return result;
-}
-const separator = /[\s,]+/;
-function flipFromString(custom, flip) {
-  flip.split(separator).forEach((str) => {
-    const value = str.trim();
-    switch (value) {
-      case "horizontal":
-        custom.hFlip = true;
-        break;
-      case "vertical":
-        custom.vFlip = true;
-        break;
-    }
-  });
-}
-function rotateFromString(value, defaultValue = 0) {
-  const units = value.replace(/^-?[0-9.]*/, "");
-  function cleanup(value2) {
-    while (value2 < 0) {
-      value2 += 4;
-    }
-    return value2 % 4;
-  }
-  if (units === "") {
-    const num = parseInt(value);
-    return isNaN(num) ? 0 : cleanup(num);
-  } else if (units !== value) {
-    let split = 0;
-    switch (units) {
-      case "%":
-        split = 25;
-        break;
-      case "deg":
-        split = 90;
-    }
-    if (split) {
-      let num = parseFloat(value.slice(0, value.length - units.length));
-      if (isNaN(num)) {
-        return 0;
-      }
-      num = num / split;
-      return num % 1 === 0 ? cleanup(num) : 0;
-    }
-  }
-  return defaultValue;
-}
-function iconToHTML(body, attributes) {
-  let renderAttribsHTML = body.indexOf("xlink:") === -1 ? "" : ' xmlns:xlink="http://www.w3.org/1999/xlink"';
-  for (const attr in attributes) {
-    renderAttribsHTML += " " + attr + '="' + attributes[attr] + '"';
-  }
-  return '<svg xmlns="http://www.w3.org/2000/svg"' + renderAttribsHTML + ">" + body + "</svg>";
-}
-function encodeSVGforURL(svg) {
-  return svg.replace(/"/g, "'").replace(/%/g, "%25").replace(/#/g, "%23").replace(/</g, "%3C").replace(/>/g, "%3E").replace(/\s+/g, " ");
-}
-function svgToData(svg) {
-  return "data:image/svg+xml," + encodeSVGforURL(svg);
-}
-function svgToURL(svg) {
-  return 'url("' + svgToData(svg) + '")';
-}
-const defaultExtendedIconCustomisations = {
-  ...defaultIconCustomisations,
-  inline: false
-};
-const svgDefaults = {
-  "xmlns": "http://www.w3.org/2000/svg",
-  "xmlns:xlink": "http://www.w3.org/1999/xlink",
-  "aria-hidden": true,
-  "role": "img"
-};
-const commonProps = {
-  display: "inline-block"
-};
-const monotoneProps = {
-  backgroundColor: "currentColor"
-};
-const coloredProps = {
-  backgroundColor: "transparent"
-};
-const propsToAdd = {
-  Image: "var(--svg)",
-  Repeat: "no-repeat",
-  Size: "100% 100%"
-};
-const propsToAddTo = {
-  webkitMask: monotoneProps,
-  mask: monotoneProps,
-  background: coloredProps
-};
-for (const prefix in propsToAddTo) {
-  const list = propsToAddTo[prefix];
-  for (const prop in propsToAdd) {
-    list[prefix + prop] = propsToAdd[prop];
-  }
-}
-const customisationAliases = {};
-["horizontal", "vertical"].forEach((prefix) => {
-  const attr = prefix.slice(0, 1) + "Flip";
-  customisationAliases[prefix + "-flip"] = attr;
-  customisationAliases[prefix.slice(0, 1) + "-flip"] = attr;
-  customisationAliases[prefix + "Flip"] = attr;
-});
-function fixSize(value) {
-  return value + (value.match(/^[-0-9.]+$/) ? "px" : "");
-}
-const render = (icon, props) => {
-  const customisations = mergeCustomisations(defaultExtendedIconCustomisations, props);
-  const componentProps = { ...svgDefaults };
-  const mode = props.mode || "svg";
-  const style = {};
-  const propsStyle = props.style;
-  const customStyle = typeof propsStyle === "object" && !(propsStyle instanceof Array) ? propsStyle : {};
-  for (let key in props) {
-    const value = props[key];
-    if (value === void 0) {
-      continue;
-    }
-    switch (key) {
-      // Properties to ignore
-      case "icon":
-      case "style":
-      case "onLoad":
-      case "mode":
-      case "ssr":
-        break;
-      // Boolean attributes
-      case "inline":
-      case "hFlip":
-      case "vFlip":
-        customisations[key] = value === true || value === "true" || value === 1;
-        break;
-      // Flip as string: 'horizontal,vertical'
-      case "flip":
-        if (typeof value === "string") {
-          flipFromString(customisations, value);
-        }
-        break;
-      // Color: override style
-      case "color":
-        style.color = value;
-        break;
-      // Rotation as string
-      case "rotate":
-        if (typeof value === "string") {
-          customisations[key] = rotateFromString(value);
-        } else if (typeof value === "number") {
-          customisations[key] = value;
-        }
-        break;
-      // Remove aria-hidden
-      case "ariaHidden":
-      case "aria-hidden":
-        if (value !== true && value !== "true") {
-          delete componentProps["aria-hidden"];
-        }
-        break;
-      default: {
-        const alias = customisationAliases[key];
-        if (alias) {
-          if (value === true || value === "true" || value === 1) {
-            customisations[alias] = true;
-          }
-        } else if (defaultExtendedIconCustomisations[key] === void 0) {
-          componentProps[key] = value;
-        }
-      }
-    }
-  }
-  const item = iconToSVG(icon, customisations);
-  const renderAttribs = item.attributes;
-  if (customisations.inline) {
-    style.verticalAlign = "-0.125em";
-  }
-  if (mode === "svg") {
-    componentProps.style = {
-      ...style,
-      ...customStyle
-    };
-    Object.assign(componentProps, renderAttribs);
-    let localCounter = 0;
-    let id = props.id;
-    if (typeof id === "string") {
-      id = id.replace(/-/g, "_");
-    }
-    componentProps["innerHTML"] = replaceIDs(item.body, id ? () => id + "ID" + localCounter++ : "iconifyVue");
-    return h("svg", componentProps);
-  }
-  const { body, width, height } = icon;
-  const useMask = mode === "mask" || (mode === "bg" ? false : body.indexOf("currentColor") !== -1);
-  const html = iconToHTML(body, {
-    ...renderAttribs,
-    width: width + "",
-    height: height + ""
-  });
-  componentProps.style = {
-    ...style,
-    "--svg": svgToURL(html),
-    "width": fixSize(renderAttribs.width),
-    "height": fixSize(renderAttribs.height),
-    ...commonProps,
-    ...useMask ? monotoneProps : coloredProps,
-    ...customStyle
-  };
-  return h("span", componentProps);
-};
-allowSimpleNames(true);
-setAPIModule("", fetchAPIModule);
-if (typeof document !== "undefined" && typeof window !== "undefined") {
-  const _window = window;
-  if (_window.IconifyPreload !== void 0) {
-    const preload = _window.IconifyPreload;
-    const err = "Invalid IconifyPreload syntax.";
-    if (typeof preload === "object" && preload !== null) {
-      (preload instanceof Array ? preload : [preload]).forEach((item) => {
-        try {
-          if (
-            // Check if item is an object and not null/array
-            typeof item !== "object" || item === null || item instanceof Array || // Check for 'icons' and 'prefix'
-            typeof item.icons !== "object" || typeof item.prefix !== "string" || // Add icon set
-            !addCollection(item)
-          ) {
-            console.error(err);
-          }
-        } catch (e) {
-          console.error(err);
-        }
-      });
-    }
-  }
-  if (_window.IconifyProviders !== void 0) {
-    const providers = _window.IconifyProviders;
-    if (typeof providers === "object" && providers !== null) {
-      for (let key in providers) {
-        const err = "IconifyProviders[" + key + "] is invalid.";
-        try {
-          const value = providers[key];
-          if (typeof value !== "object" || !value || value.resources === void 0) {
-            continue;
-          }
-          if (!addAPIProvider(key, value)) {
-            console.error(err);
-          }
-        } catch (e) {
-          console.error(err);
-        }
-      }
-    }
-  }
-}
-const emptyIcon = {
-  ...defaultIconProps,
-  body: ""
-};
-const Icon = /* @__PURE__ */ defineComponent((props, { emit: emit2 }) => {
-  const loader = ref(null);
-  function abortLoading() {
-    if (loader.value) {
-      loader.value.abort?.();
-      loader.value = null;
-    }
-  }
-  const rendering = ref(!!props.ssr);
-  const lastRenderedIconName = ref("");
-  const iconData = shallowRef(null);
-  function getIcon2() {
-    const icon = props.icon;
-    if (typeof icon === "object" && icon !== null && typeof icon.body === "string") {
-      lastRenderedIconName.value = "";
-      return {
-        data: icon
-      };
-    }
-    let iconName;
-    if (typeof icon !== "string" || (iconName = stringToIcon(icon, false, true)) === null) {
-      return null;
-    }
-    let data = getIconData(iconName);
-    if (!data) {
-      const oldState = loader.value;
-      if (!oldState || oldState.name !== icon) {
-        if (data === null) {
-          loader.value = {
-            name: icon
-          };
-        } else {
-          loader.value = {
-            name: icon,
-            abort: loadIcons([iconName], updateIconData)
-          };
-        }
-      }
-      return null;
-    }
-    abortLoading();
-    if (lastRenderedIconName.value !== icon) {
-      lastRenderedIconName.value = icon;
-      nextTick(() => {
-        emit2("load", icon);
-      });
-    }
-    const customise = props.customise;
-    if (customise) {
-      data = Object.assign({}, data);
-      const customised = customise(data.body, iconName.name, iconName.prefix, iconName.provider);
-      if (typeof customised === "string") {
-        data.body = customised;
-      }
-    }
-    const classes = ["iconify"];
-    if (iconName.prefix !== "") {
-      classes.push("iconify--" + iconName.prefix);
-    }
-    if (iconName.provider !== "") {
-      classes.push("iconify--" + iconName.provider);
-    }
-    return { data, classes };
-  }
-  function updateIconData() {
-    const icon = getIcon2();
-    if (!icon) {
-      iconData.value = null;
-    } else if (icon.data !== iconData.value?.data) {
-      iconData.value = icon;
-    }
-  }
-  if (rendering.value) {
-    updateIconData();
-  } else {
-    onMounted(() => {
-      rendering.value = true;
-      updateIconData();
-    });
-  }
-  watch(() => props.icon, updateIconData);
-  onUnmounted(abortLoading);
-  return () => {
-    const icon = iconData.value;
-    if (!icon) {
-      return render(emptyIcon, props);
-    }
-    let newProps = props;
-    if (icon.classes) {
-      newProps = {
-        ...props,
-        class: icon.classes.join(" ")
-      };
-    }
-    return render({
-      ...defaultIconProps,
-      ...icon.data
-    }, newProps);
-  };
-}, {
-  props: [
-    // Icon and render mode
-    "icon",
-    "mode",
-    "ssr",
-    // Layout and style
-    "width",
-    "height",
-    "style",
-    "color",
-    "inline",
-    // Transformations
-    "rotate",
-    "hFlip",
-    "horizontalFlip",
-    "vFlip",
-    "verticalFlip",
-    "flip",
-    // Misc
-    "id",
-    "ariaHidden",
-    "customise",
-    "title"
-  ],
-  emits: ["load"]
-});
-const _sfc_main$5 = {
-  __name: "Icon",
-  props: {
-    name: { type: String, required: true }
-  },
-  setup(__props) {
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Icon), {
-        icon: __props.name.replace(/^i-/, "")
-      }, null, 8, ["icon"]);
-    };
-  }
-};
-const ImageComponent = "img";
-const avatarGroupInjectionKey = Symbol("nuxt-ui.avatar-group");
-function useAvatarGroup(props) {
-  const avatarGroup = inject(avatarGroupInjectionKey, void 0);
-  const size = computed(() => props.size ?? avatarGroup?.value.size);
-  provide(avatarGroupInjectionKey, computed(() => ({ size: size.value })));
-  return {
-    size
-  };
-}
-const theme$3 = {
-  "slots": {
-    "root": "relative inline-flex items-center justify-center shrink-0",
-    "base": "rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap"
-  },
-  "variants": {
-    "color": {
-      "primary": "bg-primary",
-      "secondary": "bg-secondary",
-      "success": "bg-success",
-      "info": "bg-info",
-      "warning": "bg-warning",
-      "error": "bg-error",
-      "neutral": "bg-inverted"
-    },
-    "size": {
-      "3xs": "h-[4px] min-w-[4px] text-[4px]",
-      "2xs": "h-[5px] min-w-[5px] text-[5px]",
-      "xs": "h-[6px] min-w-[6px] text-[6px]",
-      "sm": "h-[7px] min-w-[7px] text-[7px]",
-      "md": "h-[8px] min-w-[8px] text-[8px]",
-      "lg": "h-[9px] min-w-[9px] text-[9px]",
-      "xl": "h-[10px] min-w-[10px] text-[10px]",
-      "2xl": "h-[11px] min-w-[11px] text-[11px]",
-      "3xl": "h-[12px] min-w-[12px] text-[12px]"
-    },
-    "position": {
-      "top-right": "top-0 right-0",
-      "bottom-right": "bottom-0 right-0",
-      "top-left": "top-0 left-0",
-      "bottom-left": "bottom-0 left-0"
-    },
-    "inset": {
-      "false": ""
-    },
-    "standalone": {
-      "false": "absolute"
-    }
-  },
-  "compoundVariants": [
-    {
-      "position": "top-right",
-      "inset": false,
-      "class": "-translate-y-1/2 translate-x-1/2 transform"
-    },
-    {
-      "position": "bottom-right",
-      "inset": false,
-      "class": "translate-y-1/2 translate-x-1/2 transform"
-    },
-    {
-      "position": "top-left",
-      "inset": false,
-      "class": "-translate-y-1/2 -translate-x-1/2 transform"
-    },
-    {
-      "position": "bottom-left",
-      "inset": false,
-      "class": "translate-y-1/2 -translate-x-1/2 transform"
-    }
-  ],
-  "defaultVariants": {
-    "size": "md",
-    "color": "primary",
-    "position": "top-right"
-  }
-};
-const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
-  __name: "Chip",
-  props: /* @__PURE__ */ mergeModels({
-    as: { type: null, required: false },
-    text: { type: [String, Number], required: false },
-    color: { type: null, required: false },
-    size: { type: null, required: false },
-    position: { type: null, required: false },
-    inset: { type: Boolean, required: false, default: false },
-    standalone: { type: Boolean, required: false, default: false },
-    class: { type: null, required: false },
-    ui: { type: null, required: false }
-  }, {
-    "show": { type: Boolean, ...{ default: true } },
-    "showModifiers": {}
-  }),
-  emits: ["update:show"],
-  setup(__props) {
-    const props = __props;
-    const show = useModel(__props, "show", { type: Boolean, ...{ default: true } });
-    const { size } = useAvatarGroup(props);
-    const appConfig2 = useAppConfig();
-    const ui = computed(() => tv({ extend: tv(theme$3), ...appConfig2.ui?.chip || {} })({
-      color: props.color,
-      size: size.value,
-      position: props.position,
-      inset: props.inset,
-      standalone: props.standalone
-    }));
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), {
-        as: __props.as,
-        class: normalizeClass(ui.value.root({ class: [props.ui?.root, props.class] }))
-      }, {
-        default: withCtx(() => [
-          createVNode(unref(Slot), normalizeProps(guardReactiveProps(_ctx.$attrs)), {
-            default: withCtx(() => [
-              renderSlot(_ctx.$slots, "default")
-            ]),
-            _: 3
-          }, 16),
-          show.value ? (openBlock(), createElementBlock("span", {
-            key: 0,
-            class: normalizeClass(ui.value.base({ class: props.ui?.base }))
-          }, [
-            renderSlot(_ctx.$slots, "content", {}, () => [
-              createTextVNode(toDisplayString(__props.text), 1)
-            ])
-          ], 2)) : createCommentVNode("", true)
-        ]),
-        _: 3
-      }, 8, ["as", "class"]);
-    };
-  }
-});
-const theme$2 = {
-  "slots": {
-    "root": "inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated",
-    "image": "h-full w-full rounded-[inherit] object-cover",
-    "fallback": "font-medium leading-none text-muted truncate",
-    "icon": "text-muted shrink-0"
-  },
-  "variants": {
-    "size": {
-      "3xs": {
-        "root": "size-4 text-[8px]"
-      },
-      "2xs": {
-        "root": "size-5 text-[10px]"
-      },
-      "xs": {
-        "root": "size-6 text-xs"
-      },
-      "sm": {
-        "root": "size-7 text-sm"
-      },
-      "md": {
-        "root": "size-8 text-base"
-      },
-      "lg": {
-        "root": "size-9 text-lg"
-      },
-      "xl": {
-        "root": "size-10 text-xl"
-      },
-      "2xl": {
-        "root": "size-11 text-[22px]"
-      },
-      "3xl": {
-        "root": "size-12 text-2xl"
-      }
-    }
-  },
-  "defaultVariants": {
-    "size": "md"
-  }
-};
-const _sfc_main$3 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
-  __name: "Avatar",
-  props: {
-    as: { type: null, required: false, default: "span" },
-    src: { type: String, required: false },
-    alt: { type: String, required: false },
-    icon: { type: String, required: false },
-    text: { type: String, required: false },
-    size: { type: null, required: false },
-    chip: { type: [Boolean, Object], required: false },
-    class: { type: null, required: false },
-    style: { type: null, required: false },
-    ui: { type: null, required: false }
-  },
-  setup(__props) {
-    const props = __props;
-    const fallback = computed(() => props.text || (props.alt || "").split(" ").map((word) => word.charAt(0)).join("").substring(0, 2));
-    const appConfig2 = useAppConfig();
-    const { size } = useAvatarGroup(props);
-    const ui = computed(() => tv({ extend: tv(theme$2), ...appConfig2.ui?.avatar || {} })({
-      size: size.value
-    }));
-    const sizePx = computed(() => ({
-      "3xs": 16,
-      "2xs": 20,
-      "xs": 24,
-      "sm": 28,
-      "md": 32,
-      "lg": 36,
-      "xl": 40,
-      "2xl": 44,
-      "3xl": 48
-    })[props.size || "md"]);
-    const error = ref(false);
-    watch(() => props.src, () => {
-      if (error.value) {
-        error.value = false;
-      }
-    });
-    function onError() {
-      error.value = true;
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(resolveDynamicComponent(props.chip ? _sfc_main$4 : unref(Primitive)), mergeProps({ as: __props.as }, props.chip ? typeof props.chip === "object" ? { inset: true, ...props.chip } : { inset: true } : {}, {
-        class: ui.value.root({ class: [props.ui?.root, props.class] }),
-        style: props.style
-      }), {
-        default: withCtx(() => [
-          __props.src && !error.value ? (openBlock(), createBlock(resolveDynamicComponent(unref(ImageComponent)), mergeProps({
-            key: 0,
-            role: "img",
-            src: __props.src,
-            alt: __props.alt,
-            width: sizePx.value,
-            height: sizePx.value
-          }, _ctx.$attrs, {
-            class: ui.value.image({ class: props.ui?.image }),
-            onError
-          }), null, 16, ["src", "alt", "width", "height", "class"])) : (openBlock(), createBlock(unref(Slot), normalizeProps(mergeProps({ key: 1 }, _ctx.$attrs)), {
-            default: withCtx(() => [
-              renderSlot(_ctx.$slots, "default", {}, () => [
-                __props.icon ? (openBlock(), createBlock(_sfc_main$5, {
-                  key: 0,
-                  name: __props.icon,
-                  class: normalizeClass(ui.value.icon({ class: props.ui?.icon }))
-                }, null, 8, ["name", "class"])) : (openBlock(), createElementBlock("span", {
-                  key: 1,
-                  class: normalizeClass(ui.value.fallback({ class: props.ui?.fallback }))
-                }, toDisplayString(fallback.value || " "), 3))
-              ])
-            ]),
-            _: 3
-          }, 16))
-        ]),
-        _: 3
-      }, 16, ["as", "class", "style"]);
-    };
-  }
-});
-function useComponentIcons(componentProps) {
-  const appConfig2 = useAppConfig();
-  const props = computed(() => toValue$1(componentProps));
-  const isLeading = computed(() => props.value.icon && props.value.leading || props.value.icon && !props.value.trailing || props.value.loading && !props.value.trailing || !!props.value.leadingIcon);
-  const isTrailing = computed(() => props.value.icon && props.value.trailing || props.value.loading && props.value.trailing || !!props.value.trailingIcon);
-  const leadingIconName = computed(() => {
-    if (props.value.loading) {
-      return props.value.loadingIcon || appConfig2.ui.icons.loading;
-    }
-    return props.value.leadingIcon || props.value.icon;
-  });
-  const trailingIconName = computed(() => {
-    if (props.value.loading && !isLeading.value) {
-      return props.value.loadingIcon || appConfig2.ui.icons.loading;
-    }
-    return props.value.trailingIcon || props.value.icon;
-  });
-  return {
-    isLeading,
-    isTrailing,
-    leadingIconName,
-    trailingIconName
-  };
-}
-const buttonGroupInjectionKey = Symbol("nuxt-ui.button-group");
-function useButtonGroup(props) {
-  const buttonGroup = inject(buttonGroupInjectionKey, void 0);
-  return {
-    orientation: computed(() => buttonGroup?.value.orientation),
-    size: computed(() => props?.size ?? buttonGroup?.value.size)
-  };
-}
-const formLoadingInjectionKey = Symbol("nuxt-ui.form-loading");
-function pickLinkProps(link) {
-  const keys = Object.keys(link);
-  const ariaKeys = keys.filter((key) => key.startsWith("aria-"));
-  const dataKeys = keys.filter((key) => key.startsWith("data-"));
-  const propsToInclude = [
-    "active",
-    "activeClass",
-    "ariaCurrentValue",
-    "as",
-    "disabled",
-    "exact",
-    "exactActiveClass",
-    "exactHash",
-    "exactQuery",
-    "external",
-    "href",
-    "download",
-    "inactiveClass",
-    "noPrefetch",
-    "noRel",
-    "prefetch",
-    "prefetchedClass",
-    "rel",
-    "replace",
-    "target",
-    "to",
-    "type",
-    "title",
-    "onClick",
-    ...ariaKeys,
-    ...dataKeys
-  ];
-  return reactivePick(link, ...propsToInclude);
-}
-function isPartiallyEqual(item1, item2) {
-  const diffedKeys = diff(item1, item2).reduce((filtered, q2) => {
-    if (q2.type === "added") {
-      filtered.add(q2.key);
-    }
-    return filtered;
-  }, /* @__PURE__ */ new Set());
-  const item1Filtered = Object.fromEntries(Object.entries(item1).filter(([key]) => !diffedKeys.has(key)));
-  const item2Filtered = Object.fromEntries(Object.entries(item2).filter(([key]) => !diffedKeys.has(key)));
-  return isEqual(item1Filtered, item2Filtered);
-}
-const PROTOCOL_STRICT_REGEX = /^[\s\w\0+.-]{2,}:([/\\]{1,2})/;
-const PROTOCOL_REGEX = /^[\s\w\0+.-]{2,}:([/\\]{2})?/;
-const PROTOCOL_RELATIVE_REGEX = /^([/\\]\s*){2,}[^/\\]/;
-function hasProtocol(inputString, opts = {}) {
-  if (typeof opts === "boolean") {
-    opts = { acceptRelative: opts };
-  }
-  if (opts.strict) {
-    return PROTOCOL_STRICT_REGEX.test(inputString);
-  }
-  return PROTOCOL_REGEX.test(inputString) || (opts.acceptRelative ? PROTOCOL_RELATIVE_REGEX.test(inputString) : false);
-}
-const _sfc_main$2 = {
-  __name: "LinkBase",
-  props: {
-    as: { type: String, required: false, default: "button" },
-    type: { type: String, required: false, default: "button" },
-    disabled: { type: Boolean, required: false },
-    onClick: { type: [Function, Array], required: false },
-    href: { type: String, required: false },
-    navigate: { type: Function, required: false },
-    target: { type: [String, Object, null], required: false },
-    rel: { type: [String, Object, null], required: false },
-    active: { type: Boolean, required: false },
-    isExternal: { type: Boolean, required: false }
-  },
-  setup(__props) {
-    const props = __props;
-    function onClickWrapper(e) {
-      if (props.disabled) {
-        e.stopPropagation();
-        e.preventDefault();
-        return;
-      }
-      if (props.onClick) {
-        for (const onClick of Array.isArray(props.onClick) ? props.onClick : [props.onClick]) {
-          onClick(e);
-        }
-      }
-      if (props.href && props.navigate && !props.isExternal) {
-        props.navigate(e);
-      }
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Primitive), mergeProps(__props.href ? {
-        "as": "a",
-        "href": __props.disabled ? void 0 : __props.href,
-        "aria-disabled": __props.disabled ? "true" : void 0,
-        "role": __props.disabled ? "link" : void 0,
-        "tabindex": __props.disabled ? -1 : void 0
-      } : __props.as === "button" ? {
-        as: __props.as,
-        type: __props.type,
-        disabled: __props.disabled
-      } : {
-        as: __props.as
-      }, {
-        rel: __props.rel,
-        target: __props.target,
-        onClick: onClickWrapper
-      }), {
-        default: withCtx(() => [
-          renderSlot(_ctx.$slots, "default")
-        ]),
-        _: 3
-      }, 16, ["rel", "target"]);
-    };
-  }
-};
-const theme$1 = {
-  "base": "focus-visible:outline-primary",
-  "variants": {
-    "active": {
-      "true": "text-primary",
-      "false": "text-muted"
-    },
-    "disabled": {
-      "true": "cursor-not-allowed opacity-75"
-    }
-  },
-  "compoundVariants": [
-    {
-      "active": false,
-      "disabled": false,
-      "class": [
-        "hover:text-default",
-        "transition-colors"
-      ]
-    }
-  ]
-};
-const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
-  __name: "Link",
-  props: {
-    as: { type: null, required: false, default: "button" },
-    type: { type: null, required: false, default: "button" },
-    disabled: { type: Boolean, required: false },
-    active: { type: Boolean, required: false, default: void 0 },
-    exact: { type: Boolean, required: false },
-    exactQuery: { type: [Boolean, String], required: false },
-    exactHash: { type: Boolean, required: false },
-    inactiveClass: { type: String, required: false, default: "" },
-    custom: { type: Boolean, required: false },
-    raw: { type: Boolean, required: false },
-    class: { type: null, required: false },
-    to: { type: null, required: false },
-    href: { type: null, required: false },
-    external: { type: Boolean, required: false },
-    target: { type: [String, Object, null], required: false },
-    rel: { type: [String, Object, null], required: false },
-    noRel: { type: Boolean, required: false },
-    prefetchedClass: { type: String, required: false },
-    prefetch: { type: Boolean, required: false },
-    prefetchOn: { type: [String, Object], required: false },
-    noPrefetch: { type: Boolean, required: false },
-    activeClass: { type: String, required: false, default: "" },
-    exactActiveClass: { type: String, required: false },
-    ariaCurrentValue: { type: String, required: false, default: "page" },
-    viewTransition: { type: Boolean, required: false },
-    replace: { type: Boolean, required: false }
-  },
-  setup(__props) {
-    const props = __props;
-    const route = useRoute();
-    const appConfig2 = useAppConfig();
-    const routerLinkProps = useForwardProps(reactiveOmit(props, "as", "type", "disabled", "active", "exact", "exactQuery", "exactHash", "activeClass", "inactiveClass", "to", "href", "raw", "custom", "class"));
-    const ui = computed(() => tv({
-      extend: tv(theme$1),
-      ...defu({
-        variants: {
-          active: {
-            true: props.activeClass,
-            false: props.inactiveClass
-          }
-        }
-      }, appConfig2.ui?.link || {})
-    }));
-    const to = computed(() => props.to ?? props.href);
-    const isExternal = computed(() => {
-      if (props.external) {
-        return true;
-      }
-      if (!to.value) {
-        return false;
-      }
-      return typeof to.value === "string" && hasProtocol(to.value, { acceptRelative: true });
-    });
-    function isLinkActive({ route: linkRoute, isActive, isExactActive }) {
-      if (props.active !== void 0) {
-        return props.active;
-      }
-      if (!to.value) {
-        return false;
-      }
-      if (props.exactQuery === "partial") {
-        if (!isPartiallyEqual(linkRoute.query, route.query)) return false;
-      } else if (props.exactQuery === true) {
-        if (!isEqual(linkRoute.query, route.query)) return false;
-      }
-      if (props.exactHash && linkRoute.hash !== route.hash) {
-        return false;
-      }
-      if (props.exact && isExactActive) {
-        return true;
-      }
-      if (!props.exact && isActive) {
-        return true;
-      }
-      return false;
-    }
-    function resolveLinkClass({ route: route2, isActive, isExactActive } = {}) {
-      const active = isLinkActive({ route: route2, isActive, isExactActive });
-      if (props.raw) {
-        return [props.class, active ? props.activeClass : props.inactiveClass];
-      }
-      return ui.value({ class: props.class, active, disabled: props.disabled });
-    }
-    return (_ctx, _cache) => {
-      return !isExternal.value && !!to.value ? (openBlock(), createBlock(unref(RouterLink), mergeProps({ key: 0 }, unref(routerLinkProps), {
-        to: to.value,
-        custom: ""
-      }), {
-        default: withCtx(({ href, navigate, route: linkRoute, isActive, isExactActive }) => [
-          __props.custom ? renderSlot(_ctx.$slots, "default", normalizeProps(mergeProps({ key: 0 }, {
-            ..._ctx.$attrs,
-            ...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
-            as: __props.as,
-            type: __props.type,
-            disabled: __props.disabled,
-            href,
-            navigate,
-            active: isLinkActive({ route: linkRoute, isActive, isExactActive })
-          }))) : (openBlock(), createBlock(_sfc_main$2, mergeProps({ key: 1 }, {
-            ..._ctx.$attrs,
-            ...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
-            as: __props.as,
-            type: __props.type,
-            disabled: __props.disabled,
-            href,
-            navigate
-          }, {
-            class: resolveLinkClass({ route: linkRoute, isActive, isExactActive })
-          }), {
-            default: withCtx(() => [
-              renderSlot(_ctx.$slots, "default", {
-                active: isLinkActive({ route: linkRoute, isActive, isExactActive })
-              })
-            ]),
-            _: 2
-          }, 1040, ["class"]))
-        ]),
-        _: 3
-      }, 16, ["to"])) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
-        __props.custom ? renderSlot(_ctx.$slots, "default", normalizeProps(mergeProps({ key: 0 }, {
-          ..._ctx.$attrs,
-          as: __props.as,
-          type: __props.type,
-          disabled: __props.disabled,
-          href: to.value,
-          target: isExternal.value ? "_blank" : void 0,
-          active: __props.active,
-          isExternal: isExternal.value
-        }))) : (openBlock(), createBlock(_sfc_main$2, mergeProps({ key: 1 }, {
-          ..._ctx.$attrs,
-          as: __props.as,
-          type: __props.type,
-          disabled: __props.disabled,
-          href: to.value,
-          target: isExternal.value ? "_blank" : void 0,
-          isExternal: isExternal.value
-        }, {
-          class: resolveLinkClass()
-        }), {
-          default: withCtx(() => [
-            renderSlot(_ctx.$slots, "default", { active: __props.active })
-          ]),
-          _: 3
-        }, 16, ["class"]))
-      ], 64));
-    };
-  }
-});
-const theme = {
-  "slots": {
-    "base": [
-      "rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75",
-      "transition-colors"
-    ],
-    "label": "truncate",
-    "leadingIcon": "shrink-0",
-    "leadingAvatar": "shrink-0",
-    "leadingAvatarSize": "",
-    "trailingIcon": "shrink-0"
-  },
-  "variants": {
-    "buttonGroup": {
-      "horizontal": "not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1]",
-      "vertical": "not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none focus-visible:z-[1]"
-    },
-    "color": {
-      "primary": "",
-      "secondary": "",
-      "success": "",
-      "info": "",
-      "warning": "",
-      "error": "",
-      "neutral": ""
-    },
-    "variant": {
-      "solid": "",
-      "outline": "",
-      "soft": "",
-      "subtle": "",
-      "ghost": "",
-      "link": ""
-    },
-    "size": {
-      "xs": {
-        "base": "px-2 py-1 text-xs gap-1",
-        "leadingIcon": "size-4",
-        "leadingAvatarSize": "3xs",
-        "trailingIcon": "size-4"
-      },
-      "sm": {
-        "base": "px-2.5 py-1.5 text-xs gap-1.5",
-        "leadingIcon": "size-4",
-        "leadingAvatarSize": "3xs",
-        "trailingIcon": "size-4"
-      },
-      "md": {
-        "base": "px-2.5 py-1.5 text-sm gap-1.5",
-        "leadingIcon": "size-5",
-        "leadingAvatarSize": "2xs",
-        "trailingIcon": "size-5"
-      },
-      "lg": {
-        "base": "px-3 py-2 text-sm gap-2",
-        "leadingIcon": "size-5",
-        "leadingAvatarSize": "2xs",
-        "trailingIcon": "size-5"
-      },
-      "xl": {
-        "base": "px-3 py-2 text-base gap-2",
-        "leadingIcon": "size-6",
-        "leadingAvatarSize": "xs",
-        "trailingIcon": "size-6"
-      }
-    },
-    "block": {
-      "true": {
-        "base": "w-full justify-center",
-        "trailingIcon": "ms-auto"
-      }
-    },
-    "square": {
-      "true": ""
-    },
-    "leading": {
-      "true": ""
-    },
-    "trailing": {
-      "true": ""
-    },
-    "loading": {
-      "true": ""
-    },
-    "active": {
-      "true": {
-        "base": ""
-      },
-      "false": {
-        "base": ""
-      }
-    }
-  },
-  "compoundVariants": [
-    {
-      "color": "primary",
-      "variant": "solid",
-      "class": "text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-    },
-    {
-      "color": "secondary",
-      "variant": "solid",
-      "class": "text-inverted bg-secondary hover:bg-secondary/75 active:bg-secondary/75 disabled:bg-secondary aria-disabled:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
-    },
-    {
-      "color": "success",
-      "variant": "solid",
-      "class": "text-inverted bg-success hover:bg-success/75 active:bg-success/75 disabled:bg-success aria-disabled:bg-success focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success"
-    },
-    {
-      "color": "info",
-      "variant": "solid",
-      "class": "text-inverted bg-info hover:bg-info/75 active:bg-info/75 disabled:bg-info aria-disabled:bg-info focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-info"
-    },
-    {
-      "color": "warning",
-      "variant": "solid",
-      "class": "text-inverted bg-warning hover:bg-warning/75 active:bg-warning/75 disabled:bg-warning aria-disabled:bg-warning focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-warning"
-    },
-    {
-      "color": "error",
-      "variant": "solid",
-      "class": "text-inverted bg-error hover:bg-error/75 active:bg-error/75 disabled:bg-error aria-disabled:bg-error focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-error"
-    },
-    {
-      "color": "primary",
-      "variant": "outline",
-      "class": "ring ring-inset ring-primary/50 text-primary hover:bg-primary/10 active:bg-primary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-    },
-    {
-      "color": "secondary",
-      "variant": "outline",
-      "class": "ring ring-inset ring-secondary/50 text-secondary hover:bg-secondary/10 active:bg-secondary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
-    },
-    {
-      "color": "success",
-      "variant": "outline",
-      "class": "ring ring-inset ring-success/50 text-success hover:bg-success/10 active:bg-success/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-success"
-    },
-    {
-      "color": "info",
-      "variant": "outline",
-      "class": "ring ring-inset ring-info/50 text-info hover:bg-info/10 active:bg-info/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-info"
-    },
-    {
-      "color": "warning",
-      "variant": "outline",
-      "class": "ring ring-inset ring-warning/50 text-warning hover:bg-warning/10 active:bg-warning/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-warning"
-    },
-    {
-      "color": "error",
-      "variant": "outline",
-      "class": "ring ring-inset ring-error/50 text-error hover:bg-error/10 active:bg-error/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-error"
-    },
-    {
-      "color": "primary",
-      "variant": "soft",
-      "class": "text-primary bg-primary/10 hover:bg-primary/15 active:bg-primary/15 focus:outline-none focus-visible:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10"
-    },
-    {
-      "color": "secondary",
-      "variant": "soft",
-      "class": "text-secondary bg-secondary/10 hover:bg-secondary/15 active:bg-secondary/15 focus:outline-none focus-visible:bg-secondary/15 disabled:bg-secondary/10 aria-disabled:bg-secondary/10"
-    },
-    {
-      "color": "success",
-      "variant": "soft",
-      "class": "text-success bg-success/10 hover:bg-success/15 active:bg-success/15 focus:outline-none focus-visible:bg-success/15 disabled:bg-success/10 aria-disabled:bg-success/10"
-    },
-    {
-      "color": "info",
-      "variant": "soft",
-      "class": "text-info bg-info/10 hover:bg-info/15 active:bg-info/15 focus:outline-none focus-visible:bg-info/15 disabled:bg-info/10 aria-disabled:bg-info/10"
-    },
-    {
-      "color": "warning",
-      "variant": "soft",
-      "class": "text-warning bg-warning/10 hover:bg-warning/15 active:bg-warning/15 focus:outline-none focus-visible:bg-warning/15 disabled:bg-warning/10 aria-disabled:bg-warning/10"
-    },
-    {
-      "color": "error",
-      "variant": "soft",
-      "class": "text-error bg-error/10 hover:bg-error/15 active:bg-error/15 focus:outline-none focus-visible:bg-error/15 disabled:bg-error/10 aria-disabled:bg-error/10"
-    },
-    {
-      "color": "primary",
-      "variant": "subtle",
-      "class": "text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-    },
-    {
-      "color": "secondary",
-      "variant": "subtle",
-      "class": "text-secondary ring ring-inset ring-secondary/25 bg-secondary/10 hover:bg-secondary/15 active:bg-secondary/15 disabled:bg-secondary/10 aria-disabled:bg-secondary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
-    },
-    {
-      "color": "success",
-      "variant": "subtle",
-      "class": "text-success ring ring-inset ring-success/25 bg-success/10 hover:bg-success/15 active:bg-success/15 disabled:bg-success/10 aria-disabled:bg-success/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-success"
-    },
-    {
-      "color": "info",
-      "variant": "subtle",
-      "class": "text-info ring ring-inset ring-info/25 bg-info/10 hover:bg-info/15 active:bg-info/15 disabled:bg-info/10 aria-disabled:bg-info/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-info"
-    },
-    {
-      "color": "warning",
-      "variant": "subtle",
-      "class": "text-warning ring ring-inset ring-warning/25 bg-warning/10 hover:bg-warning/15 active:bg-warning/15 disabled:bg-warning/10 aria-disabled:bg-warning/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-warning"
-    },
-    {
-      "color": "error",
-      "variant": "subtle",
-      "class": "text-error ring ring-inset ring-error/25 bg-error/10 hover:bg-error/15 active:bg-error/15 disabled:bg-error/10 aria-disabled:bg-error/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-error"
-    },
-    {
-      "color": "primary",
-      "variant": "ghost",
-      "class": "text-primary hover:bg-primary/10 active:bg-primary/10 focus:outline-none focus-visible:bg-primary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
-    },
-    {
-      "color": "secondary",
-      "variant": "ghost",
-      "class": "text-secondary hover:bg-secondary/10 active:bg-secondary/10 focus:outline-none focus-visible:bg-secondary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
-    },
-    {
-      "color": "success",
-      "variant": "ghost",
-      "class": "text-success hover:bg-success/10 active:bg-success/10 focus:outline-none focus-visible:bg-success/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
-    },
-    {
-      "color": "info",
-      "variant": "ghost",
-      "class": "text-info hover:bg-info/10 active:bg-info/10 focus:outline-none focus-visible:bg-info/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
-    },
-    {
-      "color": "warning",
-      "variant": "ghost",
-      "class": "text-warning hover:bg-warning/10 active:bg-warning/10 focus:outline-none focus-visible:bg-warning/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
-    },
-    {
-      "color": "error",
-      "variant": "ghost",
-      "class": "text-error hover:bg-error/10 active:bg-error/10 focus:outline-none focus-visible:bg-error/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
-    },
-    {
-      "color": "primary",
-      "variant": "link",
-      "class": "text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
-    },
-    {
-      "color": "secondary",
-      "variant": "link",
-      "class": "text-secondary hover:text-secondary/75 active:text-secondary/75 disabled:text-secondary aria-disabled:text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-secondary"
-    },
-    {
-      "color": "success",
-      "variant": "link",
-      "class": "text-success hover:text-success/75 active:text-success/75 disabled:text-success aria-disabled:text-success focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-success"
-    },
-    {
-      "color": "info",
-      "variant": "link",
-      "class": "text-info hover:text-info/75 active:text-info/75 disabled:text-info aria-disabled:text-info focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-info"
-    },
-    {
-      "color": "warning",
-      "variant": "link",
-      "class": "text-warning hover:text-warning/75 active:text-warning/75 disabled:text-warning aria-disabled:text-warning focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-warning"
-    },
-    {
-      "color": "error",
-      "variant": "link",
-      "class": "text-error hover:text-error/75 active:text-error/75 disabled:text-error aria-disabled:text-error focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error"
-    },
-    {
-      "color": "neutral",
-      "variant": "solid",
-      "class": "text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted"
-    },
-    {
-      "color": "neutral",
-      "variant": "outline",
-      "class": "ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default focus:outline-none focus-visible:ring-2 focus-visible:ring-inverted"
-    },
-    {
-      "color": "neutral",
-      "variant": "soft",
-      "class": "text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 focus:outline-none focus-visible:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated"
-    },
-    {
-      "color": "neutral",
-      "variant": "subtle",
-      "class": "ring ring-inset ring-accented text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated focus:outline-none focus-visible:ring-2 focus-visible:ring-inverted"
-    },
-    {
-      "color": "neutral",
-      "variant": "ghost",
-      "class": "text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent"
-    },
-    {
-      "color": "neutral",
-      "variant": "link",
-      "class": "text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted"
-    },
-    {
-      "size": "xs",
-      "square": true,
-      "class": "p-1"
-    },
-    {
-      "size": "sm",
-      "square": true,
-      "class": "p-1.5"
-    },
-    {
-      "size": "md",
-      "square": true,
-      "class": "p-1.5"
-    },
-    {
-      "size": "lg",
-      "square": true,
-      "class": "p-2"
-    },
-    {
-      "size": "xl",
-      "square": true,
-      "class": "p-2"
-    },
-    {
-      "loading": true,
-      "leading": true,
-      "class": {
-        "leadingIcon": "animate-spin"
-      }
-    },
-    {
-      "loading": true,
-      "leading": false,
-      "trailing": true,
-      "class": {
-        "trailingIcon": "animate-spin"
-      }
-    }
-  ],
-  "defaultVariants": {
-    "color": "primary",
-    "variant": "solid",
-    "size": "md"
-  }
-};
-const _sfc_main = {
-  __name: "Button",
-  props: {
-    label: { type: String, required: false },
-    color: { type: null, required: false },
-    activeColor: { type: null, required: false },
-    variant: { type: null, required: false },
-    activeVariant: { type: null, required: false },
-    size: { type: null, required: false },
-    square: { type: Boolean, required: false },
-    block: { type: Boolean, required: false },
-    loadingAuto: { type: Boolean, required: false },
-    onClick: { type: [Function, Array], required: false },
-    class: { type: null, required: false },
-    ui: { type: null, required: false },
-    icon: { type: String, required: false },
-    avatar: { type: Object, required: false },
-    leading: { type: Boolean, required: false },
-    leadingIcon: { type: String, required: false },
-    trailing: { type: Boolean, required: false },
-    trailingIcon: { type: String, required: false },
-    loading: { type: Boolean, required: false },
-    loadingIcon: { type: String, required: false },
-    as: { type: null, required: false },
-    type: { type: null, required: false },
-    disabled: { type: Boolean, required: false },
-    active: { type: Boolean, required: false },
-    exact: { type: Boolean, required: false },
-    exactQuery: { type: [Boolean, String], required: false },
-    exactHash: { type: Boolean, required: false },
-    inactiveClass: { type: String, required: false },
-    to: { type: null, required: false },
-    href: { type: null, required: false },
-    external: { type: Boolean, required: false },
-    target: { type: [String, Object, null], required: false },
-    rel: { type: [String, Object, null], required: false },
-    noRel: { type: Boolean, required: false },
-    prefetchedClass: { type: String, required: false },
-    prefetch: { type: Boolean, required: false },
-    prefetchOn: { type: [String, Object], required: false },
-    noPrefetch: { type: Boolean, required: false },
-    activeClass: { type: String, required: false },
-    exactActiveClass: { type: String, required: false },
-    ariaCurrentValue: { type: String, required: false },
-    viewTransition: { type: Boolean, required: false },
-    replace: { type: Boolean, required: false }
-  },
-  setup(__props) {
-    const props = __props;
-    const slots = useSlots();
-    const appConfig2 = useAppConfig();
-    const { orientation, size: buttonSize } = useButtonGroup(props);
-    const linkProps = useForwardProps(pickLinkProps(props));
-    const loadingAutoState = ref(false);
-    const formLoading = inject(formLoadingInjectionKey, void 0);
-    async function onClickWrapper(event) {
-      loadingAutoState.value = true;
-      const callbacks = Array.isArray(props.onClick) ? props.onClick : [props.onClick];
-      try {
-        await Promise.all(callbacks.map((fn) => fn?.(event)));
-      } finally {
-        loadingAutoState.value = false;
-      }
-    }
-    const isLoading = computed(() => {
-      return props.loading || props.loadingAuto && (loadingAutoState.value || formLoading?.value && props.type === "submit");
-    });
-    const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(
-      computed(() => ({ ...props, loading: isLoading.value }))
-    );
-    const ui = computed(() => tv({
-      extend: tv(theme),
-      ...defu({
-        variants: {
-          active: {
-            true: {
-              base: mergeClasses(appConfig2.ui?.button?.variants?.active?.true?.base, props.activeClass)
-            },
-            false: {
-              base: mergeClasses(appConfig2.ui?.button?.variants?.active?.false?.base, props.inactiveClass)
-            }
-          }
-        }
-      }, appConfig2.ui?.button || {})
-    })({
-      color: props.color,
-      variant: props.variant,
-      size: buttonSize.value,
-      loading: isLoading.value,
-      block: props.block,
-      square: props.square || !slots.default && !props.label,
-      leading: isLeading.value,
-      trailing: isTrailing.value,
-      buttonGroup: orientation.value
-    }));
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$1, mergeProps({
-        type: __props.type,
-        disabled: __props.disabled || isLoading.value
-      }, unref(omit)(unref(linkProps), ["type", "disabled", "onClick"]), { custom: "" }), {
-        default: withCtx(({ active, ...slotProps }) => [
-          createVNode(_sfc_main$2, mergeProps(slotProps, {
-            class: ui.value.base({
-              class: [props.ui?.base, props.class],
-              active,
-              ...active && __props.activeVariant ? { variant: __props.activeVariant } : {},
-              ...active && __props.activeColor ? { color: __props.activeColor } : {}
-            }),
-            onClick: onClickWrapper
-          }), {
-            default: withCtx(() => [
-              renderSlot(_ctx.$slots, "leading", {}, () => [
-                unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$5, {
-                  key: 0,
-                  name: unref(leadingIconName),
-                  class: normalizeClass(ui.value.leadingIcon({ class: props.ui?.leadingIcon, active }))
-                }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$3, mergeProps({
-                  key: 1,
-                  size: props.ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
-                }, __props.avatar, {
-                  class: ui.value.leadingAvatar({ class: props.ui?.leadingAvatar, active })
-                }), null, 16, ["size", "class"])) : createCommentVNode("", true)
-              ]),
-              renderSlot(_ctx.$slots, "default", {}, () => [
-                __props.label !== void 0 && __props.label !== null ? (openBlock(), createElementBlock("span", {
-                  key: 0,
-                  class: normalizeClass(ui.value.label({ class: props.ui?.label, active }))
-                }, toDisplayString(__props.label), 3)) : createCommentVNode("", true)
-              ]),
-              renderSlot(_ctx.$slots, "trailing", {}, () => [
-                unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$5, {
-                  key: 0,
-                  name: unref(trailingIconName),
-                  class: normalizeClass(ui.value.trailingIcon({ class: props.ui?.trailingIcon, active }))
-                }, null, 8, ["name", "class"])) : createCommentVNode("", true)
-              ])
-            ]),
-            _: 2
-          }, 1040, ["class"])
-        ]),
-        _: 3
-      }, 16, ["type", "disabled"]);
-    };
   }
 };
 const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwindcss.com */
@@ -24934,221 +17850,173 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 }
 `;
 export {
-  createSharedComposable as $,
-  normalizeProps as A,
-  guardReactiveProps as B,
-  useVModel as C,
-  unrefElement as D,
-  normalizeStyle as E,
+  TriggerOpTypes as $,
+  normalizeClass as A,
+  resolveDynamicComponent as B,
+  renderList as C,
+  toRef as D,
+  shallowReactive as E,
   Fragment as F,
-  useTimeoutFn as G,
-  useState as H,
-  nextTick as I,
-  useSlots as J,
-  useLocale as K,
-  useForwardPropsEmits as L,
-  reactivePick as M,
-  tv as N,
-  useAppConfig as O,
-  Primitive as P,
-  createBaseVNode as Q,
-  _sfc_main$5 as R,
-  normalizeClass as S,
+  reactive as G,
+  markRaw as H,
+  useId as I,
+  provide as J,
+  createApp as K,
+  BaseTransition as L,
+  BaseTransitionPropsValidators as M,
+  Comment as N,
+  DeprecationTypes as O,
+  EffectScope as P,
+  ErrorCodes as Q,
+  ErrorTypeStrings as R,
+  KeepAlive as S,
   Teleport as T,
-  resolveDynamicComponent as U,
-  renderList as V,
-  _sfc_main as W,
-  useForwardProps as X,
-  toRef$1 as Y,
-  omit as Z,
-  _sfc_main$3 as _,
-  createContext as a,
-  initCustomFormatter as a$,
-  shallowReactive as a0,
-  reactive as a1,
-  markRaw as a2,
-  useId as a3,
-  provide as a4,
-  localeContextInjectionKey as a5,
-  defineCustomElement as a6,
-  tailwindStyles as a7,
-  createApp as a8,
-  BaseTransition as a9,
-  createSSRApp as aA,
-  createSlots as aB,
-  createStaticVNode as aC,
-  customRef as aD,
-  defineAsyncComponent as aE,
-  defineEmits as aF,
-  defineExpose as aG,
-  defineModel as aH,
-  defineOptions as aI,
-  defineProps as aJ,
-  defineSSRCustomElement as aK,
-  defineSlots as aL,
-  devtools as aM,
-  effect as aN,
-  effectScope as aO,
-  getCurrentInstance as aP,
-  getCurrentScope as aQ,
-  getCurrentWatcher as aR,
-  getTransitionRawChildren as aS,
-  h as aT,
-  handleError as aU,
-  hasInjectionContext as aV,
-  hydrate as aW,
-  hydrateOnIdle as aX,
-  hydrateOnInteraction as aY,
-  hydrateOnMediaQuery as aZ,
-  hydrateOnVisible as a_,
-  BaseTransitionPropsValidators as aa,
-  Comment as ab,
-  DeprecationTypes as ac,
-  EffectScope as ad,
-  ErrorCodes as ae,
-  ErrorTypeStrings as af,
-  KeepAlive as ag,
-  ReactiveEffect as ah,
-  Static as ai,
-  Suspense as aj,
-  Text as ak,
-  TrackOpTypes as al,
-  Transition as am,
-  TransitionGroup as an,
-  TriggerOpTypes as ao,
-  VueElement as ap,
-  assertNumber as aq,
-  callWithAsyncErrorHandling as ar,
-  callWithErrorHandling as as,
-  camelize$1 as at,
-  capitalize as au,
-  cloneVNode as av,
-  compatUtils as aw,
-  createHydrationRenderer as ax,
-  createPropsRestProxy as ay,
-  createRenderer as az,
-  ref as b,
-  vShow as b$,
-  initDirectivesForSSR as b0,
-  inject as b1,
-  isMemoSame as b2,
-  isProxy as b3,
-  isReactive as b4,
-  isReadonly as b5,
-  isRef as b6,
-  isRuntimeOnly as b7,
-  isShallow as b8,
-  isVNode as b9,
-  setDevtoolsHook as bA,
-  setTransitionHooks as bB,
-  shallowReadonly as bC,
-  shallowRef as bD,
-  ssrContextKey as bE,
-  ssrUtils as bF,
-  stop as bG,
-  toHandlerKey as bH,
-  toHandlers as bI,
-  toRaw as bJ,
-  toValue$1 as bK,
-  transformVNodeArgs as bL,
-  triggerRef as bM,
-  useAttrs as bN,
-  useCssModule as bO,
-  useCssVars as bP,
-  useHost as bQ,
-  useModel as bR,
-  useSSRContext as bS,
-  useShadowRoot as bT,
-  useTemplateRef as bU,
-  useTransitionState as bV,
-  vModelCheckbox as bW,
-  vModelDynamic as bX,
-  vModelRadio as bY,
-  vModelSelect as bZ,
-  vModelText as b_,
-  mergeDefaults as ba,
-  mergeModels as bb,
-  onActivated as bc,
-  onBeforeMount as bd,
-  onBeforeUnmount as be,
-  onBeforeUpdate as bf,
-  onDeactivated as bg,
-  onErrorCaptured as bh,
-  onRenderTracked as bi,
-  onRenderTriggered as bj,
-  onScopeDispose as bk,
-  onServerPrefetch as bl,
-  onUpdated as bm,
-  onWatcherCleanup as bn,
-  popScopeId as bo,
-  proxyRefs as bp,
-  pushScopeId as bq,
-  queuePostFlushCb as br,
-  readonly as bs,
-  registerRuntimeCompiler as bt,
-  render$1 as bu,
-  resolveComponent as bv,
-  resolveDirective as bw,
-  resolveFilter as bx,
-  resolveTransitionHooks as by,
-  setBlockTracking as bz,
+  ReactiveEffect as U,
+  Static as V,
+  Suspense as W,
+  Text as X,
+  TrackOpTypes as Y,
+  Transition as Z,
+  TransitionGroup as _,
+  ref as a,
+  onWatcherCleanup as a$,
+  VueElement as a0,
+  assertNumber as a1,
+  callWithAsyncErrorHandling as a2,
+  callWithErrorHandling as a3,
+  camelize as a4,
+  capitalize as a5,
+  cloneVNode as a6,
+  compatUtils as a7,
+  createHydrationRenderer as a8,
+  createPropsRestProxy as a9,
+  hydrateOnInteraction as aA,
+  hydrateOnMediaQuery as aB,
+  hydrateOnVisible as aC,
+  initCustomFormatter as aD,
+  initDirectivesForSSR as aE,
+  inject as aF,
+  isMemoSame as aG,
+  isProxy as aH,
+  isReactive as aI,
+  isReadonly as aJ,
+  isRef as aK,
+  isRuntimeOnly as aL,
+  isShallow as aM,
+  isVNode as aN,
+  mergeDefaults as aO,
+  mergeModels as aP,
+  onActivated as aQ,
+  onBeforeMount as aR,
+  onBeforeUnmount as aS,
+  onBeforeUpdate as aT,
+  onDeactivated as aU,
+  onErrorCaptured as aV,
+  onRenderTracked as aW,
+  onRenderTriggered as aX,
+  onScopeDispose as aY,
+  onServerPrefetch as aZ,
+  onUpdated as a_,
+  createRenderer as aa,
+  createSSRApp as ab,
+  createSlots as ac,
+  createStaticVNode as ad,
+  customRef as ae,
+  defineAsyncComponent as af,
+  defineCustomElement as ag,
+  defineEmits as ah,
+  defineExpose as ai,
+  defineModel as aj,
+  defineOptions as ak,
+  defineProps as al,
+  defineSSRCustomElement as am,
+  defineSlots as an,
+  devtools as ao,
+  effect as ap,
+  effectScope as aq,
+  getCurrentInstance as ar,
+  getCurrentScope as as,
+  getCurrentWatcher as at,
+  getTransitionRawChildren as au,
+  h as av,
+  handleError as aw,
+  hasInjectionContext as ax,
+  hydrate as ay,
+  hydrateOnIdle as az,
+  createCommentVNode as b,
+  popScopeId as b0,
+  proxyRefs as b1,
+  pushScopeId as b2,
+  queuePostFlushCb as b3,
+  readonly as b4,
+  registerRuntimeCompiler as b5,
+  render as b6,
+  resolveComponent as b7,
+  resolveDirective as b8,
+  resolveFilter as b9,
+  vModelRadio as bA,
+  vModelSelect as bB,
+  vModelText as bC,
+  vShow as bD,
+  version as bE,
+  warn as bF,
+  watchPostEffect as bG,
+  watchSyncEffect as bH,
+  withAsyncContext as bI,
+  withDefaults as bJ,
+  withDirectives as bK,
+  withKeys as bL,
+  withMemo as bM,
+  withScopeId as bN,
+  tailwindStyles as bO,
+  resolveTransitionHooks as ba,
+  setBlockTracking as bb,
+  setDevtoolsHook as bc,
+  setTransitionHooks as bd,
+  shallowReadonly as be,
+  shallowRef as bf,
+  ssrContextKey as bg,
+  ssrUtils as bh,
+  stop as bi,
+  toHandlerKey as bj,
+  toHandlers as bk,
+  toRaw as bl,
+  toValue as bm,
+  transformVNodeArgs as bn,
+  triggerRef as bo,
+  useAttrs as bp,
+  useCssModule as bq,
+  useCssVars as br,
+  useHost as bs,
+  useModel as bt,
+  useSSRContext as bu,
+  useShadowRoot as bv,
+  useTemplateRef as bw,
+  useTransitionState as bx,
+  vModelCheckbox as by,
+  vModelDynamic as bz,
   createBlock as c,
-  version as c0,
-  warn as c1,
-  watchPostEffect as c2,
-  watchSyncEffect as c3,
-  withAsyncContext as c4,
-  withDefaults as c5,
-  withDirectives as c6,
-  withKeys as c7,
-  withMemo as c8,
-  withScopeId as c9,
-  isNullish as ca,
-  isEqual as cb,
-  defaultWindow as cc,
-  renderSlotFragments as cd,
-  useEventListener as ce,
-  createGlobalState as cf,
-  useEmitAsProps as cg,
-  createSharedComposable$1 as ch,
-  tryOnBeforeUnmount as ci,
-  defu as cj,
-  isIOS as ck,
-  useMounted as cl,
-  Slot as cm,
-  computedEager as cn,
-  refAutoReset as co,
-  makeDestructurable as cp,
-  camelize as cq,
-  get as cr,
-  reactiveOmit as cs,
-  isArrayOfArray as ct,
-  _sfc_main$1 as cu,
-  pickLinkProps as cv,
-  _sfc_main$2 as cw,
-  useButtonGroup as cx,
-  useComponentIcons as cy,
   defineComponent as d,
-  useTimeout as e,
-  useRafFn as f,
-  createCommentVNode as g,
-  createTextVNode as h,
-  toDisplayString as i,
-  useForwardExpose as j,
-  computed as k,
-  watchEffect as l,
-  watch as m,
-  onKeyStroke as n,
+  createTextVNode as e,
+  toDisplayString as f,
+  computed as g,
+  watchEffect as h,
+  watch as i,
+  onMounted as j,
+  onUnmounted as k,
+  createElementBlock as l,
+  createVNode as m,
+  mergeProps as n,
   openBlock as o,
-  onMounted as p,
-  onUnmounted as q,
+  withModifiers as p,
+  normalizeProps as q,
   renderSlot as r,
-  createElementBlock as s,
+  guardReactiveProps as s,
   toRefs as t,
   unref as u,
-  createVNode as v,
+  normalizeStyle as v,
   withCtx as w,
-  mergeProps as x,
-  withModifiers as y,
-  isClient as z
+  nextTick as x,
+  useSlots as y,
+  createBaseVNode as z
 };
