@@ -3,7 +3,7 @@ import { P as Primitive, c as createContext, u as useTimeout, a as useRafFn, b a
 import { u as useCollection, _ as _sfc_main$j, g as getActiveElement, a as _sfc_main$k, P as Presence, c as context, f as focusFirst, b as getTabbableCandidates, d as usePortal, e as _sfc_main$p, p as portalTargetInjectionKey } from "./shared-button.js";
 import { _ as _sfc_main$o } from "./card-xpto.js";
 import "./the-header.js";
-import "./_plugin-vue_export-helper.js";
+import "./me-icon.min.js";
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) return;

@@ -1,5 +1,6 @@
 import { L as BaseTransition, M as BaseTransitionPropsValidators, N as Comment, O as DeprecationTypes, P as EffectScope, Q as ErrorCodes, R as ErrorTypeStrings, F as Fragment, S as KeepAlive, U as ReactiveEffect, V as Static, W as Suspense, T as Teleport, X as Text, Y as TrackOpTypes, Z as Transition, _ as TransitionGroup, $ as TriggerOpTypes, a0 as VueElement, a1 as assertNumber, a2 as callWithAsyncErrorHandling, a3 as callWithErrorHandling, a4 as camelize, a5 as capitalize, a6 as cloneVNode, a7 as compatUtils, g as computed, K as createApp, c as createBlock, b as createCommentVNode, l as createElementBlock, z as createBaseVNode, a8 as createHydrationRenderer, a9 as createPropsRestProxy, aa as createRenderer, ab as createSSRApp, ac as createSlots, ad as createStaticVNode, e as createTextVNode, m as createVNode, ae as customRef, af as defineAsyncComponent, d as defineComponent, ag as defineCustomElement, ah as defineEmits, ai as defineExpose, aj as defineModel, ak as defineOptions, al as defineProps, am as defineSSRCustomElement, an as defineSlots, ao as devtools, ap as effect, aq as effectScope, ar as getCurrentInstance, as as getCurrentScope, at as getCurrentWatcher, au as getTransitionRawChildren, s as guardReactiveProps, av as h, aw as handleError, ax as hasInjectionContext, ay as hydrate, az as hydrateOnIdle, aA as hydrateOnInteraction, aB as hydrateOnMediaQuery, aC as hydrateOnVisible, aD as initCustomFormatter, aE as initDirectivesForSSR, aF as inject, aG as isMemoSame, aH as isProxy, aI as isReactive, aJ as isReadonly, aK as isRef, aL as isRuntimeOnly, aM as isShallow, aN as isVNode, H as markRaw, aO as mergeDefaults, aP as mergeModels, n as mergeProps, x as nextTick, A as normalizeClass, q as normalizeProps, v as normalizeStyle, aQ as onActivated, aR as onBeforeMount, aS as onBeforeUnmount, aT as onBeforeUpdate, aU as onDeactivated, aV as onErrorCaptured, j as onMounted, aW as onRenderTracked, aX as onRenderTriggered, aY as onScopeDispose, aZ as onServerPrefetch, k as onUnmounted, a_ as onUpdated, a$ as onWatcherCleanup, o as openBlock, b0 as popScopeId, J as provide, b1 as proxyRefs, b2 as pushScopeId, b3 as queuePostFlushCb, G as reactive, b4 as readonly, a as ref, b5 as registerRuntimeCompiler, b6 as render, C as renderList, r as renderSlot, b7 as resolveComponent, b8 as resolveDirective, B as resolveDynamicComponent, b9 as resolveFilter, ba as resolveTransitionHooks, bb as setBlockTracking, bc as setDevtoolsHook, bd as setTransitionHooks, E as shallowReactive, be as shallowReadonly, bf as shallowRef, bg as ssrContextKey, bh as ssrUtils, bi as stop, f as toDisplayString, bj as toHandlerKey, bk as toHandlers, bl as toRaw, D as toRef, t as toRefs, bm as toValue$1, bn as transformVNodeArgs, bo as triggerRef, u as unref, bp as useAttrs, bq as useCssModule, br as useCssVars, bs as useHost, I as useId$1, bt as useModel, bu as useSSRContext, bv as useShadowRoot, y as useSlots, bw as useTemplateRef, bx as useTransitionState, by as vModelCheckbox, bz as vModelDynamic, bA as vModelRadio, bB as vModelSelect, bC as vModelText, bD as vShow, bE as version, bF as warn, i as watch, h as watchEffect, bG as watchPostEffect, bH as watchSyncEffect, bI as withAsyncContext, w as withCtx, bJ as withDefaults, bK as withDirectives, bL as withKeys, bM as withMemo, p as withModifiers, bN as withScopeId, bO as tailwindStyles } from "./main.js";
 import { P as Primitive, v as isNullish, w as isEqual, d as useVModel, c as createContext, b as useForwardExpose, x as defaultWindow, i as isClient, y as renderSlotFragments, e as unrefElement, z as useEventListener, A as createGlobalState, o as onKeyStroke, B as useEmitAsProps, C as createSharedComposable, D as tryOnBeforeUnmount, E as defu, F as isIOS, G as useMounted, S as Slot, H as computedEager, I as refAutoReset, j as useForwardPropsEmits, J as makeDestructurable, K as camelize$1, q as createSharedComposable$1, h as useLocale, r as reactivePick, t as tv, k as useAppConfig, m as _sfc_main$1a, l as _sfc_main$1b, L as get, M as reactiveOmit, p as omit, N as isArrayOfArray, _ as _sfc_main$1c, O as _sfc_main$1d, Q as pickLinkProps, R as _sfc_main$1e } from "./Button.js";
+import { M as MeIcon, m as meIconStyles } from "./me-icon.min.js";
 /**
 * vue v3.5.18
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
@@ -7531,6 +7532,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           _: 1
         }),
         _cache[2] || (_cache[2] = createBaseVNode("br", null, null, -1)),
+        createVNode(MeIcon, {
+          name: "store",
+          size: "xl",
+          color: "black"
+        }),
+        _cache[3] || (_cache[3] = createTextVNode(" icon acima ", -1)),
+        _cache[4] || (_cache[4] = createBaseVNode("br", null, null, -1)),
         createVNode(_component_UDropdownMenu, {
           items: dropdownItems.value,
           class: "mt-4"
@@ -7558,7 +7566,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 const SharedButtonElement = defineCustomElement(_sfc_main, {
   shadowRoot: true,
-  styles: [tailwindStyles]
+  styles: [tailwindStyles, meIconStyles]
 });
 if (!customElements.get("shared-button")) {
   customElements.define("shared-button", SharedButtonElement);

@@ -10300,6 +10300,13 @@ const initDirectivesForSSR = () => {
     initVShowForSSR();
   }
 };
+const _export_sfc = (sfc, props) => {
+  const target = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target[key] = val;
+  }
+  return target;
+};
 const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwindcss.com */
 @layer properties {
   @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
@@ -17969,6 +17976,7 @@ export {
   withMemo as bM,
   withScopeId as bN,
   tailwindStyles as bO,
+  _export_sfc as bP,
   resolveTransitionHooks as ba,
   setBlockTracking as bb,
   setDevtoolsHook as bc,

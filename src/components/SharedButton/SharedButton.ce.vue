@@ -12,6 +12,10 @@
 
     <br />
 
+    <MeIcon name="store" size="xl" color="black" />
+    icon acima
+    <br />
+
     <UDropdownMenu :items="dropdownItems" class="mt-4">
       <UButton icon="i-lucide-menu" color="neutral" variant="outline" />
     </UDropdownMenu>
@@ -24,6 +28,7 @@
 
 <script setup lang="ts">
 import {ref, watch} from 'vue'
+import MeIcon from "../MeIcon/MeIcon.vue";
 
 const open = ref(false)
 

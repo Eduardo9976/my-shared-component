@@ -5,7 +5,7 @@ import meIconStyles from '@mercadoeletronico/me-icon/dist/css/me-icon.min.css?in
 
 const TheHeaderElement = defineCustomElement(TheHeader, {
   shadowRoot: true,
-  styles: [meIconStyles, tailwindStyles]
+  styles: [tailwindStyles, meIconStyles]
 })
 
 if (!customElements.get('the-header')) {
