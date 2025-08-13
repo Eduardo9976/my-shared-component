@@ -1027,6 +1027,10 @@
     z-index: var(--index);
   }
 
+  .z-10000 {
+    z-index: 10000;
+  }
+
   .z-\[1\] {
     z-index: 1;
   }
@@ -1247,6 +1251,10 @@
 
   .\!ml-4 {
     margin-left: calc(var(--spacing) * 4) !important;
+  }
+
+  .ml-auto {
+    margin-left: auto;
   }
 
   .block {
@@ -1554,6 +1562,10 @@
     max-height: calc(var(--spacing) * 60);
   }
 
+  .max-h-\[32px\] {
+    max-height: 32px;
+  }
+
   .max-h-\[70vh\] {
     max-height: 70vh;
   }
@@ -1702,6 +1714,10 @@
     width: 10px;
   }
 
+  .w-\[168px\] {
+    width: 168px;
+  }
+
   .w-\[calc\(100\%-2rem\)\] {
     width: calc(100% - 2rem);
   }
@@ -1724,6 +1740,10 @@
 
   .max-w-\(--ui-container\) {
     max-width: var(--ui-container);
+  }
+
+  .max-w-\[75px\] {
+    max-width: 75px;
   }
 
   .max-w-\[calc\(100\%-2rem\)\] {
@@ -2323,6 +2343,10 @@
     border-bottom-left-radius: .25rem;
   }
 
+  .rounded-bl-lg {
+    border-bottom-left-radius: calc(var(--ui-radius) * 2);
+  }
+
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
@@ -2494,6 +2518,10 @@
     background-color: var(--ui-border-accented);
   }
 
+  .bg-\[rgba\(0\,0\,0\,0\.4\)\] {
+    background-color: #0006;
+  }
+
   .bg-accented {
     background-color: var(--ui-bg-accented);
   }
@@ -2606,6 +2634,10 @@
     .bg-warning\/10 {
       background-color: color-mix(in oklab, var(--ui-warning) 10%, transparent);
     }
+  }
+
+  .bg-white {
+    background-color: var(--color-white);
   }
 
   .bg-repeat {
@@ -2734,6 +2766,10 @@
 
   .py-6 {
     padding-block: calc(var(--spacing) * 6);
+  }
+
+  .py-\[6px\] {
+    padding-block: 6px;
   }
 
   .ps-1 {
@@ -3032,6 +3068,11 @@
     font-weight: var(--font-weight-medium);
   }
 
+  .font-normal {
+    --tw-font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-normal);
+  }
+
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
@@ -3061,6 +3102,18 @@
     white-space: nowrap;
   }
 
+  .text-\[var\(--color-neutral-400\)\] {
+    color: var(--color-neutral-400);
+  }
+
+  .text-\[var\(--header-icon-color\)\] {
+    color: var(--header-icon-color);
+  }
+
+  .text-blue-600 {
+    color: var(--color-blue-600);
+  }
+
   .text-default {
     color: var(--ui-text);
   }
@@ -3085,6 +3138,10 @@
 
   .text-gray-600 {
     color: var(--color-gray-600);
+  }
+
+  .text-green-600 {
+    color: var(--color-green-600);
   }
 
   .text-highlighted {
@@ -3117,6 +3174,10 @@
     .text-primary\/75 {
       color: color-mix(in oklab, var(--ui-primary) 75%, transparent);
     }
+  }
+
+  .text-red-600 {
+    color: var(--color-red-600);
   }
 
   .text-secondary, .text-secondary\/75 {
@@ -3155,6 +3216,10 @@
 
   .text-yellow-500 {
     color: var(--color-yellow-500);
+  }
+
+  .text-yellow-600 {
+    color: var(--color-yellow-600);
   }
 
   .capitalize {
@@ -3558,6 +3623,12 @@
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
 
+  .transition-all {
+    transition-property: all;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+
   .transition-colors {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -3639,8 +3710,21 @@
   }
 
   @media (hover: hover) {
+    .group-hover\:border-2:is(:where(.group):hover *) {
+      border-style: var(--tw-border-style);
+      border-width: 2px;
+    }
+
+    .group-hover\:border-white:is(:where(.group):hover *) {
+      border-color: var(--color-white);
+    }
+
     .group-hover\:text-default:is(:where(.group):hover *) {
       color: var(--ui-text);
+    }
+
+    .group-hover\:text-primary:is(:where(.group):hover *) {
+      color: var(--ui-primary);
     }
   }
 
@@ -4004,6 +4088,16 @@
     bottom: calc(var(--spacing) * -2);
   }
 
+  .after\:bottom-0:after {
+    content: var(--tw-content);
+    bottom: calc(var(--spacing) * 0);
+  }
+
+  .after\:left-1\/2:after {
+    content: var(--tw-content);
+    left: 50%;
+  }
+
   .after\:z-\[1\]:after {
     content: var(--tw-content);
     z-index: 1;
@@ -4042,14 +4136,30 @@
     height: calc(var(--spacing) * 2);
   }
 
+  .after\:h-1:after {
+    content: var(--tw-content);
+    height: calc(var(--spacing) * 1);
+  }
+
   .after\:h-px:after {
     content: var(--tw-content);
     height: 1px;
   }
 
+  .after\:w-\[80\%\]:after {
+    content: var(--tw-content);
+    width: 80%;
+  }
+
   .after\:w-px:after {
     content: var(--tw-content);
     width: 1px;
+  }
+
+  .after\:-translate-x-1\/2:after {
+    content: var(--tw-content);
+    --tw-translate-x: calc(calc(1 / 2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
   .after\:animate-\[carousel-inverse_2s_ease-in-out_infinite\]:after {
@@ -4075,6 +4185,11 @@
   .after\:rounded-full:after {
     content: var(--tw-content);
     border-radius: 3.40282e38px;
+  }
+
+  .after\:bg-\[var\(--header-icon-color\)\]:after {
+    content: var(--tw-content);
+    background-color: var(--header-icon-color);
   }
 
   .after\:bg-default:after {
@@ -4135,6 +4250,12 @@
     content: var(--tw-content);
   }
 
+  .after\:content-\[\\\'\\\'\]:after {
+    content: var(--tw-content);
+    --tw-content: \'\';
+    content: var(--tw-content);
+  }
+
   .first\:me-0:first-child {
     margin-inline-end: calc(var(--spacing) * 0);
   }
@@ -4185,6 +4306,10 @@
   }
 
   @media (hover: hover) {
+    .hover\:bg-\[rgba\(0\,0\,0\,0\.1\)\]:hover {
+      background-color: #0000001a;
+    }
+
     .hover\:bg-accented\/75:hover {
       background-color: var(--ui-bg-accented);
     }
@@ -4193,6 +4318,10 @@
       .hover\:bg-accented\/75:hover {
         background-color: color-mix(in oklab, var(--ui-bg-accented) 75%, transparent);
       }
+    }
+
+    .hover\:bg-blue-100:hover {
+      background-color: var(--color-blue-100);
     }
 
     .hover\:bg-elevated:hover, .hover\:bg-elevated\/25:hover {
@@ -4423,7 +4552,7 @@
       }
     }
 
-    .hover\:text-primary\/75:hover {
+    .hover\:text-primary:hover, .hover\:text-primary\/75:hover {
       color: var(--ui-primary);
     }
 

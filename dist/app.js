@@ -1,9 +1,9 @@
-import { d as defineComponent, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, t as toRefs, a as ref, b as createCommentVNode, e as createTextVNode, f as toDisplayString, g as computed, h as watchEffect, i as watch, j as onMounted, k as onUnmounted, l as createElementBlock, m as createVNode, n as mergeProps, p as withModifiers, T as Teleport, F as Fragment, q as normalizeProps, s as guardReactiveProps, v as normalizeStyle, x as nextTick, y as useSlots, z as createBaseVNode, A as normalizeClass, B as resolveDynamicComponent, C as renderList, D as toRef, E as shallowReactive, G as reactive, H as markRaw, I as useId, J as provide, K as createApp } from "./main.js";
-import { P as Primitive, c as createContext, u as useTimeout, a as useRafFn, b as useForwardExpose, o as onKeyStroke, i as isClient, d as useVModel, e as unrefElement, f as useTimeoutFn, g as useState, h as useLocale, j as useForwardPropsEmits, r as reactivePick, t as tv, k as useAppConfig, _ as _sfc_main$l, l as _sfc_main$m, m as _sfc_main$n, n as useForwardProps, p as omit, q as createSharedComposable, s as localeContextInjectionKey } from "./Button.js";
-import { u as useCollection, _ as _sfc_main$j, g as getActiveElement, a as _sfc_main$k, P as Presence, c as context, f as focusFirst, b as getTabbableCandidates, d as usePortal, e as _sfc_main$p, p as portalTargetInjectionKey } from "./shared-button.js";
+import { d as defineComponent, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, P as Primitive, a as createContext, t as toRefs, b as ref, e as useTimeout, f as useRafFn, g as createCommentVNode, h as createTextVNode, i as toDisplayString, j as useForwardExpose, k as computed, l as watchEffect, m as watch, n as onKeyStroke, p as onMounted, q as onUnmounted, s as createElementBlock, v as createVNode, x as mergeProps, y as withModifiers, T as Teleport, F as Fragment, z as isClient, A as normalizeProps, B as guardReactiveProps, C as useVModel, D as unrefElement, E as normalizeStyle, G as useTimeoutFn, H as useState, I as nextTick, J as useSlots, K as useForwardPropsEmits, L as reactivePick, M as tv, N as useAppConfig, O as createBaseVNode, _ as _sfc_main$m, Q as normalizeClass, R as resolveDynamicComponent, S as renderList, U as useForwardProps, V as toRef, W as omit, X as createSharedComposable, Y as shallowReactive, Z as reactive, $ as markRaw, a0 as useId, a1 as provide, a2 as createApp } from "./main.js";
+import { u as useLocale, _ as _sfc_main$l, a as _sfc_main$n, l as localeContextInjectionKey } from "./Button.js";
+import { u as useCollection, _ as _sfc_main$j, g as getActiveElement, a as _sfc_main$k, c as context, f as focusFirst, b as getTabbableCandidates, d as usePortal, p as portalTargetInjectionKey } from "./shared-button.js";
 import { _ as _sfc_main$o } from "./card-xpto.js";
+import { P as Presence, _ as _sfc_main$p } from "./me-icon.min.js";
 import "./the-header.js";
-import "./me-icon.min.js";
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) return;
@@ -1487,9 +1487,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_UApp = _sfc_main$1;
       return openBlock(), createBlock(_component_UApp, null, {
         default: withCtx(() => _cache[0] || (_cache[0] = [
-          createBaseVNode("the-header", null, null, -1),
-          createBaseVNode("shared-button", null, null, -1),
-          createBaseVNode("card-xpto", null, null, -1)
+          createBaseVNode("the-header", null, null, -1)
         ])),
         _: 1,
         __: [0]

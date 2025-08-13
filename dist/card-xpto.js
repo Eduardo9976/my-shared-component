@@ -1,5 +1,5 @@
-import { d as defineComponent, i as watch, x as nextTick, g as computed, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, n as mergeProps, y as useSlots, l as createElementBlock, b as createCommentVNode, m as createVNode, v as normalizeStyle, A as normalizeClass, e as createTextVNode, f as toDisplayString, F as Fragment, C as renderList, bP as _export_sfc, z as createBaseVNode, L as defineCustomElement, M as tailwindStyles } from "./main.js";
-import { b as useForwardExpose, d as useVModel, v as isNullish, c as createContext, P as Primitive, h as useLocale, j as useForwardPropsEmits, r as reactivePick, t as tv, k as useAppConfig, T as useButtonGroup, U as useComponentIcons, l as _sfc_main$6, _ as _sfc_main$7, m as _sfc_main$8 } from "./Button.js";
+import { d as defineComponent, j as useForwardExpose, C as useVModel, m as watch, I as nextTick, k as computed, cl as isNullish, a as createContext, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, P as Primitive, x as mergeProps, J as useSlots, K as useForwardPropsEmits, L as reactivePick, M as tv, N as useAppConfig, s as createElementBlock, g as createCommentVNode, v as createVNode, E as normalizeStyle, Q as normalizeClass, h as createTextVNode, i as toDisplayString, F as Fragment, S as renderList, _ as _sfc_main$6, O as createBaseVNode, a8 as defineCustomElement, a9 as tailwindStyles } from "./main.js";
+import { u as useLocale, e as useButtonGroup, f as useComponentIcons, _ as _sfc_main$7, a as _sfc_main$8 } from "./Button.js";
 const DEFAULT_MAX = 100;
 const [injectProgressRootContext, provideProgressRootContext] = createContext("ProgressRoot");
 const isNumber = (v) => typeof v === "number";
@@ -911,7 +911,14 @@ const _sfc_main$1 = {
     };
   }
 };
-const _style_0 = "\n.card-container[data-v-251821b5] {\n  font-family: var(--ui-font);\n}\n";
+const _style_0 = "\n.card-container[data-v-4aa0b4d7] {\r\n  font-family: var(--ui-font);\n}\r\n";
+const _export_sfc = (sfc, props) => {
+  const target = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target[key] = val;
+  }
+  return target;
+};
 const _sfc_main = {};
 const _hoisted_1 = { class: "card-container" };
 const _hoisted_2 = { class: "flex items-center gap-2" };
@@ -1026,7 +1033,7 @@ function _sfc_render(_ctx, _cache) {
     })
   ]);
 }
-const CardXPTO = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__scopeId", "data-v-251821b5"]]);
+const CardXPTO = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__scopeId", "data-v-4aa0b4d7"]]);
 const CardXPTElement = defineCustomElement(CardXPTO, {
   shadowRoot: true,
   styles: [tailwindStyles]
