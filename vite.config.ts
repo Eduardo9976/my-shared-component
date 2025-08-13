@@ -35,33 +35,33 @@ export default defineConfig({
     rollupOptions: {
       input: {
         // app: './index.html',
+        'the-header': './src/components/TheHeader/the-header.ts',
         'shared-button': './src/components/SharedButton/shared-button.ts',
-        'card-xpto': './src/components/CardXPTO/card-xpto.ts',
-        'the-header': './src/components/TheHeader/the-header.ts'
+        'card-xpto': './src/components/CardXPTO/card-xpto.ts'
       },
       output: {
         entryFileNames: chunkInfo => {
+          if (chunkInfo.name === 'the-header') {
+            return 'the-header.js'
+          }
           if (chunkInfo.name === 'shared-button') {
             return 'shared-button.js'
           }
           if (chunkInfo.name === 'card-xpto') {
             return 'card-xpto.js'
           }
-          if (chunkInfo.name === 'the-header') {
-            return 'the-header.js'
-          }
           return '[name].js'
         },
         chunkFileNames: '[name].js',
         assetFileNames: assetInfo => {
+          if (assetInfo.name === 'the-header.css') {
+            return 'the-header.css'
+          }
           if (assetInfo.name === 'shared-button.css') {
             return 'shared-button.css'
           }
           if (assetInfo.name === 'card-xpto.css') {
             return 'card-xpto.css'
-          }
-          if (assetInfo.name === 'the-header.css') {
-            return 'the-header.css'
           }
           return '[name].[ext]'
         }
