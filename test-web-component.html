@@ -8,13 +8,8 @@
 
     <link
             rel="stylesheet"
-            href="https://eduardo9976.github.io/my-shared-component/dist/style.css"
+            href="https://eduardo9976.github.io/my-shared-component/dist/webcomponents-styles.css"
     />
-
-<!--        <link-->
-<!--          rel="stylesheet"-->
-<!--          href="./node_modules/@mercadoeletronico/me-icon/dist/css/me-icon.min.css"-->
-<!--        />-->
 
     <script
             type="module"
@@ -22,27 +17,36 @@
     >
     </script>
 
+        <script
+                type="module"
+                src="https://eduardo9976.github.io/my-shared-component/dist/card-xpto.js?v=7"
+        ></script>
+
+        <script
+                type="module"
+                src="https://eduardo9976.github.io/my-shared-component/dist/the-header.js?v=7"
+        ></script>
+
+<!--    <link-->
+<!--            rel="stylesheet"-->
+<!--            href="./dist/webcomponents-styles.css"-->
+<!--    />-->
+
 <!--    <script-->
 <!--            type="module"-->
 <!--            src="./dist/shared-button.js?v=7"-->
-<!--    ></script>-->
-
-
-    <script
-            type="module"
-            src="https://eduardo9976.github.io/my-shared-component/dist/card-xpto.js?v=7"
-    ></script>
-
+<!--    ></script>    -->
+<!--    -->
 <!--    <script-->
 <!--            type="module"-->
-<!--            src="https://eduardo9976.github.io/my-shared-component/dist/the-header.js?v=7"-->
+<!--            src="./dist/card-xpto.js?v=7"-->
 <!--    ></script>-->
-
 
 <!--    <script-->
 <!--            type="module"-->
 <!--            src="./dist/the-header.js"-->
 <!--    ></script>-->
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -94,6 +98,7 @@
     </style>
 </head>
 <body>
+<the-header></the-header>
 <div class="container">
     <h1>🧪 Teste do Web Component</h1>
     <p>Testando os web components carregados do GitHub Pages:</p>
@@ -108,11 +113,6 @@
             <div class="component-title">Card XPTO</div>
             <card-xpto></card-xpto>
         </div>
-
-<!--        <div class="component-section">-->
-<!--            <div class="component-title">The Header</div>-->
-<!--            <the-header></the-header>-->
-<!--    </div>-->
 
     <p style="margin-top: 30px; text-align: center">
         Se ambos os componentes aparecerem com estilos corretos, os web

@@ -34,7 +34,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        // app: './index.html',
+        app: './index.html',
         'the-header': './src/components/TheHeader/the-header.ts',
         'shared-button': './src/components/SharedButton/shared-button.ts',
         'card-xpto': './src/components/CardXPTO/card-xpto.ts'
@@ -54,6 +54,9 @@ export default defineConfig({
         },
         chunkFileNames: '[name].js',
         assetFileNames: assetInfo => {
+          if (assetInfo.name === 'style.css') {
+            return 'webcomponents-styles.css'
+          }
           if (assetInfo.name === 'the-header.css') {
             return 'the-header.css'
           }

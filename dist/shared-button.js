@@ -1,5 +1,5 @@
-import { B as BaseTransition, k as BaseTransitionPropsValidators, C as Comment, D as DeprecationTypes, E as EffectScope, l as ErrorCodes, m as ErrorTypeStrings, F as Fragment, K as KeepAlive, R as ReactiveEffect, S as Static, p as Suspense, T as Teleport, q as Text, s as TrackOpTypes, v as Transition, w as TransitionGroup, x as TriggerOpTypes, V as VueElement, y as assertNumber, z as callWithAsyncErrorHandling, A as callWithErrorHandling, G as camelize, H as capitalize, I as cloneVNode, J as compatUtils, g as computed, L as createApp, e as createBlock, M as createCommentVNode, c as createElementBlock, a as createBaseVNode, N as createHydrationRenderer, O as createPropsRestProxy, P as createRenderer, Q as createSSRApp, U as createSlots, W as createStaticVNode, X as createTextVNode, b as createVNode, Y as customRef, Z as defineAsyncComponent, d as defineComponent, i as defineCustomElement, _ as defineEmits, $ as defineExpose, a0 as defineModel, a1 as defineOptions, a2 as defineProps, a3 as defineSSRCustomElement, a4 as defineSlots, a5 as devtools, a6 as effect, a7 as effectScope, a8 as getCurrentInstance, a9 as getCurrentScope, aa as getCurrentWatcher, ab as getTransitionRawChildren, ac as guardReactiveProps, ad as h, ae as handleError, af as hasInjectionContext, ag as hydrate, ah as hydrateOnIdle, ai as hydrateOnInteraction, aj as hydrateOnMediaQuery, ak as hydrateOnVisible, al as initCustomFormatter, am as initDirectivesForSSR, an as inject, ao as isMemoSame, ap as isProxy, aq as isReactive, ar as isReadonly, as as isRef, at as isRuntimeOnly, au as isShallow, av as isVNode, aw as markRaw, ax as mergeDefaults, ay as mergeModels, az as mergeProps, aA as nextTick, h as normalizeClass, aB as normalizeProps, n as normalizeStyle, aC as onActivated, aD as onBeforeMount, aE as onBeforeUnmount, aF as onBeforeUpdate, aG as onDeactivated, aH as onErrorCaptured, aI as onMounted, aJ as onRenderTracked, aK as onRenderTriggered, aL as onScopeDispose, aM as onServerPrefetch, aN as onUnmounted, aO as onUpdated, aP as onWatcherCleanup, o as openBlock, aQ as popScopeId, aR as provide, aS as proxyRefs, aT as pushScopeId, aU as queuePostFlushCb, aV as reactive, aW as readonly, f as ref, aX as registerRuntimeCompiler, aY as render, r as renderList, aZ as renderSlot, a_ as resolveComponent, a$ as resolveDirective, b0 as resolveDynamicComponent, b1 as resolveFilter, b2 as resolveTransitionHooks, b3 as setBlockTracking, b4 as setDevtoolsHook, b5 as setTransitionHooks, b6 as shallowReactive, b7 as shallowReadonly, b8 as shallowRef, b9 as ssrContextKey, ba as ssrUtils, bb as stop, t as toDisplayString, bc as toHandlerKey, bd as toHandlers, be as toRaw, bf as toRef, bg as toRefs, bh as toValue$1, bi as transformVNodeArgs, bj as triggerRef, u as unref, bk as useAttrs, bl as useCssModule, bm as useCssVars, bn as useHost, bo as useId$1, bp as useModel, bq as useSSRContext, br as useShadowRoot, bs as useSlots, bt as useTemplateRef, bu as useTransitionState, bv as vModelCheckbox, bw as vModelDynamic, bx as vModelRadio, by as vModelSelect, bz as vModelText, bA as vShow, bB as version, bC as warn, bD as watch, bE as watchEffect, bF as watchPostEffect, bG as watchSyncEffect, bH as withAsyncContext, bI as withCtx, bJ as withDefaults, bK as withDirectives, bL as withKeys, bM as withMemo, bN as withModifiers, bO as withScopeId, j as tailwindStyles } from "./main.js";
-import { P as Primitive, i as isNullish, a as isEqual, u as useVModel, c as createContext, b as useForwardExpose, d as defaultWindow, e as isClient, r as renderSlotFragments, f as unrefElement, g as useEventListener, h as createGlobalState, o as onKeyStroke, j as useEmitAsProps, k as createSharedComposable, t as tryOnBeforeUnmount, l as defu, m as isIOS, n as useMounted, S as Slot, p as computedEager, q as refAutoReset, s as useForwardPropsEmits, v as makeDestructurable, w as camelize$1, x as createSharedComposable$1, y as useLocale, z as reactivePick, A as tv, B as useAppConfig, _ as _sfc_main$19, C as _sfc_main$1a, D as get, E as reactiveOmit, F as omit, G as isArrayOfArray, H as _sfc_main$1b, I as _sfc_main$1c, J as pickLinkProps, K as _sfc_main$1d } from "./Button.js";
+import { N as BaseTransition, O as BaseTransitionPropsValidators, P as Comment, Q as DeprecationTypes, R as EffectScope, S as ErrorCodes, U as ErrorTypeStrings, F as Fragment, V as KeepAlive, W as ReactiveEffect, X as Static, Y as Suspense, T as Teleport, Z as Text, _ as TrackOpTypes, $ as Transition, a0 as TransitionGroup, a1 as TriggerOpTypes, a2 as VueElement, a3 as assertNumber, a4 as callWithAsyncErrorHandling, a5 as callWithErrorHandling, a6 as camelize, a7 as capitalize, a8 as cloneVNode, a9 as compatUtils, g as computed, K as createApp, c as createBlock, b as createCommentVNode, l as createElementBlock, z as createBaseVNode, aa as createHydrationRenderer, ab as createPropsRestProxy, ac as createRenderer, ad as createSSRApp, ae as createSlots, af as createStaticVNode, e as createTextVNode, m as createVNode, ag as customRef, ah as defineAsyncComponent, d as defineComponent, L as defineCustomElement, ai as defineEmits, aj as defineExpose, ak as defineModel, al as defineOptions, am as defineProps, an as defineSSRCustomElement, ao as defineSlots, ap as devtools, aq as effect, ar as effectScope, as as getCurrentInstance, at as getCurrentScope, au as getCurrentWatcher, av as getTransitionRawChildren, s as guardReactiveProps, aw as h, ax as handleError, ay as hasInjectionContext, az as hydrate, aA as hydrateOnIdle, aB as hydrateOnInteraction, aC as hydrateOnMediaQuery, aD as hydrateOnVisible, aE as initCustomFormatter, aF as initDirectivesForSSR, aG as inject, aH as isMemoSame, aI as isProxy, aJ as isReactive, aK as isReadonly, aL as isRef, aM as isRuntimeOnly, aN as isShallow, aO as isVNode, H as markRaw, aP as mergeDefaults, aQ as mergeModels, n as mergeProps, x as nextTick, A as normalizeClass, q as normalizeProps, v as normalizeStyle, aR as onActivated, aS as onBeforeMount, aT as onBeforeUnmount, aU as onBeforeUpdate, aV as onDeactivated, aW as onErrorCaptured, j as onMounted, aX as onRenderTracked, aY as onRenderTriggered, aZ as onScopeDispose, a_ as onServerPrefetch, k as onUnmounted, a$ as onUpdated, b0 as onWatcherCleanup, o as openBlock, b1 as popScopeId, J as provide, b2 as proxyRefs, b3 as pushScopeId, b4 as queuePostFlushCb, G as reactive, b5 as readonly, a as ref, b6 as registerRuntimeCompiler, b7 as render, C as renderList, r as renderSlot, b8 as resolveComponent, b9 as resolveDirective, B as resolveDynamicComponent, ba as resolveFilter, bb as resolveTransitionHooks, bc as setBlockTracking, bd as setDevtoolsHook, be as setTransitionHooks, E as shallowReactive, bf as shallowReadonly, bg as shallowRef, bh as ssrContextKey, bi as ssrUtils, bj as stop, f as toDisplayString, bk as toHandlerKey, bl as toHandlers, bm as toRaw, D as toRef, t as toRefs, bn as toValue$1, bo as transformVNodeArgs, bp as triggerRef, u as unref, bq as useAttrs, br as useCssModule, bs as useCssVars, bt as useHost, I as useId$1, bu as useModel, bv as useSSRContext, bw as useShadowRoot, y as useSlots, bx as useTemplateRef, by as useTransitionState, bz as vModelCheckbox, bA as vModelDynamic, bB as vModelRadio, bC as vModelSelect, bD as vModelText, bE as vShow, bF as version, bG as warn, i as watch, h as watchEffect, bH as watchPostEffect, bI as watchSyncEffect, bJ as withAsyncContext, w as withCtx, bK as withDefaults, bL as withDirectives, bM as withKeys, bN as withMemo, p as withModifiers, bO as withScopeId, M as tailwindStyles } from "./main.js";
+import { P as Primitive, v as isNullish, w as isEqual, d as useVModel, c as createContext, b as useForwardExpose, x as defaultWindow, i as isClient, y as renderSlotFragments, e as unrefElement, z as useEventListener, A as createGlobalState, o as onKeyStroke, B as useEmitAsProps, C as createSharedComposable, D as tryOnBeforeUnmount, E as defu, F as isIOS, G as useMounted, S as Slot, H as computedEager, I as refAutoReset, j as useForwardPropsEmits, J as makeDestructurable, K as camelize$1, q as createSharedComposable$1, h as useLocale, r as reactivePick, t as tv, k as useAppConfig, m as _sfc_main$1a, l as _sfc_main$1b, L as get, M as reactiveOmit, p as omit, N as isArrayOfArray, _ as _sfc_main$1c, O as _sfc_main$1d, Q as pickLinkProps, R as _sfc_main$1e } from "./Button.js";
 import { M as MeIcon, m as meIconStyles } from "./me-icon.min.js";
 /**
 * vue v3.5.18
@@ -1930,7 +1930,7 @@ function useFloating(reference, floating, options) {
     update
   };
 }
-const _sfc_main$18 = /* @__PURE__ */ defineComponent({
+const _sfc_main$19 = /* @__PURE__ */ defineComponent({
   __name: "VisuallyHidden",
   props: {
     feature: { default: "focusable" },
@@ -2024,6 +2024,33 @@ function useSingleOrMultipleValue(props, emits) {
   };
 }
 const [injectConfigProviderContext, provideConfigProviderContext] = createContext("ConfigProvider");
+const _sfc_main$18 = /* @__PURE__ */ defineComponent({
+  ...{
+    inheritAttrs: false
+  },
+  __name: "ConfigProvider",
+  props: {
+    dir: { default: "ltr" },
+    locale: { default: "en" },
+    scrollBody: { type: [Boolean, Object], default: true },
+    nonce: { default: void 0 },
+    useId: { type: Function, default: void 0 }
+  },
+  setup(__props) {
+    const props = __props;
+    const { dir, locale, scrollBody, nonce } = toRefs(props);
+    provideConfigProviderContext({
+      dir,
+      locale,
+      scrollBody,
+      nonce,
+      useId: props.useId
+    });
+    return (_ctx, _cache) => {
+      return renderSlot(_ctx.$slots, "default");
+    };
+  }
+});
 function useDirection(dir) {
   const context2 = injectConfigProviderContext({
     dir: ref("ltr")
@@ -6185,6 +6212,22 @@ function keysToCamelKebabCase(obj) {
     newObj[camelize$1(key)] = obj[key];
   return newObj;
 }
+const portalTargetInjectionKey = Symbol("nuxt-ui.portal-target");
+function usePortal(portal) {
+  const portalTarget = inject(portalTargetInjectionKey, void 0);
+  const to = computed(() => {
+    if (typeof portal.value === "boolean" || portal.value === void 0) {
+      return portalTarget?.value ?? "body";
+    }
+    return portal.value;
+  });
+  const disabled = computed(() => typeof portal.value === "boolean" ? !portal.value : false);
+  provide(portalTargetInjectionKey, computed(() => to.value));
+  return computed(() => ({
+    to: to.value,
+    disabled: disabled.value
+  }));
+}
 const kbdKeysMap = {
   meta: "",
   ctrl: "",
@@ -6236,22 +6279,6 @@ const _useKbd = () => {
   };
 };
 const useKbd = /* @__PURE__ */ createSharedComposable$1(_useKbd);
-const portalTargetInjectionKey = Symbol("nuxt-ui.portal-target");
-function usePortal(portal) {
-  const portalTarget = inject(portalTargetInjectionKey, void 0);
-  const to = computed(() => {
-    if (typeof portal.value === "boolean" || portal.value === void 0) {
-      return portalTarget?.value ?? "body";
-    }
-    return portal.value;
-  });
-  const disabled = computed(() => typeof portal.value === "boolean" ? !portal.value : false);
-  provide(portalTargetInjectionKey, computed(() => to.value));
-  return computed(() => ({
-    to: to.value,
-    disabled: disabled.value
-  }));
-}
 const theme$3 = {
   "slots": {
     "overlay": "fixed inset-0 bg-elevated/75",
@@ -6356,7 +6383,7 @@ const _sfc_main$6 = {
                 onAfterLeave: _cache[1] || (_cache[1] = ($event) => emits("after:leave"))
               }, toHandlers(contentEvents.value)), {
                 default: withCtx(() => [
-                  !!slots.content && (__props.title || !!slots.title || (__props.description || !!slots.description)) ? (openBlock(), createBlock(unref(_sfc_main$18), { key: 0 }, {
+                  !!slots.content && (__props.title || !!slots.title || (__props.description || !!slots.description)) ? (openBlock(), createBlock(unref(_sfc_main$19), { key: 0 }, {
                     default: withCtx(() => [
                       __props.title || !!slots.title ? (openBlock(), createBlock(unref(_sfc_main$P), { key: 0 }, {
                         default: withCtx(() => [
@@ -6419,7 +6446,7 @@ const _sfc_main$6 = {
                               close,
                               ui: ui.value
                             }, () => [
-                              props.close ? (openBlock(), createBlock(_sfc_main$19, mergeProps({
+                              props.close ? (openBlock(), createBlock(_sfc_main$1a, mergeProps({
                                 key: 0,
                                 icon: __props.closeIcon || unref(appConfig).ui.icons.close,
                                 color: "neutral",
@@ -6476,7 +6503,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
       console.log("First changed", newValue);
     });
     return (_ctx, _cache) => {
-      const _component_UButton = _sfc_main$19;
+      const _component_UButton = _sfc_main$1a;
       const _component_UModal = _sfc_main$6;
       return openBlock(), createBlock(Teleport, { to: "body" }, [
         createVNode(_component_UModal, {
@@ -6601,7 +6628,7 @@ const _sfc_main$4 = {
                           index,
                           open
                         }, () => [
-                          item.icon ? (openBlock(), createBlock(_sfc_main$1a, {
+                          item.icon ? (openBlock(), createBlock(_sfc_main$1b, {
                             key: 0,
                             name: item.icon,
                             class: normalizeClass(ui.value.leadingIcon({ class: [props.ui?.leadingIcon, item?.ui?.leadingIcon] }))
@@ -6624,7 +6651,7 @@ const _sfc_main$4 = {
                           index,
                           open
                         }, () => [
-                          createVNode(_sfc_main$1a, {
+                          createVNode(_sfc_main$1b, {
                             name: item.trailingIcon || __props.trailingIcon || unref(appConfig).ui.icons.chevronDown,
                             class: normalizeClass(ui.value.trailingIcon({ class: [props.ui?.trailingIcon, item.ui?.trailingIcon] }))
                           }, null, 8, ["name", "class"])
@@ -6948,15 +6975,15 @@ const _sfc_main$2 = {
                 active,
                 index
               }, () => [
-                item.loading ? (openBlock(), createBlock(_sfc_main$1a, {
+                item.loading ? (openBlock(), createBlock(_sfc_main$1b, {
                   key: 0,
                   name: __props.loadingIcon || unref(appConfig).ui.icons.loading,
                   class: normalizeClass(__props.ui.itemLeadingIcon({ class: [__props.uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, loading: true }))
-                }, null, 8, ["name", "class"])) : item.icon ? (openBlock(), createBlock(_sfc_main$1a, {
+                }, null, 8, ["name", "class"])) : item.icon ? (openBlock(), createBlock(_sfc_main$1b, {
                   key: 1,
                   name: item.icon,
                   class: normalizeClass(__props.ui.itemLeadingIcon({ class: [__props.uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, active }))
-                }, null, 8, ["name", "class"])) : item.avatar ? (openBlock(), createBlock(_sfc_main$1b, mergeProps({
+                }, null, 8, ["name", "class"])) : item.avatar ? (openBlock(), createBlock(_sfc_main$1c, mergeProps({
                   key: 2,
                   size: item.ui?.itemLeadingAvatarSize || props.uiOverride?.itemLeadingAvatarSize || __props.ui.itemLeadingAvatarSize()
                 }, item.avatar, {
@@ -6974,7 +7001,7 @@ const _sfc_main$2 = {
                 }, () => [
                   createTextVNode(toDisplayString(unref(get)(item, props.labelKey)), 1)
                 ]),
-                item.target === "_blank" && __props.externalIcon !== false ? (openBlock(), createBlock(_sfc_main$1a, {
+                item.target === "_blank" && __props.externalIcon !== false ? (openBlock(), createBlock(_sfc_main$1b, {
                   key: 0,
                   name: typeof __props.externalIcon === "string" ? __props.externalIcon : unref(appConfig).ui.icons.external,
                   class: normalizeClass(__props.ui.itemLabelExternalIcon({ class: [__props.uiOverride?.itemLabelExternalIcon, item.ui?.itemLabelExternalIcon], color: item?.color, active }))
@@ -6988,7 +7015,7 @@ const _sfc_main$2 = {
                   active,
                   index
                 }, () => [
-                  item.children?.length ? (openBlock(), createBlock(_sfc_main$1a, {
+                  item.children?.length ? (openBlock(), createBlock(_sfc_main$1b, {
                     key: 0,
                     name: childrenIcon.value,
                     class: normalizeClass(__props.ui.itemTrailingIcon({ class: [__props.uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color, active }))
@@ -7006,7 +7033,7 @@ const _sfc_main$2 = {
                 ]),
                 createVNode(unref(DropdownMenu).ItemIndicator, { "as-child": "" }, {
                   default: withCtx(() => [
-                    createVNode(_sfc_main$1a, {
+                    createVNode(_sfc_main$1b, {
                       name: __props.checkedIcon || unref(appConfig).ui.icons.check,
                       class: normalizeClass(__props.ui.itemTrailingIcon({ class: [__props.uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color }))
                     }, null, 8, ["name", "class"])
@@ -7124,9 +7151,9 @@ const _sfc_main$2 = {
                               onSelect: item.onSelect
                             }, {
                               default: withCtx(() => [
-                                createVNode(_sfc_main$1c, mergeProps({ ref_for: true }, unref(pickLinkProps)(item), { custom: "" }), {
+                                createVNode(_sfc_main$1d, mergeProps({ ref_for: true }, unref(pickLinkProps)(item), { custom: "" }), {
                                   default: withCtx(({ active, ...slotProps }) => [
-                                    createVNode(_sfc_main$1d, mergeProps({ ref_for: true }, slotProps, {
+                                    createVNode(_sfc_main$1e, mergeProps({ ref_for: true }, slotProps, {
                                       class: __props.ui.item({ class: [__props.uiOverride?.item, item.ui?.item, item.class], color: item?.color, active })
                                     }), {
                                       default: withCtx(() => [
@@ -7483,8 +7510,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
     ]);
     return (_ctx, _cache) => {
-      const _component_UIcon = _sfc_main$1a;
-      const _component_UButton = _sfc_main$19;
+      const _component_UIcon = _sfc_main$1b;
+      const _component_UButton = _sfc_main$1a;
       const _component_UDropdownMenu = _sfc_main$1;
       const _component_UAccordion = _sfc_main$4;
       const _component_TestModal = _sfc_main$5;
@@ -7544,3 +7571,16 @@ const SharedButtonElement = defineCustomElement(_sfc_main, {
 if (!customElements.get("shared-button")) {
   customElements.define("shared-button", SharedButtonElement);
 }
+export {
+  Presence as P,
+  _sfc_main$19 as _,
+  _sfc_main$Q as a,
+  getTabbableCandidates as b,
+  context as c,
+  usePortal as d,
+  _sfc_main$18 as e,
+  focusFirst$1 as f,
+  getActiveElement as g,
+  portalTargetInjectionKey as p,
+  useCollection as u
+};

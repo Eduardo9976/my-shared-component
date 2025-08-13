@@ -1,4 +1,4 @@
-import { F as Fragment, d as defineComponent, C as Comment, az as mergeProps, I as cloneVNode, ad as h, a7 as effectScope, aE as onBeforeUnmount, a9 as getCurrentScope, aL as onScopeDispose, a8 as getCurrentInstance, bD as watch, Y as customRef, bh as toValue$1, b8 as shallowRef, bE as watchEffect, aW as readonly, f as ref, aA as nextTick, g as computed, aI as onMounted, u as unref, an as inject, aR as provide, bc as toHandlerKey, G as camelize$1, bf as toRef$1, as as isRef, aV as reactive, bg as toRefs, aN as onUnmounted, e as createBlock, o as openBlock, ay as mergeModels, bp as useModel, bI as withCtx, b as createVNode, c as createElementBlock, M as createCommentVNode, aB as normalizeProps, ac as guardReactiveProps, aZ as renderSlot, h as normalizeClass, X as createTextVNode, t as toDisplayString, b0 as resolveDynamicComponent, bs as useSlots } from "./main.js";
+import { F as Fragment, d as defineComponent, P as Comment, n as mergeProps, a8 as cloneVNode, aw as h, ar as effectScope, aT as onBeforeUnmount, at as getCurrentScope, aZ as onScopeDispose, as as getCurrentInstance, i as watch, bg as shallowRef, b5 as readonly, bn as toValue$1, g as computed, ag as customRef, h as watchEffect, a as ref, x as nextTick, j as onMounted, u as unref, aG as inject, J as provide, bk as toHandlerKey, a6 as camelize$1, D as toRef$1, aL as isRef, G as reactive, t as toRefs, k as onUnmounted, c as createBlock, o as openBlock, aQ as mergeModels, bu as useModel, w as withCtx, m as createVNode, l as createElementBlock, b as createCommentVNode, q as normalizeProps, s as guardReactiveProps, r as renderSlot, A as normalizeClass, e as createTextVNode, f as toDisplayString, B as resolveDynamicComponent, y as useSlots } from "./main.js";
 function renderSlotFragments(children) {
   if (!children)
     return [];
@@ -73,25 +73,25 @@ function tryOnScopeDispose$1(fn) {
 }
 function createGlobalState(stateFactory) {
   let initialized = false;
-  let state;
+  let state2;
   const scope = effectScope(true);
   return (...args) => {
     if (!initialized) {
-      state = scope.run(() => stateFactory(...args));
+      state2 = scope.run(() => stateFactory(...args));
       initialized = true;
     }
-    return state;
+    return state2;
   };
 }
 function createSharedComposable$1(composable) {
   let subscribers = 0;
-  let state;
+  let state2;
   let scope;
   const dispose = () => {
     subscribers -= 1;
     if (scope && subscribers <= 0) {
       scope.stop();
-      state = void 0;
+      state2 = void 0;
       scope = void 0;
     }
   };
@@ -99,10 +99,10 @@ function createSharedComposable$1(composable) {
     subscribers += 1;
     if (!scope) {
       scope = effectScope(true);
-      state = scope.run(() => composable(...args));
+      state2 = scope.run(() => composable(...args));
     }
     tryOnScopeDispose$1(dispose);
-    return state;
+    return state2;
   };
 }
 const isClient = typeof window !== "undefined" && typeof document !== "undefined";
@@ -110,6 +110,8 @@ typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalSc
 const isDef = (val) => typeof val !== "undefined";
 const toString = Object.prototype.toString;
 const isObject = (val) => toString.call(val) === "[object Object]";
+const noop$2 = () => {
+};
 const isIOS = /* @__PURE__ */ getIsIOS();
 function getIsIOS() {
   var _a, _b;
@@ -150,6 +152,66 @@ function tryOnBeforeUnmount(fn, target) {
   const instance = getLifeCycleTarget();
   if (instance)
     onBeforeUnmount(fn, target);
+}
+function useTimeoutFn(cb, interval, options = {}) {
+  const {
+    immediate = true,
+    immediateCallback = false
+  } = options;
+  const isPending = shallowRef(false);
+  let timer = null;
+  function clear() {
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+  }
+  function stop() {
+    isPending.value = false;
+    clear();
+  }
+  function start(...args) {
+    if (immediateCallback)
+      cb();
+    clear();
+    isPending.value = true;
+    timer = setTimeout(() => {
+      isPending.value = false;
+      timer = null;
+      cb(...args);
+    }, toValue$1(interval));
+  }
+  if (immediate) {
+    isPending.value = true;
+    if (isClient)
+      start();
+  }
+  tryOnScopeDispose$1(stop);
+  return {
+    isPending: readonly(isPending),
+    start,
+    stop
+  };
+}
+function useTimeout(interval = 1e3, options = {}) {
+  const {
+    controls: exposeControls = false,
+    callback
+  } = options;
+  const controls = useTimeoutFn(
+    callback != null ? callback : noop$2,
+    interval,
+    options
+  );
+  const ready = computed(() => !controls.isPending.value);
+  if (exposeControls) {
+    return {
+      ready,
+      ...controls
+    };
+  } else {
+    return ready;
+  }
 }
 function watchImmediate(source, cb, options) {
   return watch(
@@ -268,6 +330,61 @@ function onKeyStroke(...args) {
       handler(e);
   };
   return useEventListener(target, eventName, listener, passive);
+}
+function useRafFn(fn, options = {}) {
+  const {
+    immediate = true,
+    fpsLimit = void 0,
+    window: window2 = defaultWindow,
+    once = false
+  } = options;
+  const isActive = shallowRef(false);
+  const intervalLimit = computed(() => {
+    return fpsLimit ? 1e3 / toValue$1(fpsLimit) : null;
+  });
+  let previousFrameTimestamp = 0;
+  let rafId = null;
+  function loop(timestamp2) {
+    if (!isActive.value || !window2)
+      return;
+    if (!previousFrameTimestamp)
+      previousFrameTimestamp = timestamp2;
+    const delta = timestamp2 - previousFrameTimestamp;
+    if (intervalLimit.value && delta < intervalLimit.value) {
+      rafId = window2.requestAnimationFrame(loop);
+      return;
+    }
+    previousFrameTimestamp = timestamp2;
+    fn({ delta, timestamp: timestamp2 });
+    if (once) {
+      isActive.value = false;
+      rafId = null;
+      return;
+    }
+    rafId = window2.requestAnimationFrame(loop);
+  }
+  function resume() {
+    if (!isActive.value && window2) {
+      isActive.value = true;
+      previousFrameTimestamp = 0;
+      rafId = window2.requestAnimationFrame(loop);
+    }
+  }
+  function pause() {
+    isActive.value = false;
+    if (rafId != null && window2) {
+      window2.cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+  if (immediate)
+    resume();
+  tryOnScopeDispose$1(pause);
+  return {
+    isActive: readonly(isActive),
+    pause,
+    resume
+  };
 }
 function cloneFnJSON(source) {
   return JSON.parse(JSON.stringify(source));
@@ -608,13 +725,13 @@ function tryOnScopeDispose(fn) {
 // @__NO_SIDE_EFFECTS__
 function createSharedComposable(composable) {
   let subscribers = 0;
-  let state;
+  let state2;
   let scope;
   const dispose = () => {
     subscribers -= 1;
     if (scope && subscribers <= 0) {
       scope.stop();
-      state = void 0;
+      state2 = void 0;
       scope = void 0;
     }
   };
@@ -622,10 +739,10 @@ function createSharedComposable(composable) {
     subscribers += 1;
     if (!scope) {
       scope = effectScope(true);
-      state = scope.run(() => composable(...args));
+      state2 = scope.run(() => composable(...args));
     }
     tryOnScopeDispose(dispose);
-    return state;
+    return state2;
   };
 }
 // @__NO_SIDE_EFFECTS__
@@ -714,6 +831,216 @@ const camelizeRE = /-(\w)/g;
 const camelize = cacheStringFunction((str) => {
   return str.replace(camelizeRE, (_2, c2) => c2 ? c2.toUpperCase() : "");
 });
+function diff(obj1, obj2) {
+  const h1 = _toHashedObject(obj1);
+  const h2 = _toHashedObject(obj2);
+  return _diff(h1, h2);
+}
+function _diff(h1, h2) {
+  const diffs = [];
+  const allProps = /* @__PURE__ */ new Set([
+    ...Object.keys(h1.props || {}),
+    ...Object.keys(h2.props || {})
+  ]);
+  if (h1.props && h2.props) {
+    for (const prop of allProps) {
+      const p1 = h1.props[prop];
+      const p2 = h2.props[prop];
+      if (p1 && p2) {
+        diffs.push(..._diff(h1.props?.[prop], h2.props?.[prop]));
+      } else if (p1 || p2) {
+        diffs.push(
+          new DiffEntry((p2 || p1).key, p1 ? "removed" : "added", p2, p1)
+        );
+      }
+    }
+  }
+  if (allProps.size === 0 && h1.hash !== h2.hash) {
+    diffs.push(new DiffEntry((h2 || h1).key, "changed", h2, h1));
+  }
+  return diffs;
+}
+function _toHashedObject(obj, key = "") {
+  if (obj && typeof obj !== "object") {
+    return new DiffHashedObject(key, obj, serialize(obj));
+  }
+  const props = {};
+  const hashes = [];
+  for (const _key in obj) {
+    props[_key] = _toHashedObject(obj[_key], key ? `${key}.${_key}` : _key);
+    hashes.push(props[_key].hash);
+  }
+  return new DiffHashedObject(key, obj, `{${hashes.join(":")}}`, props);
+}
+class DiffEntry {
+  constructor(key, type, newValue, oldValue) {
+    this.key = key;
+    this.type = type;
+    this.newValue = newValue;
+    this.oldValue = oldValue;
+  }
+  toString() {
+    return this.toJSON();
+  }
+  toJSON() {
+    switch (this.type) {
+      case "added": {
+        return `Added   \`${this.key}\``;
+      }
+      case "removed": {
+        return `Removed \`${this.key}\``;
+      }
+      case "changed": {
+        return `Changed \`${this.key}\` from \`${this.oldValue?.toString() || "-"}\` to \`${this.newValue.toString()}\``;
+      }
+    }
+  }
+}
+class DiffHashedObject {
+  constructor(key, value, hash, props) {
+    this.key = key;
+    this.value = value;
+    this.hash = hash;
+    this.props = props;
+  }
+  toString() {
+    if (this.props) {
+      return `{${Object.keys(this.props).join(",")}}`;
+    } else {
+      return JSON.stringify(this.value);
+    }
+  }
+  toJSON() {
+    const k = this.key || ".";
+    if (this.props) {
+      return `${k}({${Object.keys(this.props).join(",")}})`;
+    }
+    return `${k}(${this.value})`;
+  }
+}
+function omit(data, keys) {
+  const result = { ...data };
+  for (const key of keys) {
+    delete result[key];
+  }
+  return result;
+}
+function get(object, path, defaultValue) {
+  if (typeof path === "string") {
+    path = path.split(".").map((key) => {
+      const numKey = Number(key);
+      return Number.isNaN(numKey) ? key : numKey;
+    });
+  }
+  let result = object;
+  for (const key of path) {
+    if (result === void 0 || result === null) {
+      return defaultValue;
+    }
+    result = result[key];
+  }
+  return result !== void 0 ? result : defaultValue;
+}
+function isArrayOfArray(item) {
+  return Array.isArray(item[0]);
+}
+function mergeClasses(appConfigClass, propClass) {
+  if (!appConfigClass && !propClass) {
+    return "";
+  }
+  return [
+    ...Array.isArray(appConfigClass) ? appConfigClass : [appConfigClass],
+    propClass
+  ].filter(Boolean);
+}
+function buildTranslator(locale) {
+  return (path, option) => translate(path, option, unref(locale));
+}
+function translate(path, option, locale) {
+  const prop = get(locale, `messages.${path}`, path);
+  return prop.replace(
+    /\{(\w+)\}/g,
+    (_2, key) => `${option?.[key] ?? `{${key}}`}`
+  );
+}
+function buildLocaleContext(locale) {
+  const lang = computed(() => unref(locale).name);
+  const code = computed(() => unref(locale).code);
+  const dir = computed(() => unref(locale).dir);
+  const localeRef = isRef(locale) ? locale : ref(locale);
+  return {
+    lang,
+    code,
+    dir,
+    locale: localeRef,
+    t: buildTranslator(locale)
+  };
+}
+// @__NO_SIDE_EFFECTS__
+function defineLocale(options) {
+  return defu(options, { dir: "ltr" });
+}
+const en = /* @__PURE__ */ defineLocale({
+  name: "English",
+  code: "en",
+  messages: {
+    inputMenu: {
+      noMatch: "No matching data",
+      noData: "No data",
+      create: 'Create "{label}"'
+    },
+    calendar: {
+      prevYear: "Previous year",
+      nextYear: "Next year",
+      prevMonth: "Previous month",
+      nextMonth: "Next month"
+    },
+    inputNumber: {
+      increment: "Increment",
+      decrement: "Decrement"
+    },
+    commandPalette: {
+      placeholder: "Type a command or search...",
+      noMatch: "No matching data",
+      noData: "No data",
+      close: "Close",
+      back: "Back"
+    },
+    selectMenu: {
+      noMatch: "No matching data",
+      noData: "No data",
+      create: 'Create "{label}"',
+      search: "Search..."
+    },
+    toast: {
+      close: "Close"
+    },
+    carousel: {
+      prev: "Prev",
+      next: "Next",
+      dots: "Choose slide to display",
+      goto: "Go to slide {slide}"
+    },
+    modal: {
+      close: "Close"
+    },
+    slideover: {
+      close: "Close"
+    },
+    alert: {
+      close: "Close"
+    },
+    table: {
+      noData: "No data"
+    }
+  }
+});
+const localeContextInjectionKey = Symbol.for("nuxt-ui.locale-context");
+const _useLocale = (localeOverrides) => {
+  const locale = localeOverrides || toRef$1(inject(localeContextInjectionKey, en));
+  return buildLocaleContext(computed(() => locale.value || en));
+};
+const useLocale = /* @__PURE__ */ createSharedComposable(_useLocale);
 function flatHooks(configHooks, hooks = {}, parentName) {
   for (const key in configHooks) {
     const subHook = configHooks[key];
@@ -1101,216 +1428,15 @@ function useRoute(_name) {
 }
 const _appConfig = reactive(appConfig);
 const useAppConfig = () => _appConfig;
-// @__NO_SIDE_EFFECTS__
-function defineLocale(options) {
-  return defu(options, { dir: "ltr" });
-}
-function diff(obj1, obj2) {
-  const h1 = _toHashedObject(obj1);
-  const h2 = _toHashedObject(obj2);
-  return _diff(h1, h2);
-}
-function _diff(h1, h2) {
-  const diffs = [];
-  const allProps = /* @__PURE__ */ new Set([
-    ...Object.keys(h1.props || {}),
-    ...Object.keys(h2.props || {})
-  ]);
-  if (h1.props && h2.props) {
-    for (const prop of allProps) {
-      const p1 = h1.props[prop];
-      const p2 = h2.props[prop];
-      if (p1 && p2) {
-        diffs.push(..._diff(h1.props?.[prop], h2.props?.[prop]));
-      } else if (p1 || p2) {
-        diffs.push(
-          new DiffEntry((p2 || p1).key, p1 ? "removed" : "added", p2, p1)
-        );
-      }
-    }
+const state = {};
+const useState = (key, init) => {
+  if (state[key]) {
+    return state[key];
   }
-  if (allProps.size === 0 && h1.hash !== h2.hash) {
-    diffs.push(new DiffEntry((h2 || h1).key, "changed", h2, h1));
-  }
-  return diffs;
-}
-function _toHashedObject(obj, key = "") {
-  if (obj && typeof obj !== "object") {
-    return new DiffHashedObject(key, obj, serialize(obj));
-  }
-  const props = {};
-  const hashes = [];
-  for (const _key in obj) {
-    props[_key] = _toHashedObject(obj[_key], key ? `${key}.${_key}` : _key);
-    hashes.push(props[_key].hash);
-  }
-  return new DiffHashedObject(key, obj, `{${hashes.join(":")}}`, props);
-}
-class DiffEntry {
-  constructor(key, type, newValue, oldValue) {
-    this.key = key;
-    this.type = type;
-    this.newValue = newValue;
-    this.oldValue = oldValue;
-  }
-  toString() {
-    return this.toJSON();
-  }
-  toJSON() {
-    switch (this.type) {
-      case "added": {
-        return `Added   \`${this.key}\``;
-      }
-      case "removed": {
-        return `Removed \`${this.key}\``;
-      }
-      case "changed": {
-        return `Changed \`${this.key}\` from \`${this.oldValue?.toString() || "-"}\` to \`${this.newValue.toString()}\``;
-      }
-    }
-  }
-}
-class DiffHashedObject {
-  constructor(key, value, hash, props) {
-    this.key = key;
-    this.value = value;
-    this.hash = hash;
-    this.props = props;
-  }
-  toString() {
-    if (this.props) {
-      return `{${Object.keys(this.props).join(",")}}`;
-    } else {
-      return JSON.stringify(this.value);
-    }
-  }
-  toJSON() {
-    const k = this.key || ".";
-    if (this.props) {
-      return `${k}({${Object.keys(this.props).join(",")}})`;
-    }
-    return `${k}(${this.value})`;
-  }
-}
-function omit(data, keys) {
-  const result = { ...data };
-  for (const key of keys) {
-    delete result[key];
-  }
-  return result;
-}
-function get(object, path, defaultValue) {
-  if (typeof path === "string") {
-    path = path.split(".").map((key) => {
-      const numKey = Number(key);
-      return Number.isNaN(numKey) ? key : numKey;
-    });
-  }
-  let result = object;
-  for (const key of path) {
-    if (result === void 0 || result === null) {
-      return defaultValue;
-    }
-    result = result[key];
-  }
-  return result !== void 0 ? result : defaultValue;
-}
-function isArrayOfArray(item) {
-  return Array.isArray(item[0]);
-}
-function mergeClasses(appConfigClass, propClass) {
-  if (!appConfigClass && !propClass) {
-    return "";
-  }
-  return [
-    ...Array.isArray(appConfigClass) ? appConfigClass : [appConfigClass],
-    propClass
-  ].filter(Boolean);
-}
-function buildTranslator(locale) {
-  return (path, option) => translate(path, option, unref(locale));
-}
-function translate(path, option, locale) {
-  const prop = get(locale, `messages.${path}`, path);
-  return prop.replace(
-    /\{(\w+)\}/g,
-    (_2, key) => `${option?.[key] ?? `{${key}}`}`
-  );
-}
-function buildLocaleContext(locale) {
-  const lang = computed(() => unref(locale).name);
-  const code = computed(() => unref(locale).code);
-  const dir = computed(() => unref(locale).dir);
-  const localeRef = isRef(locale) ? locale : ref(locale);
-  return {
-    lang,
-    code,
-    dir,
-    locale: localeRef,
-    t: buildTranslator(locale)
-  };
-}
-const en = /* @__PURE__ */ defineLocale({
-  name: "English",
-  code: "en",
-  messages: {
-    inputMenu: {
-      noMatch: "No matching data",
-      noData: "No data",
-      create: 'Create "{label}"'
-    },
-    calendar: {
-      prevYear: "Previous year",
-      nextYear: "Next year",
-      prevMonth: "Previous month",
-      nextMonth: "Next month"
-    },
-    inputNumber: {
-      increment: "Increment",
-      decrement: "Decrement"
-    },
-    commandPalette: {
-      placeholder: "Type a command or search...",
-      noMatch: "No matching data",
-      noData: "No data",
-      close: "Close",
-      back: "Back"
-    },
-    selectMenu: {
-      noMatch: "No matching data",
-      noData: "No data",
-      create: 'Create "{label}"',
-      search: "Search..."
-    },
-    toast: {
-      close: "Close"
-    },
-    carousel: {
-      prev: "Prev",
-      next: "Next",
-      dots: "Choose slide to display",
-      goto: "Go to slide {slide}"
-    },
-    modal: {
-      close: "Close"
-    },
-    slideover: {
-      close: "Close"
-    },
-    alert: {
-      close: "Close"
-    },
-    table: {
-      noData: "No data"
-    }
-  }
-});
-const localeContextInjectionKey = Symbol.for("nuxt-ui.locale-context");
-const _useLocale = (localeOverrides) => {
-  const locale = localeOverrides || toRef$1(inject(localeContextInjectionKey, en));
-  return buildLocaleContext(computed(() => locale.value || en));
+  const value = ref(init());
+  state[key] = value;
+  return value;
 };
-const useLocale = /* @__PURE__ */ createSharedComposable(_useLocale);
 createHooks();
 var l = (e) => typeof e == "boolean" ? `${e}` : e === 0 ? "0" : e, u = (e) => !e || typeof e != "object" || Object.keys(e).length === 0, x$1 = (e, o) => JSON.stringify(e) === JSON.stringify(o);
 function i(e, o) {
@@ -4195,84 +4321,6 @@ var ie = { twMerge: true, twMergeConfig: {}, responsiveVariants: false }, x = (s
 }, fe = (s) => (b, e) => ce(b, e ? p(s, e) : s);
 const appConfigTv = appConfig;
 const tv = /* @__PURE__ */ fe(appConfigTv.ui?.tv);
-function useComponentIcons(componentProps) {
-  const appConfig2 = useAppConfig();
-  const props = computed(() => toValue$1(componentProps));
-  const isLeading = computed(() => props.value.icon && props.value.leading || props.value.icon && !props.value.trailing || props.value.loading && !props.value.trailing || !!props.value.leadingIcon);
-  const isTrailing = computed(() => props.value.icon && props.value.trailing || props.value.loading && props.value.trailing || !!props.value.trailingIcon);
-  const leadingIconName = computed(() => {
-    if (props.value.loading) {
-      return props.value.loadingIcon || appConfig2.ui.icons.loading;
-    }
-    return props.value.leadingIcon || props.value.icon;
-  });
-  const trailingIconName = computed(() => {
-    if (props.value.loading && !isLeading.value) {
-      return props.value.loadingIcon || appConfig2.ui.icons.loading;
-    }
-    return props.value.trailingIcon || props.value.icon;
-  });
-  return {
-    isLeading,
-    isTrailing,
-    leadingIconName,
-    trailingIconName
-  };
-}
-const buttonGroupInjectionKey = Symbol("nuxt-ui.button-group");
-function useButtonGroup(props) {
-  const buttonGroup = inject(buttonGroupInjectionKey, void 0);
-  return {
-    orientation: computed(() => buttonGroup?.value.orientation),
-    size: computed(() => props?.size ?? buttonGroup?.value.size)
-  };
-}
-const formLoadingInjectionKey = Symbol("nuxt-ui.form-loading");
-function pickLinkProps(link) {
-  const keys = Object.keys(link);
-  const ariaKeys = keys.filter((key) => key.startsWith("aria-"));
-  const dataKeys = keys.filter((key) => key.startsWith("data-"));
-  const propsToInclude = [
-    "active",
-    "activeClass",
-    "ariaCurrentValue",
-    "as",
-    "disabled",
-    "exact",
-    "exactActiveClass",
-    "exactHash",
-    "exactQuery",
-    "external",
-    "href",
-    "download",
-    "inactiveClass",
-    "noPrefetch",
-    "noRel",
-    "prefetch",
-    "prefetchedClass",
-    "rel",
-    "replace",
-    "target",
-    "to",
-    "type",
-    "title",
-    "onClick",
-    ...ariaKeys,
-    ...dataKeys
-  ];
-  return reactivePick(link, ...propsToInclude);
-}
-function isPartiallyEqual(item1, item2) {
-  const diffedKeys = diff(item1, item2).reduce((filtered, q2) => {
-    if (q2.type === "added") {
-      filtered.add(q2.key);
-    }
-    return filtered;
-  }, /* @__PURE__ */ new Set());
-  const item1Filtered = Object.fromEntries(Object.entries(item1).filter(([key]) => !diffedKeys.has(key)));
-  const item2Filtered = Object.fromEntries(Object.entries(item2).filter(([key]) => !diffedKeys.has(key)));
-  return isEqual(item1Filtered, item2Filtered);
-}
 const matchIconName = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const stringToIcon = (value, validate, allowSimpleName, provider = "") => {
   const colonSeparated = value.split(":");
@@ -6219,6 +6267,84 @@ const _sfc_main$3 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     };
   }
 });
+function useComponentIcons(componentProps) {
+  const appConfig2 = useAppConfig();
+  const props = computed(() => toValue$1(componentProps));
+  const isLeading = computed(() => props.value.icon && props.value.leading || props.value.icon && !props.value.trailing || props.value.loading && !props.value.trailing || !!props.value.leadingIcon);
+  const isTrailing = computed(() => props.value.icon && props.value.trailing || props.value.loading && props.value.trailing || !!props.value.trailingIcon);
+  const leadingIconName = computed(() => {
+    if (props.value.loading) {
+      return props.value.loadingIcon || appConfig2.ui.icons.loading;
+    }
+    return props.value.leadingIcon || props.value.icon;
+  });
+  const trailingIconName = computed(() => {
+    if (props.value.loading && !isLeading.value) {
+      return props.value.loadingIcon || appConfig2.ui.icons.loading;
+    }
+    return props.value.trailingIcon || props.value.icon;
+  });
+  return {
+    isLeading,
+    isTrailing,
+    leadingIconName,
+    trailingIconName
+  };
+}
+const buttonGroupInjectionKey = Symbol("nuxt-ui.button-group");
+function useButtonGroup(props) {
+  const buttonGroup = inject(buttonGroupInjectionKey, void 0);
+  return {
+    orientation: computed(() => buttonGroup?.value.orientation),
+    size: computed(() => props?.size ?? buttonGroup?.value.size)
+  };
+}
+const formLoadingInjectionKey = Symbol("nuxt-ui.form-loading");
+function pickLinkProps(link) {
+  const keys = Object.keys(link);
+  const ariaKeys = keys.filter((key) => key.startsWith("aria-"));
+  const dataKeys = keys.filter((key) => key.startsWith("data-"));
+  const propsToInclude = [
+    "active",
+    "activeClass",
+    "ariaCurrentValue",
+    "as",
+    "disabled",
+    "exact",
+    "exactActiveClass",
+    "exactHash",
+    "exactQuery",
+    "external",
+    "href",
+    "download",
+    "inactiveClass",
+    "noPrefetch",
+    "noRel",
+    "prefetch",
+    "prefetchedClass",
+    "rel",
+    "replace",
+    "target",
+    "to",
+    "type",
+    "title",
+    "onClick",
+    ...ariaKeys,
+    ...dataKeys
+  ];
+  return reactivePick(link, ...propsToInclude);
+}
+function isPartiallyEqual(item1, item2) {
+  const diffedKeys = diff(item1, item2).reduce((filtered, q2) => {
+    if (q2.type === "added") {
+      filtered.add(q2.key);
+    }
+    return filtered;
+  }, /* @__PURE__ */ new Set());
+  const item1Filtered = Object.fromEntries(Object.entries(item1).filter(([key]) => !diffedKeys.has(key)));
+  const item2Filtered = Object.fromEntries(Object.entries(item2).filter(([key]) => !diffedKeys.has(key)));
+  return isEqual(item1Filtered, item2Filtered);
+}
 const PROTOCOL_STRICT_REGEX = /^[\s\w\0+.-]{2,}:([/\\]{1,2})/;
 const PROTOCOL_REGEX = /^[\s\w\0+.-]{2,}:([/\\]{2})?/;
 const PROTOCOL_RELATIVE_REGEX = /^([/\\]\s*){2,}[^/\\]/;
@@ -6958,46 +7084,52 @@ const _sfc_main = {
   }
 };
 export {
-  tv as A,
-  useAppConfig as B,
-  _sfc_main$5 as C,
-  get as D,
-  reactiveOmit as E,
-  omit as F,
-  isArrayOfArray as G,
-  _sfc_main$3 as H,
-  _sfc_main$1 as I,
-  pickLinkProps as J,
-  _sfc_main$2 as K,
-  useButtonGroup as L,
-  useComponentIcons as M,
+  createGlobalState as A,
+  useEmitAsProps as B,
+  createSharedComposable$1 as C,
+  tryOnBeforeUnmount as D,
+  defu as E,
+  isIOS as F,
+  useMounted as G,
+  computedEager as H,
+  refAutoReset as I,
+  makeDestructurable as J,
+  camelize as K,
+  get as L,
+  reactiveOmit as M,
+  isArrayOfArray as N,
+  _sfc_main$1 as O,
   Primitive as P,
+  pickLinkProps as Q,
+  _sfc_main$2 as R,
   Slot as S,
-  _sfc_main as _,
-  isEqual as a,
+  useButtonGroup as T,
+  useComponentIcons as U,
+  _sfc_main$3 as _,
+  useRafFn as a,
   useForwardExpose as b,
   createContext as c,
-  defaultWindow as d,
-  isClient as e,
-  unrefElement as f,
-  useEventListener as g,
-  createGlobalState as h,
-  isNullish as i,
-  useEmitAsProps as j,
-  createSharedComposable$1 as k,
-  defu as l,
-  isIOS as m,
-  useMounted as n,
+  useVModel as d,
+  unrefElement as e,
+  useTimeoutFn as f,
+  useState as g,
+  useLocale as h,
+  isClient as i,
+  useForwardPropsEmits as j,
+  useAppConfig as k,
+  _sfc_main$5 as l,
+  _sfc_main as m,
+  useForwardProps as n,
   onKeyStroke as o,
-  computedEager as p,
-  refAutoReset as q,
-  renderSlotFragments as r,
-  useForwardPropsEmits as s,
-  tryOnBeforeUnmount as t,
-  useVModel as u,
-  makeDestructurable as v,
-  camelize as w,
-  createSharedComposable as x,
-  useLocale as y,
-  reactivePick as z
+  omit as p,
+  createSharedComposable as q,
+  reactivePick as r,
+  localeContextInjectionKey as s,
+  tv as t,
+  useTimeout as u,
+  isNullish as v,
+  isEqual as w,
+  defaultWindow as x,
+  renderSlotFragments as y,
+  useEventListener as z
 };
