@@ -1,23 +1,34 @@
 <template>
-  <div class="flex justify-center gap-7">
-    <TheHeaderNavigationItem
-      v-for="item in items"
-      :key="item.label"
-      :icon-name="item.iconName"
-      :label="item.label"
-      :icon-color="iconColor"
-    />
+  <div class="flex justify-center gap-7 ml-auto">
+    <template
+      v-for="(item, index) in items"
+      :key="isSeparator(item) ? `separator-${index}` : item.label"
+    >
+      <div
+        v-if="isSeparator(item)"
+        class="border-l my-2"
+        :style="{borderColor: iconColor}"
+      />
+
+      <TheHeaderNavigationItem v-else v-bind="{...item, iconColor}" />
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
 import TheHeaderNavigationItem from './TheHeaderNavigationItem.vue'
-import type {NavigationItem} from '@/types'
+import type {NavigationItem, NavigationSeparatorItem} from '@/types'
 
 interface Props {
   iconColor: string
-  items: NavigationItem[]
+  items: (NavigationItem | NavigationSeparatorItem)[]
 }
 
 defineProps<Props>()
+
+function isSeparator(
+  item: NavigationItem | NavigationSeparatorItem
+): item is NavigationSeparatorItem {
+  return 'separator' in item && item.separator === true
+}
 </script>

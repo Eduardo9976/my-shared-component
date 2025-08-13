@@ -1,4 +1,3 @@
-// Brand related types
 export interface BrandBackground {
   primaryColor?: string
   secondaryColor?: string
@@ -14,12 +13,35 @@ export interface Brand {
   background?: BrandBackground
 }
 
-// Navigation related types
 export interface NavigationItem {
-  iconName: string
+  icon: string
   label: string
-  route?: string
+  active?: boolean
+  click?: (item: NavigationItem) => void
+}
+export interface NavigationSeparatorItem {
+  separator?: boolean
 }
 
-// Export all types for easy importing
-export type {BrandBackground, Brand, NavigationItem}
+export interface User {
+  name: string
+  role?: string
+  email?: string
+  acronym: string
+  badge: {
+    variant: string
+    icon: string
+  }
+}
+
+export interface ProfileItem {
+  label?: string
+  click?: () => void
+  url?: string
+  icon?: {
+    class: string
+    color: string
+  }
+  active?: boolean
+  children?: ProfileItem[]
+}

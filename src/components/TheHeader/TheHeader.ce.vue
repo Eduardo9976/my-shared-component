@@ -4,13 +4,15 @@
       <TheHeaderBrand :brand="brand" />
 
       <TheHeaderNavigation :icon-color="iconColor" :items="navigationItems" />
+
+      <TheHeaderAvatar :user="user" :profileItems="profileItems" />
     </nav>
   </header>
 </template>
 
 <script setup lang="ts">
 import {ref, computed} from 'vue'
-import type {Brand, NavigationItem} from '@/types'
+import type {Brand, NavigationItem, NavigationSeparatorItem} from '@/types'
 import TheHeaderBrand from './TheHeaderBrand.vue'
 import TheHeaderNavigation from './TheHeaderNavigation.vue'
 
@@ -19,29 +21,76 @@ const brand = ref<Brand>({
   link: 'https://me.com.br',
   newTab: true,
   background: {
-    primaryColor: '#343434',
-    secondaryColor: '#009900',
-    iconColor: 'peachPuff'
+    // primaryColor: '#343434',
+    // secondaryColor: '#009900',
+    // iconColor: 'peachPuff'
     // repeatImage: 'https://conteudo.imguol.com.br/c/home/46/2020/03/02/balaio-do-kotscho-150-1583157444753_100x100.jpg.webp',
     // mainImage: 'https://conteudo.imguol.com.br/c/noticias/90/2019/04/01/leonardo-sakamoto-1554157201028_v2_100x100.jpg.webp',
   }
 })
 
-const navigationItems = ref<NavigationItem[]>([
+const navigationItems = ref<(NavigationItem | NavigationSeparatorItem)[]>([
   {
-    iconName: 'objects-column',
+    icon: 'me-icon-l icon-objects-column',
     label: 'Dashboard',
-    route: '/dashboard'
+    click: e => console.log(e),
+    active: true
   },
   {
-    iconName: 'store',
+    separator: true
+  },
+  {
+    icon: 'me-icon-l icon-store',
     label: 'Fornecedores',
-    route: '/fornecedores'
+    click: e => console.log(e)
+  }
+])
+
+const user = ref({
+  name: 'Renato Dias',
+  role: 'Developer',
+  acronym: 'RD',
+  badge: {
+    variant: 'danger',
+    icon: 'me-icon-l icon-exclamation'
+  }
+})
+
+const profileItems = ref([
+  {
+    label: 'Profile',
+    click: () => console.log('Profile'),
+    icon: {
+      class: 'me-icon-l icon-user-alt',
+      color: 'var(--me-primary-1)'
+    }
+  },
+  {
+    label: 'Change Password',
+    url: '#',
+    icon: {
+      class: 'me-icon-l icon-key',
+      color: 'var(--me-warning-2)'
+    }
+  },
+  {
+    label: 'Português (pt-BR)',
+    active: true,
+    children: [
+      {label: 'Espanhol (es-MX)', url: '#'},
+      {label: 'Francês (fr-FR)', click: () => console.log('French')},
+      {label: 'Inglês (en-US)', url: '#'},
+      {label: 'Português (pt-PT)', url: '#'}
+    ]
+  },
+  {
+    label: 'Logoff',
+    url: '#'
   }
 ])
 
 const headerClasses = computed(() => {
-  const baseClasses = 'p-4 shadow-lg'
+  const baseClasses = 'shadow-lg'
   return `${baseClasses} text-white`
 })
 
@@ -98,7 +147,6 @@ const headerStyles = computed(() => {
     // Cenário 5: Apenas cor primária
     styles.backgroundColor = bg.primaryColor
   } else {
-    // Padrão: variável CSS
     styles.backgroundColor = 'var(--ui-primary)'
   }
 

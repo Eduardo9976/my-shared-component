@@ -1,148 +1,148 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Teste do Web Component</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
     <link
-            rel="stylesheet"
-            href="https://eduardo9976.github.io/my-shared-component/dist/webcomponents-styles.css"
+      rel="stylesheet"
+      href="https://eduardo9976.github.io/my-shared-component/dist/webcomponents-styles.css"
     />
 
     <script
-            type="module"
-            src="https://eduardo9976.github.io/my-shared-component/dist/shared-button.js?v=7"
-    >
-    </script>
+      type="module"
+      src="https://eduardo9976.github.io/my-shared-component/dist/shared-button.js?v=7"
+    ></script>
 
-        <script
-                type="module"
-                src="https://eduardo9976.github.io/my-shared-component/dist/card-xpto.js?v=7"
-        ></script>
+    <script
+      type="module"
+      src="https://eduardo9976.github.io/my-shared-component/dist/card-xpto.js?v=7"
+    ></script>
 
-        <script
-                type="module"
-                src="https://eduardo9976.github.io/my-shared-component/dist/the-header.js?v=7"
-        ></script>
+    <script
+      type="module"
+      src="https://eduardo9976.github.io/my-shared-component/dist/the-header.js?v=7"
+    ></script>
 
-<!--    <link-->
-<!--            rel="stylesheet"-->
-<!--            href="./dist/webcomponents-styles.css"-->
-<!--    />-->
+    <!--    <link-->
+    <!--            rel="stylesheet"-->
+    <!--            href="./dist/webcomponents-styles.css"-->
+    <!--    />-->
 
-<!--    <script-->
-<!--            type="module"-->
-<!--            src="./dist/shared-button.js?v=7"-->
-<!--    ></script>    -->
-<!--    -->
-<!--    <script-->
-<!--            type="module"-->
-<!--            src="./dist/card-xpto.js?v=7"-->
-<!--    ></script>-->
+    <!--    <script-->
+    <!--            type="module"-->
+    <!--            src="./dist/shared-button.js?v=7"-->
+    <!--    ></script>    -->
+    <!--    -->
+    <!--    <script-->
+    <!--            type="module"-->
+    <!--            src="./dist/card-xpto.js?v=7"-->
+    <!--    ></script>-->
 
-<!--    <script-->
-<!--            type="module"-->
-<!--            src="./dist/the-header.js"-->
-<!--    ></script>-->
+    <!--    <script-->
+    <!--            type="module"-->
+    <!--            src="./dist/the-header.js"-->
+    <!--    ></script>-->
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
 
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+      }
 
-        p {
-            color: #666;
-            line-height: 1.6;
-        }
+      p {
+        color: #666;
+        line-height: 1.6;
+      }
 
-        .components-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
+      .components-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
 
-        .component-section {
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 20px;
-            background: #fafafa;
-        }
+      .component-section {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px;
+        background: #fafafa;
+      }
 
-        .component-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #333;
-        }
+      .component-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #333;
+      }
     </style>
-</head>
-<body>
-<the-header></the-header>
-<div class="container">
-    <h1>🧪 Teste do Web Component</h1>
-    <p>Testando os web components carregados do GitHub Pages:</p>
+  </head>
+  <body>
+    <the-header></the-header>
+    <div class="container">
+      <h1>🧪 Teste do Web Component</h1>
+      <p>Testando os web components carregados do GitHub Pages:</p>
 
-    <div class="components-grid">
+      <div class="components-grid">
         <div class="component-section">
-            <div class="component-title">Shared Button</div>
-            <shared-button></shared-button>
+          <div class="component-title">Shared Button</div>
+          <shared-button></shared-button>
         </div>
 
         <div class="component-section">
-            <div class="component-title">Card XPTO</div>
-            <card-xpto></card-xpto>
+          <div class="component-title">Card XPTO</div>
+          <card-xpto></card-xpto>
         </div>
+      </div>
 
-    <p style="margin-top: 30px; text-align: center">
+      <p style="margin-top: 30px; text-align: center">
         Se ambos os componentes aparecerem com estilos corretos, os web
         components estão funcionando! ✅
-    </p>
-</div>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const components = ['shared-button', 'card-xpto', 'the-header']
-    let loadedComponents = 0
+      </p>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const components = ['shared-button', 'card-xpto', 'the-header']
+        let loadedComponents = 0
 
-    components.forEach(componentName => {
-      if (customElements.get(componentName)) {
-        console.log(
-          `✅ Web component ${componentName} carregado com sucesso!`
-        )
-        loadedComponents++
-      } else {
-        console.error(`❌ Web component ${componentName} não foi carregado`)
-      }
-    })
+        components.forEach(componentName => {
+          if (customElements.get(componentName)) {
+            console.log(
+              `✅ Web component ${componentName} carregado com sucesso!`
+            )
+            loadedComponents++
+          } else {
+            console.error(`❌ Web component ${componentName} não foi carregado`)
+          }
+        })
 
-    if (loadedComponents === components.length) {
-      console.log(
-        '🎉 Todos os web components foram carregados com sucesso!'
-      )
-    } else {
-      console.error('⚠️ Alguns web components não foram carregados')
-    }
-  })
-</script>
-</body>
+        if (loadedComponents === components.length) {
+          console.log(
+            '🎉 Todos os web components foram carregados com sucesso!'
+          )
+        } else {
+          console.error('⚠️ Alguns web components não foram carregados')
+        }
+      })
+    </script>
+  </body>
 </html>

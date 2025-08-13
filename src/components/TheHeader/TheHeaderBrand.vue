@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <a
-      :href="useSanitizeURL(brand.link)"
-      :target="brand.newTab ? '_blank' : '_self'"
-    >
-      <img :src="brand.logo" alt="logo" />
-    </a>
-  </div>
+  <a
+    :href="useSanitizeURL(brand.link)"
+    :target="brand.newTab ? '_blank' : '_self'"
+    class="px-4"
+  >
+    <img :src="brand.logo" alt="logo" class="max-w-[75px] max-h-[32px]" />
+  </a>
 </template>
 
 <script setup lang="ts">

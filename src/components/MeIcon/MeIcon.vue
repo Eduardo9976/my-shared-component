@@ -1,91 +1,131 @@
 <template>
   <i
     :class="[
-      ...iconClasses,
-      sizeClasses,
-      'inline-flex items-center justify-center'
+      currentIcon,
+      variantClass,
+      'inline-flex items-center justify-center',
+      variantClasses,
+      hoverClasses
     ]"
-    :style="iconStyles"
+    :style="iconStyle"
     :aria-label="ariaLabel"
     role="img"
-  />
+    data-cy="icon-element"
+    @mouseenter="isHover = true"
+    @mouseleave="isHover = false"
+  >
+    <slot />
+  </i>
 </template>
 
 <script setup lang="ts">
-import {computed} from 'vue'
+import {computed, ref} from 'vue'
+
+const iconTypes = {
+  regular: 'me-icon',
+  solid: 'me-icon-s',
+  light: 'me-icon-l',
+  thin: 'me-icon-t'
+}
+
+const variants = ['primary', 'success', 'danger', 'warning']
 
 interface Props {
-  name: string
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
   color?: string
+  hoverColor?: string
+  hoverIcon?: string
+  icon?: string
+  name?: string
+  type?: 'regular' | 'solid' | 'light' | 'thin'
+  variant?: 'primary' | 'success' | 'danger' | 'warning' | ''
+  size?: number | string
+  customSize?: number
   ariaLabel?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  size: 'md',
-  color: undefined,
+  color: '',
+  hoverColor: '',
+  hoverIcon: '',
+  icon: '',
+  name: '',
+  type: 'regular',
+  variant: '',
+  size: '',
+  customSize: undefined,
   ariaLabel: undefined
 })
 
-const iconClasses = computed(() => ['me-icon', `icon-${props.name}`])
+const isHover = ref(false)
 
-const sizeClasses = computed(() => {
-  const sizeMap = {
-    xs: 'me-icon-xs',
-    sm: 'me-icon-sm',
-    md: 'me-icon-md',
-    lg: 'me-icon-lg',
-    xl: 'me-icon-xl',
-    '2xl': 'me-icon-2xl'
+const iconStyle = computed(() => {
+  const styles: Record<string, string> = {}
+
+  if (isHover.value && props.hoverColor) {
+    styles.color = props.hoverColor
+  } else if (props.color) {
+    styles.color = props.color
   }
-  return sizeMap[props.size] || sizeMap.md
+
+  if (props.customSize) {
+    const sizeInPx = `${props.customSize}px`
+    styles.width = sizeInPx
+    styles.height = sizeInPx
+    styles.fontSize = sizeInPx
+  } else if (props.size) {
+    styles.fontSize =
+      typeof props.size === 'number' ? `${props.size}px` : props.size
+  }
+
+  return styles
 })
 
-const iconStyles = computed(() => {
-  const baseStyles: Record<string, string> = {}
+const variantClass = computed(() => {
+  return props.variant && variants.includes(props.variant)
+    ? `icon-${props.variant}`
+    : ''
+})
 
-  if (props.color) {
-    baseStyles.color = props.color
+const variantClasses = computed(() => {
+  if (!props.variant) return ''
+
+  const variantMap = {
+    primary: 'text-blue-600',
+    success: 'text-green-600',
+    warning: 'text-yellow-600',
+    danger: 'text-red-600'
   }
 
-  return baseStyles
+  return variantMap[props.variant] || ''
+})
+
+const hoverClasses = computed(() => {
+  if (!isHover.value) return ''
+
+  if (props.hoverIcon) {
+    return 'transition-all duration-200'
+  }
+
+  if (props.hoverColor) {
+    return 'transition-colors duration-200'
+  }
+
+  return ''
+})
+
+const currentIcon = computed(() => {
+  if (isHover.value && props.hoverIcon) {
+    return props.hoverIcon
+  }
+
+  if (props.icon) {
+    return props.icon
+  }
+
+  if (props.name) {
+    return [iconTypes[props.type], `icon-${props.name}`]
+  }
+
+  return []
 })
 </script>
-
-<style scoped>
-.me-icon-xs {
-  font-size: 0.75rem !important;
-  width: 0.75rem !important;
-  height: 0.75rem !important;
-}
-
-.me-icon-sm {
-  font-size: 0.875rem !important;
-  width: 0.875rem !important;
-  height: 0.875rem !important;
-}
-
-.me-icon-md {
-  font-size: 1rem !important;
-  width: 1rem !important;
-  height: 1rem !important;
-}
-
-.me-icon-lg {
-  font-size: 1.25rem !important;
-  width: 1.25rem !important;
-  height: 1.25rem !important;
-}
-
-.me-icon-xl {
-  font-size: 1.5rem !important;
-  width: 1.5rem !important;
-  height: 1.5rem !important;
-}
-
-.me-icon-2xl {
-  font-size: 2rem !important;
-  width: 2rem !important;
-  height: 2rem !important;
-}
-</style>

@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import {ref, watch} from 'vue'
-import MeIcon from "../MeIcon/MeIcon.vue";
+import MeIcon from '../MeIcon/MeIcon.vue'
 
 const open = ref(false)
 
