@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center gap-7 ml-auto">
+  <div class="flex justify-center gap-6 ml-auto">
     <template
       v-for="(item, index) in items"
       :key="isSeparator(item) ? `separator-${index}` : item.label"

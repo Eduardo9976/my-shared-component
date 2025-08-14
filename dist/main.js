@@ -18535,6 +18535,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     top: calc(var(--spacing) * 4);
   }
 
+  .top-\\[-1px\\] {
+    top: -1px;
+  }
+
   .top-\\[30px\\] {
     top: 30px;
   }
@@ -18843,6 +18847,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .-mb-px {
     margin-bottom: -1px;
+  }
+
+  .mb-0 {
+    margin-bottom: calc(var(--spacing) * 0);
   }
 
   .mb-1 {
@@ -19728,6 +19736,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .gap-4 {
     gap: calc(var(--spacing) * 4);
+  }
+
+  .gap-6 {
+    gap: calc(var(--spacing) * 6);
   }
 
   .gap-7 {
@@ -20754,6 +20766,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     .text-error\\/75 {
       color: color-mix(in oklab, var(--ui-error) 75%, transparent);
     }
+  }
+
+  .text-gray-400 {
+    color: var(--color-gray-400);
   }
 
   .text-gray-500 {
@@ -24758,6 +24774,57 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 }
 
+:host {
+  box-sizing: border-box;
+  font-family: var(--font-sans, inherit);
+  color: inherit;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-decoration: none;
+  list-style: none;
+}
+
+:host *, :host :before, :host :after {
+  box-sizing: border-box;
+}
+
+:host button, :host input, :host select, :host textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+:host a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:host ul, :host ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:host h1, :host h2, :host h3, :host h4, :host h5, :host h6 {
+  font-weight: inherit;
+  font-size: inherit;
+  margin: 0;
+}
+
+:host p {
+  margin: 0;
+}
+
 :root {
   --ui-color-success-50: #f0fdf4;
   --ui-color-success-100: #dcfce7;
@@ -25388,8 +25455,8 @@ export {
   inject as ad,
   onBeforeUnmount as ae,
   get as af,
-  defineCustomElement as ag,
-  tailwindStyles as ah,
+  tailwindStyles as ag,
+  defineCustomElement as ah,
   useEmitAsProps as ai,
   shallowRef as aj,
   makeDestructurable as ak,

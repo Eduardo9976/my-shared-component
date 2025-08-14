@@ -25,7 +25,7 @@
         @click.prevent="() => handleClick(item)"
       >
         <span
-          class="group-hover:text-primary"
+          class="group-hover:text-primary text-gray-500"
           :class="{
             'text-[var(--color-neutral-400)] font-semibold':
               props.nested && !item.active

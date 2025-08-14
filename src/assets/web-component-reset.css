@@ -1,0 +1,83 @@
+/* Reset CSS específico para web components consumidos em projetos com Bootstrap */
+/* Este arquivo deve ser importado apenas quando o componente for usado em projetos externos */
+
+:host {
+  /* Reset básico para evitar herança de estilos do Bootstrap */
+  all: initial;
+  font-family: var(--font-sans, inherit);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: inherit;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  display: block;
+  box-sizing: border-box;
+}
+
+:host *,
+:host *::before,
+:host *::after {
+  all: unset;
+  box-sizing: border-box;
+}
+
+/* Restaurar estilos essenciais do Tailwind */
+:host .flex { display: flex !important; }
+:host .grid { display: grid !important; }
+:host .block { display: block !important; }
+:host .inline-block { display: inline-block !important; }
+:host .hidden { display: none !important; }
+
+:host .relative { position: relative !important; }
+:host .absolute { position: absolute !important; }
+:host .fixed { position: fixed !important; }
+
+:host .text-center { text-align: center !important; }
+:host .text-left { text-align: left !important; }
+:host .text-right { text-align: right !important; }
+
+:host .text-white { color: #ffffff !important; }
+:host .text-gray-500 { color: #6b7280 !important; }
+:host .text-gray-400 { color: #9ca3af !important; }
+
+:host .bg-white { background-color: #ffffff !important; }
+:host .bg-primary { background-color: var(--color-blue-500, #1052e0) !important; }
+
+:host .rounded-full { border-radius: 9999px !important; }
+:host .rounded-bl-lg { border-bottom-left-radius: 0.5rem !important; }
+
+:host .px-4 { padding-left: 1rem !important; padding-right: 1rem !important; }
+:host .py-2 { padding-top: 0.5rem !important; padding-bottom: 0.5rem !important; }
+:host .mb-0 { margin-bottom: 0 !important; }
+
+:host .gap-4 { gap: 1rem !important; }
+:host .w-\[168px\] { width: 168px !important; }
+:host .size-12 { width: 3rem !important; height: 3rem !important; }
+
+:host .text-sm { font-size: 0.875rem !important; }
+:host .text-xs { font-size: 0.75rem !important; }
+:host .text-2xl { font-size: 1.5rem !important; }
+
+:host .font-normal { font-weight: 400 !important; }
+:host .no-underline { text-decoration: none !important; }
+
+:host .truncate {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+:host .select-none { user-select: none !important; }
+:host .cursor-pointer { cursor: pointer !important; }
+
+:host .items-center { align-items: center !important; }
+:host .items-end { align-items: flex-end !important; }
+:host .justify-center { justify-content: center !important; }
+:host .justify-between { justify-content: space-between !important; }
+
+:host .top-\[-1px\] { top: -1px !important; }
+:host .right-\[-8px\] { right: -8px !important; }

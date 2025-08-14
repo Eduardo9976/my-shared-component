@@ -1,4 +1,4 @@
-import { d as defineComponent, e as computed, f as onMounted, g as onUnmounted, c as createBlock, o as openBlock, w as withCtx, h as createVNode, u as unref, P as Primitive, r as renderSlot, n as nextTick, i as createContext, t as toRefs, j as useForwardExpose, k as useVModel, l as ref, m as normalizeStyle, p as createCommentVNode, q as watch, s as useResizeObserver, v as mergeProps, x as withKeys, y as withModifiers, z as useTimeout, A as useRafFn, B as createTextVNode, C as toDisplayString, D as watchEffect, E as onKeyStroke, F as createElementBlock, T as Teleport, G as Fragment, H as isClient, I as normalizeProps, J as guardReactiveProps, K as unrefElement, L as useTimeoutFn, M as useState, N as useSlots, O as useLocale, Q as useForwardPropsEmits, R as reactivePick, S as tv, U as useAppConfig, a as createBaseVNode, _ as _sfc_main$D, V as _sfc_main$E, W as normalizeClass, X as resolveDynamicComponent, Y as renderList, Z as _sfc_main$F, $ as useForwardProps, a0 as toRef, a1 as omit, a2 as createSharedComposable, a3 as shallowReactive, a4 as reactive, a5 as markRaw, a6 as useId$1, a7 as provide, a8 as localeContextInjectionKey, a9 as defu, aa as toHandlers, ab as resolveComponent, ac as useTemplateRef, ad as inject, ae as onBeforeUnmount, af as get, ag as defineCustomElement, ah as tailwindStyles } from "./main.js";
+import { d as defineComponent, e as computed, f as onMounted, g as onUnmounted, c as createBlock, o as openBlock, w as withCtx, h as createVNode, u as unref, P as Primitive, r as renderSlot, n as nextTick, i as createContext, t as toRefs, j as useForwardExpose, k as useVModel, l as ref, m as normalizeStyle, p as createCommentVNode, q as watch, s as useResizeObserver, v as mergeProps, x as withKeys, y as withModifiers, z as useTimeout, A as useRafFn, B as createTextVNode, C as toDisplayString, D as watchEffect, E as onKeyStroke, F as createElementBlock, T as Teleport, G as Fragment, H as isClient, I as normalizeProps, J as guardReactiveProps, K as unrefElement, L as useTimeoutFn, M as useState, N as useSlots, O as useLocale, Q as useForwardPropsEmits, R as reactivePick, S as tv, U as useAppConfig, a as createBaseVNode, _ as _sfc_main$D, V as _sfc_main$E, W as normalizeClass, X as resolveDynamicComponent, Y as renderList, Z as _sfc_main$F, $ as useForwardProps, a0 as toRef, a1 as omit, a2 as createSharedComposable, a3 as shallowReactive, a4 as reactive, a5 as markRaw, a6 as useId$1, a7 as provide, a8 as localeContextInjectionKey, a9 as defu, aa as toHandlers, ab as resolveComponent, ac as useTemplateRef, ad as inject, ae as onBeforeUnmount, af as get, ag as tailwindStyles, ah as defineCustomElement } from "./main.js";
 import { i as injectRovingFocusGroupContext, u as useId, a as useCollection, g as getFocusIntent, w as wrapArray, f as focusFirst, b as useDirection, P as Presence, _ as _sfc_main$A, c as _sfc_main$B, d as getActiveElement, e as _sfc_main$C, h as context, j as focusFirst$1, k as getTabbableCandidates, l as usePortal, m as _sfc_main$H, p as portalTargetInjectionKey, H as HoverCard, n as Popover, o as _sfc_main$I, q as _sfc_main$J, r as meIconStyles } from "./me-icon.min.js";
 import { _ as _sfc_main$G, a as _sfc_main$K } from "./Badge.js";
 const _sfc_main$z = /* @__PURE__ */ defineComponent({
@@ -1956,7 +1956,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
               onClick: withModifiers(() => handleClick(item), ["prevent"])
             }, [
               createBaseVNode("span", {
-                class: normalizeClass(["group-hover:text-primary", {
+                class: normalizeClass(["group-hover:text-primary text-gray-500", {
                   "text-[var(--color-neutral-400)] font-semibold": props.nested && !item.active
                 }])
               }, toDisplayString(item.label), 3),
@@ -1979,9 +1979,9 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
 const _hoisted_1$8 = { class: "flex select-none flex-col items-end relative" };
 const _hoisted_2$3 = { class: "flex justify-between gap-4 px-4 py-2 align-center" };
 const _hoisted_3$1 = { class: "grid w-[168px]" };
-const _hoisted_4 = { class: "truncate" };
-const _hoisted_5 = { class: "block truncate text-xs text-gray-500" };
-const _hoisted_6 = { class: "text-2xl font-normal" };
+const _hoisted_4 = { class: "truncate mb-0 text-gray-500" };
+const _hoisted_5 = { class: "block truncate text-xs text-gray-400" };
+const _hoisted_6 = { class: "text-2xl font-normal no-underline" };
 const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderAvatarMenu",
   props: {
@@ -1997,7 +1997,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
         createBaseVNode("div", {
           ref_key: "menuAvatar",
           ref: menuAvatar,
-          class: "rounded-bl-lg bg-white text-sm absolute right-[-8px]"
+          class: "rounded-bl-lg bg-white text-sm absolute top-[-1px] right-[-8px]"
         }, [
           createBaseVNode("div", _hoisted_2$3, [
             createBaseVNode("div", _hoisted_3$1, [
@@ -2624,7 +2624,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$2 = { class: "flex justify-center gap-7 ml-auto" };
+const _hoisted_1$2 = { class: "flex justify-center gap-6 ml-auto" };
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderNavigation",
   props: {
@@ -2780,36 +2780,36 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return `${baseClasses} text-white`;
     });
     const headerStyles = computed(() => {
-      const styles = {};
+      const styles2 = {};
       const bg = brand.value.background || {};
       const hasMainImage = Boolean(bg.mainImage);
       const hasRepeatImage = Boolean(bg.repeatImage);
       const hasPrimaryColor = Boolean(bg.primaryColor);
       const hasSecondaryColor = Boolean(bg.secondaryColor);
       if (hasMainImage && hasRepeatImage && bg.mainImage && bg.repeatImage) {
-        styles.backgroundImage = `url(${bg.mainImage}), url(${bg.repeatImage})`;
-        styles.backgroundSize = "cover, auto";
-        styles.backgroundPosition = "center, center";
-        styles.backgroundRepeat = "no-repeat, repeat";
+        styles2.backgroundImage = `url(${bg.mainImage}), url(${bg.repeatImage})`;
+        styles2.backgroundSize = "cover, auto";
+        styles2.backgroundPosition = "center, center";
+        styles2.backgroundRepeat = "no-repeat, repeat";
       } else if (hasMainImage && hasPrimaryColor && bg.mainImage && bg.primaryColor) {
-        styles.backgroundColor = bg.primaryColor;
-        styles.backgroundImage = `url(${bg.mainImage})`;
-        styles.backgroundSize = "contain";
-        styles.backgroundPosition = "center";
-        styles.backgroundRepeat = "no-repeat";
+        styles2.backgroundColor = bg.primaryColor;
+        styles2.backgroundImage = `url(${bg.mainImage})`;
+        styles2.backgroundSize = "contain";
+        styles2.backgroundPosition = "center";
+        styles2.backgroundRepeat = "no-repeat";
       } else if (hasRepeatImage && !hasMainImage && bg.repeatImage) {
-        styles.backgroundImage = `url(${bg.repeatImage})`;
-        styles.backgroundSize = "auto";
-        styles.backgroundPosition = "center";
-        styles.backgroundRepeat = "repeat";
+        styles2.backgroundImage = `url(${bg.repeatImage})`;
+        styles2.backgroundSize = "auto";
+        styles2.backgroundPosition = "center";
+        styles2.backgroundRepeat = "repeat";
       } else if (hasPrimaryColor && hasSecondaryColor && !hasMainImage && !hasRepeatImage && bg.primaryColor && bg.secondaryColor) {
-        styles.background = `linear-gradient(135deg, ${bg.primaryColor} 0%, ${bg.secondaryColor} 100%)`;
+        styles2.background = `linear-gradient(135deg, ${bg.primaryColor} 0%, ${bg.secondaryColor} 100%)`;
       } else if (hasPrimaryColor && !hasSecondaryColor && !hasMainImage && !hasRepeatImage && bg.primaryColor) {
-        styles.backgroundColor = bg.primaryColor;
+        styles2.backgroundColor = bg.primaryColor;
       } else {
-        styles.backgroundColor = "var(--ui-primary)";
+        styles2.backgroundColor = "var(--ui-primary)";
       }
-      return styles;
+      return styles2;
     });
     const iconColor = computed(() => {
       return brand.value.background?.iconColor || "white";
@@ -2846,9 +2846,18 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
+let styles = [tailwindStyles, meIconStyles];
+{
+  try {
+    const resetStyles = require("../../assets/web-component-reset.css?inline");
+    styles.unshift(resetStyles);
+  } catch (error) {
+    console.warn("Reset CSS não encontrado, usando estilos padrão");
+  }
+}
 const TheHeaderElement = defineCustomElement(_sfc_main, {
   shadowRoot: true,
-  styles: [tailwindStyles, meIconStyles]
+  styles
 });
 if (!customElements.get("the-header")) {
   customElements.define("the-header", TheHeaderElement);

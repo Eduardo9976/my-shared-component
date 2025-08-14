@@ -1,12 +1,12 @@
 <template>
   <div class="flex select-none flex-col items-end relative">
-    <div ref="menuAvatar" class="rounded-bl-lg bg-white text-sm absolute right-[-8px]">
+    <div ref="menuAvatar" class="rounded-bl-lg bg-white text-sm absolute top-[-1px] right-[-8px]">
       <div class="flex justify-between gap-4 px-4 py-2 align-center">
         <div class="grid w-[168px]">
-          <p class="truncate">
+          <p class="truncate mb-0 text-gray-500">
             {{ user.name }}
           </p>
-          <small class="block truncate text-xs text-gray-500">{{
+          <small class="block truncate text-xs text-gray-400">{{
             user.role || user.email || ''
           }}</small>
         </div>
@@ -14,7 +14,7 @@
           ref="avatar"
           class="flex items-center justify-center size-12 rounded-full bg-primary cursor-pointer text-white"
         >
-          <span class="text-2xl font-normal">{{ user.acronym }}</span>
+          <span class="text-2xl font-normal no-underline">{{ user.acronym }}</span>
         </div>
       </div>
 
