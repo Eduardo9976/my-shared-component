@@ -27,7 +27,7 @@ const remove = (arr, el) => {
 };
 const hasOwnProperty$1 = Object.prototype.hasOwnProperty;
 const hasOwn = (val, key) => hasOwnProperty$1.call(val, key);
-const isArray = Array.isArray;
+const isArray$1 = Array.isArray;
 const isMap = (val) => toTypeString(val) === "[object Map]";
 const isSet = (val) => toTypeString(val) === "[object Set]";
 const isDate = (val) => toTypeString(val) === "[object Date]";
@@ -44,7 +44,7 @@ const toTypeString = (value) => objectToString.call(value);
 const toRawType = (value) => {
   return toTypeString(value).slice(8, -1);
 };
-const isPlainObject = (val) => toTypeString(val) === "[object Object]";
+const isPlainObject$1 = (val) => toTypeString(val) === "[object Object]";
 const isIntegerKey = (key) => isString(key) && key !== "NaN" && key[0] !== "-" && "" + parseInt(key, 10) === key;
 const isReservedProp = /* @__PURE__ */ makeMap(
   // the leading comma is intentional so empty string "" is also included
@@ -105,7 +105,7 @@ const getGlobalThis = () => {
 const GLOBALS_ALLOWED = "Infinity,undefined,NaN,isFinite,isNaN,parseFloat,parseInt,decodeURI,decodeURIComponent,encodeURI,encodeURIComponent,Math,Number,Date,Array,Object,Boolean,String,RegExp,Map,Set,JSON,Intl,BigInt,console,Error,Symbol";
 const isGloballyAllowed = /* @__PURE__ */ makeMap(GLOBALS_ALLOWED);
 function normalizeStyle(value) {
-  if (isArray(value)) {
+  if (isArray$1(value)) {
     const res = {};
     for (let i2 = 0; i2 < value.length; i2++) {
       const item = value[i2];
@@ -138,7 +138,7 @@ function normalizeClass(value) {
   let res = "";
   if (isString(value)) {
     res = value;
-  } else if (isArray(value)) {
+  } else if (isArray$1(value)) {
     for (let i2 = 0; i2 < value.length; i2++) {
       const normalized = normalizeClass(value[i2]);
       if (normalized) {
@@ -190,8 +190,8 @@ function looseEqual(a2, b) {
   if (aValidType || bValidType) {
     return a2 === b;
   }
-  aValidType = isArray(a2);
-  bValidType = isArray(b);
+  aValidType = isArray$1(a2);
+  bValidType = isArray$1(b);
   if (aValidType || bValidType) {
     return aValidType && bValidType ? looseCompareArrays(a2, b) : false;
   }
@@ -223,7 +223,7 @@ const isRef$1 = (val) => {
   return !!(val && val["__v_isRef"] === true);
 };
 const toDisplayString = (val) => {
-  return isString(val) ? val : val == null ? "" : isArray(val) || isObject$1(val) && (val.toString === objectToString || !isFunction(val.toString)) ? isRef$1(val) ? toDisplayString(val.value) : JSON.stringify(val, replacer, 2) : String(val);
+  return isString(val) ? val : val == null ? "" : isArray$1(val) || isObject$1(val) && (val.toString === objectToString || !isFunction(val.toString)) ? isRef$1(val) ? toDisplayString(val.value) : JSON.stringify(val, replacer, 2) : String(val);
 };
 const replacer = (_key, val) => {
   if (isRef$1(val)) {
@@ -244,7 +244,7 @@ const replacer = (_key, val) => {
     };
   } else if (isSymbol(val)) {
     return stringifySymbol(val);
-  } else if (isObject$1(val) && !isArray(val) && !isPlainObject(val)) {
+  } else if (isObject$1(val) && !isArray$1(val) && !isPlainObject$1(val)) {
     return String(val);
   }
   return val;
@@ -824,7 +824,7 @@ function trigger(target, type, key, newValue, oldValue, oldTarget) {
   if (type === "clear") {
     depsMap.forEach(run);
   } else {
-    const targetIsArray = isArray(target);
+    const targetIsArray = isArray$1(target);
     const isArrayIndex = targetIsArray && isIntegerKey(key);
     if (targetIsArray && key === "length") {
       const newLength = Number(newValue);
@@ -877,7 +877,7 @@ function reactiveReadArray(array) {
   const raw = toRaw(array);
   if (raw === array) return raw;
   track(raw, "iterate", ARRAY_ITERATE_KEY);
-  return isShallow(array) ? raw : raw.map(toReactive$1);
+  return isShallow(array) ? raw : raw.map(toReactive$2);
 }
 function shallowReadArray(arr) {
   track(arr = toRaw(arr), "iterate", ARRAY_ITERATE_KEY);
@@ -886,16 +886,16 @@ function shallowReadArray(arr) {
 const arrayInstrumentations = {
   __proto__: null,
   [Symbol.iterator]() {
-    return iterator(this, Symbol.iterator, toReactive$1);
+    return iterator(this, Symbol.iterator, toReactive$2);
   },
   concat(...args) {
     return reactiveReadArray(this).concat(
-      ...args.map((x2) => isArray(x2) ? reactiveReadArray(x2) : x2)
+      ...args.map((x2) => isArray$1(x2) ? reactiveReadArray(x2) : x2)
     );
   },
   entries() {
     return iterator(this, "entries", (value) => {
-      value[1] = toReactive$1(value[1]);
+      value[1] = toReactive$2(value[1]);
       return value;
     });
   },
@@ -903,16 +903,16 @@ const arrayInstrumentations = {
     return apply(this, "every", fn, thisArg, void 0, arguments);
   },
   filter(fn, thisArg) {
-    return apply(this, "filter", fn, thisArg, (v2) => v2.map(toReactive$1), arguments);
+    return apply(this, "filter", fn, thisArg, (v2) => v2.map(toReactive$2), arguments);
   },
   find(fn, thisArg) {
-    return apply(this, "find", fn, thisArg, toReactive$1, arguments);
+    return apply(this, "find", fn, thisArg, toReactive$2, arguments);
   },
   findIndex(fn, thisArg) {
     return apply(this, "findIndex", fn, thisArg, void 0, arguments);
   },
   findLast(fn, thisArg) {
-    return apply(this, "findLast", fn, thisArg, toReactive$1, arguments);
+    return apply(this, "findLast", fn, thisArg, toReactive$2, arguments);
   },
   findLastIndex(fn, thisArg) {
     return apply(this, "findLastIndex", fn, thisArg, void 0, arguments);
@@ -972,7 +972,7 @@ const arrayInstrumentations = {
     return noTracking(this, "unshift", args);
   },
   values() {
-    return iterator(this, "values", toReactive$1);
+    return iterator(this, "values", toReactive$2);
   }
 };
 function iterator(self2, method, wrapValue) {
@@ -997,13 +997,13 @@ function apply(self2, method, fn, thisArg, wrappedRetFn, args) {
   const methodFn = arr[method];
   if (methodFn !== arrayProto[method]) {
     const result2 = methodFn.apply(self2, args);
-    return needsWrap ? toReactive$1(result2) : result2;
+    return needsWrap ? toReactive$2(result2) : result2;
   }
   let wrappedFn = fn;
   if (arr !== self2) {
     if (needsWrap) {
       wrappedFn = function(item, index) {
-        return fn.call(this, toReactive$1(item), index, self2);
+        return fn.call(this, toReactive$2(item), index, self2);
       };
     } else if (fn.length > 2) {
       wrappedFn = function(item, index) {
@@ -1020,7 +1020,7 @@ function reduce(self2, method, fn, args) {
   if (arr !== self2) {
     if (!isShallow(self2)) {
       wrappedFn = function(acc, item, index) {
-        return fn.call(this, acc, toReactive$1(item), index, self2);
+        return fn.call(this, acc, toReactive$2(item), index, self2);
       };
     } else if (fn.length > 3) {
       wrappedFn = function(acc, item, index) {
@@ -1080,7 +1080,7 @@ class BaseReactiveHandler {
       }
       return;
     }
-    const targetIsArray = isArray(target);
+    const targetIsArray = isArray$1(target);
     if (!isReadonly2) {
       let fn;
       if (targetIsArray && (fn = arrayInstrumentations[key])) {
@@ -1128,7 +1128,7 @@ class MutableReactiveHandler extends BaseReactiveHandler {
         oldValue = toRaw(oldValue);
         value = toRaw(value);
       }
-      if (!isArray(target) && isRef(oldValue) && !isRef(value)) {
+      if (!isArray$1(target) && isRef(oldValue) && !isRef(value)) {
         if (isOldValueReadonly) {
           return false;
         } else {
@@ -1137,7 +1137,7 @@ class MutableReactiveHandler extends BaseReactiveHandler {
         }
       }
     }
-    const hadKey = isArray(target) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key);
+    const hadKey = isArray$1(target) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key);
     const result = Reflect.set(
       target,
       key,
@@ -1173,7 +1173,7 @@ class MutableReactiveHandler extends BaseReactiveHandler {
     track(
       target,
       "iterate",
-      isArray(target) ? "length" : ITERATE_KEY
+      isArray$1(target) ? "length" : ITERATE_KEY
     );
     return Reflect.ownKeys(target);
   }
@@ -1203,7 +1203,7 @@ function createIterableMethod(method, isReadonly2, isShallow2) {
     const isPair = method === "entries" || method === Symbol.iterator && targetIsMap;
     const isKeyOnly = method === "keys" && targetIsMap;
     const innerIterator = target[method](...args);
-    const wrap = isShallow2 ? toShallow : isReadonly2 ? toReadonly : toReactive$1;
+    const wrap = isShallow2 ? toShallow : isReadonly2 ? toReadonly : toReactive$2;
     !isReadonly2 && track(
       rawTarget,
       "iterate",
@@ -1243,7 +1243,7 @@ function createInstrumentations(readonly2, shallow) {
         track(rawTarget, "get", rawKey);
       }
       const { has } = getProto(rawTarget);
-      const wrap = shallow ? toShallow : readonly2 ? toReadonly : toReactive$1;
+      const wrap = shallow ? toShallow : readonly2 ? toReadonly : toReactive$2;
       if (has.call(rawTarget, key)) {
         return wrap(target.get(key));
       } else if (has.call(rawTarget, rawKey)) {
@@ -1273,7 +1273,7 @@ function createInstrumentations(readonly2, shallow) {
       const observed = this;
       const target = observed["__v_raw"];
       const rawTarget = toRaw(target);
-      const wrap = shallow ? toShallow : readonly2 ? toReadonly : toReactive$1;
+      const wrap = shallow ? toShallow : readonly2 ? toReadonly : toReactive$2;
       !readonly2 && track(rawTarget, "iterate", ITERATE_KEY);
       return target.forEach((value, key) => {
         return callback.call(thisArg, wrap(value), wrap(key), observed);
@@ -1499,7 +1499,7 @@ function markRaw(value) {
   }
   return value;
 }
-const toReactive$1 = (value) => isObject$1(value) ? reactive(value) : value;
+const toReactive$2 = (value) => isObject$1(value) ? reactive(value) : value;
 const toReadonly = (value) => isObject$1(value) ? readonly(value) : value;
 function isRef(r) {
   return r ? r["__v_isRef"] === true : false;
@@ -1522,7 +1522,7 @@ class RefImpl {
     this["__v_isRef"] = true;
     this["__v_isShallow"] = false;
     this._rawValue = isShallow2 ? value : toRaw(value);
-    this._value = isShallow2 ? value : toReactive$1(value);
+    this._value = isShallow2 ? value : toReactive$2(value);
     this["__v_isShallow"] = isShallow2;
   }
   get value() {
@@ -1537,7 +1537,7 @@ class RefImpl {
     newValue = useDirectValue ? newValue : toRaw(newValue);
     if (hasChanged(newValue, oldValue)) {
       this._rawValue = newValue;
-      this._value = useDirectValue ? newValue : toReactive$1(newValue);
+      this._value = useDirectValue ? newValue : toReactive$2(newValue);
       {
         this.dep.trigger();
       }
@@ -1592,7 +1592,7 @@ function customRef(factory) {
   return new CustomRefImpl(factory);
 }
 function toRefs(object) {
-  const ret = isArray(object) ? new Array(object.length) : {};
+  const ret = isArray$1(object) ? new Array(object.length) : {};
   for (const key in object) {
     ret[key] = propertyToRef(object, key);
   }
@@ -1628,7 +1628,7 @@ class GetterRefImpl {
     return this._value = this._getter();
   }
 }
-function toRef$1(source, key, defaultValue) {
+function toRef$2(source, key, defaultValue) {
   if (isRef(source)) {
     return source;
   } else if (isFunction(source)) {
@@ -1740,7 +1740,7 @@ function watch$1(source, cb, options = EMPTY_OBJ) {
   } else if (isReactive(source)) {
     getter = () => reactiveGetter(source);
     forceTrigger = true;
-  } else if (isArray(source)) {
+  } else if (isArray$1(source)) {
     isMultiSource = true;
     forceTrigger = source.some((s) => isReactive(s) || isShallow(s));
     getter = () => source.map((s) => {
@@ -1874,7 +1874,7 @@ function traverse(value, depth = Infinity, seen) {
   depth--;
   if (isRef(value)) {
     traverse(value.value, depth, seen);
-  } else if (isArray(value)) {
+  } else if (isArray$1(value)) {
     for (let i2 = 0; i2 < value.length; i2++) {
       traverse(value[i2], depth, seen);
     }
@@ -1882,7 +1882,7 @@ function traverse(value, depth = Infinity, seen) {
     value.forEach((v2) => {
       traverse(v2, depth, seen);
     });
-  } else if (isPlainObject(value)) {
+  } else if (isPlainObject$1(value)) {
     for (const key in value) {
       traverse(value[key], depth, seen);
     }
@@ -2094,7 +2094,7 @@ function callWithAsyncErrorHandling(fn, instance, type, args) {
     }
     return res;
   }
-  if (isArray(fn)) {
+  if (isArray$1(fn)) {
     const values = [];
     for (let i2 = 0; i2 < fn.length; i2++) {
       values.push(callWithAsyncErrorHandling(fn[i2], instance, type, args));
@@ -2186,7 +2186,7 @@ function queueFlush() {
   }
 }
 function queuePostFlushCb(cb) {
-  if (!isArray(cb)) {
+  if (!isArray$1(cb)) {
     if (activePostFlushCbs && cb.id === -1) {
       activePostFlushCbs.splice(postFlushIndex + 1, 0, cb);
     } else if (!(cb.flags & 1)) {
@@ -2896,7 +2896,7 @@ function resolveTransitionHooks(vnode, props, state2, instance, postClone) {
   const callAsyncHook = (hook, args) => {
     const done = args[1];
     callHook2(hook, args);
-    if (isArray(hook)) {
+    if (isArray$1(hook)) {
       if (hook.every((hook2) => hook2.length <= 1)) done();
     } else if (hook.length <= 1) {
       done();
@@ -3103,11 +3103,11 @@ function useTemplateRef(key) {
   return ret;
 }
 function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
-  if (isArray(rawRef)) {
+  if (isArray$1(rawRef)) {
     rawRef.forEach(
       (r, i2) => setRef(
         r,
-        oldRawRef && (isArray(oldRawRef) ? oldRawRef[i2] : oldRawRef),
+        oldRawRef && (isArray$1(oldRawRef) ? oldRawRef[i2] : oldRawRef),
         parentSuspense,
         vnode,
         isUnmount
@@ -3151,9 +3151,9 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
         if (rawRef.f) {
           const existing = _isString ? canSetSetupRef(ref3) ? setupState[ref3] : refs[ref3] : ref3.value;
           if (isUnmount) {
-            isArray(existing) && remove(existing, refValue);
+            isArray$1(existing) && remove(existing, refValue);
           } else {
-            if (!isArray(existing)) {
+            if (!isArray$1(existing)) {
               if (_isString) {
                 refs[ref3] = [refValue];
                 if (canSetSetupRef(ref3)) {
@@ -4123,7 +4123,7 @@ const KeepAliveImpl = {
 };
 const KeepAlive = KeepAliveImpl;
 function matches(pattern, name) {
-  if (isArray(pattern)) {
+  if (isArray$1(pattern)) {
     return pattern.some((p2) => matches(p2, name));
   } else if (isString(pattern)) {
     return pattern.split(",").includes(name);
@@ -4269,7 +4269,7 @@ function resolve(registry, name) {
 function renderList(source, renderItem, cache, index) {
   let ret;
   const cached = cache && cache[index];
-  const sourceIsArray = isArray(source);
+  const sourceIsArray = isArray$1(source);
   if (sourceIsArray || isString(source)) {
     const sourceIsReactiveArray = sourceIsArray && isReactive(source);
     let needsWrap = false;
@@ -4282,7 +4282,7 @@ function renderList(source, renderItem, cache, index) {
     ret = new Array(source.length);
     for (let i2 = 0, l2 = source.length; i2 < l2; i2++) {
       ret[i2] = renderItem(
-        needsWrap ? isReadonlySource ? toReadonly(toReactive$1(source[i2])) : toReactive$1(source[i2]) : source[i2],
+        needsWrap ? isReadonlySource ? toReadonly(toReactive$2(source[i2])) : toReactive$2(source[i2]) : source[i2],
         i2,
         void 0,
         cached && cached[i2]
@@ -4318,7 +4318,7 @@ function renderList(source, renderItem, cache, index) {
 function createSlots(slots, dynamicSlots) {
   for (let i2 = 0; i2 < dynamicSlots.length; i2++) {
     const slot = dynamicSlots[i2];
-    if (isArray(slot)) {
+    if (isArray$1(slot)) {
       for (let j = 0; j < slot.length; j++) {
         slots[slot[j].name] = slot[j].fn;
       }
@@ -4553,7 +4553,7 @@ function getContext(calledFunctionName) {
   return i2.setupContext || (i2.setupContext = createSetupContext(i2));
 }
 function normalizePropsOrEmits(props) {
-  return isArray(props) ? props.reduce(
+  return isArray$1(props) ? props.reduce(
     (normalized, p2) => (normalized[p2] = null, normalized),
     {}
   ) : props;
@@ -4564,7 +4564,7 @@ function mergeDefaults(raw, defaults) {
     if (key.startsWith("__skip")) continue;
     let opt = props[key];
     if (opt) {
-      if (isArray(opt) || isFunction(opt)) {
+      if (isArray$1(opt) || isFunction(opt)) {
         opt = props[key] = { type: opt, default: defaults[key] };
       } else {
         opt.default = defaults[key];
@@ -4580,7 +4580,7 @@ function mergeDefaults(raw, defaults) {
 }
 function mergeModels(a2, b) {
   if (!a2 || !b) return a2 || b;
-  if (isArray(a2) && isArray(b)) return a2.concat(b);
+  if (isArray$1(a2) && isArray$1(b)) return a2.concat(b);
   return extend({}, normalizePropsOrEmits(a2), normalizePropsOrEmits(b));
 }
 function createPropsRestProxy(props, excludedKeys) {
@@ -4703,7 +4703,7 @@ function applyOptions(instance) {
     callHook$1(created, instance, "c");
   }
   function registerLifecycleHook(register, hook) {
-    if (isArray(hook)) {
+    if (isArray$1(hook)) {
       hook.forEach((_hook) => register(_hook.bind(publicThis)));
     } else if (hook) {
       register(hook.bind(publicThis));
@@ -4721,7 +4721,7 @@ function applyOptions(instance) {
   registerLifecycleHook(onBeforeUnmount, beforeUnmount);
   registerLifecycleHook(onUnmounted, unmounted);
   registerLifecycleHook(onServerPrefetch, serverPrefetch);
-  if (isArray(expose)) {
+  if (isArray$1(expose)) {
     if (expose.length) {
       const exposed = instance.exposed || (instance.exposed = {});
       expose.forEach((key) => {
@@ -4748,7 +4748,7 @@ function applyOptions(instance) {
   }
 }
 function resolveInjections(injectOptions, ctx, checkDuplicateProperties = NOOP) {
-  if (isArray(injectOptions)) {
+  if (isArray$1(injectOptions)) {
     injectOptions = normalizeInject(injectOptions);
   }
   for (const key in injectOptions) {
@@ -4781,7 +4781,7 @@ function resolveInjections(injectOptions, ctx, checkDuplicateProperties = NOOP) 
 }
 function callHook$1(hook, instance, type) {
   callWithAsyncErrorHandling(
-    isArray(hook) ? hook.map((h2) => h2.bind(instance.proxy)) : hook.bind(instance.proxy),
+    isArray$1(hook) ? hook.map((h2) => h2.bind(instance.proxy)) : hook.bind(instance.proxy),
     instance,
     type
   );
@@ -4800,7 +4800,7 @@ function createWatcher(raw, ctx, publicThis, key) {
       watch(getter, raw.bind(publicThis));
     }
   } else if (isObject$1(raw)) {
-    if (isArray(raw)) {
+    if (isArray$1(raw)) {
       raw.forEach((r) => createWatcher(r, ctx, publicThis, key));
     } else {
       const handler = isFunction(raw.handler) ? raw.handler.bind(publicThis) : ctx[raw.handler];
@@ -4908,7 +4908,7 @@ function mergeInject(to, from) {
   return mergeObjectOptions(normalizeInject(to), normalizeInject(from));
 }
 function normalizeInject(raw) {
-  if (isArray(raw)) {
+  if (isArray$1(raw)) {
     const res = {};
     for (let i2 = 0; i2 < raw.length; i2++) {
       res[raw[i2]] = raw[i2];
@@ -4925,7 +4925,7 @@ function mergeObjectOptions(to, from) {
 }
 function mergeEmitsOrPropsOptions(to, from) {
   if (to) {
-    if (isArray(to) && isArray(from)) {
+    if (isArray$1(to) && isArray$1(from)) {
       return [.../* @__PURE__ */ new Set([...to, ...from])];
     }
     return extend(
@@ -5333,7 +5333,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
     }
     return EMPTY_ARR;
   }
-  if (isArray(raw)) {
+  if (isArray$1(raw)) {
     for (let i2 = 0; i2 < raw.length; i2++) {
       const normalizedKey = camelize$1(raw[i2]);
       if (validatePropName(normalizedKey)) {
@@ -5345,11 +5345,11 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
       const normalizedKey = camelize$1(key);
       if (validatePropName(normalizedKey)) {
         const opt = raw[key];
-        const prop = normalized[normalizedKey] = isArray(opt) || isFunction(opt) ? { type: opt } : extend({}, opt);
+        const prop = normalized[normalizedKey] = isArray$1(opt) || isFunction(opt) ? { type: opt } : extend({}, opt);
         const propType = prop.type;
         let shouldCast = false;
         let shouldCastTrue = true;
-        if (isArray(propType)) {
+        if (isArray$1(propType)) {
           for (let index = 0; index < propType.length; ++index) {
             const type = propType[index];
             const typeName = isFunction(type) && type.name;
@@ -5390,7 +5390,7 @@ function validatePropName(key) {
   return false;
 }
 const isInternalKey = (key) => key === "_" || key === "__" || key === "_ctx" || key === "$stable";
-const normalizeSlotValue = (value) => isArray(value) ? value.map(normalizeVNode) : [normalizeVNode(value)];
+const normalizeSlotValue = (value) => isArray$1(value) ? value.map(normalizeVNode) : [normalizeVNode(value)];
 const normalizeSlot = (key, rawSlot, ctx) => {
   if (rawSlot._n) {
     return rawSlot;
@@ -6674,7 +6674,7 @@ function baseCreateRenderer(options, createHydrationFns) {
     if (bum) {
       invokeArrayFns(bum);
     }
-    if (parent && isArray(slotCacheKeys)) {
+    if (parent && isArray$1(slotCacheKeys)) {
       slotCacheKeys.forEach((v2) => {
         parent.renderCache[v2] = void 0;
       });
@@ -6781,7 +6781,7 @@ function needTransition(parentSuspense, transition) {
 function traverseStaticChildren(n1, n2, shallow = false) {
   const ch1 = n1.children;
   const ch2 = n2.children;
-  if (isArray(ch1) && isArray(ch2)) {
+  if (isArray$1(ch1) && isArray$1(ch2)) {
     for (let i2 = 0; i2 < ch1.length; i2++) {
       const c1 = ch1[i2];
       let c2 = ch2[i2];
@@ -7102,7 +7102,7 @@ function normalizeEmitsOptions(comp, appContext, asMixin = false) {
     }
     return null;
   }
-  if (isArray(raw)) {
+  if (isArray$1(raw)) {
     raw.forEach((key) => normalized[key] = null);
   } else {
     extend(normalized, raw);
@@ -7851,7 +7851,7 @@ function normalizeSuspenseSlot(s) {
       closeBlock();
     }
   }
-  if (isArray(s)) {
+  if (isArray$1(s)) {
     const singleChild = filterSingleRoot(s);
     s = singleChild;
   }
@@ -7863,7 +7863,7 @@ function normalizeSuspenseSlot(s) {
 }
 function queueEffectWithSuspense(fn, suspense) {
   if (suspense && suspense.pendingBranch) {
-    if (isArray(fn)) {
+    if (isArray$1(fn)) {
       suspense.effects.push(...fn);
     } else {
       suspense.effects.push(fn);
@@ -8048,7 +8048,7 @@ function _createVNode(type, props = null, children = null, patchFlag = 0, dynami
       props.class = normalizeClass(klass);
     }
     if (isObject$1(style)) {
-      if (isProxy(style) && !isArray(style)) {
+      if (isProxy(style) && !isArray$1(style)) {
         style = extend({}, style);
       }
       props.style = normalizeStyle(style);
@@ -8083,7 +8083,7 @@ function cloneVNode(vnode, extraProps, mergeRef = false, cloneTransition = false
       // #2078 in the case of <component :is="vnode" ref="extra"/>
       // if the vnode itself already has a ref, cloneVNode will need to merge
       // the refs so the single vnode can be set on multiple refs
-      mergeRef && ref3 ? isArray(ref3) ? ref3.concat(normalizeRef(extraProps)) : [ref3, normalizeRef(extraProps)] : normalizeRef(extraProps)
+      mergeRef && ref3 ? isArray$1(ref3) ? ref3.concat(normalizeRef(extraProps)) : [ref3, normalizeRef(extraProps)] : normalizeRef(extraProps)
     ) : ref3,
     scopeId: vnode.scopeId,
     slotScopeIds: vnode.slotScopeIds,
@@ -8139,7 +8139,7 @@ function createCommentVNode(text = "", asBlock = false) {
 function normalizeVNode(child) {
   if (child == null || typeof child === "boolean") {
     return createVNode(Comment);
-  } else if (isArray(child)) {
+  } else if (isArray$1(child)) {
     return createVNode(
       Fragment,
       null,
@@ -8160,7 +8160,7 @@ function normalizeChildren(vnode, children) {
   const { shapeFlag } = vnode;
   if (children == null) {
     children = null;
-  } else if (isArray(children)) {
+  } else if (isArray$1(children)) {
     type = 16;
   } else if (typeof children === "object") {
     if (shapeFlag & (1 | 64)) {
@@ -8214,7 +8214,7 @@ function mergeProps(...args) {
       } else if (isOn(key)) {
         const existing = ret[key];
         const incoming = toMerge[key];
-        if (incoming && existing !== incoming && !(isArray(existing) && existing.includes(incoming))) {
+        if (incoming && existing !== incoming && !(isArray$1(existing) && existing.includes(incoming))) {
           ret[key] = existing ? [].concat(existing, incoming) : incoming;
         }
       } else if (key !== "") {
@@ -8548,7 +8548,7 @@ const computed = (getterOrOptions, debugOptions) => {
 function h(type, propsOrChildren, children) {
   const l2 = arguments.length;
   if (l2 === 2) {
-    if (isObject$1(propsOrChildren) && !isArray(propsOrChildren)) {
+    if (isObject$1(propsOrChildren) && !isArray$1(propsOrChildren)) {
       if (isVNode(propsOrChildren)) {
         return createVNode(type, null, [propsOrChildren]);
       }
@@ -8735,14 +8735,14 @@ const Transition = /* @__PURE__ */ decorate$1(
   (props, { slots }) => h(BaseTransition, resolveTransitionProps(props), slots)
 );
 const callHook = (hook, args = []) => {
-  if (isArray(hook)) {
+  if (isArray$1(hook)) {
     hook.forEach((h2) => h2(...args));
   } else if (hook) {
     hook(...args);
   }
 };
 const hasExplicitCallback = (hook) => {
-  return hook ? isArray(hook) ? hook.some((h2) => h2.length > 1) : hook.length > 1 : false;
+  return hook ? isArray$1(hook) ? hook.some((h2) => h2.length > 1) : hook.length > 1 : false;
 };
 function resolveTransitionProps(rawProps) {
   const baseProps = {};
@@ -9155,7 +9155,7 @@ function patchStyle(el, prev, next) {
 }
 const importantRE = /\s*!important$/;
 function setStyle(style, name, val) {
-  if (isArray(val)) {
+  if (isArray$1(val)) {
     val.forEach((v2) => setStyle(style, name, v2));
   } else {
     if (val == null) val = "";
@@ -9320,7 +9320,7 @@ function createInvoker(initialValue, instance) {
   return invoker;
 }
 function patchStopImmediatePropagation(e, value) {
-  if (isArray(value)) {
+  if (isArray$1(value)) {
     const originalStop = e.stopImmediatePropagation;
     e.stopImmediatePropagation = () => {
       originalStop.call(e);
@@ -9402,7 +9402,7 @@ const REMOVAL = {};
 // @__NO_SIDE_EFFECTS__
 function defineCustomElement(options, extraOptions, _createApp) {
   const Comp = /* @__PURE__ */ defineComponent(options, extraOptions);
-  if (isPlainObject(Comp)) extend(Comp, extraOptions);
+  if (isPlainObject$1(Comp)) extend(Comp, extraOptions);
   class VueCustomElement extends VueElement {
     constructor(initialProps) {
       super(Comp, initialProps, _createApp);
@@ -9520,7 +9520,7 @@ class VueElement extends BaseClass {
       this._pendingResolve = void 0;
       const { props, styles } = def2;
       let numberProps;
-      if (props && !isArray(props)) {
+      if (props && !isArray$1(props)) {
         for (const key in props) {
           const opt = props[key];
           if (opt === Number || opt && opt.type === Number) {
@@ -9569,7 +9569,7 @@ class VueElement extends BaseClass {
   }
   _resolveProps(def2) {
     const { props } = def2;
-    const declaredPropKeys = isArray(props) ? props : Object.keys(props || {});
+    const declaredPropKeys = isArray$1(props) ? props : Object.keys(props || {});
     for (const key of Object.keys(this)) {
       if (key[0] !== "_" && declaredPropKeys.includes(key)) {
         this._setProp(key, this[key]);
@@ -9652,7 +9652,7 @@ class VueElement extends BaseClass {
           this.dispatchEvent(
             new CustomEvent(
               event,
-              isPlainObject(args[0]) ? extend({ detail: args }, args[0]) : { detail: args }
+              isPlainObject$1(args[0]) ? extend({ detail: args }, args[0]) : { detail: args }
             )
           );
         };
@@ -9904,7 +9904,7 @@ function hasCSSTransform(el, root, moveClass) {
 }
 const getModelAssigner = (vnode) => {
   const fn = vnode.props["onUpdate:modelValue"] || false;
-  return isArray(fn) ? (value) => invokeArrayFns(fn, value) : fn;
+  return isArray$1(fn) ? (value) => invokeArrayFns(fn, value) : fn;
 };
 function onCompositionStart(e) {
   e.target.composing = true;
@@ -9976,7 +9976,7 @@ const vModelCheckbox = {
       const elementValue = getValue(el);
       const checked = el.checked;
       const assign = el[assignKey];
-      if (isArray(modelValue)) {
+      if (isArray$1(modelValue)) {
         const index = looseIndexOf(modelValue, elementValue);
         const found = index !== -1;
         if (checked && !found) {
@@ -10009,7 +10009,7 @@ const vModelCheckbox = {
 function setChecked(el, { value, oldValue }, vnode) {
   el._modelValue = value;
   let checked;
-  if (isArray(value)) {
+  if (isArray$1(value)) {
     checked = looseIndexOf(value, vnode.props.value) > -1;
   } else if (isSet(value)) {
     checked = value.has(vnode.props.value);
@@ -10071,7 +10071,7 @@ const vModelSelect = {
 };
 function setSelected(el, value) {
   const isMultiple = el.multiple;
-  const isArrayValue = isArray(value);
+  const isArrayValue = isArray$1(value);
   if (isMultiple && !isArrayValue && !isSet(value)) {
     return;
   }
@@ -10152,7 +10152,7 @@ function initVModelForSSR() {
     }
   };
   vModelCheckbox.getSSRProps = ({ value }, vnode) => {
-    if (isArray(value)) {
+    if (isArray$1(value)) {
       if (vnode.props && looseIndexOf(value, vnode.props.value) > -1) {
         return { checked: true };
       }
@@ -10372,6 +10372,32 @@ function tryOnScopeDispose$1(fn) {
   }
   return false;
 }
+function createEventHook() {
+  const fns = /* @__PURE__ */ new Set();
+  const off = (fn) => {
+    fns.delete(fn);
+  };
+  const clear = () => {
+    fns.clear();
+  };
+  const on = (fn) => {
+    fns.add(fn);
+    const offFn = () => off(fn);
+    tryOnScopeDispose$1(offFn);
+    return {
+      off: offFn
+    };
+  };
+  const trigger2 = (...args) => {
+    return Promise.all(Array.from(fns).map((fn) => fn(...args)));
+  };
+  return {
+    on,
+    off,
+    trigger: trigger2,
+    clear
+  };
+}
 function createGlobalState(stateFactory) {
   let initialized = false;
   let state2;
@@ -10406,23 +10432,97 @@ function createSharedComposable$1(composable) {
     return state2;
   };
 }
+function toReactive$1(objectRef) {
+  if (!isRef(objectRef))
+    return reactive(objectRef);
+  const proxy = new Proxy({}, {
+    get(_2, p2, receiver) {
+      return unref(Reflect.get(objectRef.value, p2, receiver));
+    },
+    set(_2, p2, value) {
+      if (isRef(objectRef.value[p2]) && !isRef(value))
+        objectRef.value[p2].value = value;
+      else
+        objectRef.value[p2] = value;
+      return true;
+    },
+    deleteProperty(_2, p2) {
+      return Reflect.deleteProperty(objectRef.value, p2);
+    },
+    has(_2, p2) {
+      return Reflect.has(objectRef.value, p2);
+    },
+    ownKeys() {
+      return Object.keys(objectRef.value);
+    },
+    getOwnPropertyDescriptor() {
+      return {
+        enumerable: true,
+        configurable: true
+      };
+    }
+  });
+  return reactive(proxy);
+}
+function reactiveComputed$1(fn) {
+  return toReactive$1(computed(fn));
+}
+function reactiveOmit$1(obj, ...keys) {
+  const flatKeys = keys.flat();
+  const predicate = flatKeys[0];
+  return reactiveComputed$1(() => typeof predicate === "function" ? Object.fromEntries(Object.entries(toRefs(obj)).filter(([k, v2]) => !predicate(toValue$1(v2), k))) : Object.fromEntries(Object.entries(toRefs(obj)).filter((e) => !flatKeys.includes(e[0]))));
+}
 const isClient = typeof window !== "undefined" && typeof document !== "undefined";
 typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
 const isDef = (val) => typeof val !== "undefined";
 const toString = Object.prototype.toString;
 const isObject = (val) => toString.call(val) === "[object Object]";
-const noop$1 = () => {
+const noop$2 = () => {
 };
 const isIOS = /* @__PURE__ */ getIsIOS();
 function getIsIOS() {
   var _a, _b;
   return isClient && ((_a = window == null ? void 0 : window.navigator) == null ? void 0 : _a.userAgent) && (/iP(?:ad|hone|od)/.test(window.navigator.userAgent) || ((_b = window == null ? void 0 : window.navigator) == null ? void 0 : _b.maxTouchPoints) > 2 && /iPad|Macintosh/.test(window == null ? void 0 : window.navigator.userAgent));
 }
+function createFilterWrapper(filter, fn) {
+  function wrapper(...args) {
+    return new Promise((resolve2, reject) => {
+      Promise.resolve(filter(() => fn.apply(this, args), { fn, thisArg: this, args })).then(resolve2).catch(reject);
+    });
+  }
+  return wrapper;
+}
+const bypassFilter = (invoke2) => {
+  return invoke2();
+};
+function pausableFilter(extendFilter = bypassFilter, options = {}) {
+  const {
+    initialState = "active"
+  } = options;
+  const isActive = toRef$1(initialState === "active");
+  function pause() {
+    isActive.value = false;
+  }
+  function resume() {
+    isActive.value = true;
+  }
+  const eventFilter = (...args) => {
+    if (isActive.value)
+      extendFilter(...args);
+  };
+  return { isActive: readonly(isActive), pause, resume, eventFilter };
+}
 function getLifeCycleTarget(target) {
   return getCurrentInstance();
 }
 function toArray(value) {
   return Array.isArray(value) ? value : [value];
+}
+function toRef$1(...args) {
+  if (args.length !== 1)
+    return toRef$2(...args);
+  const r = args[0];
+  return typeof r === "function" ? readonly(customRef(() => ({ get: r, set: noop$2 }))) : ref(r);
 }
 function refAutoReset(defaultValue, afterMs = 1e4) {
   return customRef((track2, trigger2) => {
@@ -10448,6 +10548,75 @@ function refAutoReset(defaultValue, afterMs = 1e4) {
       }
     };
   });
+}
+function watchWithFilter(source, cb, options = {}) {
+  const {
+    eventFilter = bypassFilter,
+    ...watchOptions
+  } = options;
+  return watch(
+    source,
+    createFilterWrapper(
+      eventFilter,
+      cb
+    ),
+    watchOptions
+  );
+}
+function watchPausable(source, cb, options = {}) {
+  const {
+    eventFilter: filter,
+    initialState = "active",
+    ...watchOptions
+  } = options;
+  const { eventFilter, pause, resume, isActive } = pausableFilter(filter, { initialState });
+  const stop2 = watchWithFilter(
+    source,
+    cb,
+    {
+      ...watchOptions,
+      eventFilter
+    }
+  );
+  return { stop: stop2, pause, resume, isActive };
+}
+function syncRef(left, right, ...[options]) {
+  const {
+    flush = "sync",
+    deep = false,
+    immediate = true,
+    direction = "both",
+    transform = {}
+  } = options || {};
+  const watchers = [];
+  const transformLTR = "ltr" in transform && transform.ltr || ((v2) => v2);
+  const transformRTL = "rtl" in transform && transform.rtl || ((v2) => v2);
+  if (direction === "both" || direction === "ltr") {
+    watchers.push(watchPausable(
+      left,
+      (newValue) => {
+        watchers.forEach((w) => w.pause());
+        right.value = transformLTR(newValue);
+        watchers.forEach((w) => w.resume());
+      },
+      { flush, deep, immediate }
+    ));
+  }
+  if (direction === "both" || direction === "rtl") {
+    watchers.push(watchPausable(
+      right,
+      (newValue) => {
+        watchers.forEach((w) => w.pause());
+        left.value = transformRTL(newValue);
+        watchers.forEach((w) => w.resume());
+      },
+      { flush, deep, immediate }
+    ));
+  }
+  const stop2 = () => {
+    watchers.forEach((w) => w.stop());
+  };
+  return stop2;
 }
 function tryOnBeforeUnmount(fn, target) {
   const instance = getLifeCycleTarget();
@@ -10500,7 +10669,7 @@ function useTimeout(interval = 1e3, options = {}) {
     callback
   } = options;
   const controls = useTimeoutFn(
-    callback != null ? callback : noop$1,
+    callback != null ? callback : noop$2,
     interval,
     options
   );
@@ -10586,6 +10755,13 @@ function useMounted() {
     }, instance);
   }
   return isMounted;
+}
+function useSupported(callback) {
+  const isMounted = useMounted();
+  return computed(() => {
+    isMounted.value;
+    return Boolean(callback());
+  });
 }
 function createKeyPredicate(keyFilter) {
   if (typeof keyFilter === "function")
@@ -10689,6 +10865,44 @@ function useRafFn(fn, options = {}) {
 }
 function cloneFnJSON(source) {
   return JSON.parse(JSON.stringify(source));
+}
+function useResizeObserver(target, callback, options = {}) {
+  const { window: window2 = defaultWindow, ...observerOptions } = options;
+  let observer;
+  const isSupported = useSupported(() => window2 && "ResizeObserver" in window2);
+  const cleanup = () => {
+    if (observer) {
+      observer.disconnect();
+      observer = void 0;
+    }
+  };
+  const targets = computed(() => {
+    const _targets = toValue$1(target);
+    return Array.isArray(_targets) ? _targets.map((el) => unrefElement(el)) : [unrefElement(_targets)];
+  });
+  const stopWatch = watch(
+    targets,
+    (els) => {
+      cleanup();
+      if (isSupported.value && window2) {
+        observer = new ResizeObserver(callback);
+        for (const _el of els) {
+          if (_el)
+            observer.observe(_el, observerOptions);
+        }
+      }
+    },
+    { immediate: true, flush: "post" }
+  );
+  const stop2 = () => {
+    cleanup();
+    stopWatch();
+  };
+  tryOnScopeDispose$1(stop2);
+  return {
+    isSupported,
+    stop: stop2
+  };
 }
 function useVModel(props, key, emit2, options = {}) {
   var _a, _b, _c;
@@ -10932,6 +11146,60 @@ function useEmitAsProps(emit2) {
   });
   return result;
 }
+function isPlainObject(value) {
+  if (value === null || typeof value !== "object") {
+    return false;
+  }
+  const prototype = Object.getPrototypeOf(value);
+  if (prototype !== null && prototype !== Object.prototype && Object.getPrototypeOf(prototype) !== null) {
+    return false;
+  }
+  if (Symbol.iterator in value) {
+    return false;
+  }
+  if (Symbol.toStringTag in value) {
+    return Object.prototype.toString.call(value) === "[object Module]";
+  }
+  return true;
+}
+function _defu(baseObject, defaults, namespace = ".", merger) {
+  if (!isPlainObject(defaults)) {
+    return _defu(baseObject, {}, namespace, merger);
+  }
+  const object = Object.assign({}, defaults);
+  for (const key in baseObject) {
+    if (key === "__proto__" || key === "constructor") {
+      continue;
+    }
+    const value = baseObject[key];
+    if (value === null || value === void 0) {
+      continue;
+    }
+    if (merger && merger(object, key, value, namespace)) {
+      continue;
+    }
+    if (Array.isArray(value) && Array.isArray(object[key])) {
+      object[key] = [...value, ...object[key]];
+    } else if (isPlainObject(value) && isPlainObject(object[key])) {
+      object[key] = _defu(
+        value,
+        object[key],
+        (namespace ? `${namespace}.` : "") + key.toString(),
+        merger
+      );
+    } else {
+      object[key] = value;
+    }
+  }
+  return object;
+}
+function createDefu(merger) {
+  return (...arguments_) => (
+    // eslint-disable-next-line unicorn/no-array-reduce
+    arguments_.reduce((p2, c2) => _defu(p2, c2, "", merger), {})
+  );
+}
+const defu = createDefu();
 function useForwardProps(props) {
   const vm = getCurrentInstance();
   const defaultProps = Object.keys(vm?.type.props ?? {}).reduce((prev, curr) => {
@@ -10940,7 +11208,7 @@ function useForwardProps(props) {
       prev[curr] = defaultValue;
     return prev;
   }, {});
-  const refProps = toRef$1(props);
+  const refProps = toRef$2(props);
   return computed(() => {
     const preservedProps = {};
     const assignedProps = vm?.vnode.props ?? {};
@@ -11054,13 +11322,13 @@ function reactiveOmit(obj, ...keys) {
   return reactiveComputed(() => typeof predicate === "function" ? Object.fromEntries(Object.entries(toRefs(obj)).filter(([k, v2]) => !predicate(toValue$1(v2), k))) : Object.fromEntries(Object.entries(toRefs(obj)).filter((e) => !flatKeys.includes(e[0]))));
 }
 typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
-const noop = () => {
+const noop$1 = () => {
 };
 function toRef(...args) {
   if (args.length !== 1)
-    return toRef$1(...args);
+    return toRef$2(...args);
   const r = args[0];
-  return typeof r === "function" ? readonly(customRef(() => ({ get: r, set: noop }))) : ref(r);
+  return typeof r === "function" ? readonly(customRef(() => ({ get: r, set: noop$1 }))) : ref(r);
 }
 function reactivePick(obj, ...keys) {
   const flatKeys = keys.flat();
@@ -11078,6 +11346,93 @@ const camelizeRE = /-(\w)/g;
 const camelize = cacheStringFunction((str) => {
   return str.replace(camelizeRE, (_2, c2) => c2 ? c2.toUpperCase() : "");
 });
+function diff(obj1, obj2) {
+  const h1 = _toHashedObject(obj1);
+  const h2 = _toHashedObject(obj2);
+  return _diff(h1, h2);
+}
+function _diff(h1, h2) {
+  const diffs = [];
+  const allProps = /* @__PURE__ */ new Set([
+    ...Object.keys(h1.props || {}),
+    ...Object.keys(h2.props || {})
+  ]);
+  if (h1.props && h2.props) {
+    for (const prop of allProps) {
+      const p1 = h1.props[prop];
+      const p2 = h2.props[prop];
+      if (p1 && p2) {
+        diffs.push(..._diff(h1.props?.[prop], h2.props?.[prop]));
+      } else if (p1 || p2) {
+        diffs.push(
+          new DiffEntry((p2 || p1).key, p1 ? "removed" : "added", p2, p1)
+        );
+      }
+    }
+  }
+  if (allProps.size === 0 && h1.hash !== h2.hash) {
+    diffs.push(new DiffEntry((h2 || h1).key, "changed", h2, h1));
+  }
+  return diffs;
+}
+function _toHashedObject(obj, key = "") {
+  if (obj && typeof obj !== "object") {
+    return new DiffHashedObject(key, obj, serialize(obj));
+  }
+  const props = {};
+  const hashes = [];
+  for (const _key in obj) {
+    props[_key] = _toHashedObject(obj[_key], key ? `${key}.${_key}` : _key);
+    hashes.push(props[_key].hash);
+  }
+  return new DiffHashedObject(key, obj, `{${hashes.join(":")}}`, props);
+}
+class DiffEntry {
+  constructor(key, type, newValue, oldValue) {
+    this.key = key;
+    this.type = type;
+    this.newValue = newValue;
+    this.oldValue = oldValue;
+  }
+  toString() {
+    return this.toJSON();
+  }
+  toJSON() {
+    switch (this.type) {
+      case "added": {
+        return `Added   \`${this.key}\``;
+      }
+      case "removed": {
+        return `Removed \`${this.key}\``;
+      }
+      case "changed": {
+        return `Changed \`${this.key}\` from \`${this.oldValue?.toString() || "-"}\` to \`${this.newValue.toString()}\``;
+      }
+    }
+  }
+}
+class DiffHashedObject {
+  constructor(key, value, hash, props) {
+    this.key = key;
+    this.value = value;
+    this.hash = hash;
+    this.props = props;
+  }
+  toString() {
+    if (this.props) {
+      return `{${Object.keys(this.props).join(",")}}`;
+    } else {
+      return JSON.stringify(this.value);
+    }
+  }
+  toJSON() {
+    const k = this.key || ".";
+    if (this.props) {
+      return `${k}({${Object.keys(this.props).join(",")}})`;
+    }
+    return `${k}(${this.value})`;
+  }
+}
 function omit(data, keys) {
   const result = { ...data };
   for (const key of keys) {
@@ -11113,6 +11468,94 @@ function mergeClasses(appConfigClass, propClass) {
     propClass
   ].filter(Boolean);
 }
+function buildTranslator(locale) {
+  return (path, option) => translate(path, option, unref(locale));
+}
+function translate(path, option, locale) {
+  const prop = get(locale, `messages.${path}`, path);
+  return prop.replace(
+    /\{(\w+)\}/g,
+    (_2, key) => `${option?.[key] ?? `{${key}}`}`
+  );
+}
+function buildLocaleContext(locale) {
+  const lang = computed(() => unref(locale).name);
+  const code = computed(() => unref(locale).code);
+  const dir = computed(() => unref(locale).dir);
+  const localeRef = isRef(locale) ? locale : ref(locale);
+  return {
+    lang,
+    code,
+    dir,
+    locale: localeRef,
+    t: buildTranslator(locale)
+  };
+}
+// @__NO_SIDE_EFFECTS__
+function defineLocale(options) {
+  return defu(options, { dir: "ltr" });
+}
+const en = /* @__PURE__ */ defineLocale({
+  name: "English",
+  code: "en",
+  messages: {
+    inputMenu: {
+      noMatch: "No matching data",
+      noData: "No data",
+      create: 'Create "{label}"'
+    },
+    calendar: {
+      prevYear: "Previous year",
+      nextYear: "Next year",
+      prevMonth: "Previous month",
+      nextMonth: "Next month"
+    },
+    inputNumber: {
+      increment: "Increment",
+      decrement: "Decrement"
+    },
+    commandPalette: {
+      placeholder: "Type a command or search...",
+      noMatch: "No matching data",
+      noData: "No data",
+      close: "Close",
+      back: "Back"
+    },
+    selectMenu: {
+      noMatch: "No matching data",
+      noData: "No data",
+      create: 'Create "{label}"',
+      search: "Search..."
+    },
+    toast: {
+      close: "Close"
+    },
+    carousel: {
+      prev: "Prev",
+      next: "Next",
+      dots: "Choose slide to display",
+      goto: "Go to slide {slide}"
+    },
+    modal: {
+      close: "Close"
+    },
+    slideover: {
+      close: "Close"
+    },
+    alert: {
+      close: "Close"
+    },
+    table: {
+      noData: "No data"
+    }
+  }
+});
+const localeContextInjectionKey = Symbol.for("nuxt-ui.locale-context");
+const _useLocale = (localeOverrides) => {
+  const locale = localeOverrides || toRef$2(inject(localeContextInjectionKey, en));
+  return buildLocaleContext(computed(() => locale.value || en));
+};
+const useLocale = /* @__PURE__ */ createSharedComposable(_useLocale);
 function flatHooks(configHooks, hooks = {}, parentName) {
   for (const key in configHooks) {
     const subHook = configHooks[key];
@@ -11317,6 +11760,187 @@ function createHooks() {
   return new Hookable();
 }
 const appConfig = { "ui": { "colors": { "primary": "green", "secondary": "blue", "success": "green", "info": "blue", "warning": "yellow", "error": "red", "neutral": "slate" }, "icons": { "arrowLeft": "i-lucide-arrow-left", "arrowRight": "i-lucide-arrow-right", "check": "i-lucide-check", "chevronDoubleLeft": "i-lucide-chevrons-left", "chevronDoubleRight": "i-lucide-chevrons-right", "chevronDown": "i-lucide-chevron-down", "chevronLeft": "i-lucide-chevron-left", "chevronRight": "i-lucide-chevron-right", "chevronUp": "i-lucide-chevron-up", "close": "i-lucide-x", "ellipsis": "i-lucide-ellipsis", "external": "i-lucide-arrow-up-right", "file": "i-lucide-file", "folder": "i-lucide-folder", "folderOpen": "i-lucide-folder-open", "loading": "i-lucide-loader-circle", "minus": "i-lucide-minus", "plus": "i-lucide-plus", "search": "i-lucide-search", "upload": "i-lucide-upload" } }, "colorMode": true };
+/*!
+  * vue-router v4.5.1
+  * (c) 2025 Eduardo San Martin Morote
+  * @license MIT
+  */
+const noop = () => {
+};
+const isArray = Array.isArray;
+function isSameRouteRecord(a2, b) {
+  return (a2.aliasOf || a2) === (b.aliasOf || b);
+}
+function isSameRouteLocationParams(a2, b) {
+  if (Object.keys(a2).length !== Object.keys(b).length)
+    return false;
+  for (const key in a2) {
+    if (!isSameRouteLocationParamsValue(a2[key], b[key]))
+      return false;
+  }
+  return true;
+}
+function isSameRouteLocationParamsValue(a2, b) {
+  return isArray(a2) ? isEquivalentArray(a2, b) : isArray(b) ? isEquivalentArray(b, a2) : a2 === b;
+}
+function isEquivalentArray(a2, b) {
+  return isArray(b) ? a2.length === b.length && a2.every((value, i2) => value === b[i2]) : a2.length === 1 && a2[0] === b;
+}
+var NavigationType;
+(function(NavigationType2) {
+  NavigationType2["pop"] = "pop";
+  NavigationType2["push"] = "push";
+})(NavigationType || (NavigationType = {}));
+var NavigationDirection;
+(function(NavigationDirection2) {
+  NavigationDirection2["back"] = "back";
+  NavigationDirection2["forward"] = "forward";
+  NavigationDirection2["unknown"] = "";
+})(NavigationDirection || (NavigationDirection = {}));
+var NavigationFailureType;
+(function(NavigationFailureType2) {
+  NavigationFailureType2[NavigationFailureType2["aborted"] = 4] = "aborted";
+  NavigationFailureType2[NavigationFailureType2["cancelled"] = 8] = "cancelled";
+  NavigationFailureType2[NavigationFailureType2["duplicated"] = 16] = "duplicated";
+})(NavigationFailureType || (NavigationFailureType = {}));
+const routerKey = Symbol("");
+const routeLocationKey = Symbol("");
+function useLink(props) {
+  const router = inject(routerKey);
+  const currentRoute = inject(routeLocationKey);
+  const route = computed(() => {
+    const to = unref(props.to);
+    return router.resolve(to);
+  });
+  const activeRecordIndex = computed(() => {
+    const { matched } = route.value;
+    const { length } = matched;
+    const routeMatched = matched[length - 1];
+    const currentMatched = currentRoute.matched;
+    if (!routeMatched || !currentMatched.length)
+      return -1;
+    const index = currentMatched.findIndex(isSameRouteRecord.bind(null, routeMatched));
+    if (index > -1)
+      return index;
+    const parentRecordPath = getOriginalPath(matched[length - 2]);
+    return (
+      // we are dealing with nested routes
+      length > 1 && // if the parent and matched route have the same path, this link is
+      // referring to the empty child. Or we currently are on a different
+      // child of the same parent
+      getOriginalPath(routeMatched) === parentRecordPath && // avoid comparing the child with its parent
+      currentMatched[currentMatched.length - 1].path !== parentRecordPath ? currentMatched.findIndex(isSameRouteRecord.bind(null, matched[length - 2])) : index
+    );
+  });
+  const isActive = computed(() => activeRecordIndex.value > -1 && includesParams(currentRoute.params, route.value.params));
+  const isExactActive = computed(() => activeRecordIndex.value > -1 && activeRecordIndex.value === currentRoute.matched.length - 1 && isSameRouteLocationParams(currentRoute.params, route.value.params));
+  function navigate(e = {}) {
+    if (guardEvent(e)) {
+      const p2 = router[unref(props.replace) ? "replace" : "push"](
+        unref(props.to)
+        // avoid uncaught errors are they are logged anyway
+      ).catch(noop);
+      if (props.viewTransition && typeof document !== "undefined" && "startViewTransition" in document) {
+        document.startViewTransition(() => p2);
+      }
+      return p2;
+    }
+    return Promise.resolve();
+  }
+  return {
+    route,
+    href: computed(() => route.value.href),
+    isActive,
+    isExactActive,
+    navigate
+  };
+}
+function preferSingleVNode(vnodes) {
+  return vnodes.length === 1 ? vnodes[0] : vnodes;
+}
+const RouterLinkImpl = /* @__PURE__ */ defineComponent({
+  name: "RouterLink",
+  compatConfig: { MODE: 3 },
+  props: {
+    to: {
+      type: [String, Object],
+      required: true
+    },
+    replace: Boolean,
+    activeClass: String,
+    // inactiveClass: String,
+    exactActiveClass: String,
+    custom: Boolean,
+    ariaCurrentValue: {
+      type: String,
+      default: "page"
+    },
+    viewTransition: Boolean
+  },
+  useLink,
+  setup(props, { slots }) {
+    const link = reactive(useLink(props));
+    const { options } = inject(routerKey);
+    const elClass = computed(() => ({
+      [getLinkClass(props.activeClass, options.linkActiveClass, "router-link-active")]: link.isActive,
+      // [getLinkClass(
+      //   props.inactiveClass,
+      //   options.linkInactiveClass,
+      //   'router-link-inactive'
+      // )]: !link.isExactActive,
+      [getLinkClass(props.exactActiveClass, options.linkExactActiveClass, "router-link-exact-active")]: link.isExactActive
+    }));
+    return () => {
+      const children = slots.default && preferSingleVNode(slots.default(link));
+      return props.custom ? children : h("a", {
+        "aria-current": link.isExactActive ? props.ariaCurrentValue : null,
+        href: link.href,
+        // this would override user added attrs but Vue will still add
+        // the listener, so we end up triggering both
+        onClick: link.navigate,
+        class: elClass.value
+      }, children);
+    };
+  }
+});
+const RouterLink = RouterLinkImpl;
+function guardEvent(e) {
+  if (e.metaKey || e.altKey || e.ctrlKey || e.shiftKey)
+    return;
+  if (e.defaultPrevented)
+    return;
+  if (e.button !== void 0 && e.button !== 0)
+    return;
+  if (e.currentTarget && e.currentTarget.getAttribute) {
+    const target = e.currentTarget.getAttribute("target");
+    if (/\b_blank\b/i.test(target))
+      return;
+  }
+  if (e.preventDefault)
+    e.preventDefault();
+  return true;
+}
+function includesParams(outer, inner) {
+  for (const key in inner) {
+    const innerValue = inner[key];
+    const outerValue = outer[key];
+    if (typeof innerValue === "string") {
+      if (innerValue !== outerValue)
+        return false;
+    } else {
+      if (!isArray(outerValue) || outerValue.length !== innerValue.length || innerValue.some((value, i2) => value !== outerValue[i2]))
+        return false;
+    }
+  }
+  return true;
+}
+function getOriginalPath(record) {
+  return record ? record.aliasOf ? record.aliasOf.path : record.path : "";
+}
+const getLinkClass = (propClass, globalClass, defaultClass) => propClass != null ? propClass : globalClass != null ? globalClass : defaultClass;
+function useRoute(_name) {
+  return inject(routeLocationKey);
+}
 const _appConfig = reactive(appConfig);
 const useAppConfig = () => _appConfig;
 const state = {};
@@ -11404,7 +12028,7 @@ const getGroupIdForArbitraryProperty = (className) => {
 };
 const createClassMap = (config) => {
   const {
-    theme,
+    theme: theme2,
     classGroups
   } = config;
   const classMap = {
@@ -11412,11 +12036,11 @@ const createClassMap = (config) => {
     validators: []
   };
   for (const classGroupId in classGroups) {
-    processClassesRecursively(classGroups[classGroupId], classMap, classGroupId, theme);
+    processClassesRecursively(classGroups[classGroupId], classMap, classGroupId, theme2);
   }
   return classMap;
 };
-const processClassesRecursively = (classGroup, classPartObject, classGroupId, theme) => {
+const processClassesRecursively = (classGroup, classPartObject, classGroupId, theme2) => {
   classGroup.forEach((classDefinition) => {
     if (typeof classDefinition === "string") {
       const classPartObjectToEdit = classDefinition === "" ? classPartObject : getPart(classPartObject, classDefinition);
@@ -11425,7 +12049,7 @@ const processClassesRecursively = (classGroup, classPartObject, classGroupId, th
     }
     if (typeof classDefinition === "function") {
       if (isThemeGetter(classDefinition)) {
-        processClassesRecursively(classDefinition(theme), classPartObject, classGroupId, theme);
+        processClassesRecursively(classDefinition(theme2), classPartObject, classGroupId, theme2);
         return;
       }
       classPartObject.validators.push({
@@ -11435,7 +12059,7 @@ const processClassesRecursively = (classGroup, classPartObject, classGroupId, th
       return;
     }
     Object.entries(classDefinition).forEach(([key, classGroup2]) => {
-      processClassesRecursively(classGroup2, getPart(classPartObject, key), classGroupId, theme);
+      processClassesRecursively(classGroup2, getPart(classPartObject, key), classGroupId, theme2);
     });
   });
 };
@@ -11710,7 +12334,7 @@ function createTailwindMerge(createConfigFirst, ...createConfigRest) {
   };
 }
 const fromTheme = (key) => {
-  const themeGetter = (theme) => theme[key] || [];
+  const themeGetter = (theme2) => theme2[key] || [];
   themeGetter.isThemeGetter = true;
   return themeGetter;
 };
@@ -15892,7 +16516,7 @@ const Icon = /* @__PURE__ */ defineComponent((props, { emit: emit2 }) => {
   ],
   emits: ["load"]
 });
-const _sfc_main = {
+const _sfc_main$5 = {
   __name: "Icon",
   props: {
     name: { type: String, required: true }
@@ -15902,6 +16526,1075 @@ const _sfc_main = {
       return openBlock(), createBlock(unref(Icon), {
         icon: __props.name.replace(/^i-/, "")
       }, null, 8, ["icon"]);
+    };
+  }
+};
+const ImageComponent = "img";
+const avatarGroupInjectionKey = Symbol("nuxt-ui.avatar-group");
+function useAvatarGroup(props) {
+  const avatarGroup = inject(avatarGroupInjectionKey, void 0);
+  const size = computed(() => props.size ?? avatarGroup?.value.size);
+  provide(avatarGroupInjectionKey, computed(() => ({ size: size.value })));
+  return {
+    size
+  };
+}
+const theme$3 = {
+  "slots": {
+    "root": "relative inline-flex items-center justify-center shrink-0",
+    "base": "rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap"
+  },
+  "variants": {
+    "color": {
+      "primary": "bg-primary",
+      "secondary": "bg-secondary",
+      "success": "bg-success",
+      "info": "bg-info",
+      "warning": "bg-warning",
+      "error": "bg-error",
+      "neutral": "bg-inverted"
+    },
+    "size": {
+      "3xs": "h-[4px] min-w-[4px] text-[4px]",
+      "2xs": "h-[5px] min-w-[5px] text-[5px]",
+      "xs": "h-[6px] min-w-[6px] text-[6px]",
+      "sm": "h-[7px] min-w-[7px] text-[7px]",
+      "md": "h-[8px] min-w-[8px] text-[8px]",
+      "lg": "h-[9px] min-w-[9px] text-[9px]",
+      "xl": "h-[10px] min-w-[10px] text-[10px]",
+      "2xl": "h-[11px] min-w-[11px] text-[11px]",
+      "3xl": "h-[12px] min-w-[12px] text-[12px]"
+    },
+    "position": {
+      "top-right": "top-0 right-0",
+      "bottom-right": "bottom-0 right-0",
+      "top-left": "top-0 left-0",
+      "bottom-left": "bottom-0 left-0"
+    },
+    "inset": {
+      "false": ""
+    },
+    "standalone": {
+      "false": "absolute"
+    }
+  },
+  "compoundVariants": [
+    {
+      "position": "top-right",
+      "inset": false,
+      "class": "-translate-y-1/2 translate-x-1/2 transform"
+    },
+    {
+      "position": "bottom-right",
+      "inset": false,
+      "class": "translate-y-1/2 translate-x-1/2 transform"
+    },
+    {
+      "position": "top-left",
+      "inset": false,
+      "class": "-translate-y-1/2 -translate-x-1/2 transform"
+    },
+    {
+      "position": "bottom-left",
+      "inset": false,
+      "class": "translate-y-1/2 -translate-x-1/2 transform"
+    }
+  ],
+  "defaultVariants": {
+    "size": "md",
+    "color": "primary",
+    "position": "top-right"
+  }
+};
+const _sfc_main$4 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
+  __name: "Chip",
+  props: /* @__PURE__ */ mergeModels({
+    as: { type: null, required: false },
+    text: { type: [String, Number], required: false },
+    color: { type: null, required: false },
+    size: { type: null, required: false },
+    position: { type: null, required: false },
+    inset: { type: Boolean, required: false, default: false },
+    standalone: { type: Boolean, required: false, default: false },
+    class: { type: null, required: false },
+    ui: { type: null, required: false }
+  }, {
+    "show": { type: Boolean, ...{ default: true } },
+    "showModifiers": {}
+  }),
+  emits: ["update:show"],
+  setup(__props) {
+    const props = __props;
+    const show = useModel(__props, "show", { type: Boolean, ...{ default: true } });
+    const { size } = useAvatarGroup(props);
+    const appConfig2 = useAppConfig();
+    const ui = computed(() => tv({ extend: tv(theme$3), ...appConfig2.ui?.chip || {} })({
+      color: props.color,
+      size: size.value,
+      position: props.position,
+      inset: props.inset,
+      standalone: props.standalone
+    }));
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        as: __props.as,
+        class: normalizeClass(ui.value.root({ class: [props.ui?.root, props.class] }))
+      }, {
+        default: withCtx(() => [
+          createVNode(unref(Slot), normalizeProps(guardReactiveProps(_ctx.$attrs)), {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default")
+            ]),
+            _: 3
+          }, 16),
+          show.value ? (openBlock(), createElementBlock("span", {
+            key: 0,
+            class: normalizeClass(ui.value.base({ class: props.ui?.base }))
+          }, [
+            renderSlot(_ctx.$slots, "content", {}, () => [
+              createTextVNode(toDisplayString(__props.text), 1)
+            ])
+          ], 2)) : createCommentVNode("", true)
+        ]),
+        _: 3
+      }, 8, ["as", "class"]);
+    };
+  }
+});
+const theme$2 = {
+  "slots": {
+    "root": "inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated",
+    "image": "h-full w-full rounded-[inherit] object-cover",
+    "fallback": "font-medium leading-none text-muted truncate",
+    "icon": "text-muted shrink-0"
+  },
+  "variants": {
+    "size": {
+      "3xs": {
+        "root": "size-4 text-[8px]"
+      },
+      "2xs": {
+        "root": "size-5 text-[10px]"
+      },
+      "xs": {
+        "root": "size-6 text-xs"
+      },
+      "sm": {
+        "root": "size-7 text-sm"
+      },
+      "md": {
+        "root": "size-8 text-base"
+      },
+      "lg": {
+        "root": "size-9 text-lg"
+      },
+      "xl": {
+        "root": "size-10 text-xl"
+      },
+      "2xl": {
+        "root": "size-11 text-[22px]"
+      },
+      "3xl": {
+        "root": "size-12 text-2xl"
+      }
+    }
+  },
+  "defaultVariants": {
+    "size": "md"
+  }
+};
+const _sfc_main$3 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
+  __name: "Avatar",
+  props: {
+    as: { type: null, required: false, default: "span" },
+    src: { type: String, required: false },
+    alt: { type: String, required: false },
+    icon: { type: String, required: false },
+    text: { type: String, required: false },
+    size: { type: null, required: false },
+    chip: { type: [Boolean, Object], required: false },
+    class: { type: null, required: false },
+    style: { type: null, required: false },
+    ui: { type: null, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const fallback = computed(() => props.text || (props.alt || "").split(" ").map((word) => word.charAt(0)).join("").substring(0, 2));
+    const appConfig2 = useAppConfig();
+    const { size } = useAvatarGroup(props);
+    const ui = computed(() => tv({ extend: tv(theme$2), ...appConfig2.ui?.avatar || {} })({
+      size: size.value
+    }));
+    const sizePx = computed(() => ({
+      "3xs": 16,
+      "2xs": 20,
+      "xs": 24,
+      "sm": 28,
+      "md": 32,
+      "lg": 36,
+      "xl": 40,
+      "2xl": 44,
+      "3xl": 48
+    })[props.size || "md"]);
+    const error = ref(false);
+    watch(() => props.src, () => {
+      if (error.value) {
+        error.value = false;
+      }
+    });
+    function onError() {
+      error.value = true;
+    }
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(resolveDynamicComponent(props.chip ? _sfc_main$4 : unref(Primitive)), mergeProps({ as: __props.as }, props.chip ? typeof props.chip === "object" ? { inset: true, ...props.chip } : { inset: true } : {}, {
+        class: ui.value.root({ class: [props.ui?.root, props.class] }),
+        style: props.style
+      }), {
+        default: withCtx(() => [
+          __props.src && !error.value ? (openBlock(), createBlock(resolveDynamicComponent(unref(ImageComponent)), mergeProps({
+            key: 0,
+            role: "img",
+            src: __props.src,
+            alt: __props.alt,
+            width: sizePx.value,
+            height: sizePx.value
+          }, _ctx.$attrs, {
+            class: ui.value.image({ class: props.ui?.image }),
+            onError
+          }), null, 16, ["src", "alt", "width", "height", "class"])) : (openBlock(), createBlock(unref(Slot), normalizeProps(mergeProps({ key: 1 }, _ctx.$attrs)), {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default", {}, () => [
+                __props.icon ? (openBlock(), createBlock(_sfc_main$5, {
+                  key: 0,
+                  name: __props.icon,
+                  class: normalizeClass(ui.value.icon({ class: props.ui?.icon }))
+                }, null, 8, ["name", "class"])) : (openBlock(), createElementBlock("span", {
+                  key: 1,
+                  class: normalizeClass(ui.value.fallback({ class: props.ui?.fallback }))
+                }, toDisplayString(fallback.value || " "), 3))
+              ])
+            ]),
+            _: 3
+          }, 16))
+        ]),
+        _: 3
+      }, 16, ["as", "class", "style"]);
+    };
+  }
+});
+function useComponentIcons(componentProps) {
+  const appConfig2 = useAppConfig();
+  const props = computed(() => toValue$1(componentProps));
+  const isLeading = computed(() => props.value.icon && props.value.leading || props.value.icon && !props.value.trailing || props.value.loading && !props.value.trailing || !!props.value.leadingIcon);
+  const isTrailing = computed(() => props.value.icon && props.value.trailing || props.value.loading && props.value.trailing || !!props.value.trailingIcon);
+  const leadingIconName = computed(() => {
+    if (props.value.loading) {
+      return props.value.loadingIcon || appConfig2.ui.icons.loading;
+    }
+    return props.value.leadingIcon || props.value.icon;
+  });
+  const trailingIconName = computed(() => {
+    if (props.value.loading && !isLeading.value) {
+      return props.value.loadingIcon || appConfig2.ui.icons.loading;
+    }
+    return props.value.trailingIcon || props.value.icon;
+  });
+  return {
+    isLeading,
+    isTrailing,
+    leadingIconName,
+    trailingIconName
+  };
+}
+const buttonGroupInjectionKey = Symbol("nuxt-ui.button-group");
+function useButtonGroup(props) {
+  const buttonGroup = inject(buttonGroupInjectionKey, void 0);
+  return {
+    orientation: computed(() => buttonGroup?.value.orientation),
+    size: computed(() => props?.size ?? buttonGroup?.value.size)
+  };
+}
+const formLoadingInjectionKey = Symbol("nuxt-ui.form-loading");
+function pickLinkProps(link) {
+  const keys = Object.keys(link);
+  const ariaKeys = keys.filter((key) => key.startsWith("aria-"));
+  const dataKeys = keys.filter((key) => key.startsWith("data-"));
+  const propsToInclude = [
+    "active",
+    "activeClass",
+    "ariaCurrentValue",
+    "as",
+    "disabled",
+    "exact",
+    "exactActiveClass",
+    "exactHash",
+    "exactQuery",
+    "external",
+    "href",
+    "download",
+    "inactiveClass",
+    "noPrefetch",
+    "noRel",
+    "prefetch",
+    "prefetchedClass",
+    "rel",
+    "replace",
+    "target",
+    "to",
+    "type",
+    "title",
+    "onClick",
+    ...ariaKeys,
+    ...dataKeys
+  ];
+  return reactivePick(link, ...propsToInclude);
+}
+function isPartiallyEqual(item1, item2) {
+  const diffedKeys = diff(item1, item2).reduce((filtered, q2) => {
+    if (q2.type === "added") {
+      filtered.add(q2.key);
+    }
+    return filtered;
+  }, /* @__PURE__ */ new Set());
+  const item1Filtered = Object.fromEntries(Object.entries(item1).filter(([key]) => !diffedKeys.has(key)));
+  const item2Filtered = Object.fromEntries(Object.entries(item2).filter(([key]) => !diffedKeys.has(key)));
+  return isEqual(item1Filtered, item2Filtered);
+}
+const PROTOCOL_STRICT_REGEX = /^[\s\w\0+.-]{2,}:([/\\]{1,2})/;
+const PROTOCOL_REGEX = /^[\s\w\0+.-]{2,}:([/\\]{2})?/;
+const PROTOCOL_RELATIVE_REGEX = /^([/\\]\s*){2,}[^/\\]/;
+function hasProtocol(inputString, opts = {}) {
+  if (typeof opts === "boolean") {
+    opts = { acceptRelative: opts };
+  }
+  if (opts.strict) {
+    return PROTOCOL_STRICT_REGEX.test(inputString);
+  }
+  return PROTOCOL_REGEX.test(inputString) || (opts.acceptRelative ? PROTOCOL_RELATIVE_REGEX.test(inputString) : false);
+}
+const _sfc_main$2 = {
+  __name: "LinkBase",
+  props: {
+    as: { type: String, required: false, default: "button" },
+    type: { type: String, required: false, default: "button" },
+    disabled: { type: Boolean, required: false },
+    onClick: { type: [Function, Array], required: false },
+    href: { type: String, required: false },
+    navigate: { type: Function, required: false },
+    target: { type: [String, Object, null], required: false },
+    rel: { type: [String, Object, null], required: false },
+    active: { type: Boolean, required: false },
+    isExternal: { type: Boolean, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    function onClickWrapper(e) {
+      if (props.disabled) {
+        e.stopPropagation();
+        e.preventDefault();
+        return;
+      }
+      if (props.onClick) {
+        for (const onClick of Array.isArray(props.onClick) ? props.onClick : [props.onClick]) {
+          onClick(e);
+        }
+      }
+      if (props.href && props.navigate && !props.isExternal) {
+        props.navigate(e);
+      }
+    }
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), mergeProps(__props.href ? {
+        "as": "a",
+        "href": __props.disabled ? void 0 : __props.href,
+        "aria-disabled": __props.disabled ? "true" : void 0,
+        "role": __props.disabled ? "link" : void 0,
+        "tabindex": __props.disabled ? -1 : void 0
+      } : __props.as === "button" ? {
+        as: __props.as,
+        type: __props.type,
+        disabled: __props.disabled
+      } : {
+        as: __props.as
+      }, {
+        rel: __props.rel,
+        target: __props.target,
+        onClick: onClickWrapper
+      }), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16, ["rel", "target"]);
+    };
+  }
+};
+const theme$1 = {
+  "base": "focus-visible:outline-primary",
+  "variants": {
+    "active": {
+      "true": "text-primary",
+      "false": "text-muted"
+    },
+    "disabled": {
+      "true": "cursor-not-allowed opacity-75"
+    }
+  },
+  "compoundVariants": [
+    {
+      "active": false,
+      "disabled": false,
+      "class": [
+        "hover:text-default",
+        "transition-colors"
+      ]
+    }
+  ]
+};
+const _sfc_main$1 = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
+  __name: "Link",
+  props: {
+    as: { type: null, required: false, default: "button" },
+    type: { type: null, required: false, default: "button" },
+    disabled: { type: Boolean, required: false },
+    active: { type: Boolean, required: false, default: void 0 },
+    exact: { type: Boolean, required: false },
+    exactQuery: { type: [Boolean, String], required: false },
+    exactHash: { type: Boolean, required: false },
+    inactiveClass: { type: String, required: false, default: "" },
+    custom: { type: Boolean, required: false },
+    raw: { type: Boolean, required: false },
+    class: { type: null, required: false },
+    to: { type: null, required: false },
+    href: { type: null, required: false },
+    external: { type: Boolean, required: false },
+    target: { type: [String, Object, null], required: false },
+    rel: { type: [String, Object, null], required: false },
+    noRel: { type: Boolean, required: false },
+    prefetchedClass: { type: String, required: false },
+    prefetch: { type: Boolean, required: false },
+    prefetchOn: { type: [String, Object], required: false },
+    noPrefetch: { type: Boolean, required: false },
+    activeClass: { type: String, required: false, default: "" },
+    exactActiveClass: { type: String, required: false },
+    ariaCurrentValue: { type: String, required: false, default: "page" },
+    viewTransition: { type: Boolean, required: false },
+    replace: { type: Boolean, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const route = useRoute();
+    const appConfig2 = useAppConfig();
+    const routerLinkProps = useForwardProps(reactiveOmit(props, "as", "type", "disabled", "active", "exact", "exactQuery", "exactHash", "activeClass", "inactiveClass", "to", "href", "raw", "custom", "class"));
+    const ui = computed(() => tv({
+      extend: tv(theme$1),
+      ...defu({
+        variants: {
+          active: {
+            true: props.activeClass,
+            false: props.inactiveClass
+          }
+        }
+      }, appConfig2.ui?.link || {})
+    }));
+    const to = computed(() => props.to ?? props.href);
+    const isExternal = computed(() => {
+      if (props.external) {
+        return true;
+      }
+      if (!to.value) {
+        return false;
+      }
+      return typeof to.value === "string" && hasProtocol(to.value, { acceptRelative: true });
+    });
+    function isLinkActive({ route: linkRoute, isActive, isExactActive }) {
+      if (props.active !== void 0) {
+        return props.active;
+      }
+      if (!to.value) {
+        return false;
+      }
+      if (props.exactQuery === "partial") {
+        if (!isPartiallyEqual(linkRoute.query, route.query)) return false;
+      } else if (props.exactQuery === true) {
+        if (!isEqual(linkRoute.query, route.query)) return false;
+      }
+      if (props.exactHash && linkRoute.hash !== route.hash) {
+        return false;
+      }
+      if (props.exact && isExactActive) {
+        return true;
+      }
+      if (!props.exact && isActive) {
+        return true;
+      }
+      return false;
+    }
+    function resolveLinkClass({ route: route2, isActive, isExactActive } = {}) {
+      const active = isLinkActive({ route: route2, isActive, isExactActive });
+      if (props.raw) {
+        return [props.class, active ? props.activeClass : props.inactiveClass];
+      }
+      return ui.value({ class: props.class, active, disabled: props.disabled });
+    }
+    return (_ctx, _cache) => {
+      return !isExternal.value && !!to.value ? (openBlock(), createBlock(unref(RouterLink), mergeProps({ key: 0 }, unref(routerLinkProps), {
+        to: to.value,
+        custom: ""
+      }), {
+        default: withCtx(({ href, navigate, route: linkRoute, isActive, isExactActive }) => [
+          __props.custom ? renderSlot(_ctx.$slots, "default", normalizeProps(mergeProps({ key: 0 }, {
+            ..._ctx.$attrs,
+            ...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
+            as: __props.as,
+            type: __props.type,
+            disabled: __props.disabled,
+            href,
+            navigate,
+            active: isLinkActive({ route: linkRoute, isActive, isExactActive })
+          }))) : (openBlock(), createBlock(_sfc_main$2, mergeProps({ key: 1 }, {
+            ..._ctx.$attrs,
+            ...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
+            as: __props.as,
+            type: __props.type,
+            disabled: __props.disabled,
+            href,
+            navigate
+          }, {
+            class: resolveLinkClass({ route: linkRoute, isActive, isExactActive })
+          }), {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default", {
+                active: isLinkActive({ route: linkRoute, isActive, isExactActive })
+              })
+            ]),
+            _: 2
+          }, 1040, ["class"]))
+        ]),
+        _: 3
+      }, 16, ["to"])) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
+        __props.custom ? renderSlot(_ctx.$slots, "default", normalizeProps(mergeProps({ key: 0 }, {
+          ..._ctx.$attrs,
+          as: __props.as,
+          type: __props.type,
+          disabled: __props.disabled,
+          href: to.value,
+          target: isExternal.value ? "_blank" : void 0,
+          active: __props.active,
+          isExternal: isExternal.value
+        }))) : (openBlock(), createBlock(_sfc_main$2, mergeProps({ key: 1 }, {
+          ..._ctx.$attrs,
+          as: __props.as,
+          type: __props.type,
+          disabled: __props.disabled,
+          href: to.value,
+          target: isExternal.value ? "_blank" : void 0,
+          isExternal: isExternal.value
+        }, {
+          class: resolveLinkClass()
+        }), {
+          default: withCtx(() => [
+            renderSlot(_ctx.$slots, "default", { active: __props.active })
+          ]),
+          _: 3
+        }, 16, ["class"]))
+      ], 64));
+    };
+  }
+});
+const theme = {
+  "slots": {
+    "base": [
+      "rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75",
+      "transition-colors"
+    ],
+    "label": "truncate",
+    "leadingIcon": "shrink-0",
+    "leadingAvatar": "shrink-0",
+    "leadingAvatarSize": "",
+    "trailingIcon": "shrink-0"
+  },
+  "variants": {
+    "buttonGroup": {
+      "horizontal": "not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1]",
+      "vertical": "not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none focus-visible:z-[1]"
+    },
+    "color": {
+      "primary": "",
+      "secondary": "",
+      "success": "",
+      "info": "",
+      "warning": "",
+      "error": "",
+      "neutral": ""
+    },
+    "variant": {
+      "solid": "",
+      "outline": "",
+      "soft": "",
+      "subtle": "",
+      "ghost": "",
+      "link": ""
+    },
+    "size": {
+      "xs": {
+        "base": "px-2 py-1 text-xs gap-1",
+        "leadingIcon": "size-4",
+        "leadingAvatarSize": "3xs",
+        "trailingIcon": "size-4"
+      },
+      "sm": {
+        "base": "px-2.5 py-1.5 text-xs gap-1.5",
+        "leadingIcon": "size-4",
+        "leadingAvatarSize": "3xs",
+        "trailingIcon": "size-4"
+      },
+      "md": {
+        "base": "px-2.5 py-1.5 text-sm gap-1.5",
+        "leadingIcon": "size-5",
+        "leadingAvatarSize": "2xs",
+        "trailingIcon": "size-5"
+      },
+      "lg": {
+        "base": "px-3 py-2 text-sm gap-2",
+        "leadingIcon": "size-5",
+        "leadingAvatarSize": "2xs",
+        "trailingIcon": "size-5"
+      },
+      "xl": {
+        "base": "px-3 py-2 text-base gap-2",
+        "leadingIcon": "size-6",
+        "leadingAvatarSize": "xs",
+        "trailingIcon": "size-6"
+      }
+    },
+    "block": {
+      "true": {
+        "base": "w-full justify-center",
+        "trailingIcon": "ms-auto"
+      }
+    },
+    "square": {
+      "true": ""
+    },
+    "leading": {
+      "true": ""
+    },
+    "trailing": {
+      "true": ""
+    },
+    "loading": {
+      "true": ""
+    },
+    "active": {
+      "true": {
+        "base": ""
+      },
+      "false": {
+        "base": ""
+      }
+    }
+  },
+  "compoundVariants": [
+    {
+      "color": "primary",
+      "variant": "solid",
+      "class": "text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+    },
+    {
+      "color": "secondary",
+      "variant": "solid",
+      "class": "text-inverted bg-secondary hover:bg-secondary/75 active:bg-secondary/75 disabled:bg-secondary aria-disabled:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+    },
+    {
+      "color": "success",
+      "variant": "solid",
+      "class": "text-inverted bg-success hover:bg-success/75 active:bg-success/75 disabled:bg-success aria-disabled:bg-success focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success"
+    },
+    {
+      "color": "info",
+      "variant": "solid",
+      "class": "text-inverted bg-info hover:bg-info/75 active:bg-info/75 disabled:bg-info aria-disabled:bg-info focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-info"
+    },
+    {
+      "color": "warning",
+      "variant": "solid",
+      "class": "text-inverted bg-warning hover:bg-warning/75 active:bg-warning/75 disabled:bg-warning aria-disabled:bg-warning focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-warning"
+    },
+    {
+      "color": "error",
+      "variant": "solid",
+      "class": "text-inverted bg-error hover:bg-error/75 active:bg-error/75 disabled:bg-error aria-disabled:bg-error focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-error"
+    },
+    {
+      "color": "primary",
+      "variant": "outline",
+      "class": "ring ring-inset ring-primary/50 text-primary hover:bg-primary/10 active:bg-primary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+    },
+    {
+      "color": "secondary",
+      "variant": "outline",
+      "class": "ring ring-inset ring-secondary/50 text-secondary hover:bg-secondary/10 active:bg-secondary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+    },
+    {
+      "color": "success",
+      "variant": "outline",
+      "class": "ring ring-inset ring-success/50 text-success hover:bg-success/10 active:bg-success/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-success"
+    },
+    {
+      "color": "info",
+      "variant": "outline",
+      "class": "ring ring-inset ring-info/50 text-info hover:bg-info/10 active:bg-info/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-info"
+    },
+    {
+      "color": "warning",
+      "variant": "outline",
+      "class": "ring ring-inset ring-warning/50 text-warning hover:bg-warning/10 active:bg-warning/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-warning"
+    },
+    {
+      "color": "error",
+      "variant": "outline",
+      "class": "ring ring-inset ring-error/50 text-error hover:bg-error/10 active:bg-error/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-error"
+    },
+    {
+      "color": "primary",
+      "variant": "soft",
+      "class": "text-primary bg-primary/10 hover:bg-primary/15 active:bg-primary/15 focus:outline-none focus-visible:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10"
+    },
+    {
+      "color": "secondary",
+      "variant": "soft",
+      "class": "text-secondary bg-secondary/10 hover:bg-secondary/15 active:bg-secondary/15 focus:outline-none focus-visible:bg-secondary/15 disabled:bg-secondary/10 aria-disabled:bg-secondary/10"
+    },
+    {
+      "color": "success",
+      "variant": "soft",
+      "class": "text-success bg-success/10 hover:bg-success/15 active:bg-success/15 focus:outline-none focus-visible:bg-success/15 disabled:bg-success/10 aria-disabled:bg-success/10"
+    },
+    {
+      "color": "info",
+      "variant": "soft",
+      "class": "text-info bg-info/10 hover:bg-info/15 active:bg-info/15 focus:outline-none focus-visible:bg-info/15 disabled:bg-info/10 aria-disabled:bg-info/10"
+    },
+    {
+      "color": "warning",
+      "variant": "soft",
+      "class": "text-warning bg-warning/10 hover:bg-warning/15 active:bg-warning/15 focus:outline-none focus-visible:bg-warning/15 disabled:bg-warning/10 aria-disabled:bg-warning/10"
+    },
+    {
+      "color": "error",
+      "variant": "soft",
+      "class": "text-error bg-error/10 hover:bg-error/15 active:bg-error/15 focus:outline-none focus-visible:bg-error/15 disabled:bg-error/10 aria-disabled:bg-error/10"
+    },
+    {
+      "color": "primary",
+      "variant": "subtle",
+      "class": "text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+    },
+    {
+      "color": "secondary",
+      "variant": "subtle",
+      "class": "text-secondary ring ring-inset ring-secondary/25 bg-secondary/10 hover:bg-secondary/15 active:bg-secondary/15 disabled:bg-secondary/10 aria-disabled:bg-secondary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+    },
+    {
+      "color": "success",
+      "variant": "subtle",
+      "class": "text-success ring ring-inset ring-success/25 bg-success/10 hover:bg-success/15 active:bg-success/15 disabled:bg-success/10 aria-disabled:bg-success/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-success"
+    },
+    {
+      "color": "info",
+      "variant": "subtle",
+      "class": "text-info ring ring-inset ring-info/25 bg-info/10 hover:bg-info/15 active:bg-info/15 disabled:bg-info/10 aria-disabled:bg-info/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-info"
+    },
+    {
+      "color": "warning",
+      "variant": "subtle",
+      "class": "text-warning ring ring-inset ring-warning/25 bg-warning/10 hover:bg-warning/15 active:bg-warning/15 disabled:bg-warning/10 aria-disabled:bg-warning/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-warning"
+    },
+    {
+      "color": "error",
+      "variant": "subtle",
+      "class": "text-error ring ring-inset ring-error/25 bg-error/10 hover:bg-error/15 active:bg-error/15 disabled:bg-error/10 aria-disabled:bg-error/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-error"
+    },
+    {
+      "color": "primary",
+      "variant": "ghost",
+      "class": "text-primary hover:bg-primary/10 active:bg-primary/10 focus:outline-none focus-visible:bg-primary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+    },
+    {
+      "color": "secondary",
+      "variant": "ghost",
+      "class": "text-secondary hover:bg-secondary/10 active:bg-secondary/10 focus:outline-none focus-visible:bg-secondary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+    },
+    {
+      "color": "success",
+      "variant": "ghost",
+      "class": "text-success hover:bg-success/10 active:bg-success/10 focus:outline-none focus-visible:bg-success/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+    },
+    {
+      "color": "info",
+      "variant": "ghost",
+      "class": "text-info hover:bg-info/10 active:bg-info/10 focus:outline-none focus-visible:bg-info/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+    },
+    {
+      "color": "warning",
+      "variant": "ghost",
+      "class": "text-warning hover:bg-warning/10 active:bg-warning/10 focus:outline-none focus-visible:bg-warning/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+    },
+    {
+      "color": "error",
+      "variant": "ghost",
+      "class": "text-error hover:bg-error/10 active:bg-error/10 focus:outline-none focus-visible:bg-error/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+    },
+    {
+      "color": "primary",
+      "variant": "link",
+      "class": "text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+    },
+    {
+      "color": "secondary",
+      "variant": "link",
+      "class": "text-secondary hover:text-secondary/75 active:text-secondary/75 disabled:text-secondary aria-disabled:text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-secondary"
+    },
+    {
+      "color": "success",
+      "variant": "link",
+      "class": "text-success hover:text-success/75 active:text-success/75 disabled:text-success aria-disabled:text-success focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-success"
+    },
+    {
+      "color": "info",
+      "variant": "link",
+      "class": "text-info hover:text-info/75 active:text-info/75 disabled:text-info aria-disabled:text-info focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-info"
+    },
+    {
+      "color": "warning",
+      "variant": "link",
+      "class": "text-warning hover:text-warning/75 active:text-warning/75 disabled:text-warning aria-disabled:text-warning focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-warning"
+    },
+    {
+      "color": "error",
+      "variant": "link",
+      "class": "text-error hover:text-error/75 active:text-error/75 disabled:text-error aria-disabled:text-error focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error"
+    },
+    {
+      "color": "neutral",
+      "variant": "solid",
+      "class": "text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted"
+    },
+    {
+      "color": "neutral",
+      "variant": "outline",
+      "class": "ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default focus:outline-none focus-visible:ring-2 focus-visible:ring-inverted"
+    },
+    {
+      "color": "neutral",
+      "variant": "soft",
+      "class": "text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 focus:outline-none focus-visible:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated"
+    },
+    {
+      "color": "neutral",
+      "variant": "subtle",
+      "class": "ring ring-inset ring-accented text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated focus:outline-none focus-visible:ring-2 focus-visible:ring-inverted"
+    },
+    {
+      "color": "neutral",
+      "variant": "ghost",
+      "class": "text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent"
+    },
+    {
+      "color": "neutral",
+      "variant": "link",
+      "class": "text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted"
+    },
+    {
+      "size": "xs",
+      "square": true,
+      "class": "p-1"
+    },
+    {
+      "size": "sm",
+      "square": true,
+      "class": "p-1.5"
+    },
+    {
+      "size": "md",
+      "square": true,
+      "class": "p-1.5"
+    },
+    {
+      "size": "lg",
+      "square": true,
+      "class": "p-2"
+    },
+    {
+      "size": "xl",
+      "square": true,
+      "class": "p-2"
+    },
+    {
+      "loading": true,
+      "leading": true,
+      "class": {
+        "leadingIcon": "animate-spin"
+      }
+    },
+    {
+      "loading": true,
+      "leading": false,
+      "trailing": true,
+      "class": {
+        "trailingIcon": "animate-spin"
+      }
+    }
+  ],
+  "defaultVariants": {
+    "color": "primary",
+    "variant": "solid",
+    "size": "md"
+  }
+};
+const _sfc_main = {
+  __name: "Button",
+  props: {
+    label: { type: String, required: false },
+    color: { type: null, required: false },
+    activeColor: { type: null, required: false },
+    variant: { type: null, required: false },
+    activeVariant: { type: null, required: false },
+    size: { type: null, required: false },
+    square: { type: Boolean, required: false },
+    block: { type: Boolean, required: false },
+    loadingAuto: { type: Boolean, required: false },
+    onClick: { type: [Function, Array], required: false },
+    class: { type: null, required: false },
+    ui: { type: null, required: false },
+    icon: { type: String, required: false },
+    avatar: { type: Object, required: false },
+    leading: { type: Boolean, required: false },
+    leadingIcon: { type: String, required: false },
+    trailing: { type: Boolean, required: false },
+    trailingIcon: { type: String, required: false },
+    loading: { type: Boolean, required: false },
+    loadingIcon: { type: String, required: false },
+    as: { type: null, required: false },
+    type: { type: null, required: false },
+    disabled: { type: Boolean, required: false },
+    active: { type: Boolean, required: false },
+    exact: { type: Boolean, required: false },
+    exactQuery: { type: [Boolean, String], required: false },
+    exactHash: { type: Boolean, required: false },
+    inactiveClass: { type: String, required: false },
+    to: { type: null, required: false },
+    href: { type: null, required: false },
+    external: { type: Boolean, required: false },
+    target: { type: [String, Object, null], required: false },
+    rel: { type: [String, Object, null], required: false },
+    noRel: { type: Boolean, required: false },
+    prefetchedClass: { type: String, required: false },
+    prefetch: { type: Boolean, required: false },
+    prefetchOn: { type: [String, Object], required: false },
+    noPrefetch: { type: Boolean, required: false },
+    activeClass: { type: String, required: false },
+    exactActiveClass: { type: String, required: false },
+    ariaCurrentValue: { type: String, required: false },
+    viewTransition: { type: Boolean, required: false },
+    replace: { type: Boolean, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const slots = useSlots();
+    const appConfig2 = useAppConfig();
+    const { orientation, size: buttonSize } = useButtonGroup(props);
+    const linkProps = useForwardProps(pickLinkProps(props));
+    const loadingAutoState = ref(false);
+    const formLoading = inject(formLoadingInjectionKey, void 0);
+    async function onClickWrapper(event) {
+      loadingAutoState.value = true;
+      const callbacks = Array.isArray(props.onClick) ? props.onClick : [props.onClick];
+      try {
+        await Promise.all(callbacks.map((fn) => fn?.(event)));
+      } finally {
+        loadingAutoState.value = false;
+      }
+    }
+    const isLoading = computed(() => {
+      return props.loading || props.loadingAuto && (loadingAutoState.value || formLoading?.value && props.type === "submit");
+    });
+    const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(
+      computed(() => ({ ...props, loading: isLoading.value }))
+    );
+    const ui = computed(() => tv({
+      extend: tv(theme),
+      ...defu({
+        variants: {
+          active: {
+            true: {
+              base: mergeClasses(appConfig2.ui?.button?.variants?.active?.true?.base, props.activeClass)
+            },
+            false: {
+              base: mergeClasses(appConfig2.ui?.button?.variants?.active?.false?.base, props.inactiveClass)
+            }
+          }
+        }
+      }, appConfig2.ui?.button || {})
+    })({
+      color: props.color,
+      variant: props.variant,
+      size: buttonSize.value,
+      loading: isLoading.value,
+      block: props.block,
+      square: props.square || !slots.default && !props.label,
+      leading: isLeading.value,
+      trailing: isTrailing.value,
+      buttonGroup: orientation.value
+    }));
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(_sfc_main$1, mergeProps({
+        type: __props.type,
+        disabled: __props.disabled || isLoading.value
+      }, unref(omit)(unref(linkProps), ["type", "disabled", "onClick"]), { custom: "" }), {
+        default: withCtx(({ active, ...slotProps }) => [
+          createVNode(_sfc_main$2, mergeProps(slotProps, {
+            class: ui.value.base({
+              class: [props.ui?.base, props.class],
+              active,
+              ...active && __props.activeVariant ? { variant: __props.activeVariant } : {},
+              ...active && __props.activeColor ? { color: __props.activeColor } : {}
+            }),
+            onClick: onClickWrapper
+          }), {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "leading", {}, () => [
+                unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$5, {
+                  key: 0,
+                  name: unref(leadingIconName),
+                  class: normalizeClass(ui.value.leadingIcon({ class: props.ui?.leadingIcon, active }))
+                }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$3, mergeProps({
+                  key: 1,
+                  size: props.ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
+                }, __props.avatar, {
+                  class: ui.value.leadingAvatar({ class: props.ui?.leadingAvatar, active })
+                }), null, 16, ["size", "class"])) : createCommentVNode("", true)
+              ]),
+              renderSlot(_ctx.$slots, "default", {}, () => [
+                __props.label !== void 0 && __props.label !== null ? (openBlock(), createElementBlock("span", {
+                  key: 0,
+                  class: normalizeClass(ui.value.label({ class: props.ui?.label, active }))
+                }, toDisplayString(__props.label), 3)) : createCommentVNode("", true)
+              ]),
+              renderSlot(_ctx.$slots, "trailing", {}, () => [
+                unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$5, {
+                  key: 0,
+                  name: unref(trailingIconName),
+                  class: normalizeClass(ui.value.trailingIcon({ class: props.ui?.trailingIcon, active }))
+                }, null, 8, ["name", "class"])) : createCommentVNode("", true)
+              ])
+            ]),
+            _: 2
+          }, 1040, ["class"])
+        ]),
+        _: 3
+      }, 16, ["type", "disabled"]);
     };
   }
 };
@@ -16882,6 +18575,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     right: calc(var(--spacing) * 4);
   }
 
+  .right-\\[-8px\\] {
+    right: -8px;
+  }
+
   .-bottom-7 {
     bottom: calc(var(--spacing) * -7);
   }
@@ -16948,6 +18645,14 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .z-\\[100\\] {
     z-index: 100;
+  }
+
+  .z-\\[10001\\] {
+    z-index: 10001;
+  }
+
+  .z-\\[10003\\] {
+    z-index: 10003;
   }
 
   .col-start-1 {
@@ -17625,6 +19330,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     width: 168px;
   }
 
+  .w-\\[384px\\] {
+    width: 384px;
+  }
+
   .w-\\[calc\\(100\\%-2rem\\)\\] {
     width: calc(100% - 2rem);
   }
@@ -17651,6 +19360,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .max-w-\\[75px\\] {
     max-width: 75px;
+  }
+
+  .max-w-\\[384px\\] {
+    max-width: 384px;
   }
 
   .max-w-\\[calc\\(100\\%-2rem\\)\\] {
@@ -19009,6 +20722,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     white-space: nowrap;
   }
 
+  .text-\\[var\\(--color-neutral-300\\)\\] {
+    color: var(--color-neutral-300);
+  }
+
   .text-\\[var\\(--color-neutral-400\\)\\] {
     color: var(--color-neutral-400);
   }
@@ -20149,6 +21866,12 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+
+  .after\\:content-\\[\\'\\'\\]:after {
+    content: var(--tw-content);
+    --tw-content: "";
+    content: var(--tw-content);
   }
 
   .after\\:content-\\[\\'\\*\\'\\]:after {
@@ -21973,8 +23696,16 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     background-color: var(--ui-bg-inverted);
   }
 
+  .data-\\[state\\=active\\]\\:bg-white[data-state="active"] {
+    background-color: var(--color-white);
+  }
+
   .data-\\[state\\=active\\]\\:text-error[data-state="active"] {
     color: var(--ui-error);
+  }
+
+  .data-\\[state\\=active\\]\\:text-gray-900[data-state="active"] {
+    color: var(--color-gray-900);
   }
 
   .data-\\[state\\=active\\]\\:text-highlighted[data-state="active"] {
@@ -23584,180 +25315,183 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 }
 `;
 export {
-  markRaw as $,
-  normalizeProps as A,
-  guardReactiveProps as B,
-  useVModel as C,
-  unrefElement as D,
-  normalizeStyle as E,
-  Fragment as F,
-  useTimeoutFn as G,
-  useState as H,
-  nextTick as I,
-  useSlots as J,
-  useForwardPropsEmits as K,
-  reactivePick as L,
-  tv as M,
-  useAppConfig as N,
-  createBaseVNode as O,
+  useForwardProps as $,
+  useRafFn as A,
+  createTextVNode as B,
+  toDisplayString as C,
+  watchEffect as D,
+  onKeyStroke as E,
+  createElementBlock as F,
+  Fragment as G,
+  isClient as H,
+  normalizeProps as I,
+  guardReactiveProps as J,
+  unrefElement as K,
+  useTimeoutFn as L,
+  useState as M,
+  useSlots as N,
+  useLocale as O,
   Primitive as P,
-  normalizeClass as Q,
-  resolveDynamicComponent as R,
-  renderList as S,
+  useForwardPropsEmits as Q,
+  reactivePick as R,
+  tv as S,
   Teleport as T,
-  useForwardProps as U,
-  toRef$1 as V,
-  omit as W,
-  createSharedComposable as X,
-  shallowReactive as Y,
-  reactive as Z,
-  _sfc_main as _,
-  createContext as a,
-  createPropsRestProxy as a$,
-  useId as a0,
-  provide as a1,
-  createApp as a2,
-  resolveComponent as a3,
-  mergeModels as a4,
-  useModel as a5,
-  useTemplateRef as a6,
-  onBeforeUnmount as a7,
-  defineCustomElement as a8,
-  tailwindStyles as a9,
-  get as aA,
-  createSlots as aB,
-  BaseTransition as aC,
-  BaseTransitionPropsValidators as aD,
-  Comment as aE,
-  DeprecationTypes as aF,
-  EffectScope as aG,
-  ErrorCodes as aH,
-  ErrorTypeStrings as aI,
-  KeepAlive as aJ,
-  ReactiveEffect as aK,
-  Static as aL,
-  Suspense as aM,
-  Text as aN,
-  TrackOpTypes as aO,
-  Transition as aP,
-  TransitionGroup as aQ,
-  TriggerOpTypes as aR,
-  VueElement as aS,
-  assertNumber as aT,
-  callWithAsyncErrorHandling as aU,
-  callWithErrorHandling as aV,
-  camelize$1 as aW,
-  capitalize as aX,
-  cloneVNode as aY,
-  compatUtils as aZ,
-  createHydrationRenderer as a_,
-  shallowRef as aa,
-  getCurrentScope as ab,
-  onScopeDispose as ac,
-  shallowReadonly as ad,
-  createGlobalState as ae,
-  toValue$1 as af,
-  useEmitAsProps as ag,
-  createSharedComposable$1 as ah,
-  tryOnBeforeUnmount as ai,
-  isIOS as aj,
-  useEventListener as ak,
-  useMounted as al,
-  inject as am,
-  h as an,
-  Slot as ao,
-  watchPostEffect as ap,
-  mergeDefaults as aq,
-  computedEager as ar,
-  refAutoReset as as,
-  isRef as at,
-  withKeys as au,
-  makeDestructurable as av,
-  camelize as aw,
-  toHandlers as ax,
-  reactiveOmit as ay,
-  isArrayOfArray as az,
-  ref as b,
-  triggerRef as b$,
-  createRenderer as b0,
-  createSSRApp as b1,
-  createStaticVNode as b2,
-  customRef as b3,
-  defineAsyncComponent as b4,
-  defineEmits as b5,
-  defineExpose as b6,
-  defineModel as b7,
-  defineOptions as b8,
-  defineProps as b9,
-  onBeforeUpdate as bA,
-  onDeactivated as bB,
-  onErrorCaptured as bC,
-  onRenderTracked as bD,
-  onRenderTriggered as bE,
-  onServerPrefetch as bF,
-  onUpdated as bG,
-  onWatcherCleanup as bH,
-  popScopeId as bI,
-  proxyRefs as bJ,
-  pushScopeId as bK,
-  queuePostFlushCb as bL,
-  readonly as bM,
-  registerRuntimeCompiler as bN,
-  render$1 as bO,
-  resolveDirective as bP,
-  resolveFilter as bQ,
-  resolveTransitionHooks as bR,
-  setBlockTracking as bS,
-  setDevtoolsHook as bT,
-  setTransitionHooks as bU,
-  ssrContextKey as bV,
-  ssrUtils as bW,
-  stop as bX,
-  toHandlerKey as bY,
-  toRaw as bZ,
-  transformVNodeArgs as b_,
-  defineSSRCustomElement as ba,
-  defineSlots as bb,
-  devtools as bc,
-  effect as bd,
-  effectScope as be,
-  getCurrentInstance as bf,
-  getCurrentWatcher as bg,
-  getTransitionRawChildren as bh,
-  handleError as bi,
-  hasInjectionContext as bj,
-  hydrate as bk,
-  hydrateOnIdle as bl,
-  hydrateOnInteraction as bm,
-  hydrateOnMediaQuery as bn,
-  hydrateOnVisible as bo,
-  initCustomFormatter as bp,
-  initDirectivesForSSR as bq,
-  isMemoSame as br,
-  isProxy as bs,
-  isReactive as bt,
-  isReadonly as bu,
-  isRuntimeOnly as bv,
-  isShallow as bw,
-  isVNode as bx,
-  onActivated as by,
-  onBeforeMount as bz,
+  useAppConfig as U,
+  _sfc_main$5 as V,
+  normalizeClass as W,
+  resolveDynamicComponent as X,
+  renderList as Y,
+  _sfc_main as Z,
+  _sfc_main$3 as _,
+  createBaseVNode as a,
+  defineOptions as a$,
+  toRef$2 as a0,
+  omit as a1,
+  createSharedComposable as a2,
+  shallowReactive as a3,
+  reactive as a4,
+  markRaw as a5,
+  useId as a6,
+  provide as a7,
+  localeContextInjectionKey as a8,
+  defu as a9,
+  KeepAlive as aA,
+  ReactiveEffect as aB,
+  Static as aC,
+  Suspense as aD,
+  Text as aE,
+  TrackOpTypes as aF,
+  Transition as aG,
+  TransitionGroup as aH,
+  TriggerOpTypes as aI,
+  VueElement as aJ,
+  assertNumber as aK,
+  callWithAsyncErrorHandling as aL,
+  callWithErrorHandling as aM,
+  camelize$1 as aN,
+  capitalize as aO,
+  cloneVNode as aP,
+  compatUtils as aQ,
+  createHydrationRenderer as aR,
+  createPropsRestProxy as aS,
+  createRenderer as aT,
+  createSSRApp as aU,
+  createStaticVNode as aV,
+  customRef as aW,
+  defineAsyncComponent as aX,
+  defineEmits as aY,
+  defineExpose as aZ,
+  defineModel as a_,
+  toHandlers as aa,
+  resolveComponent as ab,
+  useTemplateRef as ac,
+  inject as ad,
+  onBeforeUnmount as ae,
+  get as af,
+  defineCustomElement as ag,
+  tailwindStyles as ah,
+  useEmitAsProps as ai,
+  shallowRef as aj,
+  makeDestructurable as ak,
+  camelize as al,
+  useModel as am,
+  reactiveOmit as an,
+  isArrayOfArray as ao,
+  createSlots as ap,
+  _sfc_main$1 as aq,
+  pickLinkProps as ar,
+  _sfc_main$2 as as,
+  BaseTransition as at,
+  BaseTransitionPropsValidators as au,
+  Comment as av,
+  DeprecationTypes as aw,
+  EffectScope as ax,
+  ErrorCodes as ay,
+  ErrorTypeStrings as az,
+  createApp as b,
+  useAttrs as b$,
+  defineProps as b0,
+  defineSSRCustomElement as b1,
+  defineSlots as b2,
+  devtools as b3,
+  effect as b4,
+  effectScope as b5,
+  getCurrentInstance as b6,
+  getCurrentScope as b7,
+  getCurrentWatcher as b8,
+  getTransitionRawChildren as b9,
+  onRenderTriggered as bA,
+  onScopeDispose as bB,
+  onServerPrefetch as bC,
+  onUpdated as bD,
+  onWatcherCleanup as bE,
+  popScopeId as bF,
+  proxyRefs as bG,
+  pushScopeId as bH,
+  queuePostFlushCb as bI,
+  readonly as bJ,
+  registerRuntimeCompiler as bK,
+  render$1 as bL,
+  resolveDirective as bM,
+  resolveFilter as bN,
+  resolveTransitionHooks as bO,
+  setBlockTracking as bP,
+  setDevtoolsHook as bQ,
+  setTransitionHooks as bR,
+  shallowReadonly as bS,
+  ssrContextKey as bT,
+  ssrUtils as bU,
+  stop as bV,
+  toHandlerKey as bW,
+  toRaw as bX,
+  toValue$1 as bY,
+  transformVNodeArgs as bZ,
+  triggerRef as b_,
+  h as ba,
+  handleError as bb,
+  hasInjectionContext as bc,
+  hydrate as bd,
+  hydrateOnIdle as be,
+  hydrateOnInteraction as bf,
+  hydrateOnMediaQuery as bg,
+  hydrateOnVisible as bh,
+  initCustomFormatter as bi,
+  initDirectivesForSSR as bj,
+  isMemoSame as bk,
+  isProxy as bl,
+  isReactive as bm,
+  isReadonly as bn,
+  isRef as bo,
+  isRuntimeOnly as bp,
+  isShallow as bq,
+  isVNode as br,
+  mergeDefaults as bs,
+  mergeModels as bt,
+  onActivated as bu,
+  onBeforeMount as bv,
+  onBeforeUpdate as bw,
+  onDeactivated as bx,
+  onErrorCaptured as by,
+  onRenderTracked as bz,
   createBlock as c,
-  useAttrs as c0,
-  useCssModule as c1,
-  useCssVars as c2,
-  useHost as c3,
-  useSSRContext as c4,
-  useShadowRoot as c5,
-  useTransitionState as c6,
-  vModelCheckbox as c7,
-  vModelDynamic as c8,
-  vModelRadio as c9,
-  vModelSelect as ca,
-  vModelText as cb,
-  vShow as cc,
-  version as cd,
-  warn as ce,
+  useCssModule as c0,
+  useCssVars as c1,
+  useHost as c2,
+  useSSRContext as c3,
+  useShadowRoot as c4,
+  useTransitionState as c5,
+  vModelCheckbox as c6,
+  vModelDynamic as c7,
+  vModelRadio as c8,
+  vModelSelect as c9,
+  syncRef as cA,
+  useButtonGroup as cB,
+  useComponentIcons as cC,
+  vModelText as ca,
+  vShow as cb,
+  version as cc,
+  warn as cd,
+  watchPostEffect as ce,
   watchSyncEffect as cf,
   withAsyncContext as cg,
   withDefaults as ch,
@@ -23768,29 +25502,38 @@ export {
   isEqual as cm,
   defaultWindow as cn,
   renderSlotFragments as co,
-  serialize as cp,
-  mergeClasses as cq,
+  useEventListener as cp,
+  createGlobalState as cq,
+  createSharedComposable$1 as cr,
+  tryOnBeforeUnmount as cs,
+  isIOS as ct,
+  useMounted as cu,
+  Slot as cv,
+  computedEager as cw,
+  refAutoReset as cx,
+  reactiveOmit$1 as cy,
+  createEventHook as cz,
   defineComponent as d,
-  useTimeout as e,
-  useRafFn as f,
-  createCommentVNode as g,
-  createTextVNode as h,
-  toDisplayString as i,
+  computed as e,
+  onMounted as f,
+  onUnmounted as g,
+  createVNode as h,
+  createContext as i,
   useForwardExpose as j,
-  computed as k,
-  watchEffect as l,
-  watch as m,
-  onKeyStroke as n,
+  useVModel as k,
+  ref as l,
+  normalizeStyle as m,
+  nextTick as n,
   openBlock as o,
-  onMounted as p,
-  onUnmounted as q,
+  createCommentVNode as p,
+  watch as q,
   renderSlot as r,
-  createElementBlock as s,
+  useResizeObserver as s,
   toRefs as t,
   unref as u,
-  createVNode as v,
+  mergeProps as v,
   withCtx as w,
-  mergeProps as x,
+  withKeys as x,
   withModifiers as y,
-  isClient as z
+  useTimeout as z
 };
