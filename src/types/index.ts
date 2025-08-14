@@ -18,6 +18,7 @@ export interface NavigationItem {
   label: string
   active?: boolean
   click?: (item: NavigationItem) => void
+  siteMap?: boolean
 }
 export interface NavigationSeparatorItem {
   separator?: boolean
@@ -44,4 +45,10 @@ export interface ProfileItem {
   }
   active?: boolean
   children?: ProfileItem[]
+}
+
+export interface HeaderBackdrop {
+  show: (zIndex?: number) => void
+  close: () => void
+  state: { visible: boolean; zIndex: number }
 }

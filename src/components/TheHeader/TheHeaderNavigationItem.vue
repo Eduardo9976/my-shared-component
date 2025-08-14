@@ -1,32 +1,65 @@
 <template>
-  <div
-    class="grid place-items-center gap-1 px-2 py-1 cursor-pointer relative transition-colors duration-200 hover:bg-[rgba(0,0,0,0.1)]"
-    :class="
-      props.active &&
-      'after:content-[\'\'] after:bg-[var(--header-icon-color)] after:h-1 after:rounded-full after:absolute after:block after:w-[80%] after:bottom-0 after:left-1/2 after:-translate-x-1/2'
-    "
-    :style="{'--header-icon-color': iconColor}"
-    @click="handleClick"
-  >
-    <div class="flex items-center justify-center">
-      <MeIcon :icon="props.icon" :custom-size="24" :color="iconColor" />
-    </div>
+  <div v-if="siteMap" class="relative">
+    <UPopover
+      :open="isOpen"
+      :ui="{
+        content: 'z-[10001]',
+        arrow: 'z-[10001]'
+      }"
+      mode="click"
+      arrow
+      @update:open="handlePopoverUpdate"
+    >
+      <TheHeaderNavigationItemContent
+        v-bind="$props"
+      />
 
-    <p class="text-xs py-[6px] text-[var(--header-icon-color)]">{{ label }}</p>
+      <template #content>
+        <TheHeaderTabs />
+      </template>
+    </UPopover>
   </div>
+
+  <TheHeaderNavigationItemContent
+    v-else
+    v-bind="$props"
+  />
 </template>
 
 <script setup lang="ts">
-import MeIcon from '@/components/MeIcon/MeIcon.vue'
+import { ref, inject, watch } from 'vue'
+import TheHeaderNavigationItemContent from './TheHeaderNavigationItemContent.vue'
 import type {NavigationItem} from '@/types'
 
 interface Props extends NavigationItem {
   iconColor: string
 }
 
-const props = defineProps<Props>()
-
-function handleClick() {
-  props.click?.(props)
+interface HeaderBackdrop {
+  show: (zIndex?: number) => void
+  close: () => void
+  state: { visible: boolean; zIndex: number }
 }
+
+defineProps<Props>()
+
+const isOpen = ref(false)
+
+const headerBackdrop = inject<HeaderBackdrop>('headerBackdrop')
+
+function handlePopoverUpdate(open: boolean) {
+  isOpen.value = open
+
+  if (open) {
+    headerBackdrop?.show(9999)
+  } else {
+    headerBackdrop?.close()
+  }
+}
+
+watch(isOpen, (newValue) => {
+  if (!newValue) {
+    headerBackdrop?.close()
+  }
+})
 </script>

@@ -1,20 +1,51 @@
 <template>
-  <header :class="headerClasses" :style="headerStyles">
-    <nav class="flex justify-between items-center">
-      <TheHeaderBrand :brand="brand" />
+  <UApp>
+    <header :class="headerClasses" :style="headerStyles">
+      <nav class="flex justify-between items-center">
+        <TheHeaderBrand :brand="brand"/>
 
-      <TheHeaderNavigation :icon-color="iconColor" :items="navigationItems" />
+        <TheHeaderNavigation :icon-color="iconColor" :items="navigationItems"/>
 
-      <TheHeaderAvatar :user="user" :profileItems="profileItems" />
-    </nav>
-  </header>
+        <TheHeaderAvatar :user="user" :profileItems="profileItems"/>
+      </nav>
+    </header>
+
+    <AppBackdrop
+      v-if="backdropState.visible"
+      :z-index="backdropState.zIndex"
+      @click="closeBackdrop"
+    />
+  </UApp>
 </template>
 
 <script setup lang="ts">
-import {ref, computed} from 'vue'
+import {ref, computed, provide} from 'vue'
 import type {Brand, NavigationItem, NavigationSeparatorItem} from '@/types'
 import TheHeaderBrand from './TheHeaderBrand.vue'
 import TheHeaderNavigation from './TheHeaderNavigation.vue'
+import AppBackdrop from '@/components/AppBackdrop.vue'
+
+const backdropState = ref({
+  visible: false,
+  zIndex: 9999
+})
+
+function showBackdrop(zIndex = 9999) {
+  backdropState.value = {
+    visible: true,
+    zIndex
+  }
+}
+
+function closeBackdrop() {
+  backdropState.value.visible = false
+}
+
+provide('headerBackdrop', {
+  show: showBackdrop,
+  close: closeBackdrop,
+  state: backdropState
+})
 
 const brand = ref<Brand>({
   logo: 'https://eletrods.me.com.br/logo.svg',
@@ -43,6 +74,11 @@ const navigationItems = ref<(NavigationItem | NavigationSeparatorItem)[]>([
     icon: 'me-icon-l icon-store',
     label: 'Fornecedores',
     click: e => console.log(e)
+  },
+  {
+    label: 'Mais',
+    icon: 'me-icon-l icon-ellipsis-h',
+    siteMap: true
   }
 ])
 
