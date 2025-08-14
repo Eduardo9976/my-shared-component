@@ -1,4 +1,4 @@
-import { N as useSlots, e as computed, S as tv, U as useAppConfig, c as createBlock, o as openBlock, w as withCtx, F as createElementBlock, p as createCommentVNode, W as normalizeClass, r as renderSlot, u as unref, P as Primitive, h as createVNode, a as createBaseVNode, B as createTextVNode, V as _sfc_main$3, Z as _sfc_main$5, C as toDisplayString, ah as defineCustomElement, ag as tailwindStyles } from "./main.js";
+import { N as useSlots, e as computed, S as tv, U as useAppConfig, c as createBlock, o as openBlock, w as withCtx, F as createElementBlock, p as createCommentVNode, W as normalizeClass, r as renderSlot, u as unref, P as Primitive, h as createVNode, a as createBaseVNode, B as createTextVNode, V as _sfc_main$3, Z as _sfc_main$5, C as toDisplayString, ag as defineCustomElement, ah as tailwindStyles } from "./main.js";
 import { a as _sfc_main$2, _ as _sfc_main$4 } from "./Badge.js";
 const theme = {
   "slots": {

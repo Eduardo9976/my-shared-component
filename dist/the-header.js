@@ -1,4 +1,4 @@
-import { d as defineComponent, e as computed, f as onMounted, g as onUnmounted, c as createBlock, o as openBlock, w as withCtx, h as createVNode, u as unref, P as Primitive, r as renderSlot, n as nextTick, i as createContext, t as toRefs, j as useForwardExpose, k as useVModel, l as ref, m as normalizeStyle, p as createCommentVNode, q as watch, s as useResizeObserver, v as mergeProps, x as withKeys, y as withModifiers, z as useTimeout, A as useRafFn, B as createTextVNode, C as toDisplayString, D as watchEffect, E as onKeyStroke, F as createElementBlock, T as Teleport, G as Fragment, H as isClient, I as normalizeProps, J as guardReactiveProps, K as unrefElement, L as useTimeoutFn, M as useState, N as useSlots, O as useLocale, Q as useForwardPropsEmits, R as reactivePick, S as tv, U as useAppConfig, a as createBaseVNode, _ as _sfc_main$D, V as _sfc_main$E, W as normalizeClass, X as resolveDynamicComponent, Y as renderList, Z as _sfc_main$F, $ as useForwardProps, a0 as toRef, a1 as omit, a2 as createSharedComposable, a3 as shallowReactive, a4 as reactive, a5 as markRaw, a6 as useId$1, a7 as provide, a8 as localeContextInjectionKey, a9 as defu, aa as toHandlers, ab as resolveComponent, ac as useTemplateRef, ad as inject, ae as onBeforeUnmount, af as get, ag as tailwindStyles, ah as defineCustomElement } from "./main.js";
+import { d as defineComponent, e as computed, f as onMounted, g as onUnmounted, c as createBlock, o as openBlock, w as withCtx, h as createVNode, u as unref, P as Primitive, r as renderSlot, n as nextTick, i as createContext, t as toRefs, j as useForwardExpose, k as useVModel, l as ref, m as normalizeStyle, p as createCommentVNode, q as watch, s as useResizeObserver, v as mergeProps, x as withKeys, y as withModifiers, z as useTimeout, A as useRafFn, B as createTextVNode, C as toDisplayString, D as watchEffect, E as onKeyStroke, F as createElementBlock, T as Teleport, G as Fragment, H as isClient, I as normalizeProps, J as guardReactiveProps, K as unrefElement, L as useTimeoutFn, M as useState, N as useSlots, O as useLocale, Q as useForwardPropsEmits, R as reactivePick, S as tv, U as useAppConfig, a as createBaseVNode, _ as _sfc_main$D, V as _sfc_main$E, W as normalizeClass, X as resolveDynamicComponent, Y as renderList, Z as _sfc_main$F, $ as useForwardProps, a0 as toRef, a1 as omit, a2 as createSharedComposable, a3 as shallowReactive, a4 as reactive, a5 as markRaw, a6 as useId$1, a7 as provide, a8 as localeContextInjectionKey, a9 as defu, aa as toHandlers, ab as resolveComponent, ac as useTemplateRef, ad as inject, ae as onBeforeUnmount, af as get, ag as defineCustomElement, ah as tailwindStyles } from "./main.js";
 import { i as injectRovingFocusGroupContext, u as useId, a as useCollection, g as getFocusIntent, w as wrapArray, f as focusFirst, b as useDirection, P as Presence, _ as _sfc_main$A, c as _sfc_main$B, d as getActiveElement, e as _sfc_main$C, h as context, j as focusFirst$1, k as getTabbableCandidates, l as usePortal, m as _sfc_main$H, p as portalTargetInjectionKey, H as HoverCard, n as Popover, o as _sfc_main$I, q as _sfc_main$J, r as meIconStyles } from "./me-icon.min.js";
 import { _ as _sfc_main$G, a as _sfc_main$K } from "./Badge.js";
 const _sfc_main$z = /* @__PURE__ */ defineComponent({
@@ -2780,36 +2780,36 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return `${baseClasses} text-white`;
     });
     const headerStyles = computed(() => {
-      const styles2 = {};
+      const styles = {};
       const bg = brand.value.background || {};
       const hasMainImage = Boolean(bg.mainImage);
       const hasRepeatImage = Boolean(bg.repeatImage);
       const hasPrimaryColor = Boolean(bg.primaryColor);
       const hasSecondaryColor = Boolean(bg.secondaryColor);
       if (hasMainImage && hasRepeatImage && bg.mainImage && bg.repeatImage) {
-        styles2.backgroundImage = `url(${bg.mainImage}), url(${bg.repeatImage})`;
-        styles2.backgroundSize = "cover, auto";
-        styles2.backgroundPosition = "center, center";
-        styles2.backgroundRepeat = "no-repeat, repeat";
+        styles.backgroundImage = `url(${bg.mainImage}), url(${bg.repeatImage})`;
+        styles.backgroundSize = "cover, auto";
+        styles.backgroundPosition = "center, center";
+        styles.backgroundRepeat = "no-repeat, repeat";
       } else if (hasMainImage && hasPrimaryColor && bg.mainImage && bg.primaryColor) {
-        styles2.backgroundColor = bg.primaryColor;
-        styles2.backgroundImage = `url(${bg.mainImage})`;
-        styles2.backgroundSize = "contain";
-        styles2.backgroundPosition = "center";
-        styles2.backgroundRepeat = "no-repeat";
+        styles.backgroundColor = bg.primaryColor;
+        styles.backgroundImage = `url(${bg.mainImage})`;
+        styles.backgroundSize = "contain";
+        styles.backgroundPosition = "center";
+        styles.backgroundRepeat = "no-repeat";
       } else if (hasRepeatImage && !hasMainImage && bg.repeatImage) {
-        styles2.backgroundImage = `url(${bg.repeatImage})`;
-        styles2.backgroundSize = "auto";
-        styles2.backgroundPosition = "center";
-        styles2.backgroundRepeat = "repeat";
+        styles.backgroundImage = `url(${bg.repeatImage})`;
+        styles.backgroundSize = "auto";
+        styles.backgroundPosition = "center";
+        styles.backgroundRepeat = "repeat";
       } else if (hasPrimaryColor && hasSecondaryColor && !hasMainImage && !hasRepeatImage && bg.primaryColor && bg.secondaryColor) {
-        styles2.background = `linear-gradient(135deg, ${bg.primaryColor} 0%, ${bg.secondaryColor} 100%)`;
+        styles.background = `linear-gradient(135deg, ${bg.primaryColor} 0%, ${bg.secondaryColor} 100%)`;
       } else if (hasPrimaryColor && !hasSecondaryColor && !hasMainImage && !hasRepeatImage && bg.primaryColor) {
-        styles2.backgroundColor = bg.primaryColor;
+        styles.backgroundColor = bg.primaryColor;
       } else {
-        styles2.backgroundColor = "var(--ui-primary)";
+        styles.backgroundColor = "var(--ui-primary)";
       }
-      return styles2;
+      return styles;
     });
     const iconColor = computed(() => {
       return brand.value.background?.iconColor || "white";
@@ -2846,19 +2846,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname.includes("localhost"));
-let styles = [tailwindStyles, meIconStyles];
-{
-  try {
-    const resetStyles = require("../../assets/web-component-reset.css?inline");
-    styles.unshift(resetStyles);
-  } catch (error) {
-    console.warn("Reset CSS não encontrado, usando estilos padrão");
-  }
-}
 const TheHeaderElement = defineCustomElement(_sfc_main, {
   shadowRoot: true,
-  styles
+  styles: [meIconStyles, tailwindStyles]
 });
 if (!customElements.get("the-header")) {
   customElements.define("the-header", TheHeaderElement);
