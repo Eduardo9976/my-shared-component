@@ -1,4 +1,4 @@
-import { N as useSlots, e as computed, S as tv, U as useAppConfig, c as createBlock, o as openBlock, w as withCtx, F as createElementBlock, p as createCommentVNode, W as normalizeClass, r as renderSlot, u as unref, P as Primitive, h as createVNode, a as createBaseVNode, B as createTextVNode, V as _sfc_main$3, Z as _sfc_main$5, C as toDisplayString, aq as defineCustomElement, ar as tailwindStyles } from "./main.js";
+import { N as useSlots, e as computed, S as tv, U as useAppConfig, c as createBlock, o as openBlock, w as withCtx, F as createElementBlock, p as createCommentVNode, W as normalizeClass, r as renderSlot, u as unref, P as Primitive, h as createVNode, a as createBaseVNode, B as createTextVNode, V as _sfc_main$3, Z as _sfc_main$5, C as toDisplayString, ar as defineCustomElement, as as tailwindStyles } from "./main.js";
 import { b as _export_sfc, a as _sfc_main$2, _ as _sfc_main$4 } from "./_plugin-vue_export-helper.js";
 const theme = {
   "slots": {

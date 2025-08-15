@@ -1,4 +1,4 @@
-import { d as defineComponent, e as computed, f as onMounted, g as onUnmounted, c as createBlock, o as openBlock, w as withCtx, h as createVNode, u as unref, P as Primitive, r as renderSlot, n as nextTick, i as createContext, t as toRefs, j as useForwardExpose, k as useVModel, l as ref, m as normalizeStyle, p as createCommentVNode, q as watch, s as useResizeObserver, v as mergeProps, x as withKeys, y as withModifiers, z as useTimeout, A as useRafFn, B as createTextVNode, C as toDisplayString, D as watchEffect, E as onKeyStroke, F as createElementBlock, T as Teleport, G as Fragment, H as isClient, I as normalizeProps, J as guardReactiveProps, K as unrefElement, L as useTimeoutFn, M as useState, N as useSlots, O as useLocale, Q as useForwardPropsEmits, R as reactivePick, S as tv, U as useAppConfig, a as createBaseVNode, _ as _sfc_main$G, V as _sfc_main$H, W as normalizeClass, X as resolveDynamicComponent, Y as renderList, Z as _sfc_main$I, $ as useForwardProps, a0 as toRef, a1 as omit, a2 as createSharedComposable, a3 as shallowReactive, a4 as reactive, a5 as markRaw, a6 as useId$1, a7 as provide, a8 as localeContextInjectionKey, a9 as defu, aa as toHandlers, ab as get, ac as useFormField, ad as useButtonGroup, ae as useComponentIcons, af as looseToNumber, ag as createSlots, ah as tryOnMounted, ai as tryOnScopeDispose, aj as isRef, ak as toValue, al as useTemplateRef, am as shallowRef, an as inject, ao as resolveComponent, ap as onBeforeUnmount, aq as defineCustomElement, ar as tailwindStyles } from "./main.js";
+import { d as defineComponent, e as computed, f as onMounted, g as onUnmounted, c as createBlock, o as openBlock, w as withCtx, h as createVNode, u as unref, P as Primitive, r as renderSlot, n as nextTick, i as createContext, t as toRefs, j as useForwardExpose, k as useVModel, l as ref, m as normalizeStyle, p as createCommentVNode, q as watch, s as useResizeObserver, v as mergeProps, x as withKeys, y as withModifiers, z as useTimeout, A as useRafFn, B as createTextVNode, C as toDisplayString, D as watchEffect, E as onKeyStroke, F as createElementBlock, T as Teleport, G as Fragment, H as isClient, I as normalizeProps, J as guardReactiveProps, K as unrefElement, L as useTimeoutFn, M as useState, N as useSlots, O as useLocale, Q as useForwardPropsEmits, R as reactivePick, S as tv, U as useAppConfig, a as createBaseVNode, _ as _sfc_main$G, V as _sfc_main$H, W as normalizeClass, X as resolveDynamicComponent, Y as renderList, Z as _sfc_main$I, $ as useForwardProps, a0 as toRef, a1 as omit, a2 as createSharedComposable, a3 as shallowReactive, a4 as reactive, a5 as markRaw, a6 as useId$1, a7 as provide, a8 as localeContextInjectionKey, a9 as defu, aa as toHandlers, ab as get, ac as useFormField, ad as useButtonGroup, ae as useComponentIcons, af as looseToNumber, ag as createSlots, ah as tryOnMounted, ai as tryOnScopeDispose, aj as isRef, ak as toValue, al as useTemplateRef, am as shallowRef, an as Suspense, ao as inject, ap as resolveComponent, aq as onBeforeUnmount, ar as defineCustomElement, as as tailwindStyles } from "./main.js";
 import { i as injectRovingFocusGroupContext, u as useId, a as useCollection, g as getFocusIntent, w as wrapArray, f as focusFirst, b as useDirection, P as Presence, _ as _sfc_main$D, c as _sfc_main$E, d as getActiveElement, e as _sfc_main$F, h as context, j as focusFirst$1, k as getTabbableCandidates, l as usePortal, m as _sfc_main$K, p as portalTargetInjectionKey, H as HoverCard, n as Popover, o as useVModel$1, q as _sfc_main$M, r as _sfc_main$N, s as defaultDocument, t as unrefElement$1, v as meIconStyles } from "./me-icon.min.js";
 import { _ as _sfc_main$J, a as _sfc_main$L, b as _export_sfc } from "./_plugin-vue_export-helper.js";
 const _sfc_main$C = /* @__PURE__ */ defineComponent({
@@ -5113,6 +5113,10 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
         slot: "siteMapItems"
       }
     ]);
+    const handleTabChange = (index2) => {
+    };
+    onMounted(() => {
+    });
     return (_ctx, _cache) => {
       const _component_UTabs = _sfc_main$c;
       return openBlock(), createElementBlock("div", _hoisted_1$8, [
@@ -5126,13 +5130,34 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
             list: "grid grid-cols-2 w-full",
             trigger: "flex-1 text-center cursor-pointer data-[state=active]:bg-white data-[state=active]:text-gray-900 focus:outline-none focus-visible:outline-none",
             indicator: "bg-white"
-          }
+          },
+          onChange: handleTabChange
         }, {
           navigationItems: withCtx(() => [
-            createVNode(TheHeaderTabsNavigationItems)
+            createBaseVNode("keep-alive", null, [
+              (openBlock(), createBlock(Suspense, null, {
+                fallback: withCtx(() => _cache[0] || (_cache[0] = [
+                  createBaseVNode("div", { class: "p-4 text-center text-gray-500" }, "Carregando...", -1)
+                ])),
+                default: withCtx(() => [
+                  createVNode(TheHeaderTabsNavigationItems)
+                ]),
+                _: 1
+              }))
+            ])
           ]),
           siteMapItems: withCtx(() => [
-            createVNode(_sfc_main$a)
+            createBaseVNode("keep-alive", null, [
+              (openBlock(), createBlock(Suspense, null, {
+                fallback: withCtx(() => _cache[1] || (_cache[1] = [
+                  createBaseVNode("div", { class: "p-4 text-center text-gray-500" }, "Carregando...", -1)
+                ])),
+                default: withCtx(() => [
+                  createVNode(_sfc_main$a)
+                ]),
+                _: 1
+              }))
+            ])
           ]),
           _: 1
         }, 8, ["items"])

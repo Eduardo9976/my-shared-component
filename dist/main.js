@@ -19524,10 +19524,6 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     max-width: 75px;
   }
 
-  .max-w-\\[384px\\] {
-    max-width: 384px;
-  }
-
   .max-w-\\[calc\\(100\\%-2rem\\)\\] {
     max-width: calc(100% - 2rem);
   }
@@ -20366,6 +20362,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .bg-gray-300 {
     background-color: var(--color-gray-300);
+  }
+
+  .bg-gray-500 {
+    background-color: var(--color-gray-500);
   }
 
   .bg-gray-500\\/5 {
@@ -25592,16 +25592,16 @@ export {
   provide as a7,
   localeContextInjectionKey as a8,
   defu as a9,
-  BaseTransitionPropsValidators as aA,
-  Comment as aB,
-  DeprecationTypes as aC,
-  EffectScope as aD,
-  ErrorCodes as aE,
-  ErrorTypeStrings as aF,
-  KeepAlive as aG,
-  ReactiveEffect as aH,
-  Static as aI,
-  Suspense as aJ,
+  BaseTransition as aA,
+  BaseTransitionPropsValidators as aB,
+  Comment as aC,
+  DeprecationTypes as aD,
+  EffectScope as aE,
+  ErrorCodes as aF,
+  ErrorTypeStrings as aG,
+  KeepAlive as aH,
+  ReactiveEffect as aI,
+  Static as aJ,
   Text as aK,
   TrackOpTypes as aL,
   Transition as aM,
@@ -25632,19 +25632,19 @@ export {
   toValue$1 as ak,
   useTemplateRef as al,
   shallowRef as am,
-  inject as an,
-  resolveComponent as ao,
-  onBeforeUnmount as ap,
-  defineCustomElement as aq,
-  tailwindStyles as ar,
-  useEmitAsProps as as,
-  useModel as at,
-  reactiveOmit as au,
-  isArrayOfArray as av,
-  _sfc_main$1 as aw,
-  pickLinkProps as ax,
-  _sfc_main$2 as ay,
-  BaseTransition as az,
+  Suspense as an,
+  inject as ao,
+  resolveComponent as ap,
+  onBeforeUnmount as aq,
+  defineCustomElement as ar,
+  tailwindStyles as as,
+  useEmitAsProps as at,
+  useModel as au,
+  reactiveOmit as av,
+  isArrayOfArray as aw,
+  _sfc_main$1 as ax,
+  pickLinkProps as ay,
+  _sfc_main$2 as az,
   createApp as b,
   toHandlerKey as b$,
   customRef as b0,
