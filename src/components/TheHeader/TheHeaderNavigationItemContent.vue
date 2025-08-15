@@ -18,18 +18,19 @@
 
 <script setup lang="ts">
 import MeIcon from '@/components/MeIcon/MeIcon.vue'
+import type {NavigationItem} from '@/types'
 
 interface Props {
   icon: string
   label: string
   iconColor: string
   active?: boolean
-  click?: (item: any) => void
+  click?: (item: NavigationItem) => void
 }
 
 const props = defineProps<Props>()
 
 function handleClick() {
-  props.click?.(props)
+  props.click?.(props as NavigationItem)
 }
 </script>

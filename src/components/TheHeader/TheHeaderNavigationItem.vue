@@ -11,7 +11,11 @@
       @update:open="handlePopoverUpdate"
     >
       <TheHeaderNavigationItemContent
-        v-bind="$props"
+        :icon="icon"
+        :label="label"
+        :iconColor="iconColor"
+        :active="active"
+        :click="click"
       />
 
       <template #content>
@@ -22,12 +26,16 @@
 
   <TheHeaderNavigationItemContent
     v-else
-    v-bind="$props"
+    :icon="icon"
+    :label="label"
+    :iconColor="iconColor"
+    :active="active"
+    :click="click"
   />
 </template>
 
 <script setup lang="ts">
-import { ref, inject, watch } from 'vue'
+import {ref, inject, watch} from 'vue'
 import TheHeaderNavigationItemContent from './TheHeaderNavigationItemContent.vue'
 import type {NavigationItem} from '@/types'
 
@@ -38,7 +46,7 @@ interface Props extends NavigationItem {
 interface HeaderBackdrop {
   show: (zIndex?: number) => void
   close: () => void
-  state: { visible: boolean; zIndex: number }
+  state: {visible: boolean; zIndex: number}
 }
 
 defineProps<Props>()
@@ -57,7 +65,7 @@ function handlePopoverUpdate(open: boolean) {
   }
 }
 
-watch(isOpen, (newValue) => {
+watch(isOpen, newValue => {
   if (!newValue) {
     headerBackdrop?.close()
   }

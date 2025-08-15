@@ -6,7 +6,7 @@
         :items="accordionItems(item)"
         :ui="{
           body: 'p-0',
-          trigger: `py-2 px-4 hover:bg-blue-100 hover:text-primary flex items-center gap-2 cursor-pointer font-normal ${item.active ? 'text-primary' : ''}`
+          trigger: `py-2 px-4 hover:bg-blue-100 hover:text-primary flex navigationItems-center gap-2 cursor-pointer font-normal ${item.active ? 'text-primary' : ''}`
         }"
       >
         <template #body="{item: accordionItem}">
@@ -20,12 +20,12 @@
 
       <a
         v-else
-        class="py-2 px-4 hover:bg-blue-100 hover:text-primary flex items-center gap-2 cursor-pointer h-10 group"
+        class="flex h-10 cursor-pointer items-center gap-2 px-4 py-2 group hover:text-primary hover:bg-blue-100"
         :href="item.url || '#'"
         @click.prevent="() => handleClick(item)"
       >
         <span
-          class="group-hover:text-primary text-gray-500"
+          class="text-gray-500 group-hover:text-primary"
           :class="{
             'text-[var(--color-neutral-400)] font-semibold':
               props.nested && !item.active

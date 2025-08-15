@@ -1,5 +1,5 @@
-import { d as defineComponent, i as createContext, k as useVModel, l as ref, t as toRefs, r as renderSlot, u as unref, j as useForwardExpose, c as createBlock, o as openBlock, w as withCtx, v as mergeProps, P as Primitive, f as onMounted, h as createVNode, ai as useEmitAsProps, p as createCommentVNode, I as normalizeProps, J as guardReactiveProps, aj as shallowRef, ak as makeDestructurable, al as camelize, a2 as createSharedComposable, e as computed, a4 as reactive, N as useSlots, O as useLocale, Q as useForwardPropsEmits, R as reactivePick, a0 as toRef, S as tv, U as useAppConfig, W as normalizeClass, aa as toHandlers, B as createTextVNode, C as toDisplayString, F as createElementBlock, a as createBaseVNode, Z as _sfc_main$m, am as useModel, q as watch, T as Teleport, an as reactiveOmit, a1 as omit, ao as isArrayOfArray, V as _sfc_main$n, _ as _sfc_main$o, af as get, G as Fragment, Y as renderList, X as resolveDynamicComponent, ap as createSlots, aq as _sfc_main$p, ar as pickLinkProps, as as _sfc_main$q, a9 as defu, ag as defineCustomElement, ah as tailwindStyles } from "./main.js";
-import { u as useId, d as getActiveElement, s as _sfc_main$i, t as getOpenState, v as _sfc_main$j, x as useHideOthers, P as Presence, y as useBodyScrollLock, e as _sfc_main$k, l as usePortal, c as _sfc_main$l, D as DropdownMenu, z as _sfc_main$r, A as _sfc_main$s, B as _sfc_main$t, q as _sfc_main$u, o as _sfc_main$v, r as meIconStyles } from "./me-icon.min.js";
+import { d as defineComponent, i as createContext, k as useVModel, l as ref, t as toRefs, r as renderSlot, u as unref, j as useForwardExpose, c as createBlock, o as openBlock, w as withCtx, v as mergeProps, P as Primitive, f as onMounted, h as createVNode, as as useEmitAsProps, p as createCommentVNode, I as normalizeProps, J as guardReactiveProps, a2 as createSharedComposable, e as computed, a4 as reactive, N as useSlots, O as useLocale, Q as useForwardPropsEmits, R as reactivePick, a0 as toRef, S as tv, U as useAppConfig, W as normalizeClass, aa as toHandlers, B as createTextVNode, C as toDisplayString, F as createElementBlock, a as createBaseVNode, Z as _sfc_main$m, at as useModel, q as watch, T as Teleport, au as reactiveOmit, a1 as omit, av as isArrayOfArray, V as _sfc_main$n, _ as _sfc_main$o, ab as get, G as Fragment, Y as renderList, X as resolveDynamicComponent, ag as createSlots, aw as _sfc_main$p, ax as pickLinkProps, ay as _sfc_main$q, a9 as defu, aq as defineCustomElement, ar as tailwindStyles } from "./main.js";
+import { u as useId, d as getActiveElement, x as _sfc_main$i, y as getOpenState, z as _sfc_main$j, A as useHideOthers, P as Presence, B as useBodyScrollLock, e as _sfc_main$k, l as usePortal, c as _sfc_main$l, C as createReusableTemplate, D as DropdownMenu, E as _sfc_main$r, F as _sfc_main$s, G as _sfc_main$t, q as _sfc_main$u, r as _sfc_main$v, v as meIconStyles } from "./me-icon.min.js";
 const [injectDialogRootContext, provideDialogRootContext] = createContext("DialogRoot");
 const _sfc_main$h = /* @__PURE__ */ defineComponent({
   ...{
@@ -425,46 +425,6 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-// @__NO_SIDE_EFFECTS__
-function createReusableTemplate(options = {}) {
-  const {
-    inheritAttrs = true
-  } = options;
-  const render = shallowRef();
-  const define = /* @__PURE__ */ defineComponent({
-    setup(_, { slots }) {
-      return () => {
-        render.value = slots.default;
-      };
-    }
-  });
-  const reuse = /* @__PURE__ */ defineComponent({
-    inheritAttrs,
-    props: options.props,
-    setup(props, { attrs, slots }) {
-      return () => {
-        var _a;
-        if (!render.value && false)
-          ;
-        const vnode = (_a = render.value) == null ? void 0 : _a.call(render, {
-          ...options.props == null ? keysToCamelKebabCase(attrs) : props,
-          $slots: slots
-        });
-        return inheritAttrs && (vnode == null ? void 0 : vnode.length) === 1 ? vnode[0] : vnode;
-      };
-    }
-  });
-  return makeDestructurable(
-    { define, reuse },
-    [define, reuse]
-  );
-}
-function keysToCamelKebabCase(obj) {
-  const newObj = {};
-  for (const key in obj)
-    newObj[camelize(key)] = obj[key];
-  return newObj;
-}
 const kbdKeysMap = {
   meta: "",
   ctrl: "",
@@ -1034,7 +994,7 @@ const _sfc_main$2 = {
     const portalProps = usePortal(toRef(() => props.portal));
     const contentProps = useForwardPropsEmits(reactiveOmit(props, "sub", "items", "portal", "labelKey", "checkedIcon", "loadingIcon", "externalIcon", "class", "ui", "uiOverride"), emits);
     const proxySlots = omit(slots, ["default"]);
-    const [DefineItemTemplate, ReuseItemTemplate] = /* @__PURE__ */ createReusableTemplate();
+    const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate();
     const childrenIcon = computed(() => dir.value === "rtl" ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight);
     const groups = computed(
       () => props.items?.length ? isArrayOfArray(props.items) ? props.items : [props.items] : []
@@ -1547,7 +1507,7 @@ const _sfc_main$1 = {
     };
   }
 };
-const _hoisted_1 = { class: "border border-blue-500 p-4 bg-blue-100" };
+const _hoisted_1 = { class: "border border-blue-500 bg-blue-100 p-4" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "SharedButton.ce",
   setup(__props) {

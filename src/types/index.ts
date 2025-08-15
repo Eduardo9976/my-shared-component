@@ -47,8 +47,16 @@ export interface ProfileItem {
   children?: ProfileItem[]
 }
 
+export interface SiteMapItem {
+  $id: string
+  name: string
+  description: string
+  url?: string
+  children: SiteMapItem[]
+}
+
 export interface HeaderBackdrop {
   show: (zIndex?: number) => void
   close: () => void
-  state: { visible: boolean; zIndex: number }
+  state: {visible: boolean; zIndex: number}
 }

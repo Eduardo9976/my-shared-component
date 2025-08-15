@@ -1,9 +1,12 @@
 <template>
-  <div class="flex select-none flex-col items-end relative">
-    <div ref="menuAvatar" class="rounded-bl-lg bg-white text-sm absolute top-[-1px] right-[-8px]">
+  <div class="relative flex select-none flex-col items-end">
+    <div
+      ref="menuAvatar"
+      class="absolute rounded-bl-lg bg-white text-sm top-[-1px] right-[-8px]"
+    >
       <div class="flex justify-between gap-4 px-4 py-2 align-center">
         <div class="grid w-[168px]">
-          <p class="truncate mb-0 text-gray-500">
+          <p class="mb-0 truncate text-gray-500">
             {{ user.name }}
           </p>
           <small class="block truncate text-xs text-gray-400">{{
@@ -12,9 +15,11 @@
         </div>
         <div
           ref="avatar"
-          class="flex items-center justify-center size-12 rounded-full bg-primary cursor-pointer text-white"
+          class="flex cursor-pointer items-center justify-center rounded-full text-white size-12 bg-primary"
         >
-          <span class="text-2xl font-normal no-underline">{{ user.acronym }}</span>
+          <span class="text-2xl font-normal no-underline">{{
+            user.acronym
+          }}</span>
         </div>
       </div>
 
@@ -27,8 +32,8 @@
 </template>
 
 <script setup lang="ts">
-import { useTemplateRef } from 'vue'
-import type { ProfileItem, User } from '@/types'
+import {useTemplateRef} from 'vue'
+import type {ProfileItem, User} from '@/types'
 import TheHeaderAvatarMenuItem from './TheHeaderAvatarMenuItem.vue'
 
 interface Props {

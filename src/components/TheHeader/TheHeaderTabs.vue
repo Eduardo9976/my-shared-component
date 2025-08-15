@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 max-w-[384px] w-[384px]">
+  <div class="p-4 w-[384px]">
     <UTabs
       :items="items"
       class="w-full"
@@ -8,37 +8,36 @@
       color="neutral"
       :ui="{
         list: 'grid grid-cols-2 w-full',
-        trigger: 'flex-1 text-center cursor-pointer data-[state=active]:bg-white data-[state=active]:text-gray-900 focus:outline-none focus-visible:outline-none',
+        trigger:
+          'flex-1 text-center cursor-pointer data-[state=active]:bg-white data-[state=active]:text-gray-900 focus:outline-none focus-visible:outline-none',
         indicator: 'bg-white'
       }"
     >
-      <template #apps>
-        <div class="p-4">
-          <p>Apps content goes here.</p>
-        </div>
+      <template #navigationItems>
+        <TheHeaderTabsNavigationItems />
       </template>
 
-      <template #others>
-        <div class="p-4">
-          <p>Other functionalities content goes here.</p>
-        </div>
+      <template #siteMapItems>
+        <TheHeaderTabsSiteMapItems />
       </template>
     </UTabs>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { TabsItem } from '@nuxt/ui'
+import {ref} from 'vue'
+import type {TabsItem} from '@nuxt/ui'
+import TheHeaderTabsSiteMapItems from '@/components/TheHeader/TheHeaderTabsSiteMapItems.vue'
+import TheHeaderTabsNavigationItems from '@/components/TheHeader/TheHeaderTabsNavigationItems.vue'
 
 const items = ref<TabsItem[]>([
   {
     label: 'Apps',
-    slot: 'apps' as const
+    slot: 'navigationItems' as const
   },
   {
     label: 'Outras funcionalidades',
-    slot: 'others' as const
+    slot: 'siteMapItems' as const
   }
 ])
 </script>

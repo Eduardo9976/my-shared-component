@@ -3,7 +3,7 @@ import { _ as _sfc_main$1 } from "./the-header.js";
 import "./shared-button.js";
 import "./card-xpto.js";
 import "./me-icon.min.js";
-import "./Badge.js";
+import "./_plugin-vue_export-helper.js";
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) return;

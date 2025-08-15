@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-blue-500 p-4 bg-blue-100">
+  <div class="border border-blue-500 bg-blue-100 p-4">
     <UButton
       color="success"
       variant="solid"

@@ -1,5 +1,5 @@
-import { N as useSlots, e as computed, S as tv, U as useAppConfig, c as createBlock, o as openBlock, w as withCtx, F as createElementBlock, p as createCommentVNode, W as normalizeClass, r as renderSlot, u as unref, P as Primitive, h as createVNode, a as createBaseVNode, B as createTextVNode, V as _sfc_main$3, Z as _sfc_main$5, C as toDisplayString, ag as defineCustomElement, ah as tailwindStyles } from "./main.js";
-import { a as _sfc_main$2, _ as _sfc_main$4 } from "./Badge.js";
+import { N as useSlots, e as computed, S as tv, U as useAppConfig, c as createBlock, o as openBlock, w as withCtx, F as createElementBlock, p as createCommentVNode, W as normalizeClass, r as renderSlot, u as unref, P as Primitive, h as createVNode, a as createBaseVNode, B as createTextVNode, V as _sfc_main$3, Z as _sfc_main$5, C as toDisplayString, aq as defineCustomElement, ar as tailwindStyles } from "./main.js";
+import { b as _export_sfc, a as _sfc_main$2, _ as _sfc_main$4 } from "./_plugin-vue_export-helper.js";
 const theme = {
   "slots": {
     "root": "rounded-lg overflow-hidden",
@@ -72,21 +72,14 @@ const _sfc_main$1 = {
     };
   }
 };
-const _style_0 = "\n.card-container[data-v-4aa0b4d7] {\r\n  font-family: var(--ui-font);\n}\r\n";
-const _export_sfc = (sfc, props) => {
-  const target = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target[key] = val;
-  }
-  return target;
-};
+const _style_0 = "\n.card-container[data-v-73c62aad] {\n  font-family: var(--ui-font);\n}\n";
 const _sfc_main = {};
 const _hoisted_1 = { class: "card-container" };
 const _hoisted_2 = { class: "flex items-center gap-2" };
 const _hoisted_3 = { class: "space-y-3" };
 const _hoisted_4 = { class: "flex items-center gap-2" };
 const _hoisted_5 = { class: "flex gap-2" };
-const _hoisted_6 = { class: "flex justify-between items-center text-sm text-gray-500" };
+const _hoisted_6 = { class: "flex items-center justify-between text-sm text-gray-500" };
 function _sfc_render(_ctx, _cache) {
   const _component_UIcon = _sfc_main$3;
   const _component_UBadge = _sfc_main$2;
@@ -130,7 +123,7 @@ function _sfc_render(_ctx, _cache) {
               default: withCtx(() => [
                 createVNode(_component_UIcon, {
                   name: "i-lucide-check",
-                  class: "w-3 h-3"
+                  class: "h-3 w-3"
                 }),
                 _cache[1] || (_cache[1] = createTextVNode(" Funcionando ", -1))
               ]),
@@ -144,7 +137,7 @@ function _sfc_render(_ctx, _cache) {
               default: withCtx(() => [
                 createVNode(_component_UIcon, {
                   name: "i-lucide-alert-triangle",
-                  class: "w-3 h-3"
+                  class: "h-3 w-3"
                 }),
                 _cache[2] || (_cache[2] = createTextVNode(" Atenção ", -1))
               ]),
@@ -165,7 +158,7 @@ function _sfc_render(_ctx, _cache) {
               default: withCtx(() => [
                 createVNode(_component_UIcon, {
                   name: "i-lucide-heart",
-                  class: "w-4 h-4"
+                  class: "h-4 w-4"
                 }),
                 _cache[3] || (_cache[3] = createTextVNode(" Curtir ", -1))
               ]),
@@ -180,7 +173,7 @@ function _sfc_render(_ctx, _cache) {
               default: withCtx(() => [
                 createVNode(_component_UIcon, {
                   name: "i-lucide-share",
-                  class: "w-4 h-4"
+                  class: "h-4 w-4"
                 }),
                 _cache[4] || (_cache[4] = createTextVNode(" Compartilhar ", -1))
               ]),
@@ -194,7 +187,7 @@ function _sfc_render(_ctx, _cache) {
     })
   ]);
 }
-const CardXPTO = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__scopeId", "data-v-4aa0b4d7"]]);
+const CardXPTO = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__scopeId", "data-v-73c62aad"]]);
 const CardXPTElement = defineCustomElement(CardXPTO, {
   shadowRoot: true,
   styles: [tailwindStyles]

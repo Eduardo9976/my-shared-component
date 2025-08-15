@@ -1,4 +1,4 @@
-import { d as defineComponent, j as useForwardExpose, k as useVModel, q as watch, n as nextTick, e as computed, cl as isNullish, i as createContext, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, P as Primitive, v as mergeProps, N as useSlots, O as useLocale, Q as useForwardPropsEmits, R as reactivePick, S as tv, U as useAppConfig, F as createElementBlock, p as createCommentVNode, h as createVNode, m as normalizeStyle, W as normalizeClass, B as createTextVNode, C as toDisplayString, G as Fragment, Y as renderList, cB as useButtonGroup, cC as useComponentIcons, V as _sfc_main$4, _ as _sfc_main$5 } from "./main.js";
+import { d as defineComponent, j as useForwardExpose, k as useVModel, q as watch, n as nextTick, e as computed, cp as isNullish, i as createContext, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, P as Primitive, v as mergeProps, N as useSlots, O as useLocale, Q as useForwardPropsEmits, R as reactivePick, S as tv, U as useAppConfig, F as createElementBlock, p as createCommentVNode, h as createVNode, m as normalizeStyle, W as normalizeClass, B as createTextVNode, C as toDisplayString, G as Fragment, Y as renderList, ad as useButtonGroup, ae as useComponentIcons, V as _sfc_main$4, _ as _sfc_main$5 } from "./main.js";
 const DEFAULT_MAX = 100;
 const [injectProgressRootContext, provideProgressRootContext] = createContext("ProgressRoot");
 const isNumber = (v) => typeof v === "number";
@@ -838,7 +838,15 @@ const _sfc_main = {
     };
   }
 };
+const _export_sfc = (sfc, props) => {
+  const target = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target[key] = val;
+  }
+  return target;
+};
 export {
   _sfc_main$1 as _,
-  _sfc_main as a
+  _sfc_main as a,
+  _export_sfc as b
 };

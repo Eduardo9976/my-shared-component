@@ -13,9 +13,7 @@
       mode="click"
       @update:open="handlePopoverUpdate"
     >
-      <div
-        class="group py-2 px-4 hover:bg-[rgba(0,0,0,0.1)] cursor-pointer"
-      >
+      <div class="group py-2 px-4 hover:bg-[rgba(0,0,0,0.1)] cursor-pointer">
         <div
           class="flex items-center justify-center size-12 rounded-full bg-[rgba(0,0,0,0.4)] mx-auto border-transparent border group-hover:border-white group-hover:border-2"
         >
@@ -35,8 +33,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeUnmount, watch, inject } from 'vue'
-import type { ProfileItem, User, HeaderBackdrop } from '@/types'
+import {ref, onBeforeUnmount, watch, inject} from 'vue'
+import type {ProfileItem, User, HeaderBackdrop} from '@/types'
 import TheHeaderAvatarMenu from './TheHeaderAvatarMenu.vue'
 
 interface Props {
@@ -63,7 +61,7 @@ function setVisibleToFalse() {
   headerBackdrop?.close()
 }
 
-watch(visibleMenu, (newValue) => {
+watch(visibleMenu, newValue => {
   if (!newValue) {
     headerBackdrop?.close()
   }
