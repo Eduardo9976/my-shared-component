@@ -24,6 +24,8 @@ export interface NavigationSeparatorItem {
   separator?: boolean
 }
 
+export type NavigationItemOrSeparator = NavigationItem | NavigationSeparatorItem
+
 export interface User {
   name: string
   role?: string

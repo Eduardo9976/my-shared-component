@@ -12,7 +12,6 @@
           'flex-1 text-center cursor-pointer data-[state=active]:bg-white data-[state=active]:text-gray-900 focus:outline-none focus-visible:outline-none',
         indicator: 'bg-white'
       }"
-      @change="handleTabChange"
     >
       <template #navigationItems>
         <keep-alive>
@@ -40,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref, onMounted} from 'vue'
+import {ref} from 'vue'
 import type {TabsItem} from '@nuxt/ui'
 import TheHeaderTabsSiteMapItems from '@/components/TheHeader/TheHeaderTabsSiteMapItems.vue'
 import TheHeaderTabsNavigationItems from '@/components/TheHeader/TheHeaderTabsNavigationItems.vue'
@@ -55,15 +54,4 @@ const items = ref<TabsItem[]>([
     slot: 'siteMapItems' as const
   }
 ])
-
-// Função para lidar com a mudança de tab
-const handleTabChange = (index: number) => {
-  // O UTabs já gerencia o estado internamente, então não precisamos de estado adicional
-  // O keep-alive vai preservar os componentes
-}
-
-// Otimização: pré-carregar os componentes quando o componente for montado
-onMounted(() => {
-  // Os componentes serão carregados lazy mas mantidos em memória pelo keep-alive
-})
 </script>

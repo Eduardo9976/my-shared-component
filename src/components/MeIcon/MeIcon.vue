@@ -61,20 +61,14 @@ const isHover = ref(false)
 const iconStyle = computed(() => {
   const styles: Record<string, string> = {}
 
-  if (isHover.value && props.hoverColor) {
-    styles.color = props.hoverColor
-  } else if (props.color) {
-    styles.color = props.color
-  }
+  const color = isHover.value ? props.hoverColor : props.color
+  if (color) styles.color = color
 
   if (props.customSize) {
-    const sizeInPx = `${props.customSize}px`
-    styles.width = sizeInPx
-    styles.height = sizeInPx
-    styles.fontSize = sizeInPx
+    const px = `${props.customSize}px`
+    Object.assign(styles, { width: px, height: px, fontSize: px })
   } else if (props.size) {
-    styles.fontSize =
-      typeof props.size === 'number' ? `${props.size}px` : props.size
+    styles.fontSize = typeof props.size === 'number' ? `${props.size}px` : props.size
   }
 
   return styles

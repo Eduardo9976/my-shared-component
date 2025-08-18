@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import TheHeaderNavigationItem from './TheHeaderNavigationItem.vue'
-import type {NavigationItem, NavigationSeparatorItem} from '@/types'
+import type {NavigationItem, NavigationSeparatorItem, NavigationItemOrSeparator} from '@/types'
 import {useNavigationStore} from '@/composables/useNavigationStore.ts'
 
 interface Props {
@@ -37,7 +37,7 @@ defineProps<Props>()
 const {navigationItems} = useNavigationStore()
 
 function isSeparator(
-  item: NavigationItem | NavigationSeparatorItem
+  item: NavigationItemOrSeparator
 ): item is NavigationSeparatorItem {
   return 'separator' in item && item.separator === true
 }
