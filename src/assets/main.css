@@ -1,6 +1,8 @@
 @import 'tailwindcss' theme(static);
 @import '@nuxt/ui';
 
+@reference "tailwindcss";
+
 @theme {
   --font-sans: 'Roboto', sans-serif;
   --color-blue-50: #edf3ff;

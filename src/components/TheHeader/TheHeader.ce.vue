@@ -180,7 +180,7 @@ navigationStore.setNavigationItems([
   {
     id: '10',
     linkName: 'USER',
-    visible: true,
+    visible: false,
     label: 'Usuários',
     icon: 'me-icon-l icon-users',
     url: '/user/',
@@ -236,7 +236,7 @@ navigationStore.setNavigationItems([
   {
     id: '14',
     linkName: 'MESSAGES',
-    visible: true,
+    visible: false,
     label: 'Mensagens',
     icon: 'me-icon-l icon-comments',
     url: '/chat',
