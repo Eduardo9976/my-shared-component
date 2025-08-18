@@ -13074,7 +13074,7 @@ function useSingleOrMultipleValue(props, emits) {
   };
 }
 const [injectConfigProviderContext, provideConfigProviderContext] = createContext("ConfigProvider");
-const _sfc_main$Y = /* @__PURE__ */ defineComponent({
+const _sfc_main$Z = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -13151,7 +13151,7 @@ function useForwardExpose() {
   return { forwardRef, currentRef, currentElement };
 }
 const [injectAccordionRootContext, provideAccordionRootContext] = createContext("AccordionRoot");
-const _sfc_main$X = /* @__PURE__ */ defineComponent({
+const _sfc_main$Y = /* @__PURE__ */ defineComponent({
   __name: "AccordionRoot",
   props: {
     collapsible: { type: Boolean, default: false },
@@ -13199,7 +13199,7 @@ const _sfc_main$X = /* @__PURE__ */ defineComponent({
   }
 });
 const [injectCollapsibleRootContext, provideCollapsibleRootContext] = createContext("CollapsibleRoot");
-const _sfc_main$W = /* @__PURE__ */ defineComponent({
+const _sfc_main$X = /* @__PURE__ */ defineComponent({
   __name: "CollapsibleRoot",
   props: {
     defaultOpen: { type: Boolean, default: false },
@@ -13316,7 +13316,7 @@ function findNextFocusableElement(elements, currentElement, options, iterations 
   return candidate;
 }
 const [injectAccordionItemContext, provideAccordionItemContext] = createContext("AccordionItem");
-const _sfc_main$V = /* @__PURE__ */ defineComponent({
+const _sfc_main$W = /* @__PURE__ */ defineComponent({
   __name: "AccordionItem",
   props: {
     disabled: { type: Boolean },
@@ -13369,7 +13369,7 @@ const _sfc_main$V = /* @__PURE__ */ defineComponent({
       );
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$W), {
+      return openBlock(), createBlock(unref(_sfc_main$X), {
         "data-orientation": unref(rootContext).orientation,
         "data-disabled": dataDisabled.value,
         "data-state": dataState.value,
@@ -13588,7 +13588,7 @@ const Presence = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$U = /* @__PURE__ */ defineComponent({
+const _sfc_main$V = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -13680,7 +13680,7 @@ const _sfc_main$U = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$T = /* @__PURE__ */ defineComponent({
+const _sfc_main$U = /* @__PURE__ */ defineComponent({
   __name: "AccordionContent",
   props: {
     forceMount: { type: Boolean },
@@ -13693,7 +13693,7 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
     const itemContext = injectAccordionItemContext();
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$U), {
+      return openBlock(), createBlock(unref(_sfc_main$V), {
         role: "region",
         "as-child": props.asChild,
         as: _ctx.as,
@@ -13713,7 +13713,7 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$S = /* @__PURE__ */ defineComponent({
+const _sfc_main$T = /* @__PURE__ */ defineComponent({
   __name: "AccordionHeader",
   props: {
     asChild: { type: Boolean },
@@ -13740,7 +13740,7 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$R = /* @__PURE__ */ defineComponent({
+const _sfc_main$S = /* @__PURE__ */ defineComponent({
   __name: "CollapsibleTrigger",
   props: {
     asChild: { type: Boolean },
@@ -13770,7 +13770,7 @@ const _sfc_main$R = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$Q = /* @__PURE__ */ defineComponent({
+const _sfc_main$R = /* @__PURE__ */ defineComponent({
   __name: "AccordionTrigger",
   props: {
     asChild: { type: Boolean },
@@ -13788,7 +13788,7 @@ const _sfc_main$Q = /* @__PURE__ */ defineComponent({
       rootContext.changeModelValue(itemContext.value.value);
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$R), {
+      return openBlock(), createBlock(unref(_sfc_main$S), {
         id: unref(itemContext).triggerId,
         ref: unref(itemContext).currentRef,
         "data-reka-collection-item": "",
@@ -13924,7 +13924,7 @@ function focus(element, { select = false } = {}) {
     }
   }
 }
-const _sfc_main$P = /* @__PURE__ */ defineComponent({
+const _sfc_main$Q = /* @__PURE__ */ defineComponent({
   __name: "FocusScope",
   props: {
     loop: { type: Boolean, default: false },
@@ -14196,7 +14196,7 @@ const context = reactive({
   layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
   branches: /* @__PURE__ */ new Set()
 });
-const _sfc_main$O = /* @__PURE__ */ defineComponent({
+const _sfc_main$P = /* @__PURE__ */ defineComponent({
   __name: "DismissableLayer",
   props: {
     disableOutsidePointerEvents: { type: Boolean, default: false },
@@ -14583,7 +14583,7 @@ function preventDefault(rawEvent) {
     e.preventDefault();
   return false;
 }
-const _sfc_main$N = /* @__PURE__ */ defineComponent({
+const _sfc_main$O = /* @__PURE__ */ defineComponent({
   __name: "Teleport",
   props: {
     to: { default: "body" },
@@ -14747,7 +14747,7 @@ function wrapArray(array, startIndex) {
   return array.map((_2, index2) => array[(startIndex + index2) % array.length]);
 }
 const [injectRovingFocusGroupContext, provideRovingFocusGroupContext] = createContext("RovingFocusGroup");
-const _sfc_main$M = /* @__PURE__ */ defineComponent({
+const _sfc_main$N = /* @__PURE__ */ defineComponent({
   __name: "RovingFocusGroup",
   props: {
     orientation: { default: void 0 },
@@ -14845,7 +14845,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$L = /* @__PURE__ */ defineComponent({
+const _sfc_main$M = /* @__PURE__ */ defineComponent({
   __name: "RovingFocusItem",
   props: {
     tabStopId: {},
@@ -14931,7 +14931,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
   }
 });
 const [injectPopperRootContext, providePopperRootContext] = createContext("PopperRoot");
-const _sfc_main$K = /* @__PURE__ */ defineComponent({
+const _sfc_main$L = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -14947,7 +14947,7 @@ const _sfc_main$K = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$J = /* @__PURE__ */ defineComponent({
+const _sfc_main$K = /* @__PURE__ */ defineComponent({
   __name: "PopperAnchor",
   props: {
     reference: {},
@@ -14983,7 +14983,7 @@ const _hoisted_2$7 = {
   key: 1,
   d: "M0 0L4.58579 4.58579C5.36683 5.36683 6.63316 5.36684 7.41421 4.58579L12 0"
 };
-const _sfc_main$I = /* @__PURE__ */ defineComponent({
+const _sfc_main$J = /* @__PURE__ */ defineComponent({
   __name: "Arrow",
   props: {
     width: { default: 10 },
@@ -15106,7 +15106,7 @@ const PopperContentPropsDefaultValue = {
   prioritizePosition: false
 };
 const [injectPopperContentContext, providePopperContentContext] = createContext("PopperContent");
-const _sfc_main$H = /* @__PURE__ */ defineComponent({
+const _sfc_main$I = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -15301,7 +15301,7 @@ const OPPOSITE_SIDE = {
   bottom: "top",
   left: "right"
 };
-const _sfc_main$G = /* @__PURE__ */ defineComponent({
+const _sfc_main$H = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -15343,7 +15343,7 @@ const _sfc_main$G = /* @__PURE__ */ defineComponent({
           visibility: unref(contentContext).shouldHideArrow.value ? "hidden" : void 0
         })
       }, [
-        createVNode(_sfc_main$I, mergeProps(_ctx.$attrs, {
+        createVNode(_sfc_main$J, mergeProps(_ctx.$attrs, {
           ref: unref(forwardRef),
           style: {
             display: "block"
@@ -15397,7 +15397,7 @@ function createFocusGuard() {
   return element;
 }
 const [injectPopoverRootContext, providePopoverRootContext] = createContext("PopoverRoot");
-const _sfc_main$F = /* @__PURE__ */ defineComponent({
+const _sfc_main$G = /* @__PURE__ */ defineComponent({
   __name: "PopoverRoot",
   props: {
     defaultOpen: { type: Boolean, default: false },
@@ -15430,7 +15430,7 @@ const _sfc_main$F = /* @__PURE__ */ defineComponent({
       hasCustomAnchor
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$K), null, {
+      return openBlock(), createBlock(unref(_sfc_main$L), null, {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default", { open: unref(open) })
         ]),
@@ -15439,7 +15439,7 @@ const _sfc_main$F = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$E = /* @__PURE__ */ defineComponent({
+const _sfc_main$F = /* @__PURE__ */ defineComponent({
   __name: "PopoverAnchor",
   props: {
     reference: {},
@@ -15457,7 +15457,7 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
       rootContext.hasCustomAnchor.value = false;
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$J), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$K), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -15466,7 +15466,7 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$D = /* @__PURE__ */ defineComponent({
+const _sfc_main$E = /* @__PURE__ */ defineComponent({
   __name: "PopoverArrow",
   props: {
     width: { default: 10 },
@@ -15479,7 +15479,7 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$G), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$H), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -15488,7 +15488,7 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$C = /* @__PURE__ */ defineComponent({
+const _sfc_main$D = /* @__PURE__ */ defineComponent({
   __name: "PopoverClose",
   props: {
     asChild: { type: Boolean },
@@ -15513,7 +15513,7 @@ const _sfc_main$C = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$B = /* @__PURE__ */ defineComponent({
+const _sfc_main$C = /* @__PURE__ */ defineComponent({
   __name: "PopoverPortal",
   props: {
     to: {},
@@ -15524,7 +15524,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$N), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$O), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -15533,7 +15533,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$A = /* @__PURE__ */ defineComponent({
+const _sfc_main$B = /* @__PURE__ */ defineComponent({
   __name: "PopoverContentImpl",
   props: {
     trapFocus: { type: Boolean },
@@ -15565,7 +15565,7 @@ const _sfc_main$A = /* @__PURE__ */ defineComponent({
     const rootContext = injectPopoverRootContext();
     useFocusGuards();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$P), {
+      return openBlock(), createBlock(unref(_sfc_main$Q), {
         "as-child": "",
         loop: "",
         trapped: _ctx.trapFocus,
@@ -15573,7 +15573,7 @@ const _sfc_main$A = /* @__PURE__ */ defineComponent({
         onUnmountAutoFocus: _cache[6] || (_cache[6] = ($event) => emits("closeAutoFocus", $event))
       }, {
         default: withCtx(() => [
-          createVNode(unref(_sfc_main$O), {
+          createVNode(unref(_sfc_main$P), {
             "as-child": "",
             "disable-outside-pointer-events": _ctx.disableOutsidePointerEvents,
             onPointerDownOutside: _cache[0] || (_cache[0] = ($event) => emits("pointerDownOutside", $event)),
@@ -15583,7 +15583,7 @@ const _sfc_main$A = /* @__PURE__ */ defineComponent({
             onDismiss: _cache[4] || (_cache[4] = ($event) => unref(rootContext).onOpenChange(false))
           }, {
             default: withCtx(() => [
-              createVNode(unref(_sfc_main$H), mergeProps(unref(forwarded), {
+              createVNode(unref(_sfc_main$I), mergeProps(unref(forwarded), {
                 id: unref(rootContext).contentId,
                 ref: unref(forwardRef),
                 "data-state": unref(rootContext).open.value ? "open" : "closed",
@@ -15611,7 +15611,7 @@ const _sfc_main$A = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$z = /* @__PURE__ */ defineComponent({
+const _sfc_main$A = /* @__PURE__ */ defineComponent({
   __name: "PopoverContentModal",
   props: {
     side: {},
@@ -15644,7 +15644,7 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
     const { forwardRef, currentElement } = useForwardExpose();
     useHideOthers(currentElement);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$A, mergeProps(unref(forwarded), {
+      return openBlock(), createBlock(_sfc_main$B, mergeProps(unref(forwarded), {
         ref: unref(forwardRef),
         "trap-focus": unref(rootContext).open.value,
         "disable-outside-pointer-events": "",
@@ -15673,7 +15673,7 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$y = /* @__PURE__ */ defineComponent({
+const _sfc_main$z = /* @__PURE__ */ defineComponent({
   __name: "PopoverContentNonModal",
   props: {
     side: {},
@@ -15704,7 +15704,7 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
     const hasPointerDownOutsideRef = ref(false);
     const forwarded = useForwardPropsEmits(props, emits);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$A, mergeProps(unref(forwarded), {
+      return openBlock(), createBlock(_sfc_main$B, mergeProps(unref(forwarded), {
         "trap-focus": false,
         "disable-outside-pointer-events": false,
         onCloseAutoFocus: _cache[0] || (_cache[0] = (event) => {
@@ -15740,7 +15740,7 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$x = /* @__PURE__ */ defineComponent({
+const _sfc_main$y = /* @__PURE__ */ defineComponent({
   __name: "PopoverContent",
   props: {
     forceMount: { type: Boolean },
@@ -15776,12 +15776,12 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
         present: _ctx.forceMount || unref(rootContext).open.value
       }, {
         default: withCtx(() => [
-          unref(rootContext).modal.value ? (openBlock(), createBlock(_sfc_main$z, mergeProps({ key: 0 }, unref(forwarded), { ref: unref(forwardRef) }), {
+          unref(rootContext).modal.value ? (openBlock(), createBlock(_sfc_main$A, mergeProps({ key: 0 }, unref(forwarded), { ref: unref(forwardRef) }), {
             default: withCtx(() => [
               renderSlot(_ctx.$slots, "default")
             ]),
             _: 3
-          }, 16)) : (openBlock(), createBlock(_sfc_main$y, mergeProps({ key: 1 }, unref(forwarded), { ref: unref(forwardRef) }), {
+          }, 16)) : (openBlock(), createBlock(_sfc_main$z, mergeProps({ key: 1 }, unref(forwarded), { ref: unref(forwardRef) }), {
             default: withCtx(() => [
               renderSlot(_ctx.$slots, "default")
             ]),
@@ -15793,7 +15793,7 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$w = /* @__PURE__ */ defineComponent({
+const _sfc_main$x = /* @__PURE__ */ defineComponent({
   __name: "PopoverTrigger",
   props: {
     asChild: { type: Boolean },
@@ -15808,7 +15808,7 @@ const _sfc_main$w = /* @__PURE__ */ defineComponent({
       rootContext.triggerElement.value = triggerElement.value;
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(resolveDynamicComponent(unref(rootContext).hasCustomAnchor.value ? unref(Primitive) : unref(_sfc_main$J)), { "as-child": "" }, {
+      return openBlock(), createBlock(resolveDynamicComponent(unref(rootContext).hasCustomAnchor.value ? unref(Primitive) : unref(_sfc_main$K)), { "as-child": "" }, {
         default: withCtx(() => [
           createVNode(unref(Primitive), {
             id: unref(rootContext).triggerId,
@@ -15833,7 +15833,7 @@ const _sfc_main$w = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$v = /* @__PURE__ */ defineComponent({
+const _sfc_main$w = /* @__PURE__ */ defineComponent({
   __name: "HoverCardArrow",
   props: {
     width: { default: 10 },
@@ -15846,7 +15846,7 @@ const _sfc_main$v = /* @__PURE__ */ defineComponent({
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$G), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$H), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -15869,7 +15869,7 @@ function getTabbableNodes(container) {
   return nodes;
 }
 const [injectHoverCardRootContext, provideHoverCardRootContext] = createContext("HoverCardRoot");
-const _sfc_main$u = /* @__PURE__ */ defineComponent({
+const _sfc_main$v = /* @__PURE__ */ defineComponent({
   __name: "HoverCardRoot",
   props: {
     defaultOpen: { type: Boolean, default: false },
@@ -15919,7 +15919,7 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
       triggerElement
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$K), null, {
+      return openBlock(), createBlock(unref(_sfc_main$L), null, {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default", { open: unref(open) })
         ]),
@@ -16105,7 +16105,7 @@ function getHullPresorted(points) {
     return upperHull.concat(lowerHull);
   }
 }
-const _sfc_main$t = /* @__PURE__ */ defineComponent({
+const _sfc_main$u = /* @__PURE__ */ defineComponent({
   __name: "HoverCardContentImpl",
   props: {
     side: {},
@@ -16174,7 +16174,7 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
       rootContext.isPointerDownOnContentRef.value = false;
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$O), {
+      return openBlock(), createBlock(unref(_sfc_main$P), {
         "as-child": "",
         "disable-outside-pointer-events": false,
         onEscapeKeyDown: _cache[1] || (_cache[1] = ($event) => emits("escapeKeyDown", $event)),
@@ -16183,7 +16183,7 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
         onDismiss: unref(rootContext).onDismiss
       }, {
         default: withCtx(() => [
-          createVNode(unref(_sfc_main$H), mergeProps({ ...unref(forwarded), ..._ctx.$attrs }, {
+          createVNode(unref(_sfc_main$I), mergeProps({ ...unref(forwarded), ..._ctx.$attrs }, {
             ref: unref(forwardRef),
             "data-state": unref(rootContext).open.value ? "open" : "closed",
             style: {
@@ -16216,7 +16216,7 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$s = /* @__PURE__ */ defineComponent({
+const _sfc_main$t = /* @__PURE__ */ defineComponent({
   __name: "HoverCardContent",
   props: {
     forceMount: { type: Boolean },
@@ -16250,7 +16250,7 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
         present: _ctx.forceMount || unref(rootContext).open.value
       }, {
         default: withCtx(() => [
-          createVNode(_sfc_main$t, mergeProps(unref(forwarded), {
+          createVNode(_sfc_main$u, mergeProps(unref(forwarded), {
             ref: unref(forwardRef),
             onPointerenter: _cache[0] || (_cache[0] = ($event) => unref(excludeTouch)(unref(rootContext).onOpen)($event))
           }), {
@@ -16265,7 +16265,7 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$r = /* @__PURE__ */ defineComponent({
+const _sfc_main$s = /* @__PURE__ */ defineComponent({
   __name: "HoverCardPortal",
   props: {
     to: {},
@@ -16276,7 +16276,7 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$N), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$O), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -16285,7 +16285,7 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$q = /* @__PURE__ */ defineComponent({
+const _sfc_main$r = /* @__PURE__ */ defineComponent({
   __name: "HoverCardTrigger",
   props: {
     reference: {},
@@ -16304,7 +16304,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
       }, 0);
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$J), {
+      return openBlock(), createBlock(unref(_sfc_main$K), {
         "as-child": "",
         reference: _ctx.reference
       }, {
@@ -16338,7 +16338,7 @@ function makeContentId(baseId, value) {
   return `${baseId}-content-${value}`;
 }
 const [injectTabsRootContext, provideTabsRootContext] = createContext("TabsRoot");
-const _sfc_main$p = /* @__PURE__ */ defineComponent({
+const _sfc_main$q = /* @__PURE__ */ defineComponent({
   __name: "TabsRoot",
   props: {
     defaultValue: {},
@@ -16389,7 +16389,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$o = /* @__PURE__ */ defineComponent({
+const _sfc_main$p = /* @__PURE__ */ defineComponent({
   __name: "TabsContent",
   props: {
     value: {},
@@ -16442,7 +16442,7 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$n = /* @__PURE__ */ defineComponent({
+const _sfc_main$o = /* @__PURE__ */ defineComponent({
   __name: "TabsIndicator",
   props: {
     asChild: { type: Boolean },
@@ -16493,7 +16493,7 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$m = /* @__PURE__ */ defineComponent({
+const _sfc_main$n = /* @__PURE__ */ defineComponent({
   __name: "TabsList",
   props: {
     loop: { type: Boolean, default: true },
@@ -16507,7 +16507,7 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
     const context2 = injectTabsRootContext();
     context2.tabsList = currentElement;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$M), {
+      return openBlock(), createBlock(unref(_sfc_main$N), {
         "as-child": "",
         orientation: unref(context2).orientation.value,
         dir: unref(context2).dir.value,
@@ -16532,7 +16532,7 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$l = /* @__PURE__ */ defineComponent({
+const _sfc_main$m = /* @__PURE__ */ defineComponent({
   __name: "TabsTrigger",
   props: {
     value: {},
@@ -16548,7 +16548,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     const contentId = computed(() => makeContentId(rootContext.baseId, props.value));
     const isSelected = computed(() => props.value === rootContext.modelValue.value);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$L), {
+      return openBlock(), createBlock(unref(_sfc_main$M), {
         "as-child": "",
         focusable: !_ctx.disabled,
         active: isSelected.value
@@ -21648,7 +21648,7 @@ const Icon = /* @__PURE__ */ defineComponent((props, { emit: emit2 }) => {
   ],
   emits: ["load"]
 });
-const _sfc_main$k = {
+const _sfc_main$l = {
   __name: "Icon",
   props: {
     name: { type: String, required: true }
@@ -21738,7 +21738,7 @@ const theme$6 = {
     "position": "top-right"
   }
 };
-const _sfc_main$j = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
+const _sfc_main$k = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   __name: "Chip",
   props: /* @__PURE__ */ mergeModels({
     as: { type: null, required: false },
@@ -21835,7 +21835,7 @@ const theme$5 = {
     "size": "md"
   }
 };
-const _sfc_main$i = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
+const _sfc_main$j = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   __name: "Avatar",
   props: {
     as: { type: null, required: false, default: "span" },
@@ -21878,7 +21878,7 @@ const _sfc_main$i = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       error.value = true;
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(resolveDynamicComponent(props.chip ? _sfc_main$j : unref(Primitive)), mergeProps({ as: __props.as }, props.chip ? typeof props.chip === "object" ? { inset: true, ...props.chip } : { inset: true } : {}, {
+      return openBlock(), createBlock(resolveDynamicComponent(props.chip ? _sfc_main$k : unref(Primitive)), mergeProps({ as: __props.as }, props.chip ? typeof props.chip === "object" ? { inset: true, ...props.chip } : { inset: true } : {}, {
         class: ui.value.root({ class: [props.ui?.root, props.class] }),
         style: props.style
       }), {
@@ -21896,7 +21896,7 @@ const _sfc_main$i = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
           }), null, 16, ["src", "alt", "width", "height", "class"])) : (openBlock(), createBlock(unref(Slot), normalizeProps(mergeProps({ key: 1 }, _ctx.$attrs)), {
             default: withCtx(() => [
               renderSlot(_ctx.$slots, "default", {}, () => [
-                __props.icon ? (openBlock(), createBlock(_sfc_main$k, {
+                __props.icon ? (openBlock(), createBlock(_sfc_main$l, {
                   key: 0,
                   name: __props.icon,
                   class: normalizeClass(ui.value.icon({ class: props.ui?.icon }))
@@ -22027,7 +22027,7 @@ function useSanitizeURL(url) {
 }
 const _hoisted_1$d = ["href", "target"];
 const _hoisted_2$6 = ["src"];
-const _sfc_main$h = /* @__PURE__ */ defineComponent({
+const _sfc_main$i = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderBrand",
   props: {
     brand: { type: Object }
@@ -22049,20 +22049,20 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
   }
 });
 const HoverCard = {
-  Root: _sfc_main$u,
-  Trigger: _sfc_main$q,
-  Portal: _sfc_main$r,
-  Content: _sfc_main$s,
-  Arrow: _sfc_main$v
+  Root: _sfc_main$v,
+  Trigger: _sfc_main$r,
+  Portal: _sfc_main$s,
+  Content: _sfc_main$t,
+  Arrow: _sfc_main$w
 };
 const Popover = {
-  Root: _sfc_main$F,
-  Trigger: _sfc_main$w,
-  Portal: _sfc_main$B,
-  Content: _sfc_main$x,
-  Arrow: _sfc_main$D,
-  Close: _sfc_main$C,
-  Anchor: _sfc_main$E
+  Root: _sfc_main$G,
+  Trigger: _sfc_main$x,
+  Portal: _sfc_main$C,
+  Content: _sfc_main$y,
+  Arrow: _sfc_main$E,
+  Close: _sfc_main$D,
+  Anchor: _sfc_main$F
 };
 const theme$4 = {
   "slots": {
@@ -22070,7 +22070,7 @@ const theme$4 = {
     "arrow": "fill-default"
   }
 };
-const _sfc_main$g = {
+const _sfc_main$h = {
   __name: "Popover",
   props: {
     mode: { type: String, required: false, default: "click" },
@@ -22398,7 +22398,7 @@ const theme$3 = {
     "size": "md"
   }
 };
-const _sfc_main$f = {
+const _sfc_main$g = {
   __name: "Badge",
   props: {
     as: { type: null, required: false, default: "span" },
@@ -22436,11 +22436,11 @@ const _sfc_main$f = {
       }, {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "leading", {}, () => [
-            unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$k, {
+            unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$l, {
               key: 0,
               name: unref(leadingIconName),
               class: normalizeClass(ui.value.leadingIcon({ class: props.ui?.leadingIcon }))
-            }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$i, mergeProps({
+            }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$j, mergeProps({
               key: 1,
               size: props.ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
             }, __props.avatar, {
@@ -22454,7 +22454,7 @@ const _sfc_main$f = {
             }, toDisplayString(__props.label), 3)) : createCommentVNode("", true)
           ]),
           renderSlot(_ctx.$slots, "trailing", {}, () => [
-            unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$k, {
+            unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$l, {
               key: 0,
               name: unref(trailingIconName),
               class: normalizeClass(ui.value.trailingIcon({ class: props.ui?.trailingIcon }))
@@ -22696,7 +22696,7 @@ const theme$2 = {
     "size": "md"
   }
 };
-const _sfc_main$e = {
+const _sfc_main$f = {
   __name: "Tabs",
   props: {
     as: { type: null, required: false },
@@ -22732,21 +22732,21 @@ const _sfc_main$e = {
       triggersRef
     });
     return (_ctx, _cache) => {
-      const _component_UBadge = _sfc_main$f;
-      return openBlock(), createBlock(unref(_sfc_main$p), mergeProps(unref(rootProps), {
+      const _component_UBadge = _sfc_main$g;
+      return openBlock(), createBlock(unref(_sfc_main$q), mergeProps(unref(rootProps), {
         class: ui.value.root({ class: [props.ui?.root, props.class] })
       }), {
         default: withCtx(() => [
-          createVNode(unref(_sfc_main$m), {
+          createVNode(unref(_sfc_main$n), {
             class: normalizeClass(ui.value.list({ class: props.ui?.list }))
           }, {
             default: withCtx(() => [
-              createVNode(unref(_sfc_main$n), {
+              createVNode(unref(_sfc_main$o), {
                 class: normalizeClass(ui.value.indicator({ class: props.ui?.indicator }))
               }, null, 8, ["class"]),
               renderSlot(_ctx.$slots, "list-leading"),
               (openBlock(true), createElementBlock(Fragment, null, renderList(__props.items, (item, index2) => {
-                return openBlock(), createBlock(unref(_sfc_main$l), {
+                return openBlock(), createBlock(unref(_sfc_main$m), {
                   key: index2,
                   ref_for: true,
                   ref: (el) => triggersRef.value[index2] = el,
@@ -22759,11 +22759,11 @@ const _sfc_main$e = {
                       item,
                       index: index2
                     }, () => [
-                      item.icon ? (openBlock(), createBlock(_sfc_main$k, {
+                      item.icon ? (openBlock(), createBlock(_sfc_main$l, {
                         key: 0,
                         name: item.icon,
                         class: normalizeClass(ui.value.leadingIcon({ class: [props.ui?.leadingIcon, item.ui?.leadingIcon] }))
-                      }, null, 8, ["name", "class"])) : item.avatar ? (openBlock(), createBlock(_sfc_main$i, mergeProps({
+                      }, null, 8, ["name", "class"])) : item.avatar ? (openBlock(), createBlock(_sfc_main$j, mergeProps({
                         key: 1,
                         size: item.ui?.leadingAvatarSize || props.ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
                       }, { ref_for: true }, item.avatar, {
@@ -22803,7 +22803,7 @@ const _sfc_main$e = {
             _: 3
           }, 8, ["class"]),
           !!__props.content ? (openBlock(true), createElementBlock(Fragment, { key: 0 }, renderList(__props.items, (item, index2) => {
-            return openBlock(), createBlock(unref(_sfc_main$o), {
+            return openBlock(), createBlock(unref(_sfc_main$p), {
               key: index2,
               value: item.value || String(index2),
               class: normalizeClass(ui.value.content({ class: [props.ui?.content, item.ui?.content, item.class] }))
@@ -22845,7 +22845,7 @@ const theme$1 = {
     }
   }
 };
-const _sfc_main$d = {
+const _sfc_main$e = {
   __name: "Accordion",
   props: {
     as: { type: null, required: false },
@@ -22872,24 +22872,24 @@ const _sfc_main$d = {
       disabled: props.disabled
     }));
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$X), mergeProps(unref(rootProps), {
+      return openBlock(), createBlock(unref(_sfc_main$Y), mergeProps(unref(rootProps), {
         class: ui.value.root({ class: [props.ui?.root, props.class] })
       }), {
         default: withCtx(() => [
           (openBlock(true), createElementBlock(Fragment, null, renderList(props.items, (item, index2) => {
-            return openBlock(), createBlock(unref(_sfc_main$V), {
+            return openBlock(), createBlock(unref(_sfc_main$W), {
               key: index2,
               value: item.value || String(index2),
               disabled: item.disabled,
               class: normalizeClass(ui.value.item({ class: [props.ui?.item, item.ui?.item, item.class] }))
             }, {
               default: withCtx(({ open }) => [
-                createVNode(unref(_sfc_main$S), {
+                createVNode(unref(_sfc_main$T), {
                   as: "div",
                   class: normalizeClass(ui.value.header({ class: [props.ui?.header, item.ui?.header] }))
                 }, {
                   default: withCtx(() => [
-                    createVNode(unref(_sfc_main$Q), {
+                    createVNode(unref(_sfc_main$R), {
                       class: normalizeClass(ui.value.trigger({ class: [props.ui?.trigger, item.ui?.trigger], disabled: item.disabled }))
                     }, {
                       default: withCtx(() => [
@@ -22898,7 +22898,7 @@ const _sfc_main$d = {
                           index: index2,
                           open
                         }, () => [
-                          item.icon ? (openBlock(), createBlock(_sfc_main$k, {
+                          item.icon ? (openBlock(), createBlock(_sfc_main$l, {
                             key: 0,
                             name: item.icon,
                             class: normalizeClass(ui.value.leadingIcon({ class: [props.ui?.leadingIcon, item?.ui?.leadingIcon] }))
@@ -22921,7 +22921,7 @@ const _sfc_main$d = {
                           index: index2,
                           open
                         }, () => [
-                          createVNode(_sfc_main$k, {
+                          createVNode(_sfc_main$l, {
                             name: item.trailingIcon || __props.trailingIcon || unref(appConfig2).ui.icons.chevronDown,
                             class: normalizeClass(ui.value.trailingIcon({ class: [props.ui?.trailingIcon, item.ui?.trailingIcon] }))
                           }, null, 8, ["name", "class"])
@@ -22932,7 +22932,7 @@ const _sfc_main$d = {
                   ]),
                   _: 2
                 }, 1032, ["class"]),
-                item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`] ? (openBlock(), createBlock(unref(_sfc_main$T), {
+                item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`] ? (openBlock(), createBlock(unref(_sfc_main$U), {
                   key: 0,
                   class: normalizeClass(ui.value.content({ class: [props.ui?.content, item.ui?.content] }))
                 }, {
@@ -23231,7 +23231,7 @@ const theme = {
   }
 };
 const _hoisted_1$c = ["id", "type", "value", "name", "placeholder", "disabled", "required", "autocomplete"];
-const _sfc_main$c = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
+const _sfc_main$d = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   __name: "Input",
   props: {
     as: { type: null, required: false },
@@ -23361,11 +23361,11 @@ const _sfc_main$c = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             class: normalizeClass(ui.value.leading({ class: props.ui?.leading }))
           }, [
             renderSlot(_ctx.$slots, "leading", {}, () => [
-              unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$k, {
+              unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$l, {
                 key: 0,
                 name: unref(leadingIconName),
                 class: normalizeClass(ui.value.leadingIcon({ class: props.ui?.leadingIcon }))
-              }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$i, mergeProps({
+              }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$j, mergeProps({
                 key: 1,
                 size: props.ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
               }, __props.avatar, {
@@ -23378,7 +23378,7 @@ const _sfc_main$c = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             class: normalizeClass(ui.value.trailing({ class: props.ui?.trailing }))
           }, [
             renderSlot(_ctx.$slots, "trailing", {}, () => [
-              unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$k, {
+              unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$l, {
                 key: 0,
                 name: unref(trailingIconName),
                 class: normalizeClass(ui.value.trailingIcon({ class: props.ui?.trailingIcon }))
@@ -23392,7 +23392,7 @@ const _sfc_main$c = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   }
 });
 const _hoisted_1$b = ["aria-label"];
-const _sfc_main$b = /* @__PURE__ */ defineComponent({
+const _sfc_main$c = /* @__PURE__ */ defineComponent({
   __name: "MeIcon",
   props: {
     color: { default: "", type: String },
@@ -23496,7 +23496,9 @@ function isSeparator(item) {
 }
 function setNavigationItems(items) {
   state.navigationItems = items;
-  state.customNavigationItems = items.filter((item) => !isSeparator(item));
+  state.customNavigationItems = items.filter(
+    (item) => !isSeparator(item)
+  );
 }
 function setCustomNavigationItems(items) {
   const updatedItems = [];
@@ -23533,10 +23535,13 @@ function useNavigationStore() {
     updateNavigationItemsVisible
   };
 }
-const _hoisted_1$a = { class: "overflow-y-auto max-h-[280px]" };
+function isExternalUrl(url) {
+  return /^https?:\/\//i.test(url);
+}
+const _hoisted_1$a = { class: "max-h-[280px] overflow-y-auto" };
 const _hoisted_2$5 = { class: "space-y-2" };
-const _hoisted_3$3 = ["onClick"];
-const _sfc_main$a = /* @__PURE__ */ defineComponent({
+const _hoisted_3$3 = ["href", "target"];
+const _sfc_main$b = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabsSiteMapItems",
   setup(__props) {
     const { siteMapItems } = useNavigationStore();
@@ -23544,8 +23549,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     const normalize = (text) => text.trim().toLowerCase();
     const matchesSearch = (item, term) => {
       if (!term) return true;
-      if (normalize(item.description).includes(term)) return true;
-      return item.children?.some((child) => matchesSearch(child, term)) ?? false;
+      return normalize(item.description).includes(term) || item.children?.some((child) => matchesSearch(child, term)) || false;
     };
     const filterSiteMap = (items, term) => items.map((section) => {
       const matchingChildren = section.children.filter(
@@ -23561,21 +23565,17 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       const term = normalize(searchTerm.value);
       return term ? filterSiteMap(siteMapItems.value, term) : siteMapItems.value;
     });
-    const accordionItems = computed(() => {
-      return filteredSiteMap.value.map((section, index2) => ({
+    const accordionItems = computed(
+      () => filteredSiteMap.value.map((section, index2) => ({
         label: section.description,
         value: `section-${index2}`,
         children: section.children
-      }));
-    });
-    const handleItemClick = (item) => {
-      if (item.url) {
-        window.open(item.url, "_self");
-      }
-    };
+      }))
+    );
+    const getTarget = (url) => isExternalUrl(url) ? "_blank" : "_self";
     return (_ctx, _cache) => {
-      const _component_UInput = _sfc_main$c;
-      const _component_UAccordion = _sfc_main$d;
+      const _component_UInput = _sfc_main$d;
+      const _component_UAccordion = _sfc_main$e;
       return openBlock(), createElementBlock("div", null, [
         createVNode(_component_UInput, {
           modelValue: searchTerm.value,
@@ -23586,15 +23586,15 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
           placeholder: "Buscar",
           class: "mb-3 w-full"
         }, createSlots({ _: 2 }, [
-          searchTerm.value?.length ? {
+          searchTerm.value ? {
             name: "trailing",
             fn: withCtx(() => [
               createBaseVNode("button", {
                 type: "button",
-                class: "inline-flex cursor-pointer items-center justify-center rounded-md p-0 text-sm font-medium transition-colors ring-offset-background size-8 hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+                class: "inline-flex size-8 items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
                 onClick: _cache[0] || (_cache[0] = ($event) => searchTerm.value = "")
               }, [
-                createVNode(_sfc_main$b, { icon: "me-icon-l icon-xmark" })
+                createVNode(_sfc_main$c, { icon: "me-icon-l icon-xmark" })
               ])
             ]),
             key: "0"
@@ -23613,12 +23613,13 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
           }, {
             content: withCtx(({ item }) => [
               createBaseVNode("div", _hoisted_2$5, [
-                (openBlock(true), createElementBlock(Fragment, null, renderList(item.children, (childItem, childIndex) => {
-                  return openBlock(), createElementBlock("div", {
-                    key: childIndex,
-                    class: "cursor-pointer rounded-md p-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-colors",
-                    onClick: ($event) => handleItemClick(childItem)
-                  }, toDisplayString(childItem.description), 9, _hoisted_3$3);
+                (openBlock(true), createElementBlock(Fragment, null, renderList(item.children, (child, idx) => {
+                  return openBlock(), createElementBlock("a", {
+                    key: idx,
+                    href: child.url || "#",
+                    target: child.url ? getTarget(child.url) : void 0,
+                    class: "block cursor-pointer rounded-md p-2 text-sm text-gray-600 no-underline transition-colors hover:bg-gray-100 hover:text-gray-800"
+                  }, toDisplayString(child.description), 9, _hoisted_3$3);
                 }), 128))
               ])
             ]),
@@ -25842,80 +25843,143 @@ function moveArrayElement(list, from, to, e = null) {
     });
   }
 }
-const _hoisted_1$9 = { class: "flex items-center gap-2 text-[var(--color-neutral-400)] h-12" };
-const _hoisted_2$4 = { class: "rotate-90" };
-const _hoisted_3$2 = { class: "text-sm font-medium" };
-const _hoisted_4$1 = ["onClick"];
-const _sfc_main$9 = /* @__PURE__ */ defineComponent({
+const _hoisted_1$9 = { class: "flex flex-col" };
+const _hoisted_2$4 = { class: "text-sm text-primary py-2 px-6 bg-[var(--color-blue-50)] rounded-lg mb-2 flex justify-between font-medium" };
+const _hoisted_3$2 = { class: "flex items-center gap-2 text-[var(--color-neutral-400)] h-12 pl-2" };
+const _hoisted_4$1 = { class: "icon-container" };
+const _hoisted_5$1 = ["href", "target"];
+const _hoisted_6$1 = {
+  key: 1,
+  class: "text-label text-sm flex-1"
+};
+const _hoisted_7 = ["onClick"];
+const _sfc_main$a = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabsNavigationItems",
   setup(__props) {
-    const { customNavigationItems, setCustomNavigationItems: setCustomNavigationItems2, updateNavigationItemsVisible: updateNavigationItemsVisible2 } = useNavigationStore();
+    const {
+      customNavigationItems,
+      setCustomNavigationItems: setCustomNavigationItems2,
+      updateNavigationItemsVisible: updateNavigationItemsVisible2
+    } = useNavigationStore();
     const el = useTemplateRef("el");
     const list = shallowRef(customNavigationItems.value || []);
+    const getCountNavigationItems = computed(() => {
+      const total = customNavigationItems.value?.length;
+      const actives = customNavigationItems.value?.filter((i2) => i2.visible).length;
+      return `${actives}/${total}`;
+    });
+    const getTarget = (url) => {
+      return isExternalUrl(url) ? "_blank" : "_self";
+    };
+    function addDragClasses(item) {
+      item.classList.add(
+        "border",
+        "border-[var(--ui-primary)]",
+        "text-[var(--ui-primary)]",
+        "rounded-lg"
+      );
+      const textLabel = item.querySelector(".text-label");
+      if (textLabel) {
+        textLabel.classList.add("text-[var(--ui-primary)]");
+      }
+      const iconContainer = item.querySelector(".icon-container");
+      if (iconContainer) {
+        iconContainer.classList.add("text-[var(--ui-primary)]");
+      }
+      const buttonIcon = item.querySelector(".button-icon");
+      if (buttonIcon) {
+        buttonIcon.classList.add("text-[var(--ui-primary)]");
+      }
+    }
+    function removeDragClasses(item) {
+      item.classList.remove(
+        "border",
+        "border-[var(--ui-primary)]",
+        "text-[var(--ui-primary)]",
+        "rounded-lg"
+      );
+      const textLabel = item.querySelector(".text-label");
+      if (textLabel) {
+        textLabel.classList.remove("text-[var(--ui-primary)]");
+      }
+      const iconContainer = item.querySelector(".icon-container");
+      if (iconContainer) {
+        iconContainer.classList.remove("text-[var(--ui-primary)]");
+      }
+      const buttonIcon = item.querySelector(".button-icon");
+      if (buttonIcon) {
+        buttonIcon.classList.remove("text-[var(--ui-primary)]");
+      }
+    }
     useSortable(el, list, {
       animation: 150,
-      ghostClass: "sortable-ghost",
-      chosenClass: "sortable-chosen",
-      dragClass: "sortable-drag"
+      scroll: true,
+      scrollSensitivity: 30,
+      scrollSpeed: 10,
+      onStart: (evt) => addDragClasses(evt.item),
+      onEnd: (evt) => removeDragClasses(evt.item),
+      onChange: () => {
+      }
     });
-    watch(
-      list,
-      (newList) => setCustomNavigationItems2(toRaw(newList))
-    );
+    watch(list, (newList) => setCustomNavigationItems2(toRaw(newList)));
     function handleClick(item) {
       const currentVisibility = item.visible ?? false;
       updateNavigationItemsVisible2(item, !currentVisibility);
     }
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        ref_key: "el",
-        ref: el,
-        class: "flex flex-col"
-      }, [
-        (openBlock(true), createElementBlock(Fragment, null, renderList(list.value, (item, index2) => {
-          return openBlock(), createElementBlock("div", {
-            key: index2,
-            class: "hover:bg-gray-500/10 transition-colors cursor-pointer border-b border-[var(--color-neutral-200)]"
-          }, [
-            createBaseVNode("div", _hoisted_1$9, [
-              createBaseVNode("div", _hoisted_2$4, [
-                createVNode(_sfc_main$b, {
-                  icon: "me-icon-s icon-grid-horizontal",
-                  class: "text-inherit",
-                  "custom-size": 12
-                })
-              ]),
-              createBaseVNode("span", _hoisted_3$2, toDisplayString(item.label), 1),
-              !item?.siteMap ? (openBlock(), createElementBlock("button", {
-                key: 0,
-                class: "ml-auto size-12",
-                onClick: withModifiers(() => handleClick(item), ["stop"])
-              }, [
-                createVNode(_sfc_main$b, {
-                  icon: "me-icon-l icon-eye-slash",
-                  class: "text-inherit cursor-pointer",
-                  "custom-size": 14,
-                  color: "var(--ui-primary)"
-                })
-              ], 8, _hoisted_4$1)) : createCommentVNode("", true)
-            ])
-          ]);
-        }), 128))
-      ], 512);
+      return openBlock(), createElementBlock("div", _hoisted_1$9, [
+        createBaseVNode("div", _hoisted_2$4, [
+          _cache[1] || (_cache[1] = createBaseVNode("p", null, "Apps fixados no header:", -1)),
+          createBaseVNode("span", null, toDisplayString(getCountNavigationItems.value), 1)
+        ]),
+        createBaseVNode("div", {
+          ref_key: "el",
+          ref: el,
+          class: "overflow-y-auto max-h-[280px]"
+        }, [
+          (openBlock(true), createElementBlock(Fragment, null, renderList(list.value, (item, index2) => {
+            return openBlock(), createElementBlock("div", {
+              key: index2,
+              class: "hover:bg-gray-500/10 transition-colors cursor-pointer border-b border-[var(--color-neutral-100)] mr-2"
+            }, [
+              createBaseVNode("div", _hoisted_3$2, [
+                createBaseVNode("div", _hoisted_4$1, [
+                  createVNode(_sfc_main$c, {
+                    icon: "me-icon-s icon-grid-horizontal",
+                    class: "text-inherit",
+                    "custom-size": 12
+                  })
+                ]),
+                item.url ? (openBlock(), createElementBlock("a", {
+                  key: 0,
+                  href: item.url,
+                  target: getTarget(item.url),
+                  class: "text-label text-sm no-underline flex-1",
+                  onClick: _cache[0] || (_cache[0] = withModifiers(() => {
+                  }, ["stop"]))
+                }, toDisplayString(item.label), 9, _hoisted_5$1)) : (openBlock(), createElementBlock("span", _hoisted_6$1, toDisplayString(item.label), 1)),
+                !item?.siteMap ? (openBlock(), createElementBlock("button", {
+                  key: 2,
+                  class: "ml-auto size-12",
+                  onClick: withModifiers(() => handleClick(item), ["stop"])
+                }, [
+                  createVNode(_sfc_main$c, {
+                    icon: "me-icon-l icon-eye-slash",
+                    class: "button-icon",
+                    "custom-size": 14,
+                    color: item.visible ? "var(--ui-primary)" : "var(--color-neutral-200)"
+                  }, null, 8, ["color"])
+                ], 8, _hoisted_7)) : createCommentVNode("", true)
+              ])
+            ]);
+          }), 128))
+        ], 512)
+      ]);
     };
   }
 });
-const _style_0 = "\n.sortable-ghost[data-v-3b77ebcd] {\n  opacity: 0.4;\n  background-color: #f3f4f6;\n}\n.sortable-chosen[data-v-3b77ebcd] {\n  background-color: #e5e7eb;\n}\n.sortable-drag[data-v-3b77ebcd] {\n  opacity: 0.8;\n  transform: rotate(5deg);\n}\n";
-const _export_sfc = (sfc, props) => {
-  const target = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target[key] = val;
-  }
-  return target;
-};
-const TheHeaderTabsNavigationItems = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["styles", [_style_0]], ["__scopeId", "data-v-3b77ebcd"]]);
 const _hoisted_1$8 = { class: "p-4 w-[384px]" };
-const _sfc_main$8 = /* @__PURE__ */ defineComponent({
+const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabs",
   setup(__props) {
     const items = ref([
@@ -25929,7 +25993,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       }
     ]);
     return (_ctx, _cache) => {
-      const _component_UTabs = _sfc_main$e;
+      const _component_UTabs = _sfc_main$f;
       return openBlock(), createElementBlock("div", _hoisted_1$8, [
         createVNode(_component_UTabs, {
           items: items.value,
@@ -25950,7 +26014,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                   createBaseVNode("div", { class: "p-4 text-center text-gray-500" }, "Carregando...", -1)
                 ])),
                 default: withCtx(() => [
-                  createVNode(TheHeaderTabsNavigationItems)
+                  createVNode(_sfc_main$a)
                 ]),
                 _: 1
               }))
@@ -25963,7 +26027,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                   createBaseVNode("div", { class: "p-4 text-center text-gray-500" }, "Carregando...", -1)
                 ])),
                 default: withCtx(() => [
-                  createVNode(_sfc_main$a)
+                  createVNode(_sfc_main$b)
                 ]),
                 _: 1
               }))
@@ -25975,40 +26039,70 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$7 = { class: "flex items-center justify-center" };
+const _hoisted_1$7 = { class: "relative flex items-center justify-center" };
 const _hoisted_2$3 = { class: "text-xs py-[6px] text-[var(--header-icon-color)]" };
-const _sfc_main$7 = /* @__PURE__ */ defineComponent({
+const activeClass = "after:content-[''] after:bg-[var(--header-icon-color)] after:h-1 after:rounded-full after:absolute after:block after:w-[80%] after:bottom-0 after:left-1/2 after:-translate-x-1/2";
+const _sfc_main$8 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderNavigationItemContent",
   props: {
-    icon: { type: String },
-    label: { type: String },
     iconColor: { type: String },
+    id: { type: String },
+    icon: { type: [String, null] },
+    label: { type: [String, null] },
     active: { type: Boolean },
-    click: { type: Function }
+    click: { type: Function },
+    siteMap: { type: [Boolean, null] },
+    linkName: { type: [String, null] },
+    url: { type: [String, null] },
+    target: { type: [String, null] },
+    badgeTotalUrl: { type: [String, null] },
+    badgeEvent: { type: [String, null] },
+    badge: { type: [Object, null] },
+    visible: { type: Boolean }
   },
   setup(__props) {
     const props = __props;
+    const isLink = computed(() => Boolean(props.url));
     function handleClick() {
       props.click?.(props);
     }
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass([
-          "grid place-items-center gap-1 px-2 py-1 cursor-pointer relative transition-colors duration-200 hover:bg-[rgba(0,0,0,0.1)] text-[var(--color-neutral-300)] text-center",
-          _ctx.active === true && "after:content-[''] after:bg-[var(--header-icon-color)] after:h-1 after:rounded-full after:absolute after:block after:w-[80%] after:bottom-0 after:left-1/2 after:-translate-x-1/2"
-        ]),
+      const _component_UChip = _sfc_main$k;
+      return openBlock(), createBlock(resolveDynamicComponent(isLink.value ? "a" : "button"), {
+        href: isLink.value ? _ctx.url : void 0,
+        target: isLink.value ? _ctx.target ?? "_self" : void 0,
+        type: !isLink.value ? "button" : void 0,
+        class: normalizeClass(["grid place-items-center gap-1 px-2 py-1 cursor-pointer relative transition-colors duration-200 hover:bg-[rgba(0,0,0,0.1)] text-[var(--color-neutral-300)] text-center", [
+          isLink.value ? "no-underline" : "border-0 bg-transparent",
+          _ctx.active && activeClass
+        ]]),
         style: normalizeStyle({ "--header-icon-color": _ctx.iconColor }),
-        onClick: withModifiers(handleClick, ["prevent", "stop"])
-      }, [
-        createBaseVNode("div", _hoisted_1$7, [
-          createVNode(_sfc_main$b, {
-            icon: _ctx.icon,
-            "custom-size": 24,
-            color: _ctx.iconColor
-          }, null, 8, ["icon", "color"])
+        onClick: _cache[0] || (_cache[0] = ($event) => _ctx.click && handleClick)
+      }, {
+        default: withCtx(() => [
+          createBaseVNode("div", _hoisted_1$7, [
+            createVNode(_sfc_main$c, {
+              icon: _ctx.icon || "",
+              "custom-size": 24,
+              color: _ctx.iconColor
+            }, null, 8, ["icon", "color"]),
+            _ctx.badge?.text ? (openBlock(), createBlock(_component_UChip, {
+              key: 0,
+              text: _ctx.badge.text,
+              color: "error",
+              size: "3xl",
+              position: "top-right",
+              inset: false,
+              ui: {
+                base: "px-2 py-3 ring-0 font-semibold",
+                root: "translate-x-2"
+              }
+            }, null, 8, ["text"])) : createCommentVNode("", true)
+          ]),
+          createBaseVNode("p", _hoisted_2$3, toDisplayString(_ctx.label), 1)
         ]),
-        createBaseVNode("p", _hoisted_2$3, toDisplayString(_ctx.label), 1)
-      ], 6);
+        _: 1
+      }, 8, ["href", "target", "type", "class", "style"]);
     };
   }
 });
@@ -26016,7 +26110,7 @@ const _hoisted_1$6 = {
   key: 0,
   class: "relative"
 };
-const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderNavigationItem",
   props: {
     iconColor: { type: String },
@@ -26031,6 +26125,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     target: { type: [String, null] },
     badgeTotalUrl: { type: [String, null] },
     badgeEvent: { type: [String, null] },
+    badge: { type: [Object, null] },
     visible: { type: Boolean }
   },
   setup(__props) {
@@ -26050,8 +26145,8 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
       }
     });
     return (_ctx, _cache) => {
-      const _component_TheHeaderTabs = _sfc_main$8;
-      const _component_UPopover = _sfc_main$g;
+      const _component_TheHeaderTabs = _sfc_main$9;
+      const _component_UPopover = _sfc_main$h;
       return _ctx.siteMap ? (openBlock(), createElementBlock("div", _hoisted_1$6, [
         createVNode(_component_UPopover, {
           open: isOpen.value,
@@ -26067,7 +26162,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
             createVNode(_component_TheHeaderTabs)
           ]),
           default: withCtx(() => [
-            createVNode(_sfc_main$7, {
+            createVNode(_sfc_main$8, {
               icon: _ctx.icon,
               label: _ctx.label,
               iconColor: _ctx.iconColor,
@@ -26077,7 +26172,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
           ]),
           _: 1
         }, 8, ["open"])
-      ])) : (openBlock(), createBlock(_sfc_main$7, {
+      ])) : (openBlock(), createBlock(_sfc_main$8, {
         key: 1,
         icon: _ctx.icon,
         label: _ctx.label,
@@ -26089,7 +26184,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1$5 = { class: "ml-auto flex justify-center gap-6" };
-const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderNavigation",
   props: {
     iconColor: { type: String }
@@ -26121,7 +26216,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
               key: 0,
               class: "my-2 border-l",
               style: normalizeStyle({ borderColor: _ctx.iconColor })
-            }, null, 4)) : item.visible ?? false ? (openBlock(), createBlock(_sfc_main$6, mergeProps({
+            }, null, 4)) : item.visible ?? false ? (openBlock(), createBlock(_sfc_main$7, mergeProps({
               key: 1,
               ref_for: true
             }, item, { iconColor: _ctx.iconColor }), null, 16, ["iconColor"])) : createCommentVNode("", true)
@@ -26133,7 +26228,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
 });
 const _hoisted_1$4 = { class: "cursor-pointer overflow-hidden rounded-bl-lg" };
 const _hoisted_2$2 = ["href", "onClick"];
-const _sfc_main$4 = /* @__PURE__ */ defineComponent({
+const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderAvatarMenuItem",
   props: {
     profileItems: { type: Array },
@@ -26153,23 +26248,25 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
       ];
     }
     function handleClick(item) {
-      if (item.url) {
-        const isExternal = /^https?:\/\//.test(item.url);
-        if (isExternal) {
-          window.open(item.url, "_self");
+      const { url, click } = item;
+      const target = item.target ?? "_blank";
+      if (url) {
+        if (isExternalUrl(url)) {
+          window.open(url, target, "noopener,noreferrer");
         } else {
-          window.location.href = item.url;
+          window.location.href = url;
         }
-        return props.setVisibleToFalse();
+        props.setVisibleToFalse();
+        return;
       }
-      if (item?.click) {
-        item.click();
+      if (click) {
+        click();
         props.setVisibleToFalse();
       }
     }
     return (_ctx, _cache) => {
       const _component_TheHeaderAvatarMenuItem = resolveComponent("TheHeaderAvatarMenuItem", true);
-      const _component_UAccordion = _sfc_main$d;
+      const _component_UAccordion = _sfc_main$e;
       return openBlock(), createElementBlock("ul", _hoisted_1$4, [
         (openBlock(true), createElementBlock(Fragment, null, renderList(props.profileItems, (item, index2) => {
           return openBlock(), createElementBlock("li", { key: index2 }, [
@@ -26201,7 +26298,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                 }])
               }, toDisplayString(item.label), 3),
               createBaseVNode("span", null, [
-                item.icon ? (openBlock(), createBlock(_sfc_main$b, {
+                item.icon ? (openBlock(), createBlock(_sfc_main$c, {
                   key: 0,
                   icon: item.icon.class,
                   "custom-size": 16,
@@ -26213,6 +26310,38 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
           ]);
         }), 128))
       ]);
+    };
+  }
+});
+const _sfc_main$4 = /* @__PURE__ */ defineComponent({
+  __name: "TheHeaderAvatarChip",
+  props: {
+    user: { type: Object }
+  },
+  setup(__props) {
+    const props = __props;
+    return (_ctx, _cache) => {
+      const _component_MeIcon = _sfc_main$c;
+      const _component_UChip = _sfc_main$k;
+      return _ctx.user.badge.icon ? (openBlock(), createBlock(_component_UChip, {
+        key: 0,
+        color: "error",
+        size: "3xl",
+        position: "bottom-right",
+        inset: false,
+        ui: {
+          base: "p-2 ring-0 font-semibold",
+          root: "translate-x-1 translate-y-3"
+        }
+      }, {
+        content: withCtx(() => [
+          createVNode(_component_MeIcon, {
+            icon: props.user.badge.icon,
+            color: props.user.badge.variant || "danger"
+          }, null, 8, ["icon", "color"])
+        ]),
+        _: 1
+      })) : createCommentVNode("", true);
     };
   }
 });
@@ -26249,10 +26378,11 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
               ref: avatar,
               class: "flex cursor-pointer items-center justify-center rounded-full text-white size-12 bg-primary"
             }, [
-              createBaseVNode("span", _hoisted_6, toDisplayString(_ctx.user.acronym), 1)
+              createBaseVNode("span", _hoisted_6, toDisplayString(_ctx.user.acronym), 1),
+              createVNode(_sfc_main$4, { user: _ctx.user }, null, 8, ["user"])
             ], 512)
           ]),
-          createVNode(_sfc_main$4, {
+          createVNode(_sfc_main$5, {
             profileItems: _ctx.profileItems,
             "set-visible-to-false": _ctx.setVisibleToFalse
           }, null, 8, ["profileItems", "set-visible-to-false"])
@@ -26294,7 +26424,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       setVisibleToFalse();
     });
     return (_ctx, _cache) => {
-      const _component_UPopover = _sfc_main$g;
+      const _component_UPopover = _sfc_main$h;
       return openBlock(), createElementBlock("div", null, [
         createVNode(_component_UPopover, {
           open: visibleMenu.value,
@@ -26322,7 +26452,10 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
           default: withCtx(() => [
             createBaseVNode("div", _hoisted_1$2, [
               createBaseVNode("div", _hoisted_2, [
-                createBaseVNode("span", _hoisted_3, toDisplayString(props.user.acronym), 1)
+                createBaseVNode("span", _hoisted_3, toDisplayString(props.user.acronym), 1),
+                createVNode(_sfc_main$4, {
+                  user: props.user
+                }, null, 8, ["user"])
               ])
             ])
           ]),
@@ -26405,181 +26538,286 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     });
     const profileItems = ref([
       {
-        label: "Profile",
-        click: () => console.log("Profile"),
-        icon: {
-          class: "me-icon-l icon-user-alt",
-          color: "var(--me-primary-1)"
-        }
+        $id: "15",
+        label: "Perfil",
+        url: "/user/details/606660",
+        active: false,
+        name: null,
+        icon: null,
+        children: null,
+        target: null
       },
       {
-        label: "Change Password",
-        url: "#",
-        icon: {
-          class: "me-icon-l icon-key",
-          color: "var(--me-warning-2)"
-        }
+        $id: "16",
+        label: "Configurações Gerais",
+        url: "/preferences",
+        active: false,
+        name: null,
+        icon: null,
+        children: null,
+        target: null
       },
       {
-        label: "Português (pt-BR)",
+        $id: "17",
+        label: "Substituir Usuário",
+        url: "/do/ChangeUser.mvc",
+        active: false,
+        name: null,
+        icon: null,
+        children: null,
+        target: null
+      },
+      {
+        $id: "18",
+        label: "Substituição de Workflow",
+        url: "/do/Usuario.mvc/SubstituirWorkflow",
+        active: false,
+        name: null,
+        icon: null,
+        children: null,
+        target: null
+      },
+      {
+        $id: "19",
+        label: "Substituição temporária",
+        url: "/do/Substituicao.mvc",
+        active: false,
+        name: null,
+        icon: null,
+        children: null,
+        target: null
+      },
+      {
+        $id: "20",
+        label: "Novidades e Atualizações",
+        url: "https://guide.me.com.br",
+        active: false,
+        name: null,
+        icon: null,
+        children: null,
+        target: "_blank"
+      },
+      {
+        $id: "21",
+        label: "Português BR",
+        url: null,
         active: true,
+        name: "locale",
+        icon: null,
         children: [
-          { label: "Espanhol (es-MX)", url: "#" },
-          { label: "Francês (fr-FR)", click: () => console.log("French") },
-          { label: "Inglês (en-US)", url: "#" },
-          { label: "Português (pt-PT)", url: "#" }
-        ]
+          {
+            $id: "22",
+            label: "Inglês",
+            url: "javascript:jQuery.MELocaleChange('en-US');",
+            active: false,
+            name: "2",
+            icon: null,
+            children: null,
+            target: null
+          },
+          {
+            $id: "23",
+            label: "Espanhol",
+            url: "javascript:jQuery.MELocaleChange('es-ES');",
+            active: false,
+            name: "3",
+            icon: null,
+            children: null,
+            target: null
+          },
+          {
+            $id: "24",
+            label: "Português PT",
+            url: "javascript:jQuery.MELocaleChange('pt-PT');",
+            active: false,
+            name: "4",
+            icon: null,
+            children: null,
+            target: null
+          },
+          {
+            $id: "25",
+            label: "Espanhol MX",
+            url: "javascript:jQuery.MELocaleChange('es-MX');",
+            active: false,
+            name: "7",
+            icon: null,
+            children: null,
+            target: null
+          },
+          {
+            $id: "26",
+            label: "Francês",
+            url: "javascript:jQuery.MELocaleChange('fr-FR');",
+            active: false,
+            name: "8",
+            icon: null,
+            children: null,
+            target: null
+          }
+        ],
+        target: null
       },
       {
+        $id: "27",
         label: "Logoff",
-        url: "#"
+        url: "/FimSecao.asp",
+        active: false,
+        name: null,
+        icon: null,
+        children: null,
+        target: null
       }
     ]);
-    navigationStore.setNavigationItems(
-      [
-        {
-          "id": "5",
-          "linkName": "DASHBOARD",
-          visible: true,
-          "label": "Dashboard",
-          "icon": "me-icon-l icon-objects-column",
-          "url": "/dashboard/",
-          "target": null,
-          "active": false,
-          "siteMap": false,
-          "separator": false,
-          "badgeTotalUrl": null,
-          "badgeEvent": null
-        },
-        {
-          "id": "6",
-          "linkName": null,
-          visible: true,
-          "label": null,
-          "icon": null,
-          "url": null,
-          "target": null,
-          "active": false,
-          "siteMap": false,
-          "separator": true,
-          "badgeTotalUrl": null,
-          "badgeEvent": null
-        },
-        {
-          "id": "7",
-          "linkName": "HOME",
-          visible: true,
-          "label": "Transações",
-          "icon": "me-icon-l icon-file-import",
-          "url": "/home",
-          "target": null,
-          "active": false,
-          "siteMap": false,
-          "separator": false,
-          "badgeTotalUrl": null,
-          "badgeEvent": null
-        },
-        {
-          "id": "8",
-          "linkName": "SUPPLIER",
-          visible: true,
-          "label": "Fornecedores",
-          "icon": "me-icon-l icon-store",
-          "url": "/supplier/search",
-          "target": null,
-          "active": true,
-          "siteMap": false,
-          "separator": false,
-          "badgeTotalUrl": null,
-          "badgeEvent": null,
-          click: () => console.log("Fornecedores")
-        },
-        {
-          "id": "9",
-          "linkName": "PRODUCT",
-          visible: true,
-          "label": "Catálogos",
-          "icon": "me-icon-l icon-shopping-bag",
-          "url": "/product/",
-          "target": null,
-          "active": false,
-          "siteMap": false,
-          "separator": false,
-          "badgeTotalUrl": null,
-          "badgeEvent": null
-        },
-        {
-          "id": "10",
-          "linkName": "USER",
-          visible: true,
-          "label": "Usuários",
-          "icon": "me-icon-l icon-users",
-          "url": "/user/",
-          "target": null,
-          "active": false,
-          "siteMap": false,
-          "separator": false,
-          "badgeTotalUrl": null,
-          "badgeEvent": null
-        },
-        {
-          "id": "11",
-          "linkName": "MORE",
-          visible: true,
-          "label": "Mais",
-          "icon": "me-icon-l icon-ellipsis-stroke",
-          "url": null,
-          "target": null,
-          "active": false,
-          "siteMap": true,
-          "separator": false,
-          "badgeTotalUrl": null,
-          "badgeEvent": null
-        },
-        {
-          "id": "12",
-          "linkName": null,
-          visible: true,
-          "label": null,
-          "icon": null,
-          "url": null,
-          "target": null,
-          "active": false,
-          "siteMap": false,
-          "separator": true,
-          "badgeTotalUrl": null,
-          "badgeEvent": null
-        },
-        {
-          "id": "13",
-          "linkName": "BOOST",
-          visible: true,
-          "label": "ME Boost",
-          "icon": "me-icon-l icon-chart-mixed",
-          "url": "https://analytics.meboost.com.br/_/boost/jbs/app/kibana#/dashboards?_g=()",
-          "target": "_blank",
-          "active": false,
-          "siteMap": false,
-          "separator": false,
-          "badgeTotalUrl": null,
-          "badgeEvent": null
-        },
-        {
-          "id": "14",
-          "linkName": "MESSAGES",
-          visible: true,
-          "label": "Mensagens",
-          "icon": "me-icon-l icon-comments",
-          "url": "/chat",
-          "target": null,
-          "active": false,
-          "siteMap": false,
-          "separator": false,
-          "badgeTotalUrl": "https://trunk.api.web.mercadoe.com/chat-api-bff/v1/messages/unread",
-          "badgeEvent": null
+    navigationStore.setNavigationItems([
+      {
+        id: "5",
+        linkName: "DASHBOARD",
+        visible: true,
+        label: "Dashboard",
+        icon: "me-icon-l icon-objects-column",
+        url: "/dashboard/",
+        target: null,
+        active: false,
+        siteMap: false,
+        separator: false,
+        badgeTotalUrl: null,
+        badgeEvent: null
+      },
+      {
+        id: "6",
+        linkName: null,
+        visible: true,
+        label: null,
+        icon: null,
+        url: null,
+        target: null,
+        active: false,
+        siteMap: false,
+        separator: true,
+        badgeTotalUrl: null,
+        badgeEvent: null
+      },
+      {
+        id: "7",
+        linkName: "HOME",
+        visible: true,
+        label: "Transações",
+        icon: "me-icon-l icon-file-import",
+        url: "/home",
+        target: null,
+        active: false,
+        siteMap: false,
+        separator: false,
+        badgeTotalUrl: null,
+        badgeEvent: null,
+        badge: {
+          text: "9999"
         }
-      ]
-    );
+      },
+      {
+        id: "8",
+        linkName: "SUPPLIER",
+        visible: true,
+        label: "Fornecedores",
+        icon: "me-icon-l icon-store",
+        url: "/supplier/search",
+        target: null,
+        active: true,
+        siteMap: false,
+        separator: false,
+        badgeTotalUrl: null,
+        badgeEvent: null,
+        click: () => console.log("Fornecedores"),
+        badge: {
+          text: "76"
+        }
+      },
+      {
+        id: "9",
+        linkName: "PRODUCT",
+        visible: true,
+        label: "Catálogos",
+        icon: "me-icon-l icon-shopping-bag",
+        url: "/product/",
+        target: null,
+        active: false,
+        siteMap: false,
+        separator: false,
+        badgeTotalUrl: null,
+        badgeEvent: null
+      },
+      {
+        id: "10",
+        linkName: "USER",
+        visible: false,
+        label: "Usuários",
+        icon: "me-icon-l icon-users",
+        url: "/user/",
+        target: null,
+        active: false,
+        siteMap: false,
+        separator: false,
+        badgeTotalUrl: null,
+        badgeEvent: null
+      },
+      {
+        id: "11",
+        linkName: "MORE",
+        visible: true,
+        label: "Mais",
+        icon: "me-icon-l icon-ellipsis-stroke",
+        url: null,
+        target: null,
+        active: false,
+        siteMap: true,
+        separator: false,
+        badgeTotalUrl: null,
+        badgeEvent: null
+      },
+      {
+        id: "12",
+        linkName: null,
+        visible: true,
+        label: null,
+        icon: null,
+        url: null,
+        target: null,
+        active: false,
+        siteMap: false,
+        separator: true,
+        badgeTotalUrl: null,
+        badgeEvent: null
+      },
+      {
+        id: "13",
+        linkName: "BOOST",
+        visible: true,
+        label: "ME Boost",
+        icon: "me-icon-l icon-chart-mixed",
+        url: "https://analytics.meboost.com.br/_/boost/jbs/app/kibana#/dashboards?_g=()",
+        target: "_blank",
+        active: false,
+        siteMap: false,
+        separator: false,
+        badgeTotalUrl: null,
+        badgeEvent: null
+      },
+      {
+        id: "14",
+        linkName: "MESSAGES",
+        visible: false,
+        label: "Mensagens",
+        icon: "me-icon-l icon-comments",
+        url: "/chat",
+        target: null,
+        active: false,
+        siteMap: false,
+        separator: false,
+        badgeTotalUrl: "https://trunk.api.web.mercadoe.com/chat-api-bff/v1/messages/unread",
+        badgeEvent: null
+      }
+    ]);
     navigationStore.setSiteMapItems([
       {
         id: "2",
@@ -28071,8 +28309,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           style: normalizeStyle(headerStyles.value)
         }, [
           createBaseVNode("nav", _hoisted_1, [
-            createVNode(_sfc_main$h, { brand: brand.value }, null, 8, ["brand"]),
-            createVNode(_sfc_main$5, { iconColor: iconColor.value }, null, 8, ["iconColor"]),
+            createVNode(_sfc_main$i, { brand: brand.value }, null, 8, ["brand"]),
+            createVNode(_sfc_main$6, { iconColor: iconColor.value }, null, 8, ["iconColor"]),
             createVNode(_sfc_main$2, {
               user: user.value,
               profileItems: profileItems.value
@@ -28165,118 +28403,6 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 @layer theme {
   :root, :host {
     --font-sans: "Roboto", sans-serif;
-    --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --color-red-50: oklch(97.1% .013 17.38);
-    --color-red-100: oklch(93.6% .032 17.717);
-    --color-red-200: oklch(88.5% .062 18.334);
-    --color-red-300: oklch(80.8% .114 19.571);
-    --color-red-400: oklch(70.4% .191 22.216);
-    --color-red-500: oklch(63.7% .237 25.331);
-    --color-red-600: oklch(57.7% .245 27.325);
-    --color-red-700: oklch(50.5% .213 27.518);
-    --color-red-800: oklch(44.4% .177 26.899);
-    --color-red-900: oklch(39.6% .141 25.723);
-    --color-red-950: oklch(25.8% .092 26.042);
-    --color-orange-50: oklch(98% .016 73.684);
-    --color-orange-100: oklch(95.4% .038 75.164);
-    --color-orange-200: oklch(90.1% .076 70.697);
-    --color-orange-300: oklch(83.7% .128 66.29);
-    --color-orange-400: oklch(75% .183 55.934);
-    --color-orange-500: oklch(70.5% .213 47.604);
-    --color-orange-600: oklch(64.6% .222 41.116);
-    --color-orange-700: oklch(55.3% .195 38.402);
-    --color-orange-800: oklch(47% .157 37.304);
-    --color-orange-900: oklch(40.8% .123 38.172);
-    --color-orange-950: oklch(26.6% .079 36.259);
-    --color-amber-50: oklch(98.7% .022 95.277);
-    --color-amber-100: oklch(96.2% .059 95.617);
-    --color-amber-200: oklch(92.4% .12 95.746);
-    --color-amber-300: oklch(87.9% .169 91.605);
-    --color-amber-400: oklch(82.8% .189 84.429);
-    --color-amber-500: oklch(76.9% .188 70.08);
-    --color-amber-600: oklch(66.6% .179 58.318);
-    --color-amber-700: oklch(55.5% .163 48.998);
-    --color-amber-800: oklch(47.3% .137 46.201);
-    --color-amber-900: oklch(41.4% .112 45.904);
-    --color-amber-950: oklch(27.9% .077 45.635);
-    --color-yellow-50: oklch(98.7% .026 102.212);
-    --color-yellow-100: oklch(97.3% .071 103.193);
-    --color-yellow-200: oklch(94.5% .129 101.54);
-    --color-yellow-300: oklch(90.5% .182 98.111);
-    --color-yellow-400: oklch(85.2% .199 91.936);
-    --color-yellow-500: oklch(79.5% .184 86.047);
-    --color-yellow-600: oklch(68.1% .162 75.834);
-    --color-yellow-700: oklch(55.4% .135 66.442);
-    --color-yellow-800: oklch(47.6% .114 61.907);
-    --color-yellow-900: oklch(42.1% .095 57.708);
-    --color-yellow-950: oklch(28.6% .066 53.813);
-    --color-lime-50: oklch(98.6% .031 120.757);
-    --color-lime-100: oklch(96.7% .067 122.328);
-    --color-lime-200: oklch(93.8% .127 124.321);
-    --color-lime-300: oklch(89.7% .196 126.665);
-    --color-lime-400: oklch(84.1% .238 128.85);
-    --color-lime-500: oklch(76.8% .233 130.85);
-    --color-lime-600: oklch(64.8% .2 131.684);
-    --color-lime-700: oklch(53.2% .157 131.589);
-    --color-lime-800: oklch(45.3% .124 130.933);
-    --color-lime-900: oklch(40.5% .101 131.063);
-    --color-lime-950: oklch(27.4% .072 132.109);
-    --color-green-50: oklch(98.2% .018 155.826);
-    --color-green-100: oklch(96.2% .044 156.743);
-    --color-green-200: oklch(92.5% .084 155.995);
-    --color-green-300: oklch(87.1% .15 154.449);
-    --color-green-400: oklch(79.2% .209 151.711);
-    --color-green-500: oklch(72.3% .219 149.579);
-    --color-green-600: oklch(62.7% .194 149.214);
-    --color-green-700: oklch(52.7% .154 150.069);
-    --color-green-800: oklch(44.8% .119 151.328);
-    --color-green-900: oklch(39.3% .095 152.535);
-    --color-green-950: oklch(26.6% .065 152.934);
-    --color-emerald-50: oklch(97.9% .021 166.113);
-    --color-emerald-100: oklch(95% .052 163.051);
-    --color-emerald-200: oklch(90.5% .093 164.15);
-    --color-emerald-300: oklch(84.5% .143 164.978);
-    --color-emerald-400: oklch(76.5% .177 163.223);
-    --color-emerald-500: oklch(69.6% .17 162.48);
-    --color-emerald-600: oklch(59.6% .145 163.225);
-    --color-emerald-700: oklch(50.8% .118 165.612);
-    --color-emerald-800: oklch(43.2% .095 166.913);
-    --color-emerald-900: oklch(37.8% .077 168.94);
-    --color-emerald-950: oklch(26.2% .051 172.552);
-    --color-teal-50: oklch(98.4% .014 180.72);
-    --color-teal-100: oklch(95.3% .051 180.801);
-    --color-teal-200: oklch(91% .096 180.426);
-    --color-teal-300: oklch(85.5% .138 181.071);
-    --color-teal-400: oklch(77.7% .152 181.912);
-    --color-teal-500: oklch(70.4% .14 182.503);
-    --color-teal-600: oklch(60% .118 184.704);
-    --color-teal-700: oklch(51.1% .096 186.391);
-    --color-teal-800: oklch(43.7% .078 188.216);
-    --color-teal-900: oklch(38.6% .063 188.416);
-    --color-teal-950: oklch(27.7% .046 192.524);
-    --color-cyan-50: oklch(98.4% .019 200.873);
-    --color-cyan-100: oklch(95.6% .045 203.388);
-    --color-cyan-200: oklch(91.7% .08 205.041);
-    --color-cyan-300: oklch(86.5% .127 207.078);
-    --color-cyan-400: oklch(78.9% .154 211.53);
-    --color-cyan-500: oklch(71.5% .143 215.221);
-    --color-cyan-600: oklch(60.9% .126 221.723);
-    --color-cyan-700: oklch(52% .105 223.128);
-    --color-cyan-800: oklch(45% .085 224.283);
-    --color-cyan-900: oklch(39.8% .07 227.392);
-    --color-cyan-950: oklch(30.2% .056 229.695);
-    --color-sky-50: oklch(97.7% .013 236.62);
-    --color-sky-100: oklch(95.1% .026 236.824);
-    --color-sky-200: oklch(90.1% .058 230.902);
-    --color-sky-300: oklch(82.8% .111 230.318);
-    --color-sky-400: oklch(74.6% .16 232.661);
-    --color-sky-500: oklch(68.5% .169 237.323);
-    --color-sky-600: oklch(58.8% .158 241.966);
-    --color-sky-700: oklch(50% .134 242.749);
-    --color-sky-800: oklch(44.3% .11 240.79);
-    --color-sky-900: oklch(39.1% .09 240.876);
-    --color-sky-950: oklch(29.3% .066 243.157);
     --color-blue-50: #edf3ff;
     --color-blue-100: #d0e0ff;
     --color-blue-200: #a9c6ff;
@@ -28288,105 +28414,6 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     --color-blue-800: #075985;
     --color-blue-900: #05054a;
     --color-blue-950: #082f49;
-    --color-indigo-50: oklch(96.2% .018 272.314);
-    --color-indigo-100: oklch(93% .034 272.788);
-    --color-indigo-200: oklch(87% .065 274.039);
-    --color-indigo-300: oklch(78.5% .115 274.713);
-    --color-indigo-400: oklch(67.3% .182 276.935);
-    --color-indigo-500: oklch(58.5% .233 277.117);
-    --color-indigo-600: oklch(51.1% .262 276.966);
-    --color-indigo-700: oklch(45.7% .24 277.023);
-    --color-indigo-800: oklch(39.8% .195 277.366);
-    --color-indigo-900: oklch(35.9% .144 278.697);
-    --color-indigo-950: oklch(25.7% .09 281.288);
-    --color-violet-50: oklch(96.9% .016 293.756);
-    --color-violet-100: oklch(94.3% .029 294.588);
-    --color-violet-200: oklch(89.4% .057 293.283);
-    --color-violet-300: oklch(81.1% .111 293.571);
-    --color-violet-400: oklch(70.2% .183 293.541);
-    --color-violet-500: oklch(60.6% .25 292.717);
-    --color-violet-600: oklch(54.1% .281 293.009);
-    --color-violet-700: oklch(49.1% .27 292.581);
-    --color-violet-800: oklch(43.2% .232 292.759);
-    --color-violet-900: oklch(38% .189 293.745);
-    --color-violet-950: oklch(28.3% .141 291.089);
-    --color-purple-50: oklch(97.7% .014 308.299);
-    --color-purple-100: oklch(94.6% .033 307.174);
-    --color-purple-200: oklch(90.2% .063 306.703);
-    --color-purple-300: oklch(82.7% .119 306.383);
-    --color-purple-400: oklch(71.4% .203 305.504);
-    --color-purple-500: oklch(62.7% .265 303.9);
-    --color-purple-600: oklch(55.8% .288 302.321);
-    --color-purple-700: oklch(49.6% .265 301.924);
-    --color-purple-800: oklch(43.8% .218 303.724);
-    --color-purple-900: oklch(38.1% .176 304.987);
-    --color-purple-950: oklch(29.1% .149 302.717);
-    --color-fuchsia-50: oklch(97.7% .017 320.058);
-    --color-fuchsia-100: oklch(95.2% .037 318.852);
-    --color-fuchsia-200: oklch(90.3% .076 319.62);
-    --color-fuchsia-300: oklch(83.3% .145 321.434);
-    --color-fuchsia-400: oklch(74% .238 322.16);
-    --color-fuchsia-500: oklch(66.7% .295 322.15);
-    --color-fuchsia-600: oklch(59.1% .293 322.896);
-    --color-fuchsia-700: oklch(51.8% .253 323.949);
-    --color-fuchsia-800: oklch(45.2% .211 324.591);
-    --color-fuchsia-900: oklch(40.1% .17 325.612);
-    --color-fuchsia-950: oklch(29.3% .136 325.661);
-    --color-pink-50: oklch(97.1% .014 343.198);
-    --color-pink-100: oklch(94.8% .028 342.258);
-    --color-pink-200: oklch(89.9% .061 343.231);
-    --color-pink-300: oklch(82.3% .12 346.018);
-    --color-pink-400: oklch(71.8% .202 349.761);
-    --color-pink-500: oklch(65.6% .241 354.308);
-    --color-pink-600: oklch(59.2% .249 .584);
-    --color-pink-700: oklch(52.5% .223 3.958);
-    --color-pink-800: oklch(45.9% .187 3.815);
-    --color-pink-900: oklch(40.8% .153 2.432);
-    --color-pink-950: oklch(28.4% .109 3.907);
-    --color-rose-50: oklch(96.9% .015 12.422);
-    --color-rose-100: oklch(94.1% .03 12.58);
-    --color-rose-200: oklch(89.2% .058 10.001);
-    --color-rose-300: oklch(81% .117 11.638);
-    --color-rose-400: oklch(71.2% .194 13.428);
-    --color-rose-500: oklch(64.5% .246 16.439);
-    --color-rose-600: oklch(58.6% .253 17.585);
-    --color-rose-700: oklch(51.4% .222 16.935);
-    --color-rose-800: oklch(45.5% .188 13.697);
-    --color-rose-900: oklch(41% .159 10.272);
-    --color-rose-950: oklch(27.1% .105 12.094);
-    --color-slate-50: oklch(98.4% .003 247.858);
-    --color-slate-100: oklch(96.8% .007 247.896);
-    --color-slate-200: oklch(92.9% .013 255.508);
-    --color-slate-300: oklch(86.9% .022 252.894);
-    --color-slate-400: oklch(70.4% .04 256.788);
-    --color-slate-500: oklch(55.4% .046 257.417);
-    --color-slate-600: oklch(44.6% .043 257.281);
-    --color-slate-700: oklch(37.2% .044 257.287);
-    --color-slate-800: oklch(27.9% .041 260.031);
-    --color-slate-900: oklch(20.8% .042 265.755);
-    --color-slate-950: oklch(12.9% .042 264.695);
-    --color-gray-50: oklch(98.5% .002 247.839);
-    --color-gray-100: oklch(96.7% .003 264.542);
-    --color-gray-200: oklch(92.8% .006 264.531);
-    --color-gray-300: oklch(87.2% .01 258.338);
-    --color-gray-400: oklch(70.7% .022 261.325);
-    --color-gray-500: oklch(55.1% .027 264.364);
-    --color-gray-600: oklch(44.6% .03 256.802);
-    --color-gray-700: oklch(37.3% .034 259.733);
-    --color-gray-800: oklch(27.8% .033 256.848);
-    --color-gray-900: oklch(21% .034 264.665);
-    --color-gray-950: oklch(13% .028 261.692);
-    --color-zinc-50: oklch(98.5% 0 0);
-    --color-zinc-100: oklch(96.7% .001 286.375);
-    --color-zinc-200: oklch(92% .004 286.32);
-    --color-zinc-300: oklch(87.1% .006 286.286);
-    --color-zinc-400: oklch(70.5% .015 286.067);
-    --color-zinc-500: oklch(55.2% .016 285.938);
-    --color-zinc-600: oklch(44.2% .017 285.786);
-    --color-zinc-700: oklch(37% .013 285.805);
-    --color-zinc-800: oklch(27.4% .006 286.033);
-    --color-zinc-900: oklch(21% .006 285.885);
-    --color-zinc-950: oklch(14.1% .005 285.823);
     --color-neutral-50: #f1f3f5;
     --color-neutral-100: #e2e6e9;
     --color-neutral-200: #a3acb6;
@@ -28396,130 +28423,6 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     --color-neutral-600: #303e49;
     --color-neutral-700: #262f35;
     --color-neutral-800: #075985;
-    --color-stone-50: oklch(98.5% .001 106.423);
-    --color-stone-100: oklch(97% .001 106.424);
-    --color-stone-200: oklch(92.3% .003 48.717);
-    --color-stone-300: oklch(86.9% .005 56.366);
-    --color-stone-400: oklch(70.9% .01 56.259);
-    --color-stone-500: oklch(55.3% .013 58.071);
-    --color-stone-600: oklch(44.4% .011 73.639);
-    --color-stone-700: oklch(37.4% .01 67.558);
-    --color-stone-800: oklch(26.8% .007 34.298);
-    --color-stone-900: oklch(21.6% .006 56.043);
-    --color-stone-950: oklch(14.7% .004 49.25);
-    --color-black: #000;
-    --color-white: #fff;
-    --spacing: .25rem;
-    --breakpoint-sm: 40rem;
-    --breakpoint-md: 48rem;
-    --breakpoint-lg: 64rem;
-    --breakpoint-xl: 80rem;
-    --breakpoint-2xl: 96rem;
-    --container-3xs: 16rem;
-    --container-2xs: 18rem;
-    --container-xs: 20rem;
-    --container-sm: 24rem;
-    --container-md: 28rem;
-    --container-lg: 32rem;
-    --container-xl: 36rem;
-    --container-2xl: 42rem;
-    --container-3xl: 48rem;
-    --container-4xl: 56rem;
-    --container-5xl: 64rem;
-    --container-6xl: 72rem;
-    --container-7xl: 80rem;
-    --text-xs: .75rem;
-    --text-xs--line-height: calc(1 / .75);
-    --text-sm: .875rem;
-    --text-sm--line-height: calc(1.25 / .875);
-    --text-base: 1rem;
-    --text-base--line-height: calc(1.5 / 1);
-    --text-lg: 1.125rem;
-    --text-lg--line-height: calc(1.75 / 1.125);
-    --text-xl: 1.25rem;
-    --text-xl--line-height: calc(1.75 / 1.25);
-    --text-2xl: 1.5rem;
-    --text-2xl--line-height: calc(2 / 1.5);
-    --text-3xl: 1.875rem;
-    --text-3xl--line-height: calc(2.25 / 1.875);
-    --text-4xl: 2.25rem;
-    --text-4xl--line-height: calc(2.5 / 2.25);
-    --text-5xl: 3rem;
-    --text-5xl--line-height: 1;
-    --text-6xl: 3.75rem;
-    --text-6xl--line-height: 1;
-    --text-7xl: 4.5rem;
-    --text-7xl--line-height: 1;
-    --text-8xl: 6rem;
-    --text-8xl--line-height: 1;
-    --text-9xl: 8rem;
-    --text-9xl--line-height: 1;
-    --font-weight-thin: 100;
-    --font-weight-extralight: 200;
-    --font-weight-light: 300;
-    --font-weight-normal: 400;
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
-    --font-weight-extrabold: 800;
-    --font-weight-black: 900;
-    --tracking-tighter: -.05em;
-    --tracking-tight: -.025em;
-    --tracking-normal: 0em;
-    --tracking-wide: .025em;
-    --tracking-wider: .05em;
-    --tracking-widest: .1em;
-    --leading-tight: 1.25;
-    --leading-snug: 1.375;
-    --leading-normal: 1.5;
-    --leading-relaxed: 1.625;
-    --leading-loose: 2;
-    --radius-4xl: 2rem;
-    --shadow-2xs: 0 1px #0000000d;
-    --shadow-xs: 0 1px 2px 0 #0000000d;
-    --shadow-sm: 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
-    --shadow-md: 0 4px 6px -1px #0000001a, 0 2px 4px -2px #0000001a;
-    --shadow-lg: 0 10px 15px -3px #0000001a, 0 4px 6px -4px #0000001a;
-    --shadow-xl: 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
-    --shadow-2xl: 0 25px 50px -12px #00000040;
-    --inset-shadow-2xs: inset 0 1px #0000000d;
-    --inset-shadow-xs: inset 0 1px 1px #0000000d;
-    --inset-shadow-sm: inset 0 2px 4px #0000000d;
-    --drop-shadow-xs: 0 1px 1px #0000000d;
-    --drop-shadow-sm: 0 1px 2px #00000026;
-    --drop-shadow-md: 0 3px 3px #0000001f;
-    --drop-shadow-lg: 0 4px 4px #00000026;
-    --drop-shadow-xl: 0 9px 7px #0000001a;
-    --drop-shadow-2xl: 0 25px 25px #00000026;
-    --text-shadow-2xs: 0px 1px 0px #00000026;
-    --text-shadow-xs: 0px 1px 1px #0003;
-    --text-shadow-sm: 0px 1px 0px #00000013, 0px 1px 1px #00000013, 0px 2px 2px #00000013;
-    --text-shadow-md: 0px 1px 1px #0000001a, 0px 1px 2px #0000001a, 0px 2px 4px #0000001a;
-    --text-shadow-lg: 0px 1px 2px #0000001a, 0px 3px 2px #0000001a, 0px 4px 8px #0000001a;
-    --ease-in: cubic-bezier(.4, 0, 1, 1);
-    --ease-out: cubic-bezier(0, 0, .2, 1);
-    --ease-in-out: cubic-bezier(.4, 0, .2, 1);
-    --animate-spin: spin 1s linear infinite;
-    --animate-ping: ping 1s cubic-bezier(0, 0, .2, 1) infinite;
-    --animate-pulse: pulse 2s cubic-bezier(.4, 0, .6, 1) infinite;
-    --animate-bounce: bounce 1s infinite;
-    --blur-xs: 4px;
-    --blur-sm: 8px;
-    --blur-md: 12px;
-    --blur-lg: 16px;
-    --blur-xl: 24px;
-    --blur-2xl: 40px;
-    --blur-3xl: 64px;
-    --perspective-dramatic: 100px;
-    --perspective-near: 300px;
-    --perspective-normal: 500px;
-    --perspective-midrange: 800px;
-    --perspective-distant: 1200px;
-    --aspect-video: 16 / 9;
-    --default-transition-duration: .15s;
-    --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-    --default-font-family: var(--font-sans);
-    --default-mono-font-family: var(--font-mono);
     --color-old-neutral-50: oklch(98.5% 0 0);
     --color-old-neutral-100: oklch(97% 0 0);
     --color-old-neutral-200: oklch(92.2% 0 0);
@@ -28553,9 +28456,9 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     -webkit-text-size-adjust: 100%;
     tab-size: 4;
     line-height: 1.5;
-    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
-    font-feature-settings: var(--default-font-feature-settings, normal);
-    font-variation-settings: var(--default-font-variation-settings, normal);
+    font-family: var(--default-font-family, var(--font-sans, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"));
+    font-feature-settings: var(--default-font-feature-settings, initial);
+    font-variation-settings: var(--default-font-variation-settings, initial);
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -28588,9 +28491,9 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   code, kbd, samp, pre {
-    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
-    font-feature-settings: var(--default-mono-font-feature-settings, normal);
-    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-family: var(--default-mono-font-family, var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace));
+    font-feature-settings: var(--default-mono-font-feature-settings, initial);
+    font-variation-settings: var(--default-mono-font-variation-settings, initial);
     font-size: 1em;
   }
 
@@ -28894,39 +28797,39 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .inset-0 {
-    inset: calc(var(--spacing) * 0);
+    inset: calc(var(--spacing, .25rem) * 0);
   }
 
   .inset-x-0 {
-    inset-inline: calc(var(--spacing) * 0);
+    inset-inline: calc(var(--spacing, .25rem) * 0);
   }
 
   .inset-x-1 {
-    inset-inline: calc(var(--spacing) * 1);
+    inset-inline: calc(var(--spacing, .25rem) * 1);
   }
 
   .inset-x-4 {
-    inset-inline: calc(var(--spacing) * 4);
+    inset-inline: calc(var(--spacing, .25rem) * 4);
   }
 
   .inset-y-0 {
-    inset-block: calc(var(--spacing) * 0);
+    inset-block: calc(var(--spacing, .25rem) * 0);
   }
 
   .inset-y-1 {
-    inset-block: calc(var(--spacing) * 1);
+    inset-block: calc(var(--spacing, .25rem) * 1);
   }
 
   .inset-y-1\\.5 {
-    inset-block: calc(var(--spacing) * 1.5);
+    inset-block: calc(var(--spacing, .25rem) * 1.5);
   }
 
   .inset-y-2 {
-    inset-block: calc(var(--spacing) * 2);
+    inset-block: calc(var(--spacing, .25rem) * 2);
   }
 
   .inset-y-4 {
-    inset-block: calc(var(--spacing) * 4);
+    inset-block: calc(var(--spacing, .25rem) * 4);
   }
 
   .-start-px {
@@ -28934,11 +28837,11 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .start-0 {
-    inset-inline-start: calc(var(--spacing) * 0);
+    inset-inline-start: calc(var(--spacing, .25rem) * 0);
   }
 
   .start-4 {
-    inset-inline-start: calc(var(--spacing) * 4);
+    inset-inline-start: calc(var(--spacing, .25rem) * 4);
   }
 
   .start-\\[calc\\(50\\%\\+16px\\)\\] {
@@ -28966,19 +28869,19 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .-end-1 {
-    inset-inline-end: calc(var(--spacing) * -1);
+    inset-inline-end: calc(var(--spacing, .25rem) * -1);
   }
 
   .-end-1\\.5 {
-    inset-inline-end: calc(var(--spacing) * -1.5);
+    inset-inline-end: calc(var(--spacing, .25rem) * -1.5);
   }
 
   .end-0 {
-    inset-inline-end: calc(var(--spacing) * 0);
+    inset-inline-end: calc(var(--spacing, .25rem) * 0);
   }
 
   .end-4 {
-    inset-inline-end: calc(var(--spacing) * 4);
+    inset-inline-end: calc(var(--spacing, .25rem) * 4);
   }
 
   .end-\\[calc\\(-50\\%\\+16px\\)\\] {
@@ -29002,19 +28905,19 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .-top-1 {
-    top: calc(var(--spacing) * -1);
+    top: calc(var(--spacing, .25rem) * -1);
   }
 
   .-top-1\\.5 {
-    top: calc(var(--spacing) * -1.5);
+    top: calc(var(--spacing, .25rem) * -1.5);
   }
 
   .top-0 {
-    top: calc(var(--spacing) * 0);
+    top: calc(var(--spacing, .25rem) * 0);
   }
 
   .top-1 {
-    top: calc(var(--spacing) * 1);
+    top: calc(var(--spacing, .25rem) * 1);
   }
 
   .top-1\\/2 {
@@ -29022,7 +28925,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .top-4 {
-    top: calc(var(--spacing) * 4);
+    top: calc(var(--spacing, .25rem) * 4);
   }
 
   .top-\\[-1px\\] {
@@ -29062,11 +28965,11 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .right-0 {
-    right: calc(var(--spacing) * 0);
+    right: calc(var(--spacing, .25rem) * 0);
   }
 
   .right-4 {
-    right: calc(var(--spacing) * 4);
+    right: calc(var(--spacing, .25rem) * 4);
   }
 
   .right-\\[-8px\\] {
@@ -29074,7 +28977,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .-bottom-7 {
-    bottom: calc(var(--spacing) * -7);
+    bottom: calc(var(--spacing, .25rem) * -7);
   }
 
   .-bottom-\\[10px\\] {
@@ -29086,11 +28989,11 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .bottom-0 {
-    bottom: calc(var(--spacing) * 0);
+    bottom: calc(var(--spacing, .25rem) * 0);
   }
 
   .bottom-4 {
-    bottom: calc(var(--spacing) * 4);
+    bottom: calc(var(--spacing, .25rem) * 4);
   }
 
   .left-\\(--reka-navigation-menu-viewport-left\\) {
@@ -29098,11 +29001,11 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .left-0 {
-    left: calc(var(--spacing) * 0);
+    left: calc(var(--spacing, .25rem) * 0);
   }
 
   .left-1 {
-    left: calc(var(--spacing) * 1);
+    left: calc(var(--spacing, .25rem) * 1);
   }
 
   .left-1\\/2 {
@@ -29110,7 +29013,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .left-4 {
-    left: calc(var(--spacing) * 4);
+    left: calc(var(--spacing, .25rem) * 4);
   }
 
   .isolate {
@@ -29192,19 +29095,19 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .m-0 {
-    margin: calc(var(--spacing) * 0);
+    margin: calc(var(--spacing, .25rem) * 0);
   }
 
   .m-0\\.5 {
-    margin: calc(var(--spacing) * .5);
+    margin: calc(var(--spacing, .25rem) * .5);
   }
 
   .-mx-1 {
-    margin-inline: calc(var(--spacing) * -1);
+    margin-inline: calc(var(--spacing, .25rem) * -1);
   }
 
   .mx-3 {
-    margin-inline: calc(var(--spacing) * 3);
+    margin-inline: calc(var(--spacing, .25rem) * 3);
   }
 
   .mx-auto {
@@ -29212,15 +29115,15 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .my-1 {
-    margin-block: calc(var(--spacing) * 1);
+    margin-block: calc(var(--spacing, .25rem) * 1);
   }
 
   .my-2 {
-    margin-block: calc(var(--spacing) * 2);
+    margin-block: calc(var(--spacing, .25rem) * 2);
   }
 
   .-ms-4 {
-    margin-inline-start: calc(var(--spacing) * -4);
+    margin-inline-start: calc(var(--spacing, .25rem) * -4);
   }
 
   .-ms-px {
@@ -29228,19 +29131,19 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .ms-2 {
-    margin-inline-start: calc(var(--spacing) * 2);
+    margin-inline-start: calc(var(--spacing, .25rem) * 2);
   }
 
   .ms-4 {
-    margin-inline-start: calc(var(--spacing) * 4);
+    margin-inline-start: calc(var(--spacing, .25rem) * 4);
   }
 
   .ms-4\\.5 {
-    margin-inline-start: calc(var(--spacing) * 4.5);
+    margin-inline-start: calc(var(--spacing, .25rem) * 4.5);
   }
 
   .ms-5 {
-    margin-inline-start: calc(var(--spacing) * 5);
+    margin-inline-start: calc(var(--spacing, .25rem) * 5);
   }
 
   .ms-auto {
@@ -29248,79 +29151,79 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .-me-0 {
-    margin-inline-end: calc(var(--spacing) * 0);
+    margin-inline-end: calc(var(--spacing, .25rem) * 0);
   }
 
   .-me-0\\.5 {
-    margin-inline-end: calc(var(--spacing) * -.5);
+    margin-inline-end: calc(var(--spacing, .25rem) * -.5);
   }
 
   .-me-1 {
-    margin-inline-end: calc(var(--spacing) * -1);
+    margin-inline-end: calc(var(--spacing, .25rem) * -1);
   }
 
   .-me-1\\.5 {
-    margin-inline-end: calc(var(--spacing) * -1.5);
+    margin-inline-end: calc(var(--spacing, .25rem) * -1.5);
   }
 
   .-me-2 {
-    margin-inline-end: calc(var(--spacing) * -2);
+    margin-inline-end: calc(var(--spacing, .25rem) * -2);
   }
 
   .me-2 {
-    margin-inline-end: calc(var(--spacing) * 2);
+    margin-inline-end: calc(var(--spacing, .25rem) * 2);
   }
 
   .-mt-0 {
-    margin-top: calc(var(--spacing) * 0);
+    margin-top: calc(var(--spacing, .25rem) * 0);
   }
 
   .-mt-0\\.5 {
-    margin-top: calc(var(--spacing) * -.5);
+    margin-top: calc(var(--spacing, .25rem) * -.5);
   }
 
   .-mt-4 {
-    margin-top: calc(var(--spacing) * -4);
+    margin-top: calc(var(--spacing, .25rem) * -4);
   }
 
   .mt-0 {
-    margin-top: calc(var(--spacing) * 0);
+    margin-top: calc(var(--spacing, .25rem) * 0);
   }
 
   .mt-0\\.5 {
-    margin-top: calc(var(--spacing) * .5);
+    margin-top: calc(var(--spacing, .25rem) * .5);
   }
 
   .mt-1 {
-    margin-top: calc(var(--spacing) * 1);
+    margin-top: calc(var(--spacing, .25rem) * 1);
   }
 
   .mt-1\\.5 {
-    margin-top: calc(var(--spacing) * 1.5);
+    margin-top: calc(var(--spacing, .25rem) * 1.5);
   }
 
   .mt-2 {
-    margin-top: calc(var(--spacing) * 2);
+    margin-top: calc(var(--spacing, .25rem) * 2);
   }
 
   .mt-2\\.5 {
-    margin-top: calc(var(--spacing) * 2.5);
+    margin-top: calc(var(--spacing, .25rem) * 2.5);
   }
 
   .mt-3 {
-    margin-top: calc(var(--spacing) * 3);
+    margin-top: calc(var(--spacing, .25rem) * 3);
   }
 
   .mt-3\\.5 {
-    margin-top: calc(var(--spacing) * 3.5);
+    margin-top: calc(var(--spacing, .25rem) * 3.5);
   }
 
   .mt-4 {
-    margin-top: calc(var(--spacing) * 4);
+    margin-top: calc(var(--spacing, .25rem) * 4);
   }
 
   .mt-24 {
-    margin-top: calc(var(--spacing) * 24);
+    margin-top: calc(var(--spacing, .25rem) * 24);
   }
 
   .mt-auto {
@@ -29328,11 +29231,11 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .\\!mr-4 {
-    margin-right: calc(var(--spacing) * 4) !important;
+    margin-right: calc(var(--spacing, .25rem) * 4) !important;
   }
 
   .mr-2 {
-    margin-right: calc(var(--spacing) * 2);
+    margin-right: calc(var(--spacing, .25rem) * 2);
   }
 
   .-mb-px {
@@ -29340,23 +29243,27 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .mb-0 {
-    margin-bottom: calc(var(--spacing) * 0);
+    margin-bottom: calc(var(--spacing, .25rem) * 0);
   }
 
   .mb-1 {
-    margin-bottom: calc(var(--spacing) * 1);
+    margin-bottom: calc(var(--spacing, .25rem) * 1);
+  }
+
+  .mb-2 {
+    margin-bottom: calc(var(--spacing, .25rem) * 2);
   }
 
   .mb-3 {
-    margin-bottom: calc(var(--spacing) * 3);
+    margin-bottom: calc(var(--spacing, .25rem) * 3);
   }
 
   .mb-4 {
-    margin-bottom: calc(var(--spacing) * 4);
+    margin-bottom: calc(var(--spacing, .25rem) * 4);
   }
 
   .mb-24 {
-    margin-bottom: calc(var(--spacing) * 24);
+    margin-bottom: calc(var(--spacing, .25rem) * 24);
   }
 
   .mb-auto {
@@ -29364,7 +29271,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .\\!ml-4 {
-    margin-left: calc(var(--spacing) * 4) !important;
+    margin-left: calc(var(--spacing, .25rem) * 4) !important;
   }
 
   .ml-auto {
@@ -29460,63 +29367,63 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .size-2 {
-    width: calc(var(--spacing) * 2);
-    height: calc(var(--spacing) * 2);
+    width: calc(var(--spacing, .25rem) * 2);
+    height: calc(var(--spacing, .25rem) * 2);
   }
 
   .size-2\\.5 {
-    width: calc(var(--spacing) * 2.5);
-    height: calc(var(--spacing) * 2.5);
+    width: calc(var(--spacing, .25rem) * 2.5);
+    height: calc(var(--spacing, .25rem) * 2.5);
   }
 
   .size-3 {
-    width: calc(var(--spacing) * 3);
-    height: calc(var(--spacing) * 3);
+    width: calc(var(--spacing, .25rem) * 3);
+    height: calc(var(--spacing, .25rem) * 3);
   }
 
   .size-3\\.5 {
-    width: calc(var(--spacing) * 3.5);
-    height: calc(var(--spacing) * 3.5);
+    width: calc(var(--spacing, .25rem) * 3.5);
+    height: calc(var(--spacing, .25rem) * 3.5);
   }
 
   .size-4 {
-    width: calc(var(--spacing) * 4);
-    height: calc(var(--spacing) * 4);
+    width: calc(var(--spacing, .25rem) * 4);
+    height: calc(var(--spacing, .25rem) * 4);
   }
 
   .size-4\\.5 {
-    width: calc(var(--spacing) * 4.5);
-    height: calc(var(--spacing) * 4.5);
+    width: calc(var(--spacing, .25rem) * 4.5);
+    height: calc(var(--spacing, .25rem) * 4.5);
   }
 
   .size-5 {
-    width: calc(var(--spacing) * 5);
-    height: calc(var(--spacing) * 5);
+    width: calc(var(--spacing, .25rem) * 5);
+    height: calc(var(--spacing, .25rem) * 5);
   }
 
   .size-6 {
-    width: calc(var(--spacing) * 6);
-    height: calc(var(--spacing) * 6);
+    width: calc(var(--spacing, .25rem) * 6);
+    height: calc(var(--spacing, .25rem) * 6);
   }
 
   .size-7 {
-    width: calc(var(--spacing) * 7);
-    height: calc(var(--spacing) * 7);
+    width: calc(var(--spacing, .25rem) * 7);
+    height: calc(var(--spacing, .25rem) * 7);
   }
 
   .size-8 {
-    width: calc(var(--spacing) * 8);
-    height: calc(var(--spacing) * 8);
+    width: calc(var(--spacing, .25rem) * 8);
+    height: calc(var(--spacing, .25rem) * 8);
   }
 
   .size-9 {
-    width: calc(var(--spacing) * 9);
-    height: calc(var(--spacing) * 9);
+    width: calc(var(--spacing, .25rem) * 9);
+    height: calc(var(--spacing, .25rem) * 9);
   }
 
   .size-10 {
-    width: calc(var(--spacing) * 10);
-    height: calc(var(--spacing) * 10);
+    width: calc(var(--spacing, .25rem) * 10);
+    height: calc(var(--spacing, .25rem) * 10);
   }
 
   .size-10\\/12 {
@@ -29525,18 +29432,18 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .size-11 {
-    width: calc(var(--spacing) * 11);
-    height: calc(var(--spacing) * 11);
+    width: calc(var(--spacing, .25rem) * 11);
+    height: calc(var(--spacing, .25rem) * 11);
   }
 
   .size-12 {
-    width: calc(var(--spacing) * 12);
-    height: calc(var(--spacing) * 12);
+    width: calc(var(--spacing, .25rem) * 12);
+    height: calc(var(--spacing, .25rem) * 12);
   }
 
   .size-14 {
-    width: calc(var(--spacing) * 14);
-    height: calc(var(--spacing) * 14);
+    width: calc(var(--spacing, .25rem) * 14);
+    height: calc(var(--spacing, .25rem) * 14);
   }
 
   .size-full {
@@ -29545,11 +29452,11 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .\\!h-1\\.5 {
-    height: calc(var(--spacing) * 1.5) !important;
+    height: calc(var(--spacing, .25rem) * 1.5) !important;
   }
 
   .\\!h-12 {
-    height: calc(var(--spacing) * 12) !important;
+    height: calc(var(--spacing, .25rem) * 12) !important;
   }
 
   .h-\\(--reka-navigation-menu-viewport-height\\) {
@@ -29561,75 +29468,75 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .h-0 {
-    height: calc(var(--spacing) * 0);
+    height: calc(var(--spacing, .25rem) * 0);
   }
 
   .h-0\\.5 {
-    height: calc(var(--spacing) * .5);
+    height: calc(var(--spacing, .25rem) * .5);
   }
 
   .h-1 {
-    height: calc(var(--spacing) * 1);
+    height: calc(var(--spacing, .25rem) * 1);
   }
 
   .h-2 {
-    height: calc(var(--spacing) * 2);
+    height: calc(var(--spacing, .25rem) * 2);
   }
 
   .h-2\\.5 {
-    height: calc(var(--spacing) * 2.5);
+    height: calc(var(--spacing, .25rem) * 2.5);
   }
 
   .h-3 {
-    height: calc(var(--spacing) * 3);
+    height: calc(var(--spacing, .25rem) * 3);
   }
 
   .h-4 {
-    height: calc(var(--spacing) * 4);
+    height: calc(var(--spacing, .25rem) * 4);
   }
 
   .h-5 {
-    height: calc(var(--spacing) * 5);
+    height: calc(var(--spacing, .25rem) * 5);
   }
 
   .h-6 {
-    height: calc(var(--spacing) * 6);
+    height: calc(var(--spacing, .25rem) * 6);
   }
 
   .h-8 {
-    height: calc(var(--spacing) * 8);
+    height: calc(var(--spacing, .25rem) * 8);
   }
 
   .h-10 {
-    height: calc(var(--spacing) * 10);
+    height: calc(var(--spacing, .25rem) * 10);
   }
 
   .h-12 {
-    height: calc(var(--spacing) * 12);
+    height: calc(var(--spacing, .25rem) * 12);
   }
 
   .h-20 {
-    height: calc(var(--spacing) * 20);
+    height: calc(var(--spacing, .25rem) * 20);
   }
 
   .h-38 {
-    height: calc(var(--spacing) * 38);
+    height: calc(var(--spacing, .25rem) * 38);
   }
 
   .h-40 {
-    height: calc(var(--spacing) * 40);
+    height: calc(var(--spacing, .25rem) * 40);
   }
 
   .h-42 {
-    height: calc(var(--spacing) * 42);
+    height: calc(var(--spacing, .25rem) * 42);
   }
 
   .h-44 {
-    height: calc(var(--spacing) * 44);
+    height: calc(var(--spacing, .25rem) * 44);
   }
 
   .h-46 {
-    height: calc(var(--spacing) * 46);
+    height: calc(var(--spacing, .25rem) * 46);
   }
 
   .h-\\[4px\\] {
@@ -29681,7 +29588,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .max-h-60 {
-    max-height: calc(var(--spacing) * 60);
+    max-height: calc(var(--spacing, .25rem) * 60);
   }
 
   .max-h-\\[32px\\] {
@@ -29709,23 +29616,23 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .min-h-0 {
-    min-height: calc(var(--spacing) * 0);
+    min-height: calc(var(--spacing, .25rem) * 0);
   }
 
   .min-h-6 {
-    min-height: calc(var(--spacing) * 6);
+    min-height: calc(var(--spacing, .25rem) * 6);
   }
 
   .min-h-16 {
-    min-height: calc(var(--spacing) * 16);
+    min-height: calc(var(--spacing, .25rem) * 16);
   }
 
   .\\!w-1\\.5 {
-    width: calc(var(--spacing) * 1.5) !important;
+    width: calc(var(--spacing, .25rem) * 1.5) !important;
   }
 
   .\\!w-12 {
-    width: calc(var(--spacing) * 12) !important;
+    width: calc(var(--spacing, .25rem) * 12) !important;
   }
 
   .w-\\(--reka-combobox-trigger-width\\) {
@@ -29745,79 +29652,79 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .w-0 {
-    width: calc(var(--spacing) * 0);
+    width: calc(var(--spacing, .25rem) * 0);
   }
 
   .w-0\\.5 {
-    width: calc(var(--spacing) * .5);
+    width: calc(var(--spacing, .25rem) * .5);
   }
 
   .w-1 {
-    width: calc(var(--spacing) * 1);
+    width: calc(var(--spacing, .25rem) * 1);
   }
 
   .w-2 {
-    width: calc(var(--spacing) * 2);
+    width: calc(var(--spacing, .25rem) * 2);
   }
 
   .w-3 {
-    width: calc(var(--spacing) * 3);
+    width: calc(var(--spacing, .25rem) * 3);
   }
 
   .w-4 {
-    width: calc(var(--spacing) * 4);
+    width: calc(var(--spacing, .25rem) * 4);
   }
 
   .w-5 {
-    width: calc(var(--spacing) * 5);
+    width: calc(var(--spacing, .25rem) * 5);
   }
 
   .w-6 {
-    width: calc(var(--spacing) * 6);
+    width: calc(var(--spacing, .25rem) * 6);
   }
 
   .w-7 {
-    width: calc(var(--spacing) * 7);
+    width: calc(var(--spacing, .25rem) * 7);
   }
 
   .w-8 {
-    width: calc(var(--spacing) * 8);
+    width: calc(var(--spacing, .25rem) * 8);
   }
 
   .w-9 {
-    width: calc(var(--spacing) * 9);
+    width: calc(var(--spacing, .25rem) * 9);
   }
 
   .w-10 {
-    width: calc(var(--spacing) * 10);
+    width: calc(var(--spacing, .25rem) * 10);
   }
 
   .w-11 {
-    width: calc(var(--spacing) * 11);
+    width: calc(var(--spacing, .25rem) * 11);
   }
 
   .w-38 {
-    width: calc(var(--spacing) * 38);
+    width: calc(var(--spacing, .25rem) * 38);
   }
 
   .w-40 {
-    width: calc(var(--spacing) * 40);
+    width: calc(var(--spacing, .25rem) * 40);
   }
 
   .w-42 {
-    width: calc(var(--spacing) * 42);
+    width: calc(var(--spacing, .25rem) * 42);
   }
 
   .w-44 {
-    width: calc(var(--spacing) * 44);
+    width: calc(var(--spacing, .25rem) * 44);
   }
 
   .w-46 {
-    width: calc(var(--spacing) * 46);
+    width: calc(var(--spacing, .25rem) * 46);
   }
 
   .w-60 {
-    width: calc(var(--spacing) * 60);
+    width: calc(var(--spacing, .25rem) * 60);
   }
 
   .w-\\[6px\\] {
@@ -29881,27 +29788,27 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .max-w-lg {
-    max-width: var(--container-lg);
+    max-width: var(--container-lg, 32rem);
   }
 
   .max-w-md {
-    max-width: var(--container-md);
+    max-width: var(--container-md, 28rem);
   }
 
   .max-w-sm {
-    max-width: var(--container-sm);
+    max-width: var(--container-sm, 24rem);
   }
 
   .min-w-0 {
-    min-width: calc(var(--spacing) * 0);
+    min-width: calc(var(--spacing, .25rem) * 0);
   }
 
   .min-w-5 {
-    min-width: calc(var(--spacing) * 5);
+    min-width: calc(var(--spacing, .25rem) * 5);
   }
 
   .min-w-32 {
-    min-width: calc(var(--spacing) * 32);
+    min-width: calc(var(--spacing, .25rem) * 32);
   }
 
   .min-w-\\[4px\\] {
@@ -30009,7 +29916,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .-translate-x-1 {
-    --tw-translate-x: calc(var(--spacing) * -1);
+    --tw-translate-x: calc(var(--spacing, .25rem) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
@@ -30034,7 +29941,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .translate-x-1 {
-    --tw-translate-x: calc(var(--spacing) * 1);
+    --tw-translate-x: calc(var(--spacing, .25rem) * 1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
@@ -30043,8 +29950,13 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
+  .translate-x-2 {
+    --tw-translate-x: calc(var(--spacing, .25rem) * 2);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+
   .-translate-y-1 {
-    --tw-translate-y: calc(var(--spacing) * -1);
+    --tw-translate-y: calc(var(--spacing, .25rem) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
@@ -30059,12 +29971,17 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .translate-y-1 {
-    --tw-translate-y: calc(var(--spacing) * 1);
+    --tw-translate-y: calc(var(--spacing, .25rem) * 1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
   .translate-y-1\\/2 {
     --tw-translate-y: calc(1 / 2 * 100%);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+
+  .translate-y-3 {
+    --tw-translate-y: calc(var(--spacing, .25rem) * 3);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
@@ -30100,11 +30017,11 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .animate-pulse {
-    animation: var(--animate-pulse);
+    animation: var(--animate-pulse, pulse 2s cubic-bezier(.4, 0, .6, 1) infinite);
   }
 
   .animate-spin {
-    animation: var(--animate-spin);
+    animation: var(--animate-spin, spin 1s linear infinite);
   }
 
   .cursor-move {
@@ -30137,7 +30054,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .scroll-py-1 {
-    scroll-padding-block: calc(var(--spacing) * 1);
+    scroll-padding-block: calc(var(--spacing, .25rem) * 1);
   }
 
   .columns-3 {
@@ -30209,47 +30126,47 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .gap-0 {
-    gap: calc(var(--spacing) * 0);
+    gap: calc(var(--spacing, .25rem) * 0);
   }
 
   .gap-0\\.5 {
-    gap: calc(var(--spacing) * .5);
+    gap: calc(var(--spacing, .25rem) * .5);
   }
 
   .gap-1 {
-    gap: calc(var(--spacing) * 1);
+    gap: calc(var(--spacing, .25rem) * 1);
   }
 
   .gap-1\\.5 {
-    gap: calc(var(--spacing) * 1.5);
+    gap: calc(var(--spacing, .25rem) * 1.5);
   }
 
   .gap-2 {
-    gap: calc(var(--spacing) * 2);
+    gap: calc(var(--spacing, .25rem) * 2);
   }
 
   .gap-2\\.5 {
-    gap: calc(var(--spacing) * 2.5);
+    gap: calc(var(--spacing, .25rem) * 2.5);
   }
 
   .gap-3 {
-    gap: calc(var(--spacing) * 3);
+    gap: calc(var(--spacing, .25rem) * 3);
   }
 
   .gap-3\\.5 {
-    gap: calc(var(--spacing) * 3.5);
+    gap: calc(var(--spacing, .25rem) * 3.5);
   }
 
   .gap-4 {
-    gap: calc(var(--spacing) * 4);
+    gap: calc(var(--spacing, .25rem) * 4);
   }
 
   .gap-6 {
-    gap: calc(var(--spacing) * 6);
+    gap: calc(var(--spacing, .25rem) * 6);
   }
 
   .gap-7 {
-    gap: calc(var(--spacing) * 7);
+    gap: calc(var(--spacing, .25rem) * 7);
   }
 
   :where(.-space-y-px > :not(:last-child)) {
@@ -30260,26 +30177,26 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   :where(.space-y-1 > :not(:last-child)) {
     --tw-space-y-reverse: 0;
-    margin-block-start: calc(calc(var(--spacing) * 1) * var(--tw-space-y-reverse));
-    margin-block-end: calc(calc(var(--spacing) * 1) * calc(1 - var(--tw-space-y-reverse)));
+    margin-block-start: calc(calc(var(--spacing, .25rem) * 1) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing, .25rem) * 1) * calc(1 - var(--tw-space-y-reverse)));
   }
 
   :where(.space-y-2 > :not(:last-child)) {
     --tw-space-y-reverse: 0;
-    margin-block-start: calc(calc(var(--spacing) * 2) * var(--tw-space-y-reverse));
-    margin-block-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-y-reverse)));
+    margin-block-start: calc(calc(var(--spacing, .25rem) * 2) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing, .25rem) * 2) * calc(1 - var(--tw-space-y-reverse)));
   }
 
   :where(.space-y-3 > :not(:last-child)) {
     --tw-space-y-reverse: 0;
-    margin-block-start: calc(calc(var(--spacing) * 3) * var(--tw-space-y-reverse));
-    margin-block-end: calc(calc(var(--spacing) * 3) * calc(1 - var(--tw-space-y-reverse)));
+    margin-block-start: calc(calc(var(--spacing, .25rem) * 3) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing, .25rem) * 3) * calc(1 - var(--tw-space-y-reverse)));
   }
 
   :where(.space-y-4 > :not(:last-child)) {
     --tw-space-y-reverse: 0;
-    margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
-    margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
+    margin-block-start: calc(calc(var(--spacing, .25rem) * 4) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing, .25rem) * 4) * calc(1 - var(--tw-space-y-reverse)));
   }
 
   :where(.space-y-reverse > :not(:last-child)) {
@@ -30287,7 +30204,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .gap-x-2 {
-    column-gap: calc(var(--spacing) * 2);
+    column-gap: calc(var(--spacing, .25rem) * 2);
   }
 
   :where(.-space-x-px > :not(:last-child)) {
@@ -30298,8 +30215,8 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   :where(.space-x-1 > :not(:last-child)) {
     --tw-space-x-reverse: 0;
-    margin-inline-start: calc(calc(var(--spacing) * 1) * var(--tw-space-x-reverse));
-    margin-inline-end: calc(calc(var(--spacing) * 1) * calc(1 - var(--tw-space-x-reverse)));
+    margin-inline-start: calc(calc(var(--spacing, .25rem) * 1) * var(--tw-space-x-reverse));
+    margin-inline-end: calc(calc(var(--spacing, .25rem) * 1) * calc(1 - var(--tw-space-x-reverse)));
   }
 
   :where(.space-x-reverse > :not(:last-child)) {
@@ -30307,19 +30224,19 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .gap-y-0 {
-    row-gap: calc(var(--spacing) * 0);
+    row-gap: calc(var(--spacing, .25rem) * 0);
   }
 
   .gap-y-0\\.5 {
-    row-gap: calc(var(--spacing) * .5);
+    row-gap: calc(var(--spacing, .25rem) * .5);
   }
 
   .gap-y-1 {
-    row-gap: calc(var(--spacing) * 1);
+    row-gap: calc(var(--spacing, .25rem) * 1);
   }
 
   .gap-y-1\\.5 {
-    row-gap: calc(var(--spacing) * 1.5);
+    row-gap: calc(var(--spacing, .25rem) * 1.5);
   }
 
   :where(.divide-x > :not(:last-child)) {
@@ -30384,19 +30301,19 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .rounded-lg {
-    border-radius: calc(var(--ui-radius) * 2);
+    border-radius: var(--radius-lg, .5rem);
   }
 
   .rounded-md {
-    border-radius: calc(var(--ui-radius) * 1.5);
+    border-radius: var(--radius-md, .375rem);
   }
 
   .rounded-sm {
-    border-radius: var(--ui-radius);
+    border-radius: var(--radius-sm, .25rem);
   }
 
   .rounded-xs {
-    border-radius: calc(var(--ui-radius) * .5);
+    border-radius: var(--radius-xs, .125rem);
   }
 
   .rounded-s {
@@ -30431,8 +30348,8 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .rounded-t-lg {
-    border-top-left-radius: calc(var(--ui-radius) * 2);
-    border-top-right-radius: calc(var(--ui-radius) * 2);
+    border-top-left-radius: var(--radius-lg, .5rem);
+    border-top-right-radius: var(--radius-lg, .5rem);
   }
 
   .rounded-l {
@@ -30441,8 +30358,8 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .rounded-l-lg {
-    border-top-left-radius: calc(var(--ui-radius) * 2);
-    border-bottom-left-radius: calc(var(--ui-radius) * 2);
+    border-top-left-radius: var(--radius-lg, .5rem);
+    border-bottom-left-radius: var(--radius-lg, .5rem);
   }
 
   .rounded-tl {
@@ -30455,8 +30372,8 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .rounded-r-lg {
-    border-top-right-radius: calc(var(--ui-radius) * 2);
-    border-bottom-right-radius: calc(var(--ui-radius) * 2);
+    border-top-right-radius: var(--radius-lg, .5rem);
+    border-bottom-right-radius: var(--radius-lg, .5rem);
   }
 
   .rounded-tr {
@@ -30469,8 +30386,8 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .rounded-b-lg {
-    border-bottom-right-radius: calc(var(--ui-radius) * 2);
-    border-bottom-left-radius: calc(var(--ui-radius) * 2);
+    border-bottom-right-radius: var(--radius-lg, .5rem);
+    border-bottom-left-radius: var(--radius-lg, .5rem);
   }
 
   .rounded-br {
@@ -30482,7 +30399,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .rounded-bl-lg {
-    border-bottom-left-radius: calc(var(--ui-radius) * 2);
+    border-bottom-left-radius: var(--radius-lg, .5rem);
   }
 
   .border {
@@ -30600,8 +30517,16 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     border-style: solid;
   }
 
+  .border-\\[var\\(--color-neutral-100\\)\\] {
+    border-color: var(--color-neutral-100);
+  }
+
   .border-\\[var\\(--color-neutral-200\\)\\] {
     border-color: var(--color-neutral-200);
+  }
+
+  .border-\\[var\\(--ui-primary\\)\\] {
+    border-color: var(--ui-primary);
   }
 
   .border-bg {
@@ -30664,6 +30589,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     background-color: #0006;
   }
 
+  .bg-\\[var\\(--color-blue-50\\)\\] {
+    background-color: var(--color-blue-50);
+  }
+
   .bg-accented {
     background-color: var(--ui-bg-accented);
   }
@@ -30717,25 +30646,15 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .bg-gray-300 {
-    background-color: var(--color-gray-300);
+    background-color: var(--color-gray-300, oklch(87.2% .01 258.338));
   }
 
   .bg-gray-500 {
-    background-color: var(--color-gray-500);
-  }
-
-  .bg-gray-500\\/5 {
-    background-color: #6a72820d;
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .bg-gray-500\\/5 {
-      background-color: color-mix(in oklab, var(--color-gray-500) 5%, transparent);
-    }
+    background-color: var(--color-gray-500, oklch(55.1% .027 264.364));
   }
 
   .bg-gray-800 {
-    background-color: var(--color-gray-800);
+    background-color: var(--color-gray-800, oklch(27.8% .033 256.848));
   }
 
   .bg-info, .bg-info\\/10 {
@@ -30797,7 +30716,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .bg-white {
-    background-color: var(--color-white);
+    background-color: var(--color-white, #fff);
   }
 
   .bg-repeat {
@@ -30813,119 +30732,123 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .p-0 {
-    padding: calc(var(--spacing) * 0);
+    padding: calc(var(--spacing, .25rem) * 0);
   }
 
   .p-0\\.5 {
-    padding: calc(var(--spacing) * .5);
+    padding: calc(var(--spacing, .25rem) * .5);
   }
 
   .p-1 {
-    padding: calc(var(--spacing) * 1);
+    padding: calc(var(--spacing, .25rem) * 1);
   }
 
   .p-1\\.5 {
-    padding: calc(var(--spacing) * 1.5);
+    padding: calc(var(--spacing, .25rem) * 1.5);
   }
 
   .p-2 {
-    padding: calc(var(--spacing) * 2);
+    padding: calc(var(--spacing, .25rem) * 2);
   }
 
   .p-2\\.5 {
-    padding: calc(var(--spacing) * 2.5);
+    padding: calc(var(--spacing, .25rem) * 2.5);
   }
 
   .p-3 {
-    padding: calc(var(--spacing) * 3);
+    padding: calc(var(--spacing, .25rem) * 3);
   }
 
   .p-3\\.5 {
-    padding: calc(var(--spacing) * 3.5);
+    padding: calc(var(--spacing, .25rem) * 3.5);
   }
 
   .p-4 {
-    padding: calc(var(--spacing) * 4);
+    padding: calc(var(--spacing, .25rem) * 4);
   }
 
   .p-4\\.5 {
-    padding: calc(var(--spacing) * 4.5);
+    padding: calc(var(--spacing, .25rem) * 4.5);
   }
 
   .px-1 {
-    padding-inline: calc(var(--spacing) * 1);
+    padding-inline: calc(var(--spacing, .25rem) * 1);
   }
 
   .px-1\\.5 {
-    padding-inline: calc(var(--spacing) * 1.5);
+    padding-inline: calc(var(--spacing, .25rem) * 1.5);
   }
 
   .px-2 {
-    padding-inline: calc(var(--spacing) * 2);
+    padding-inline: calc(var(--spacing, .25rem) * 2);
   }
 
   .px-2\\.5 {
-    padding-inline: calc(var(--spacing) * 2.5);
+    padding-inline: calc(var(--spacing, .25rem) * 2.5);
   }
 
   .px-3 {
-    padding-inline: calc(var(--spacing) * 3);
+    padding-inline: calc(var(--spacing, .25rem) * 3);
   }
 
   .px-4 {
-    padding-inline: calc(var(--spacing) * 4);
+    padding-inline: calc(var(--spacing, .25rem) * 4);
+  }
+
+  .px-6 {
+    padding-inline: calc(var(--spacing, .25rem) * 6);
   }
 
   .px-7 {
-    padding-inline: calc(var(--spacing) * 7);
+    padding-inline: calc(var(--spacing, .25rem) * 7);
   }
 
   .px-8 {
-    padding-inline: calc(var(--spacing) * 8);
+    padding-inline: calc(var(--spacing, .25rem) * 8);
   }
 
   .px-9 {
-    padding-inline: calc(var(--spacing) * 9);
+    padding-inline: calc(var(--spacing, .25rem) * 9);
   }
 
   .px-10 {
-    padding-inline: calc(var(--spacing) * 10);
+    padding-inline: calc(var(--spacing, .25rem) * 10);
   }
 
   .px-11 {
-    padding-inline: calc(var(--spacing) * 11);
+    padding-inline: calc(var(--spacing, .25rem) * 11);
   }
 
   .py-0 {
-    padding-block: calc(var(--spacing) * 0);
+    padding-block: calc(var(--spacing, .25rem) * 0);
   }
 
   .py-0\\.5 {
-    padding-block: calc(var(--spacing) * .5);
+    padding-block: calc(var(--spacing, .25rem) * .5);
   }
 
   .py-1 {
-    padding-block: calc(var(--spacing) * 1);
+    padding-block: calc(var(--spacing, .25rem) * 1);
   }
 
   .py-1\\.5 {
-    padding-block: calc(var(--spacing) * 1.5);
+    padding-block: calc(var(--spacing, .25rem) * 1.5);
   }
 
   .py-2 {
-    padding-block: calc(var(--spacing) * 2);
+    padding-block: calc(var(--spacing, .25rem) * 2);
   }
 
   .py-3 {
-    padding-block: calc(var(--spacing) * 3);
+    padding-block: calc(var(--spacing, .25rem) * 3);
   }
 
   .py-3\\.5 {
-    padding-block: calc(var(--spacing) * 3.5);
+    padding-block: calc(var(--spacing, .25rem) * 3.5);
   }
 
   .py-6 {
-    padding-block: calc(var(--spacing) * 6);
+    padding-block: calc(var(--spacing, .25rem) * 6);
   }
 
   .py-\\[6px\\] {
@@ -30933,175 +30856,179 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .ps-1 {
-    padding-inline-start: calc(var(--spacing) * 1);
+    padding-inline-start: calc(var(--spacing, .25rem) * 1);
   }
 
   .ps-1\\.5 {
-    padding-inline-start: calc(var(--spacing) * 1.5);
+    padding-inline-start: calc(var(--spacing, .25rem) * 1.5);
   }
 
   .ps-2 {
-    padding-inline-start: calc(var(--spacing) * 2);
+    padding-inline-start: calc(var(--spacing, .25rem) * 2);
   }
 
   .ps-2\\.5 {
-    padding-inline-start: calc(var(--spacing) * 2.5);
+    padding-inline-start: calc(var(--spacing, .25rem) * 2.5);
   }
 
   .ps-3 {
-    padding-inline-start: calc(var(--spacing) * 3);
+    padding-inline-start: calc(var(--spacing, .25rem) * 3);
   }
 
   .ps-4 {
-    padding-inline-start: calc(var(--spacing) * 4);
+    padding-inline-start: calc(var(--spacing, .25rem) * 4);
   }
 
   .ps-7 {
-    padding-inline-start: calc(var(--spacing) * 7);
+    padding-inline-start: calc(var(--spacing, .25rem) * 7);
   }
 
   .ps-8 {
-    padding-inline-start: calc(var(--spacing) * 8);
+    padding-inline-start: calc(var(--spacing, .25rem) * 8);
   }
 
   .ps-9 {
-    padding-inline-start: calc(var(--spacing) * 9);
+    padding-inline-start: calc(var(--spacing, .25rem) * 9);
   }
 
   .ps-10 {
-    padding-inline-start: calc(var(--spacing) * 10);
+    padding-inline-start: calc(var(--spacing, .25rem) * 10);
   }
 
   .ps-11 {
-    padding-inline-start: calc(var(--spacing) * 11);
+    padding-inline-start: calc(var(--spacing, .25rem) * 11);
   }
 
   .pe-1 {
-    padding-inline-end: calc(var(--spacing) * 1);
+    padding-inline-end: calc(var(--spacing, .25rem) * 1);
   }
 
   .pe-2 {
-    padding-inline-end: calc(var(--spacing) * 2);
+    padding-inline-end: calc(var(--spacing, .25rem) * 2);
   }
 
   .pe-2\\.5 {
-    padding-inline-end: calc(var(--spacing) * 2.5);
+    padding-inline-end: calc(var(--spacing, .25rem) * 2.5);
   }
 
   .pe-3 {
-    padding-inline-end: calc(var(--spacing) * 3);
+    padding-inline-end: calc(var(--spacing, .25rem) * 3);
   }
 
   .pe-4 {
-    padding-inline-end: calc(var(--spacing) * 4);
+    padding-inline-end: calc(var(--spacing, .25rem) * 4);
   }
 
   .pe-4\\.5 {
-    padding-inline-end: calc(var(--spacing) * 4.5);
+    padding-inline-end: calc(var(--spacing, .25rem) * 4.5);
   }
 
   .pe-5 {
-    padding-inline-end: calc(var(--spacing) * 5);
+    padding-inline-end: calc(var(--spacing, .25rem) * 5);
   }
 
   .pe-5\\.5 {
-    padding-inline-end: calc(var(--spacing) * 5.5);
+    padding-inline-end: calc(var(--spacing, .25rem) * 5.5);
   }
 
   .pe-6 {
-    padding-inline-end: calc(var(--spacing) * 6);
+    padding-inline-end: calc(var(--spacing, .25rem) * 6);
   }
 
   .pe-6\\.5 {
-    padding-inline-end: calc(var(--spacing) * 6.5);
+    padding-inline-end: calc(var(--spacing, .25rem) * 6.5);
   }
 
   .pe-7 {
-    padding-inline-end: calc(var(--spacing) * 7);
+    padding-inline-end: calc(var(--spacing, .25rem) * 7);
   }
 
   .pe-7\\.5 {
-    padding-inline-end: calc(var(--spacing) * 7.5);
+    padding-inline-end: calc(var(--spacing, .25rem) * 7.5);
   }
 
   .pe-8 {
-    padding-inline-end: calc(var(--spacing) * 8);
+    padding-inline-end: calc(var(--spacing, .25rem) * 8);
   }
 
   .pe-8\\.5 {
-    padding-inline-end: calc(var(--spacing) * 8.5);
+    padding-inline-end: calc(var(--spacing, .25rem) * 8.5);
   }
 
   .pe-9 {
-    padding-inline-end: calc(var(--spacing) * 9);
+    padding-inline-end: calc(var(--spacing, .25rem) * 9);
   }
 
   .pe-10 {
-    padding-inline-end: calc(var(--spacing) * 10);
+    padding-inline-end: calc(var(--spacing, .25rem) * 10);
   }
 
   .pe-11 {
-    padding-inline-end: calc(var(--spacing) * 11);
+    padding-inline-end: calc(var(--spacing, .25rem) * 11);
   }
 
   .pt-2 {
-    padding-top: calc(var(--spacing) * 2);
+    padding-top: calc(var(--spacing, .25rem) * 2);
   }
 
   .pt-4 {
-    padding-top: calc(var(--spacing) * 4);
+    padding-top: calc(var(--spacing, .25rem) * 4);
   }
 
   .pr-2 {
-    padding-right: calc(var(--spacing) * 2);
+    padding-right: calc(var(--spacing, .25rem) * 2);
   }
 
   .pb-3 {
-    padding-bottom: calc(var(--spacing) * 3);
+    padding-bottom: calc(var(--spacing, .25rem) * 3);
   }
 
   .pb-3\\.5 {
-    padding-bottom: calc(var(--spacing) * 3.5);
+    padding-bottom: calc(var(--spacing, .25rem) * 3.5);
   }
 
   .pb-4 {
-    padding-bottom: calc(var(--spacing) * 4);
+    padding-bottom: calc(var(--spacing, .25rem) * 4);
   }
 
   .pb-4\\.5 {
-    padding-bottom: calc(var(--spacing) * 4.5);
+    padding-bottom: calc(var(--spacing, .25rem) * 4.5);
   }
 
   .pb-5 {
-    padding-bottom: calc(var(--spacing) * 5);
+    padding-bottom: calc(var(--spacing, .25rem) * 5);
   }
 
   .pb-5\\.5 {
-    padding-bottom: calc(var(--spacing) * 5.5);
+    padding-bottom: calc(var(--spacing, .25rem) * 5.5);
   }
 
   .pb-6 {
-    padding-bottom: calc(var(--spacing) * 6);
+    padding-bottom: calc(var(--spacing, .25rem) * 6);
   }
 
   .pb-6\\.5 {
-    padding-bottom: calc(var(--spacing) * 6.5);
+    padding-bottom: calc(var(--spacing, .25rem) * 6.5);
   }
 
   .pb-7 {
-    padding-bottom: calc(var(--spacing) * 7);
+    padding-bottom: calc(var(--spacing, .25rem) * 7);
   }
 
   .pb-7\\.5 {
-    padding-bottom: calc(var(--spacing) * 7.5);
+    padding-bottom: calc(var(--spacing, .25rem) * 7.5);
   }
 
   .pb-8 {
-    padding-bottom: calc(var(--spacing) * 8);
+    padding-bottom: calc(var(--spacing, .25rem) * 8);
   }
 
   .pb-8\\.5 {
-    padding-bottom: calc(var(--spacing) * 8.5);
+    padding-bottom: calc(var(--spacing, .25rem) * 8.5);
+  }
+
+  .pl-2 {
+    padding-left: calc(var(--spacing, .25rem) * 2);
   }
 
   .text-center {
@@ -31133,48 +31060,48 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .text-2xl {
-    font-size: var(--text-2xl);
-    line-height: var(--tw-leading, var(--text-2xl--line-height));
+    font-size: var(--text-2xl, 1.5rem);
+    line-height: var(--tw-leading, var(--text-2xl--line-height, calc(2 / 1.5)));
   }
 
   .text-\\[8px\\]\\/3 {
     font-size: 8px;
-    line-height: calc(var(--spacing) * 3);
+    line-height: calc(var(--spacing, .25rem) * 3);
   }
 
   .text-\\[10px\\]\\/3 {
     font-size: 10px;
-    line-height: calc(var(--spacing) * 3);
+    line-height: calc(var(--spacing, .25rem) * 3);
   }
 
   .text-base {
-    font-size: var(--text-base);
-    line-height: var(--tw-leading, var(--text-base--line-height));
+    font-size: var(--text-base, 1rem);
+    line-height: var(--tw-leading, var(--text-base--line-height, calc(1.5 / 1)));
   }
 
   .text-lg {
-    font-size: var(--text-lg);
-    line-height: var(--tw-leading, var(--text-lg--line-height));
+    font-size: var(--text-lg, 1.125rem);
+    line-height: var(--tw-leading, var(--text-lg--line-height, calc(1.75 / 1.125)));
   }
 
   .text-sm {
-    font-size: var(--text-sm);
-    line-height: var(--tw-leading, var(--text-sm--line-height));
+    font-size: var(--text-sm, .875rem);
+    line-height: var(--tw-leading, var(--text-sm--line-height, calc(1.25 / .875)));
   }
 
   .text-xl {
-    font-size: var(--text-xl);
-    line-height: var(--tw-leading, var(--text-xl--line-height));
+    font-size: var(--text-xl, 1.25rem);
+    line-height: var(--tw-leading, var(--text-xl--line-height, calc(1.75 / 1.25)));
   }
 
   .text-xs {
-    font-size: var(--text-xs);
-    line-height: var(--tw-leading, var(--text-xs--line-height));
+    font-size: var(--text-xs, .75rem);
+    line-height: var(--tw-leading, var(--text-xs--line-height, calc(1 / .75)));
   }
 
   .text-xs\\/5 {
-    font-size: var(--text-xs);
-    line-height: calc(var(--spacing) * 5);
+    font-size: var(--text-xs, .75rem);
+    line-height: calc(var(--spacing, .25rem) * 5);
   }
 
   .text-\\[4px\\] {
@@ -31223,23 +31150,23 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .font-bold {
-    --tw-font-weight: var(--font-weight-bold);
-    font-weight: var(--font-weight-bold);
+    --tw-font-weight: var(--font-weight-bold, 700);
+    font-weight: var(--font-weight-bold, 700);
   }
 
   .font-medium {
-    --tw-font-weight: var(--font-weight-medium);
-    font-weight: var(--font-weight-medium);
+    --tw-font-weight: var(--font-weight-medium, 500);
+    font-weight: var(--font-weight-medium, 500);
   }
 
   .font-normal {
-    --tw-font-weight: var(--font-weight-normal);
-    font-weight: var(--font-weight-normal);
+    --tw-font-weight: var(--font-weight-normal, 400);
+    font-weight: var(--font-weight-normal, 400);
   }
 
   .font-semibold {
-    --tw-font-weight: var(--font-weight-semibold);
-    font-weight: var(--font-weight-semibold);
+    --tw-font-weight: var(--font-weight-semibold, 600);
+    font-weight: var(--font-weight-semibold, 600);
   }
 
   .text-wrap {
@@ -31278,6 +31205,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     color: var(--header-icon-color);
   }
 
+  .text-\\[var\\(--ui-primary\\)\\] {
+    color: var(--ui-primary);
+  }
+
   .text-blue-600 {
     color: var(--color-blue-600);
   }
@@ -31301,19 +31232,19 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .text-gray-400 {
-    color: var(--color-gray-400);
+    color: var(--color-gray-400, oklch(70.7% .022 261.325));
   }
 
   .text-gray-500 {
-    color: var(--color-gray-500);
+    color: var(--color-gray-500, oklch(55.1% .027 264.364));
   }
 
   .text-gray-600 {
-    color: var(--color-gray-600);
+    color: var(--color-gray-600, oklch(44.6% .03 256.802));
   }
 
   .text-green-600 {
-    color: var(--color-green-600);
+    color: var(--color-green-600, oklch(62.7% .194 149.214));
   }
 
   .text-highlighted {
@@ -31353,7 +31284,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .text-red-600 {
-    color: var(--color-red-600);
+    color: var(--color-red-600, oklch(57.7% .245 27.325));
   }
 
   .text-secondary, .text-secondary\\/75 {
@@ -31387,15 +31318,15 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .text-white {
-    color: var(--color-white);
+    color: var(--color-white, #fff);
   }
 
   .text-yellow-500 {
-    color: var(--color-yellow-500);
+    color: var(--color-yellow-500, oklch(79.5% .184 86.047));
   }
 
   .text-yellow-600 {
-    color: var(--color-yellow-600);
+    color: var(--color-yellow-600, oklch(68.1% .162 75.834));
   }
 
   .capitalize {
@@ -31759,68 +31690,68 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, visibility, content-visibility, overlay, pointer-events;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
   }
 
   .transition-\\[background\\] {
     transition-property: background;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
   }
 
   .transition-\\[color\\,opacity\\] {
     transition-property: color, opacity;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
   }
 
   .transition-\\[transform\\,translate\\,height\\] {
     transition-property: transform, translate, height;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
   }
 
   .transition-\\[translate\\,width\\] {
     transition-property: translate, width;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
   }
 
   .transition-\\[width\\,height\\,left\\] {
     transition-property: width, height, left;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
   }
 
   .transition-\\[width\\] {
     transition-property: width;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
   }
 
   .transition-all {
     transition-property: all;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
   }
 
   .transition-colors {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
   }
 
   .transition-opacity {
     transition-property: opacity;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
   }
 
   .transition-transform {
     transition-property: transform, translate, scale, rotate;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
   }
 
   .duration-200 {
@@ -31829,18 +31760,18 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .ease-in {
-    --tw-ease: var(--ease-in);
-    transition-timing-function: var(--ease-in);
+    --tw-ease: var(--ease-in, cubic-bezier(.4, 0, 1, 1));
+    transition-timing-function: var(--ease-in, cubic-bezier(.4, 0, 1, 1));
   }
 
   .ease-in-out {
-    --tw-ease: var(--ease-in-out);
-    transition-timing-function: var(--ease-in-out);
+    --tw-ease: var(--ease-in-out, cubic-bezier(.4, 0, .2, 1));
+    transition-timing-function: var(--ease-in-out, cubic-bezier(.4, 0, .2, 1));
   }
 
   .ease-out {
-    --tw-ease: var(--ease-out);
-    transition-timing-function: var(--ease-out);
+    --tw-ease: var(--ease-out, cubic-bezier(0, 0, .2, 1));
+    transition-timing-function: var(--ease-out, cubic-bezier(0, 0, .2, 1));
   }
 
   .outline-none {
@@ -31892,7 +31823,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     }
 
     .group-hover\\:border-white:is(:where(.group):hover *) {
-      border-color: var(--color-white);
+      border-color: var(--color-white, #fff);
     }
 
     .group-hover\\:text-default:is(:where(.group):hover *) {
@@ -32089,12 +32020,12 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .file\\:me-1\\.5::file-selector-button {
-    margin-inline-end: calc(var(--spacing) * 1.5);
+    margin-inline-end: calc(var(--spacing, .25rem) * 1.5);
   }
 
   .file\\:font-medium::file-selector-button {
-    --tw-font-weight: var(--font-weight-medium);
-    font-weight: var(--font-weight-medium);
+    --tw-font-weight: var(--font-weight-medium, 500);
+    font-weight: var(--font-weight-medium, 500);
   }
 
   .file\\:text-muted::file-selector-button {
@@ -32122,7 +32053,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .before\\:inset-x-0:before {
     content: var(--tw-content);
-    inset-inline: calc(var(--spacing) * 0);
+    inset-inline: calc(var(--spacing, .25rem) * 0);
   }
 
   .before\\:inset-x-px:before {
@@ -32132,7 +32063,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .before\\:inset-y-0:before {
     content: var(--tw-content);
-    inset-block: calc(var(--spacing) * 0);
+    inset-block: calc(var(--spacing, .25rem) * 0);
   }
 
   .before\\:inset-y-px:before {
@@ -32147,7 +32078,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .before\\:rounded-md:before {
     content: var(--tw-content);
-    border-radius: calc(var(--ui-radius) * 1.5);
+    border-radius: var(--radius-md, .375rem);
   }
 
   .before\\:bg-elevated:before {
@@ -32224,13 +32155,13 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   .before\\:transition-colors:before {
     content: var(--tw-content);
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
   }
 
   .not-first-of-type\\:before\\:me-0\\.5:not(:first-of-type):before {
     content: var(--tw-content);
-    margin-inline-end: calc(var(--spacing) * .5);
+    margin-inline-end: calc(var(--spacing, .25rem) * .5);
   }
 
   .not-first-of-type\\:before\\:content-\\[\\'·\\'\\]:not(:first-of-type):before {
@@ -32246,27 +32177,27 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .after\\:inset-x-2\\.5:after {
     content: var(--tw-content);
-    inset-inline: calc(var(--spacing) * 2.5);
+    inset-inline: calc(var(--spacing, .25rem) * 2.5);
   }
 
   .after\\:inset-y-0\\.5:after {
     content: var(--tw-content);
-    inset-block: calc(var(--spacing) * .5);
+    inset-block: calc(var(--spacing, .25rem) * .5);
   }
 
   .after\\:-start-1\\.5:after {
     content: var(--tw-content);
-    inset-inline-start: calc(var(--spacing) * -1.5);
+    inset-inline-start: calc(var(--spacing, .25rem) * -1.5);
   }
 
   .after\\:-bottom-2:after {
     content: var(--tw-content);
-    bottom: calc(var(--spacing) * -2);
+    bottom: calc(var(--spacing, .25rem) * -2);
   }
 
   .after\\:bottom-0:after {
     content: var(--tw-content);
-    bottom: calc(var(--spacing) * 0);
+    bottom: calc(var(--spacing, .25rem) * 0);
   }
 
   .after\\:left-1\\/2:after {
@@ -32281,7 +32212,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .after\\:ms-0\\.5:after {
     content: var(--tw-content);
-    margin-inline-start: calc(var(--spacing) * .5);
+    margin-inline-start: calc(var(--spacing, .25rem) * .5);
   }
 
   .after\\:block:after {
@@ -32296,25 +32227,25 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .after\\:size-1:after {
     content: var(--tw-content);
-    width: calc(var(--spacing) * 1);
-    height: calc(var(--spacing) * 1);
+    width: calc(var(--spacing, .25rem) * 1);
+    height: calc(var(--spacing, .25rem) * 1);
   }
 
   .after\\:size-1\\.5:after {
     content: var(--tw-content);
-    width: calc(var(--spacing) * 1.5);
-    height: calc(var(--spacing) * 1.5);
+    width: calc(var(--spacing, .25rem) * 1.5);
+    height: calc(var(--spacing, .25rem) * 1.5);
   }
 
   .after\\:size-2:after {
     content: var(--tw-content);
-    width: calc(var(--spacing) * 2);
-    height: calc(var(--spacing) * 2);
+    width: calc(var(--spacing, .25rem) * 2);
+    height: calc(var(--spacing, .25rem) * 2);
   }
 
   .after\\:h-1:after {
     content: var(--tw-content);
-    height: calc(var(--spacing) * 1);
+    height: calc(var(--spacing, .25rem) * 1);
   }
 
   .after\\:h-px:after {
@@ -32416,8 +32347,8 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   .after\\:transition-colors:after {
     content: var(--tw-content);
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
   }
 
   .after\\:content-\\[\\'\\'\\]:after {
@@ -32432,14 +32363,8 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     content: var(--tw-content);
   }
 
-  .after\\:content-\\[\\\\\\'\\\\\\'\\]:after {
-    content: var(--tw-content);
-    --tw-content: \\'\\';
-    content: var(--tw-content);
-  }
-
   .first\\:me-0:first-child {
-    margin-inline-end: calc(var(--spacing) * 0);
+    margin-inline-end: calc(var(--spacing, .25rem) * 0);
   }
 
   .not-only\\:first\\:rounded-e-none:not(:only-child):first-child {
@@ -32468,23 +32393,23 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .first-of-type\\:rounded-s-lg:first-of-type {
-    border-start-start-radius: calc(var(--ui-radius) * 2);
-    border-end-start-radius: calc(var(--ui-radius) * 2);
+    border-start-start-radius: var(--radius-lg, .5rem);
+    border-end-start-radius: var(--radius-lg, .5rem);
   }
 
   .first-of-type\\:rounded-t-lg:first-of-type {
-    border-top-left-radius: calc(var(--ui-radius) * 2);
-    border-top-right-radius: calc(var(--ui-radius) * 2);
+    border-top-left-radius: var(--radius-lg, .5rem);
+    border-top-right-radius: var(--radius-lg, .5rem);
   }
 
   .last-of-type\\:rounded-e-lg:last-of-type {
-    border-start-end-radius: calc(var(--ui-radius) * 2);
-    border-end-end-radius: calc(var(--ui-radius) * 2);
+    border-start-end-radius: var(--radius-lg, .5rem);
+    border-end-end-radius: var(--radius-lg, .5rem);
   }
 
   .last-of-type\\:rounded-b-lg:last-of-type {
-    border-bottom-right-radius: calc(var(--ui-radius) * 2);
-    border-bottom-left-radius: calc(var(--ui-radius) * 2);
+    border-bottom-right-radius: var(--radius-lg, .5rem);
+    border-bottom-left-radius: var(--radius-lg, .5rem);
   }
 
   @media (hover: hover) {
@@ -32547,7 +32472,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     }
 
     .hover\\:bg-gray-100:hover {
-      background-color: var(--color-gray-100);
+      background-color: var(--color-gray-100, oklch(96.7% .003 264.542));
     }
 
     .hover\\:bg-gray-500\\/10:hover {
@@ -32556,7 +32481,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
     @supports (color: color-mix(in lab, red, red)) {
       .hover\\:bg-gray-500\\/10:hover {
-        background-color: color-mix(in oklab, var(--color-gray-500) 10%, transparent);
+        background-color: color-mix(in oklab, var(--color-gray-500, oklch(55.1% .027 264.364)) 10%, transparent);
       }
     }
 
@@ -32735,7 +32660,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     }
 
     .hover\\:text-gray-800:hover {
-      color: var(--color-gray-800);
+      color: var(--color-gray-800, oklch(27.8% .033 256.848));
     }
 
     .hover\\:text-highlighted:hover {
@@ -34042,8 +33967,8 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .data-today\\:font-semibold[data-today] {
-    --tw-font-weight: var(--font-weight-semibold);
-    font-weight: var(--font-weight-semibold);
+    --tw-font-weight: var(--font-weight-semibold, 600);
+    font-weight: var(--font-weight-semibold, 600);
   }
 
   .data-today\\:not-data-\\[selected\\]\\:text-error[data-today]:not([data-selected]) {
@@ -34110,8 +34035,8 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   :is(.data-\\[front\\=false\\]\\:\\*\\:transition-opacity[data-front="false"] > *) {
     transition-property: opacity;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
   }
 
   :is(.data-\\[front\\=false\\]\\:\\*\\:duration-100[data-front="false"] > *) {
@@ -34218,11 +34143,11 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .data-\\[pinned\\=left\\]\\:left-0[data-pinned="left"] {
-    left: calc(var(--spacing) * 0);
+    left: calc(var(--spacing, .25rem) * 0);
   }
 
   .data-\\[pinned\\=right\\]\\:right-0[data-pinned="right"] {
-    right: calc(var(--spacing) * 0);
+    right: calc(var(--spacing, .25rem) * 0);
   }
 
   .data-\\[selected\\]\\:bg-error[data-selected] {
@@ -34276,7 +34201,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .data-\\[state\\=active\\]\\:bg-white[data-state="active"] {
-    background-color: var(--color-white);
+    background-color: var(--color-white, #fff);
   }
 
   .data-\\[state\\=active\\]\\:text-error[data-state="active"] {
@@ -34284,7 +34209,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .data-\\[state\\=active\\]\\:text-gray-900[data-state="active"] {
-    color: var(--color-gray-900);
+    color: var(--color-gray-900, oklch(21% .034 264.665));
   }
 
   .data-\\[state\\=active\\]\\:text-highlighted[data-state="active"] {
@@ -34316,27 +34241,27 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .data-\\[state\\=checked\\]\\:translate-x-3[data-state="checked"] {
-    --tw-translate-x: calc(var(--spacing) * 3);
+    --tw-translate-x: calc(var(--spacing, .25rem) * 3);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
   .data-\\[state\\=checked\\]\\:translate-x-3\\.5[data-state="checked"] {
-    --tw-translate-x: calc(var(--spacing) * 3.5);
+    --tw-translate-x: calc(var(--spacing, .25rem) * 3.5);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
   .data-\\[state\\=checked\\]\\:translate-x-4[data-state="checked"] {
-    --tw-translate-x: calc(var(--spacing) * 4);
+    --tw-translate-x: calc(var(--spacing, .25rem) * 4);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
   .data-\\[state\\=checked\\]\\:translate-x-4\\.5[data-state="checked"] {
-    --tw-translate-x: calc(var(--spacing) * 4.5);
+    --tw-translate-x: calc(var(--spacing, .25rem) * 4.5);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
   .data-\\[state\\=checked\\]\\:translate-x-5[data-state="checked"] {
-    --tw-translate-x: calc(var(--spacing) * 5);
+    --tw-translate-x: calc(var(--spacing, .25rem) * 5);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
@@ -34584,7 +34509,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .data-\\[state\\=unchecked\\]\\:translate-x-0[data-state="unchecked"] {
-    --tw-translate-x: calc(var(--spacing) * 0);
+    --tw-translate-x: calc(var(--spacing, .25rem) * 0);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
@@ -34597,12 +34522,12 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .data-\\[swipe\\=cancel\\]\\:translate-x-0[data-swipe="cancel"] {
-    --tw-translate-x: calc(var(--spacing) * 0);
+    --tw-translate-x: calc(var(--spacing, .25rem) * 0);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
   .data-\\[swipe\\=cancel\\]\\:translate-y-0[data-swipe="cancel"] {
-    --tw-translate-y: calc(var(--spacing) * 0);
+    --tw-translate-y: calc(var(--spacing, .25rem) * 0);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
@@ -34648,19 +34573,19 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   @media (min-width: 40rem) {
     .sm\\:-start-12 {
-      inset-inline-start: calc(var(--spacing) * -12);
+      inset-inline-start: calc(var(--spacing, .25rem) * -12);
     }
 
     .sm\\:-end-12 {
-      inset-inline-end: calc(var(--spacing) * -12);
+      inset-inline-end: calc(var(--spacing, .25rem) * -12);
     }
 
     .sm\\:-top-12 {
-      top: calc(var(--spacing) * -12);
+      top: calc(var(--spacing, .25rem) * -12);
     }
 
     .sm\\:-bottom-12 {
-      bottom: calc(var(--spacing) * -12);
+      bottom: calc(var(--spacing, .25rem) * -12);
     }
 
     .sm\\:max-h-\\[calc\\(100dvh-4rem\\)\\] {
@@ -34672,7 +34597,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     }
 
     .sm\\:w-96 {
-      width: calc(var(--spacing) * 96);
+      width: calc(var(--spacing, .25rem) * 96);
     }
 
     .sm\\:flex-row {
@@ -34681,22 +34606,22 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
     :where(.sm\\:space-y-0 > :not(:last-child)) {
       --tw-space-y-reverse: 0;
-      margin-block-start: calc(calc(var(--spacing) * 0) * var(--tw-space-y-reverse));
-      margin-block-end: calc(calc(var(--spacing) * 0) * calc(1 - var(--tw-space-y-reverse)));
+      margin-block-start: calc(calc(var(--spacing, .25rem) * 0) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing, .25rem) * 0) * calc(1 - var(--tw-space-y-reverse)));
     }
 
     :where(.sm\\:space-x-4 > :not(:last-child)) {
       --tw-space-x-reverse: 0;
-      margin-inline-start: calc(calc(var(--spacing) * 4) * var(--tw-space-x-reverse));
-      margin-inline-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-x-reverse)));
+      margin-inline-start: calc(calc(var(--spacing, .25rem) * 4) * var(--tw-space-x-reverse));
+      margin-inline-end: calc(calc(var(--spacing, .25rem) * 4) * calc(1 - var(--tw-space-x-reverse)));
     }
 
     .sm\\:p-6 {
-      padding: calc(var(--spacing) * 6);
+      padding: calc(var(--spacing, .25rem) * 6);
     }
 
     .sm\\:px-6 {
-      padding-inline: calc(var(--spacing) * 6);
+      padding-inline: calc(var(--spacing, .25rem) * 6);
     }
 
     .sm\\:shadow-lg {
@@ -34722,7 +34647,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     }
 
     .lg\\:px-8 {
-      padding-inline: calc(var(--spacing) * 8);
+      padding-inline: calc(var(--spacing, .25rem) * 8);
     }
   }
 
@@ -34750,27 +34675,27 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .data-\\[state\\=checked\\]\\:rtl\\:-translate-x-3[data-state="checked"]:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
-    --tw-translate-x: calc(var(--spacing) * -3);
+    --tw-translate-x: calc(var(--spacing, .25rem) * -3);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
   .data-\\[state\\=checked\\]\\:rtl\\:-translate-x-3\\.5[data-state="checked"]:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
-    --tw-translate-x: calc(var(--spacing) * -3.5);
+    --tw-translate-x: calc(var(--spacing, .25rem) * -3.5);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
   .data-\\[state\\=checked\\]\\:rtl\\:-translate-x-4[data-state="checked"]:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
-    --tw-translate-x: calc(var(--spacing) * -4);
+    --tw-translate-x: calc(var(--spacing, .25rem) * -4);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
   .data-\\[state\\=checked\\]\\:rtl\\:-translate-x-4\\.5[data-state="checked"]:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
-    --tw-translate-x: calc(var(--spacing) * -4.5);
+    --tw-translate-x: calc(var(--spacing, .25rem) * -4.5);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
   .data-\\[state\\=checked\\]\\:rtl\\:-translate-x-5[data-state="checked"]:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
-    --tw-translate-x: calc(var(--spacing) * -5);
+    --tw-translate-x: calc(var(--spacing, .25rem) * -5);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
@@ -34783,7 +34708,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .data-\\[state\\=unchecked\\]\\:rtl\\:-translate-x-0[data-state="unchecked"]:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
-    --tw-translate-x: calc(var(--spacing) * 0);
+    --tw-translate-x: calc(var(--spacing, .25rem) * 0);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
@@ -34813,19 +34738,19 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 
   .\\[\\&\\:has\\(\\[role\\=checkbox\\]\\)\\]\\:pe-0:has([role="checkbox"]) {
-    padding-inline-end: calc(var(--spacing) * 0);
+    padding-inline-end: calc(var(--spacing, .25rem) * 0);
   }
 
   .\\[\\&\\>button\\]\\:py-0 > button {
-    padding-block: calc(var(--spacing) * 0);
+    padding-block: calc(var(--spacing, .25rem) * 0);
   }
 
   .\\[\\&\\>div\\]\\:min-w-0 > div {
-    min-width: calc(var(--spacing) * 0);
+    min-width: calc(var(--spacing, .25rem) * 0);
   }
 
   .\\[\\&\\>input\\]\\:h-12 > input {
-    height: calc(var(--spacing) * 12);
+    height: calc(var(--spacing, .25rem) * 12);
   }
 
   .\\[\\&\\>mark\\]\\:bg-primary > mark {
@@ -35886,28 +35811,9 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 }
 
-@keyframes ping {
-  75%, 100% {
-    opacity: 0;
-    transform: scale(2);
-  }
-}
-
 @keyframes pulse {
   50% {
     opacity: .5;
-  }
-}
-
-@keyframes bounce {
-  0%, 100% {
-    animation-timing-function: cubic-bezier(.8, 0, 1, 1);
-    transform: translateY(-25%);
-  }
-
-  50% {
-    animation-timing-function: cubic-bezier(0, 0, .2, 1);
-    transform: none;
   }
 }
 `;
@@ -35952,7 +35858,7 @@ export {
   inject as X,
   reactive as Y,
   h as Z,
-  _sfc_main$N as _,
+  _sfc_main$O as _,
   useForwardExpose as a,
   reactivePick as a0,
   isEqual as a1,
@@ -35965,9 +35871,9 @@ export {
   formLoadingInjectionKey as a8,
   useComponentIcons as a9,
   mergeClasses as aa,
-  _sfc_main$k as ab,
+  _sfc_main$l as ab,
   normalizeClass as ac,
-  _sfc_main$i as ad,
+  _sfc_main$j as ad,
   omit as ae,
   useForwardPropsEmits as af,
   renderList as ag,
@@ -35977,7 +35883,7 @@ export {
   shallowReactive as ak,
   markRaw as al,
   useId$1 as am,
-  _sfc_main$Y as an,
+  _sfc_main$Z as an,
   provide as ao,
   portalTargetInjectionKey as ap,
   createApp as aq,

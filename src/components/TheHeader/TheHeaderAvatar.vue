@@ -18,6 +18,7 @@
           class="flex items-center justify-center size-12 rounded-full bg-[rgba(0,0,0,0.4)] mx-auto border-transparent border group-hover:border-white group-hover:border-2"
         >
           <span class="text-2xl uppercase">{{ props.user.acronym }}</span>
+          <TheHeaderAvatarChip :user="props.user" />
         </div>
       </div>
 
@@ -33,9 +34,10 @@
 </template>
 
 <script setup lang="ts">
-import {ref, onBeforeUnmount, watch, inject} from 'vue'
-import type {ProfileItem, User, HeaderBackdrop} from '@/types'
+import {inject, onBeforeUnmount, ref, watch} from 'vue'
+import type {HeaderBackdrop, ProfileItem, User} from '@/types'
 import TheHeaderAvatarMenu from './TheHeaderAvatarMenu.vue'
+import TheHeaderAvatarChip from '@/components/TheHeader/TheHeaderAvatarChip.vue'
 
 interface Props {
   user: User

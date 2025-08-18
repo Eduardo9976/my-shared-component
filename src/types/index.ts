@@ -14,17 +14,20 @@ export interface Brand {
 }
 
 export interface NavigationItem {
-  id: string
+  id?: string
   icon: string | null
   label: string | null
   active?: boolean
   click?: (item: NavigationItem) => void
   siteMap?: boolean | null
-  linkName: string | null
+  linkName?: string | null
   url?: string | null
   target?: string | null
   badgeTotalUrl?: string | null
   badgeEvent?: string | null
+  badge?: {
+    text: string
+  } | null
   visible?: boolean
 }
 export interface NavigationSeparatorItem {
@@ -45,15 +48,18 @@ export interface User {
 }
 
 export interface ProfileItem {
+  $id?: string
   label?: string
   click?: () => void
-  url?: string
+  url?: string | null
   icon?: {
     class: string
     color: string
-  }
+  } | null
   active?: boolean
-  children?: ProfileItem[]
+  name?: string | null
+  children?: ProfileItem[] | null
+  target?: string | null
 }
 
 export interface SiteMapItem {
@@ -61,6 +67,7 @@ export interface SiteMapItem {
   name: string
   description: string
   url?: string
+  target?: string | null
   children: SiteMapItem[]
 }
 

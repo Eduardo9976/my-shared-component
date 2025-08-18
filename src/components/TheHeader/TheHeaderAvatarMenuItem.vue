@@ -50,6 +50,7 @@
 <script setup lang="ts">
 import type {ProfileItem} from '@/types'
 import MeIcon from '@/components/MeIcon/MeIcon.vue'
+import {isExternalUrl} from '@/utils/isExternalUrl.ts'
 
 interface Props {
   profileItems: ProfileItem[]
@@ -71,20 +72,22 @@ function accordionItems(item: ProfileItem) {
 }
 
 function handleClick(item: ProfileItem) {
-  if (item.url) {
-    const isExternal = /^https?:\/\//.test(item.url)
+  const {url, click} = item
+  const target = item.target ?? '_blank'
 
-    if (isExternal) {
-      window.open(item.url, '_self')
+  if (url) {
+    if (isExternalUrl(url)) {
+      window.open(url, target, 'noopener,noreferrer')
     } else {
-      window.location.href = item.url
+      window.location.href = url
     }
 
-    return props.setVisibleToFalse()
+    props.setVisibleToFalse()
+    return
   }
 
-  if (item?.click) {
-    item.click()
+  if (click) {
+    click()
     props.setVisibleToFalse()
   }
 }

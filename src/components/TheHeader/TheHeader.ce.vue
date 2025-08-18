@@ -74,34 +74,135 @@ const user = ref({
 
 const profileItems = ref([
   {
-    label: 'Profile',
-    click: () => console.log('Profile'),
-    icon: {
-      class: 'me-icon-l icon-user-alt',
-      color: 'var(--me-primary-1)'
-    }
+    $id: '15',
+    label: 'Perfil',
+    url: '/user/details/606660',
+    active: false,
+    name: null,
+    icon: null,
+    children: null,
+    target: null
   },
   {
-    label: 'Change Password',
-    url: '#',
-    icon: {
-      class: 'me-icon-l icon-key',
-      color: 'var(--me-warning-2)'
-    }
+    $id: '16',
+    label: 'Configurações Gerais',
+    url: '/preferences',
+    active: false,
+    name: null,
+    icon: null,
+    children: null,
+    target: null
   },
   {
-    label: 'Português (pt-BR)',
+    $id: '17',
+    label: 'Substituir Usuário',
+    url: '/do/ChangeUser.mvc',
+    active: false,
+    name: null,
+    icon: null,
+    children: null,
+    target: null
+  },
+  {
+    $id: '18',
+    label: 'Substituição de Workflow',
+    url: '/do/Usuario.mvc/SubstituirWorkflow',
+    active: false,
+    name: null,
+    icon: null,
+    children: null,
+    target: null
+  },
+  {
+    $id: '19',
+    label: 'Substituição temporária',
+    url: '/do/Substituicao.mvc',
+    active: false,
+    name: null,
+    icon: null,
+    children: null,
+    target: null
+  },
+  {
+    $id: '20',
+    label: 'Novidades e Atualizações',
+    url: 'https://guide.me.com.br',
+    active: false,
+    name: null,
+    icon: null,
+    children: null,
+    target: '_blank'
+  },
+  {
+    $id: '21',
+    label: 'Português BR',
+    url: null,
     active: true,
+    name: 'locale',
+    icon: null,
     children: [
-      {label: 'Espanhol (es-MX)', url: '#'},
-      {label: 'Francês (fr-FR)', click: () => console.log('French')},
-      {label: 'Inglês (en-US)', url: '#'},
-      {label: 'Português (pt-PT)', url: '#'}
-    ]
+      {
+        $id: '22',
+        label: 'Inglês',
+        url: "javascript:jQuery.MELocaleChange('en-US');",
+        active: false,
+        name: '2',
+        icon: null,
+        children: null,
+        target: null
+      },
+      {
+        $id: '23',
+        label: 'Espanhol',
+        url: "javascript:jQuery.MELocaleChange('es-ES');",
+        active: false,
+        name: '3',
+        icon: null,
+        children: null,
+        target: null
+      },
+      {
+        $id: '24',
+        label: 'Português PT',
+        url: "javascript:jQuery.MELocaleChange('pt-PT');",
+        active: false,
+        name: '4',
+        icon: null,
+        children: null,
+        target: null
+      },
+      {
+        $id: '25',
+        label: 'Espanhol MX',
+        url: "javascript:jQuery.MELocaleChange('es-MX');",
+        active: false,
+        name: '7',
+        icon: null,
+        children: null,
+        target: null
+      },
+      {
+        $id: '26',
+        label: 'Francês',
+        url: "javascript:jQuery.MELocaleChange('fr-FR');",
+        active: false,
+        name: '8',
+        icon: null,
+        children: null,
+        target: null
+      }
+    ],
+    target: null
   },
   {
+    $id: '27',
     label: 'Logoff',
-    url: '#'
+    url: '/FimSecao.asp',
+    active: false,
+    name: null,
+    icon: null,
+    children: null,
+    target: null
   }
 ])
 
@@ -146,7 +247,10 @@ navigationStore.setNavigationItems([
     siteMap: false,
     separator: false,
     badgeTotalUrl: null,
-    badgeEvent: null
+    badgeEvent: null,
+    badge: {
+      text: '9999'
+    }
   },
   {
     id: '8',
@@ -161,7 +265,10 @@ navigationStore.setNavigationItems([
     separator: false,
     badgeTotalUrl: null,
     badgeEvent: null,
-    click: () => console.log('Fornecedores')
+    click: () => console.log('Fornecedores'),
+    badge: {
+      text: '76'
+    }
   },
   {
     id: '9',

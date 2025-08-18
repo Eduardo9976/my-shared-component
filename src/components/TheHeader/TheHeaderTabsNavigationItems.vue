@@ -1,6 +1,8 @@
 <template>
   <div class="flex flex-col">
-    <div class="text-sm text-primary py-2 px-6 bg-[var(--color-blue-50)] rounded-lg mb-2 flex justify-between font-medium">
+    <div
+      class="text-sm text-primary py-2 px-6 bg-[var(--color-blue-50)] rounded-lg mb-2 flex justify-between font-medium"
+    >
       <p>Apps fixados no header:</p>
       <span>{{ getCountNavigationItems }}</span>
     </div>
@@ -11,7 +13,9 @@
         :key="index"
         class="hover:bg-gray-500/10 transition-colors cursor-pointer border-b border-[var(--color-neutral-100)] mr-2"
       >
-        <div class="flex items-center gap-2 text-[var(--color-neutral-400)] h-12 pl-2">
+        <div
+          class="flex items-center gap-2 text-[var(--color-neutral-400)] h-12 pl-2"
+        >
           <div class="icon-container">
             <MeIcon
               icon="me-icon-s icon-grid-horizontal"
@@ -20,7 +24,19 @@
             />
           </div>
 
-          <span class="text-label text-sm">{{ item.label }}</span>
+          <a
+            v-if="item.url"
+            :href="item.url"
+            :target="getTarget(item.url)"
+            class="text-label text-sm no-underline flex-1"
+            @click.stop
+          >
+            {{ item.label }}
+          </a>
+
+          <span v-else class="text-label text-sm flex-1">
+            {{ item.label }}
+          </span>
 
           <button
             v-if="!item?.siteMap"
@@ -31,9 +47,9 @@
               icon="me-icon-l icon-eye-slash"
               class="button-icon"
               :custom-size="14"
-              :color="item.visible
-               ? 'var(--ui-primary)'
-               : 'var(--color-neutral-200)'"
+              :color="
+                item.visible ? 'var(--ui-primary)' : 'var(--color-neutral-200)'
+              "
             />
           </button>
         </div>
@@ -48,6 +64,7 @@ import {useSortable} from '@vueuse/integrations/useSortable'
 import MeIcon from '@/components/MeIcon/MeIcon.vue'
 import type {NavigationItem} from '@/types'
 import {useNavigationStore} from '@/composables/useNavigationStore.ts'
+import {isExternalUrl} from '@/utils/isExternalUrl.ts'
 
 const {
   customNavigationItems,
@@ -66,8 +83,17 @@ const getCountNavigationItems = computed(() => {
   return `${actives}/${total}`
 })
 
+const getTarget = (url: string): string => {
+  return isExternalUrl(url) ? '_blank' : '_self'
+}
+
 function addDragClasses(item: HTMLElement) {
-  item.classList.add('border', 'border-[var(--ui-primary)]', 'text-[var(--ui-primary)]', 'rounded-lg')
+  item.classList.add(
+    'border',
+    'border-[var(--ui-primary)]',
+    'text-[var(--ui-primary)]',
+    'rounded-lg'
+  )
   const textLabel = item.querySelector('.text-label')
   if (textLabel) {
     textLabel.classList.add('text-[var(--ui-primary)]')
@@ -83,7 +109,12 @@ function addDragClasses(item: HTMLElement) {
 }
 
 function removeDragClasses(item: HTMLElement) {
-  item.classList.remove('border', 'border-[var(--ui-primary)]', 'text-[var(--ui-primary)]', 'rounded-lg')
+  item.classList.remove(
+    'border',
+    'border-[var(--ui-primary)]',
+    'text-[var(--ui-primary)]',
+    'rounded-lg'
+  )
   const textLabel = item.querySelector('.text-label')
   if (textLabel) {
     textLabel.classList.remove('text-[var(--ui-primary)]')
@@ -103,10 +134,9 @@ useSortable(el, list, {
   scroll: true,
   scrollSensitivity: 30,
   scrollSpeed: 10,
-  onStart: (evt: any) => addDragClasses(evt.item),
-  onEnd: (evt: any) => removeDragClasses(evt.item),
-  onChange: (evt: any) => {
-  }
+  onStart: (evt: {item: HTMLElement}) => addDragClasses(evt.item),
+  onEnd: (evt: {item: HTMLElement}) => removeDragClasses(evt.item),
+  onChange: () => {}
 })
 
 watch(list, newList => setCustomNavigationItems(toRaw(newList)))

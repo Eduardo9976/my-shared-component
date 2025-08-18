@@ -17,9 +17,11 @@
           ref="avatar"
           class="flex cursor-pointer items-center justify-center rounded-full text-white size-12 bg-primary"
         >
-          <span class="text-2xl font-normal no-underline">{{
-            user.acronym
-          }}</span>
+          <span class="text-2xl font-normal no-underline">
+            {{ user.acronym }}
+          </span>
+
+          <TheHeaderAvatarChip :user="user" />
         </div>
       </div>
 
@@ -35,6 +37,7 @@
 import {useTemplateRef} from 'vue'
 import type {ProfileItem, User} from '@/types'
 import TheHeaderAvatarMenuItem from './TheHeaderAvatarMenuItem.vue'
+import TheHeaderAvatarChip from '@/components/TheHeader/TheHeaderAvatarChip.vue'
 
 interface Props {
   user: User
