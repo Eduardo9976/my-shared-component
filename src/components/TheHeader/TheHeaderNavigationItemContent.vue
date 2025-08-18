@@ -31,6 +31,6 @@ interface Props {
 const props = defineProps<Props>()
 
 function handleClick() {
-  props.click?.(props as NavigationItem)
+  props.click?.(props as Props & NavigationItem)
 }
 </script>

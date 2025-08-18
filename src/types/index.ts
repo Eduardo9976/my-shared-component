@@ -14,11 +14,18 @@ export interface Brand {
 }
 
 export interface NavigationItem {
-  icon: string
-  label: string
+  id: string
+  icon: string | null
+  label: string | null
   active?: boolean
   click?: (item: NavigationItem) => void
-  siteMap?: boolean
+  siteMap?: boolean | null
+  linkName: string | null
+  url?: string | null
+  target?: string | null
+  badgeTotalUrl?: string | null
+  badgeEvent?: string | null
+  visible?: boolean
 }
 export interface NavigationSeparatorItem {
   separator?: boolean
@@ -50,7 +57,7 @@ export interface ProfileItem {
 }
 
 export interface SiteMapItem {
-  $id: string
+  id: string
   name: string
   description: string
   url?: string
