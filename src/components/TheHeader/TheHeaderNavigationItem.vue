@@ -11,11 +11,7 @@
       @update:open="handlePopoverUpdate"
     >
       <TheHeaderNavigationItemContent
-        :icon="icon"
-        :label="label"
-        :iconColor="iconColor"
-        :active="active"
-        :click="click"
+        v-bind="$props"
       />
 
       <template #content>
@@ -26,11 +22,7 @@
 
   <TheHeaderNavigationItemContent
     v-else
-    :icon="icon"
-    :label="label"
-    :iconColor="iconColor"
-    :active="active"
-    :click="click"
+    v-bind="$props"
   />
 </template>
 
