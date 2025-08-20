@@ -2193,10 +2193,6 @@
     border-color: var(--color-neutral-100);
   }
 
-  .border-\[var\(--color-neutral-200\)\] {
-    border-color: var(--color-neutral-200);
-  }
-
   .border-\[var\(--ui-primary\)\] {
     border-color: var(--ui-primary);
   }

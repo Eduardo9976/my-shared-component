@@ -3,7 +3,7 @@
     <div
       class="text-sm text-primary py-2 px-6 bg-[var(--color-blue-50)] rounded-lg mb-2 flex justify-between font-medium"
     >
-      <p>Apps fixados no header:</p>
+      <p>{{ t('theHeader.tabs.navigationItems.pinnedApps') }}</p>
       <span>{{ getCountNavigationItems }}</span>
     </div>
 
@@ -65,6 +65,9 @@ import MeIcon from '@/components/MeIcon/MeIcon.vue'
 import type {NavigationItem} from '@/types'
 import {useNavigationStore} from '@/composables/useNavigationStore.ts'
 import {isExternalUrl} from '@/utils/isExternalUrl.ts'
+import {useTranslations} from '@/composables/localI18n/useTranslations.ts'
+
+const {t} = useTranslations()
 
 const {
   customNavigationItems,

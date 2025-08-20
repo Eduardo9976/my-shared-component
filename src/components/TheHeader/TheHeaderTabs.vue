@@ -1,5 +1,7 @@
 <template>
   <div class="p-4 w-[384px]">
+
+
     <UTabs
       :items="items"
       class="w-full"
@@ -7,7 +9,7 @@
       variant="pill"
       color="neutral"
       :ui="{
-        list: 'grid grid-cols-2 w-full',
+        list: 'grid grid-col w-full',
         trigger:
           'flex-1 text-center cursor-pointer data-[state=active]:bg-white data-[state=active]:text-gray-900 focus:outline-none focus-visible:outline-none',
         indicator: 'bg-white'
@@ -18,7 +20,7 @@
           <Suspense>
             <TheHeaderTabsNavigationItems />
             <template #fallback>
-              <div class="p-4 text-center text-gray-500">Carregando...</div>
+              <div class="p-4 text-center text-gray-500">{{ t('theHeader.tabs.loading') }}</div>
             </template>
           </Suspense>
         </keep-alive>
@@ -29,7 +31,7 @@
           <Suspense>
             <TheHeaderTabsSiteMapItems />
             <template #fallback>
-              <div class="p-4 text-center text-gray-500">Carregando...</div>
+              <div class="p-4 text-center text-gray-500">{{ t('theHeader.tabs.loading') }}</div>
             </template>
           </Suspense>
         </keep-alive>
@@ -43,14 +45,13 @@ import {ref} from 'vue'
 import type {TabsItem} from '@nuxt/ui'
 import TheHeaderTabsSiteMapItems from '@/components/TheHeader/TheHeaderTabsSiteMapItems.vue'
 import TheHeaderTabsNavigationItems from '@/components/TheHeader/TheHeaderTabsNavigationItems.vue'
+import {useTranslations} from '@/composables/localI18n/useTranslations.ts'
+
+const {t, setLocale, getCurrentLocale} = useTranslations()
 
 const items = ref<TabsItem[]>([
   {
-    label: 'Apps',
-    slot: 'navigationItems' as const
-  },
-  {
-    label: 'Outras funcionalidades',
+    label: t('theHeader.tabs.othersFuncionality'),
     slot: 'siteMapItems' as const
   }
 ])

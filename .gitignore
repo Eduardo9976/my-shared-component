@@ -31,3 +31,6 @@ GIT_SETUP.md
 
 # Component documentation
 src/components/**/README.md
+
+# Environment variables
+.env

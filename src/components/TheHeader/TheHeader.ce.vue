@@ -24,6 +24,7 @@ import TheHeaderNavigation from './TheHeaderNavigation.vue'
 import TheHeaderAvatar from './TheHeaderAvatar.vue'
 import AppBackdrop from '@/components/AppBackdrop.vue'
 import {useNavigationStore} from '@/composables/useNavigationStore.ts'
+import {type SupportedLocale, useTranslations} from '@/composables/localI18n/useTranslations.ts'
 
 const navigationStore = useNavigationStore()
 
@@ -66,11 +67,14 @@ const user = ref({
   name: 'Renato Dias',
   role: 'Developer',
   acronym: 'RD',
+  culture: 'pt-BR', // adicionar
   badge: {
     variant: 'danger',
     icon: 'me-icon-l icon-exclamation'
   }
 })
+
+useTranslations().setLocale(user.value.culture as SupportedLocale)
 
 const profileItems = ref([
   {
@@ -219,7 +223,7 @@ navigationStore.setNavigationItems([
     siteMap: false,
     separator: false,
     badgeTotalUrl: null,
-    badgeEvent: null
+    badgeEvent: null,
   },
   {
     id: '6',

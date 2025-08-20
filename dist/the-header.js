@@ -14979,7 +14979,7 @@ const _hoisted_1$e = {
   key: 0,
   d: "M0 0L6 6L12 0"
 };
-const _hoisted_2$7 = {
+const _hoisted_2$8 = {
   key: 1,
   d: "M0 0L4.58579 4.58579C5.36683 5.36683 6.63316 5.36684 7.41421 4.58579L12 0"
 };
@@ -15004,7 +15004,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
       }), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default", {}, () => [
-            !_ctx.rounded ? (openBlock(), createElementBlock("path", _hoisted_1$e)) : (openBlock(), createElementBlock("path", _hoisted_2$7))
+            !_ctx.rounded ? (openBlock(), createElementBlock("path", _hoisted_1$e)) : (openBlock(), createElementBlock("path", _hoisted_2$8))
           ])
         ]),
         _: 3
@@ -22026,7 +22026,7 @@ function useSanitizeURL(url) {
   }
 }
 const _hoisted_1$d = ["href", "target"];
-const _hoisted_2$6 = ["src"];
+const _hoisted_2$7 = ["src"];
 const _sfc_main$i = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderBrand",
   props: {
@@ -22043,7 +22043,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
           src: _ctx.brand.logo,
           alt: "logo",
           class: "max-w-[75px] max-h-[32px]"
-        }, null, 8, _hoisted_2$6)
+        }, null, 8, _hoisted_2$7)
       ], 8, _hoisted_1$d);
     };
   }
@@ -23538,12 +23538,159 @@ function useNavigationStore() {
 function isExternalUrl(url) {
   return /^https?:\/\//i.test(url);
 }
+const enUS = {
+  theHeader: {
+    tabs: {
+      othersFuncionality: "Other functionalities",
+      loading: "Loading...",
+      navigationItems: {
+        pinnedApps: "Apps pinned in header:"
+      },
+      siteMapItems: {
+        search: "Search"
+      }
+    }
+  }
+};
+const ptBR = {
+  theHeader: {
+    tabs: {
+      othersFuncionality: "Outras funcionalidades",
+      loading: "Carregando...",
+      navigationItems: {
+        pinnedApps: "Apps fixados no header:"
+      },
+      siteMapItems: {
+        search: "Buscar"
+      }
+    }
+  }
+};
+const esES = {
+  theHeader: {
+    tabs: {
+      othersFuncionality: "Otras funcionalidades",
+      loading: "Cargando...",
+      navigationItems: {
+        pinnedApps: "Apps fijados en el header:"
+      },
+      siteMapItems: {
+        search: "Buscar"
+      }
+    }
+  }
+};
+const esMX = {
+  theHeader: {
+    tabs: {
+      othersFuncionality: "Otras funcionalidades",
+      loading: "Cargando...",
+      navigationItems: {
+        pinnedApps: "Apps fijados en el header:"
+      },
+      siteMapItems: {
+        search: "Buscar"
+      }
+    }
+  }
+};
+const frCA = {
+  theHeader: {
+    tabs: {
+      othersFuncionality: "Autres fonctionnalités",
+      loading: "Chargement...",
+      navigationItems: {
+        pinnedApps: "Apps épinglés dans l'en-tête:"
+      },
+      siteMapItems: {
+        search: "Rechercher"
+      }
+    }
+  }
+};
+const frFR = {
+  theHeader: {
+    tabs: {
+      othersFuncionality: "Autres fonctionnalités",
+      loading: "Chargement...",
+      navigationItems: {
+        pinnedApps: "Apps épinglés dans l'en-tête:"
+      },
+      siteMapItems: {
+        search: "Rechercher"
+      }
+    }
+  }
+};
+const ptPT = {
+  theHeader: {
+    tabs: {
+      othersFuncionality: "Outras funcionalidades",
+      loading: "A carregar...",
+      navigationItems: {
+        pinnedApps: "Apps fixados no cabeçalho:"
+      },
+      siteMapItems: {
+        search: "Pesquisar"
+      }
+    }
+  }
+};
+const translations = {
+  "en-US": enUS,
+  "pt-BR": ptBR,
+  "es-ES": esES,
+  "es-MX": esMX,
+  "fr-CA": frCA,
+  "fr-FR": frFR,
+  "pt-PT": ptPT
+};
+const globalLocale = ref("en-US");
+function useTranslations() {
+  const t = (key, params) => {
+    const keys = key.split(".");
+    let value = translations[globalLocale.value];
+    for (const k of keys) {
+      if (value && typeof value === "object" && k in value) {
+        value = value[k];
+      } else {
+        console.warn(`Translation key not found: ${key} for locale: ${globalLocale.value}`);
+        return key;
+      }
+    }
+    if (typeof value === "string") {
+      if (params) {
+        return value.replace(/\{(\w+)\}/g, (match, param) => {
+          return params[param]?.toString() || match;
+        });
+      }
+      return value;
+    }
+    return key;
+  };
+  const setLocale = (locale) => {
+    if (locale in translations) {
+      globalLocale.value = locale;
+    } else {
+      console.warn(`Unsupported locale: ${locale}`);
+    }
+  };
+  const getCurrentLocale = computed(() => globalLocale.value);
+  const getSupportedLocales = computed(() => Object.keys(translations));
+  return {
+    t,
+    setLocale,
+    getCurrentLocale,
+    getSupportedLocales
+  };
+}
 const _hoisted_1$a = { class: "max-h-[280px] overflow-y-auto" };
-const _hoisted_2$5 = { class: "space-y-2" };
-const _hoisted_3$3 = ["href", "target"];
+const _hoisted_2$6 = { class: "space-y-2" };
+const _hoisted_3$4 = ["href", "target"];
 const _sfc_main$b = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabsSiteMapItems",
   setup(__props) {
+    const { t } = useTranslations();
     const { siteMapItems } = useNavigationStore();
     const searchTerm = ref("");
     const normalize = (text) => text.trim().toLowerCase();
@@ -23583,7 +23730,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
           icon: "i-lucide-search",
           size: "md",
           variant: "outline",
-          placeholder: "Buscar",
+          placeholder: unref(t)("theHeader.tabs.siteMapItems.search"),
           class: "mb-3 w-full"
         }, createSlots({ _: 2 }, [
           searchTerm.value ? {
@@ -23599,7 +23746,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
             ]),
             key: "0"
           } : void 0
-        ]), 1032, ["modelValue"]),
+        ]), 1032, ["modelValue", "placeholder"]),
         createBaseVNode("div", _hoisted_1$a, [
           createVNode(_component_UAccordion, {
             type: "multiple",
@@ -23612,14 +23759,14 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
             }
           }, {
             content: withCtx(({ item }) => [
-              createBaseVNode("div", _hoisted_2$5, [
+              createBaseVNode("div", _hoisted_2$6, [
                 (openBlock(true), createElementBlock(Fragment, null, renderList(item.children, (child, idx) => {
                   return openBlock(), createElementBlock("a", {
                     key: idx,
                     href: child.url || "#",
                     target: child.url ? getTarget(child.url) : void 0,
                     class: "block cursor-pointer rounded-md p-2 text-sm text-gray-600 no-underline transition-colors hover:bg-gray-100 hover:text-gray-800"
-                  }, toDisplayString(child.description), 9, _hoisted_3$3);
+                  }, toDisplayString(child.description), 9, _hoisted_3$4);
                 }), 128))
               ])
             ]),
@@ -25844,8 +25991,8 @@ function moveArrayElement(list, from, to, e = null) {
   }
 }
 const _hoisted_1$9 = { class: "flex flex-col" };
-const _hoisted_2$4 = { class: "text-sm text-primary py-2 px-6 bg-[var(--color-blue-50)] rounded-lg mb-2 flex justify-between font-medium" };
-const _hoisted_3$2 = { class: "flex items-center gap-2 text-[var(--color-neutral-400)] h-12 pl-2" };
+const _hoisted_2$5 = { class: "text-sm text-primary py-2 px-6 bg-[var(--color-blue-50)] rounded-lg mb-2 flex justify-between font-medium" };
+const _hoisted_3$3 = { class: "flex items-center gap-2 text-[var(--color-neutral-400)] h-12 pl-2" };
 const _hoisted_4$1 = { class: "icon-container" };
 const _hoisted_5$1 = ["href", "target"];
 const _hoisted_6$1 = {
@@ -25856,6 +26003,7 @@ const _hoisted_7 = ["onClick"];
 const _sfc_main$a = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabsNavigationItems",
   setup(__props) {
+    const { t } = useTranslations();
     const {
       customNavigationItems,
       setCustomNavigationItems: setCustomNavigationItems2,
@@ -25928,8 +26076,8 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     }
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1$9, [
-        createBaseVNode("div", _hoisted_2$4, [
-          _cache[1] || (_cache[1] = createBaseVNode("p", null, "Apps fixados no header:", -1)),
+        createBaseVNode("div", _hoisted_2$5, [
+          createBaseVNode("p", null, toDisplayString(unref(t)("theHeader.tabs.navigationItems.pinnedApps")), 1),
           createBaseVNode("span", null, toDisplayString(getCountNavigationItems.value), 1)
         ]),
         createBaseVNode("div", {
@@ -25942,7 +26090,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
               key: index2,
               class: "hover:bg-gray-500/10 transition-colors cursor-pointer border-b border-[var(--color-neutral-100)] mr-2"
             }, [
-              createBaseVNode("div", _hoisted_3$2, [
+              createBaseVNode("div", _hoisted_3$3, [
                 createBaseVNode("div", _hoisted_4$1, [
                   createVNode(_sfc_main$c, {
                     icon: "me-icon-s icon-grid-horizontal",
@@ -25979,16 +26127,15 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1$8 = { class: "p-4 w-[384px]" };
+const _hoisted_2$4 = { class: "p-4 text-center text-gray-500" };
+const _hoisted_3$2 = { class: "p-4 text-center text-gray-500" };
 const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabs",
   setup(__props) {
+    const { t } = useTranslations();
     const items = ref([
       {
-        label: "Apps",
-        slot: "navigationItems"
-      },
-      {
-        label: "Outras funcionalidades",
+        label: t("theHeader.tabs.othersFuncionality"),
         slot: "siteMapItems"
       }
     ]);
@@ -26002,7 +26149,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
           variant: "pill",
           color: "neutral",
           ui: {
-            list: "grid grid-cols-2 w-full",
+            list: "grid grid-col w-full",
             trigger: "flex-1 text-center cursor-pointer data-[state=active]:bg-white data-[state=active]:text-gray-900 focus:outline-none focus-visible:outline-none",
             indicator: "bg-white"
           }
@@ -26010,9 +26157,9 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
           navigationItems: withCtx(() => [
             createBaseVNode("keep-alive", null, [
               (openBlock(), createBlock(Suspense, null, {
-                fallback: withCtx(() => _cache[0] || (_cache[0] = [
-                  createBaseVNode("div", { class: "p-4 text-center text-gray-500" }, "Carregando...", -1)
-                ])),
+                fallback: withCtx(() => [
+                  createBaseVNode("div", _hoisted_2$4, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
+                ]),
                 default: withCtx(() => [
                   createVNode(_sfc_main$a)
                 ]),
@@ -26023,9 +26170,9 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
           siteMapItems: withCtx(() => [
             createBaseVNode("keep-alive", null, [
               (openBlock(), createBlock(Suspense, null, {
-                fallback: withCtx(() => _cache[1] || (_cache[1] = [
-                  createBaseVNode("div", { class: "p-4 text-center text-gray-500" }, "Carregando...", -1)
-                ])),
+                fallback: withCtx(() => [
+                  createBaseVNode("div", _hoisted_3$2, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
+                ]),
                 default: withCtx(() => [
                   createVNode(_sfc_main$b)
                 ]),
@@ -26162,24 +26309,11 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
             createVNode(_component_TheHeaderTabs)
           ]),
           default: withCtx(() => [
-            createVNode(_sfc_main$8, {
-              icon: _ctx.icon,
-              label: _ctx.label,
-              iconColor: _ctx.iconColor,
-              active: _ctx.active,
-              click: _ctx.click
-            }, null, 8, ["icon", "label", "iconColor", "active", "click"])
+            createVNode(_sfc_main$8, normalizeProps(guardReactiveProps(_ctx.$props)), null, 16)
           ]),
           _: 1
         }, 8, ["open"])
-      ])) : (openBlock(), createBlock(_sfc_main$8, {
-        key: 1,
-        icon: _ctx.icon,
-        label: _ctx.label,
-        iconColor: _ctx.iconColor,
-        active: _ctx.active,
-        click: _ctx.click
-      }, null, 8, ["icon", "label", "iconColor", "active", "click"]));
+      ])) : (openBlock(), createBlock(_sfc_main$8, normalizeProps(mergeProps({ key: 1 }, _ctx.$props)), null, 16));
     };
   }
 });
@@ -26531,11 +26665,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       name: "Renato Dias",
       role: "Developer",
       acronym: "RD",
+      culture: "pt-BR",
+      // adicionar
       badge: {
         variant: "danger",
         icon: "me-icon-l icon-exclamation"
       }
     });
+    useTranslations().setLocale(user.value.culture);
     const profileItems = ref([
       {
         $id: "15",
@@ -30519,10 +30656,6 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .border-\\[var\\(--color-neutral-100\\)\\] {
     border-color: var(--color-neutral-100);
-  }
-
-  .border-\\[var\\(--color-neutral-200\\)\\] {
-    border-color: var(--color-neutral-200);
   }
 
   .border-\\[var\\(--ui-primary\\)\\] {

@@ -5,7 +5,7 @@
       icon="i-lucide-search"
       size="md"
       variant="outline"
-      placeholder="Buscar"
+      :placeholder="t('theHeader.tabs.siteMapItems.search')"
       class="mb-3 w-full"
     >
       <template v-if="searchTerm" #trailing>
@@ -54,6 +54,9 @@ import MeIcon from '@/components/MeIcon/MeIcon.vue'
 import type {SiteMapItem} from '@/types'
 import {useNavigationStore} from '@/composables/useNavigationStore'
 import {isExternalUrl} from '@/utils/isExternalUrl'
+import {useTranslations} from '@/composables/localI18n/useTranslations.ts'
+
+const {t} = useTranslations()
 
 const {siteMapItems} = useNavigationStore()
 
