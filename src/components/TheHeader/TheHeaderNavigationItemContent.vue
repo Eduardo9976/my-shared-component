@@ -29,7 +29,11 @@
       />
     </div>
 
-    <p class="text-xs py-[6px] text-[var(--header-icon-color)] whitespace-nowrap">{{ label }}</p>
+    <p
+      class="text-xs py-[6px] text-[var(--header-icon-color)] whitespace-nowrap"
+    >
+      {{ label }}
+    </p>
   </component>
 </template>
 

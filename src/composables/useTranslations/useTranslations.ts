@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import {ref, computed} from 'vue'
 import enUS from './en-US.js'
 import ptBR from './pt-BR.js'
 import esES from './es-ES.js'
@@ -7,7 +7,14 @@ import frCA from './fr-CA.js'
 import frFR from './fr-FR.js'
 import ptPT from './pt-PT.js'
 
-export type SupportedLocale = 'en-US' | 'pt-BR' | 'es-ES' | 'es-MX' | 'fr-CA' | 'fr-FR' | 'pt-PT'
+export type SupportedLocale =
+  | 'en-US'
+  | 'pt-BR'
+  | 'es-ES'
+  | 'es-MX'
+  | 'fr-CA'
+  | 'fr-FR'
+  | 'pt-PT'
 
 const translations = {
   'en-US': enUS,
@@ -24,13 +31,15 @@ const globalLocale = ref<SupportedLocale>('en-US')
 export function useTranslations() {
   const t = (key: string, params?: Record<string, string | number>) => {
     const keys = key.split('.')
-    let value: any = translations[globalLocale.value]
+    let value: unknown = translations[globalLocale.value]
 
     for (const k of keys) {
       if (value && typeof value === 'object' && k in value) {
         value = value[k]
       } else {
-        console.warn(`Translation key not found: ${key} for locale: ${globalLocale.value}`)
+        console.warn(
+          `Translation key not found: ${key} for locale: ${globalLocale.value}`
+        )
         return key
       }
     }
@@ -57,7 +66,9 @@ export function useTranslations() {
 
   const getCurrentLocale = computed(() => globalLocale.value)
 
-  const getSupportedLocales = computed(() => Object.keys(translations) as SupportedLocale[])
+  const getSupportedLocales = computed(
+    () => Object.keys(translations) as SupportedLocale[]
+  )
 
   return {
     t,

@@ -23486,55 +23486,6 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const state = reactive({
-  navigationItems: [],
-  customNavigationItems: [],
-  siteMapItems: []
-});
-function isSeparator(item) {
-  return "separator" in item && item.separator === true;
-}
-function setNavigationItems(items) {
-  state.navigationItems = items;
-  state.customNavigationItems = items.filter(
-    (item) => !isSeparator(item)
-  );
-}
-function setCustomNavigationItems(items) {
-  const updatedItems = [];
-  let i2 = 0;
-  for (const item of state.navigationItems) {
-    updatedItems.push(isSeparator(item) ? item : items[i2++] ?? item);
-  }
-  state.customNavigationItems = items;
-  state.navigationItems = updatedItems;
-}
-function setSiteMapItems(items) {
-  state.siteMapItems = items;
-}
-function findNavigationItemById(id) {
-  const foundItem = state.navigationItems.find(
-    (navItem) => !isSeparator(navItem) && navItem.id === id
-  );
-  return foundItem;
-}
-function updateNavigationItemsVisible(item, visible) {
-  const targetItem = findNavigationItemById(item.id);
-  if (targetItem) {
-    targetItem.visible = visible;
-    state.navigationItems = [...state.navigationItems];
-  }
-}
-function useNavigationStore() {
-  return {
-    ...toRefs(state),
-    setNavigationItems,
-    setCustomNavigationItems,
-    setSiteMapItems,
-    isSeparator,
-    updateNavigationItemsVisible
-  };
-}
 function isExternalUrl(url) {
   return /^https?:\/\//i.test(url);
 }
@@ -23654,7 +23605,9 @@ function useTranslations() {
       if (value && typeof value === "object" && k in value) {
         value = value[k];
       } else {
-        console.warn(`Translation key not found: ${key} for locale: ${globalLocale.value}`);
+        console.warn(
+          `Translation key not found: ${key} for locale: ${globalLocale.value}`
+        );
         return key;
       }
     }
@@ -23676,7 +23629,9 @@ function useTranslations() {
     }
   };
   const getCurrentLocale = computed(() => globalLocale.value);
-  const getSupportedLocales = computed(() => Object.keys(translations));
+  const getSupportedLocales = computed(
+    () => Object.keys(translations)
+  );
   return {
     t,
     setLocale,
@@ -23686,12 +23641,15 @@ function useTranslations() {
 }
 const _hoisted_1$a = { class: "max-h-[280px] overflow-y-auto" };
 const _hoisted_2$6 = { class: "space-y-2" };
-const _hoisted_3$4 = ["href", "target"];
+const _hoisted_3$4 = ["href", "target", "onClick"];
 const _sfc_main$b = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabsSiteMapItems",
+  props: {
+    siteMapItems: { type: Array }
+  },
   setup(__props) {
     const { t } = useTranslations();
-    const { siteMapItems } = useNavigationStore();
+    const props = __props;
     const searchTerm = ref("");
     const normalize = (text) => text.trim().toLowerCase();
     const matchesSearch = (item, term) => {
@@ -23708,9 +23666,9 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
       return matchesSearch(section, term) ? section : null;
     }).filter((section) => section !== null);
     const filteredSiteMap = computed(() => {
-      if (!siteMapItems.value) return [];
+      if (!props.siteMapItems) return [];
       const term = normalize(searchTerm.value);
-      return term ? filterSiteMap(siteMapItems.value, term) : siteMapItems.value;
+      return term ? filterSiteMap(props.siteMapItems, term) : props.siteMapItems;
     });
     const accordionItems = computed(
       () => filteredSiteMap.value.map((section, index2) => ({
@@ -23720,6 +23678,9 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
       }))
     );
     const getTarget = (url) => isExternalUrl(url) ? "_blank" : "_self";
+    function handleClick(item) {
+      item?.click?.(item);
+    }
     return (_ctx, _cache) => {
       const _component_UInput = _sfc_main$d;
       const _component_UAccordion = _sfc_main$e;
@@ -23765,7 +23726,8 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
                     key: idx,
                     href: child.url || "#",
                     target: child.url ? getTarget(child.url) : void 0,
-                    class: "block cursor-pointer rounded-md p-2 text-sm text-gray-600 no-underline transition-colors hover:bg-gray-100 hover:text-gray-800"
+                    class: "block cursor-pointer rounded-md p-2 text-sm text-gray-600 no-underline transition-colors hover:bg-gray-100 hover:text-gray-800",
+                    onClick: withModifiers(() => handleClick(child), ["prevent", "stop"])
                   }, toDisplayString(child.description), 9, _hoisted_3$4);
                 }), 128))
               ])
@@ -25990,6 +25952,75 @@ function moveArrayElement(list, from, to, e = null) {
     });
   }
 }
+const state = reactive({
+  user: {},
+  navigationItems: [],
+  customNavigationItems: [],
+  siteMapItems: [],
+  brand: {},
+  profileItems: []
+});
+function setUser(user) {
+  state.user = {
+    ...user
+  };
+}
+function setBrand(brand) {
+  state.brand = {
+    ...brand
+  };
+}
+function setProfileItems(items) {
+  state.profileItems = items;
+}
+function isSeparator(item) {
+  return "separator" in item && item.separator === true;
+}
+function setNavigationItems(items) {
+  state.navigationItems = items;
+  state.customNavigationItems = items.filter(
+    (item) => !isSeparator(item)
+  );
+}
+function setCustomNavigationItems(items) {
+  const updatedItems = [];
+  let i2 = 0;
+  for (const item of state.navigationItems) {
+    updatedItems.push(isSeparator(item) ? item : items[i2++] ?? item);
+  }
+  state.customNavigationItems = items;
+  state.navigationItems = updatedItems;
+}
+function setSiteMapItems(items) {
+  state.siteMapItems = items;
+}
+function findNavigationItemById(id) {
+  const foundItem = state.navigationItems.find(
+    (navItem) => !isSeparator(navItem) && navItem.id === id
+  );
+  return foundItem;
+}
+function updateNavigationItemsVisible(item, visible) {
+  if (!item.id) return;
+  const targetItem = findNavigationItemById(item.id);
+  if (targetItem) {
+    targetItem.visible = visible;
+    state.navigationItems = [...state.navigationItems];
+  }
+}
+function useNavigationStore() {
+  return {
+    ...toRefs(state),
+    setUser,
+    setNavigationItems,
+    setCustomNavigationItems,
+    setSiteMapItems,
+    setBrand,
+    setProfileItems,
+    isSeparator,
+    updateNavigationItemsVisible
+  };
+}
 const _hoisted_1$9 = { class: "flex flex-col" };
 const _hoisted_2$5 = { class: "text-sm text-primary py-2 px-6 bg-[var(--color-blue-50)] rounded-lg mb-2 flex justify-between font-medium" };
 const _hoisted_3$3 = { class: "flex items-center gap-2 text-[var(--color-neutral-400)] h-12 pl-2" };
@@ -26131,8 +26162,12 @@ const _hoisted_2$4 = { class: "p-4 text-center text-gray-500" };
 const _hoisted_3$2 = { class: "p-4 text-center text-gray-500" };
 const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabs",
+  props: {
+    siteMapItems: { type: Array }
+  },
   setup(__props) {
     const { t } = useTranslations();
+    const props = __props;
     const items = ref([
       {
         label: t("theHeader.tabs.othersFuncionality"),
@@ -26174,7 +26209,9 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                   createBaseVNode("div", _hoisted_3$2, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
                 ]),
                 default: withCtx(() => [
-                  createVNode(_sfc_main$b)
+                  createVNode(_sfc_main$b, {
+                    siteMapItems: props.siteMapItems
+                  }, null, 8, ["siteMapItems"])
                 ]),
                 _: 1
               }))
@@ -26187,7 +26224,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1$7 = { class: "relative flex items-center justify-center" };
-const _hoisted_2$3 = { class: "text-xs py-[6px] text-[var(--header-icon-color)]" };
+const _hoisted_2$3 = { class: "text-xs py-[6px] text-[var(--header-icon-color)] whitespace-nowrap" };
 const activeClass = "after:content-[''] after:bg-[var(--header-icon-color)] after:h-1 after:rounded-full after:absolute after:block after:w-[80%] after:bottom-0 after:left-1/2 after:-translate-x-1/2";
 const _sfc_main$8 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderNavigationItemContent",
@@ -26224,7 +26261,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
           _ctx.active && activeClass
         ]]),
         style: normalizeStyle({ "--header-icon-color": _ctx.iconColor }),
-        onClick: _cache[0] || (_cache[0] = ($event) => _ctx.click && handleClick)
+        onClick: withModifiers(handleClick, ["prevent", "stop"])
       }, {
         default: withCtx(() => [
           createBaseVNode("div", _hoisted_1$7, [
@@ -26255,12 +26292,13 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
 });
 const _hoisted_1$6 = {
   key: 0,
-  class: "relative"
+  class: "relative flex"
 };
 const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderNavigationItem",
   props: {
     iconColor: { type: String },
+    siteMapItems: { type: Array },
     id: { type: String },
     icon: { type: [String, null] },
     label: { type: [String, null] },
@@ -26286,8 +26324,8 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
         headerBackdrop?.close();
       }
     }
-    watch(isOpen, (newValue) => {
-      if (!newValue) {
+    watch(isOpen, (newValue, oldValue) => {
+      if (oldValue && !newValue) {
         headerBackdrop?.close();
       }
     });
@@ -26306,7 +26344,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
           "onUpdate:open": handlePopoverUpdate
         }, {
           content: withCtx(() => [
-            createVNode(_component_TheHeaderTabs)
+            createVNode(_component_TheHeaderTabs, { siteMapItems: _ctx.siteMapItems }, null, 8, ["siteMapItems"])
           ]),
           default: withCtx(() => [
             createVNode(_sfc_main$8, normalizeProps(guardReactiveProps(_ctx.$props)), null, 16)
@@ -26321,14 +26359,17 @@ const _hoisted_1$5 = { class: "ml-auto flex justify-center gap-6" };
 const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderNavigation",
   props: {
-    iconColor: { type: String }
+    navigationItems: { type: Array },
+    iconColor: { type: String },
+    siteMapItems: { type: Array }
   },
   setup(__props) {
-    const { navigationItems, isSeparator: isSeparator2 } = useNavigationStore();
+    const props = __props;
+    const { isSeparator: isSeparator2 } = useNavigationStore();
     const filteredNavigationItems = computed(() => {
       const filtered = [];
       let lastWasSeparator = false;
-      for (const item of navigationItems.value) {
+      for (const item of props.navigationItems || []) {
         if (isSeparator2(item)) {
           if (lastWasSeparator) continue;
           filtered.push(item);
@@ -26353,7 +26394,10 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
             }, null, 4)) : item.visible ?? false ? (openBlock(), createBlock(_sfc_main$7, mergeProps({
               key: 1,
               ref_for: true
-            }, item, { iconColor: _ctx.iconColor }), null, 16, ["iconColor"])) : createCommentVNode("", true)
+            }, item, {
+              iconColor: _ctx.iconColor,
+              siteMapItems: _ctx.siteMapItems
+            }), null, 16, ["iconColor", "siteMapItems"])) : createCommentVNode("", true)
           ], 64);
         }), 128))
       ]);
@@ -26384,6 +26428,11 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
     function handleClick(item) {
       const { url, click } = item;
       const target = item.target ?? "_blank";
+      if (click) {
+        click();
+        props.setVisibleToFalse();
+        return;
+      }
       if (url) {
         if (isExternalUrl(url)) {
           window.open(url, target, "noopener,noreferrer");
@@ -26392,10 +26441,6 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
         }
         props.setVisibleToFalse();
         return;
-      }
-      if (click) {
-        click();
-        props.setVisibleToFalse();
       }
     }
     return (_ctx, _cache) => {
@@ -26424,7 +26469,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
               key: 1,
               class: "flex h-10 cursor-pointer items-center gap-2 px-4 py-2 group hover:text-primary hover:bg-blue-100",
               href: item.url || "#",
-              onClick: withModifiers(() => handleClick(item), ["prevent"])
+              onClick: withModifiers(() => handleClick(item), ["prevent", "stop"])
             }, [
               createBaseVNode("span", {
                 class: normalizeClass(["text-gray-500 group-hover:text-primary", {
@@ -26457,7 +26502,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     return (_ctx, _cache) => {
       const _component_MeIcon = _sfc_main$c;
       const _component_UChip = _sfc_main$k;
-      return _ctx.user.badge.icon ? (openBlock(), createBlock(_component_UChip, {
+      return props?.user?.badge?.icon ? (openBlock(), createBlock(_component_UChip, {
         key: 0,
         color: "error",
         size: "3xl",
@@ -26469,10 +26514,11 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
         }
       }, {
         content: withCtx(() => [
-          createVNode(_component_MeIcon, {
-            icon: props.user.badge.icon,
-            color: props.user.badge.variant || "danger"
-          }, null, 8, ["icon", "color"])
+          props.user?.badge.icon ? (openBlock(), createBlock(_component_MeIcon, {
+            key: 0,
+            icon: props.user?.badge.icon,
+            color: props.user?.badge.variant || "danger"
+          }, null, 8, ["icon", "color"])) : createCommentVNode("", true)
         ]),
         _: 1
       })) : createCommentVNode("", true);
@@ -26484,7 +26530,7 @@ const _hoisted_2$1 = { class: "flex justify-between gap-4 px-4 py-2 align-center
 const _hoisted_3$1 = { class: "grid w-[168px]" };
 const _hoisted_4 = { class: "mb-0 truncate text-gray-500" };
 const _hoisted_5 = { class: "block truncate text-xs text-gray-400" };
-const _hoisted_6 = { class: "text-2xl font-normal no-underline" };
+const _hoisted_6 = { class: "text-2xl font-normal no-underline text-white" };
 const _sfc_main$3 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderAvatarMenu",
   props: {
@@ -26510,7 +26556,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
             createBaseVNode("div", {
               ref_key: "avatar",
               ref: avatar,
-              class: "flex cursor-pointer items-center justify-center rounded-full text-white size-12 bg-primary"
+              class: "flex items-center justify-center size-12 rounded-full bg-primary mx-auto border-transparent border"
             }, [
               createBaseVNode("span", _hoisted_6, toDisplayString(_ctx.user.acronym), 1),
               createVNode(_sfc_main$4, { user: _ctx.user }, null, 8, ["user"])
@@ -29035,6 +29081,7 @@ const {
 class HttpService {
   instance;
   baseURL;
+  customToken = null;
   constructor() {
     this.baseURL = "https://trunk.me.com.br";
     this.instance = axios.create({
@@ -29043,7 +29090,7 @@ class HttpService {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        Accept: "application/json"
       }
     });
     this.setupInterceptors();
@@ -29053,7 +29100,7 @@ class HttpService {
       (config) => {
         const requestConfig = config;
         if (requestConfig.withToken !== false) {
-          const token = localStorage.getItem("ACCESS_TOKEN");
+          const token = this.customToken || localStorage.getItem("ACCESS_TOKEN");
           if (token) {
             config.headers.Authorization = `Bearer ${token}`;
           }
@@ -29094,12 +29141,8 @@ class HttpService {
   }
   async get(url, config) {
     const fullURL = this.getFullURL(url);
-    try {
-      const response = await this.instance.get(fullURL, config);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+    const response = await this.instance.get(fullURL, config);
+    return response.data;
   }
   async post(url, data, config) {
     const fullURL = this.getFullURL(url);
@@ -29127,6 +29170,19 @@ class HttpService {
   }
   getBaseURL() {
     return this.baseURL;
+  }
+  setCustomToken(token) {
+    if (token !== null && typeof token !== "string") {
+      console.warn("Token deve ser uma string, recebido:", typeof token, token);
+      return;
+    }
+    this.customToken = token;
+  }
+  getCustomToken() {
+    return this.customToken;
+  }
+  clearCustomToken() {
+    this.customToken = null;
   }
 }
 const httpService = new HttpService();
@@ -29192,259 +29248,237 @@ function useHttp() {
     clearError,
     setError,
     setBaseURL: httpService.setBaseURL.bind(httpService),
-    getBaseURL: httpService.getBaseURL.bind(httpService)
+    getBaseURL: httpService.getBaseURL.bind(httpService),
+    setCustomToken: httpService.setCustomToken.bind(httpService),
+    getCustomToken: httpService.getCustomToken.bind(httpService),
+    clearCustomToken: httpService.clearCustomToken.bind(httpService)
   };
 }
-function useHeaderData() {
-  const { get: get2 } = useHttp();
-  const user = ref({
-    id: "606660",
-    name: "Usuário Mock",
-    role: "Admin",
-    email: "usuario@example.com",
-    acronym: "UM",
-    badge: {
-      variant: "primary",
-      icon: "me-icon-s icon-user"
-    },
-    culture: "pt-BR"
-  });
-  const brand = ref({
-    logo: "/logo.svg",
-    link: "/",
-    newTab: false,
-    background: {
-      primaryColor: "#1976d2",
-      secondaryColor: "#42a5f5",
-      iconColor: "white"
-    }
-  });
-  const profileItems = ref([
-    {
-      $id: "profile",
-      label: "Perfil",
-      icon: { class: "me-icon-s icon-user", color: "text-gray-600" },
-      active: false
-    },
-    {
-      $id: "settings",
-      label: "Configurações",
-      icon: { class: "me-icon-s icon-cog", color: "text-gray-600" },
-      active: false
-    },
-    {
-      $id: "logout",
-      label: "Sair",
-      icon: { class: "me-icon-s icon-sign-out-alt", color: "text-red-600" },
-      active: false
-    }
-  ]);
-  const navItems = ref([
-    {
-      id: "home",
-      icon: "me-icon-s icon-home",
-      label: "Início",
-      active: true,
-      url: "/",
-      target: null
-    },
-    {
-      id: "products",
-      icon: "me-icon-s icon-box",
-      label: "Produtos",
-      active: false,
-      url: "/products",
-      target: null
-    },
-    {
-      id: "orders",
-      icon: "me-icon-s icon-shopping-cart",
-      label: "Pedidos",
-      active: false,
-      url: "/orders",
-      target: null,
-      badge: { text: "3" }
-    }
-  ]);
-  const siteMap = ref([
-    {
-      id: "main",
-      name: "Principal",
-      description: "Página principal do sistema",
-      url: "/",
-      target: null,
-      children: []
-    }
-  ]);
-  const cartItems = ref([]);
-  const badges = ref({});
-  const loading = ref(false);
-  const error = ref(null);
+function useHeaderData(activeLinkName, gtm) {
+  const { get: get2, post, setCustomToken } = useHttp();
+  const navigationStore = useNavigationStore();
+  const storeUser = toRef$2(navigationStore, "user");
   const loadUserData = async () => {
     try {
-      loading.value = true;
-      console.log("📡 Tentando carregar dados do usuário...");
-      const response = await get2("/user/profile");
-      if (response) {
-        console.log("✅ Dados do usuário carregados:", response.data);
-        user.value = {
-          ...user.value,
-          ...response.data
-        };
+      const data = await get2("/do/api/v1/users/GetCurrentUser");
+      if (!data) {
+        throw new Error("Falha ao carregar dados do usuário");
       }
-    } catch (error2) {
-      if (error2?.response?.status === 403) {
-        console.warn("⚠️ Acesso negado (403) - Usuário não autenticado, usando mock");
-      } else if (error2?.response?.status === 401) {
+      if (data.token?.accessToken && typeof data.token.accessToken === "string") {
+        setCustomToken(data.token.accessToken);
+      }
+      navigationStore.setUser(data);
+    } catch (error) {
+      const errorObj = error;
+      if (errorObj?.response?.status === 403) {
+        console.warn(
+          "⚠️ Acesso negado (403) - Usuário não autenticado, usando mock"
+        );
+      } else if (errorObj?.response?.status === 401) {
         console.warn("⚠️ Não autorizado (401) - Token inválido, usando mock");
       } else {
-        console.warn("⚠️ Erro ao carregar dados do usuário:", error2?.message || "Erro desconhecido", "usando mock");
+        console.warn(
+          "⚠️ Erro ao carregar dados do usuário:",
+          errorObj?.message || "Erro desconhecido",
+          "usando mock"
+        );
       }
-    } finally {
-      loading.value = false;
     }
   };
-  const loadBrandData = async () => {
+  const createNavItemClickHandler = (navItem, gtm2) => {
+    if (!navItem.siteMap && !navItem.url) return null;
+    return () => {
+      if (navItem.siteMap) {
+        gtm2.push({ event: "MS_maisBuscar" });
+        return;
+      }
+      gtm2.push({
+        event: "MS_telasPrincipais",
+        selectOp: navItem.linkName
+      });
+      window.location.href = navItem.url;
+    };
+  };
+  const createSiteMapItemClickHandler = (item, parentCategory, gtm2) => {
+    if (!item.url) return void 0;
+    return () => {
+      gtm2.push({
+        event: "MS_maisOpcao",
+        categoria: parentCategory,
+        selectOp: item.description ?? item.name
+      });
+      window.location.href = item.url;
+    };
+  };
+  const mapSiteMapItems = (items, parentCategory, gtm2) => {
+    return items.map((item) => {
+      const hasChildren = item.children?.length > 0;
+      const nextParentCategory = item.description ?? item.name;
+      return {
+        id: item.$id,
+        name: item.name,
+        description: item.description,
+        url: item.url,
+        click: createSiteMapItemClickHandler(item, parentCategory, gtm2),
+        children: hasChildren ? mapSiteMapItems(
+          item.children,
+          nextParentCategory,
+          gtm2
+        ) : []
+      };
+    });
+  };
+  const mapNavigationItems = (navItems, activeLinkName2, gtm2) => {
+    return navItems.map((item) => {
+      const { $id, ...rest } = item;
+      const isActive = rest.linkName?.toLowerCase() === activeLinkName2?.toLowerCase();
+      const isVisible = item.visible ?? true;
+      return {
+        ...rest,
+        active: isActive,
+        click: createNavItemClickHandler(item, gtm2),
+        id: $id,
+        visible: isVisible
+      };
+    });
+  };
+  const createProfileItemClickHandler = (profileItem, gtm2) => {
+    if (!profileItem.url || profileItem.name === "locale") return void 0;
+    return () => {
+      gtm2.push({
+        event: "MS_perfilOpcao",
+        selectOp: profileItem.label
+      });
+      window.location.href = profileItem.url;
+    };
+  };
+  const changeLocale = async (locale, gtm2) => {
     try {
-      loading.value = true;
-      console.log("📡 Tentando carregar dados da marca...");
-      const response = await get2("/brand/config");
-      if (response) {
-        console.log("✅ Dados da marca carregados:", response.data);
-        brand.value = {
-          ...brand.value,
-          ...response.data
+      gtm2.push({
+        event: "MS_perfilLocale",
+        selectOp: locale
+      });
+      await post("/do/api/v1/users/ChangeLanguage", { culture: locale });
+      navigationStore.setUser({
+        ...navigationStore.user.value,
+        culture: locale
+      });
+      window.location.reload();
+    } catch (error) {
+      console.error("Erro ao mudar idioma:", error);
+    }
+  };
+  const createLocaleItemClickHandler = (child, gtm2) => {
+    const locale = child.url?.match(/[a-z]{2}-[A-Z]{2}/g)?.[0];
+    if (!locale) return void 0;
+    return () => {
+      changeLocale(locale, gtm2);
+    };
+  };
+  const mapProfileItems = (profileItems, gtm2) => {
+    return profileItems.map((item) => {
+      if (item.name === "locale") {
+        return {
+          ...item,
+          children: item.children?.map(
+            (child) => ({
+              ...child,
+              click: createLocaleItemClickHandler(child, gtm2)
+            })
+          ) ?? []
         };
       }
-    } catch (error2) {
-      if (error2?.response?.status === 403) {
-        console.warn("⚠️ Acesso negado (403) - Dados da marca não disponíveis, usando mock");
-      } else {
-        console.warn("⚠️ Erro ao carregar dados da marca:", error2?.message || "Erro desconhecido", "usando mock");
-      }
-    } finally {
-      loading.value = false;
-    }
-  };
-  const loadCartItems = async () => {
-    try {
-      loading.value = true;
-      const response = await get2("/cart/cart");
-      if (response) {
-        cartItems.value = response.data?.products || [];
-      }
-    } catch {
-      console.warn("Não foi possível carregar itens do carrinho, usando mock");
-      cartItems.value = [];
-    } finally {
-      loading.value = false;
-    }
-  };
-  const loadBadgeValue = async (badgeUrl, linkName) => {
-    try {
-      const response = await get2(badgeUrl);
-      if (response) {
-        badges.value[linkName] = response.data?.total || 0;
-      }
-    } catch {
-      console.warn(`Não foi possível carregar badge para ${linkName}`);
-    }
-  };
-  const loadAllBadges = async () => {
-    const badgePromises = navItems.value.filter((item) => item.badgeTotalUrl).map((item) => loadBadgeValue(item.badgeTotalUrl, item.id));
-    await Promise.allSettled(badgePromises);
-  };
-  const loadProfileItems = async () => {
-    try {
-      loading.value = true;
-      const response = await get2("/user/profile/links");
-      if (response) {
-        profileItems.value = response.data || profileItems.value;
-      }
-    } catch {
-      console.warn("Não foi possível carregar itens do perfil, usando mock");
-    } finally {
-      loading.value = false;
-    }
+      return {
+        ...item,
+        click: createProfileItemClickHandler(item, gtm2)
+      };
+    });
   };
   const loadNavigationItems = async () => {
     try {
-      loading.value = true;
-      const response = await get2(`/do/api/v2/header?v=${(/* @__PURE__ */ new Date()).getTime()}&id=${user.value.id}&lang=${user.value.culture}`);
-      if (response) {
-        console.log("response", response);
-        navItems.value = response.data || navItems.value;
+      const query = `?v=${new Date(storeUser.value.lastAccess || 0).getTime()}&id=${navigationStore.user.value.id}&lang=${navigationStore.user.value.culture}`;
+      const response = await get2(`/do/api/v2/header${query}`);
+      if (!response) {
+        throw new Error("Falha ao carregar dados de navegação");
       }
+      navigationStore.setUser({
+        ...navigationStore.user.value,
+        ...response.user
+      });
+      navigationStore.setNavigationItems(
+        mapNavigationItems(
+          response.navItems,
+          activeLinkName,
+          gtm
+        )
+      );
+      navigationStore.setBrand(response.brand);
+      const mappedProfileItems = mapProfileItems(
+        response.profileItems,
+        gtm
+      );
+      navigationStore.setProfileItems(mappedProfileItems);
     } catch {
       console.warn("Não foi possível carregar itens de navegação, usando mock");
-    } finally {
-      loading.value = false;
     }
   };
   const loadSiteMap = async () => {
     try {
-      loading.value = true;
-      const response = await get2("/navigation/sitemap");
-      if (response) {
-        siteMap.value = response.data || siteMap.value;
+      const pathname = window.location.pathname;
+      const isPdm = pathname.includes("/MEPDM/") || pathname.includes("/PDM/");
+      const url = isPdm ? "/do/api/v1/sitemap/pdm" : "/do/api/v1/sitemap";
+      const query = `?v=${new Date(storeUser.value.lastAccess || 0).getTime()}&id=${storeUser.value.id}&lang=${storeUser.value.culture}`;
+      const response = await get2(`${url}${query}`);
+      if (!response) {
+        throw new Error("Falha ao carregar sitemap");
       }
+      const mappedSiteMapItems = mapSiteMapItems(
+        response.children,
+        response.name,
+        gtm
+      );
+      navigationStore.setSiteMapItems(mappedSiteMapItems);
     } catch {
       console.warn("Não foi possível carregar sitemap, usando mock");
-    } finally {
-      loading.value = false;
     }
   };
   const initializeData = async () => {
-    console.log("🚀 Iniciando carregamento de dados do header...");
     try {
+      await loadUserData();
       await Promise.allSettled([
-        // loadUserData(),
-        // loadBrandData(),
-        // loadProfileItems(),
-        loadNavigationItems()
-        // loadSiteMap(),
+        loadNavigationItems(),
+        loadSiteMap()
         // loadCartItems(),
         // loadAllBadges()
       ]);
-      console.log("✅ Dados do header carregados com sucesso!");
-    } catch (error2) {
-      console.error("❌ Erro ao carregar dados do header:", error2);
+    } catch (error) {
+      console.error("❌ Erro ao carregar dados do header:", error);
     }
   };
   return {
-    user,
-    brand,
-    profileItems,
-    navItems,
-    siteMap,
-    cartItems,
-    badges,
-    loading,
-    error,
-    loadUserData,
-    loadBrandData,
-    loadCartItems,
-    loadBadgeValue,
-    loadAllBadges,
-    loadProfileItems,
-    loadNavigationItems,
-    loadSiteMap,
     initializeData
   };
 }
 const _hoisted_1 = { class: "flex items-center justify-between" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "TheHeader.ce",
+  props: {
+    activeLinkName: { type: String },
+    gtm: { type: Object },
+    token: { type: String }
+  },
   setup(__props) {
+    const props = __props;
+    const { initializeData } = useHeaderData(
+      props.activeLinkName || "home",
+      props.gtm || { push: (e) => console.log("click no gtm", e) }
+    );
     const navigationStore = useNavigationStore();
-    const {
-      user,
-      brand,
-      profileItems,
-      navItems,
-      siteMap,
-      initializeData
-    } = useHeaderData();
+    const storeUser = toRef$2(navigationStore, "user");
+    const storeNavigationItems = toRef$2(navigationStore, "navigationItems");
+    const storeBrand = toRef$2(navigationStore, "brand");
+    const storeProfileItems = toRef$2(navigationStore, "profileItems");
+    const storeSiteMapItems = toRef$2(navigationStore, "siteMapItems");
     const backdropState = ref({
       visible: false,
       zIndex: 9999
@@ -29463,23 +29497,21 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       close: closeBackdrop,
       state: backdropState
     });
-    useTranslations().setLocale(user.value.culture);
-    watch(navItems, (newNavItems) => {
-      navigationStore.setNavigationItems(newNavItems);
-    }, { immediate: true });
-    watch(siteMap, (newSiteMap) => {
-      navigationStore.setSiteMapItems(newSiteMap);
-    }, { immediate: true });
-    onMounted(() => {
-      initializeData();
+    onMounted(async () => {
+      const { setCustomToken } = useHttp();
+      if (props.token) {
+        setCustomToken(props.token);
+      }
+      await initializeData();
+      useTranslations().setLocale(storeUser.value.culture);
     });
     const headerClasses = computed(() => {
-      const baseClasses = "shadow-lg";
-      return `${baseClasses} text-white`;
+      const baseClasses = `shadow-lg text-white border-b`;
+      return `${baseClasses}`;
     });
     const headerStyles = computed(() => {
       const styles = {};
-      const bg = brand.value.background || {};
+      const bg = storeBrand.value?.background || {};
       const hasMainImage = Boolean(bg.mainImage);
       const hasRepeatImage = Boolean(bg.repeatImage);
       const hasPrimaryColor = Boolean(bg.primaryColor);
@@ -29507,10 +29539,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       } else {
         styles.backgroundColor = "var(--ui-primary)";
       }
+      styles.borderBottomColor = iconColor.value || "transparent";
       return styles;
     });
     const iconColor = computed(() => {
-      return brand.value.background?.iconColor || "white";
+      return storeBrand.value?.iconColor || "var(--ui-bg)";
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock(Fragment, null, [
@@ -29519,11 +29552,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           style: normalizeStyle(headerStyles.value)
         }, [
           createBaseVNode("nav", _hoisted_1, [
-            createVNode(_sfc_main$i, { brand: unref(brand) }, null, 8, ["brand"]),
-            createVNode(_sfc_main$6, { iconColor: iconColor.value }, null, 8, ["iconColor"]),
+            createVNode(_sfc_main$i, { brand: storeBrand.value }, null, 8, ["brand"]),
+            createVNode(_sfc_main$6, {
+              navigationItems: storeNavigationItems.value,
+              iconColor: iconColor.value,
+              siteMapItems: storeSiteMapItems.value
+            }, null, 8, ["navigationItems", "iconColor", "siteMapItems"]),
             createVNode(_sfc_main$2, {
-              user: unref(user),
-              profileItems: unref(profileItems)
+              user: storeUser.value,
+              profileItems: storeProfileItems.value
             }, null, 8, ["user", "profileItems"])
           ])
         ], 6),

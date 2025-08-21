@@ -65,7 +65,7 @@ import MeIcon from '@/components/MeIcon/MeIcon.vue'
 import type {NavigationItem} from '@/types'
 import {useNavigationStore} from '@/composables/useNavigationStore.ts'
 import {isExternalUrl} from '@/utils/isExternalUrl.ts'
-import {useTranslations} from '@/composables/localI18n/useTranslations.ts'
+import {useTranslations} from '@/composables/useTranslations/useTranslations.ts'
 
 const {t} = useTranslations()
 

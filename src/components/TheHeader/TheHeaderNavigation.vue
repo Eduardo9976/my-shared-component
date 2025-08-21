@@ -26,7 +26,11 @@
 
 <script setup lang="ts">
 import TheHeaderNavigationItem from './TheHeaderNavigationItem.vue'
-import type {NavigationItem, NavigationSeparatorItem, SiteMapItem} from '@/types'
+import type {
+  NavigationItem,
+  NavigationSeparatorItem,
+  SiteMapItem
+} from '@/types'
 import {useNavigationStore} from '@/composables/useNavigationStore.ts'
 import {computed} from 'vue'
 

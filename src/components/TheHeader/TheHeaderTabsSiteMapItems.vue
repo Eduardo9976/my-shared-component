@@ -54,7 +54,7 @@ import {ref, computed} from 'vue'
 import MeIcon from '@/components/MeIcon/MeIcon.vue'
 import type {SiteMapItem} from '@/types'
 import {isExternalUrl} from '@/utils/isExternalUrl'
-import {useTranslations} from '@/composables/localI18n/useTranslations.ts'
+import {useTranslations} from '@/composables/useTranslations/useTranslations.ts'
 
 const {t} = useTranslations()
 
@@ -104,7 +104,7 @@ const accordionItems = computed(() =>
   }))
 )
 
-const getTarget = (url: string) => isExternalUrl(url) ? '_blank' : '_self'
+const getTarget = (url: string) => (isExternalUrl(url) ? '_blank' : '_self')
 
 function handleClick(item: SiteMapItem) {
   item?.click?.(item)

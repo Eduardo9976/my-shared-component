@@ -2,6 +2,7 @@ import globals from 'globals'
 import pluginJs from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
+import prettierConfig from 'eslint-config-prettier'
 
 export default [
   {files: ['**/*.{js,mjs,cjs,ts,vue}']},
@@ -10,6 +11,7 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   ...pluginVue.configs['flat/essential'],
+  prettierConfig,
   {
     files: ['**/*.vue'],
     languageOptions: {
@@ -24,14 +26,11 @@ export default [
           ignores: ['Index', 'Error']
         }
       ],
-      'vue/max-attributes-per-line': [
-        'error',
-        {
-          singleline: 1,
-          multiline: 1
-        }
-      ],
+      'vue/max-attributes-per-line': 'off', // Deixar o Prettier cuidar disso
       'vue/singleline-html-element-content-newline': 'off'
     }
+  },
+  {
+    ignores: ['dist/**', 'node_modules/**', '*.d.ts']
   }
 ]

@@ -43,6 +43,13 @@ export interface User {
   email?: string
   acronym: string
   culture?: string
+  lastAccess?: Date
+  token?: {
+    accessToken: string
+    refreshToken: string
+    expiresIn: number
+    kcAccessToken?: string | null
+  }
   badge: {
     variant: string
     icon: string

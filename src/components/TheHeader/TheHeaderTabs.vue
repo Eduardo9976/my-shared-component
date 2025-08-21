@@ -1,7 +1,5 @@
 <template>
   <div class="p-4 w-[384px]">
-
-
     <UTabs
       :items="items"
       class="w-full"
@@ -20,7 +18,9 @@
           <Suspense>
             <TheHeaderTabsNavigationItems />
             <template #fallback>
-              <div class="p-4 text-center text-gray-500">{{ t('theHeader.tabs.loading') }}</div>
+              <div class="p-4 text-center text-gray-500">
+                {{ t('theHeader.tabs.loading') }}
+              </div>
             </template>
           </Suspense>
         </keep-alive>
@@ -31,7 +31,9 @@
           <Suspense>
             <TheHeaderTabsSiteMapItems :siteMapItems="props.siteMapItems" />
             <template #fallback>
-              <div class="p-4 text-center text-gray-500">{{ t('theHeader.tabs.loading') }}</div>
+              <div class="p-4 text-center text-gray-500">
+                {{ t('theHeader.tabs.loading') }}
+              </div>
             </template>
           </Suspense>
         </keep-alive>
@@ -46,7 +48,7 @@ import type {TabsItem} from '@nuxt/ui'
 import type {SiteMapItem} from '@/types'
 import TheHeaderTabsSiteMapItems from '@/components/TheHeader/TheHeaderTabsSiteMapItems.vue'
 import TheHeaderTabsNavigationItems from '@/components/TheHeader/TheHeaderTabsNavigationItems.vue'
-import {useTranslations} from '@/composables/localI18n/useTranslations.ts'
+import {useTranslations} from '@/composables/useTranslations/useTranslations.ts'
 
 const {t} = useTranslations()
 

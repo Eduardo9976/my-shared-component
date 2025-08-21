@@ -1,15 +1,16 @@
-import axios, { type AxiosInstance, type AxiosResponse } from 'axios'
-import { ref, computed } from 'vue'
-import type { RequestConfig } from '@/types/http'
+import axios, {type AxiosInstance, type AxiosResponse} from 'axios'
+import {ref, computed} from 'vue'
+import type {RequestConfig} from '@/types/http'
 
 class HttpService {
   private instance: AxiosInstance
   private baseURL: string
+  private customToken: string | null = null
 
   constructor() {
     this.baseURL = import.meta.env.DEV
       ? window.location.origin
-      : import.meta.env.VITE_MEWEB ?? window.location.origin
+      : (import.meta.env.VITE_MEWEB ?? window.location.origin)
 
     this.instance = axios.create({
       baseURL: this.baseURL,
@@ -17,7 +18,7 @@ class HttpService {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        Accept: 'application/json'
       }
     })
 
@@ -26,11 +27,14 @@ class HttpService {
 
   private setupInterceptors(): void {
     this.instance.interceptors.request.use(
-      (config) => {
-        const requestConfig = config as { withToken?: boolean; withCredentials?: boolean }
+      config => {
+        const requestConfig = config as {
+          withToken?: boolean
+          withCredentials?: boolean
+        }
 
         if (requestConfig.withToken !== false) {
-          const token = localStorage.getItem('ACCESS_TOKEN')
+          const token = this.customToken || localStorage.getItem('ACCESS_TOKEN')
           if (token) {
             config.headers.Authorization = `Bearer ${token}`
           }
@@ -42,7 +46,7 @@ class HttpService {
 
         return config
       },
-      (error) => {
+      error => {
         return Promise.reject(error)
       }
     )
@@ -51,7 +55,7 @@ class HttpService {
       (response: AxiosResponse) => {
         return response
       },
-      (error) => {
+      error => {
         if (error.response?.status === 401) {
           localStorage.removeItem('ACCESS_TOKEN')
           window.dispatchEvent(new CustomEvent('auth:unauthorized'))
@@ -78,27 +82,35 @@ class HttpService {
 
   async get<T = unknown>(url: string, config?: RequestConfig): Promise<T> {
     const fullURL = this.getFullURL(url)
-    try {
-      const response = await this.instance.get(fullURL, config)
-      return response.data
-    } catch (error: any) {
-      throw error
-    }
+    const response = await this.instance.get(fullURL, config)
+    return response.data
   }
 
-  async post<T = unknown>(url: string, data?: unknown, config?: RequestConfig): Promise<T> {
+  async post<T = unknown>(
+    url: string,
+    data?: unknown,
+    config?: RequestConfig
+  ): Promise<T> {
     const fullURL = this.getFullURL(url)
     const response = await this.instance.post(fullURL, data, config)
     return response.data
   }
 
-  async put<T = unknown>(url: string, data?: unknown, config?: RequestConfig): Promise<T> {
+  async put<T = unknown>(
+    url: string,
+    data?: unknown,
+    config?: RequestConfig
+  ): Promise<T> {
     const fullURL = this.getFullURL(url)
     const response = await this.instance.put(fullURL, data, config)
     return response.data
   }
 
-  async patch<T = unknown>(url: string, data?: unknown, config?: RequestConfig): Promise<T> {
+  async patch<T = unknown>(
+    url: string,
+    data?: unknown,
+    config?: RequestConfig
+  ): Promise<T> {
     const fullURL = this.getFullURL(url)
     const response = await this.instance.patch(fullURL, data, config)
     return response.data
@@ -117,6 +129,22 @@ class HttpService {
 
   getBaseURL(): string {
     return this.baseURL
+  }
+
+  setCustomToken(token: string | null): void {
+    if (token !== null && typeof token !== 'string') {
+      console.warn('Token deve ser uma string, recebido:', typeof token, token)
+      return
+    }
+    this.customToken = token
+  }
+
+  getCustomToken(): string | null {
+    return this.customToken
+  }
+
+  clearCustomToken(): void {
+    this.customToken = null
   }
 }
 
@@ -171,7 +199,11 @@ export function useHttp() {
 
       return response
     } catch (err: unknown) {
-      const errorMessage = (err as { response?: { data?: { message?: string } }, message?: string })?.response?.data?.message || (err as { message?: string })?.message || 'An error occurred'
+      const errorMessage =
+        (err as {response?: {data?: {message?: string}}; message?: string})
+          ?.response?.data?.message ||
+        (err as {message?: string})?.message ||
+        'An error occurred'
       setError(errorMessage)
       return null
     } finally {
@@ -179,11 +211,25 @@ export function useHttp() {
     }
   }
 
-  const get = <T = unknown>(url: string, config?: RequestConfig) => request<T>('get', url, undefined, config)
-  const post = <T = unknown>(url: string, data?: unknown, config?: RequestConfig) => request<T>('post', url, data, config)
-  const put = <T = unknown>(url: string, data?: unknown, config?: RequestConfig) => request<T>('put', url, data, config)
-  const patch = <T = unknown>(url: string, data?: unknown, config?: RequestConfig) => request<T>('patch', url, data, config)
-  const del = <T = unknown>(url: string, config?: RequestConfig) => request<T>('delete', url, undefined, config)
+  const get = <T = unknown>(url: string, config?: RequestConfig) =>
+    request<T>('get', url, undefined, config)
+  const post = <T = unknown>(
+    url: string,
+    data?: unknown,
+    config?: RequestConfig
+  ) => request<T>('post', url, data, config)
+  const put = <T = unknown>(
+    url: string,
+    data?: unknown,
+    config?: RequestConfig
+  ) => request<T>('put', url, data, config)
+  const patch = <T = unknown>(
+    url: string,
+    data?: unknown,
+    config?: RequestConfig
+  ) => request<T>('patch', url, data, config)
+  const del = <T = unknown>(url: string, config?: RequestConfig) =>
+    request<T>('delete', url, undefined, config)
 
   return {
     loading: isLoading,
@@ -200,9 +246,12 @@ export function useHttp() {
     setError,
 
     setBaseURL: httpService.setBaseURL.bind(httpService),
-    getBaseURL: httpService.getBaseURL.bind(httpService)
+    getBaseURL: httpService.getBaseURL.bind(httpService),
+    setCustomToken: httpService.setCustomToken.bind(httpService),
+    getCustomToken: httpService.getCustomToken.bind(httpService),
+    clearCustomToken: httpService.clearCustomToken.bind(httpService)
   }
 }
 
-export { httpService }
+export {httpService}
 export default useHttp

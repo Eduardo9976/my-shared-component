@@ -10,9 +10,7 @@
       arrow
       @update:open="handlePopoverUpdate"
     >
-      <TheHeaderNavigationItemContent
-        v-bind="$props"
-      />
+      <TheHeaderNavigationItemContent v-bind="$props" />
 
       <template #content>
         <TheHeaderTabs :siteMapItems="siteMapItems" />
@@ -20,10 +18,7 @@
     </UPopover>
   </div>
 
-  <TheHeaderNavigationItemContent
-    v-else
-    v-bind="$props"
-  />
+  <TheHeaderNavigationItemContent v-else v-bind="$props" />
 </template>
 
 <script setup lang="ts">

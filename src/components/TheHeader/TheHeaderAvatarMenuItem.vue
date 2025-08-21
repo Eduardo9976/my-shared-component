@@ -22,7 +22,7 @@
         v-else
         class="flex h-10 cursor-pointer items-center gap-2 px-4 py-2 group hover:text-primary hover:bg-blue-100"
         :href="item.url || '#'"
-        @click.prevent="() => handleClick(item)"
+        @click.prevent.stop="() => handleClick(item)"
       >
         <span
           class="text-gray-500 group-hover:text-primary"
@@ -75,6 +75,14 @@ function handleClick(item: ProfileItem) {
   const {url, click} = item
   const target = item.target ?? '_blank'
 
+  // Prioriza a função click se ela existir
+  if (click) {
+    click()
+    props.setVisibleToFalse()
+    return
+  }
+
+  // Fallback para navegação direta se não houver função click
   if (url) {
     if (isExternalUrl(url)) {
       window.open(url, target, 'noopener,noreferrer')
@@ -84,11 +92,6 @@ function handleClick(item: ProfileItem) {
 
     props.setVisibleToFalse()
     return
-  }
-
-  if (click) {
-    click()
-    props.setVisibleToFalse()
   }
 }
 </script>

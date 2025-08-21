@@ -27,18 +27,26 @@ import TheHeaderNavigation from './TheHeaderNavigation.vue'
 import TheHeaderAvatar from './TheHeaderAvatar.vue'
 import AppBackdrop from '@/components/AppBackdrop.vue'
 import {useNavigationStore} from '@/composables/useNavigationStore.ts'
-import {type SupportedLocale, useTranslations} from '@/composables/localI18n/useTranslations.ts'
-import {useHeaderData} from "@/composables/useHeaderData.ts";
-import type {GTM} from "@/types";
+import {
+  type SupportedLocale,
+  useTranslations
+} from '@/composables/useTranslations/useTranslations.ts'
+import {useHeaderData} from '@/composables/useHeaderData.ts'
+import type {GTM} from '@/types'
+import {useHttp} from "@/composables/useHttp";
 
 interface Props {
   activeLinkName?: string
   gtm?: GTM
+  token?: string
 }
 
 const props = defineProps<Props>()
 
-const { initializeData } = useHeaderData(props.activeLinkName || 'home', props.gtm || { push: (e: any) => console.log('click no gtm', e) })
+const {initializeData} = useHeaderData(
+  props.activeLinkName || 'home',
+  props.gtm || {push: (e: unknown) => console.log('click no gtm', e)}
+)
 
 const navigationStore = useNavigationStore()
 
@@ -75,8 +83,14 @@ provide('headerBackdrop', {
 })
 
 onMounted(async () => {
+  const { setCustomToken } = useHttp()
+
+  if(props.token) {
+    setCustomToken(props.token)
+  }
+
   await initializeData()
-  useTranslations().setLocale(navigationStore.user.value.culture as SupportedLocale)
+  useTranslations().setLocale(storeUser.value.culture as SupportedLocale)
 })
 
 const headerClasses = computed(() => {

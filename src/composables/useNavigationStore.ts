@@ -3,7 +3,10 @@ import type {
   NavigationItem,
   NavigationSeparatorItem,
   NavigationItemOrSeparator,
-  SiteMapItem, User, Brand, ProfileItem
+  SiteMapItem,
+  User,
+  Brand,
+  ProfileItem
 } from '@/types'
 
 const state = reactive({
