@@ -75,14 +75,12 @@ function handleClick(item: ProfileItem) {
   const {url, click} = item
   const target = item.target ?? '_blank'
 
-  // Prioriza a função click se ela existir
   if (click) {
     click()
     props.setVisibleToFalse()
     return
   }
 
-  // Fallback para navegação direta se não houver função click
   if (url) {
     if (isExternalUrl(url)) {
       window.open(url, target, 'noopener,noreferrer')
