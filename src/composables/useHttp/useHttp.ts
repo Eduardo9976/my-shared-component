@@ -15,7 +15,7 @@ class HttpService {
     this.instance = axios.create({
       baseURL: this.baseURL,
       timeout: 10000,
-      withCredentials: true,
+      withCredentials: false,
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
@@ -41,7 +41,8 @@ class HttpService {
         }
 
         if (requestConfig.withCredentials !== undefined) {
-          config.withCredentials = requestConfig.withCredentials
+          // config.withCredentials = requestConfig.withCredentials
+          config.withCredentials = false
         }
 
         return config
