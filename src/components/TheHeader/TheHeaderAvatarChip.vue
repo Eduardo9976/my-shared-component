@@ -1,6 +1,6 @@
 <template>
   <UChip
-    v-if="user.badge.icon"
+    v-if="props?.user?.badge?.icon"
     color="error"
     size="3xl"
     position="bottom-right"
@@ -12,8 +12,9 @@
   >
     <template #content>
       <MeIcon
-        :icon="props.user.badge.icon"
-        :color="props.user.badge.variant || 'danger'"
+        v-if="props.user?.badge.icon"
+        :icon="props.user?.badge.icon"
+        :color="props.user?.badge.variant || 'danger'"
       />
     </template>
   </UChip>

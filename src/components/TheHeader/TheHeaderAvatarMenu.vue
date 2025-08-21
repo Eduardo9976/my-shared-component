@@ -15,9 +15,9 @@
         </div>
         <div
           ref="avatar"
-          class="flex cursor-pointer items-center justify-center rounded-full text-white size-12 bg-primary"
+          class="flex items-center justify-center size-12 rounded-full bg-primary mx-auto border-transparent border"
         >
-          <span class="text-2xl font-normal no-underline">
+          <span class="text-2xl font-normal no-underline text-white">
             {{ user.acronym }}
           </span>
 

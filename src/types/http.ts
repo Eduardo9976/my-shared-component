@@ -2,6 +2,7 @@ import type { AxiosRequestConfig } from 'axios'
 
 export interface RequestConfig extends AxiosRequestConfig {
   withToken?: boolean
+  withCredentials?: boolean
 }
 
 export interface HttpOptions {
@@ -32,7 +33,6 @@ export interface HttpError {
   details?: unknown
 }
 
-// Common HTTP status codes
 export enum HttpStatus {
   OK = 200,
   CREATED = 201,

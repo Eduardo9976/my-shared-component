@@ -18,34 +18,34 @@ const NO = () => false;
 const isOn = (key) => key.charCodeAt(0) === 111 && key.charCodeAt(1) === 110 && // uppercase letter
 (key.charCodeAt(2) > 122 || key.charCodeAt(2) < 97);
 const isModelListener = (key) => key.startsWith("onUpdate:");
-const extend$1 = Object.assign;
+const extend$2 = Object.assign;
 const remove = (arr, el) => {
   const i2 = arr.indexOf(el);
   if (i2 > -1) {
     arr.splice(i2, 1);
   }
 };
-const hasOwnProperty$1 = Object.prototype.hasOwnProperty;
-const hasOwn = (val, key) => hasOwnProperty$1.call(val, key);
-const isArray = Array.isArray;
+const hasOwnProperty$2 = Object.prototype.hasOwnProperty;
+const hasOwn = (val, key) => hasOwnProperty$2.call(val, key);
+const isArray$1 = Array.isArray;
 const isMap = (val) => toTypeString(val) === "[object Map]";
 const isSet = (val) => toTypeString(val) === "[object Set]";
-const isDate = (val) => toTypeString(val) === "[object Date]";
-const isRegExp = (val) => toTypeString(val) === "[object RegExp]";
-const isFunction = (val) => typeof val === "function";
-const isString = (val) => typeof val === "string";
+const isDate$1 = (val) => toTypeString(val) === "[object Date]";
+const isRegExp$1 = (val) => toTypeString(val) === "[object RegExp]";
+const isFunction$1 = (val) => typeof val === "function";
+const isString$1 = (val) => typeof val === "string";
 const isSymbol = (val) => typeof val === "symbol";
-const isObject$1 = (val) => val !== null && typeof val === "object";
+const isObject$2 = (val) => val !== null && typeof val === "object";
 const isPromise = (val) => {
-  return (isObject$1(val) || isFunction(val)) && isFunction(val.then) && isFunction(val.catch);
+  return (isObject$2(val) || isFunction$1(val)) && isFunction$1(val.then) && isFunction$1(val.catch);
 };
 const objectToString = Object.prototype.toString;
 const toTypeString = (value) => objectToString.call(value);
 const toRawType = (value) => {
   return toTypeString(value).slice(8, -1);
 };
-const isPlainObject$1 = (val) => toTypeString(val) === "[object Object]";
-const isIntegerKey = (key) => isString(key) && key !== "NaN" && key[0] !== "-" && "" + parseInt(key, 10) === key;
+const isPlainObject$2 = (val) => toTypeString(val) === "[object Object]";
+const isIntegerKey = (key) => isString$1(key) && key !== "NaN" && key[0] !== "-" && "" + parseInt(key, 10) === key;
 const isReservedProp = /* @__PURE__ */ makeMap(
   // the leading comma is intentional so empty string "" is also included
   ",key,ref,ref_for,ref_key,onVnodeBeforeMount,onVnodeMounted,onVnodeBeforeUpdate,onVnodeUpdated,onVnodeBeforeUnmount,onVnodeUnmounted"
@@ -95,7 +95,7 @@ const looseToNumber$1 = (val) => {
   return isNaN(n) ? val : n;
 };
 const toNumber = (val) => {
-  const n = isString(val) ? Number(val) : NaN;
+  const n = isString$1(val) ? Number(val) : NaN;
   return isNaN(n) ? val : n;
 };
 let _globalThis;
@@ -105,11 +105,11 @@ const getGlobalThis = () => {
 const GLOBALS_ALLOWED = "Infinity,undefined,NaN,isFinite,isNaN,parseFloat,parseInt,decodeURI,decodeURIComponent,encodeURI,encodeURIComponent,Math,Number,Date,Array,Object,Boolean,String,RegExp,Map,Set,JSON,Intl,BigInt,console,Error,Symbol";
 const isGloballyAllowed = /* @__PURE__ */ makeMap(GLOBALS_ALLOWED);
 function normalizeStyle(value) {
-  if (isArray(value)) {
+  if (isArray$1(value)) {
     const res = {};
     for (let i2 = 0; i2 < value.length; i2++) {
       const item = value[i2];
-      const normalized = isString(item) ? parseStringStyle(item) : normalizeStyle(item);
+      const normalized = isString$1(item) ? parseStringStyle(item) : normalizeStyle(item);
       if (normalized) {
         for (const key in normalized) {
           res[key] = normalized[key];
@@ -117,7 +117,7 @@ function normalizeStyle(value) {
       }
     }
     return res;
-  } else if (isString(value) || isObject$1(value)) {
+  } else if (isString$1(value) || isObject$2(value)) {
     return value;
   }
 }
@@ -136,16 +136,16 @@ function parseStringStyle(cssText) {
 }
 function normalizeClass(value) {
   let res = "";
-  if (isString(value)) {
+  if (isString$1(value)) {
     res = value;
-  } else if (isArray(value)) {
+  } else if (isArray$1(value)) {
     for (let i2 = 0; i2 < value.length; i2++) {
       const normalized = normalizeClass(value[i2]);
       if (normalized) {
         res += normalized + " ";
       }
     }
-  } else if (isObject$1(value)) {
+  } else if (isObject$2(value)) {
     for (const name in value) {
       if (value[name]) {
         res += name + " ";
@@ -157,7 +157,7 @@ function normalizeClass(value) {
 function normalizeProps(props) {
   if (!props) return null;
   let { class: klass, style } = props;
-  if (klass && !isString(klass)) {
+  if (klass && !isString$1(klass)) {
     props.class = normalizeClass(klass);
   }
   if (style) {
@@ -180,8 +180,8 @@ function looseCompareArrays(a2, b) {
 }
 function looseEqual(a2, b) {
   if (a2 === b) return true;
-  let aValidType = isDate(a2);
-  let bValidType = isDate(b);
+  let aValidType = isDate$1(a2);
+  let bValidType = isDate$1(b);
   if (aValidType || bValidType) {
     return aValidType && bValidType ? a2.getTime() === b.getTime() : false;
   }
@@ -190,13 +190,13 @@ function looseEqual(a2, b) {
   if (aValidType || bValidType) {
     return a2 === b;
   }
-  aValidType = isArray(a2);
-  bValidType = isArray(b);
+  aValidType = isArray$1(a2);
+  bValidType = isArray$1(b);
   if (aValidType || bValidType) {
     return aValidType && bValidType ? looseCompareArrays(a2, b) : false;
   }
-  aValidType = isObject$1(a2);
-  bValidType = isObject$1(b);
+  aValidType = isObject$2(a2);
+  bValidType = isObject$2(b);
   if (aValidType || bValidType) {
     if (!aValidType || !bValidType) {
       return false;
@@ -223,7 +223,7 @@ const isRef$1 = (val) => {
   return !!(val && val["__v_isRef"] === true);
 };
 const toDisplayString = (val) => {
-  return isString(val) ? val : val == null ? "" : isArray(val) || isObject$1(val) && (val.toString === objectToString || !isFunction(val.toString)) ? isRef$1(val) ? toDisplayString(val.value) : JSON.stringify(val, replacer, 2) : String(val);
+  return isString$1(val) ? val : val == null ? "" : isArray$1(val) || isObject$2(val) && (val.toString === objectToString || !isFunction$1(val.toString)) ? isRef$1(val) ? toDisplayString(val.value) : JSON.stringify(val, replacer, 2) : String(val);
 };
 const replacer = (_key, val) => {
   if (isRef$1(val)) {
@@ -244,7 +244,7 @@ const replacer = (_key, val) => {
     };
   } else if (isSymbol(val)) {
     return stringifySymbol(val);
-  } else if (isObject$1(val) && !isArray(val) && !isPlainObject$1(val)) {
+  } else if (isObject$2(val) && !isArray$1(val) && !isPlainObject$2(val)) {
     return String(val);
   }
   return val;
@@ -649,7 +649,7 @@ function effect(fn, options) {
   }
   const e = new ReactiveEffect(fn);
   if (options) {
-    extend$1(e, options);
+    extend$2(e, options);
   }
   try {
     e.run();
@@ -824,7 +824,7 @@ function trigger(target, type, key, newValue, oldValue, oldTarget) {
   if (type === "clear") {
     depsMap.forEach(run);
   } else {
-    const targetIsArray = isArray(target);
+    const targetIsArray = isArray$1(target);
     const isArrayIndex = targetIsArray && isIntegerKey(key);
     if (targetIsArray && key === "length") {
       const newLength = Number(newValue);
@@ -886,15 +886,15 @@ function shallowReadArray(arr) {
 const arrayInstrumentations = {
   __proto__: null,
   [Symbol.iterator]() {
-    return iterator(this, Symbol.iterator, toReactive$2);
+    return iterator$1(this, Symbol.iterator, toReactive$2);
   },
   concat(...args) {
     return reactiveReadArray(this).concat(
-      ...args.map((x2) => isArray(x2) ? reactiveReadArray(x2) : x2)
+      ...args.map((x2) => isArray$1(x2) ? reactiveReadArray(x2) : x2)
     );
   },
   entries() {
-    return iterator(this, "entries", (value) => {
+    return iterator$1(this, "entries", (value) => {
       value[1] = toReactive$2(value[1]);
       return value;
     });
@@ -972,10 +972,10 @@ const arrayInstrumentations = {
     return noTracking(this, "unshift", args);
   },
   values() {
-    return iterator(this, "values", toReactive$2);
+    return iterator$1(this, "values", toReactive$2);
   }
 };
-function iterator(self2, method, wrapValue) {
+function iterator$1(self2, method, wrapValue) {
   const arr = shallowReadArray(self2);
   const iter = arr[method]();
   if (arr !== self2 && !isShallow(self2)) {
@@ -1052,7 +1052,7 @@ const isNonTrackableKeys = /* @__PURE__ */ makeMap(`__proto__,__v_isRef,__isVue`
 const builtInSymbols = new Set(
   /* @__PURE__ */ Object.getOwnPropertyNames(Symbol).filter((key) => key !== "arguments" && key !== "caller").map((key) => Symbol[key]).filter(isSymbol)
 );
-function hasOwnProperty(key) {
+function hasOwnProperty$1(key) {
   if (!isSymbol(key)) key = String(key);
   const obj = toRaw(this);
   track(obj, "has", key);
@@ -1080,14 +1080,14 @@ class BaseReactiveHandler {
       }
       return;
     }
-    const targetIsArray = isArray(target);
+    const targetIsArray = isArray$1(target);
     if (!isReadonly2) {
       let fn;
       if (targetIsArray && (fn = arrayInstrumentations[key])) {
         return fn;
       }
       if (key === "hasOwnProperty") {
-        return hasOwnProperty;
+        return hasOwnProperty$1;
       }
     }
     const res = Reflect.get(
@@ -1110,7 +1110,7 @@ class BaseReactiveHandler {
     if (isRef(res)) {
       return targetIsArray && isIntegerKey(key) ? res : res.value;
     }
-    if (isObject$1(res)) {
+    if (isObject$2(res)) {
       return isReadonly2 ? readonly(res) : reactive(res);
     }
     return res;
@@ -1128,7 +1128,7 @@ class MutableReactiveHandler extends BaseReactiveHandler {
         oldValue = toRaw(oldValue);
         value = toRaw(value);
       }
-      if (!isArray(target) && isRef(oldValue) && !isRef(value)) {
+      if (!isArray$1(target) && isRef(oldValue) && !isRef(value)) {
         if (isOldValueReadonly) {
           return false;
         } else {
@@ -1137,7 +1137,7 @@ class MutableReactiveHandler extends BaseReactiveHandler {
         }
       }
     }
-    const hadKey = isArray(target) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key);
+    const hadKey = isArray$1(target) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key);
     const result = Reflect.set(
       target,
       key,
@@ -1173,7 +1173,7 @@ class MutableReactiveHandler extends BaseReactiveHandler {
     track(
       target,
       "iterate",
-      isArray(target) ? "length" : ITERATE_KEY
+      isArray$1(target) ? "length" : ITERATE_KEY
     );
     return Reflect.ownKeys(target);
   }
@@ -1280,7 +1280,7 @@ function createInstrumentations(readonly2, shallow) {
       });
     }
   };
-  extend$1(
+  extend$2(
     instrumentations,
     readonly2 ? {
       add: createReadonlyMethod("add"),
@@ -1453,7 +1453,7 @@ function shallowReadonly(target) {
   );
 }
 function createReactiveObject(target, isReadonly2, baseHandlers, collectionHandlers, proxyMap) {
-  if (!isObject$1(target)) {
+  if (!isObject$2(target)) {
     return target;
   }
   if (target["__v_raw"] && !(isReadonly2 && target["__v_isReactive"])) {
@@ -1499,8 +1499,8 @@ function markRaw(value) {
   }
   return value;
 }
-const toReactive$2 = (value) => isObject$1(value) ? reactive(value) : value;
-const toReadonly = (value) => isObject$1(value) ? readonly(value) : value;
+const toReactive$2 = (value) => isObject$2(value) ? reactive(value) : value;
+const toReadonly = (value) => isObject$2(value) ? readonly(value) : value;
 function isRef(r) {
   return r ? r["__v_isRef"] === true : false;
 }
@@ -1555,7 +1555,7 @@ function unref(ref2) {
   return isRef(ref2) ? ref2.value : ref2;
 }
 function toValue$2(source) {
-  return isFunction(source) ? source() : unref(source);
+  return isFunction$1(source) ? source() : unref(source);
 }
 const shallowUnwrapHandlers = {
   get: (target, key, receiver) => key === "__v_raw" ? target : unref(Reflect.get(target, key, receiver)),
@@ -1592,7 +1592,7 @@ function customRef(factory) {
   return new CustomRefImpl(factory);
 }
 function toRefs(object) {
-  const ret = isArray(object) ? new Array(object.length) : {};
+  const ret = isArray$1(object) ? new Array(object.length) : {};
   for (const key in object) {
     ret[key] = propertyToRef(object, key);
   }
@@ -1631,9 +1631,9 @@ class GetterRefImpl {
 function toRef$2(source, key, defaultValue) {
   if (isRef(source)) {
     return source;
-  } else if (isFunction(source)) {
+  } else if (isFunction$1(source)) {
     return new GetterRefImpl(source);
-  } else if (isObject$1(source) && arguments.length > 1) {
+  } else if (isObject$2(source) && arguments.length > 1) {
     return propertyToRef(source, key, defaultValue);
   } else {
     return ref(source);
@@ -1687,7 +1687,7 @@ class ComputedRefImpl {
 function computed$1(getterOrOptions, debugOptions, isSSR = false) {
   let getter;
   let setter;
-  if (isFunction(getterOrOptions)) {
+  if (isFunction$1(getterOrOptions)) {
     getter = getterOrOptions;
   } else {
     getter = getterOrOptions.get;
@@ -1740,7 +1740,7 @@ function watch$1(source, cb, options = EMPTY_OBJ) {
   } else if (isReactive(source)) {
     getter = () => reactiveGetter(source);
     forceTrigger = true;
-  } else if (isArray(source)) {
+  } else if (isArray$1(source)) {
     isMultiSource = true;
     forceTrigger = source.some((s) => isReactive(s) || isShallow(s));
     getter = () => source.map((s) => {
@@ -1748,11 +1748,11 @@ function watch$1(source, cb, options = EMPTY_OBJ) {
         return s.value;
       } else if (isReactive(s)) {
         return reactiveGetter(s);
-      } else if (isFunction(s)) {
+      } else if (isFunction$1(s)) {
         return call ? call(s, 2) : s();
       } else ;
     });
-  } else if (isFunction(source)) {
+  } else if (isFunction$1(source)) {
     if (cb) {
       getter = call ? () => call(source, 2) : source;
     } else {
@@ -1863,7 +1863,7 @@ function watch$1(source, cb, options = EMPTY_OBJ) {
   return watchHandle;
 }
 function traverse(value, depth = Infinity, seen) {
-  if (depth <= 0 || !isObject$1(value) || value["__v_skip"]) {
+  if (depth <= 0 || !isObject$2(value) || value["__v_skip"]) {
     return value;
   }
   seen = seen || /* @__PURE__ */ new Set();
@@ -1874,7 +1874,7 @@ function traverse(value, depth = Infinity, seen) {
   depth--;
   if (isRef(value)) {
     traverse(value.value, depth, seen);
-  } else if (isArray(value)) {
+  } else if (isArray$1(value)) {
     for (let i2 = 0; i2 < value.length; i2++) {
       traverse(value[i2], depth, seen);
     }
@@ -1882,7 +1882,7 @@ function traverse(value, depth = Infinity, seen) {
     value.forEach((v2) => {
       traverse(v2, depth, seen);
     });
-  } else if (isPlainObject$1(value)) {
+  } else if (isPlainObject$2(value)) {
     for (const key in value) {
       traverse(value[key], depth, seen);
     }
@@ -1996,7 +1996,7 @@ function formatProps(props) {
   return res;
 }
 function formatProp(key, value, raw) {
-  if (isString(value)) {
+  if (isString$1(value)) {
     value = JSON.stringify(value);
     return raw ? value : [`${key}=${value}`];
   } else if (typeof value === "number" || typeof value === "boolean" || value == null) {
@@ -2004,7 +2004,7 @@ function formatProp(key, value, raw) {
   } else if (isRef(value)) {
     value = formatProp(key, toRaw(value.value), true);
     return raw ? value : [`${key}=Ref<`, value, `>`];
-  } else if (isFunction(value)) {
+  } else if (isFunction$1(value)) {
     return [`${key}=fn${value.name ? `<${value.name}>` : ``}`];
   } else {
     value = toRaw(value);
@@ -2085,7 +2085,7 @@ function callWithErrorHandling(fn, instance, type, args) {
   }
 }
 function callWithAsyncErrorHandling(fn, instance, type, args) {
-  if (isFunction(fn)) {
+  if (isFunction$1(fn)) {
     const res = callWithErrorHandling(fn, instance, type, args);
     if (res && isPromise(res)) {
       res.catch((err) => {
@@ -2094,7 +2094,7 @@ function callWithAsyncErrorHandling(fn, instance, type, args) {
     }
     return res;
   }
-  if (isArray(fn)) {
+  if (isArray$1(fn)) {
     const values = [];
     for (let i2 = 0; i2 < fn.length; i2++) {
       values.push(callWithAsyncErrorHandling(fn[i2], instance, type, args));
@@ -2186,7 +2186,7 @@ function queueFlush() {
   }
 }
 function queuePostFlushCb(cb) {
-  if (!isArray(cb)) {
+  if (!isArray$1(cb)) {
     if (activePostFlushCbs && cb.id === -1) {
       activePostFlushCbs.splice(postFlushIndex + 1, 0, cb);
     } else if (!(cb.flags & 1)) {
@@ -2358,7 +2358,7 @@ function withDirectives(vnode, directives) {
   for (let i2 = 0; i2 < directives.length; i2++) {
     let [dir, value, arg, modifiers = EMPTY_OBJ] = directives[i2];
     if (dir) {
-      if (isFunction(dir)) {
+      if (isFunction$1(dir)) {
         dir = {
           mounted: dir,
           updated: dir
@@ -2408,7 +2408,7 @@ const isTargetSVG = (target) => typeof SVGElement !== "undefined" && target inst
 const isTargetMathML = (target) => typeof MathMLElement === "function" && target instanceof MathMLElement;
 const resolveTarget = (props, select) => {
   const targetSelector = props && props.to;
-  if (isString(targetSelector)) {
+  if (isString$1(targetSelector)) {
     if (!select) {
       return null;
     } else {
@@ -2896,7 +2896,7 @@ function resolveTransitionHooks(vnode, props, state2, instance, postClone) {
   const callAsyncHook = (hook, args) => {
     const done = args[1];
     callHook2(hook, args);
-    if (isArray(hook)) {
+    if (isArray$1(hook)) {
       if (hook.every((hook2) => hook2.length <= 1)) done();
     } else if (hook.length <= 1) {
       done();
@@ -3029,7 +3029,7 @@ function getInnerChild$1(vnode) {
     if (shapeFlag & 16) {
       return children[0];
     }
-    if (shapeFlag & 32 && isFunction(children.default)) {
+    if (shapeFlag & 32 && isFunction$1(children.default)) {
       return children.default();
     }
   }
@@ -3070,10 +3070,10 @@ function getTransitionRawChildren(children, keepComment = false, parentKey) {
 /*! #__NO_SIDE_EFFECTS__ */
 // @__NO_SIDE_EFFECTS__
 function defineComponent(options, extraOptions) {
-  return isFunction(options) ? (
+  return isFunction$1(options) ? (
     // #8236: extend call and options.name access are considered side-effects
     // by Rollup, so we have to wrap it in a pure-annotated IIFE.
-    /* @__PURE__ */ (() => extend$1({ name: options.name }, extraOptions, { setup: options }))()
+    /* @__PURE__ */ (() => extend$2({ name: options.name }, extraOptions, { setup: options }))()
   ) : options;
 }
 function useId$1() {
@@ -3103,11 +3103,11 @@ function useTemplateRef(key) {
   return ret;
 }
 function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
-  if (isArray(rawRef)) {
+  if (isArray$1(rawRef)) {
     rawRef.forEach(
       (r, i2) => setRef(
         r,
-        oldRawRef && (isArray(oldRawRef) ? oldRawRef[i2] : oldRawRef),
+        oldRawRef && (isArray$1(oldRawRef) ? oldRawRef[i2] : oldRawRef),
         parentSuspense,
         vnode,
         isUnmount
@@ -3132,7 +3132,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
     return hasOwn(rawSetupState, key);
   };
   if (oldRef != null && oldRef !== ref3) {
-    if (isString(oldRef)) {
+    if (isString$1(oldRef)) {
       refs[oldRef] = null;
       if (canSetSetupRef(oldRef)) {
         setupState[oldRef] = null;
@@ -3141,19 +3141,19 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
       oldRef.value = null;
     }
   }
-  if (isFunction(ref3)) {
+  if (isFunction$1(ref3)) {
     callWithErrorHandling(ref3, owner, 12, [value, refs]);
   } else {
-    const _isString = isString(ref3);
+    const _isString = isString$1(ref3);
     const _isRef = isRef(ref3);
     if (_isString || _isRef) {
       const doSet = () => {
         if (rawRef.f) {
           const existing = _isString ? canSetSetupRef(ref3) ? setupState[ref3] : refs[ref3] : ref3.value;
           if (isUnmount) {
-            isArray(existing) && remove(existing, refValue);
+            isArray$1(existing) && remove(existing, refValue);
           } else {
-            if (!isArray(existing)) {
+            if (!isArray$1(existing)) {
               if (_isString) {
                 refs[ref3] = [refValue];
                 if (canSetSetupRef(ref3)) {
@@ -3695,7 +3695,7 @@ function elementIsVisibleInViewport(el) {
   const { innerHeight, innerWidth } = window;
   return (top > 0 && top < innerHeight || bottom > 0 && bottom < innerHeight) && (left > 0 && left < innerWidth || right > 0 && right < innerWidth);
 }
-const hydrateOnVisible = (opts) => (hydrate2, forEach) => {
+const hydrateOnVisible = (opts) => (hydrate2, forEach2) => {
   const ob = new IntersectionObserver((entries) => {
     for (const e of entries) {
       if (!e.isIntersecting) continue;
@@ -3704,7 +3704,7 @@ const hydrateOnVisible = (opts) => (hydrate2, forEach) => {
       break;
     }
   }, opts);
-  forEach((el) => {
+  forEach2((el) => {
     if (!(el instanceof Element)) return;
     if (elementIsVisibleInViewport(el)) {
       hydrate2();
@@ -3726,8 +3726,8 @@ const hydrateOnMediaQuery = (query) => (hydrate2) => {
     }
   }
 };
-const hydrateOnInteraction = (interactions = []) => (hydrate2, forEach) => {
-  if (isString(interactions)) interactions = [interactions];
+const hydrateOnInteraction = (interactions = []) => (hydrate2, forEach2) => {
+  if (isString$1(interactions)) interactions = [interactions];
   let hasHydrated = false;
   const doHydrate = (e) => {
     if (!hasHydrated) {
@@ -3738,13 +3738,13 @@ const hydrateOnInteraction = (interactions = []) => (hydrate2, forEach) => {
     }
   };
   const teardown = () => {
-    forEach((el) => {
+    forEach2((el) => {
       for (const i2 of interactions) {
         el.removeEventListener(i2, doHydrate);
       }
     });
   };
-  forEach((el) => {
+  forEach2((el) => {
     for (const i2 of interactions) {
       el.addEventListener(i2, doHydrate, { once: true });
     }
@@ -3778,7 +3778,7 @@ const isAsyncWrapper = (i2) => !!i2.type.__asyncLoader;
 /*! #__NO_SIDE_EFFECTS__ */
 // @__NO_SIDE_EFFECTS__
 function defineAsyncComponent(source) {
-  if (isFunction(source)) {
+  if (isFunction$1(source)) {
     source = { loader: source };
   }
   const {
@@ -4008,10 +4008,10 @@ const KeepAliveImpl = {
       resetShapeFlag(vnode);
       _unmount(vnode, instance, parentSuspense, true);
     }
-    function pruneCache(filter) {
+    function pruneCache(filter2) {
       cache.forEach((vnode, key) => {
         const name = getComponentName(vnode.type);
-        if (name && !filter(name)) {
+        if (name && !filter2(name)) {
           pruneCacheEntry(key);
         }
       });
@@ -4123,11 +4123,11 @@ const KeepAliveImpl = {
 };
 const KeepAlive = KeepAliveImpl;
 function matches$1(pattern, name) {
-  if (isArray(pattern)) {
+  if (isArray$1(pattern)) {
     return pattern.some((p2) => matches$1(p2, name));
-  } else if (isString(pattern)) {
+  } else if (isString$1(pattern)) {
     return pattern.split(",").includes(name);
-  } else if (isRegExp(pattern)) {
+  } else if (isRegExp$1(pattern)) {
     pattern.lastIndex = 0;
     return pattern.test(name);
   }
@@ -4229,7 +4229,7 @@ function resolveComponent(name, maybeSelfReference) {
 }
 const NULL_DYNAMIC_COMPONENT = Symbol.for("v-ndc");
 function resolveDynamicComponent(component) {
-  if (isString(component)) {
+  if (isString$1(component)) {
     return resolveAsset(COMPONENTS, component, false) || component;
   } else {
     return component || NULL_DYNAMIC_COMPONENT;
@@ -4269,8 +4269,8 @@ function resolve(registry, name) {
 function renderList(source, renderItem, cache, index2) {
   let ret;
   const cached = cache && cache[index2];
-  const sourceIsArray = isArray(source);
-  if (sourceIsArray || isString(source)) {
+  const sourceIsArray = isArray$1(source);
+  if (sourceIsArray || isString$1(source)) {
     const sourceIsReactiveArray = sourceIsArray && isReactive(source);
     let needsWrap = false;
     let isReadonlySource = false;
@@ -4293,7 +4293,7 @@ function renderList(source, renderItem, cache, index2) {
     for (let i2 = 0; i2 < source; i2++) {
       ret[i2] = renderItem(i2 + 1, i2, void 0, cached && cached[i2]);
     }
-  } else if (isObject$1(source)) {
+  } else if (isObject$2(source)) {
     if (source[Symbol.iterator]) {
       ret = Array.from(
         source,
@@ -4318,7 +4318,7 @@ function renderList(source, renderItem, cache, index2) {
 function createSlots(slots, dynamicSlots) {
   for (let i2 = 0; i2 < dynamicSlots.length; i2++) {
     const slot = dynamicSlots[i2];
-    if (isArray(slot)) {
+    if (isArray$1(slot)) {
       for (let j = 0; j < slot.length; j++) {
         slots[slot[j].name] = slot[j].fn;
       }
@@ -4392,7 +4392,7 @@ const getPublicInstance = (i2) => {
 const publicPropertiesMap = (
   // Move PURE marker to new line to workaround compiler discarding it
   // due to type annotation
-  /* @__PURE__ */ extend$1(/* @__PURE__ */ Object.create(null), {
+  /* @__PURE__ */ extend$2(/* @__PURE__ */ Object.create(null), {
     $: (i2) => i2,
     $el: (i2) => i2.vnode.el,
     $data: (i2) => i2.data,
@@ -4512,7 +4512,7 @@ const PublicInstanceProxyHandlers = {
     return Reflect.defineProperty(target, key, descriptor);
   }
 };
-const RuntimeCompiledPublicInstanceProxyHandlers = /* @__PURE__ */ extend$1({}, PublicInstanceProxyHandlers, {
+const RuntimeCompiledPublicInstanceProxyHandlers = /* @__PURE__ */ extend$2({}, PublicInstanceProxyHandlers, {
   get(target, key) {
     if (key === Symbol.unscopables) {
       return;
@@ -4553,7 +4553,7 @@ function getContext(calledFunctionName) {
   return i2.setupContext || (i2.setupContext = createSetupContext(i2));
 }
 function normalizePropsOrEmits(props) {
-  return isArray(props) ? props.reduce(
+  return isArray$1(props) ? props.reduce(
     (normalized, p2) => (normalized[p2] = null, normalized),
     {}
   ) : props;
@@ -4564,7 +4564,7 @@ function mergeDefaults(raw, defaults2) {
     if (key.startsWith("__skip")) continue;
     let opt = props[key];
     if (opt) {
-      if (isArray(opt) || isFunction(opt)) {
+      if (isArray$1(opt) || isFunction$1(opt)) {
         opt = props[key] = { type: opt, default: defaults2[key] };
       } else {
         opt.default = defaults2[key];
@@ -4580,8 +4580,8 @@ function mergeDefaults(raw, defaults2) {
 }
 function mergeModels(a2, b) {
   if (!a2 || !b) return a2 || b;
-  if (isArray(a2) && isArray(b)) return a2.concat(b);
-  return extend$1({}, normalizePropsOrEmits(a2), normalizePropsOrEmits(b));
+  if (isArray$1(a2) && isArray$1(b)) return a2.concat(b);
+  return extend$2({}, normalizePropsOrEmits(a2), normalizePropsOrEmits(b));
 }
 function createPropsRestProxy(props, excludedKeys) {
   const ret = {};
@@ -4656,7 +4656,7 @@ function applyOptions(instance) {
   if (methods) {
     for (const key in methods) {
       const methodHandler = methods[key];
-      if (isFunction(methodHandler)) {
+      if (isFunction$1(methodHandler)) {
         {
           ctx[key] = methodHandler.bind(publicThis);
         }
@@ -4665,7 +4665,7 @@ function applyOptions(instance) {
   }
   if (dataOptions) {
     const data = dataOptions.call(publicThis, publicThis);
-    if (!isObject$1(data)) ;
+    if (!isObject$2(data)) ;
     else {
       instance.data = reactive(data);
     }
@@ -4674,8 +4674,8 @@ function applyOptions(instance) {
   if (computedOptions) {
     for (const key in computedOptions) {
       const opt = computedOptions[key];
-      const get2 = isFunction(opt) ? opt.bind(publicThis, publicThis) : isFunction(opt.get) ? opt.get.bind(publicThis, publicThis) : NOOP;
-      const set = !isFunction(opt) && isFunction(opt.set) ? opt.set.bind(publicThis) : NOOP;
+      const get2 = isFunction$1(opt) ? opt.bind(publicThis, publicThis) : isFunction$1(opt.get) ? opt.get.bind(publicThis, publicThis) : NOOP;
+      const set = !isFunction$1(opt) && isFunction$1(opt.set) ? opt.set.bind(publicThis) : NOOP;
       const c2 = computed({
         get: get2,
         set
@@ -4694,7 +4694,7 @@ function applyOptions(instance) {
     }
   }
   if (provideOptions) {
-    const provides = isFunction(provideOptions) ? provideOptions.call(publicThis) : provideOptions;
+    const provides = isFunction$1(provideOptions) ? provideOptions.call(publicThis) : provideOptions;
     Reflect.ownKeys(provides).forEach((key) => {
       provide(key, provides[key]);
     });
@@ -4703,7 +4703,7 @@ function applyOptions(instance) {
     callHook$1(created, instance, "c");
   }
   function registerLifecycleHook(register, hook) {
-    if (isArray(hook)) {
+    if (isArray$1(hook)) {
       hook.forEach((_hook) => register(_hook.bind(publicThis)));
     } else if (hook) {
       register(hook.bind(publicThis));
@@ -4721,7 +4721,7 @@ function applyOptions(instance) {
   registerLifecycleHook(onBeforeUnmount, beforeUnmount);
   registerLifecycleHook(onUnmounted, unmounted);
   registerLifecycleHook(onServerPrefetch, serverPrefetch);
-  if (isArray(expose)) {
+  if (isArray$1(expose)) {
     if (expose.length) {
       const exposed = instance.exposed || (instance.exposed = {});
       expose.forEach((key) => {
@@ -4748,13 +4748,13 @@ function applyOptions(instance) {
   }
 }
 function resolveInjections(injectOptions, ctx, checkDuplicateProperties = NOOP) {
-  if (isArray(injectOptions)) {
+  if (isArray$1(injectOptions)) {
     injectOptions = normalizeInject(injectOptions);
   }
   for (const key in injectOptions) {
     const opt = injectOptions[key];
     let injected;
-    if (isObject$1(opt)) {
+    if (isObject$2(opt)) {
       if ("default" in opt) {
         injected = inject(
           opt.from || key,
@@ -4781,30 +4781,30 @@ function resolveInjections(injectOptions, ctx, checkDuplicateProperties = NOOP) 
 }
 function callHook$1(hook, instance, type) {
   callWithAsyncErrorHandling(
-    isArray(hook) ? hook.map((h2) => h2.bind(instance.proxy)) : hook.bind(instance.proxy),
+    isArray$1(hook) ? hook.map((h2) => h2.bind(instance.proxy)) : hook.bind(instance.proxy),
     instance,
     type
   );
 }
 function createWatcher(raw, ctx, publicThis, key) {
   let getter = key.includes(".") ? createPathGetter(publicThis, key) : () => publicThis[key];
-  if (isString(raw)) {
+  if (isString$1(raw)) {
     const handler = ctx[raw];
-    if (isFunction(handler)) {
+    if (isFunction$1(handler)) {
       {
         watch(getter, handler);
       }
     }
-  } else if (isFunction(raw)) {
+  } else if (isFunction$1(raw)) {
     {
       watch(getter, raw.bind(publicThis));
     }
-  } else if (isObject$1(raw)) {
-    if (isArray(raw)) {
+  } else if (isObject$2(raw)) {
+    if (isArray$1(raw)) {
       raw.forEach((r) => createWatcher(r, ctx, publicThis, key));
     } else {
-      const handler = isFunction(raw.handler) ? raw.handler.bind(publicThis) : ctx[raw.handler];
-      if (isFunction(handler)) {
+      const handler = isFunction$1(raw.handler) ? raw.handler.bind(publicThis) : ctx[raw.handler];
+      if (isFunction$1(handler)) {
         watch(getter, handler, raw);
       }
     }
@@ -4835,7 +4835,7 @@ function resolveMergedOptions(instance) {
     }
     mergeOptions(resolved, base, optionMergeStrategies);
   }
-  if (isObject$1(base)) {
+  if (isObject$2(base)) {
     cache.set(base, resolved);
   }
   return resolved;
@@ -4898,9 +4898,9 @@ function mergeDataFn(to, from) {
     return from;
   }
   return function mergedDataFn() {
-    return extend$1(
-      isFunction(to) ? to.call(this, this) : to,
-      isFunction(from) ? from.call(this, this) : from
+    return extend$2(
+      isFunction$1(to) ? to.call(this, this) : to,
+      isFunction$1(from) ? from.call(this, this) : from
     );
   };
 }
@@ -4908,7 +4908,7 @@ function mergeInject(to, from) {
   return mergeObjectOptions(normalizeInject(to), normalizeInject(from));
 }
 function normalizeInject(raw) {
-  if (isArray(raw)) {
+  if (isArray$1(raw)) {
     const res = {};
     for (let i2 = 0; i2 < raw.length; i2++) {
       res[raw[i2]] = raw[i2];
@@ -4921,14 +4921,14 @@ function mergeAsArray(to, from) {
   return to ? [...new Set([].concat(to, from))] : from;
 }
 function mergeObjectOptions(to, from) {
-  return to ? extend$1(/* @__PURE__ */ Object.create(null), to, from) : from;
+  return to ? extend$2(/* @__PURE__ */ Object.create(null), to, from) : from;
 }
 function mergeEmitsOrPropsOptions(to, from) {
   if (to) {
-    if (isArray(to) && isArray(from)) {
+    if (isArray$1(to) && isArray$1(from)) {
       return [.../* @__PURE__ */ new Set([...to, ...from])];
     }
-    return extend$1(
+    return extend$2(
       /* @__PURE__ */ Object.create(null),
       normalizePropsOrEmits(to),
       normalizePropsOrEmits(from != null ? from : {})
@@ -4940,7 +4940,7 @@ function mergeEmitsOrPropsOptions(to, from) {
 function mergeWatchOptions(to, from) {
   if (!to) return from;
   if (!from) return to;
-  const merged = extend$1(/* @__PURE__ */ Object.create(null), to);
+  const merged = extend$2(/* @__PURE__ */ Object.create(null), to);
   for (const key in from) {
     merged[key] = mergeAsArray(to[key], from[key]);
   }
@@ -4970,10 +4970,10 @@ function createAppContext() {
 let uid$1 = 0;
 function createAppAPI(render2, hydrate2) {
   return function createApp2(rootComponent, rootProps = null) {
-    if (!isFunction(rootComponent)) {
-      rootComponent = extend$1({}, rootComponent);
+    if (!isFunction$1(rootComponent)) {
+      rootComponent = extend$2({}, rootComponent);
     }
-    if (rootProps != null && !isObject$1(rootProps)) {
+    if (rootProps != null && !isObject$2(rootProps)) {
       rootProps = null;
     }
     const context2 = createAppContext();
@@ -4995,10 +4995,10 @@ function createAppAPI(render2, hydrate2) {
       },
       use(plugin, ...options) {
         if (installedPlugins.has(plugin)) ;
-        else if (plugin && isFunction(plugin.install)) {
+        else if (plugin && isFunction$1(plugin.install)) {
           installedPlugins.add(plugin);
           plugin.install(app, ...options);
-        } else if (isFunction(plugin)) {
+        } else if (isFunction$1(plugin)) {
           installedPlugins.add(plugin);
           plugin(app, ...options);
         } else ;
@@ -5096,7 +5096,7 @@ function inject(key, defaultValue, treatDefaultAsFactory = false) {
     if (provides && key in provides) {
       return provides[key];
     } else if (arguments.length > 1) {
-      return treatDefaultAsFactory && isFunction(defaultValue) ? defaultValue.call(instance && instance.proxy) : defaultValue;
+      return treatDefaultAsFactory && isFunction$1(defaultValue) ? defaultValue.call(instance && instance.proxy) : defaultValue;
     } else ;
   }
 }
@@ -5264,7 +5264,7 @@ function resolvePropValue(options, props, key, value, instance, isAbsent) {
     const hasDefault = hasOwn(opt, "default");
     if (hasDefault && value === void 0) {
       const defaultValue = opt.default;
-      if (opt.type !== Function && !opt.skipFactory && isFunction(defaultValue)) {
+      if (opt.type !== Function && !opt.skipFactory && isFunction$1(defaultValue)) {
         const { propsDefaults } = instance;
         if (key in propsDefaults) {
           value = propsDefaults[key];
@@ -5310,11 +5310,11 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
   const normalized = {};
   const needCastKeys = [];
   let hasExtends = false;
-  if (!isFunction(comp)) {
+  if (!isFunction$1(comp)) {
     const extendProps = (raw2) => {
       hasExtends = true;
       const [props, keys] = normalizePropsOptions(raw2, appContext, true);
-      extend$1(normalized, props);
+      extend$2(normalized, props);
       if (keys) needCastKeys.push(...keys);
     };
     if (!asMixin && appContext.mixins.length) {
@@ -5328,12 +5328,12 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
     }
   }
   if (!raw && !hasExtends) {
-    if (isObject$1(comp)) {
+    if (isObject$2(comp)) {
       cache.set(comp, EMPTY_ARR);
     }
     return EMPTY_ARR;
   }
-  if (isArray(raw)) {
+  if (isArray$1(raw)) {
     for (let i2 = 0; i2 < raw.length; i2++) {
       const normalizedKey = camelize(raw[i2]);
       if (validatePropName(normalizedKey)) {
@@ -5345,14 +5345,14 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
       const normalizedKey = camelize(key);
       if (validatePropName(normalizedKey)) {
         const opt = raw[key];
-        const prop = normalized[normalizedKey] = isArray(opt) || isFunction(opt) ? { type: opt } : extend$1({}, opt);
+        const prop = normalized[normalizedKey] = isArray$1(opt) || isFunction$1(opt) ? { type: opt } : extend$2({}, opt);
         const propType = prop.type;
         let shouldCast = false;
         let shouldCastTrue = true;
-        if (isArray(propType)) {
+        if (isArray$1(propType)) {
           for (let index2 = 0; index2 < propType.length; ++index2) {
             const type = propType[index2];
-            const typeName = isFunction(type) && type.name;
+            const typeName = isFunction$1(type) && type.name;
             if (typeName === "Boolean") {
               shouldCast = true;
               break;
@@ -5361,7 +5361,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
             }
           }
         } else {
-          shouldCast = isFunction(propType) && propType.name === "Boolean";
+          shouldCast = isFunction$1(propType) && propType.name === "Boolean";
         }
         prop[
           0
@@ -5378,7 +5378,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
     }
   }
   const res = [normalized, needCastKeys];
-  if (isObject$1(comp)) {
+  if (isObject$2(comp)) {
     cache.set(comp, res);
   }
   return res;
@@ -5390,7 +5390,7 @@ function validatePropName(key) {
   return false;
 }
 const isInternalKey = (key) => key === "_" || key === "__" || key === "_ctx" || key === "$stable";
-const normalizeSlotValue = (value) => isArray(value) ? value.map(normalizeVNode) : [normalizeVNode(value)];
+const normalizeSlotValue = (value) => isArray$1(value) ? value.map(normalizeVNode) : [normalizeVNode(value)];
 const normalizeSlot = (key, rawSlot, ctx) => {
   if (rawSlot._n) {
     return rawSlot;
@@ -5407,7 +5407,7 @@ const normalizeObjectSlots = (rawSlots, slots, instance) => {
   for (const key in rawSlots) {
     if (isInternalKey(key)) continue;
     const value = rawSlots[key];
-    if (isFunction(value)) {
+    if (isFunction$1(value)) {
       slots[key] = normalizeSlot(key, value, ctx);
     } else if (value != null) {
       const normalized = normalizeSlotValue(value);
@@ -6674,7 +6674,7 @@ function baseCreateRenderer(options, createHydrationFns) {
     if (bum) {
       invokeArrayFns(bum);
     }
-    if (parent && isArray(slotCacheKeys)) {
+    if (parent && isArray$1(slotCacheKeys)) {
       slotCacheKeys.forEach((v2) => {
         parent.renderCache[v2] = void 0;
       });
@@ -6781,7 +6781,7 @@ function needTransition(parentSuspense, transition) {
 function traverseStaticChildren(n1, n2, shallow = false) {
   const ch1 = n1.children;
   const ch2 = n2.children;
-  if (isArray(ch1) && isArray(ch2)) {
+  if (isArray$1(ch1) && isArray$1(ch2)) {
     for (let i2 = 0; i2 < ch1.length; i2++) {
       const c1 = ch1[i2];
       let c2 = ch2[i2];
@@ -6887,7 +6887,7 @@ function watch(source, cb, options) {
 }
 function doWatch(source, cb, options = EMPTY_OBJ) {
   const { immediate, deep, flush, once } = options;
-  const baseWatchOptions = extend$1({}, options);
+  const baseWatchOptions = extend$2({}, options);
   const runsImmediately = cb && immediate || !cb && flush !== "post";
   let ssrCleanup;
   if (isInSSRComponentSetup) {
@@ -6944,9 +6944,9 @@ function doWatch(source, cb, options = EMPTY_OBJ) {
 }
 function instanceWatch(source, value, options) {
   const publicThis = this.proxy;
-  const getter = isString(source) ? source.includes(".") ? createPathGetter(publicThis, source) : () => publicThis[source] : source.bind(publicThis, publicThis);
+  const getter = isString$1(source) ? source.includes(".") ? createPathGetter(publicThis, source) : () => publicThis[source] : source.bind(publicThis, publicThis);
   let cb;
-  if (isFunction(value)) {
+  if (isFunction$1(value)) {
     cb = value;
   } else {
     cb = value.handler;
@@ -7033,7 +7033,7 @@ function emit(instance, event, ...rawArgs) {
   const modifiers = isModelListener2 && getModelModifiers(props, event.slice(7));
   if (modifiers) {
     if (modifiers.trim) {
-      args = rawArgs.map((a2) => isString(a2) ? a2.trim() : a2);
+      args = rawArgs.map((a2) => isString$1(a2) ? a2.trim() : a2);
     }
     if (modifiers.number) {
       args = rawArgs.map(looseToNumber$1);
@@ -7078,12 +7078,12 @@ function normalizeEmitsOptions(comp, appContext, asMixin = false) {
   const raw = comp.emits;
   let normalized = {};
   let hasExtends = false;
-  if (!isFunction(comp)) {
+  if (!isFunction$1(comp)) {
     const extendEmits = (raw2) => {
       const normalizedFromExtend = normalizeEmitsOptions(raw2, appContext, true);
       if (normalizedFromExtend) {
         hasExtends = true;
-        extend$1(normalized, normalizedFromExtend);
+        extend$2(normalized, normalizedFromExtend);
       }
     };
     if (!asMixin && appContext.mixins.length) {
@@ -7097,17 +7097,17 @@ function normalizeEmitsOptions(comp, appContext, asMixin = false) {
     }
   }
   if (!raw && !hasExtends) {
-    if (isObject$1(comp)) {
+    if (isObject$2(comp)) {
       cache.set(comp, null);
     }
     return null;
   }
-  if (isArray(raw)) {
+  if (isArray$1(raw)) {
     raw.forEach((key) => normalized[key] = null);
   } else {
-    extend$1(normalized, raw);
+    extend$2(normalized, raw);
   }
-  if (isObject$1(comp)) {
+  if (isObject$2(comp)) {
     cache.set(comp, normalized);
   }
   return normalized;
@@ -7377,7 +7377,7 @@ const SuspenseImpl = {
 const Suspense = SuspenseImpl;
 function triggerEvent(vnode, name) {
   const eventListener = vnode.props && vnode.props[name];
-  if (isFunction(eventListener)) {
+  if (isFunction$1(eventListener)) {
     eventListener();
   }
 }
@@ -7838,7 +7838,7 @@ function normalizeSuspenseChildren(vnode) {
 }
 function normalizeSuspenseSlot(s) {
   let block;
-  if (isFunction(s)) {
+  if (isFunction$1(s)) {
     const trackBlock = isBlockTreeEnabled && s._c;
     if (trackBlock) {
       s._d = false;
@@ -7851,7 +7851,7 @@ function normalizeSuspenseSlot(s) {
       closeBlock();
     }
   }
-  if (isArray(s)) {
+  if (isArray$1(s)) {
     const singleChild = filterSingleRoot(s);
     s = singleChild;
   }
@@ -7863,7 +7863,7 @@ function normalizeSuspenseSlot(s) {
 }
 function queueEffectWithSuspense(fn, suspense) {
   if (suspense && suspense.pendingBranch) {
-    if (isArray(fn)) {
+    if (isArray$1(fn)) {
       suspense.effects.push(...fn);
     } else {
       suspense.effects.push(fn);
@@ -7960,7 +7960,7 @@ const normalizeRef = ({
   if (typeof ref3 === "number") {
     ref3 = "" + ref3;
   }
-  return ref3 != null ? isString(ref3) || isRef(ref3) || isFunction(ref3) ? { i: currentRenderingInstance, r: ref3, k: ref_key, f: !!ref_for } : ref3 : null;
+  return ref3 != null ? isString$1(ref3) || isRef(ref3) || isFunction$1(ref3) ? { i: currentRenderingInstance, r: ref3, k: ref_key, f: !!ref_for } : ref3 : null;
 };
 function createBaseVNode(type, props = null, children = null, patchFlag = 0, dynamicProps = null, shapeFlag = type === Fragment ? 0 : 1, isBlockNode = false, needFullChildrenNormalization = false) {
   const vnode = {
@@ -7998,7 +7998,7 @@ function createBaseVNode(type, props = null, children = null, patchFlag = 0, dyn
       type.normalize(vnode);
     }
   } else if (children) {
-    vnode.shapeFlag |= isString(children) ? 8 : 16;
+    vnode.shapeFlag |= isString$1(children) ? 8 : 16;
   }
   if (isBlockTreeEnabled > 0 && // avoid a block node from tracking itself
   !isBlockNode && // has current parent block
@@ -8044,17 +8044,17 @@ function _createVNode(type, props = null, children = null, patchFlag = 0, dynami
   if (props) {
     props = guardReactiveProps(props);
     let { class: klass, style } = props;
-    if (klass && !isString(klass)) {
+    if (klass && !isString$1(klass)) {
       props.class = normalizeClass(klass);
     }
-    if (isObject$1(style)) {
-      if (isProxy(style) && !isArray(style)) {
-        style = extend$1({}, style);
+    if (isObject$2(style)) {
+      if (isProxy(style) && !isArray$1(style)) {
+        style = extend$2({}, style);
       }
       props.style = normalizeStyle(style);
     }
   }
-  const shapeFlag = isString(type) ? 1 : isSuspense(type) ? 128 : isTeleport(type) ? 64 : isObject$1(type) ? 4 : isFunction(type) ? 2 : 0;
+  const shapeFlag = isString$1(type) ? 1 : isSuspense(type) ? 128 : isTeleport(type) ? 64 : isObject$2(type) ? 4 : isFunction$1(type) ? 2 : 0;
   return createBaseVNode(
     type,
     props,
@@ -8068,7 +8068,7 @@ function _createVNode(type, props = null, children = null, patchFlag = 0, dynami
 }
 function guardReactiveProps(props) {
   if (!props) return null;
-  return isProxy(props) || isInternalObject(props) ? extend$1({}, props) : props;
+  return isProxy(props) || isInternalObject(props) ? extend$2({}, props) : props;
 }
 function cloneVNode(vnode, extraProps, mergeRef = false, cloneTransition = false) {
   const { props, ref: ref3, patchFlag, children, transition } = vnode;
@@ -8083,7 +8083,7 @@ function cloneVNode(vnode, extraProps, mergeRef = false, cloneTransition = false
       // #2078 in the case of <component :is="vnode" ref="extra"/>
       // if the vnode itself already has a ref, cloneVNode will need to merge
       // the refs so the single vnode can be set on multiple refs
-      mergeRef && ref3 ? isArray(ref3) ? ref3.concat(normalizeRef(extraProps)) : [ref3, normalizeRef(extraProps)] : normalizeRef(extraProps)
+      mergeRef && ref3 ? isArray$1(ref3) ? ref3.concat(normalizeRef(extraProps)) : [ref3, normalizeRef(extraProps)] : normalizeRef(extraProps)
     ) : ref3,
     scopeId: vnode.scopeId,
     slotScopeIds: vnode.slotScopeIds,
@@ -8139,7 +8139,7 @@ function createCommentVNode(text = "", asBlock = false) {
 function normalizeVNode(child) {
   if (child == null || typeof child === "boolean") {
     return createVNode(Comment);
-  } else if (isArray(child)) {
+  } else if (isArray$1(child)) {
     return createVNode(
       Fragment,
       null,
@@ -8160,7 +8160,7 @@ function normalizeChildren(vnode, children) {
   const { shapeFlag } = vnode;
   if (children == null) {
     children = null;
-  } else if (isArray(children)) {
+  } else if (isArray$1(children)) {
     type = 16;
   } else if (typeof children === "object") {
     if (shapeFlag & (1 | 64)) {
@@ -8185,7 +8185,7 @@ function normalizeChildren(vnode, children) {
         }
       }
     }
-  } else if (isFunction(children)) {
+  } else if (isFunction$1(children)) {
     children = { default: children, _ctx: currentRenderingInstance };
     type = 32;
   } else {
@@ -8214,7 +8214,7 @@ function mergeProps(...args) {
       } else if (isOn(key)) {
         const existing = ret[key];
         const incoming = toMerge[key];
-        if (incoming && existing !== incoming && !(isArray(existing) && existing.includes(incoming))) {
+        if (incoming && existing !== incoming && !(isArray$1(existing) && existing.includes(incoming))) {
           ret[key] = existing ? [].concat(existing, incoming) : incoming;
         }
       } else if (key !== "") {
@@ -8415,13 +8415,13 @@ function setupStatefulComponent(instance, isSSR) {
   }
 }
 function handleSetupResult(instance, setupResult, isSSR) {
-  if (isFunction(setupResult)) {
+  if (isFunction$1(setupResult)) {
     if (instance.type.__ssrInlineRender) {
       instance.ssrRender = setupResult;
     } else {
       instance.render = setupResult;
     }
-  } else if (isObject$1(setupResult)) {
+  } else if (isObject$2(setupResult)) {
     instance.setupState = proxyRefs(setupResult);
   } else ;
   finishComponentSetup(instance, isSSR);
@@ -8445,8 +8445,8 @@ function finishComponentSetup(instance, isSSR, skipOptions) {
       if (template) {
         const { isCustomElement, compilerOptions } = instance.appContext.config;
         const { delimiters, compilerOptions: componentCompilerOptions } = Component;
-        const finalCompilerOptions = extend$1(
-          extend$1(
+        const finalCompilerOptions = extend$2(
+          extend$2(
             {
               isCustomElement,
               delimiters
@@ -8514,7 +8514,7 @@ function getComponentPublicInstance(instance) {
 const classifyRE = /(?:^|[-_])(\w)/g;
 const classify = (str) => str.replace(classifyRE, (c2) => c2.toUpperCase()).replace(/[-_]/g, "");
 function getComponentName(Component, includeInferred = true) {
-  return isFunction(Component) ? Component.displayName || Component.name : Component.name || includeInferred && Component.__name;
+  return isFunction$1(Component) ? Component.displayName || Component.name : Component.name || includeInferred && Component.__name;
 }
 function formatComponentName(instance, Component, isRoot = false) {
   let name = getComponentName(Component);
@@ -8539,7 +8539,7 @@ function formatComponentName(instance, Component, isRoot = false) {
   return name ? classify(name) : isRoot ? `App` : `Anonymous`;
 }
 function isClassComponent(value) {
-  return isFunction(value) && "__vccOpts" in value;
+  return isFunction$1(value) && "__vccOpts" in value;
 }
 const computed = (getterOrOptions, debugOptions) => {
   const c2 = computed$1(getterOrOptions, debugOptions, isInSSRComponentSetup);
@@ -8548,7 +8548,7 @@ const computed = (getterOrOptions, debugOptions) => {
 function h(type, propsOrChildren, children) {
   const l2 = arguments.length;
   if (l2 === 2) {
-    if (isObject$1(propsOrChildren) && !isArray(propsOrChildren)) {
+    if (isObject$2(propsOrChildren) && !isArray$1(propsOrChildren)) {
       if (isVNode(propsOrChildren)) {
         return createVNode(type, null, [propsOrChildren]);
       }
@@ -8721,7 +8721,7 @@ const DOMTransitionPropsValidators = {
   leaveActiveClass: String,
   leaveToClass: String
 };
-const TransitionPropsValidators = /* @__PURE__ */ extend$1(
+const TransitionPropsValidators = /* @__PURE__ */ extend$2(
   {},
   BaseTransitionPropsValidators,
   DOMTransitionPropsValidators
@@ -8735,14 +8735,14 @@ const Transition = /* @__PURE__ */ decorate$1(
   (props, { slots }) => h(BaseTransition, resolveTransitionProps(props), slots)
 );
 const callHook = (hook, args = []) => {
-  if (isArray(hook)) {
+  if (isArray$1(hook)) {
     hook.forEach((h2) => h2(...args));
   } else if (hook) {
     hook(...args);
   }
 };
 const hasExplicitCallback = (hook) => {
-  return hook ? isArray(hook) ? hook.some((h2) => h2.length > 1) : hook.length > 1 : false;
+  return hook ? isArray$1(hook) ? hook.some((h2) => h2.length > 1) : hook.length > 1 : false;
 };
 function resolveTransitionProps(rawProps) {
   const baseProps = {};
@@ -8808,7 +8808,7 @@ function resolveTransitionProps(rawProps) {
       });
     };
   };
-  return extend$1(baseProps, {
+  return extend$2(baseProps, {
     onBeforeEnter(el) {
       callHook(onBeforeEnter, [el]);
       addTransitionClass(el, enterFromClass);
@@ -8861,7 +8861,7 @@ function resolveTransitionProps(rawProps) {
 function normalizeDuration(duration) {
   if (duration == null) {
     return null;
-  } else if (isObject$1(duration)) {
+  } else if (isObject$2(duration)) {
     return [NumberOf(duration.enter), NumberOf(duration.leave)];
   } else {
     const n = NumberOf(duration);
@@ -9107,11 +9107,11 @@ function setVarsOnNode(el, vars) {
 const displayRE = /(^|;)\s*display\s*:/;
 function patchStyle(el, prev, next) {
   const style = el.style;
-  const isCssString = isString(next);
+  const isCssString = isString$1(next);
   let hasControlledDisplay = false;
   if (next && !isCssString) {
     if (prev) {
-      if (!isString(prev)) {
+      if (!isString$1(prev)) {
         for (const key in prev) {
           if (next[key] == null) {
             setStyle(style, key, "");
@@ -9155,7 +9155,7 @@ function patchStyle(el, prev, next) {
 }
 const importantRE = /\s*!important$/;
 function setStyle(style, name, val) {
-  if (isArray(val)) {
+  if (isArray$1(val)) {
     val.forEach((v2) => setStyle(style, name, v2));
   } else {
     if (val == null) val = "";
@@ -9196,7 +9196,7 @@ function autoPrefix(style, rawName) {
   return rawName;
 }
 const xlinkNS = "http://www.w3.org/1999/xlink";
-function patchAttr(el, key, value, isSVG, instance, isBoolean = isSpecialBooleanAttr(key)) {
+function patchAttr(el, key, value, isSVG, instance, isBoolean2 = isSpecialBooleanAttr(key)) {
   if (isSVG && key.startsWith("xlink:")) {
     if (value == null) {
       el.removeAttributeNS(xlinkNS, key.slice(6, key.length));
@@ -9204,12 +9204,12 @@ function patchAttr(el, key, value, isSVG, instance, isBoolean = isSpecialBoolean
       el.setAttributeNS(xlinkNS, key, value);
     }
   } else {
-    if (value == null || isBoolean && !includeBooleanAttr(value)) {
+    if (value == null || isBoolean2 && !includeBooleanAttr(value)) {
       el.removeAttribute(key);
     } else {
       el.setAttribute(
         key,
-        isBoolean ? "" : isSymbol(value) ? String(value) : value
+        isBoolean2 ? "" : isSymbol(value) ? String(value) : value
       );
     }
   }
@@ -9320,7 +9320,7 @@ function createInvoker(initialValue, instance) {
   return invoker;
 }
 function patchStopImmediatePropagation(e, value) {
-  if (isArray(value)) {
+  if (isArray$1(value)) {
     const originalStop = e.stopImmediatePropagation;
     e.stopImmediatePropagation = () => {
       originalStop.call(e);
@@ -9352,7 +9352,7 @@ const patchProp = (el, key, prevValue, nextValue, namespace, parentComponent) =>
     }
   } else if (
     // #11081 force set props for possible async custom element
-    el._isVueCE && (/[A-Z]/.test(key) || !isString(nextValue))
+    el._isVueCE && (/[A-Z]/.test(key) || !isString$1(nextValue))
   ) {
     patchDOMProp(el, camelize(key), nextValue, parentComponent, key);
   } else {
@@ -9369,7 +9369,7 @@ function shouldSetAsProp(el, key, value, isSVG) {
     if (key === "innerHTML" || key === "textContent") {
       return true;
     }
-    if (key in el && isNativeOn(key) && isFunction(value)) {
+    if (key in el && isNativeOn(key) && isFunction$1(value)) {
       return true;
     }
     return false;
@@ -9392,7 +9392,7 @@ function shouldSetAsProp(el, key, value, isSVG) {
       return false;
     }
   }
-  if (isNativeOn(key) && isString(value)) {
+  if (isNativeOn(key) && isString$1(value)) {
     return false;
   }
   return key in el;
@@ -9402,7 +9402,7 @@ const REMOVAL = {};
 // @__NO_SIDE_EFFECTS__
 function defineCustomElement(options, extraOptions, _createApp) {
   const Comp = /* @__PURE__ */ defineComponent(options, extraOptions);
-  if (isPlainObject$1(Comp)) extend$1(Comp, extraOptions);
+  if (isPlainObject$2(Comp)) extend$2(Comp, extraOptions);
   class VueCustomElement extends VueElement {
     constructor(initialProps) {
       super(Comp, initialProps, _createApp);
@@ -9520,7 +9520,7 @@ class VueElement extends BaseClass {
       this._pendingResolve = void 0;
       const { props, styles } = def2;
       let numberProps;
-      if (props && !isArray(props)) {
+      if (props && !isArray$1(props)) {
         for (const key in props) {
           const opt = props[key];
           if (opt === Number || opt && opt.type === Number) {
@@ -9569,7 +9569,7 @@ class VueElement extends BaseClass {
   }
   _resolveProps(def2) {
     const { props } = def2;
-    const declaredPropKeys = isArray(props) ? props : Object.keys(props || {});
+    const declaredPropKeys = isArray$1(props) ? props : Object.keys(props || {});
     for (const key of Object.keys(this)) {
       if (key[0] !== "_" && declaredPropKeys.includes(key)) {
         this._setProp(key, this[key]);
@@ -9642,7 +9642,7 @@ class VueElement extends BaseClass {
     if (!this.shadowRoot) {
       baseProps.onVnodeMounted = baseProps.onVnodeUpdated = this._renderSlots.bind(this);
     }
-    const vnode = createVNode(this._def, extend$1(baseProps, this._props));
+    const vnode = createVNode(this._def, extend$2(baseProps, this._props));
     if (!this._instance) {
       vnode.ce = (instance) => {
         this._instance = instance;
@@ -9652,7 +9652,7 @@ class VueElement extends BaseClass {
           this.dispatchEvent(
             new CustomEvent(
               event,
-              isPlainObject$1(args[0]) ? extend$1({ detail: args }, args[0]) : { detail: args }
+              isPlainObject$2(args[0]) ? extend$2({ detail: args }, args[0]) : { detail: args }
             )
           );
         };
@@ -9776,7 +9776,7 @@ const decorate = (t) => {
 };
 const TransitionGroupImpl = /* @__PURE__ */ decorate({
   name: "TransitionGroup",
-  props: /* @__PURE__ */ extend$1({}, TransitionPropsValidators, {
+  props: /* @__PURE__ */ extend$2({}, TransitionPropsValidators, {
     tag: String,
     moveClass: String
   }),
@@ -9904,7 +9904,7 @@ function hasCSSTransform(el, root, moveClass) {
 }
 const getModelAssigner = (vnode) => {
   const fn = vnode.props["onUpdate:modelValue"] || false;
-  return isArray(fn) ? (value) => invokeArrayFns(fn, value) : fn;
+  return isArray$1(fn) ? (value) => invokeArrayFns(fn, value) : fn;
 };
 function onCompositionStart(e) {
   e.target.composing = true;
@@ -9918,13 +9918,13 @@ function onCompositionEnd(e) {
 }
 const assignKey = Symbol("_assign");
 const vModelText = {
-  created(el, { modifiers: { lazy, trim, number } }, vnode) {
+  created(el, { modifiers: { lazy, trim: trim2, number } }, vnode) {
     el[assignKey] = getModelAssigner(vnode);
     const castToNumber = number || vnode.props && vnode.props.type === "number";
     addEventListener(el, lazy ? "change" : "input", (e) => {
       if (e.target.composing) return;
       let domValue = el.value;
-      if (trim) {
+      if (trim2) {
         domValue = domValue.trim();
       }
       if (castToNumber) {
@@ -9932,7 +9932,7 @@ const vModelText = {
       }
       el[assignKey](domValue);
     });
-    if (trim) {
+    if (trim2) {
       addEventListener(el, "change", () => {
         el.value = el.value.trim();
       });
@@ -9947,7 +9947,7 @@ const vModelText = {
   mounted(el, { value }) {
     el.value = value == null ? "" : value;
   },
-  beforeUpdate(el, { value, oldValue, modifiers: { lazy, trim, number } }, vnode) {
+  beforeUpdate(el, { value, oldValue, modifiers: { lazy, trim: trim2, number } }, vnode) {
     el[assignKey] = getModelAssigner(vnode);
     if (el.composing) return;
     const elValue = (number || el.type === "number") && !/^0\d/.test(el.value) ? looseToNumber$1(el.value) : el.value;
@@ -9959,7 +9959,7 @@ const vModelText = {
       if (lazy && value === oldValue) {
         return;
       }
-      if (trim && el.value.trim() === newValue) {
+      if (trim2 && el.value.trim() === newValue) {
         return;
       }
     }
@@ -9976,7 +9976,7 @@ const vModelCheckbox = {
       const elementValue = getValue(el);
       const checked = el.checked;
       const assign = el[assignKey];
-      if (isArray(modelValue)) {
+      if (isArray$1(modelValue)) {
         const index2 = looseIndexOf(modelValue, elementValue);
         const found = index2 !== -1;
         if (checked && !found) {
@@ -10009,7 +10009,7 @@ const vModelCheckbox = {
 function setChecked(el, { value, oldValue }, vnode) {
   el._modelValue = value;
   let checked;
-  if (isArray(value)) {
+  if (isArray$1(value)) {
     checked = looseIndexOf(value, vnode.props.value) > -1;
   } else if (isSet(value)) {
     checked = value.has(vnode.props.value);
@@ -10071,7 +10071,7 @@ const vModelSelect = {
 };
 function setSelected(el, value) {
   const isMultiple = el.multiple;
-  const isArrayValue = isArray(value);
+  const isArrayValue = isArray$1(value);
   if (isMultiple && !isArrayValue && !isSet(value)) {
     return;
   }
@@ -10152,7 +10152,7 @@ function initVModelForSSR() {
     }
   };
   vModelCheckbox.getSSRProps = ({ value }, vnode) => {
-    if (isArray(value)) {
+    if (isArray$1(value)) {
       if (vnode.props && looseIndexOf(value, vnode.props.value) > -1) {
         return { checked: true };
       }
@@ -10227,7 +10227,7 @@ const withKeys = (fn, modifiers) => {
     }
   });
 };
-const rendererOptions = /* @__PURE__ */ extend$1({ patchProp }, nodeOps);
+const rendererOptions = /* @__PURE__ */ extend$2({ patchProp }, nodeOps);
 let renderer;
 let enabledHydration = false;
 function ensureRenderer() {
@@ -10251,7 +10251,7 @@ const createApp = (...args) => {
     const container = normalizeContainer(containerOrSelector);
     if (!container) return;
     const component = app._component;
-    if (!isFunction(component) && !component.render && !component.template) {
+    if (!isFunction$1(component) && !component.render && !component.template) {
       component.template = container.innerHTML;
     }
     if (container.nodeType === 1) {
@@ -10286,7 +10286,7 @@ function resolveRootNamespace(container) {
   }
 }
 function normalizeContainer(container) {
-  if (isString(container)) {
+  if (isString$1(container)) {
     const res = document.querySelector(container);
     return res;
   }
@@ -11890,7 +11890,7 @@ const getElementRects = async function(data) {
 function isRTL(element) {
   return getComputedStyle$1(element).direction === "rtl";
 }
-const platform = {
+const platform$2 = {
   convertOffsetParentRelativeRectToViewportRelativeRect,
   getDocumentElement,
   getClippingRect,
@@ -12057,7 +12057,7 @@ const limitShift = limitShift$1;
 const computePosition = (reference, floating, options) => {
   const cache = /* @__PURE__ */ new Map();
   const mergedOptions = {
-    platform,
+    platform: platform$2,
     ...options
   };
   const platformWithCache = {
@@ -12404,19 +12404,19 @@ function reactiveOmit$1(obj, ...keys) {
 const isClient$1 = typeof window !== "undefined" && typeof document !== "undefined";
 typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
 const isDef$1 = (val) => typeof val !== "undefined";
-const toString = Object.prototype.toString;
-const isObject = (val) => toString.call(val) === "[object Object]";
-const noop$1 = () => {
+const toString$1 = Object.prototype.toString;
+const isObject$1 = (val) => toString$1.call(val) === "[object Object]";
+const noop$2 = () => {
 };
 const isIOS = /* @__PURE__ */ getIsIOS();
 function getIsIOS() {
   var _a, _b;
   return isClient$1 && ((_a = window == null ? void 0 : window.navigator) == null ? void 0 : _a.userAgent) && (/iP(?:ad|hone|od)/.test(window.navigator.userAgent) || ((_b = window == null ? void 0 : window.navigator) == null ? void 0 : _b.maxTouchPoints) > 2 && /iPad|Macintosh/.test(window == null ? void 0 : window.navigator.userAgent));
 }
-function createFilterWrapper$1(filter, fn) {
+function createFilterWrapper$1(filter2, fn) {
   function wrapper(...args) {
     return new Promise((resolve2, reject) => {
-      Promise.resolve(filter(() => fn.apply(this, args), { fn, thisArg: this, args })).then(resolve2).catch(reject);
+      Promise.resolve(filter2(() => fn.apply(this, args), { fn, thisArg: this, args })).then(resolve2).catch(reject);
     });
   }
   return wrapper;
@@ -12444,14 +12444,14 @@ function pausableFilter(extendFilter = bypassFilter, options = {}) {
 function getLifeCycleTarget$1(target) {
   return getCurrentInstance();
 }
-function toArray(value) {
+function toArray$1(value) {
   return Array.isArray(value) ? value : [value];
 }
 function toRef$1(...args) {
   if (args.length !== 1)
     return toRef$2(...args);
   const r = args[0];
-  return typeof r === "function" ? readonly(customRef(() => ({ get: r, set: noop$1 }))) : ref(r);
+  return typeof r === "function" ? readonly(customRef(() => ({ get: r, set: noop$2 }))) : ref(r);
 }
 function refAutoReset(defaultValue, afterMs = 1e4) {
   return customRef((track2, trigger2) => {
@@ -12494,11 +12494,11 @@ function watchWithFilter(source, cb, options = {}) {
 }
 function watchPausable(source, cb, options = {}) {
   const {
-    eventFilter: filter,
+    eventFilter: filter2,
     initialState = "active",
     ...watchOptions
   } = options;
-  const { eventFilter, pause, resume, isActive } = pausableFilter(filter, { initialState });
+  const { eventFilter, pause, resume, isActive } = pausableFilter(filter2, { initialState });
   const stop2 = watchWithFilter(
     source,
     cb,
@@ -12598,7 +12598,7 @@ function useTimeout(interval = 1e3, options = {}) {
     callback
   } = options;
   const controls = useTimeoutFn(
-    callback != null ? callback : noop$1,
+    callback != null ? callback : noop$2,
     interval,
     options
   );
@@ -12639,16 +12639,16 @@ function useEventListener(...args) {
     return () => el.removeEventListener(event, listener, options);
   };
   const firstParamTargets = computed(() => {
-    const test = toArray(toValue$2(args[0])).filter((e) => e != null);
-    return test.every((e) => typeof e !== "string") ? test : void 0;
+    const test2 = toArray$1(toValue$2(args[0])).filter((e) => e != null);
+    return test2.every((e) => typeof e !== "string") ? test2 : void 0;
   });
   const stopWatch = watchImmediate(
     () => {
       var _a, _b;
       return [
         (_b = (_a = firstParamTargets.value) == null ? void 0 : _a.map((e) => unrefElement$1(e))) != null ? _b : [defaultWindow].filter((e) => e != null),
-        toArray(toValue$2(firstParamTargets.value ? args[1] : args[0])),
-        toArray(unref(firstParamTargets.value ? args[2] : args[1])),
+        toArray$1(toValue$2(firstParamTargets.value ? args[1] : args[0])),
+        toArray$1(unref(firstParamTargets.value ? args[2] : args[1])),
         // @ts-expect-error - TypeScript gets the correct types, but somehow still complains
         toValue$2(firstParamTargets.value ? args[3] : args[2])
       ];
@@ -12657,7 +12657,7 @@ function useEventListener(...args) {
       cleanup();
       if (!(raw_targets == null ? void 0 : raw_targets.length) || !(raw_events == null ? void 0 : raw_events.length) || !(raw_listeners == null ? void 0 : raw_listeners.length))
         return;
-      const optionsClone = isObject(raw_options) ? { ...raw_options } : raw_options;
+      const optionsClone = isObject$1(raw_options) ? { ...raw_options } : raw_options;
       cleanups.push(
         ...raw_targets.flatMap(
           (el) => raw_events.flatMap(
@@ -14434,12 +14434,12 @@ function useHideOthers(target) {
       undo();
   });
 }
-function isPlainObject(value) {
+function isPlainObject$1(value) {
   if (value === null || typeof value !== "object") {
     return false;
   }
-  const prototype = Object.getPrototypeOf(value);
-  if (prototype !== null && prototype !== Object.prototype && Object.getPrototypeOf(prototype) !== null) {
+  const prototype2 = Object.getPrototypeOf(value);
+  if (prototype2 !== null && prototype2 !== Object.prototype && Object.getPrototypeOf(prototype2) !== null) {
     return false;
   }
   if (Symbol.iterator in value) {
@@ -14451,7 +14451,7 @@ function isPlainObject(value) {
   return true;
 }
 function _defu(baseObject, defaults2, namespace = ".", merger) {
-  if (!isPlainObject(defaults2)) {
+  if (!isPlainObject$1(defaults2)) {
     return _defu(baseObject, {}, namespace, merger);
   }
   const object = Object.assign({}, defaults2);
@@ -14468,7 +14468,7 @@ function _defu(baseObject, defaults2, namespace = ".", merger) {
     }
     if (Array.isArray(value) && Array.isArray(object[key])) {
       object[key] = [...value, ...object[key]];
-    } else if (isPlainObject(value) && isPlainObject(object[key])) {
+    } else if (isPlainObject$1(value) && isPlainObject$1(object[key])) {
       object[key] = _defu(
         value,
         object[key],
@@ -16666,23 +16666,23 @@ function reactiveOmit(obj, ...keys) {
 const isClient = typeof window !== "undefined" && typeof document !== "undefined";
 typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
 const isDef = (val) => typeof val !== "undefined";
-const noop = () => {
+const noop$1 = () => {
 };
 function toRef(...args) {
   if (args.length !== 1)
     return toRef$2(...args);
   const r = args[0];
-  return typeof r === "function" ? readonly(customRef(() => ({ get: r, set: noop }))) : ref(r);
+  return typeof r === "function" ? readonly(customRef(() => ({ get: r, set: noop$1 }))) : ref(r);
 }
 function reactivePick(obj, ...keys) {
   const flatKeys = keys.flat();
   const predicate = flatKeys[0];
   return reactiveComputed(() => typeof predicate === "function" ? Object.fromEntries(Object.entries(toRefs(obj)).filter(([k, v2]) => predicate(toValue$2(v2), k))) : Object.fromEntries(flatKeys.map((k) => [k, toRef(obj, k)])));
 }
-function createFilterWrapper(filter, fn) {
+function createFilterWrapper(filter2, fn) {
   function wrapper(...args) {
     return new Promise((resolve2, reject) => {
-      Promise.resolve(filter(() => fn.apply(this, args), { fn, thisArg: this, args })).then(resolve2).catch(reject);
+      Promise.resolve(filter2(() => fn.apply(this, args), { fn, thisArg: this, args })).then(resolve2).catch(reject);
     });
   }
   return wrapper;
@@ -16690,14 +16690,14 @@ function createFilterWrapper(filter, fn) {
 function debounceFilter(ms, options = {}) {
   let timer;
   let maxTimer;
-  let lastRejector = noop;
+  let lastRejector = noop$1;
   const _clearTimeout = (timer2) => {
     clearTimeout(timer2);
     lastRejector();
-    lastRejector = noop;
+    lastRejector = noop$1;
   };
   let lastInvoker;
-  const filter = (invoke2) => {
+  const filter2 = (invoke2) => {
     const duration = toValue$2(ms);
     const maxDuration = toValue$2(options.maxWait);
     if (timer)
@@ -16728,7 +16728,7 @@ function debounceFilter(ms, options = {}) {
       }, duration);
     });
   };
-  return filter;
+  return filter2;
 }
 function getLifeCycleTarget(target) {
   return getCurrentInstance();
@@ -17145,8 +17145,8 @@ const getGroupRecursive = (classParts, classPartObject) => {
   }
   const classRest = classParts.join(CLASS_PART_SEPARATOR);
   return classPartObject.validators.find(({
-    validator
-  }) => validator(classRest))?.classGroupId;
+    validator: validator2
+  }) => validator2(classRest))?.classGroupId;
 };
 const arbitraryPropertyRegex = /^\[(.+)\]$/;
 const getGroupIdForArbitraryProperty = (className) => {
@@ -17479,9 +17479,9 @@ const colorFunctionRegex = /^(rgba?|hsla?|hwb|(ok)?(lab|lch))\(.+\)$/;
 const shadowRegex = /^(inset_)?-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/;
 const imageRegex = /^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/;
 const isFraction = (value) => fractionRegex.test(value);
-const isNumber = (value) => Boolean(value) && !Number.isNaN(Number(value));
+const isNumber$1 = (value) => Boolean(value) && !Number.isNaN(Number(value));
 const isInteger = (value) => Boolean(value) && Number.isInteger(Number(value));
-const isPercent = (value) => value.endsWith("%") && isNumber(value.slice(0, -1));
+const isPercent = (value) => value.endsWith("%") && isNumber$1(value.slice(0, -1));
 const isTshirtSize = (value) => tshirtUnitRegex.test(value);
 const isAny = () => true;
 const isLengthOnly = (value) => (
@@ -17497,7 +17497,7 @@ const isAnyNonArbitrary = (value) => !isArbitraryValue(value) && !isArbitraryVar
 const isArbitrarySize = (value) => getIsArbitraryValue(value, isLabelSize, isNever);
 const isArbitraryValue = (value) => arbitraryValueRegex.test(value);
 const isArbitraryLength = (value) => getIsArbitraryValue(value, isLabelLength, isLengthOnly);
-const isArbitraryNumber = (value) => getIsArbitraryValue(value, isLabelNumber, isNumber);
+const isArbitraryNumber = (value) => getIsArbitraryValue(value, isLabelNumber, isNumber$1);
 const isArbitraryPosition = (value) => getIsArbitraryValue(value, isLabelPosition, isNever);
 const isArbitraryImage = (value) => getIsArbitraryValue(value, isLabelImage, isImage);
 const isArbitraryShadow = (value) => getIsArbitraryValue(value, isNever, isShadow);
@@ -17583,7 +17583,7 @@ const getDefaultConfig = () => {
     isArbitraryVariable,
     isArbitraryValue
   ];
-  const scaleBorderWidth = () => ["", isNumber, isArbitraryVariableLength, isArbitraryLength];
+  const scaleBorderWidth = () => ["", isNumber$1, isArbitraryVariableLength, isArbitraryLength];
   const scaleLineStyle = () => ["solid", "dashed", "dotted", "double"];
   const scaleBlendMode = () => ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"];
   const scaleBlur = () => [
@@ -17595,9 +17595,9 @@ const getDefaultConfig = () => {
     isArbitraryValue
   ];
   const scaleOrigin = () => ["center", "top", "top-right", "right", "bottom-right", "bottom", "bottom-left", "left", "top-left", isArbitraryVariable, isArbitraryValue];
-  const scaleRotate = () => ["none", isNumber, isArbitraryVariable, isArbitraryValue];
-  const scaleScale = () => ["none", isNumber, isArbitraryVariable, isArbitraryValue];
-  const scaleSkew = () => [isNumber, isArbitraryVariable, isArbitraryValue];
+  const scaleRotate = () => ["none", isNumber$1, isArbitraryVariable, isArbitraryValue];
+  const scaleScale = () => ["none", isNumber$1, isArbitraryVariable, isArbitraryValue];
+  const scaleSkew = () => [isNumber$1, isArbitraryVariable, isArbitraryValue];
   const scaleTranslate = () => [isFraction, "full", ...scaleUnambiguousSpacing()];
   return {
     cacheSize: 500,
@@ -17617,7 +17617,7 @@ const getDefaultConfig = () => {
       perspective: ["dramatic", "near", "normal", "midrange", "distant", "none"],
       radius: [isTshirtSize],
       shadow: [isTshirtSize],
-      spacing: ["px", isNumber],
+      spacing: ["px", isNumber$1],
       text: [isTshirtSize],
       tracking: ["tighter", "tight", "normal", "wide", "wider", "widest"]
     },
@@ -17643,7 +17643,7 @@ const getDefaultConfig = () => {
        * @see https://tailwindcss.com/docs/columns
        */
       columns: [{
-        columns: [isNumber, isArbitraryValue, isArbitraryVariable, themeContainer]
+        columns: [isNumber$1, isArbitraryValue, isArbitraryVariable, themeContainer]
       }],
       /**
        * Break After
@@ -17874,21 +17874,21 @@ const getDefaultConfig = () => {
        * @see https://tailwindcss.com/docs/flex
        */
       flex: [{
-        flex: [isNumber, isFraction, "auto", "initial", "none", isArbitraryValue]
+        flex: [isNumber$1, isFraction, "auto", "initial", "none", isArbitraryValue]
       }],
       /**
        * Flex Grow
        * @see https://tailwindcss.com/docs/flex-grow
        */
       grow: [{
-        grow: ["", isNumber, isArbitraryVariable, isArbitraryValue]
+        grow: ["", isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Flex Shrink
        * @see https://tailwindcss.com/docs/flex-shrink
        */
       shrink: [{
-        shrink: ["", isNumber, isArbitraryVariable, isArbitraryValue]
+        shrink: ["", isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Order
@@ -18361,7 +18361,7 @@ const getDefaultConfig = () => {
        * @see https://tailwindcss.com/docs/line-clamp
        */
       "line-clamp": [{
-        "line-clamp": [isNumber, "none", isArbitraryVariable, isArbitraryNumber]
+        "line-clamp": [isNumber$1, "none", isArbitraryVariable, isArbitraryNumber]
       }],
       /**
        * Line Height
@@ -18434,7 +18434,7 @@ const getDefaultConfig = () => {
        * @see https://tailwindcss.com/docs/text-decoration-thickness
        */
       "text-decoration-thickness": [{
-        decoration: [isNumber, "from-font", "auto", isArbitraryVariable, isArbitraryLength]
+        decoration: [isNumber$1, "from-font", "auto", isArbitraryVariable, isArbitraryLength]
       }],
       /**
        * Text Decoration Color
@@ -18448,7 +18448,7 @@ const getDefaultConfig = () => {
        * @see https://tailwindcss.com/docs/text-underline-offset
        */
       "underline-offset": [{
-        "underline-offset": [isNumber, "auto", isArbitraryVariable, isArbitraryValue]
+        "underline-offset": [isNumber$1, "auto", isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Text Transform
@@ -18909,14 +18909,14 @@ const getDefaultConfig = () => {
        * @see https://tailwindcss.com/docs/outline-offset
        */
       "outline-offset": [{
-        "outline-offset": [isNumber, isArbitraryVariable, isArbitraryValue]
+        "outline-offset": [isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Outline Width
        * @see https://tailwindcss.com/docs/outline-width
        */
       "outline-w": [{
-        outline: ["", isNumber, isArbitraryVariableLength, isArbitraryLength]
+        outline: ["", isNumber$1, isArbitraryVariableLength, isArbitraryLength]
       }],
       /**
        * Outline Color
@@ -18991,7 +18991,7 @@ const getDefaultConfig = () => {
        * @see https://github.com/tailwindlabs/tailwindcss/blob/v4.0.0/packages/tailwindcss/src/utilities.ts#L4158
        */
       "ring-offset-w": [{
-        "ring-offset": [isNumber, isArbitraryLength]
+        "ring-offset": [isNumber$1, isArbitraryLength]
       }],
       /**
        * Ring Offset Color
@@ -19021,7 +19021,7 @@ const getDefaultConfig = () => {
        * @see https://tailwindcss.com/docs/opacity
        */
       opacity: [{
-        opacity: [isNumber, isArbitraryVariable, isArbitraryValue]
+        opacity: [isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Mix Blend Mode
@@ -19065,14 +19065,14 @@ const getDefaultConfig = () => {
        * @see https://tailwindcss.com/docs/brightness
        */
       brightness: [{
-        brightness: [isNumber, isArbitraryVariable, isArbitraryValue]
+        brightness: [isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Contrast
        * @see https://tailwindcss.com/docs/contrast
        */
       contrast: [{
-        contrast: [isNumber, isArbitraryVariable, isArbitraryValue]
+        contrast: [isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Drop Shadow
@@ -19093,35 +19093,35 @@ const getDefaultConfig = () => {
        * @see https://tailwindcss.com/docs/grayscale
        */
       grayscale: [{
-        grayscale: ["", isNumber, isArbitraryVariable, isArbitraryValue]
+        grayscale: ["", isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Hue Rotate
        * @see https://tailwindcss.com/docs/hue-rotate
        */
       "hue-rotate": [{
-        "hue-rotate": [isNumber, isArbitraryVariable, isArbitraryValue]
+        "hue-rotate": [isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Invert
        * @see https://tailwindcss.com/docs/invert
        */
       invert: [{
-        invert: ["", isNumber, isArbitraryVariable, isArbitraryValue]
+        invert: ["", isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Saturate
        * @see https://tailwindcss.com/docs/saturate
        */
       saturate: [{
-        saturate: [isNumber, isArbitraryVariable, isArbitraryValue]
+        saturate: [isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Sepia
        * @see https://tailwindcss.com/docs/sepia
        */
       sepia: [{
-        sepia: ["", isNumber, isArbitraryVariable, isArbitraryValue]
+        sepia: ["", isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Backdrop Filter
@@ -19148,56 +19148,56 @@ const getDefaultConfig = () => {
        * @see https://tailwindcss.com/docs/backdrop-brightness
        */
       "backdrop-brightness": [{
-        "backdrop-brightness": [isNumber, isArbitraryVariable, isArbitraryValue]
+        "backdrop-brightness": [isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Backdrop Contrast
        * @see https://tailwindcss.com/docs/backdrop-contrast
        */
       "backdrop-contrast": [{
-        "backdrop-contrast": [isNumber, isArbitraryVariable, isArbitraryValue]
+        "backdrop-contrast": [isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Backdrop Grayscale
        * @see https://tailwindcss.com/docs/backdrop-grayscale
        */
       "backdrop-grayscale": [{
-        "backdrop-grayscale": ["", isNumber, isArbitraryVariable, isArbitraryValue]
+        "backdrop-grayscale": ["", isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Backdrop Hue Rotate
        * @see https://tailwindcss.com/docs/backdrop-hue-rotate
        */
       "backdrop-hue-rotate": [{
-        "backdrop-hue-rotate": [isNumber, isArbitraryVariable, isArbitraryValue]
+        "backdrop-hue-rotate": [isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Backdrop Invert
        * @see https://tailwindcss.com/docs/backdrop-invert
        */
       "backdrop-invert": [{
-        "backdrop-invert": ["", isNumber, isArbitraryVariable, isArbitraryValue]
+        "backdrop-invert": ["", isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Backdrop Opacity
        * @see https://tailwindcss.com/docs/backdrop-opacity
        */
       "backdrop-opacity": [{
-        "backdrop-opacity": [isNumber, isArbitraryVariable, isArbitraryValue]
+        "backdrop-opacity": [isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Backdrop Saturate
        * @see https://tailwindcss.com/docs/backdrop-saturate
        */
       "backdrop-saturate": [{
-        "backdrop-saturate": [isNumber, isArbitraryVariable, isArbitraryValue]
+        "backdrop-saturate": [isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Backdrop Sepia
        * @see https://tailwindcss.com/docs/backdrop-sepia
        */
       "backdrop-sepia": [{
-        "backdrop-sepia": ["", isNumber, isArbitraryVariable, isArbitraryValue]
+        "backdrop-sepia": ["", isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       // --------------
       // --- Tables ---
@@ -19266,7 +19266,7 @@ const getDefaultConfig = () => {
        * @see https://tailwindcss.com/docs/transition-duration
        */
       duration: [{
-        duration: [isNumber, "initial", isArbitraryVariable, isArbitraryValue]
+        duration: [isNumber$1, "initial", isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Transition Timing Function
@@ -19280,7 +19280,7 @@ const getDefaultConfig = () => {
        * @see https://tailwindcss.com/docs/transition-delay
        */
       delay: [{
-        delay: [isNumber, isArbitraryVariable, isArbitraryValue]
+        delay: [isNumber$1, isArbitraryVariable, isArbitraryValue]
       }],
       /**
        * Animation
@@ -19724,7 +19724,7 @@ const getDefaultConfig = () => {
        * @see https://tailwindcss.com/docs/stroke-width
        */
       "stroke-w": [{
-        stroke: [isNumber, isArbitraryVariableLength, isArbitraryLength, isArbitraryNumber]
+        stroke: [isNumber$1, isArbitraryVariableLength, isArbitraryLength, isArbitraryNumber]
       }],
       /**
        * Stroke
@@ -20717,11 +20717,11 @@ function sortIcons(icons) {
     const prefix = icon.prefix;
     const name = icon.name;
     const providerStorage = storage2[provider] || (storage2[provider] = /* @__PURE__ */ Object.create(null));
-    const localStorage = providerStorage[prefix] || (providerStorage[prefix] = getStorage(provider, prefix));
+    const localStorage2 = providerStorage[prefix] || (providerStorage[prefix] = getStorage(provider, prefix));
     let list;
-    if (name in localStorage.icons) {
+    if (name in localStorage2.icons) {
       list = result.loaded;
-    } else if (prefix === "" || localStorage.missing.has(name)) {
+    } else if (prefix === "" || localStorage2.missing.has(name)) {
       list = result.missing;
     } else {
       list = result.pending;
@@ -24134,7 +24134,7 @@ function getParentAutoScrollElement(el, includeSelf) {
   } while (elem = elem.parentNode);
   return getWindowScrollingElement();
 }
-function extend(dst, src) {
+function extend$1(dst, src) {
   if (dst && src) {
     for (var key in src) {
       if (src.hasOwnProperty(key)) {
@@ -24148,7 +24148,7 @@ function isRectEqual(rect1, rect2) {
   return Math.round(rect1.top) === Math.round(rect2.top) && Math.round(rect1.left) === Math.round(rect2.left) && Math.round(rect1.height) === Math.round(rect2.height) && Math.round(rect1.width) === Math.round(rect2.width);
 }
 var _throttleTimeout;
-function throttle(callback, ms) {
+function throttle$1(callback, ms) {
   return function() {
     if (!_throttleTimeout) {
       var args = arguments, _this = this;
@@ -24315,14 +24315,14 @@ function calculateRealTime(animatingRect, fromRect, toRect, options) {
   return Math.sqrt(Math.pow(fromRect.top - animatingRect.top, 2) + Math.pow(fromRect.left - animatingRect.left, 2)) / Math.sqrt(Math.pow(fromRect.top - toRect.top, 2) + Math.pow(fromRect.left - toRect.left, 2)) * options.animation;
 }
 var plugins = [];
-var defaults = {
+var defaults$1 = {
   initializeByDefault: true
 };
 var PluginManager = {
   mount: function mount(plugin) {
-    for (var option2 in defaults) {
-      if (defaults.hasOwnProperty(option2) && !(option2 in plugin)) {
-        plugin[option2] = defaults[option2];
+    for (var option2 in defaults$1) {
+      if (defaults$1.hasOwnProperty(option2) && !(option2 in plugin)) {
+        plugin[option2] = defaults$1[option2];
       }
     }
     plugins.forEach(function(p2) {
@@ -24677,7 +24677,7 @@ Sortable.prototype = /** @lends Sortable.prototype */
   },
   _onTapStart: function _onTapStart(evt) {
     if (!evt.cancelable) return;
-    var _this = this, el = this.el, options = this.options, preventOnFilter = options.preventOnFilter, type = evt.type, touch = evt.touches && evt.touches[0] || evt.pointerType && evt.pointerType === "touch" && evt, target = (touch || evt).target, originalTarget = evt.target.shadowRoot && (evt.path && evt.path[0] || evt.composedPath && evt.composedPath()[0]) || target, filter = options.filter;
+    var _this = this, el = this.el, options = this.options, preventOnFilter = options.preventOnFilter, type = evt.type, touch = evt.touches && evt.touches[0] || evt.pointerType && evt.pointerType === "touch" && evt, target = (touch || evt).target, originalTarget = evt.target.shadowRoot && (evt.path && evt.path[0] || evt.composedPath && evt.composedPath()[0]) || target, filter2 = options.filter;
     _saveInputCheckedState(el);
     if (dragEl) {
       return;
@@ -24700,8 +24700,8 @@ Sortable.prototype = /** @lends Sortable.prototype */
     }
     oldIndex = index(target);
     oldDraggableIndex = index(target, options.draggable);
-    if (typeof filter === "function") {
-      if (filter.call(this, evt, target, this)) {
+    if (typeof filter2 === "function") {
+      if (filter2.call(this, evt, target, this)) {
         _dispatchEvent({
           sortable: _this,
           rootEl: originalTarget,
@@ -24716,8 +24716,8 @@ Sortable.prototype = /** @lends Sortable.prototype */
         preventOnFilter && evt.preventDefault();
         return;
       }
-    } else if (filter) {
-      filter = filter.split(",").some(function(criteria) {
+    } else if (filter2) {
+      filter2 = filter2.split(",").some(function(criteria) {
         criteria = closest(originalTarget, criteria.trim(), el, false);
         if (criteria) {
           _dispatchEvent({
@@ -24734,7 +24734,7 @@ Sortable.prototype = /** @lends Sortable.prototype */
           return true;
         }
       });
-      if (filter) {
+      if (filter2) {
         preventOnFilter && evt.preventDefault();
         return;
       }
@@ -25433,7 +25433,7 @@ Sortable.prototype = /** @lends Sortable.prototype */
    * Serializes the item into an array of string.
    * @returns {String[]}
    */
-  toArray: function toArray2() {
+  toArray: function toArray() {
     var order = [], el, children = this.el.children, i2 = 0, n = children.length, options = this.options;
     for (; i2 < n; i2++) {
       el = children[i2];
@@ -25679,8 +25679,8 @@ Sortable.utils = {
   is: function is(el, selector) {
     return !!closest(el, selector, el, false);
   },
-  extend,
-  throttle,
+  extend: extend$1,
+  throttle: throttle$1,
   closest,
   toggleClass,
   clone,
@@ -25810,7 +25810,7 @@ function clearAutoScrolls() {
 function clearPointerElemChangedInterval() {
   clearInterval(pointerElemChangedInterval);
 }
-var autoScroll = throttle(function(evt, options, rootEl2, isFallback) {
+var autoScroll = throttle$1(function(evt, options, rootEl2, isFallback) {
   if (!options.scroll) return;
   var x2 = (evt.touches ? evt.touches[0] : evt).clientX, y2 = (evt.touches ? evt.touches[0] : evt).clientY, sens = options.scrollSensitivity, speed = options.scrollSpeed, winScroller = getWindowScrollingElement();
   var scrollThisInstance = false, scrollCustomFn;
@@ -26626,11 +26626,2825 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
+function bind(fn, thisArg) {
+  return function wrap() {
+    return fn.apply(thisArg, arguments);
+  };
+}
+const { toString } = Object.prototype;
+const { getPrototypeOf } = Object;
+const { iterator, toStringTag } = Symbol;
+const kindOf = /* @__PURE__ */ ((cache) => (thing) => {
+  const str = toString.call(thing);
+  return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
+})(/* @__PURE__ */ Object.create(null));
+const kindOfTest = (type) => {
+  type = type.toLowerCase();
+  return (thing) => kindOf(thing) === type;
+};
+const typeOfTest = (type) => (thing) => typeof thing === type;
+const { isArray } = Array;
+const isUndefined = typeOfTest("undefined");
+function isBuffer(val) {
+  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor) && isFunction(val.constructor.isBuffer) && val.constructor.isBuffer(val);
+}
+const isArrayBuffer = kindOfTest("ArrayBuffer");
+function isArrayBufferView(val) {
+  let result;
+  if (typeof ArrayBuffer !== "undefined" && ArrayBuffer.isView) {
+    result = ArrayBuffer.isView(val);
+  } else {
+    result = val && val.buffer && isArrayBuffer(val.buffer);
+  }
+  return result;
+}
+const isString = typeOfTest("string");
+const isFunction = typeOfTest("function");
+const isNumber = typeOfTest("number");
+const isObject = (thing) => thing !== null && typeof thing === "object";
+const isBoolean = (thing) => thing === true || thing === false;
+const isPlainObject = (val) => {
+  if (kindOf(val) !== "object") {
+    return false;
+  }
+  const prototype2 = getPrototypeOf(val);
+  return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(toStringTag in val) && !(iterator in val);
+};
+const isEmptyObject = (val) => {
+  if (!isObject(val) || isBuffer(val)) {
+    return false;
+  }
+  try {
+    return Object.keys(val).length === 0 && Object.getPrototypeOf(val) === Object.prototype;
+  } catch (e) {
+    return false;
+  }
+};
+const isDate = kindOfTest("Date");
+const isFile = kindOfTest("File");
+const isBlob = kindOfTest("Blob");
+const isFileList = kindOfTest("FileList");
+const isStream = (val) => isObject(val) && isFunction(val.pipe);
+const isFormData = (thing) => {
+  let kind;
+  return thing && (typeof FormData === "function" && thing instanceof FormData || isFunction(thing.append) && ((kind = kindOf(thing)) === "formdata" || // detect form-data instance
+  kind === "object" && isFunction(thing.toString) && thing.toString() === "[object FormData]"));
+};
+const isURLSearchParams = kindOfTest("URLSearchParams");
+const [isReadableStream, isRequest, isResponse, isHeaders] = ["ReadableStream", "Request", "Response", "Headers"].map(kindOfTest);
+const trim = (str) => str.trim ? str.trim() : str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
+function forEach(obj, fn, { allOwnKeys = false } = {}) {
+  if (obj === null || typeof obj === "undefined") {
+    return;
+  }
+  let i2;
+  let l2;
+  if (typeof obj !== "object") {
+    obj = [obj];
+  }
+  if (isArray(obj)) {
+    for (i2 = 0, l2 = obj.length; i2 < l2; i2++) {
+      fn.call(null, obj[i2], i2, obj);
+    }
+  } else {
+    if (isBuffer(obj)) {
+      return;
+    }
+    const keys = allOwnKeys ? Object.getOwnPropertyNames(obj) : Object.keys(obj);
+    const len = keys.length;
+    let key;
+    for (i2 = 0; i2 < len; i2++) {
+      key = keys[i2];
+      fn.call(null, obj[key], key, obj);
+    }
+  }
+}
+function findKey(obj, key) {
+  if (isBuffer(obj)) {
+    return null;
+  }
+  key = key.toLowerCase();
+  const keys = Object.keys(obj);
+  let i2 = keys.length;
+  let _key;
+  while (i2-- > 0) {
+    _key = keys[i2];
+    if (key === _key.toLowerCase()) {
+      return _key;
+    }
+  }
+  return null;
+}
+const _global = (() => {
+  if (typeof globalThis !== "undefined") return globalThis;
+  return typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : globalThis;
+})();
+const isContextDefined = (context2) => !isUndefined(context2) && context2 !== _global;
+function merge() {
+  const { caseless } = isContextDefined(this) && this || {};
+  const result = {};
+  const assignValue = (val, key) => {
+    const targetKey = caseless && findKey(result, key) || key;
+    if (isPlainObject(result[targetKey]) && isPlainObject(val)) {
+      result[targetKey] = merge(result[targetKey], val);
+    } else if (isPlainObject(val)) {
+      result[targetKey] = merge({}, val);
+    } else if (isArray(val)) {
+      result[targetKey] = val.slice();
+    } else {
+      result[targetKey] = val;
+    }
+  };
+  for (let i2 = 0, l2 = arguments.length; i2 < l2; i2++) {
+    arguments[i2] && forEach(arguments[i2], assignValue);
+  }
+  return result;
+}
+const extend = (a2, b, thisArg, { allOwnKeys } = {}) => {
+  forEach(b, (val, key) => {
+    if (thisArg && isFunction(val)) {
+      a2[key] = bind(val, thisArg);
+    } else {
+      a2[key] = val;
+    }
+  }, { allOwnKeys });
+  return a2;
+};
+const stripBOM = (content) => {
+  if (content.charCodeAt(0) === 65279) {
+    content = content.slice(1);
+  }
+  return content;
+};
+const inherits = (constructor, superConstructor, props, descriptors2) => {
+  constructor.prototype = Object.create(superConstructor.prototype, descriptors2);
+  constructor.prototype.constructor = constructor;
+  Object.defineProperty(constructor, "super", {
+    value: superConstructor.prototype
+  });
+  props && Object.assign(constructor.prototype, props);
+};
+const toFlatObject = (sourceObj, destObj, filter2, propFilter) => {
+  let props;
+  let i2;
+  let prop;
+  const merged = {};
+  destObj = destObj || {};
+  if (sourceObj == null) return destObj;
+  do {
+    props = Object.getOwnPropertyNames(sourceObj);
+    i2 = props.length;
+    while (i2-- > 0) {
+      prop = props[i2];
+      if ((!propFilter || propFilter(prop, sourceObj, destObj)) && !merged[prop]) {
+        destObj[prop] = sourceObj[prop];
+        merged[prop] = true;
+      }
+    }
+    sourceObj = filter2 !== false && getPrototypeOf(sourceObj);
+  } while (sourceObj && (!filter2 || filter2(sourceObj, destObj)) && sourceObj !== Object.prototype);
+  return destObj;
+};
+const endsWith = (str, searchString, position) => {
+  str = String(str);
+  if (position === void 0 || position > str.length) {
+    position = str.length;
+  }
+  position -= searchString.length;
+  const lastIndex = str.indexOf(searchString, position);
+  return lastIndex !== -1 && lastIndex === position;
+};
+const toArray2 = (thing) => {
+  if (!thing) return null;
+  if (isArray(thing)) return thing;
+  let i2 = thing.length;
+  if (!isNumber(i2)) return null;
+  const arr = new Array(i2);
+  while (i2-- > 0) {
+    arr[i2] = thing[i2];
+  }
+  return arr;
+};
+const isTypedArray = /* @__PURE__ */ ((TypedArray) => {
+  return (thing) => {
+    return TypedArray && thing instanceof TypedArray;
+  };
+})(typeof Uint8Array !== "undefined" && getPrototypeOf(Uint8Array));
+const forEachEntry = (obj, fn) => {
+  const generator = obj && obj[iterator];
+  const _iterator = generator.call(obj);
+  let result;
+  while ((result = _iterator.next()) && !result.done) {
+    const pair = result.value;
+    fn.call(obj, pair[0], pair[1]);
+  }
+};
+const matchAll = (regExp, str) => {
+  let matches2;
+  const arr = [];
+  while ((matches2 = regExp.exec(str)) !== null) {
+    arr.push(matches2);
+  }
+  return arr;
+};
+const isHTMLForm = kindOfTest("HTMLFormElement");
+const toCamelCase = (str) => {
+  return str.toLowerCase().replace(
+    /[-_\s]([a-z\d])(\w*)/g,
+    function replacer2(m, p1, p2) {
+      return p1.toUpperCase() + p2;
+    }
+  );
+};
+const hasOwnProperty = (({ hasOwnProperty: hasOwnProperty2 }) => (obj, prop) => hasOwnProperty2.call(obj, prop))(Object.prototype);
+const isRegExp = kindOfTest("RegExp");
+const reduceDescriptors = (obj, reducer) => {
+  const descriptors2 = Object.getOwnPropertyDescriptors(obj);
+  const reducedDescriptors = {};
+  forEach(descriptors2, (descriptor, name) => {
+    let ret;
+    if ((ret = reducer(descriptor, name, obj)) !== false) {
+      reducedDescriptors[name] = ret || descriptor;
+    }
+  });
+  Object.defineProperties(obj, reducedDescriptors);
+};
+const freezeMethods = (obj) => {
+  reduceDescriptors(obj, (descriptor, name) => {
+    if (isFunction(obj) && ["arguments", "caller", "callee"].indexOf(name) !== -1) {
+      return false;
+    }
+    const value = obj[name];
+    if (!isFunction(value)) return;
+    descriptor.enumerable = false;
+    if ("writable" in descriptor) {
+      descriptor.writable = false;
+      return;
+    }
+    if (!descriptor.set) {
+      descriptor.set = () => {
+        throw Error("Can not rewrite read-only method '" + name + "'");
+      };
+    }
+  });
+};
+const toObjectSet = (arrayOrString, delimiter) => {
+  const obj = {};
+  const define = (arr) => {
+    arr.forEach((value) => {
+      obj[value] = true;
+    });
+  };
+  isArray(arrayOrString) ? define(arrayOrString) : define(String(arrayOrString).split(delimiter));
+  return obj;
+};
+const noop = () => {
+};
+const toFiniteNumber = (value, defaultValue) => {
+  return value != null && Number.isFinite(value = +value) ? value : defaultValue;
+};
+function isSpecCompliantForm(thing) {
+  return !!(thing && isFunction(thing.append) && thing[toStringTag] === "FormData" && thing[iterator]);
+}
+const toJSONObject = (obj) => {
+  const stack2 = new Array(10);
+  const visit = (source, i2) => {
+    if (isObject(source)) {
+      if (stack2.indexOf(source) >= 0) {
+        return;
+      }
+      if (isBuffer(source)) {
+        return source;
+      }
+      if (!("toJSON" in source)) {
+        stack2[i2] = source;
+        const target = isArray(source) ? [] : {};
+        forEach(source, (value, key) => {
+          const reducedValue = visit(value, i2 + 1);
+          !isUndefined(reducedValue) && (target[key] = reducedValue);
+        });
+        stack2[i2] = void 0;
+        return target;
+      }
+    }
+    return source;
+  };
+  return visit(obj, 0);
+};
+const isAsyncFn = kindOfTest("AsyncFunction");
+const isThenable = (thing) => thing && (isObject(thing) || isFunction(thing)) && isFunction(thing.then) && isFunction(thing.catch);
+const _setImmediate = ((setImmediateSupported, postMessageSupported) => {
+  if (setImmediateSupported) {
+    return setImmediate;
+  }
+  return postMessageSupported ? ((token, callbacks) => {
+    _global.addEventListener("message", ({ source, data }) => {
+      if (source === _global && data === token) {
+        callbacks.length && callbacks.shift()();
+      }
+    }, false);
+    return (cb) => {
+      callbacks.push(cb);
+      _global.postMessage(token, "*");
+    };
+  })(`axios@${Math.random()}`, []) : (cb) => setTimeout(cb);
+})(
+  typeof setImmediate === "function",
+  isFunction(_global.postMessage)
+);
+const asap = typeof queueMicrotask !== "undefined" ? queueMicrotask.bind(_global) : typeof process !== "undefined" && process.nextTick || _setImmediate;
+const isIterable = (thing) => thing != null && isFunction(thing[iterator]);
+const utils$1 = {
+  isArray,
+  isArrayBuffer,
+  isBuffer,
+  isFormData,
+  isArrayBufferView,
+  isString,
+  isNumber,
+  isBoolean,
+  isObject,
+  isPlainObject,
+  isEmptyObject,
+  isReadableStream,
+  isRequest,
+  isResponse,
+  isHeaders,
+  isUndefined,
+  isDate,
+  isFile,
+  isBlob,
+  isRegExp,
+  isFunction,
+  isStream,
+  isURLSearchParams,
+  isTypedArray,
+  isFileList,
+  forEach,
+  merge,
+  extend,
+  trim,
+  stripBOM,
+  inherits,
+  toFlatObject,
+  kindOf,
+  kindOfTest,
+  endsWith,
+  toArray: toArray2,
+  forEachEntry,
+  matchAll,
+  isHTMLForm,
+  hasOwnProperty,
+  hasOwnProp: hasOwnProperty,
+  // an alias to avoid ESLint no-prototype-builtins detection
+  reduceDescriptors,
+  freezeMethods,
+  toObjectSet,
+  toCamelCase,
+  noop,
+  toFiniteNumber,
+  findKey,
+  global: _global,
+  isContextDefined,
+  isSpecCompliantForm,
+  toJSONObject,
+  isAsyncFn,
+  isThenable,
+  setImmediate: _setImmediate,
+  asap,
+  isIterable
+};
+function AxiosError$1(message, code, config, request, response) {
+  Error.call(this);
+  if (Error.captureStackTrace) {
+    Error.captureStackTrace(this, this.constructor);
+  } else {
+    this.stack = new Error().stack;
+  }
+  this.message = message;
+  this.name = "AxiosError";
+  code && (this.code = code);
+  config && (this.config = config);
+  request && (this.request = request);
+  if (response) {
+    this.response = response;
+    this.status = response.status ? response.status : null;
+  }
+}
+utils$1.inherits(AxiosError$1, Error, {
+  toJSON: function toJSON() {
+    return {
+      // Standard
+      message: this.message,
+      name: this.name,
+      // Microsoft
+      description: this.description,
+      number: this.number,
+      // Mozilla
+      fileName: this.fileName,
+      lineNumber: this.lineNumber,
+      columnNumber: this.columnNumber,
+      stack: this.stack,
+      // Axios
+      config: utils$1.toJSONObject(this.config),
+      code: this.code,
+      status: this.status
+    };
+  }
+});
+const prototype$1 = AxiosError$1.prototype;
+const descriptors = {};
+[
+  "ERR_BAD_OPTION_VALUE",
+  "ERR_BAD_OPTION",
+  "ECONNABORTED",
+  "ETIMEDOUT",
+  "ERR_NETWORK",
+  "ERR_FR_TOO_MANY_REDIRECTS",
+  "ERR_DEPRECATED",
+  "ERR_BAD_RESPONSE",
+  "ERR_BAD_REQUEST",
+  "ERR_CANCELED",
+  "ERR_NOT_SUPPORT",
+  "ERR_INVALID_URL"
+  // eslint-disable-next-line func-names
+].forEach((code) => {
+  descriptors[code] = { value: code };
+});
+Object.defineProperties(AxiosError$1, descriptors);
+Object.defineProperty(prototype$1, "isAxiosError", { value: true });
+AxiosError$1.from = (error, code, config, request, response, customProps) => {
+  const axiosError = Object.create(prototype$1);
+  utils$1.toFlatObject(error, axiosError, function filter2(obj) {
+    return obj !== Error.prototype;
+  }, (prop) => {
+    return prop !== "isAxiosError";
+  });
+  AxiosError$1.call(axiosError, error.message, code, config, request, response);
+  axiosError.cause = error;
+  axiosError.name = error.name;
+  customProps && Object.assign(axiosError, customProps);
+  return axiosError;
+};
+const httpAdapter = null;
+function isVisitable(thing) {
+  return utils$1.isPlainObject(thing) || utils$1.isArray(thing);
+}
+function removeBrackets(key) {
+  return utils$1.endsWith(key, "[]") ? key.slice(0, -2) : key;
+}
+function renderKey(path, key, dots) {
+  if (!path) return key;
+  return path.concat(key).map(function each(token, i2) {
+    token = removeBrackets(token);
+    return !dots && i2 ? "[" + token + "]" : token;
+  }).join(dots ? "." : "");
+}
+function isFlatArray(arr) {
+  return utils$1.isArray(arr) && !arr.some(isVisitable);
+}
+const predicates = utils$1.toFlatObject(utils$1, {}, null, function filter(prop) {
+  return /^is[A-Z]/.test(prop);
+});
+function toFormData$1(obj, formData, options) {
+  if (!utils$1.isObject(obj)) {
+    throw new TypeError("target must be an object");
+  }
+  formData = formData || new FormData();
+  options = utils$1.toFlatObject(options, {
+    metaTokens: true,
+    dots: false,
+    indexes: false
+  }, false, function defined(option2, source) {
+    return !utils$1.isUndefined(source[option2]);
+  });
+  const metaTokens = options.metaTokens;
+  const visitor = options.visitor || defaultVisitor;
+  const dots = options.dots;
+  const indexes = options.indexes;
+  const _Blob = options.Blob || typeof Blob !== "undefined" && Blob;
+  const useBlob = _Blob && utils$1.isSpecCompliantForm(formData);
+  if (!utils$1.isFunction(visitor)) {
+    throw new TypeError("visitor must be a function");
+  }
+  function convertValue(value) {
+    if (value === null) return "";
+    if (utils$1.isDate(value)) {
+      return value.toISOString();
+    }
+    if (utils$1.isBoolean(value)) {
+      return value.toString();
+    }
+    if (!useBlob && utils$1.isBlob(value)) {
+      throw new AxiosError$1("Blob is not supported. Use a Buffer instead.");
+    }
+    if (utils$1.isArrayBuffer(value) || utils$1.isTypedArray(value)) {
+      return useBlob && typeof Blob === "function" ? new Blob([value]) : Buffer.from(value);
+    }
+    return value;
+  }
+  function defaultVisitor(value, key, path) {
+    let arr = value;
+    if (value && !path && typeof value === "object") {
+      if (utils$1.endsWith(key, "{}")) {
+        key = metaTokens ? key : key.slice(0, -2);
+        value = JSON.stringify(value);
+      } else if (utils$1.isArray(value) && isFlatArray(value) || (utils$1.isFileList(value) || utils$1.endsWith(key, "[]")) && (arr = utils$1.toArray(value))) {
+        key = removeBrackets(key);
+        arr.forEach(function each(el, index2) {
+          !(utils$1.isUndefined(el) || el === null) && formData.append(
+            // eslint-disable-next-line no-nested-ternary
+            indexes === true ? renderKey([key], index2, dots) : indexes === null ? key : key + "[]",
+            convertValue(el)
+          );
+        });
+        return false;
+      }
+    }
+    if (isVisitable(value)) {
+      return true;
+    }
+    formData.append(renderKey(path, key, dots), convertValue(value));
+    return false;
+  }
+  const stack2 = [];
+  const exposedHelpers = Object.assign(predicates, {
+    defaultVisitor,
+    convertValue,
+    isVisitable
+  });
+  function build(value, path) {
+    if (utils$1.isUndefined(value)) return;
+    if (stack2.indexOf(value) !== -1) {
+      throw Error("Circular reference detected in " + path.join("."));
+    }
+    stack2.push(value);
+    utils$1.forEach(value, function each(el, key) {
+      const result = !(utils$1.isUndefined(el) || el === null) && visitor.call(
+        formData,
+        el,
+        utils$1.isString(key) ? key.trim() : key,
+        path,
+        exposedHelpers
+      );
+      if (result === true) {
+        build(el, path ? path.concat(key) : [key]);
+      }
+    });
+    stack2.pop();
+  }
+  if (!utils$1.isObject(obj)) {
+    throw new TypeError("data must be an object");
+  }
+  build(obj);
+  return formData;
+}
+function encode$1(str) {
+  const charMap = {
+    "!": "%21",
+    "'": "%27",
+    "(": "%28",
+    ")": "%29",
+    "~": "%7E",
+    "%20": "+",
+    "%00": "\0"
+  };
+  return encodeURIComponent(str).replace(/[!'()~]|%20|%00/g, function replacer2(match) {
+    return charMap[match];
+  });
+}
+function AxiosURLSearchParams(params, options) {
+  this._pairs = [];
+  params && toFormData$1(params, this, options);
+}
+const prototype = AxiosURLSearchParams.prototype;
+prototype.append = function append(name, value) {
+  this._pairs.push([name, value]);
+};
+prototype.toString = function toString2(encoder) {
+  const _encode = encoder ? function(value) {
+    return encoder.call(this, value, encode$1);
+  } : encode$1;
+  return this._pairs.map(function each(pair) {
+    return _encode(pair[0]) + "=" + _encode(pair[1]);
+  }, "").join("&");
+};
+function encode(val) {
+  return encodeURIComponent(val).replace(/%3A/gi, ":").replace(/%24/g, "$").replace(/%2C/gi, ",").replace(/%20/g, "+").replace(/%5B/gi, "[").replace(/%5D/gi, "]");
+}
+function buildURL(url, params, options) {
+  if (!params) {
+    return url;
+  }
+  const _encode = options && options.encode || encode;
+  if (utils$1.isFunction(options)) {
+    options = {
+      serialize: options
+    };
+  }
+  const serializeFn = options && options.serialize;
+  let serializedParams;
+  if (serializeFn) {
+    serializedParams = serializeFn(params, options);
+  } else {
+    serializedParams = utils$1.isURLSearchParams(params) ? params.toString() : new AxiosURLSearchParams(params, options).toString(_encode);
+  }
+  if (serializedParams) {
+    const hashmarkIndex = url.indexOf("#");
+    if (hashmarkIndex !== -1) {
+      url = url.slice(0, hashmarkIndex);
+    }
+    url += (url.indexOf("?") === -1 ? "?" : "&") + serializedParams;
+  }
+  return url;
+}
+class InterceptorManager {
+  constructor() {
+    this.handlers = [];
+  }
+  /**
+   * Add a new interceptor to the stack
+   *
+   * @param {Function} fulfilled The function to handle `then` for a `Promise`
+   * @param {Function} rejected The function to handle `reject` for a `Promise`
+   *
+   * @return {Number} An ID used to remove interceptor later
+   */
+  use(fulfilled, rejected, options) {
+    this.handlers.push({
+      fulfilled,
+      rejected,
+      synchronous: options ? options.synchronous : false,
+      runWhen: options ? options.runWhen : null
+    });
+    return this.handlers.length - 1;
+  }
+  /**
+   * Remove an interceptor from the stack
+   *
+   * @param {Number} id The ID that was returned by `use`
+   *
+   * @returns {Boolean} `true` if the interceptor was removed, `false` otherwise
+   */
+  eject(id) {
+    if (this.handlers[id]) {
+      this.handlers[id] = null;
+    }
+  }
+  /**
+   * Clear all interceptors from the stack
+   *
+   * @returns {void}
+   */
+  clear() {
+    if (this.handlers) {
+      this.handlers = [];
+    }
+  }
+  /**
+   * Iterate over all the registered interceptors
+   *
+   * This method is particularly useful for skipping over any
+   * interceptors that may have become `null` calling `eject`.
+   *
+   * @param {Function} fn The function to call for each interceptor
+   *
+   * @returns {void}
+   */
+  forEach(fn) {
+    utils$1.forEach(this.handlers, function forEachHandler(h2) {
+      if (h2 !== null) {
+        fn(h2);
+      }
+    });
+  }
+}
+const transitionalDefaults = {
+  silentJSONParsing: true,
+  forcedJSONParsing: true,
+  clarifyTimeoutError: false
+};
+const URLSearchParams$1 = typeof URLSearchParams !== "undefined" ? URLSearchParams : AxiosURLSearchParams;
+const FormData$1 = typeof FormData !== "undefined" ? FormData : null;
+const Blob$1 = typeof Blob !== "undefined" ? Blob : null;
+const platform$1 = {
+  isBrowser: true,
+  classes: {
+    URLSearchParams: URLSearchParams$1,
+    FormData: FormData$1,
+    Blob: Blob$1
+  },
+  protocols: ["http", "https", "file", "blob", "url", "data"]
+};
+const hasBrowserEnv = typeof window !== "undefined" && typeof document !== "undefined";
+const _navigator = typeof navigator === "object" && navigator || void 0;
+const hasStandardBrowserEnv = hasBrowserEnv && (!_navigator || ["ReactNative", "NativeScript", "NS"].indexOf(_navigator.product) < 0);
+const hasStandardBrowserWebWorkerEnv = (() => {
+  return typeof WorkerGlobalScope !== "undefined" && // eslint-disable-next-line no-undef
+  self instanceof WorkerGlobalScope && typeof self.importScripts === "function";
+})();
+const origin = hasBrowserEnv && window.location.href || "http://localhost";
+const utils = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  hasBrowserEnv,
+  hasStandardBrowserEnv,
+  hasStandardBrowserWebWorkerEnv,
+  navigator: _navigator,
+  origin
+}, Symbol.toStringTag, { value: "Module" }));
+const platform = {
+  ...utils,
+  ...platform$1
+};
+function toURLEncodedForm(data, options) {
+  return toFormData$1(data, new platform.classes.URLSearchParams(), {
+    visitor: function(value, key, path, helpers) {
+      if (platform.isNode && utils$1.isBuffer(value)) {
+        this.append(key, value.toString("base64"));
+        return false;
+      }
+      return helpers.defaultVisitor.apply(this, arguments);
+    },
+    ...options
+  });
+}
+function parsePropPath(name) {
+  return utils$1.matchAll(/\w+|\[(\w*)]/g, name).map((match) => {
+    return match[0] === "[]" ? "" : match[1] || match[0];
+  });
+}
+function arrayToObject(arr) {
+  const obj = {};
+  const keys = Object.keys(arr);
+  let i2;
+  const len = keys.length;
+  let key;
+  for (i2 = 0; i2 < len; i2++) {
+    key = keys[i2];
+    obj[key] = arr[key];
+  }
+  return obj;
+}
+function formDataToJSON(formData) {
+  function buildPath(path, value, target, index2) {
+    let name = path[index2++];
+    if (name === "__proto__") return true;
+    const isNumericKey = Number.isFinite(+name);
+    const isLast = index2 >= path.length;
+    name = !name && utils$1.isArray(target) ? target.length : name;
+    if (isLast) {
+      if (utils$1.hasOwnProp(target, name)) {
+        target[name] = [target[name], value];
+      } else {
+        target[name] = value;
+      }
+      return !isNumericKey;
+    }
+    if (!target[name] || !utils$1.isObject(target[name])) {
+      target[name] = [];
+    }
+    const result = buildPath(path, value, target[name], index2);
+    if (result && utils$1.isArray(target[name])) {
+      target[name] = arrayToObject(target[name]);
+    }
+    return !isNumericKey;
+  }
+  if (utils$1.isFormData(formData) && utils$1.isFunction(formData.entries)) {
+    const obj = {};
+    utils$1.forEachEntry(formData, (name, value) => {
+      buildPath(parsePropPath(name), value, obj, 0);
+    });
+    return obj;
+  }
+  return null;
+}
+function stringifySafely(rawValue, parser, encoder) {
+  if (utils$1.isString(rawValue)) {
+    try {
+      (parser || JSON.parse)(rawValue);
+      return utils$1.trim(rawValue);
+    } catch (e) {
+      if (e.name !== "SyntaxError") {
+        throw e;
+      }
+    }
+  }
+  return (encoder || JSON.stringify)(rawValue);
+}
+const defaults = {
+  transitional: transitionalDefaults,
+  adapter: ["xhr", "http", "fetch"],
+  transformRequest: [function transformRequest(data, headers) {
+    const contentType = headers.getContentType() || "";
+    const hasJSONContentType = contentType.indexOf("application/json") > -1;
+    const isObjectPayload = utils$1.isObject(data);
+    if (isObjectPayload && utils$1.isHTMLForm(data)) {
+      data = new FormData(data);
+    }
+    const isFormData2 = utils$1.isFormData(data);
+    if (isFormData2) {
+      return hasJSONContentType ? JSON.stringify(formDataToJSON(data)) : data;
+    }
+    if (utils$1.isArrayBuffer(data) || utils$1.isBuffer(data) || utils$1.isStream(data) || utils$1.isFile(data) || utils$1.isBlob(data) || utils$1.isReadableStream(data)) {
+      return data;
+    }
+    if (utils$1.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils$1.isURLSearchParams(data)) {
+      headers.setContentType("application/x-www-form-urlencoded;charset=utf-8", false);
+      return data.toString();
+    }
+    let isFileList2;
+    if (isObjectPayload) {
+      if (contentType.indexOf("application/x-www-form-urlencoded") > -1) {
+        return toURLEncodedForm(data, this.formSerializer).toString();
+      }
+      if ((isFileList2 = utils$1.isFileList(data)) || contentType.indexOf("multipart/form-data") > -1) {
+        const _FormData = this.env && this.env.FormData;
+        return toFormData$1(
+          isFileList2 ? { "files[]": data } : data,
+          _FormData && new _FormData(),
+          this.formSerializer
+        );
+      }
+    }
+    if (isObjectPayload || hasJSONContentType) {
+      headers.setContentType("application/json", false);
+      return stringifySafely(data);
+    }
+    return data;
+  }],
+  transformResponse: [function transformResponse(data) {
+    const transitional2 = this.transitional || defaults.transitional;
+    const forcedJSONParsing = transitional2 && transitional2.forcedJSONParsing;
+    const JSONRequested = this.responseType === "json";
+    if (utils$1.isResponse(data) || utils$1.isReadableStream(data)) {
+      return data;
+    }
+    if (data && utils$1.isString(data) && (forcedJSONParsing && !this.responseType || JSONRequested)) {
+      const silentJSONParsing = transitional2 && transitional2.silentJSONParsing;
+      const strictJSONParsing = !silentJSONParsing && JSONRequested;
+      try {
+        return JSON.parse(data);
+      } catch (e) {
+        if (strictJSONParsing) {
+          if (e.name === "SyntaxError") {
+            throw AxiosError$1.from(e, AxiosError$1.ERR_BAD_RESPONSE, this, null, this.response);
+          }
+          throw e;
+        }
+      }
+    }
+    return data;
+  }],
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+  xsrfCookieName: "XSRF-TOKEN",
+  xsrfHeaderName: "X-XSRF-TOKEN",
+  maxContentLength: -1,
+  maxBodyLength: -1,
+  env: {
+    FormData: platform.classes.FormData,
+    Blob: platform.classes.Blob
+  },
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  },
+  headers: {
+    common: {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": void 0
+    }
+  }
+};
+utils$1.forEach(["delete", "get", "head", "post", "put", "patch"], (method) => {
+  defaults.headers[method] = {};
+});
+const ignoreDuplicateOf = utils$1.toObjectSet([
+  "age",
+  "authorization",
+  "content-length",
+  "content-type",
+  "etag",
+  "expires",
+  "from",
+  "host",
+  "if-modified-since",
+  "if-unmodified-since",
+  "last-modified",
+  "location",
+  "max-forwards",
+  "proxy-authorization",
+  "referer",
+  "retry-after",
+  "user-agent"
+]);
+const parseHeaders = (rawHeaders) => {
+  const parsed = {};
+  let key;
+  let val;
+  let i2;
+  rawHeaders && rawHeaders.split("\n").forEach(function parser(line) {
+    i2 = line.indexOf(":");
+    key = line.substring(0, i2).trim().toLowerCase();
+    val = line.substring(i2 + 1).trim();
+    if (!key || parsed[key] && ignoreDuplicateOf[key]) {
+      return;
+    }
+    if (key === "set-cookie") {
+      if (parsed[key]) {
+        parsed[key].push(val);
+      } else {
+        parsed[key] = [val];
+      }
+    } else {
+      parsed[key] = parsed[key] ? parsed[key] + ", " + val : val;
+    }
+  });
+  return parsed;
+};
+const $internals = Symbol("internals");
+function normalizeHeader(header) {
+  return header && String(header).trim().toLowerCase();
+}
+function normalizeValue(value) {
+  if (value === false || value == null) {
+    return value;
+  }
+  return utils$1.isArray(value) ? value.map(normalizeValue) : String(value);
+}
+function parseTokens(str) {
+  const tokens = /* @__PURE__ */ Object.create(null);
+  const tokensRE = /([^\s,;=]+)\s*(?:=\s*([^,;]+))?/g;
+  let match;
+  while (match = tokensRE.exec(str)) {
+    tokens[match[1]] = match[2];
+  }
+  return tokens;
+}
+const isValidHeaderName = (str) => /^[-_a-zA-Z0-9^`|~,!#$%&'*+.]+$/.test(str.trim());
+function matchHeaderValue(context2, value, header, filter2, isHeaderNameFilter) {
+  if (utils$1.isFunction(filter2)) {
+    return filter2.call(this, value, header);
+  }
+  if (isHeaderNameFilter) {
+    value = header;
+  }
+  if (!utils$1.isString(value)) return;
+  if (utils$1.isString(filter2)) {
+    return value.indexOf(filter2) !== -1;
+  }
+  if (utils$1.isRegExp(filter2)) {
+    return filter2.test(value);
+  }
+}
+function formatHeader(header) {
+  return header.trim().toLowerCase().replace(/([a-z\d])(\w*)/g, (w, char, str) => {
+    return char.toUpperCase() + str;
+  });
+}
+function buildAccessors(obj, header) {
+  const accessorName = utils$1.toCamelCase(" " + header);
+  ["get", "set", "has"].forEach((methodName) => {
+    Object.defineProperty(obj, methodName + accessorName, {
+      value: function(arg1, arg2, arg3) {
+        return this[methodName].call(this, header, arg1, arg2, arg3);
+      },
+      configurable: true
+    });
+  });
+}
+let AxiosHeaders$1 = class AxiosHeaders {
+  constructor(headers) {
+    headers && this.set(headers);
+  }
+  set(header, valueOrRewrite, rewrite) {
+    const self2 = this;
+    function setHeader(_value, _header, _rewrite) {
+      const lHeader = normalizeHeader(_header);
+      if (!lHeader) {
+        throw new Error("header name must be a non-empty string");
+      }
+      const key = utils$1.findKey(self2, lHeader);
+      if (!key || self2[key] === void 0 || _rewrite === true || _rewrite === void 0 && self2[key] !== false) {
+        self2[key || _header] = normalizeValue(_value);
+      }
+    }
+    const setHeaders = (headers, _rewrite) => utils$1.forEach(headers, (_value, _header) => setHeader(_value, _header, _rewrite));
+    if (utils$1.isPlainObject(header) || header instanceof this.constructor) {
+      setHeaders(header, valueOrRewrite);
+    } else if (utils$1.isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
+      setHeaders(parseHeaders(header), valueOrRewrite);
+    } else if (utils$1.isObject(header) && utils$1.isIterable(header)) {
+      let obj = {}, dest, key;
+      for (const entry of header) {
+        if (!utils$1.isArray(entry)) {
+          throw TypeError("Object iterator must return a key-value pair");
+        }
+        obj[key = entry[0]] = (dest = obj[key]) ? utils$1.isArray(dest) ? [...dest, entry[1]] : [dest, entry[1]] : entry[1];
+      }
+      setHeaders(obj, valueOrRewrite);
+    } else {
+      header != null && setHeader(valueOrRewrite, header, rewrite);
+    }
+    return this;
+  }
+  get(header, parser) {
+    header = normalizeHeader(header);
+    if (header) {
+      const key = utils$1.findKey(this, header);
+      if (key) {
+        const value = this[key];
+        if (!parser) {
+          return value;
+        }
+        if (parser === true) {
+          return parseTokens(value);
+        }
+        if (utils$1.isFunction(parser)) {
+          return parser.call(this, value, key);
+        }
+        if (utils$1.isRegExp(parser)) {
+          return parser.exec(value);
+        }
+        throw new TypeError("parser must be boolean|regexp|function");
+      }
+    }
+  }
+  has(header, matcher) {
+    header = normalizeHeader(header);
+    if (header) {
+      const key = utils$1.findKey(this, header);
+      return !!(key && this[key] !== void 0 && (!matcher || matchHeaderValue(this, this[key], key, matcher)));
+    }
+    return false;
+  }
+  delete(header, matcher) {
+    const self2 = this;
+    let deleted = false;
+    function deleteHeader(_header) {
+      _header = normalizeHeader(_header);
+      if (_header) {
+        const key = utils$1.findKey(self2, _header);
+        if (key && (!matcher || matchHeaderValue(self2, self2[key], key, matcher))) {
+          delete self2[key];
+          deleted = true;
+        }
+      }
+    }
+    if (utils$1.isArray(header)) {
+      header.forEach(deleteHeader);
+    } else {
+      deleteHeader(header);
+    }
+    return deleted;
+  }
+  clear(matcher) {
+    const keys = Object.keys(this);
+    let i2 = keys.length;
+    let deleted = false;
+    while (i2--) {
+      const key = keys[i2];
+      if (!matcher || matchHeaderValue(this, this[key], key, matcher, true)) {
+        delete this[key];
+        deleted = true;
+      }
+    }
+    return deleted;
+  }
+  normalize(format) {
+    const self2 = this;
+    const headers = {};
+    utils$1.forEach(this, (value, header) => {
+      const key = utils$1.findKey(headers, header);
+      if (key) {
+        self2[key] = normalizeValue(value);
+        delete self2[header];
+        return;
+      }
+      const normalized = format ? formatHeader(header) : String(header).trim();
+      if (normalized !== header) {
+        delete self2[header];
+      }
+      self2[normalized] = normalizeValue(value);
+      headers[normalized] = true;
+    });
+    return this;
+  }
+  concat(...targets) {
+    return this.constructor.concat(this, ...targets);
+  }
+  toJSON(asStrings) {
+    const obj = /* @__PURE__ */ Object.create(null);
+    utils$1.forEach(this, (value, header) => {
+      value != null && value !== false && (obj[header] = asStrings && utils$1.isArray(value) ? value.join(", ") : value);
+    });
+    return obj;
+  }
+  [Symbol.iterator]() {
+    return Object.entries(this.toJSON())[Symbol.iterator]();
+  }
+  toString() {
+    return Object.entries(this.toJSON()).map(([header, value]) => header + ": " + value).join("\n");
+  }
+  getSetCookie() {
+    return this.get("set-cookie") || [];
+  }
+  get [Symbol.toStringTag]() {
+    return "AxiosHeaders";
+  }
+  static from(thing) {
+    return thing instanceof this ? thing : new this(thing);
+  }
+  static concat(first, ...targets) {
+    const computed2 = new this(first);
+    targets.forEach((target) => computed2.set(target));
+    return computed2;
+  }
+  static accessor(header) {
+    const internals = this[$internals] = this[$internals] = {
+      accessors: {}
+    };
+    const accessors = internals.accessors;
+    const prototype2 = this.prototype;
+    function defineAccessor(_header) {
+      const lHeader = normalizeHeader(_header);
+      if (!accessors[lHeader]) {
+        buildAccessors(prototype2, _header);
+        accessors[lHeader] = true;
+      }
+    }
+    utils$1.isArray(header) ? header.forEach(defineAccessor) : defineAccessor(header);
+    return this;
+  }
+};
+AxiosHeaders$1.accessor(["Content-Type", "Content-Length", "Accept", "Accept-Encoding", "User-Agent", "Authorization"]);
+utils$1.reduceDescriptors(AxiosHeaders$1.prototype, ({ value }, key) => {
+  let mapped = key[0].toUpperCase() + key.slice(1);
+  return {
+    get: () => value,
+    set(headerValue) {
+      this[mapped] = headerValue;
+    }
+  };
+});
+utils$1.freezeMethods(AxiosHeaders$1);
+function transformData(fns, response) {
+  const config = this || defaults;
+  const context2 = response || config;
+  const headers = AxiosHeaders$1.from(context2.headers);
+  let data = context2.data;
+  utils$1.forEach(fns, function transform(fn) {
+    data = fn.call(config, data, headers.normalize(), response ? response.status : void 0);
+  });
+  headers.normalize();
+  return data;
+}
+function isCancel$1(value) {
+  return !!(value && value.__CANCEL__);
+}
+function CanceledError$1(message, config, request) {
+  AxiosError$1.call(this, message == null ? "canceled" : message, AxiosError$1.ERR_CANCELED, config, request);
+  this.name = "CanceledError";
+}
+utils$1.inherits(CanceledError$1, AxiosError$1, {
+  __CANCEL__: true
+});
+function settle(resolve2, reject, response) {
+  const validateStatus2 = response.config.validateStatus;
+  if (!response.status || !validateStatus2 || validateStatus2(response.status)) {
+    resolve2(response);
+  } else {
+    reject(new AxiosError$1(
+      "Request failed with status code " + response.status,
+      [AxiosError$1.ERR_BAD_REQUEST, AxiosError$1.ERR_BAD_RESPONSE][Math.floor(response.status / 100) - 4],
+      response.config,
+      response.request,
+      response
+    ));
+  }
+}
+function parseProtocol(url) {
+  const match = /^([-+\w]{1,25})(:?\/\/|:)/.exec(url);
+  return match && match[1] || "";
+}
+function speedometer(samplesCount, min2) {
+  samplesCount = samplesCount || 10;
+  const bytes = new Array(samplesCount);
+  const timestamps = new Array(samplesCount);
+  let head = 0;
+  let tail = 0;
+  let firstSampleTS;
+  min2 = min2 !== void 0 ? min2 : 1e3;
+  return function push(chunkLength) {
+    const now = Date.now();
+    const startedAt = timestamps[tail];
+    if (!firstSampleTS) {
+      firstSampleTS = now;
+    }
+    bytes[head] = chunkLength;
+    timestamps[head] = now;
+    let i2 = tail;
+    let bytesCount = 0;
+    while (i2 !== head) {
+      bytesCount += bytes[i2++];
+      i2 = i2 % samplesCount;
+    }
+    head = (head + 1) % samplesCount;
+    if (head === tail) {
+      tail = (tail + 1) % samplesCount;
+    }
+    if (now - firstSampleTS < min2) {
+      return;
+    }
+    const passed = startedAt && now - startedAt;
+    return passed ? Math.round(bytesCount * 1e3 / passed) : void 0;
+  };
+}
+function throttle(fn, freq) {
+  let timestamp = 0;
+  let threshold = 1e3 / freq;
+  let lastArgs;
+  let timer;
+  const invoke = (args, now = Date.now()) => {
+    timestamp = now;
+    lastArgs = null;
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+    fn(...args);
+  };
+  const throttled = (...args) => {
+    const now = Date.now();
+    const passed = now - timestamp;
+    if (passed >= threshold) {
+      invoke(args, now);
+    } else {
+      lastArgs = args;
+      if (!timer) {
+        timer = setTimeout(() => {
+          timer = null;
+          invoke(lastArgs);
+        }, threshold - passed);
+      }
+    }
+  };
+  const flush = () => lastArgs && invoke(lastArgs);
+  return [throttled, flush];
+}
+const progressEventReducer = (listener, isDownloadStream, freq = 3) => {
+  let bytesNotified = 0;
+  const _speedometer = speedometer(50, 250);
+  return throttle((e) => {
+    const loaded = e.loaded;
+    const total = e.lengthComputable ? e.total : void 0;
+    const progressBytes = loaded - bytesNotified;
+    const rate = _speedometer(progressBytes);
+    const inRange = loaded <= total;
+    bytesNotified = loaded;
+    const data = {
+      loaded,
+      total,
+      progress: total ? loaded / total : void 0,
+      bytes: progressBytes,
+      rate: rate ? rate : void 0,
+      estimated: rate && total && inRange ? (total - loaded) / rate : void 0,
+      event: e,
+      lengthComputable: total != null,
+      [isDownloadStream ? "download" : "upload"]: true
+    };
+    listener(data);
+  }, freq);
+};
+const progressEventDecorator = (total, throttled) => {
+  const lengthComputable = total != null;
+  return [(loaded) => throttled[0]({
+    lengthComputable,
+    total,
+    loaded
+  }), throttled[1]];
+};
+const asyncDecorator = (fn) => (...args) => utils$1.asap(() => fn(...args));
+const isURLSameOrigin = platform.hasStandardBrowserEnv ? /* @__PURE__ */ ((origin2, isMSIE) => (url) => {
+  url = new URL(url, platform.origin);
+  return origin2.protocol === url.protocol && origin2.host === url.host && (isMSIE || origin2.port === url.port);
+})(
+  new URL(platform.origin),
+  platform.navigator && /(msie|trident)/i.test(platform.navigator.userAgent)
+) : () => true;
+const cookies = platform.hasStandardBrowserEnv ? (
+  // Standard browser envs support document.cookie
+  {
+    write(name, value, expires, path, domain, secure) {
+      const cookie = [name + "=" + encodeURIComponent(value)];
+      utils$1.isNumber(expires) && cookie.push("expires=" + new Date(expires).toGMTString());
+      utils$1.isString(path) && cookie.push("path=" + path);
+      utils$1.isString(domain) && cookie.push("domain=" + domain);
+      secure === true && cookie.push("secure");
+      document.cookie = cookie.join("; ");
+    },
+    read(name) {
+      const match = document.cookie.match(new RegExp("(^|;\\s*)(" + name + ")=([^;]*)"));
+      return match ? decodeURIComponent(match[3]) : null;
+    },
+    remove(name) {
+      this.write(name, "", Date.now() - 864e5);
+    }
+  }
+) : (
+  // Non-standard browser env (web workers, react-native) lack needed support.
+  {
+    write() {
+    },
+    read() {
+      return null;
+    },
+    remove() {
+    }
+  }
+);
+function isAbsoluteURL(url) {
+  return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
+}
+function combineURLs(baseURL, relativeURL) {
+  return relativeURL ? baseURL.replace(/\/?\/$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL;
+}
+function buildFullPath(baseURL, requestedURL, allowAbsoluteUrls) {
+  let isRelativeUrl = !isAbsoluteURL(requestedURL);
+  if (baseURL && (isRelativeUrl || allowAbsoluteUrls == false)) {
+    return combineURLs(baseURL, requestedURL);
+  }
+  return requestedURL;
+}
+const headersToObject = (thing) => thing instanceof AxiosHeaders$1 ? { ...thing } : thing;
+function mergeConfig$1(config1, config2) {
+  config2 = config2 || {};
+  const config = {};
+  function getMergedValue(target, source, prop, caseless) {
+    if (utils$1.isPlainObject(target) && utils$1.isPlainObject(source)) {
+      return utils$1.merge.call({ caseless }, target, source);
+    } else if (utils$1.isPlainObject(source)) {
+      return utils$1.merge({}, source);
+    } else if (utils$1.isArray(source)) {
+      return source.slice();
+    }
+    return source;
+  }
+  function mergeDeepProperties(a2, b, prop, caseless) {
+    if (!utils$1.isUndefined(b)) {
+      return getMergedValue(a2, b, prop, caseless);
+    } else if (!utils$1.isUndefined(a2)) {
+      return getMergedValue(void 0, a2, prop, caseless);
+    }
+  }
+  function valueFromConfig2(a2, b) {
+    if (!utils$1.isUndefined(b)) {
+      return getMergedValue(void 0, b);
+    }
+  }
+  function defaultToConfig2(a2, b) {
+    if (!utils$1.isUndefined(b)) {
+      return getMergedValue(void 0, b);
+    } else if (!utils$1.isUndefined(a2)) {
+      return getMergedValue(void 0, a2);
+    }
+  }
+  function mergeDirectKeys(a2, b, prop) {
+    if (prop in config2) {
+      return getMergedValue(a2, b);
+    } else if (prop in config1) {
+      return getMergedValue(void 0, a2);
+    }
+  }
+  const mergeMap = {
+    url: valueFromConfig2,
+    method: valueFromConfig2,
+    data: valueFromConfig2,
+    baseURL: defaultToConfig2,
+    transformRequest: defaultToConfig2,
+    transformResponse: defaultToConfig2,
+    paramsSerializer: defaultToConfig2,
+    timeout: defaultToConfig2,
+    timeoutMessage: defaultToConfig2,
+    withCredentials: defaultToConfig2,
+    withXSRFToken: defaultToConfig2,
+    adapter: defaultToConfig2,
+    responseType: defaultToConfig2,
+    xsrfCookieName: defaultToConfig2,
+    xsrfHeaderName: defaultToConfig2,
+    onUploadProgress: defaultToConfig2,
+    onDownloadProgress: defaultToConfig2,
+    decompress: defaultToConfig2,
+    maxContentLength: defaultToConfig2,
+    maxBodyLength: defaultToConfig2,
+    beforeRedirect: defaultToConfig2,
+    transport: defaultToConfig2,
+    httpAgent: defaultToConfig2,
+    httpsAgent: defaultToConfig2,
+    cancelToken: defaultToConfig2,
+    socketPath: defaultToConfig2,
+    responseEncoding: defaultToConfig2,
+    validateStatus: mergeDirectKeys,
+    headers: (a2, b, prop) => mergeDeepProperties(headersToObject(a2), headersToObject(b), prop, true)
+  };
+  utils$1.forEach(Object.keys({ ...config1, ...config2 }), function computeConfigValue(prop) {
+    const merge2 = mergeMap[prop] || mergeDeepProperties;
+    const configValue = merge2(config1[prop], config2[prop], prop);
+    utils$1.isUndefined(configValue) && merge2 !== mergeDirectKeys || (config[prop] = configValue);
+  });
+  return config;
+}
+const resolveConfig = (config) => {
+  const newConfig = mergeConfig$1({}, config);
+  let { data, withXSRFToken, xsrfHeaderName, xsrfCookieName, headers, auth } = newConfig;
+  newConfig.headers = headers = AxiosHeaders$1.from(headers);
+  newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url, newConfig.allowAbsoluteUrls), config.params, config.paramsSerializer);
+  if (auth) {
+    headers.set(
+      "Authorization",
+      "Basic " + btoa((auth.username || "") + ":" + (auth.password ? unescape(encodeURIComponent(auth.password)) : ""))
+    );
+  }
+  let contentType;
+  if (utils$1.isFormData(data)) {
+    if (platform.hasStandardBrowserEnv || platform.hasStandardBrowserWebWorkerEnv) {
+      headers.setContentType(void 0);
+    } else if ((contentType = headers.getContentType()) !== false) {
+      const [type, ...tokens] = contentType ? contentType.split(";").map((token) => token.trim()).filter(Boolean) : [];
+      headers.setContentType([type || "multipart/form-data", ...tokens].join("; "));
+    }
+  }
+  if (platform.hasStandardBrowserEnv) {
+    withXSRFToken && utils$1.isFunction(withXSRFToken) && (withXSRFToken = withXSRFToken(newConfig));
+    if (withXSRFToken || withXSRFToken !== false && isURLSameOrigin(newConfig.url)) {
+      const xsrfValue = xsrfHeaderName && xsrfCookieName && cookies.read(xsrfCookieName);
+      if (xsrfValue) {
+        headers.set(xsrfHeaderName, xsrfValue);
+      }
+    }
+  }
+  return newConfig;
+};
+const isXHRAdapterSupported = typeof XMLHttpRequest !== "undefined";
+const xhrAdapter = isXHRAdapterSupported && function(config) {
+  return new Promise(function dispatchXhrRequest(resolve2, reject) {
+    const _config = resolveConfig(config);
+    let requestData = _config.data;
+    const requestHeaders = AxiosHeaders$1.from(_config.headers).normalize();
+    let { responseType, onUploadProgress, onDownloadProgress } = _config;
+    let onCanceled;
+    let uploadThrottled, downloadThrottled;
+    let flushUpload, flushDownload;
+    function done() {
+      flushUpload && flushUpload();
+      flushDownload && flushDownload();
+      _config.cancelToken && _config.cancelToken.unsubscribe(onCanceled);
+      _config.signal && _config.signal.removeEventListener("abort", onCanceled);
+    }
+    let request = new XMLHttpRequest();
+    request.open(_config.method.toUpperCase(), _config.url, true);
+    request.timeout = _config.timeout;
+    function onloadend() {
+      if (!request) {
+        return;
+      }
+      const responseHeaders = AxiosHeaders$1.from(
+        "getAllResponseHeaders" in request && request.getAllResponseHeaders()
+      );
+      const responseData = !responseType || responseType === "text" || responseType === "json" ? request.responseText : request.response;
+      const response = {
+        data: responseData,
+        status: request.status,
+        statusText: request.statusText,
+        headers: responseHeaders,
+        config,
+        request
+      };
+      settle(function _resolve(value) {
+        resolve2(value);
+        done();
+      }, function _reject(err) {
+        reject(err);
+        done();
+      }, response);
+      request = null;
+    }
+    if ("onloadend" in request) {
+      request.onloadend = onloadend;
+    } else {
+      request.onreadystatechange = function handleLoad() {
+        if (!request || request.readyState !== 4) {
+          return;
+        }
+        if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf("file:") === 0)) {
+          return;
+        }
+        setTimeout(onloadend);
+      };
+    }
+    request.onabort = function handleAbort() {
+      if (!request) {
+        return;
+      }
+      reject(new AxiosError$1("Request aborted", AxiosError$1.ECONNABORTED, config, request));
+      request = null;
+    };
+    request.onerror = function handleError2() {
+      reject(new AxiosError$1("Network Error", AxiosError$1.ERR_NETWORK, config, request));
+      request = null;
+    };
+    request.ontimeout = function handleTimeout() {
+      let timeoutErrorMessage = _config.timeout ? "timeout of " + _config.timeout + "ms exceeded" : "timeout exceeded";
+      const transitional2 = _config.transitional || transitionalDefaults;
+      if (_config.timeoutErrorMessage) {
+        timeoutErrorMessage = _config.timeoutErrorMessage;
+      }
+      reject(new AxiosError$1(
+        timeoutErrorMessage,
+        transitional2.clarifyTimeoutError ? AxiosError$1.ETIMEDOUT : AxiosError$1.ECONNABORTED,
+        config,
+        request
+      ));
+      request = null;
+    };
+    requestData === void 0 && requestHeaders.setContentType(null);
+    if ("setRequestHeader" in request) {
+      utils$1.forEach(requestHeaders.toJSON(), function setRequestHeader(val, key) {
+        request.setRequestHeader(key, val);
+      });
+    }
+    if (!utils$1.isUndefined(_config.withCredentials)) {
+      request.withCredentials = !!_config.withCredentials;
+    }
+    if (responseType && responseType !== "json") {
+      request.responseType = _config.responseType;
+    }
+    if (onDownloadProgress) {
+      [downloadThrottled, flushDownload] = progressEventReducer(onDownloadProgress, true);
+      request.addEventListener("progress", downloadThrottled);
+    }
+    if (onUploadProgress && request.upload) {
+      [uploadThrottled, flushUpload] = progressEventReducer(onUploadProgress);
+      request.upload.addEventListener("progress", uploadThrottled);
+      request.upload.addEventListener("loadend", flushUpload);
+    }
+    if (_config.cancelToken || _config.signal) {
+      onCanceled = (cancel) => {
+        if (!request) {
+          return;
+        }
+        reject(!cancel || cancel.type ? new CanceledError$1(null, config, request) : cancel);
+        request.abort();
+        request = null;
+      };
+      _config.cancelToken && _config.cancelToken.subscribe(onCanceled);
+      if (_config.signal) {
+        _config.signal.aborted ? onCanceled() : _config.signal.addEventListener("abort", onCanceled);
+      }
+    }
+    const protocol = parseProtocol(_config.url);
+    if (protocol && platform.protocols.indexOf(protocol) === -1) {
+      reject(new AxiosError$1("Unsupported protocol " + protocol + ":", AxiosError$1.ERR_BAD_REQUEST, config));
+      return;
+    }
+    request.send(requestData || null);
+  });
+};
+const composeSignals = (signals, timeout) => {
+  const { length } = signals = signals ? signals.filter(Boolean) : [];
+  if (timeout || length) {
+    let controller = new AbortController();
+    let aborted;
+    const onabort = function(reason) {
+      if (!aborted) {
+        aborted = true;
+        unsubscribe();
+        const err = reason instanceof Error ? reason : this.reason;
+        controller.abort(err instanceof AxiosError$1 ? err : new CanceledError$1(err instanceof Error ? err.message : err));
+      }
+    };
+    let timer = timeout && setTimeout(() => {
+      timer = null;
+      onabort(new AxiosError$1(`timeout ${timeout} of ms exceeded`, AxiosError$1.ETIMEDOUT));
+    }, timeout);
+    const unsubscribe = () => {
+      if (signals) {
+        timer && clearTimeout(timer);
+        timer = null;
+        signals.forEach((signal2) => {
+          signal2.unsubscribe ? signal2.unsubscribe(onabort) : signal2.removeEventListener("abort", onabort);
+        });
+        signals = null;
+      }
+    };
+    signals.forEach((signal2) => signal2.addEventListener("abort", onabort));
+    const { signal } = controller;
+    signal.unsubscribe = () => utils$1.asap(unsubscribe);
+    return signal;
+  }
+};
+const streamChunk = function* (chunk, chunkSize) {
+  let len = chunk.byteLength;
+  if (len < chunkSize) {
+    yield chunk;
+    return;
+  }
+  let pos = 0;
+  let end;
+  while (pos < len) {
+    end = pos + chunkSize;
+    yield chunk.slice(pos, end);
+    pos = end;
+  }
+};
+const readBytes = async function* (iterable, chunkSize) {
+  for await (const chunk of readStream(iterable)) {
+    yield* streamChunk(chunk, chunkSize);
+  }
+};
+const readStream = async function* (stream) {
+  if (stream[Symbol.asyncIterator]) {
+    yield* stream;
+    return;
+  }
+  const reader = stream.getReader();
+  try {
+    for (; ; ) {
+      const { done, value } = await reader.read();
+      if (done) {
+        break;
+      }
+      yield value;
+    }
+  } finally {
+    await reader.cancel();
+  }
+};
+const trackStream = (stream, chunkSize, onProgress, onFinish) => {
+  const iterator2 = readBytes(stream, chunkSize);
+  let bytes = 0;
+  let done;
+  let _onFinish = (e) => {
+    if (!done) {
+      done = true;
+      onFinish && onFinish(e);
+    }
+  };
+  return new ReadableStream({
+    async pull(controller) {
+      try {
+        const { done: done2, value } = await iterator2.next();
+        if (done2) {
+          _onFinish();
+          controller.close();
+          return;
+        }
+        let len = value.byteLength;
+        if (onProgress) {
+          let loadedBytes = bytes += len;
+          onProgress(loadedBytes);
+        }
+        controller.enqueue(new Uint8Array(value));
+      } catch (err) {
+        _onFinish(err);
+        throw err;
+      }
+    },
+    cancel(reason) {
+      _onFinish(reason);
+      return iterator2.return();
+    }
+  }, {
+    highWaterMark: 2
+  });
+};
+const isFetchSupported = typeof fetch === "function" && typeof Request === "function" && typeof Response === "function";
+const isReadableStreamSupported = isFetchSupported && typeof ReadableStream === "function";
+const encodeText = isFetchSupported && (typeof TextEncoder === "function" ? /* @__PURE__ */ ((encoder) => (str) => encoder.encode(str))(new TextEncoder()) : async (str) => new Uint8Array(await new Response(str).arrayBuffer()));
+const test = (fn, ...args) => {
+  try {
+    return !!fn(...args);
+  } catch (e) {
+    return false;
+  }
+};
+const supportsRequestStream = isReadableStreamSupported && test(() => {
+  let duplexAccessed = false;
+  const hasContentType = new Request(platform.origin, {
+    body: new ReadableStream(),
+    method: "POST",
+    get duplex() {
+      duplexAccessed = true;
+      return "half";
+    }
+  }).headers.has("Content-Type");
+  return duplexAccessed && !hasContentType;
+});
+const DEFAULT_CHUNK_SIZE = 64 * 1024;
+const supportsResponseStream = isReadableStreamSupported && test(() => utils$1.isReadableStream(new Response("").body));
+const resolvers = {
+  stream: supportsResponseStream && ((res) => res.body)
+};
+isFetchSupported && ((res) => {
+  ["text", "arrayBuffer", "blob", "formData", "stream"].forEach((type) => {
+    !resolvers[type] && (resolvers[type] = utils$1.isFunction(res[type]) ? (res2) => res2[type]() : (_2, config) => {
+      throw new AxiosError$1(`Response type '${type}' is not supported`, AxiosError$1.ERR_NOT_SUPPORT, config);
+    });
+  });
+})(new Response());
+const getBodyLength = async (body) => {
+  if (body == null) {
+    return 0;
+  }
+  if (utils$1.isBlob(body)) {
+    return body.size;
+  }
+  if (utils$1.isSpecCompliantForm(body)) {
+    const _request = new Request(platform.origin, {
+      method: "POST",
+      body
+    });
+    return (await _request.arrayBuffer()).byteLength;
+  }
+  if (utils$1.isArrayBufferView(body) || utils$1.isArrayBuffer(body)) {
+    return body.byteLength;
+  }
+  if (utils$1.isURLSearchParams(body)) {
+    body = body + "";
+  }
+  if (utils$1.isString(body)) {
+    return (await encodeText(body)).byteLength;
+  }
+};
+const resolveBodyLength = async (headers, body) => {
+  const length = utils$1.toFiniteNumber(headers.getContentLength());
+  return length == null ? getBodyLength(body) : length;
+};
+const fetchAdapter = isFetchSupported && (async (config) => {
+  let {
+    url,
+    method,
+    data,
+    signal,
+    cancelToken,
+    timeout,
+    onDownloadProgress,
+    onUploadProgress,
+    responseType,
+    headers,
+    withCredentials = "same-origin",
+    fetchOptions
+  } = resolveConfig(config);
+  responseType = responseType ? (responseType + "").toLowerCase() : "text";
+  let composedSignal = composeSignals([signal, cancelToken && cancelToken.toAbortSignal()], timeout);
+  let request;
+  const unsubscribe = composedSignal && composedSignal.unsubscribe && (() => {
+    composedSignal.unsubscribe();
+  });
+  let requestContentLength;
+  try {
+    if (onUploadProgress && supportsRequestStream && method !== "get" && method !== "head" && (requestContentLength = await resolveBodyLength(headers, data)) !== 0) {
+      let _request = new Request(url, {
+        method: "POST",
+        body: data,
+        duplex: "half"
+      });
+      let contentTypeHeader;
+      if (utils$1.isFormData(data) && (contentTypeHeader = _request.headers.get("content-type"))) {
+        headers.setContentType(contentTypeHeader);
+      }
+      if (_request.body) {
+        const [onProgress, flush] = progressEventDecorator(
+          requestContentLength,
+          progressEventReducer(asyncDecorator(onUploadProgress))
+        );
+        data = trackStream(_request.body, DEFAULT_CHUNK_SIZE, onProgress, flush);
+      }
+    }
+    if (!utils$1.isString(withCredentials)) {
+      withCredentials = withCredentials ? "include" : "omit";
+    }
+    const isCredentialsSupported = "credentials" in Request.prototype;
+    request = new Request(url, {
+      ...fetchOptions,
+      signal: composedSignal,
+      method: method.toUpperCase(),
+      headers: headers.normalize().toJSON(),
+      body: data,
+      duplex: "half",
+      credentials: isCredentialsSupported ? withCredentials : void 0
+    });
+    let response = await fetch(request, fetchOptions);
+    const isStreamResponse = supportsResponseStream && (responseType === "stream" || responseType === "response");
+    if (supportsResponseStream && (onDownloadProgress || isStreamResponse && unsubscribe)) {
+      const options = {};
+      ["status", "statusText", "headers"].forEach((prop) => {
+        options[prop] = response[prop];
+      });
+      const responseContentLength = utils$1.toFiniteNumber(response.headers.get("content-length"));
+      const [onProgress, flush] = onDownloadProgress && progressEventDecorator(
+        responseContentLength,
+        progressEventReducer(asyncDecorator(onDownloadProgress), true)
+      ) || [];
+      response = new Response(
+        trackStream(response.body, DEFAULT_CHUNK_SIZE, onProgress, () => {
+          flush && flush();
+          unsubscribe && unsubscribe();
+        }),
+        options
+      );
+    }
+    responseType = responseType || "text";
+    let responseData = await resolvers[utils$1.findKey(resolvers, responseType) || "text"](response, config);
+    !isStreamResponse && unsubscribe && unsubscribe();
+    return await new Promise((resolve2, reject) => {
+      settle(resolve2, reject, {
+        data: responseData,
+        headers: AxiosHeaders$1.from(response.headers),
+        status: response.status,
+        statusText: response.statusText,
+        config,
+        request
+      });
+    });
+  } catch (err) {
+    unsubscribe && unsubscribe();
+    if (err && err.name === "TypeError" && /Load failed|fetch/i.test(err.message)) {
+      throw Object.assign(
+        new AxiosError$1("Network Error", AxiosError$1.ERR_NETWORK, config, request),
+        {
+          cause: err.cause || err
+        }
+      );
+    }
+    throw AxiosError$1.from(err, err && err.code, config, request);
+  }
+});
+const knownAdapters = {
+  http: httpAdapter,
+  xhr: xhrAdapter,
+  fetch: fetchAdapter
+};
+utils$1.forEach(knownAdapters, (fn, value) => {
+  if (fn) {
+    try {
+      Object.defineProperty(fn, "name", { value });
+    } catch (e) {
+    }
+    Object.defineProperty(fn, "adapterName", { value });
+  }
+});
+const renderReason = (reason) => `- ${reason}`;
+const isResolvedHandle = (adapter) => utils$1.isFunction(adapter) || adapter === null || adapter === false;
+const adapters = {
+  getAdapter: (adapters2) => {
+    adapters2 = utils$1.isArray(adapters2) ? adapters2 : [adapters2];
+    const { length } = adapters2;
+    let nameOrAdapter;
+    let adapter;
+    const rejectedReasons = {};
+    for (let i2 = 0; i2 < length; i2++) {
+      nameOrAdapter = adapters2[i2];
+      let id;
+      adapter = nameOrAdapter;
+      if (!isResolvedHandle(nameOrAdapter)) {
+        adapter = knownAdapters[(id = String(nameOrAdapter)).toLowerCase()];
+        if (adapter === void 0) {
+          throw new AxiosError$1(`Unknown adapter '${id}'`);
+        }
+      }
+      if (adapter) {
+        break;
+      }
+      rejectedReasons[id || "#" + i2] = adapter;
+    }
+    if (!adapter) {
+      const reasons = Object.entries(rejectedReasons).map(
+        ([id, state2]) => `adapter ${id} ` + (state2 === false ? "is not supported by the environment" : "is not available in the build")
+      );
+      let s = length ? reasons.length > 1 ? "since :\n" + reasons.map(renderReason).join("\n") : " " + renderReason(reasons[0]) : "as no adapter specified";
+      throw new AxiosError$1(
+        `There is no suitable adapter to dispatch the request ` + s,
+        "ERR_NOT_SUPPORT"
+      );
+    }
+    return adapter;
+  },
+  adapters: knownAdapters
+};
+function throwIfCancellationRequested(config) {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested();
+  }
+  if (config.signal && config.signal.aborted) {
+    throw new CanceledError$1(null, config);
+  }
+}
+function dispatchRequest(config) {
+  throwIfCancellationRequested(config);
+  config.headers = AxiosHeaders$1.from(config.headers);
+  config.data = transformData.call(
+    config,
+    config.transformRequest
+  );
+  if (["post", "put", "patch"].indexOf(config.method) !== -1) {
+    config.headers.setContentType("application/x-www-form-urlencoded", false);
+  }
+  const adapter = adapters.getAdapter(config.adapter || defaults.adapter);
+  return adapter(config).then(function onAdapterResolution(response) {
+    throwIfCancellationRequested(config);
+    response.data = transformData.call(
+      config,
+      config.transformResponse,
+      response
+    );
+    response.headers = AxiosHeaders$1.from(response.headers);
+    return response;
+  }, function onAdapterRejection(reason) {
+    if (!isCancel$1(reason)) {
+      throwIfCancellationRequested(config);
+      if (reason && reason.response) {
+        reason.response.data = transformData.call(
+          config,
+          config.transformResponse,
+          reason.response
+        );
+        reason.response.headers = AxiosHeaders$1.from(reason.response.headers);
+      }
+    }
+    return Promise.reject(reason);
+  });
+}
+const VERSION$1 = "1.11.0";
+const validators$1 = {};
+["object", "boolean", "number", "function", "string", "symbol"].forEach((type, i2) => {
+  validators$1[type] = function validator2(thing) {
+    return typeof thing === type || "a" + (i2 < 1 ? "n " : " ") + type;
+  };
+});
+const deprecatedWarnings = {};
+validators$1.transitional = function transitional(validator2, version2, message) {
+  function formatMessage(opt, desc) {
+    return "[Axios v" + VERSION$1 + "] Transitional option '" + opt + "'" + desc + (message ? ". " + message : "");
+  }
+  return (value, opt, opts) => {
+    if (validator2 === false) {
+      throw new AxiosError$1(
+        formatMessage(opt, " has been removed" + (version2 ? " in " + version2 : "")),
+        AxiosError$1.ERR_DEPRECATED
+      );
+    }
+    if (version2 && !deprecatedWarnings[opt]) {
+      deprecatedWarnings[opt] = true;
+      console.warn(
+        formatMessage(
+          opt,
+          " has been deprecated since v" + version2 + " and will be removed in the near future"
+        )
+      );
+    }
+    return validator2 ? validator2(value, opt, opts) : true;
+  };
+};
+validators$1.spelling = function spelling(correctSpelling) {
+  return (value, opt) => {
+    console.warn(`${opt} is likely a misspelling of ${correctSpelling}`);
+    return true;
+  };
+};
+function assertOptions(options, schema, allowUnknown) {
+  if (typeof options !== "object") {
+    throw new AxiosError$1("options must be an object", AxiosError$1.ERR_BAD_OPTION_VALUE);
+  }
+  const keys = Object.keys(options);
+  let i2 = keys.length;
+  while (i2-- > 0) {
+    const opt = keys[i2];
+    const validator2 = schema[opt];
+    if (validator2) {
+      const value = options[opt];
+      const result = value === void 0 || validator2(value, opt, options);
+      if (result !== true) {
+        throw new AxiosError$1("option " + opt + " must be " + result, AxiosError$1.ERR_BAD_OPTION_VALUE);
+      }
+      continue;
+    }
+    if (allowUnknown !== true) {
+      throw new AxiosError$1("Unknown option " + opt, AxiosError$1.ERR_BAD_OPTION);
+    }
+  }
+}
+const validator = {
+  assertOptions,
+  validators: validators$1
+};
+const validators = validator.validators;
+let Axios$1 = class Axios {
+  constructor(instanceConfig) {
+    this.defaults = instanceConfig || {};
+    this.interceptors = {
+      request: new InterceptorManager(),
+      response: new InterceptorManager()
+    };
+  }
+  /**
+   * Dispatch a request
+   *
+   * @param {String|Object} configOrUrl The config specific for this request (merged with this.defaults)
+   * @param {?Object} config
+   *
+   * @returns {Promise} The Promise to be fulfilled
+   */
+  async request(configOrUrl, config) {
+    try {
+      return await this._request(configOrUrl, config);
+    } catch (err) {
+      if (err instanceof Error) {
+        let dummy = {};
+        Error.captureStackTrace ? Error.captureStackTrace(dummy) : dummy = new Error();
+        const stack2 = dummy.stack ? dummy.stack.replace(/^.+\n/, "") : "";
+        try {
+          if (!err.stack) {
+            err.stack = stack2;
+          } else if (stack2 && !String(err.stack).endsWith(stack2.replace(/^.+\n.+\n/, ""))) {
+            err.stack += "\n" + stack2;
+          }
+        } catch (e) {
+        }
+      }
+      throw err;
+    }
+  }
+  _request(configOrUrl, config) {
+    if (typeof configOrUrl === "string") {
+      config = config || {};
+      config.url = configOrUrl;
+    } else {
+      config = configOrUrl || {};
+    }
+    config = mergeConfig$1(this.defaults, config);
+    const { transitional: transitional2, paramsSerializer, headers } = config;
+    if (transitional2 !== void 0) {
+      validator.assertOptions(transitional2, {
+        silentJSONParsing: validators.transitional(validators.boolean),
+        forcedJSONParsing: validators.transitional(validators.boolean),
+        clarifyTimeoutError: validators.transitional(validators.boolean)
+      }, false);
+    }
+    if (paramsSerializer != null) {
+      if (utils$1.isFunction(paramsSerializer)) {
+        config.paramsSerializer = {
+          serialize: paramsSerializer
+        };
+      } else {
+        validator.assertOptions(paramsSerializer, {
+          encode: validators.function,
+          serialize: validators.function
+        }, true);
+      }
+    }
+    if (config.allowAbsoluteUrls !== void 0) ;
+    else if (this.defaults.allowAbsoluteUrls !== void 0) {
+      config.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls;
+    } else {
+      config.allowAbsoluteUrls = true;
+    }
+    validator.assertOptions(config, {
+      baseUrl: validators.spelling("baseURL"),
+      withXsrfToken: validators.spelling("withXSRFToken")
+    }, true);
+    config.method = (config.method || this.defaults.method || "get").toLowerCase();
+    let contextHeaders = headers && utils$1.merge(
+      headers.common,
+      headers[config.method]
+    );
+    headers && utils$1.forEach(
+      ["delete", "get", "head", "post", "put", "patch", "common"],
+      (method) => {
+        delete headers[method];
+      }
+    );
+    config.headers = AxiosHeaders$1.concat(contextHeaders, headers);
+    const requestInterceptorChain = [];
+    let synchronousRequestInterceptors = true;
+    this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+      if (typeof interceptor.runWhen === "function" && interceptor.runWhen(config) === false) {
+        return;
+      }
+      synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
+      requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
+    });
+    const responseInterceptorChain = [];
+    this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+      responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
+    });
+    let promise;
+    let i2 = 0;
+    let len;
+    if (!synchronousRequestInterceptors) {
+      const chain = [dispatchRequest.bind(this), void 0];
+      chain.unshift(...requestInterceptorChain);
+      chain.push(...responseInterceptorChain);
+      len = chain.length;
+      promise = Promise.resolve(config);
+      while (i2 < len) {
+        promise = promise.then(chain[i2++], chain[i2++]);
+      }
+      return promise;
+    }
+    len = requestInterceptorChain.length;
+    let newConfig = config;
+    i2 = 0;
+    while (i2 < len) {
+      const onFulfilled = requestInterceptorChain[i2++];
+      const onRejected = requestInterceptorChain[i2++];
+      try {
+        newConfig = onFulfilled(newConfig);
+      } catch (error) {
+        onRejected.call(this, error);
+        break;
+      }
+    }
+    try {
+      promise = dispatchRequest.call(this, newConfig);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+    i2 = 0;
+    len = responseInterceptorChain.length;
+    while (i2 < len) {
+      promise = promise.then(responseInterceptorChain[i2++], responseInterceptorChain[i2++]);
+    }
+    return promise;
+  }
+  getUri(config) {
+    config = mergeConfig$1(this.defaults, config);
+    const fullPath = buildFullPath(config.baseURL, config.url, config.allowAbsoluteUrls);
+    return buildURL(fullPath, config.params, config.paramsSerializer);
+  }
+};
+utils$1.forEach(["delete", "get", "head", "options"], function forEachMethodNoData(method) {
+  Axios$1.prototype[method] = function(url, config) {
+    return this.request(mergeConfig$1(config || {}, {
+      method,
+      url,
+      data: (config || {}).data
+    }));
+  };
+});
+utils$1.forEach(["post", "put", "patch"], function forEachMethodWithData(method) {
+  function generateHTTPMethod(isForm) {
+    return function httpMethod(url, data, config) {
+      return this.request(mergeConfig$1(config || {}, {
+        method,
+        headers: isForm ? {
+          "Content-Type": "multipart/form-data"
+        } : {},
+        url,
+        data
+      }));
+    };
+  }
+  Axios$1.prototype[method] = generateHTTPMethod();
+  Axios$1.prototype[method + "Form"] = generateHTTPMethod(true);
+});
+let CancelToken$1 = class CancelToken {
+  constructor(executor) {
+    if (typeof executor !== "function") {
+      throw new TypeError("executor must be a function.");
+    }
+    let resolvePromise;
+    this.promise = new Promise(function promiseExecutor(resolve2) {
+      resolvePromise = resolve2;
+    });
+    const token = this;
+    this.promise.then((cancel) => {
+      if (!token._listeners) return;
+      let i2 = token._listeners.length;
+      while (i2-- > 0) {
+        token._listeners[i2](cancel);
+      }
+      token._listeners = null;
+    });
+    this.promise.then = (onfulfilled) => {
+      let _resolve;
+      const promise = new Promise((resolve2) => {
+        token.subscribe(resolve2);
+        _resolve = resolve2;
+      }).then(onfulfilled);
+      promise.cancel = function reject() {
+        token.unsubscribe(_resolve);
+      };
+      return promise;
+    };
+    executor(function cancel(message, config, request) {
+      if (token.reason) {
+        return;
+      }
+      token.reason = new CanceledError$1(message, config, request);
+      resolvePromise(token.reason);
+    });
+  }
+  /**
+   * Throws a `CanceledError` if cancellation has been requested.
+   */
+  throwIfRequested() {
+    if (this.reason) {
+      throw this.reason;
+    }
+  }
+  /**
+   * Subscribe to the cancel signal
+   */
+  subscribe(listener) {
+    if (this.reason) {
+      listener(this.reason);
+      return;
+    }
+    if (this._listeners) {
+      this._listeners.push(listener);
+    } else {
+      this._listeners = [listener];
+    }
+  }
+  /**
+   * Unsubscribe from the cancel signal
+   */
+  unsubscribe(listener) {
+    if (!this._listeners) {
+      return;
+    }
+    const index2 = this._listeners.indexOf(listener);
+    if (index2 !== -1) {
+      this._listeners.splice(index2, 1);
+    }
+  }
+  toAbortSignal() {
+    const controller = new AbortController();
+    const abort = (err) => {
+      controller.abort(err);
+    };
+    this.subscribe(abort);
+    controller.signal.unsubscribe = () => this.unsubscribe(abort);
+    return controller.signal;
+  }
+  /**
+   * Returns an object that contains a new `CancelToken` and a function that, when called,
+   * cancels the `CancelToken`.
+   */
+  static source() {
+    let cancel;
+    const token = new CancelToken(function executor(c2) {
+      cancel = c2;
+    });
+    return {
+      token,
+      cancel
+    };
+  }
+};
+function spread$1(callback) {
+  return function wrap(arr) {
+    return callback.apply(null, arr);
+  };
+}
+function isAxiosError$1(payload) {
+  return utils$1.isObject(payload) && payload.isAxiosError === true;
+}
+const HttpStatusCode$1 = {
+  Continue: 100,
+  SwitchingProtocols: 101,
+  Processing: 102,
+  EarlyHints: 103,
+  Ok: 200,
+  Created: 201,
+  Accepted: 202,
+  NonAuthoritativeInformation: 203,
+  NoContent: 204,
+  ResetContent: 205,
+  PartialContent: 206,
+  MultiStatus: 207,
+  AlreadyReported: 208,
+  ImUsed: 226,
+  MultipleChoices: 300,
+  MovedPermanently: 301,
+  Found: 302,
+  SeeOther: 303,
+  NotModified: 304,
+  UseProxy: 305,
+  Unused: 306,
+  TemporaryRedirect: 307,
+  PermanentRedirect: 308,
+  BadRequest: 400,
+  Unauthorized: 401,
+  PaymentRequired: 402,
+  Forbidden: 403,
+  NotFound: 404,
+  MethodNotAllowed: 405,
+  NotAcceptable: 406,
+  ProxyAuthenticationRequired: 407,
+  RequestTimeout: 408,
+  Conflict: 409,
+  Gone: 410,
+  LengthRequired: 411,
+  PreconditionFailed: 412,
+  PayloadTooLarge: 413,
+  UriTooLong: 414,
+  UnsupportedMediaType: 415,
+  RangeNotSatisfiable: 416,
+  ExpectationFailed: 417,
+  ImATeapot: 418,
+  MisdirectedRequest: 421,
+  UnprocessableEntity: 422,
+  Locked: 423,
+  FailedDependency: 424,
+  TooEarly: 425,
+  UpgradeRequired: 426,
+  PreconditionRequired: 428,
+  TooManyRequests: 429,
+  RequestHeaderFieldsTooLarge: 431,
+  UnavailableForLegalReasons: 451,
+  InternalServerError: 500,
+  NotImplemented: 501,
+  BadGateway: 502,
+  ServiceUnavailable: 503,
+  GatewayTimeout: 504,
+  HttpVersionNotSupported: 505,
+  VariantAlsoNegotiates: 506,
+  InsufficientStorage: 507,
+  LoopDetected: 508,
+  NotExtended: 510,
+  NetworkAuthenticationRequired: 511
+};
+Object.entries(HttpStatusCode$1).forEach(([key, value]) => {
+  HttpStatusCode$1[value] = key;
+});
+function createInstance(defaultConfig2) {
+  const context2 = new Axios$1(defaultConfig2);
+  const instance = bind(Axios$1.prototype.request, context2);
+  utils$1.extend(instance, Axios$1.prototype, context2, { allOwnKeys: true });
+  utils$1.extend(instance, context2, null, { allOwnKeys: true });
+  instance.create = function create(instanceConfig) {
+    return createInstance(mergeConfig$1(defaultConfig2, instanceConfig));
+  };
+  return instance;
+}
+const axios = createInstance(defaults);
+axios.Axios = Axios$1;
+axios.CanceledError = CanceledError$1;
+axios.CancelToken = CancelToken$1;
+axios.isCancel = isCancel$1;
+axios.VERSION = VERSION$1;
+axios.toFormData = toFormData$1;
+axios.AxiosError = AxiosError$1;
+axios.Cancel = axios.CanceledError;
+axios.all = function all(promises) {
+  return Promise.all(promises);
+};
+axios.spread = spread$1;
+axios.isAxiosError = isAxiosError$1;
+axios.mergeConfig = mergeConfig$1;
+axios.AxiosHeaders = AxiosHeaders$1;
+axios.formToJSON = (thing) => formDataToJSON(utils$1.isHTMLForm(thing) ? new FormData(thing) : thing);
+axios.getAdapter = adapters.getAdapter;
+axios.HttpStatusCode = HttpStatusCode$1;
+axios.default = axios;
+const {
+  Axios: Axios2,
+  AxiosError,
+  CanceledError,
+  isCancel,
+  CancelToken: CancelToken2,
+  VERSION,
+  all: all2,
+  Cancel,
+  isAxiosError,
+  spread,
+  toFormData,
+  AxiosHeaders: AxiosHeaders2,
+  HttpStatusCode,
+  formToJSON,
+  getAdapter,
+  mergeConfig
+} = axios;
+class HttpService {
+  instance;
+  baseURL;
+  constructor() {
+    this.baseURL = "https://trunk.me.com.br";
+    this.instance = axios.create({
+      baseURL: this.baseURL,
+      timeout: 1e4,
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      }
+    });
+    this.setupInterceptors();
+  }
+  setupInterceptors() {
+    this.instance.interceptors.request.use(
+      (config) => {
+        const requestConfig = config;
+        if (requestConfig.withToken !== false) {
+          const token = localStorage.getItem("ACCESS_TOKEN");
+          if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+          }
+        }
+        if (requestConfig.withCredentials !== void 0) {
+          config.withCredentials = requestConfig.withCredentials;
+        }
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+    this.instance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response?.status === 401) {
+          localStorage.removeItem("ACCESS_TOKEN");
+          window.dispatchEvent(new CustomEvent("auth:unauthorized"));
+        }
+        if (error.response?.status === 403) {
+          window.dispatchEvent(new CustomEvent("auth:forbidden"));
+        }
+        return Promise.reject(error);
+      }
+    );
+  }
+  getFullURL(url) {
+    if (url.startsWith("/")) {
+      return `${this.baseURL}${url}`;
+    }
+    if (url.startsWith("http://") || url.startsWith("https://")) {
+      return url;
+    }
+    return `${this.baseURL}/${url}`;
+  }
+  async get(url, config) {
+    const fullURL = this.getFullURL(url);
+    try {
+      const response = await this.instance.get(fullURL, config);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+  async post(url, data, config) {
+    const fullURL = this.getFullURL(url);
+    const response = await this.instance.post(fullURL, data, config);
+    return response.data;
+  }
+  async put(url, data, config) {
+    const fullURL = this.getFullURL(url);
+    const response = await this.instance.put(fullURL, data, config);
+    return response.data;
+  }
+  async patch(url, data, config) {
+    const fullURL = this.getFullURL(url);
+    const response = await this.instance.patch(fullURL, data, config);
+    return response.data;
+  }
+  async delete(url, config) {
+    const fullURL = this.getFullURL(url);
+    const response = await this.instance.delete(fullURL, config);
+    return response.data;
+  }
+  setBaseURL(url) {
+    this.baseURL = url;
+    this.instance.defaults.baseURL = url;
+  }
+  getBaseURL() {
+    return this.baseURL;
+  }
+}
+const httpService = new HttpService();
+function useHttp() {
+  const loading = ref(false);
+  const error = ref(null);
+  const isLoading = computed(() => loading.value);
+  const hasError = computed(() => error.value !== null);
+  const clearError = () => {
+    error.value = null;
+  };
+  const setError = (message) => {
+    error.value = message;
+  };
+  const request = async (method, url, data, config) => {
+    try {
+      loading.value = true;
+      error.value = null;
+      let response;
+      switch (method) {
+        case "get":
+          response = await httpService.get(url, config);
+          break;
+        case "post":
+          response = await httpService.post(url, data, config);
+          break;
+        case "put":
+          response = await httpService.put(url, data, config);
+          break;
+        case "patch":
+          response = await httpService.patch(url, config);
+          break;
+        case "delete":
+          response = await httpService.delete(url, config);
+          break;
+        default:
+          throw new Error(`Unsupported HTTP method: ${method}`);
+      }
+      return response;
+    } catch (err) {
+      const errorMessage = err?.response?.data?.message || err?.message || "An error occurred";
+      setError(errorMessage);
+      return null;
+    } finally {
+      loading.value = false;
+    }
+  };
+  const get2 = (url, config) => request("get", url, void 0, config);
+  const post = (url, data, config) => request("post", url, data, config);
+  const put = (url, data, config) => request("put", url, data, config);
+  const patch = (url, data, config) => request("patch", url, data, config);
+  const del = (url, config) => request("delete", url, void 0, config);
+  return {
+    loading: isLoading,
+    error: hasError,
+    errorMessage: error,
+    request,
+    get: get2,
+    post,
+    put,
+    patch,
+    delete: del,
+    clearError,
+    setError,
+    setBaseURL: httpService.setBaseURL.bind(httpService),
+    getBaseURL: httpService.getBaseURL.bind(httpService)
+  };
+}
+function useHeaderData() {
+  const { get: get2 } = useHttp();
+  const user = ref({
+    id: "606660",
+    name: "Usuário Mock",
+    role: "Admin",
+    email: "usuario@example.com",
+    acronym: "UM",
+    badge: {
+      variant: "primary",
+      icon: "me-icon-s icon-user"
+    },
+    culture: "pt-BR"
+  });
+  const brand = ref({
+    logo: "/logo.svg",
+    link: "/",
+    newTab: false,
+    background: {
+      primaryColor: "#1976d2",
+      secondaryColor: "#42a5f5",
+      iconColor: "white"
+    }
+  });
+  const profileItems = ref([
+    {
+      $id: "profile",
+      label: "Perfil",
+      icon: { class: "me-icon-s icon-user", color: "text-gray-600" },
+      active: false
+    },
+    {
+      $id: "settings",
+      label: "Configurações",
+      icon: { class: "me-icon-s icon-cog", color: "text-gray-600" },
+      active: false
+    },
+    {
+      $id: "logout",
+      label: "Sair",
+      icon: { class: "me-icon-s icon-sign-out-alt", color: "text-red-600" },
+      active: false
+    }
+  ]);
+  const navItems = ref([
+    {
+      id: "home",
+      icon: "me-icon-s icon-home",
+      label: "Início",
+      active: true,
+      url: "/",
+      target: null
+    },
+    {
+      id: "products",
+      icon: "me-icon-s icon-box",
+      label: "Produtos",
+      active: false,
+      url: "/products",
+      target: null
+    },
+    {
+      id: "orders",
+      icon: "me-icon-s icon-shopping-cart",
+      label: "Pedidos",
+      active: false,
+      url: "/orders",
+      target: null,
+      badge: { text: "3" }
+    }
+  ]);
+  const siteMap = ref([
+    {
+      id: "main",
+      name: "Principal",
+      description: "Página principal do sistema",
+      url: "/",
+      target: null,
+      children: []
+    }
+  ]);
+  const cartItems = ref([]);
+  const badges = ref({});
+  const loading = ref(false);
+  const error = ref(null);
+  const loadUserData = async () => {
+    try {
+      loading.value = true;
+      console.log("📡 Tentando carregar dados do usuário...");
+      const response = await get2("/user/profile");
+      if (response) {
+        console.log("✅ Dados do usuário carregados:", response.data);
+        user.value = {
+          ...user.value,
+          ...response.data
+        };
+      }
+    } catch (error2) {
+      if (error2?.response?.status === 403) {
+        console.warn("⚠️ Acesso negado (403) - Usuário não autenticado, usando mock");
+      } else if (error2?.response?.status === 401) {
+        console.warn("⚠️ Não autorizado (401) - Token inválido, usando mock");
+      } else {
+        console.warn("⚠️ Erro ao carregar dados do usuário:", error2?.message || "Erro desconhecido", "usando mock");
+      }
+    } finally {
+      loading.value = false;
+    }
+  };
+  const loadBrandData = async () => {
+    try {
+      loading.value = true;
+      console.log("📡 Tentando carregar dados da marca...");
+      const response = await get2("/brand/config");
+      if (response) {
+        console.log("✅ Dados da marca carregados:", response.data);
+        brand.value = {
+          ...brand.value,
+          ...response.data
+        };
+      }
+    } catch (error2) {
+      if (error2?.response?.status === 403) {
+        console.warn("⚠️ Acesso negado (403) - Dados da marca não disponíveis, usando mock");
+      } else {
+        console.warn("⚠️ Erro ao carregar dados da marca:", error2?.message || "Erro desconhecido", "usando mock");
+      }
+    } finally {
+      loading.value = false;
+    }
+  };
+  const loadCartItems = async () => {
+    try {
+      loading.value = true;
+      const response = await get2("/cart/cart");
+      if (response) {
+        cartItems.value = response.data?.products || [];
+      }
+    } catch {
+      console.warn("Não foi possível carregar itens do carrinho, usando mock");
+      cartItems.value = [];
+    } finally {
+      loading.value = false;
+    }
+  };
+  const loadBadgeValue = async (badgeUrl, linkName) => {
+    try {
+      const response = await get2(badgeUrl);
+      if (response) {
+        badges.value[linkName] = response.data?.total || 0;
+      }
+    } catch {
+      console.warn(`Não foi possível carregar badge para ${linkName}`);
+    }
+  };
+  const loadAllBadges = async () => {
+    const badgePromises = navItems.value.filter((item) => item.badgeTotalUrl).map((item) => loadBadgeValue(item.badgeTotalUrl, item.id));
+    await Promise.allSettled(badgePromises);
+  };
+  const loadProfileItems = async () => {
+    try {
+      loading.value = true;
+      const response = await get2("/user/profile/links");
+      if (response) {
+        profileItems.value = response.data || profileItems.value;
+      }
+    } catch {
+      console.warn("Não foi possível carregar itens do perfil, usando mock");
+    } finally {
+      loading.value = false;
+    }
+  };
+  const loadNavigationItems = async () => {
+    try {
+      loading.value = true;
+      const response = await get2(`/do/api/v2/header?v=${(/* @__PURE__ */ new Date()).getTime()}&id=${user.value.id}&lang=${user.value.culture}`);
+      if (response) {
+        console.log("response", response);
+        navItems.value = response.data || navItems.value;
+      }
+    } catch {
+      console.warn("Não foi possível carregar itens de navegação, usando mock");
+    } finally {
+      loading.value = false;
+    }
+  };
+  const loadSiteMap = async () => {
+    try {
+      loading.value = true;
+      const response = await get2("/navigation/sitemap");
+      if (response) {
+        siteMap.value = response.data || siteMap.value;
+      }
+    } catch {
+      console.warn("Não foi possível carregar sitemap, usando mock");
+    } finally {
+      loading.value = false;
+    }
+  };
+  const initializeData = async () => {
+    console.log("🚀 Iniciando carregamento de dados do header...");
+    try {
+      await Promise.allSettled([
+        // loadUserData(),
+        // loadBrandData(),
+        // loadProfileItems(),
+        loadNavigationItems()
+        // loadSiteMap(),
+        // loadCartItems(),
+        // loadAllBadges()
+      ]);
+      console.log("✅ Dados do header carregados com sucesso!");
+    } catch (error2) {
+      console.error("❌ Erro ao carregar dados do header:", error2);
+    }
+  };
+  return {
+    user,
+    brand,
+    profileItems,
+    navItems,
+    siteMap,
+    cartItems,
+    badges,
+    loading,
+    error,
+    loadUserData,
+    loadBrandData,
+    loadCartItems,
+    loadBadgeValue,
+    loadAllBadges,
+    loadProfileItems,
+    loadNavigationItems,
+    loadSiteMap,
+    initializeData
+  };
+}
 const _hoisted_1 = { class: "flex items-center justify-between" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "TheHeader.ce",
   setup(__props) {
     const navigationStore = useNavigationStore();
+    const {
+      user,
+      brand,
+      profileItems,
+      navItems,
+      siteMap,
+      initializeData
+    } = useHeaderData();
     const backdropState = ref({
       visible: false,
       zIndex: 9999
@@ -26649,1757 +29463,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       close: closeBackdrop,
       state: backdropState
     });
-    const brand = ref({
-      logo: "https://eletrods.me.com.br/logo.svg",
-      link: "https://me.com.br",
-      newTab: true,
-      background: {
-        // primaryColor: '#343434',
-        // secondaryColor: '#009900',
-        // iconColor: 'peachPuff'
-        // repeatImage: 'https://conteudo.imguol.com.br/c/home/46/2020/03/02/balaio-do-kotscho-150-1583157444753_100x100.jpg.webp',
-        // mainImage: 'https://conteudo.imguol.com.br/c/noticias/90/2019/04/01/leonardo-sakamoto-1554157201028_v2_100x100.jpg.webp',
-      }
-    });
-    const user = ref({
-      name: "Renato Dias",
-      role: "Developer",
-      acronym: "RD",
-      culture: "pt-BR",
-      // adicionar
-      badge: {
-        variant: "danger",
-        icon: "me-icon-l icon-exclamation"
-      }
-    });
     useTranslations().setLocale(user.value.culture);
-    const profileItems = ref([
-      {
-        $id: "15",
-        label: "Perfil",
-        url: "/user/details/606660",
-        active: false,
-        name: null,
-        icon: null,
-        children: null,
-        target: null
-      },
-      {
-        $id: "16",
-        label: "Configurações Gerais",
-        url: "/preferences",
-        active: false,
-        name: null,
-        icon: null,
-        children: null,
-        target: null
-      },
-      {
-        $id: "17",
-        label: "Substituir Usuário",
-        url: "/do/ChangeUser.mvc",
-        active: false,
-        name: null,
-        icon: null,
-        children: null,
-        target: null
-      },
-      {
-        $id: "18",
-        label: "Substituição de Workflow",
-        url: "/do/Usuario.mvc/SubstituirWorkflow",
-        active: false,
-        name: null,
-        icon: null,
-        children: null,
-        target: null
-      },
-      {
-        $id: "19",
-        label: "Substituição temporária",
-        url: "/do/Substituicao.mvc",
-        active: false,
-        name: null,
-        icon: null,
-        children: null,
-        target: null
-      },
-      {
-        $id: "20",
-        label: "Novidades e Atualizações",
-        url: "https://guide.me.com.br",
-        active: false,
-        name: null,
-        icon: null,
-        children: null,
-        target: "_blank"
-      },
-      {
-        $id: "21",
-        label: "Português BR",
-        url: null,
-        active: true,
-        name: "locale",
-        icon: null,
-        children: [
-          {
-            $id: "22",
-            label: "Inglês",
-            url: "javascript:jQuery.MELocaleChange('en-US');",
-            active: false,
-            name: "2",
-            icon: null,
-            children: null,
-            target: null
-          },
-          {
-            $id: "23",
-            label: "Espanhol",
-            url: "javascript:jQuery.MELocaleChange('es-ES');",
-            active: false,
-            name: "3",
-            icon: null,
-            children: null,
-            target: null
-          },
-          {
-            $id: "24",
-            label: "Português PT",
-            url: "javascript:jQuery.MELocaleChange('pt-PT');",
-            active: false,
-            name: "4",
-            icon: null,
-            children: null,
-            target: null
-          },
-          {
-            $id: "25",
-            label: "Espanhol MX",
-            url: "javascript:jQuery.MELocaleChange('es-MX');",
-            active: false,
-            name: "7",
-            icon: null,
-            children: null,
-            target: null
-          },
-          {
-            $id: "26",
-            label: "Francês",
-            url: "javascript:jQuery.MELocaleChange('fr-FR');",
-            active: false,
-            name: "8",
-            icon: null,
-            children: null,
-            target: null
-          }
-        ],
-        target: null
-      },
-      {
-        $id: "27",
-        label: "Logoff",
-        url: "/FimSecao.asp",
-        active: false,
-        name: null,
-        icon: null,
-        children: null,
-        target: null
-      }
-    ]);
-    navigationStore.setNavigationItems([
-      {
-        id: "5",
-        linkName: "DASHBOARD",
-        visible: true,
-        label: "Dashboard",
-        icon: "me-icon-l icon-objects-column",
-        url: "/dashboard/",
-        target: null,
-        active: false,
-        siteMap: false,
-        separator: false,
-        badgeTotalUrl: null,
-        badgeEvent: null
-      },
-      {
-        id: "6",
-        linkName: null,
-        visible: true,
-        label: null,
-        icon: null,
-        url: null,
-        target: null,
-        active: false,
-        siteMap: false,
-        separator: true,
-        badgeTotalUrl: null,
-        badgeEvent: null
-      },
-      {
-        id: "7",
-        linkName: "HOME",
-        visible: true,
-        label: "Transações",
-        icon: "me-icon-l icon-file-import",
-        url: "/home",
-        target: null,
-        active: false,
-        siteMap: false,
-        separator: false,
-        badgeTotalUrl: null,
-        badgeEvent: null,
-        badge: {
-          text: "9999"
-        }
-      },
-      {
-        id: "8",
-        linkName: "SUPPLIER",
-        visible: true,
-        label: "Fornecedores",
-        icon: "me-icon-l icon-store",
-        url: "/supplier/search",
-        target: null,
-        active: true,
-        siteMap: false,
-        separator: false,
-        badgeTotalUrl: null,
-        badgeEvent: null,
-        click: () => console.log("Fornecedores"),
-        badge: {
-          text: "76"
-        }
-      },
-      {
-        id: "9",
-        linkName: "PRODUCT",
-        visible: true,
-        label: "Catálogos",
-        icon: "me-icon-l icon-shopping-bag",
-        url: "/product/",
-        target: null,
-        active: false,
-        siteMap: false,
-        separator: false,
-        badgeTotalUrl: null,
-        badgeEvent: null
-      },
-      {
-        id: "10",
-        linkName: "USER",
-        visible: false,
-        label: "Usuários",
-        icon: "me-icon-l icon-users",
-        url: "/user/",
-        target: null,
-        active: false,
-        siteMap: false,
-        separator: false,
-        badgeTotalUrl: null,
-        badgeEvent: null
-      },
-      {
-        id: "11",
-        linkName: "MORE",
-        visible: true,
-        label: "Mais",
-        icon: "me-icon-l icon-ellipsis-stroke",
-        url: null,
-        target: null,
-        active: false,
-        siteMap: true,
-        separator: false,
-        badgeTotalUrl: null,
-        badgeEvent: null
-      },
-      {
-        id: "12",
-        linkName: null,
-        visible: true,
-        label: null,
-        icon: null,
-        url: null,
-        target: null,
-        active: false,
-        siteMap: false,
-        separator: true,
-        badgeTotalUrl: null,
-        badgeEvent: null
-      },
-      {
-        id: "13",
-        linkName: "BOOST",
-        visible: true,
-        label: "ME Boost",
-        icon: "me-icon-l icon-chart-mixed",
-        url: "https://analytics.meboost.com.br/_/boost/jbs/app/kibana#/dashboards?_g=()",
-        target: "_blank",
-        active: false,
-        siteMap: false,
-        separator: false,
-        badgeTotalUrl: null,
-        badgeEvent: null
-      },
-      {
-        id: "14",
-        linkName: "MESSAGES",
-        visible: false,
-        label: "Mensagens",
-        icon: "me-icon-l icon-comments",
-        url: "/chat",
-        target: null,
-        active: false,
-        siteMap: false,
-        separator: false,
-        badgeTotalUrl: "https://trunk.api.web.mercadoe.com/chat-api-bff/v1/messages/unread",
-        badgeEvent: null
-      }
-    ]);
-    navigationStore.setSiteMapItems([
-      {
-        id: "2",
-        name: "1",
-        description: "Painel de Controle",
-        url: "",
-        children: [
-          {
-            id: "3",
-            name: "1_1",
-            description: "Compras",
-            url: "/Mercado.asp",
-            children: []
-          },
-          {
-            id: "4",
-            name: "1_2",
-            description: "Vendas",
-            url: "/MeuMercadoVendas.asp",
-            children: []
-          },
-          {
-            id: "5",
-            name: "1_5",
-            description: "Vendas (Projetos)",
-            url: "/ME/PainelControleVendasProjetos.aspx",
-            children: []
-          }
-        ]
-      },
-      {
-        id: "6",
-        name: "2",
-        description: "Usuários",
-        url: "",
-        children: [
-          {
-            id: "7",
-            name: "2_0",
-            description: "Usuários",
-            url: "/user/",
-            children: []
-          },
-          {
-            id: "8",
-            name: "2_1",
-            description: "Perfis",
-            url: "/ME/Perfil.aspx",
-            children: []
-          },
-          {
-            id: "9",
-            name: "2_8",
-            description: "Perfis Planeamento",
-            url: "/ME/PerfilPlaneamento.aspx",
-            children: []
-          },
-          {
-            id: "10",
-            name: "2_3",
-            description: "Grupos De Usuários",
-            url: "/ME/ListaGruposUsuariosWF.aspx",
-            children: []
-          },
-          {
-            id: "11",
-            name: "2_6",
-            description: "Monitoramento de Usuários",
-            url: "/ME/MonitoraUsuariosWF.aspx",
-            children: []
-          },
-          {
-            id: "12",
-            name: "2_7",
-            description: "Histórico de Substituição",
-            url: "/do/HistoricoSubstituicaoPerfil.mvc",
-            children: []
-          }
-        ]
-      },
-      {
-        id: "13",
-        name: "3",
-        description: "Produtos",
-        url: "",
-        children: [
-          {
-            id: "14",
-            name: "3_0",
-            description: "Meus Produtos",
-            url: "/ListaTodosProdutosIE.asp",
-            children: []
-          },
-          {
-            id: "15",
-            name: "3_1",
-            description: "Grupos de Produtos",
-            url: "/ListaGruposProd.asp",
-            children: []
-          },
-          {
-            id: "16",
-            name: "3_7",
-            description: "Flows de Produtos",
-            url: "/ME/ListaFlows.aspx",
-            children: []
-          },
-          {
-            id: "17",
-            name: "3_3",
-            description: "Catálogo de Compras",
-            url: "/ListaProdutos.asp",
-            children: []
-          },
-          {
-            id: "18",
-            name: "3_5",
-            description: "Catálogos Fornecedores",
-            url: "/do/Suppliers.mvc/Catalogo",
-            children: []
-          },
-          {
-            id: "19",
-            name: "3_10",
-            description: "Templates de Cotação",
-            url: "/CotacaoTemplate.asp",
-            children: []
-          },
-          {
-            id: "20",
-            name: "3_11",
-            description: "Gerenciamento de Contratos",
-            url: "/ME/GerenciamentoContrato.aspx",
-            children: []
-          },
-          {
-            id: "21",
-            name: "3_23",
-            description: "Categorias de Contratos",
-            url: "/do/CategoriaContrato.mvc",
-            children: []
-          },
-          {
-            id: "22",
-            name: "3_22",
-            description: "Grupo de Workflow",
-            url: "/ME/GrupoWorkflow.aspx",
-            children: []
-          },
-          {
-            id: "23",
-            name: "3_12",
-            description: "Templates de Requisição",
-            url: "/ME/TemplateReq.aspx",
-            children: []
-          },
-          {
-            id: "24",
-            name: "3_16",
-            description: "Taxas de ICMS",
-            url: "/ME/TaxaICMS.aspx",
-            children: []
-          },
-          {
-            id: "25",
-            name: "3_14",
-            description: "Exceções de ICMS",
-            url: "/ME/ExcecaoICMS.aspx",
-            children: []
-          },
-          {
-            id: "26",
-            name: "3_15",
-            description: "Exceções de IPI",
-            url: "/ME/ExcecaoIPI.aspx",
-            children: []
-          },
-          {
-            id: "27",
-            name: "3_17",
-            description: "Controle de NBM",
-            url: "/do/NBM.mvc",
-            children: []
-          },
-          {
-            id: "28",
-            name: "3_18",
-            description: "Fator de Conversão de Unidade",
-            url: "/ME/ConversaoUnidadeSimples.aspx",
-            children: []
-          },
-          {
-            id: "29",
-            name: "3_19",
-            description: "Atributos Produtos",
-            url: "/Produtos.asp?action=listaAtributosProduto",
-            children: []
-          },
-          {
-            id: "30",
-            name: "3_20",
-            description: "Abreviaturas",
-            url: "/Produtos.asp?action=listaAbreviaturas",
-            children: []
-          },
-          {
-            id: "31",
-            name: "3_21",
-            description: "Sinônimos",
-            url: "/Produtos.asp?action=listaSinonimos",
-            children: []
-          },
-          {
-            id: "32",
-            name: "3_25",
-            description: "Templates de Carrinho",
-            url: "/ME/TemplateCarrinho.aspx",
-            children: []
-          },
-          {
-            id: "33",
-            name: "3_28",
-            description: "Associação Produto X Fornecedor X Fabricante",
-            url: "/do/FornecedorFabricanteProduto.mvc",
-            children: []
-          },
-          {
-            id: "34",
-            name: "3_29",
-            description: "Situação de Estoque e Previsão de Demanda",
-            url: "/do/SituacaoEstoque.mvc",
-            children: []
-          },
-          {
-            id: "35",
-            name: "3_30",
-            description: "Associação Fornecedor X Previsão Demanda",
-            url: "/do/AssociacaoFornecedorPrevisaoDemanda.mvc",
-            children: []
-          },
-          {
-            id: "36",
-            name: "3_31",
-            description: "Tipos de Documento",
-            url: "/DO/TipoDocumento.mvc/",
-            children: []
-          },
-          {
-            id: "37",
-            name: "3_32",
-            description: "Reajustes Automáticos de Contrato",
-            url: "/DO/Reajuste.mvc//Index/false",
-            children: []
-          }
-        ]
-      },
-      {
-        id: "38",
-        name: "4",
-        description: "Fornecedores",
-        url: "",
-        children: [
-          {
-            id: "39",
-            name: "4_3",
-            description: "Atributos de Fornecedores",
-            url: "/ME/AtributosMeusFornecedores.aspx",
-            children: []
-          },
-          {
-            id: "40",
-            name: "4_8",
-            description: "Grupos de Fornecedores",
-            url: "/do/GrupoFornecedor.mvc",
-            children: []
-          },
-          {
-            id: "41",
-            name: "4_5",
-            description: "Fornecedores do Workflow de Documentos",
-            url: "/DO/WFD/FornecedorWFD.mvc",
-            children: []
-          },
-          {
-            id: "42",
-            name: "4_6",
-            description: "Fornecedores ME",
-            url: "/supplier/",
-            children: []
-          },
-          {
-            id: "43",
-            name: "4_9",
-            description: "Status Homologação Fornecedor",
-            url: "/DO/StatusHomologacaoFornecedor.mvc",
-            children: []
-          }
-        ]
-      },
-      {
-        id: "44",
-        name: "5",
-        description: "Preferências",
-        url: "",
-        children: [
-          {
-            id: "45",
-            name: "5_1",
-            description: "Locais",
-            url: "/do/Locais.mvc",
-            children: []
-          },
-          {
-            id: "46",
-            name: "5_7",
-            description: "Cia ERP",
-            url: "/do/CiaERP.mvc",
-            children: []
-          },
-          {
-            id: "47",
-            name: "5_2",
-            description: "Centros de Custos",
-            url: "/ME/ListaCCustoWF.aspx",
-            children: []
-          },
-          {
-            id: "48",
-            name: "5_3",
-            description: "Conta Contábil",
-            url: "/ME/ListaContaContabilWF.aspx",
-            children: []
-          },
-          {
-            id: "49",
-            name: "5_6",
-            description: "Conta Devedora",
-            url: "/do/ContaDevedora.mvc",
-            children: []
-          },
-          {
-            id: "50",
-            name: "5_5",
-            description: "Referências Devedora",
-            url: "/do/ReferenciaDevedora.mvc",
-            children: []
-          },
-          {
-            id: "51",
-            name: "5_9",
-            description: "Nomenclatura Recusar/Cancelar",
-            url: "/NomenclaturaCancelarRecusarWF.asp",
-            children: []
-          },
-          {
-            id: "52",
-            name: "5_8",
-            description: "FUP de Entregas",
-            url: "/FUPConfiguraWF.asp",
-            children: []
-          },
-          {
-            id: "53",
-            name: "5_11",
-            description: "Mapa Comparativo Excel",
-            url: "/MapaComparativoExcelGenericoConfigura.asp",
-            children: []
-          },
-          {
-            id: "54",
-            name: "5_10",
-            description: "FUP (Criticidade)",
-            url: "/do/FUPCriticidade.mvc",
-            children: []
-          },
-          {
-            id: "55",
-            name: "5_12",
-            description: "Customização de e-mails",
-            url: "/CustomMail.asp",
-            children: []
-          },
-          {
-            id: "56",
-            name: "5_23",
-            description: "Nova Customização de e-mails",
-            url: "/ME/CustomMail.aspx",
-            children: []
-          },
-          {
-            id: "57",
-            name: "5_19",
-            description: "Manutenção de Feriados",
-            url: "/do/Feriadowf.mvc",
-            children: []
-          },
-          {
-            id: "58",
-            name: "5_22",
-            description: "Configurações (Fornecedor)",
-            url: "/ME/PreferenciasWFF.aspx",
-            children: []
-          },
-          {
-            id: "59",
-            name: "5_18",
-            description: "Tipos de Tarefas",
-            url: "/ME/TipoTarefa.aspx",
-            children: []
-          },
-          {
-            id: "60",
-            name: "5_26",
-            description: "Cesta Índice de Reajuste",
-            url: "/ME/CestaIndiceReajuste.aspx",
-            children: []
-          },
-          {
-            id: "61",
-            name: "5_29",
-            description: "Configuração de Impostos",
-            url: "/do/Imposto.mvc",
-            children: []
-          },
-          {
-            id: "62",
-            name: "5_30",
-            description: "Associação Centro Custo/Utilizador",
-            url: "/ME/ListaCCustoUsuarioBorgWF.aspx",
-            children: []
-          },
-          {
-            id: "63",
-            name: "5_31",
-            description: "Justificativas de Classif. Qualitativa",
-            url: "/do/RecebimentoPedidoJustificativaCQ.mvc",
-            children: []
-          },
-          {
-            id: "64",
-            name: "5_34",
-            description: "Personalizar elementos do Tema",
-            url: "/DO/Theme.mvc",
-            children: []
-          },
-          {
-            id: "65",
-            name: "5_36",
-            description: "Personalizar Header (Cabeçalho)",
-            url: "/DO/Theme.mvc/Header",
-            children: []
-          },
-          {
-            id: "66",
-            name: "5_37",
-            description: "Personalizar Tela de Login",
-            url: "/DO/Theme.mvc/Home",
-            children: []
-          },
-          {
-            id: "67",
-            name: "5_35",
-            description: "Agendamento",
-            url: "/DO/Scheduler.mvc",
-            children: []
-          }
-        ]
-      },
-      {
-        id: "68",
-        name: "6",
-        description: "WorkFlow",
-        url: "",
-        children: [
-          {
-            id: "69",
-            name: "6_1",
-            description: "Permissões",
-            url: "/do/PermissaoWF.mvc",
-            children: []
-          },
-          {
-            id: "70",
-            name: "6_33",
-            description: "Permissão Catálogo",
-            url: "/do/PermissaoCatalogo.mvc",
-            children: []
-          },
-          {
-            id: "71",
-            name: "6_2",
-            description: "Estados",
-            url: "/VerEstadosWF.asp",
-            children: []
-          },
-          {
-            id: "72",
-            name: "6_37",
-            description: "Validação de Regras",
-            url: "/ME/ValidadorRegras.aspx",
-            children: []
-          },
-          {
-            id: "73",
-            name: "6_38",
-            description: "Carga de Regras",
-            url: "/ME/CargaRegras.aspx",
-            children: []
-          },
-          {
-            id: "74",
-            name: "6_88",
-            description: "Automação",
-            url: "/automation",
-            children: []
-          },
-          {
-            id: "75",
-            name: "6_77",
-            description: "Importação / Exportação Cargas",
-            url: "/dataload/LoadHistory",
-            children: []
-          },
-          {
-            id: "76",
-            name: "6_3",
-            description: "Cargos",
-            url: "/ME/ListaCargosWF.aspx",
-            children: []
-          },
-          {
-            id: "77",
-            name: "6_4",
-            description: "Catálogo",
-            url: "/ME/MarcaCatalogosWF.aspx",
-            children: []
-          },
-          {
-            id: "78",
-            name: "6_5",
-            description: "Atributos Requisição",
-            url: "/do/AtributoRequisicao.mvc",
-            children: []
-          },
-          {
-            id: "79",
-            name: "6_10",
-            description: "Atributos Pré-Pedido",
-            url: "/ME/ListaAtributosPrePedidoWF.aspx",
-            children: []
-          },
-          {
-            id: "80",
-            name: "6_38",
-            description: "Atributos Pedido",
-            url: "/do/AtributoPedido.mvc",
-            children: []
-          },
-          {
-            id: "81",
-            name: "6_39",
-            description: "Atributos Contrato",
-            url: "/do/AtributoContrato.mvc",
-            children: []
-          },
-          {
-            id: "82",
-            name: "6_15",
-            description: "Atributos Cotação",
-            url: "/do/AtributoCotacao.mvc",
-            children: []
-          },
-          {
-            id: "83",
-            name: "6_6",
-            description: "Categorias Requisição",
-            url: "/ME/ListaCategoriasWF.aspx",
-            children: []
-          },
-          {
-            id: "84",
-            name: "6_11",
-            description: "Categorias Pré-Pedido",
-            url: "/ME/ListaCategoriasPrePedidoWF.aspx",
-            children: []
-          },
-          {
-            id: "85",
-            name: "6_53",
-            description: "Categorias de NF",
-            url: "/do/CategoriaNF.mvc",
-            children: []
-          },
-          {
-            id: "86",
-            name: "6_75",
-            description: "Tipo de Documento de NF",
-            url: "/do/TipoDocumentoNF.mvc",
-            children: []
-          },
-          {
-            id: "87",
-            name: "6_14",
-            description: "Categorias Cotação",
-            url: "/ME/ListaCategoriasCotacao.aspx",
-            children: []
-          },
-          {
-            id: "88",
-            name: "6_18",
-            description: "Categorias Anexo",
-            url: "/do/CategoriaAnexo.mvc",
-            children: []
-          },
-          {
-            id: "89",
-            name: "6_21",
-            description: "Templates Anexo",
-            url: "/do/Anexo.mvc",
-            children: []
-          },
-          {
-            id: "90",
-            name: "6_8",
-            description: "Substituições de Usuário",
-            url: "/do/Substituicao.mvc",
-            children: []
-          },
-          {
-            id: "91",
-            name: "6_97",
-            description: "Setor Industrial",
-            url: "/DO/SetorIndustrial.mvc",
-            children: []
-          },
-          {
-            id: "92",
-            name: "6_98",
-            description: "Grupo de Contas",
-            url: "/DO/GrupoConta.mvc",
-            children: []
-          },
-          {
-            id: "93",
-            name: "6_35",
-            description: "Ver Histórico de Substituição de Aprovador",
-            url: "/do/HistoricoSubstituicaoAprovador.mvc",
-            children: []
-          },
-          {
-            id: "94",
-            name: "6_9",
-            description: "Conta Corrente",
-            url: "/ME/ContaCorrenteWF.aspx",
-            children: []
-          },
-          {
-            id: "95",
-            name: "6_12",
-            description: "Compras / Centros De Custo",
-            url: "/do/GastoCCWF.mvc",
-            children: []
-          },
-          {
-            id: "96",
-            name: "6_13",
-            description: "Verba",
-            url: "/ME/EditaVerbasWF.aspx",
-            children: []
-          },
-          {
-            id: "97",
-            name: "6_16",
-            description: "Cadastrar Taxa de Conversão",
-            url: "/ME/EditaTaxaDolarWF.aspx",
-            children: []
-          },
-          {
-            id: "98",
-            name: "6_17",
-            description: "Relatórios de Workflow",
-            url: "/RelatLinksRelatoriosWF.asp",
-            children: []
-          },
-          {
-            id: "99",
-            name: "6_22",
-            description: "Informações de Compras",
-            url: "/InformacaoCompras.asp",
-            children: []
-          },
-          {
-            id: "100",
-            name: "6_24",
-            description: "Material de Treinamento",
-            url: "/MaterialTreinamento.asp",
-            children: []
-          },
-          {
-            id: "101",
-            name: "6_25",
-            description: "Unid. Req. de Cotação",
-            url: "/ME/VerUnidReqCotWF.aspx",
-            children: []
-          },
-          {
-            id: "102",
-            name: "6_30",
-            description: "Manutenção Aplicação",
-            url: "/ME/ManutencaoAplicacao.aspx",
-            children: []
-          },
-          {
-            id: "103",
-            name: "6_29",
-            description: "Manutenção IVA",
-            url: "/ME/ManutencaoIVA.aspx",
-            children: []
-          },
-          {
-            id: "104",
-            name: "6_31",
-            description: "Relatório de Verba por Ordem Interna",
-            url: "/ME/RelatorioVerbasOI.aspx",
-            children: []
-          },
-          {
-            id: "105",
-            name: "6_32",
-            description: "Motivo da recusa",
-            url: "/DO/MotivoRecusa.mvc",
-            children: []
-          },
-          {
-            id: "106",
-            name: "6_40",
-            description: "Monitor de Requisição",
-            url: "/MonitoraReqIntegracao.asp",
-            children: []
-          },
-          {
-            id: "107",
-            name: "6_41",
-            description: "Área Funcional",
-            url: "/ME/CadastroAreaFuncional.aspx",
-            children: []
-          },
-          {
-            id: "108",
-            name: "6_48",
-            description: "Cadastro de gestão de frete",
-            url: "/Cadastros.asp",
-            children: []
-          },
-          {
-            id: "109",
-            name: "6_99",
-            description: "Cadastro de Frete",
-            url: "/DO/Frete.mvc",
-            children: []
-          },
-          {
-            id: "110",
-            name: "6_52",
-            description: "Alertas",
-            url: "/do/ManutencaoAlerta.mvc",
-            children: []
-          },
-          {
-            id: "111",
-            name: "6_56",
-            description: "Marketplace",
-            url: "/PlanoEmpresa.asp",
-            children: []
-          },
-          {
-            id: "112",
-            name: "6_55",
-            description: "Critérios de Avaliação",
-            url: "/do/CriterioAvaliacao.mvc",
-            children: []
-          },
-          {
-            id: "113",
-            name: "6_59",
-            description: "Condições de Pagamento",
-            url: "/do/CondicaoPagamento.mvc",
-            children: []
-          },
-          {
-            id: "114",
-            name: "6_61",
-            description: "Condições de Fornecimento",
-            url: "/do/CondicaoFornecimento.mvc",
-            children: []
-          },
-          {
-            id: "115",
-            name: "6_63",
-            description: "Categoria de Item de Requisição",
-            url: "/ME/CategoriasItemWF.aspx",
-            children: []
-          },
-          {
-            id: "116",
-            name: "6_64",
-            description: "Categoria de Ordem",
-            url: "/ME/CategoriasOrdemWF.aspx",
-            children: []
-          },
-          {
-            id: "117",
-            name: "7_01",
-            description: "Moedas",
-            url: "/DO/Currency/Currency.mvc",
-            children: []
-          },
-          {
-            id: "118",
-            name: "7_02",
-            description: "Cadastro de Origem de Material",
-            url: "/do/OrigemMaterial/OrigemMaterial.mvc",
-            children: []
-          },
-          {
-            id: "119",
-            name: "7_03",
-            description: "Cadastro de Unidades",
-            url: "/DO/Unit/Unit.mvc",
-            children: []
-          },
-          {
-            id: "120",
-            name: "6_67",
-            description: "Tipo Conta de Consumo",
-            url: "/ME/TipoContaConsumo.aspx",
-            children: []
-          },
-          {
-            id: "121",
-            name: "6_70",
-            description: "Cadastro de Grupo de Compras",
-            url: "/ME/GrupoCompraWF.aspx",
-            children: []
-          },
-          {
-            id: "122",
-            name: "6_80",
-            description: "Cadastro de Roteamento",
-            url: "/ME/CadastroRoteamento.aspx",
-            children: []
-          },
-          {
-            id: "123",
-            name: "6_112",
-            description: "Configuração Mapa Comparativo Hipster",
-            url: "/comparative-panel/config",
-            children: []
-          },
-          {
-            id: "124",
-            name: "6_71",
-            description: "Cadastro de Categoria do Material",
-            url: "/ME/CategoriaMaterial.aspx",
-            children: []
-          },
-          {
-            id: "125",
-            name: "6_72",
-            description: "Cadastro de Classificação do Serviço",
-            url: "/ME/ClassificacaoFiscalServico.aspx",
-            children: []
-          },
-          {
-            id: "126",
-            name: "6_74",
-            description: "Textos Genéricos",
-            url: "/ME/TextoGenerico.aspx",
-            children: []
-          },
-          {
-            id: "127",
-            name: "6_75",
-            description: "Cadastro de Elemento PEP",
-            url: "/ME/ElementoPEP.aspx",
-            children: []
-          },
-          {
-            id: "128",
-            name: "6_81",
-            description: "Administração de Macro Áreas",
-            url: "/ME/MacroAreas.aspx",
-            children: []
-          },
-          {
-            id: "129",
-            name: "6_86",
-            description: "REIDI",
-            url: "/do/Reidi.mvc",
-            children: []
-          },
-          {
-            id: "130",
-            name: "6_87",
-            description: "Anexo Fornecedor",
-            url: "/ME/AnexoFornecedor.aspx",
-            children: []
-          },
-          {
-            id: "131",
-            name: "6_90",
-            description: "Regras de Follow UP (Novo Motor)",
-            url: "/DO/FUP/Configuration.mvc",
-            children: []
-          },
-          {
-            id: "132",
-            name: "6_91",
-            description: "Cadastro de Tipo de Entidade",
-            url: "/do/TipoEntidade.mvc",
-            children: []
-          },
-          {
-            id: "133",
-            name: "6_93",
-            description: "Cadastro de Operações Comerciais",
-            url: "/DO/OperacaoComercial.mvc",
-            children: []
-          },
-          {
-            id: "134",
-            name: "6_94",
-            description: "Cadastro de Diagramas de Rede",
-            url: "/DO/DiagramaRede.mvc",
-            children: []
-          },
-          {
-            id: "135",
-            name: "6_97",
-            description: "Tipos de Fornecedor Parceiro",
-            url: "/DO/TipoFornecedorParceiro.mvc/",
-            children: []
-          },
-          {
-            id: "136",
-            name: "6_98",
-            description: "Formas de Pagamento",
-            url: "/DO/FormaPagamento.mvc/",
-            children: []
-          },
-          {
-            id: "137",
-            name: "6_99",
-            description: "Catálogo de Traduções",
-            url: "/DO/CatalogoTraducao.mvc",
-            children: []
-          },
-          {
-            id: "138",
-            name: "6_100",
-            description: "Categoria FRS",
-            url: "/DO/CategoriaFRS.mvc",
-            children: []
-          },
-          {
-            id: "139",
-            name: "6_101",
-            description: "Cadastro de Regionais",
-            url: "/DO/Regional.mvc",
-            children: []
-          },
-          {
-            id: "140",
-            name: "6_105",
-            description: "Pacotes e Condições de Melhor Compra",
-            url: "/DO/PacoteMelhorCompra.mvc",
-            children: []
-          },
-          {
-            id: "141",
-            name: "6_108",
-            description: "Cadastro de Tipo de Exportação",
-            url: "/do/TipoExportacao.mvc",
-            children: []
-          },
-          {
-            id: "142",
-            name: "6_92",
-            description: "Cadastro de Comunicados",
-            url: "/ME/CadastroComunicado.aspx",
-            children: []
-          },
-          {
-            id: "143",
-            name: "6_93",
-            description: "Gerenciar o cadastro de Determinação de IVA",
-            url: "/do/DeterminacaoIVA.mvc",
-            children: []
-          },
-          {
-            id: "144",
-            name: "2_8",
-            description: "Cadastro de Ordem",
-            url: "/do/OrdemWF.mvc",
-            children: []
-          }
-        ]
-      },
-      {
-        id: "145",
-        name: "7",
-        description: "Relatórios",
-        url: "",
-        children: [
-          {
-            id: "146",
-            name: "7_1",
-            description: "Ver gráficos",
-            url: "/Graficos.asp",
-            children: []
-          },
-          {
-            id: "147",
-            name: "7_5",
-            description: "Relatório Gerencial",
-            url: "/RelatorioGestaoPedidos.asp",
-            children: []
-          },
-          {
-            id: "148",
-            name: "7_6",
-            description: "Acompanhamento de Relatórios",
-            url: "/ME/ListaExtracaoRelatorio.aspx",
-            children: []
-          },
-          {
-            id: "149",
-            name: "7_7",
-            description: "Extração de Relatório",
-            url: "/ME/ExtracaoRelatorio.aspx",
-            children: []
-          },
-          {
-            id: "150",
-            name: "7_2",
-            description: "Relatórios de Workflow",
-            url: "/RelatLinksRelatoriosWF.asp",
-            children: []
-          },
-          {
-            id: "151",
-            name: "27_1",
-            description: "Relatórios e-Business Intelligence",
-            url: "/MERG.asp",
-            children: []
-          }
-        ]
-      },
-      {
-        id: "152",
-        name: "9",
-        description: "WorkFlow Central",
-        url: "",
-        children: []
-      },
-      {
-        id: "153",
-        name: "12",
-        description: "Contas Pagas",
-        url: "",
-        children: []
-      },
-      {
-        id: "154",
-        name: "25",
-        description: "Notas Fiscais",
-        url: "",
-        children: [
-          {
-            id: "155",
-            name: "25_1",
-            description: "Lista de Notas Fiscais",
-            url: "/NF.asp?action=lista",
-            children: []
-          },
-          {
-            id: "156",
-            name: "25_3",
-            description: "Período Fiscal",
-            url: "/do/PeriodoFiscal.mvc",
-            children: []
-          }
-        ]
-      },
-      {
-        id: "157",
-        name: "14",
-        description: "RoundTrip",
-        url: "",
-        children: [
-          {
-            id: "158",
-            name: "14_1",
-            description: "Catálogos",
-            url: "/do/RoundTripWF.mvc",
-            children: []
-          },
-          {
-            id: "159",
-            name: "14_2",
-            description: "Usuários",
-            url: "/do/RoundTripUser.mvc",
-            children: []
-          }
-        ]
-      },
-      {
-        id: "160",
-        name: "18",
-        description: "Monitor de Integração",
-        url: "",
-        children: []
-      },
-      {
-        id: "161",
-        name: "19",
-        description: "Amarrações",
-        url: "",
-        children: [
-          {
-            id: "162",
-            name: "19_1",
-            description: "Conta Razão x Ordem Interna",
-            url: "/do/ContaRazaoOrdemInterna.mvc",
-            children: []
-          },
-          {
-            id: "163",
-            name: "19_2",
-            description: "Conta Razão x Centro de Custo",
-            url: "/ME/ContaRazaoCentroCusto.aspx",
-            children: []
-          },
-          {
-            id: "164",
-            name: "19_3",
-            description: "Conta Razão x Área Funcional",
-            url: "/ME/ContaRazaoAreaFuncional.aspx",
-            children: []
-          },
-          {
-            id: "165",
-            name: "19_4",
-            description: "Conta Razão x Ordem",
-            url: "/do/ContaRazaoOrdem.mvc",
-            children: []
-          },
-          {
-            id: "166",
-            name: "19_5",
-            description: "Centro de Custo x Área Funcional",
-            url: "/do/AreaFuncionalCentroCusto.mvc",
-            children: []
-          },
-          {
-            id: "167",
-            name: "19_6",
-            description: "Usuário x Área Funcional",
-            url: "/do/AreaFuncionalUsuario.mvc",
-            children: []
-          }
-        ]
-      },
-      {
-        id: "168",
-        name: "21",
-        description: "Links Personalizados",
-        url: "",
-        children: []
-      },
-      {
-        id: "169",
-        name: "23",
-        description: "Consulta Serasa",
-        url: "",
-        children: []
-      },
-      {
-        id: "170",
-        name: "29",
-        description: "Motor de Regras 3",
-        url: "",
-        children: [
-          {
-            id: "171",
-            name: "29_1",
-            description: "Tabelas",
-            url: "/ME/ConsultarTabelas.aspx",
-            children: []
-          },
-          {
-            id: "172",
-            name: "29_2",
-            description: "Regras",
-            url: "/ME/CadastroRegras.aspx",
-            children: []
-          }
-        ]
-      },
-      {
-        id: "173",
-        name: "32",
-        description: "Integração",
-        url: "",
-        children: [
-          {
-            id: "174",
-            name: "32_1",
-            description: "Enviar Arquivo",
-            url: "/do/Integracao.mvc/SendFile",
-            children: []
-          },
-          {
-            id: "175",
-            name: "32_2",
-            description: "Visão Geral",
-            url: "/do/Integracao.mvc/FilaVisao",
-            children: []
-          },
-          {
-            id: "176",
-            name: "32_3",
-            description: "Processos",
-            url: "/do/Integracao.mvc/Fila",
-            children: []
-          }
-        ]
-      },
-      {
-        id: "177",
-        name: "33",
-        description: "Log",
-        url: "",
-        children: [
-          {
-            id: "178",
-            name: "33_1",
-            description: "Cadastro de Produto",
-            url: "/do/Log/Produto.mvc",
-            children: []
-          },
-          {
-            id: "179",
-            name: "33_2",
-            description: "Flags de Preferências",
-            url: "/do/Log/Flags.mvc/Index/Workflow",
-            children: []
-          }
-        ]
-      },
-      {
-        id: "180",
-        name: "34",
-        description: "Minha Conta",
-        url: "",
-        children: [
-          {
-            id: "181",
-            name: "34_1",
-            description: "Meus Dados",
-            url: "/RegEdit.asp",
-            children: []
-          },
-          {
-            id: "182",
-            name: "34_2",
-            description: "Relatórios",
-            url: "/ME/ExtracaoRelatorio.aspx",
-            children: []
-          },
-          {
-            id: "183",
-            name: "34_5",
-            description: "Acompanhamento de Relatórios",
-            url: "/ME/ListaExtracaoRelatorio.aspx",
-            children: []
-          },
-          {
-            id: "184",
-            name: "34_3",
-            description: "Notas / Boletos / Extratos",
-            url: "/do/Fornecedor.mvc/ListaFornecedorFinanceiro",
-            children: []
-          }
-        ]
-      },
-      {
-        id: "185",
-        name: "40",
-        description: "Links úteis",
-        url: "",
-        children: [
-          {
-            id: "186",
-            name: "40_0",
-            description: "Pedidos para Enviar",
-            url: "/ListaPedidosProntosWF.asp",
-            children: []
-          },
-          {
-            id: "187",
-            name: "41_1",
-            description: "Meus Pré-Pedidos para Enviar",
-            url: "/ListaPedidosProntosWF.asp",
-            children: []
-          },
-          {
-            id: "188",
-            name: "41_2",
-            description: "Pendências de Contrato",
-            url: "/DO/RFQ/Create.mvc/Contract",
-            children: []
-          },
-          {
-            id: "189",
-            name: "41_3",
-            description: "Pendência de Reaproveitamento de SO",
-            url: "/DO/ReaproveitamentoCotacao.mvc",
-            children: []
-          },
-          {
-            id: "190",
-            name: "41_7",
-            description: "Pendências de alteração de data de entrega",
-            url: "/DO/Orders/Pendency.mvc",
-            children: []
-          },
-          {
-            id: "191",
-            name: "41_8",
-            description: "Aprovação de Produtos PDM",
-            url: "/PDM/AprovarProdutos.aspx",
-            children: []
-          },
-          {
-            id: "192",
-            name: "41_9",
-            description: "Aprovação de Tarefas",
-            url: "/ME/ListarTarefas.aspx",
-            children: []
-          },
-          {
-            id: "193",
-            name: "41_10",
-            description: "Solicitações de Orçamento",
-            url: "/ListaRequisicoesWF.asp?Oper=so",
-            children: []
-          },
-          {
-            id: "194",
-            name: "41_11",
-            description: "Requisições Emergenciais",
-            url: "/ListaRequisicoesWF.asp?Emergencial=2",
-            children: []
-          },
-          {
-            id: "195",
-            name: "41_12",
-            description: "Mapa Comparativo",
-            url: "/do/MapaComparativo.mvc/ListaMapaComparativo",
-            children: []
-          },
-          {
-            id: "196",
-            name: "41_13",
-            description: "Relatório de Acompanhamento",
-            url: "/RelatAcompanhamentoWF.asp",
-            children: []
-          },
-          {
-            id: "197",
-            name: "41_15",
-            description: "Documentos ME",
-            url: "/do/RepositorioDocumentoME/Home.mvc",
-            children: []
-          },
-          {
-            id: "198",
-            name: "41_17",
-            description: "Gestão de Compras",
-            url: "/do/ControleDeCompras.mvc/Backlog",
-            children: []
-          },
-          {
-            id: "199",
-            name: "41_18",
-            description: "Substituir Usuário",
-            url: "/do/ChangeUser.mvc",
-            children: []
-          },
-          {
-            id: "200",
-            name: "41_20",
-            description: "Substituir Usuário do Mesmo Perfil",
-            url: "/TrocaUsuarioPerfilWF.asp",
-            children: []
-          },
-          {
-            id: "201",
-            name: "41_27",
-            description: "Substituição de Workflow",
-            url: "/do/Usuario.mvc/SubstituirWorkflow",
-            children: []
-          },
-          {
-            id: "202",
-            name: "41_23",
-            description: "Recebimento",
-            url: "/ME/RecebimentoWF.aspx",
-            children: []
-          },
-          {
-            id: "203",
-            name: "41_24",
-            description: "Pedidos Agendados",
-            url: "/PedidosAgendadosWF.asp",
-            children: []
-          },
-          {
-            id: "204",
-            name: "41_26",
-            description: "Evento Online",
-            url: "/do/Leilao/CriarLeilao.mvc/listaEventos",
-            children: []
-          },
-          {
-            id: "205",
-            name: "41_28",
-            description: "Importação / Exportação Cargas",
-            url: "/dataload/LoadHistory",
-            children: []
-          }
-        ]
-      }
-    ]);
+    watch(navItems, (newNavItems) => {
+      navigationStore.setNavigationItems(newNavItems);
+    }, { immediate: true });
+    watch(siteMap, (newSiteMap) => {
+      navigationStore.setSiteMapItems(newSiteMap);
+    }, { immediate: true });
+    onMounted(() => {
+      initializeData();
+    });
     const headerClasses = computed(() => {
       const baseClasses = "shadow-lg";
       return `${baseClasses} text-white`;
@@ -28446,11 +29519,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           style: normalizeStyle(headerStyles.value)
         }, [
           createBaseVNode("nav", _hoisted_1, [
-            createVNode(_sfc_main$i, { brand: brand.value }, null, 8, ["brand"]),
+            createVNode(_sfc_main$i, { brand: unref(brand) }, null, 8, ["brand"]),
             createVNode(_sfc_main$6, { iconColor: iconColor.value }, null, 8, ["iconColor"]),
             createVNode(_sfc_main$2, {
-              user: user.value,
-              profileItems: profileItems.value
+              user: unref(user),
+              profileItems: unref(profileItems)
             }, null, 8, ["user", "profileItems"])
           ])
         ], 6),

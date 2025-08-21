@@ -3,14 +3,33 @@ import type {
   NavigationItem,
   NavigationSeparatorItem,
   NavigationItemOrSeparator,
-  SiteMapItem
+  SiteMapItem, User, Brand, ProfileItem
 } from '@/types'
 
 const state = reactive({
+  user: {} as User,
   navigationItems: [] as NavigationItemOrSeparator[],
   customNavigationItems: [] as NavigationItem[],
-  siteMapItems: [] as SiteMapItem[]
+  siteMapItems: [] as SiteMapItem[],
+  brand: {} as Brand,
+  profileItems: [] as ProfileItem[]
 })
+
+function setUser(user: User) {
+  state.user = {
+    ...user
+  }
+}
+
+function setBrand(brand: Brand) {
+  state.brand = {
+    ...brand
+  }
+}
+
+function setProfileItems(items: ProfileItem[]) {
+  state.profileItems = items
+}
 
 function isSeparator(
   item: NavigationItemOrSeparator
@@ -49,6 +68,8 @@ function findNavigationItemById(id: string): NavigationItem | undefined {
 }
 
 function updateNavigationItemsVisible(item: NavigationItem, visible: boolean) {
+  if (!item.id) return
+
   const targetItem = findNavigationItemById(item.id)
 
   if (targetItem) {
@@ -60,9 +81,12 @@ function updateNavigationItemsVisible(item: NavigationItem, visible: boolean) {
 export function useNavigationStore() {
   return {
     ...toRefs(state),
+    setUser,
     setNavigationItems,
     setCustomNavigationItems,
     setSiteMapItems,
+    setBrand,
+    setProfileItems,
     isSeparator,
     updateNavigationItemsVisible
   }

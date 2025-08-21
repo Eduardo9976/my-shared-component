@@ -29,7 +29,7 @@
       <template #siteMapItems>
         <keep-alive>
           <Suspense>
-            <TheHeaderTabsSiteMapItems />
+            <TheHeaderTabsSiteMapItems :siteMapItems="props.siteMapItems" />
             <template #fallback>
               <div class="p-4 text-center text-gray-500">{{ t('theHeader.tabs.loading') }}</div>
             </template>
@@ -43,11 +43,18 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import type {TabsItem} from '@nuxt/ui'
+import type {SiteMapItem} from '@/types'
 import TheHeaderTabsSiteMapItems from '@/components/TheHeader/TheHeaderTabsSiteMapItems.vue'
 import TheHeaderTabsNavigationItems from '@/components/TheHeader/TheHeaderTabsNavigationItems.vue'
 import {useTranslations} from '@/composables/localI18n/useTranslations.ts'
 
-const {t, setLocale, getCurrentLocale} = useTranslations()
+const {t} = useTranslations()
+
+interface Props {
+  siteMapItems?: SiteMapItem[]
+}
+
+const props = defineProps<Props>()
 
 const items = ref<TabsItem[]>([
   {

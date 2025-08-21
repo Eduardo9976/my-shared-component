@@ -1,5 +1,5 @@
 <template>
-  <div v-if="siteMap" class="relative">
+  <div v-if="siteMap" class="relative flex">
     <UPopover
       :open="isOpen"
       :ui="{
@@ -15,7 +15,7 @@
       />
 
       <template #content>
-        <TheHeaderTabs />
+        <TheHeaderTabs :siteMapItems="siteMapItems" />
       </template>
     </UPopover>
   </div>
@@ -29,10 +29,11 @@
 <script setup lang="ts">
 import {ref, inject, watch} from 'vue'
 import TheHeaderNavigationItemContent from './TheHeaderNavigationItemContent.vue'
-import type {NavigationItem} from '@/types'
+import type {NavigationItem, SiteMapItem} from '@/types'
 
 interface Props extends NavigationItem {
   iconColor: string
+  siteMapItems?: SiteMapItem[]
 }
 
 interface HeaderBackdrop {
@@ -57,8 +58,8 @@ function handlePopoverUpdate(open: boolean) {
   }
 }
 
-watch(isOpen, newValue => {
-  if (!newValue) {
+watch(isOpen, (newValue, oldValue) => {
+  if (oldValue && !newValue) {
     headerBackdrop?.close()
   }
 })

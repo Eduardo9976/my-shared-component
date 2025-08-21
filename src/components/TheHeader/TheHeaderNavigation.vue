@@ -18,6 +18,7 @@
         v-else-if="(item as NavigationItem).visible ?? false"
         v-bind="item as NavigationItem"
         :iconColor="iconColor"
+        :siteMapItems="siteMapItems"
       />
     </template>
   </div>
@@ -25,23 +26,25 @@
 
 <script setup lang="ts">
 import TheHeaderNavigationItem from './TheHeaderNavigationItem.vue'
-import type {NavigationItem, NavigationSeparatorItem} from '@/types'
+import type {NavigationItem, NavigationSeparatorItem, SiteMapItem} from '@/types'
 import {useNavigationStore} from '@/composables/useNavigationStore.ts'
 import {computed} from 'vue'
 
 interface Props {
+  navigationItems?: (NavigationItem | NavigationSeparatorItem)[]
   iconColor: string
+  siteMapItems?: SiteMapItem[]
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
-const {navigationItems, isSeparator} = useNavigationStore()
+const {isSeparator} = useNavigationStore()
 
 const filteredNavigationItems = computed(() => {
   const filtered: (NavigationItem | NavigationSeparatorItem)[] = []
   let lastWasSeparator = false
 
-  for (const item of navigationItems.value) {
+  for (const item of props.navigationItems || []) {
     if (isSeparator(item)) {
       if (lastWasSeparator) continue
       filtered.push(item)

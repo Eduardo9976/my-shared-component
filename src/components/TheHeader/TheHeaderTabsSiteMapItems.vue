@@ -38,6 +38,7 @@
               :href="child.url || '#'"
               :target="child.url ? getTarget(child.url) : undefined"
               class="block cursor-pointer rounded-md p-2 text-sm text-gray-600 no-underline transition-colors hover:bg-gray-100 hover:text-gray-800"
+              @click.prevent.stop="() => handleClick(child)"
             >
               {{ child.description }}
             </a>
@@ -52,13 +53,16 @@
 import {ref, computed} from 'vue'
 import MeIcon from '@/components/MeIcon/MeIcon.vue'
 import type {SiteMapItem} from '@/types'
-import {useNavigationStore} from '@/composables/useNavigationStore'
 import {isExternalUrl} from '@/utils/isExternalUrl'
 import {useTranslations} from '@/composables/localI18n/useTranslations.ts'
 
 const {t} = useTranslations()
 
-const {siteMapItems} = useNavigationStore()
+interface Props {
+  siteMapItems?: SiteMapItem[]
+}
+
+const props = defineProps<Props>()
 
 const searchTerm = ref('')
 
@@ -87,9 +91,9 @@ const filterSiteMap = (items: SiteMapItem[], term: string): SiteMapItem[] =>
     .filter((section): section is SiteMapItem => section !== null)
 
 const filteredSiteMap = computed(() => {
-  if (!siteMapItems.value) return []
+  if (!props.siteMapItems) return []
   const term = normalize(searchTerm.value)
-  return term ? filterSiteMap(siteMapItems.value, term) : siteMapItems.value
+  return term ? filterSiteMap(props.siteMapItems, term) : props.siteMapItems
 })
 
 const accordionItems = computed(() =>
@@ -100,6 +104,9 @@ const accordionItems = computed(() =>
   }))
 )
 
-const getTarget = (url: string): '_self' | '_blank' =>
-  isExternalUrl(url) ? '_blank' : '_self'
+const getTarget = (url: string) => isExternalUrl(url) ? '_blank' : '_self'
+
+function handleClick(item: SiteMapItem) {
+  item?.click?.(item)
+}
 </script>

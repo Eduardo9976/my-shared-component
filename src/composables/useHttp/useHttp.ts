@@ -7,11 +7,14 @@ class HttpService {
   private baseURL: string
 
   constructor() {
-    this.baseURL = import.meta.env.BFF || ''
+    this.baseURL = import.meta.env.DEV
+      ? window.location.origin
+      : import.meta.env.VITE_MEWEB ?? window.location.origin
 
     this.instance = axios.create({
       baseURL: this.baseURL,
       timeout: 10000,
+      withCredentials: true,
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -24,13 +27,19 @@ class HttpService {
   private setupInterceptors(): void {
     this.instance.interceptors.request.use(
       (config) => {
-        const requestConfig = config as { withToken?: boolean }
+        const requestConfig = config as { withToken?: boolean; withCredentials?: boolean }
+
         if (requestConfig.withToken !== false) {
           const token = localStorage.getItem('ACCESS_TOKEN')
           if (token) {
             config.headers.Authorization = `Bearer ${token}`
           }
         }
+
+        if (requestConfig.withCredentials !== undefined) {
+          config.withCredentials = requestConfig.withCredentials
+        }
+
         return config
       },
       (error) => {
@@ -69,8 +78,12 @@ class HttpService {
 
   async get<T = unknown>(url: string, config?: RequestConfig): Promise<T> {
     const fullURL = this.getFullURL(url)
-    const response = await this.instance.get(fullURL, config)
-    return response.data
+    try {
+      const response = await this.instance.get(fullURL, config)
+      return response.data
+    } catch (error: any) {
+      throw error
+    }
   }
 
   async post<T = unknown>(url: string, data?: unknown, config?: RequestConfig): Promise<T> {

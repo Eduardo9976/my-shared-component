@@ -10,7 +10,7 @@
       active && activeClass
     ]"
     :style="{'--header-icon-color': iconColor}"
-    @click="click && handleClick"
+    @click.prevent.stop="handleClick"
   >
     <div class="relative flex items-center justify-center">
       <MeIcon :icon="icon || ''" :custom-size="24" :color="iconColor" />
@@ -29,7 +29,7 @@
       />
     </div>
 
-    <p class="text-xs py-[6px] text-[var(--header-icon-color)]">{{ label }}</p>
+    <p class="text-xs py-[6px] text-[var(--header-icon-color)] whitespace-nowrap">{{ label }}</p>
   </component>
 </template>
 

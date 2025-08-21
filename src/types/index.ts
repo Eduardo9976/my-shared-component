@@ -1,7 +1,6 @@
 export interface BrandBackground {
   primaryColor?: string
   secondaryColor?: string
-  iconColor?: string
   mainImage?: string
   repeatImage?: string
 }
@@ -10,6 +9,7 @@ export interface Brand {
   logo: string
   link: string
   newTab: boolean
+  iconColor?: string
   background?: BrandBackground
 }
 
@@ -37,10 +37,12 @@ export interface NavigationSeparatorItem {
 export type NavigationItemOrSeparator = NavigationItem | NavigationSeparatorItem
 
 export interface User {
+  id: string
   name: string
   role?: string
   email?: string
   acronym: string
+  culture?: string
   badge: {
     variant: string
     icon: string
@@ -77,5 +79,8 @@ export interface HeaderBackdrop {
   state: {visible: boolean; zIndex: number}
 }
 
-// HTTP Types
+export type GTM = {
+  push: (data: Record<string, unknown>) => void
+}
+
 export * from './http'
