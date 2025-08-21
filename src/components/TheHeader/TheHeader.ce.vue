@@ -26,14 +26,14 @@ import TheHeaderBrand from './TheHeaderBrand.vue'
 import TheHeaderNavigation from './TheHeaderNavigation.vue'
 import TheHeaderAvatar from './TheHeaderAvatar.vue'
 import AppBackdrop from '@/components/AppBackdrop.vue'
-import {useNavigationStore} from '@/composables/useNavigationStore.ts'
+import {useHeaderStore} from '@/composables/useHeaderStore.ts'
 import {
   type SupportedLocale,
   useTranslations
 } from '@/composables/useTranslations/useTranslations.ts'
-import {useHeaderData} from '@/composables/useHeaderData.ts'
+import {useHeader} from '@/composables/useHeader.ts'
 import type {GTM} from '@/types'
-import {useHttp} from "@/composables/useHttp";
+import {useHttp} from '@/composables/useHttp'
 
 interface Props {
   activeLinkName?: string
@@ -43,22 +43,22 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const {initializeData} = useHeaderData(
+const {initializeData} = useHeader(
   props.activeLinkName || 'home',
   props.gtm || {push: (e: unknown) => console.log('click no gtm', e)}
 )
 
-const navigationStore = useNavigationStore()
+const headerStore = useHeaderStore()
 
-const storeUser = toRef(navigationStore, 'user')
+const storeUser = toRef(headerStore, 'user')
 
-const storeNavigationItems = toRef(navigationStore, 'navigationItems')
+const storeNavigationItems = toRef(headerStore, 'navigationItems')
 
-const storeBrand = toRef(navigationStore, 'brand')
+const storeBrand = toRef(headerStore, 'brand')
 
-const storeProfileItems = toRef(navigationStore, 'profileItems')
+const storeProfileItems = toRef(headerStore, 'profileItems')
 
-const storeSiteMapItems = toRef(navigationStore, 'siteMapItems')
+const storeSiteMapItems = toRef(headerStore, 'siteMapItems')
 
 const backdropState = ref({
   visible: false,
@@ -83,9 +83,9 @@ provide('headerBackdrop', {
 })
 
 onMounted(async () => {
-  const { setCustomToken } = useHttp()
+  const {setCustomToken} = useHttp()
 
-  if(props.token) {
+  if (props.token) {
     setCustomToken(props.token)
   }
 

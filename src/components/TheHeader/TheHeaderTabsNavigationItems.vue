@@ -63,7 +63,7 @@ import {shallowRef, toRaw, useTemplateRef, watch, computed} from 'vue'
 import {useSortable} from '@vueuse/integrations/useSortable'
 import MeIcon from '@/components/MeIcon/MeIcon.vue'
 import type {NavigationItem} from '@/types'
-import {useNavigationStore} from '@/composables/useNavigationStore.ts'
+import {useHeaderStore} from '@/composables/useHeaderStore.ts'
 import {isExternalUrl} from '@/utils/isExternalUrl.ts'
 import {useTranslations} from '@/composables/useTranslations/useTranslations.ts'
 
@@ -73,7 +73,7 @@ const {
   customNavigationItems,
   setCustomNavigationItems,
   updateNavigationItemsVisible
-} = useNavigationStore()
+} = useHeaderStore()
 
 const el = useTemplateRef<HTMLElement>('el')
 

@@ -31,7 +31,7 @@ import type {
   NavigationSeparatorItem,
   SiteMapItem
 } from '@/types'
-import {useNavigationStore} from '@/composables/useNavigationStore.ts'
+import {useHeaderStore} from '@/composables/useHeaderStore.ts'
 import {computed} from 'vue'
 
 interface Props {
@@ -42,7 +42,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const {isSeparator} = useNavigationStore()
+const {isSeparator} = useHeaderStore()
 
 const filteredNavigationItems = computed(() => {
   const filtered: (NavigationItem | NavigationSeparatorItem)[] = []

@@ -12426,9 +12426,9 @@ const bypassFilter = (invoke2) => {
 };
 function pausableFilter(extendFilter = bypassFilter, options = {}) {
   const {
-    initialState = "active"
+    initialState: initialState2 = "active"
   } = options;
-  const isActive = toRef$1(initialState === "active");
+  const isActive = toRef$1(initialState2 === "active");
   function pause() {
     isActive.value = false;
   }
@@ -12495,10 +12495,10 @@ function watchWithFilter(source, cb, options = {}) {
 function watchPausable(source, cb, options = {}) {
   const {
     eventFilter: filter2,
-    initialState = "active",
+    initialState: initialState2 = "active",
     ...watchOptions
   } = options;
-  const { eventFilter, pause, resume, isActive } = pausableFilter(filter2, { initialState });
+  const { eventFilter, pause, resume, isActive } = pausableFilter(filter2, { initialState: initialState2 });
   const stop2 = watchWithFilter(
     source,
     cb,
@@ -13398,8 +13398,8 @@ function useId(deterministicId, prefix = "reka") {
   }
   return `${prefix}-${++count$1}`;
 }
-function useStateMachine(initialState, machine) {
-  const state2 = ref(initialState);
+function useStateMachine(initialState2, machine) {
+  const state2 = ref(initialState2);
   function reducer(event) {
     const nextState = machine[state2.value][event];
     return nextState ?? state2.value;
@@ -13416,10 +13416,10 @@ function usePresence(present, node) {
   const stylesRef = ref({});
   const prevAnimationNameRef = ref("none");
   const prevPresentRef = ref(present);
-  const initialState = present.value ? "mounted" : "unmounted";
+  const initialState2 = present.value ? "mounted" : "unmounted";
   let timeoutId;
   const ownerWindow = node.value?.ownerDocument.defaultView ?? defaultWindow;
-  const { state: state2, dispatch } = useStateMachine(initialState, {
+  const { state: state2, dispatch } = useStateMachine(initialState2, {
     mounted: {
       UNMOUNT: "unmounted",
       ANIMATION_OUT: "unmountSuspended"
@@ -14548,10 +14548,10 @@ const useBodyLockStackCount = createSharedComposable$1(() => {
   }, { immediate: true, flush: "sync" });
   return map;
 });
-function useBodyScrollLock(initialState) {
+function useBodyScrollLock(initialState2) {
   const id = Math.random().toString(36).substring(2, 7);
   const map = useBodyLockStackCount();
-  map.value.set(id, initialState);
+  map.value.set(id, initialState2);
   const locked = computed({
     get: () => map.value.get(id) ?? false,
     set: (value) => map.value.set(id, value)
@@ -25952,73 +25952,82 @@ function moveArrayElement(list, from, to, e = null) {
     });
   }
 }
-const state = reactive({
+const initialState = {
   user: {},
   navigationItems: [],
   customNavigationItems: [],
   siteMapItems: [],
   brand: {},
-  profileItems: []
-});
-function setUser(user) {
-  state.user = {
-    ...user
-  };
-}
-function setBrand(brand) {
-  state.brand = {
-    ...brand
-  };
-}
-function setProfileItems(items) {
+  profileItems: [],
+  headerLinks: []
+};
+const state = reactive(initialState);
+const navigationItemsWithoutSeparators = computed(
+  () => state.navigationItems.filter((item) => !isSeparator(item))
+);
+const isSeparator = (item) => "separator" in item && item.separator === true;
+const setUser = (user) => {
+  state.user = { ...user };
+};
+const setBrand = (brand) => {
+  state.brand = { ...brand };
+};
+const setProfileItems = (items) => {
   state.profileItems = items;
-}
-function isSeparator(item) {
-  return "separator" in item && item.separator === true;
-}
-function setNavigationItems(items) {
+};
+const setHeaderLinks = (headerLinks) => {
+  state.headerLinks = headerLinks;
+};
+const setNavigationItems = (items) => {
   state.navigationItems = items;
-  state.customNavigationItems = items.filter(
-    (item) => !isSeparator(item)
-  );
-}
-function setCustomNavigationItems(items) {
+  state.customNavigationItems = navigationItemsWithoutSeparators.value;
+};
+const setCustomNavigationItems = (items) => {
   const updatedItems = [];
-  let i2 = 0;
-  for (const item of state.navigationItems) {
-    updatedItems.push(isSeparator(item) ? item : items[i2++] ?? item);
+  let itemIndex = 0;
+  for (const currentItem of state.navigationItems) {
+    updatedItems.push(
+      isSeparator(currentItem) ? currentItem : items[itemIndex++] ?? currentItem
+    );
   }
   state.customNavigationItems = items;
   state.navigationItems = updatedItems;
-}
-function setSiteMapItems(items) {
+};
+const setSiteMapItems = (items) => {
   state.siteMapItems = items;
-}
-function findNavigationItemById(id) {
-  const foundItem = state.navigationItems.find(
-    (navItem) => !isSeparator(navItem) && navItem.id === id
+};
+const findNavigationItemById = (id) => {
+  if (!id) return void 0;
+  return state.navigationItems.find(
+    (item) => !isSeparator(item) && item.id === id
   );
-  return foundItem;
-}
-function updateNavigationItemsVisible(item, visible) {
+};
+const updateNavigationItemsVisible = (item, visible) => {
   if (!item.id) return;
   const targetItem = findNavigationItemById(item.id);
   if (targetItem) {
     targetItem.visible = visible;
     state.navigationItems = [...state.navigationItems];
   }
-}
-function useNavigationStore() {
+};
+const resetState = () => {
+  Object.assign(state, initialState);
+};
+function useHeaderStore() {
   return {
     ...toRefs(state),
+    navigationItemsWithoutSeparators,
     setUser,
+    setBrand,
+    setProfileItems,
+    setHeaderLinks,
     setNavigationItems,
     setCustomNavigationItems,
     setSiteMapItems,
-    setBrand,
-    setProfileItems,
     isSeparator,
-    updateNavigationItemsVisible
+    findNavigationItemById,
+    updateNavigationItemsVisible,
+    resetState
   };
 }
 const _hoisted_1$9 = { class: "flex flex-col" };
@@ -26039,7 +26048,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       customNavigationItems,
       setCustomNavigationItems: setCustomNavigationItems2,
       updateNavigationItemsVisible: updateNavigationItemsVisible2
-    } = useNavigationStore();
+    } = useHeaderStore();
     const el = useTemplateRef("el");
     const list = shallowRef(customNavigationItems.value || []);
     const getCountNavigationItems = computed(() => {
@@ -26365,7 +26374,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const { isSeparator: isSeparator2 } = useNavigationStore();
+    const { isSeparator: isSeparator2 } = useHeaderStore();
     const filteredNavigationItems = computed(() => {
       const filtered = [];
       let lastWasSeparator = false;
@@ -29087,7 +29096,7 @@ class HttpService {
     this.instance = axios.create({
       baseURL: this.baseURL,
       timeout: 1e4,
-      withCredentials: false,
+      withCredentials: true,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -29106,7 +29115,7 @@ class HttpService {
           }
         }
         if (requestConfig.withCredentials !== void 0) {
-          config.withCredentials = false;
+          config.withCredentials = requestConfig.withCredentials;
         }
         return config;
       },
@@ -29254,209 +29263,403 @@ function useHttp() {
     clearCustomToken: httpService.clearCustomToken.bind(httpService)
   };
 }
-function useHeaderData(activeLinkName, gtm) {
-  const { get: get2, post, setCustomToken } = useHttp();
-  const navigationStore = useNavigationStore();
-  const storeUser = toRef$2(navigationStore, "user");
-  const loadUserData = async () => {
-    try {
-      const data = await get2("/do/api/v1/users/GetCurrentUser");
-      if (!data) {
-        throw new Error("Falha ao carregar dados do usuário");
-      }
-      if (data.token?.accessToken && typeof data.token.accessToken === "string") {
-        setCustomToken(data.token.accessToken);
-      }
-      navigationStore.setUser(data);
-    } catch (error) {
-      const errorObj = error;
-      if (errorObj?.response?.status === 403) {
-        console.warn(
-          "⚠️ Acesso negado (403) - Usuário não autenticado, usando mock"
-        );
-      } else if (errorObj?.response?.status === 401) {
-        console.warn("⚠️ Não autorizado (401) - Token inválido, usando mock");
-      } else {
-        console.warn(
-          "⚠️ Erro ao carregar dados do usuário:",
-          errorObj?.message || "Erro desconhecido",
-          "usando mock"
-        );
-      }
-    }
-  };
-  const createNavItemClickHandler = (navItem, gtm2) => {
-    if (!navItem.siteMap && !navItem.url) return null;
+const GTM_EVENTS = {
+  MAIS_BUSCAR: "MS_maisBuscar",
+  TELAS_PRINCIPAIS: "MS_telasPrincipais",
+  MAIS_OPCAO: "MS_maisOpcao",
+  PERFIL_OPCAO: "MS_perfilOpcao"
+};
+const createNavItemClickHandler = (navItem, gtm) => {
+  if (navItem.siteMap) {
+    return () => gtm.push({ event: GTM_EVENTS.MAIS_BUSCAR });
+  }
+  if (navItem.url) {
     return () => {
-      if (navItem.siteMap) {
-        gtm2.push({ event: "MS_maisBuscar" });
-        return;
-      }
-      gtm2.push({
-        event: "MS_telasPrincipais",
+      gtm.push({
+        event: GTM_EVENTS.TELAS_PRINCIPAIS,
         selectOp: navItem.linkName
       });
       window.location.href = navItem.url;
     };
-  };
-  const createSiteMapItemClickHandler = (item, parentCategory, gtm2) => {
-    if (!item.url) return void 0;
-    return () => {
-      gtm2.push({
-        event: "MS_maisOpcao",
-        categoria: parentCategory,
-        selectOp: item.description ?? item.name
-      });
-      window.location.href = item.url;
-    };
-  };
-  const mapSiteMapItems = (items, parentCategory, gtm2) => {
-    return items.map((item) => {
-      const hasChildren = item.children?.length > 0;
-      const nextParentCategory = item.description ?? item.name;
-      return {
-        id: item.$id,
-        name: item.name,
-        description: item.description,
-        url: item.url,
-        click: createSiteMapItemClickHandler(item, parentCategory, gtm2),
-        children: hasChildren ? mapSiteMapItems(
-          item.children,
-          nextParentCategory,
-          gtm2
-        ) : []
-      };
+  }
+  return void 0;
+};
+const createSiteMapClickHandler = (item, parentCategory, gtm) => {
+  if (!item.url) return void 0;
+  return () => {
+    gtm.push({
+      event: GTM_EVENTS.MAIS_OPCAO,
+      categoria: parentCategory,
+      selectOp: item.description ?? item.name
     });
+    window.location.href = item.url;
   };
-  const mapNavigationItems = (navItems, activeLinkName2, gtm2) => {
-    return navItems.map((item) => {
-      const { $id, ...rest } = item;
-      const isActive = rest.linkName?.toLowerCase() === activeLinkName2?.toLowerCase();
-      const isVisible = item.visible ?? true;
-      return {
-        ...rest,
-        active: isActive,
-        click: createNavItemClickHandler(item, gtm2),
-        id: $id,
-        visible: isVisible
-      };
+};
+const createProfileItemClickHandler = (profileItem, gtm) => {
+  if (!profileItem.url || profileItem.name === "locale") return void 0;
+  return () => {
+    gtm.push({
+      event: GTM_EVENTS.PERFIL_OPCAO,
+      selectOp: profileItem.label
     });
+    window.location.href = profileItem.url;
   };
-  const createProfileItemClickHandler = (profileItem, gtm2) => {
-    if (!profileItem.url || profileItem.name === "locale") return void 0;
-    return () => {
-      gtm2.push({
-        event: "MS_perfilOpcao",
-        selectOp: profileItem.label
-      });
-      window.location.href = profileItem.url;
-    };
+};
+const mapHeaderLinks = (navItems, gtm) => navItems.map(({ $id, ...rest }) => ({
+  ...rest,
+  id: $id || void 0,
+  url: null,
+  click: createNavItemClickHandler({ ...rest }, gtm)
+}));
+const mapSiteMapItems = (items, parentCategory, gtm) => items.map((item) => {
+  const hasChildren = item.children?.length > 0;
+  const nextParentCategory = item.description ?? item.name;
+  return {
+    id: item.$id,
+    name: item.name,
+    description: item.description,
+    url: item.url || "",
+    click: createSiteMapClickHandler(item, parentCategory, gtm),
+    children: hasChildren ? mapSiteMapItems(
+      item.children,
+      nextParentCategory,
+      gtm
+    ) : []
   };
-  const changeLocale = async (locale, gtm2) => {
-    try {
-      gtm2.push({
-        event: "MS_perfilLocale",
-        selectOp: locale
-      });
-      await post("/do/api/v1/users/ChangeLanguage", { culture: locale });
-      navigationStore.setUser({
-        ...navigationStore.user.value,
-        culture: locale
-      });
-      window.location.reload();
-    } catch (error) {
-      console.error("Erro ao mudar idioma:", error);
-    }
-  };
-  const createLocaleItemClickHandler = (child, gtm2) => {
-    const locale = child.url?.match(/[a-z]{2}-[A-Z]{2}/g)?.[0];
-    if (!locale) return void 0;
-    return () => {
-      changeLocale(locale, gtm2);
-    };
-  };
-  const mapProfileItems = (profileItems, gtm2) => {
-    return profileItems.map((item) => {
-      if (item.name === "locale") {
-        return {
-          ...item,
-          children: item.children?.map(
-            (child) => ({
-              ...child,
-              click: createLocaleItemClickHandler(child, gtm2)
-            })
-          ) ?? []
-        };
-      }
+});
+const siteMapChildrenMapper = (data, parent, gtm) => ({
+  ...data,
+  children: data.children?.map((childOption) => {
+    if (childOption.children?.length) {
       return {
-        ...item,
-        click: createProfileItemClickHandler(item, gtm2)
-      };
-    });
-  };
-  const loadNavigationItems = async () => {
-    try {
-      const query = `?v=${new Date(storeUser.value.lastAccess || 0).getTime()}&id=${navigationStore.user.value.id}&lang=${navigationStore.user.value.culture}`;
-      const response = await get2(`/do/api/v2/header${query}`);
-      if (!response) {
-        throw new Error("Falha ao carregar dados de navegação");
-      }
-      navigationStore.setUser({
-        ...navigationStore.user.value,
-        ...response.user
-      });
-      navigationStore.setNavigationItems(
-        mapNavigationItems(
-          response.navItems,
-          activeLinkName,
+        ...siteMapChildrenMapper(
+          childOption,
+          childOption.description ?? childOption.name,
           gtm
         )
+      };
+    }
+    return {
+      ...childOption,
+      url: null,
+      click: childOption.url ? () => {
+        gtm.push({
+          event: GTM_EVENTS.MAIS_OPCAO,
+          categoria: parent || "",
+          selectOp: childOption.description
+        });
+        window.location.href = childOption.url;
+      } : null
+    };
+  }) || []
+});
+const mapNavigationItems = (navItems, activeLinkName, gtm) => navItems.map(({ $id, ...rest }) => ({
+  ...rest,
+  active: rest.linkName?.toLowerCase() === activeLinkName?.toLowerCase(),
+  click: createNavItemClickHandler({ ...rest }, gtm),
+  id: $id,
+  visible: rest.visible ?? true
+}));
+const mapUserDetailsFromResponse = (response) => {
+  const user = {
+    id: response.id,
+    name: response.fullName,
+    role: response.profile,
+    acronym: response.header?.nameInitials || "",
+    culture: response.culture,
+    lastAccess: new Date(response.lastAccess || 0),
+    token: response.token,
+    badge: {
+      variant: "default",
+      icon: "user"
+    }
+  };
+  const customer = {
+    idMain: response.idMain,
+    registrationCompleted: response.company?.registrationCompleted || false
+  };
+  if (response.header?.customization) {
+    const header = response.header;
+    const customization = header.customization;
+    const homeUserUrl = header.homeUserUrl;
+    const backgroundColor = customization.backgroundColor;
+    const backgroundColorSecundary = customization.backgroundColorSecundary;
+    const buttonColor = customization.buttonColor;
+    customer.header = {
+      appsUrls: { users: homeUserUrl },
+      logo: customization.clientLogo,
+      iconColor: buttonColor?.primary,
+      background: {
+        mainImage: customization.backgroundMainImage,
+        repeatImage: customization.backgroundRepeatImage,
+        primaryColor: backgroundColor?.primary,
+        secondaryColor: backgroundColorSecundary?.primary
+      }
+    };
+  }
+  return {
+    user,
+    customer,
+    locale: response.culture,
+    token: response.token,
+    permissions: response.permit || {},
+    precisions: response.precision || {},
+    links: response.links || [],
+    virtualEntities: response.vEnts || []
+  };
+};
+const API_ENDPOINTS = {
+  USERS: {
+    CURRENT: "/do/api/v1/users/GetCurrentUser",
+    CHANGE_LANGUAGE: "/do/api/v1/users/ChangeLanguage"
+  },
+  HEADER: "/do/api/v2/header",
+  SITEMAP: {
+    DEFAULT: "/do/api/v1/sitemap",
+    PDM: "/do/api/v1/sitemap/pdm"
+  }
+};
+const HTTP_HEADERS = {
+  NO_CACHE: { "Cache-Control": "no-cache", "Authorization": "" }
+};
+const ERROR_MESSAGES$1 = {
+  USER_DATA: "Falha ao carregar dados do usuário",
+  // refatorar
+  NAVIGATION: "Falha ao carregar dados de navegação",
+  SITEMAP: "Falha ao carregar sitemap",
+  USER_DETAILS: "Falha ao carregar detalhes do usuário"
+};
+const buildQueryString = (params) => {
+  const searchParams = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== void 0 && value !== null) {
+      searchParams.append(key, String(value));
+    }
+  });
+  return searchParams.toString();
+};
+const isPdmPath = (pathname) => pathname.includes("/MEPDM/") || pathname.includes("/PDM/");
+const loadUserData = async (get2, setCustomToken) => {
+  const data = await get2(API_ENDPOINTS.USERS.CURRENT);
+  if (!data) {
+    throw new Error(ERROR_MESSAGES$1.USER_DATA);
+  }
+  if (data.token?.accessToken && typeof data.token.accessToken === "string") {
+    setCustomToken(data.token.accessToken);
+  }
+  return data;
+};
+const loadHeaderData = async (get2, userId, culture, lastAccess) => {
+  const queryParams = {
+    v: new Date(lastAccess || 0).getTime(),
+    id: userId,
+    lang: culture
+  };
+  const queryString = buildQueryString(queryParams);
+  const url = `${API_ENDPOINTS.HEADER}?${queryString}`;
+  const response = await get2(url);
+  if (!response) {
+    throw new Error(ERROR_MESSAGES$1.NAVIGATION);
+  }
+  return response;
+};
+const loadSiteMapData = async (get2, userId, culture, lastAccess) => {
+  const pathname = window.location.pathname;
+  const baseUrl = isPdmPath(pathname) ? API_ENDPOINTS.SITEMAP.PDM : API_ENDPOINTS.SITEMAP.DEFAULT;
+  const queryParams = {
+    v: new Date(lastAccess || 0).getTime(),
+    id: userId,
+    lang: culture
+  };
+  const queryString = buildQueryString(queryParams);
+  const url = `${baseUrl}?${queryString}`;
+  const response = await get2(url);
+  if (!response) {
+    throw new Error(ERROR_MESSAGES$1.SITEMAP);
+  }
+  return response;
+};
+const loadUserDetails = async (get2) => {
+  try {
+    const response = await get2(
+      API_ENDPOINTS.USERS.CURRENT,
+      { headers: HTTP_HEADERS.NO_CACHE }
+    );
+    if (!response) {
+      throw new Error(ERROR_MESSAGES$1.USER_DETAILS);
+    }
+    return mapUserDetailsFromResponse(response);
+  } catch (error) {
+    console.warn("Erro ao carregar detalhes do usuário, usando valores padrão:", error);
+    return {
+      user: {},
+      customer: {},
+      locale: "",
+      token: "",
+      permissions: {},
+      precisions: {},
+      links: [],
+      virtualEntities: []
+    };
+  }
+};
+const changeLocale = async (post, locale, gtm) => {
+  gtm.push({
+    event: "MS_perfilLocale",
+    selectOp: locale
+  });
+  await post(API_ENDPOINTS.USERS.CHANGE_LANGUAGE, { culture: locale });
+  window.location.reload();
+};
+const mapProfileLinks = (profileItems, gtm, onChangeLocale) => {
+  const handleProfileLinks = [...profileItems];
+  const localeLinks = handleProfileLinks.find((item) => item.name === "locale");
+  if (localeLinks?.children) {
+    const handleLinks = localeLinks.children.map(({ active, children, label, url }) => {
+      const locale = url?.match(/[a-z]{2}-[A-Z]{2}/g)?.[0];
+      return {
+        active,
+        children,
+        label,
+        click: locale ? () => onChangeLocale(locale) : void 0
+      };
+    });
+    handleProfileLinks.forEach((item) => {
+      if (item.name === "locale") {
+        item.children = handleLinks;
+      }
+    });
+  }
+  return handleProfileLinks.map((item) => {
+    if (item.name === "locale") {
+      return { ...item, children: item.children };
+    }
+    return {
+      ...item,
+      click: createProfileItemClickHandler(item, gtm)
+    };
+  });
+};
+const ERROR_STATUS = {
+  FORBIDDEN: 403,
+  UNAUTHORIZED: 401
+};
+const ERROR_MESSAGES = {
+  FORBIDDEN: "⚠️ Acesso negado (403) - Usuário não autenticado, usando mock",
+  // refatorar
+  UNAUTHORIZED: "⚠️ Não autorizado (401) - Token inválido, usando mock",
+  GENERIC: "⚠️ Erro ao carregar dados do usuário:",
+  HEADER_LOAD: "❌ Erro ao carregar dados do header:",
+  LOCALE_CHANGE: "Erro ao mudar idioma:"
+};
+function useHeader(activeLinkName, gtm) {
+  const { get: get2, post, setCustomToken } = useHttp();
+  const headerStore = useHeaderStore();
+  const storeUser = toRef$2(headerStore, "user");
+  const handleUserDataError = (error) => {
+    const errorObj = error;
+    if (errorObj?.response?.status === ERROR_STATUS.FORBIDDEN) {
+      console.warn(ERROR_MESSAGES.FORBIDDEN);
+    } else if (errorObj?.response?.status === ERROR_STATUS.UNAUTHORIZED) {
+      console.warn(ERROR_MESSAGES.UNAUTHORIZED);
+    } else {
+      console.warn(
+        ERROR_MESSAGES.GENERIC,
+        errorObj?.message || "Erro desconhecido",
+        "usando mock"
       );
-      navigationStore.setBrand(response.brand);
-      const mappedProfileItems = mapProfileItems(
-        response.profileItems,
+    }
+  };
+  const handleUserDataLoad = async () => {
+    try {
+      const userData = await loadUserData(get2, setCustomToken);
+      headerStore.setUser(userData);
+    } catch (error) {
+      handleUserDataError(error);
+    }
+  };
+  const handleNavigationItemsLoad = async () => {
+    try {
+      const response = await loadHeaderData(
+        get2,
+        headerStore.user.value.id,
+        headerStore.user.value.culture || "",
+        storeUser.value.lastAccess
+      );
+      headerStore.setUser({
+        ...headerStore.user.value,
+        ...response.user
+      });
+      const mappedNavigationItems = mapNavigationItems(
+        response.navItems,
+        activeLinkName,
         gtm
       );
-      navigationStore.setProfileItems(mappedProfileItems);
+      headerStore.setNavigationItems(mappedNavigationItems);
+      headerStore.setHeaderLinks(mapHeaderLinks(response.navItems, gtm));
+      headerStore.setBrand(response.brand);
+      const handleChangeLocale2 = async (locale) => {
+        await changeLocale(post, locale, gtm);
+      };
+      const mappedProfileItems = mapProfileLinks(
+        response.profileItems,
+        gtm,
+        handleChangeLocale2
+      );
+      headerStore.setProfileItems(mappedProfileItems);
     } catch {
       console.warn("Não foi possível carregar itens de navegação, usando mock");
     }
   };
-  const loadSiteMap = async () => {
+  const handleSiteMapLoad = async () => {
     try {
-      const pathname = window.location.pathname;
-      const isPdm = pathname.includes("/MEPDM/") || pathname.includes("/PDM/");
-      const url = isPdm ? "/do/api/v1/sitemap/pdm" : "/do/api/v1/sitemap";
-      const query = `?v=${new Date(storeUser.value.lastAccess || 0).getTime()}&id=${storeUser.value.id}&lang=${storeUser.value.culture}`;
-      const response = await get2(`${url}${query}`);
-      if (!response) {
-        throw new Error("Falha ao carregar sitemap");
-      }
+      const response = await loadSiteMapData(
+        get2,
+        storeUser.value.id,
+        storeUser.value.culture || "",
+        storeUser.value.lastAccess
+      );
+      siteMapChildrenMapper(
+        response,
+        response.name,
+        gtm
+      );
       const mappedSiteMapItems = mapSiteMapItems(
         response.children,
         response.name,
         gtm
       );
-      navigationStore.setSiteMapItems(mappedSiteMapItems);
+      headerStore.setSiteMapItems(mappedSiteMapItems);
     } catch {
       console.warn("Não foi possível carregar sitemap, usando mock");
     }
   };
   const initializeData = async () => {
     try {
-      await loadUserData();
+      await handleUserDataLoad();
       await Promise.allSettled([
-        loadNavigationItems(),
-        loadSiteMap()
-        // loadCartItems(),
-        // loadAllBadges()
+        handleNavigationItemsLoad(),
+        handleSiteMapLoad()
       ]);
     } catch (error) {
-      console.error("❌ Erro ao carregar dados do header:", error);
+      console.error(ERROR_MESSAGES.HEADER_LOAD, error);
+    }
+  };
+  const handleChangeLocale = async (locale) => {
+    try {
+      await changeLocale(post, locale, gtm);
+      headerStore.setUser({
+        ...headerStore.user.value,
+        culture: locale
+      });
+    } catch (error) {
+      console.error(ERROR_MESSAGES.LOCALE_CHANGE, error);
     }
   };
   return {
-    initializeData
+    initializeData,
+    loadUserDetails: () => loadUserDetails(get2),
+    changeLocale: handleChangeLocale
   };
 }
 const _hoisted_1 = { class: "flex items-center justify-between" };
@@ -29469,16 +29672,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const { initializeData } = useHeaderData(
+    const { initializeData } = useHeader(
       props.activeLinkName || "home",
       props.gtm || { push: (e) => console.log("click no gtm", e) }
     );
-    const navigationStore = useNavigationStore();
-    const storeUser = toRef$2(navigationStore, "user");
-    const storeNavigationItems = toRef$2(navigationStore, "navigationItems");
-    const storeBrand = toRef$2(navigationStore, "brand");
-    const storeProfileItems = toRef$2(navigationStore, "profileItems");
-    const storeSiteMapItems = toRef$2(navigationStore, "siteMapItems");
+    const headerStore = useHeaderStore();
+    const storeUser = toRef$2(headerStore, "user");
+    const storeNavigationItems = toRef$2(headerStore, "navigationItems");
+    const storeBrand = toRef$2(headerStore, "brand");
+    const storeProfileItems = toRef$2(headerStore, "profileItems");
+    const storeSiteMapItems = toRef$2(headerStore, "siteMapItems");
     const backdropState = ref({
       visible: false,
       zIndex: 9999

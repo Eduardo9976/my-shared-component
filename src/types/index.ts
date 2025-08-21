@@ -91,3 +91,4 @@ export type GTM = {
 }
 
 export * from './http'
+export * from './header'
