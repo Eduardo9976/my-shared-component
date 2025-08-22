@@ -16730,6 +16730,60 @@ function debounceFilter(ms, options = {}) {
   };
   return filter2;
 }
+function throttleFilter(...args) {
+  let lastExec = 0;
+  let timer;
+  let isLeading = true;
+  let lastRejector = noop$1;
+  let lastValue;
+  let ms;
+  let trailing;
+  let leading;
+  let rejectOnCancel;
+  if (!isRef(args[0]) && typeof args[0] === "object")
+    ({ delay: ms, trailing = true, leading = true, rejectOnCancel = false } = args[0]);
+  else
+    [ms, trailing = true, leading = true, rejectOnCancel = false] = args;
+  const clear = () => {
+    if (timer) {
+      clearTimeout(timer);
+      timer = void 0;
+      lastRejector();
+      lastRejector = noop$1;
+    }
+  };
+  const filter2 = (_invoke) => {
+    const duration = toValue$2(ms);
+    const elapsed = Date.now() - lastExec;
+    const invoke2 = () => {
+      return lastValue = _invoke();
+    };
+    clear();
+    if (duration <= 0) {
+      lastExec = Date.now();
+      return invoke2();
+    }
+    if (elapsed > duration && (leading || !isLeading)) {
+      lastExec = Date.now();
+      invoke2();
+    } else if (trailing) {
+      lastValue = new Promise((resolve2, reject) => {
+        lastRejector = rejectOnCancel ? reject : resolve2;
+        timer = setTimeout(() => {
+          lastExec = Date.now();
+          isLeading = true;
+          resolve2(invoke2());
+          clear();
+        }, Math.max(0, duration - elapsed));
+      });
+    }
+    if (!leading && !timer)
+      timer = setTimeout(() => isLeading = true, duration);
+    isLeading = false;
+    return lastValue;
+  };
+  return filter2;
+}
 function getLifeCycleTarget(target) {
   return getCurrentInstance();
 }
@@ -16737,6 +16791,13 @@ function getLifeCycleTarget(target) {
 function useDebounceFn(fn, ms = 200, options = {}) {
   return createFilterWrapper(
     debounceFilter(ms, options),
+    fn
+  );
+}
+// @__NO_SIDE_EFFECTS__
+function useThrottleFn(fn, ms = 200, trailing = false, leading = true, rejectOnCancel = false) {
+  return createFilterWrapper(
+    throttleFilter(ms, trailing, leading, rejectOnCancel),
     fn
   );
 }
@@ -23486,8 +23547,13 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
     };
   }
 });
-function isExternalUrl(url) {
-  return /^https?:\/\//i.test(url);
+function useIsExternalUrl() {
+  const isExternalUrl = (url) => {
+    return /^https?:\/\//i.test(url);
+  };
+  return {
+    isExternalUrl
+  };
 }
 const enUS = {
   theHeader: {
@@ -23628,15 +23694,9 @@ function useTranslations() {
       console.warn(`Unsupported locale: ${locale}`);
     }
   };
-  const getCurrentLocale = computed(() => globalLocale.value);
-  const getSupportedLocales = computed(
-    () => Object.keys(translations)
-  );
   return {
     t,
-    setLocale,
-    getCurrentLocale,
-    getSupportedLocales
+    setLocale
   };
 }
 const _hoisted_1$a = { class: "max-h-[280px] overflow-y-auto" };
@@ -23649,6 +23709,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const { t } = useTranslations();
+    const { isExternalUrl } = useIsExternalUrl();
     const props = __props;
     const searchTerm = ref("");
     const normalize = (text) => text.trim().toLowerCase();
@@ -25952,735 +26013,6 @@ function moveArrayElement(list, from, to, e = null) {
     });
   }
 }
-const initialState = {
-  user: {},
-  navigationItems: [],
-  customNavigationItems: [],
-  siteMapItems: [],
-  brand: {},
-  profileItems: [],
-  headerLinks: []
-};
-const state = reactive(initialState);
-const navigationItemsWithoutSeparators = computed(
-  () => state.navigationItems.filter((item) => !isSeparator(item))
-);
-const isSeparator = (item) => "separator" in item && item.separator === true;
-const setUser = (user) => {
-  state.user = { ...user };
-};
-const setBrand = (brand) => {
-  state.brand = { ...brand };
-};
-const setProfileItems = (items) => {
-  state.profileItems = items;
-};
-const setHeaderLinks = (headerLinks) => {
-  state.headerLinks = headerLinks;
-};
-const setNavigationItems = (items) => {
-  state.navigationItems = items;
-  state.customNavigationItems = navigationItemsWithoutSeparators.value;
-};
-const setCustomNavigationItems = (items) => {
-  const updatedItems = [];
-  let itemIndex = 0;
-  for (const currentItem of state.navigationItems) {
-    updatedItems.push(
-      isSeparator(currentItem) ? currentItem : items[itemIndex++] ?? currentItem
-    );
-  }
-  state.customNavigationItems = items;
-  state.navigationItems = updatedItems;
-};
-const setSiteMapItems = (items) => {
-  state.siteMapItems = items;
-};
-const findNavigationItemById = (id) => {
-  if (!id) return void 0;
-  return state.navigationItems.find(
-    (item) => !isSeparator(item) && item.id === id
-  );
-};
-const updateNavigationItemsVisible = (item, visible) => {
-  if (!item.id) return;
-  const targetItem = findNavigationItemById(item.id);
-  if (targetItem) {
-    targetItem.visible = visible;
-    state.navigationItems = [...state.navigationItems];
-  }
-};
-const resetState = () => {
-  Object.assign(state, initialState);
-};
-function useHeaderStore() {
-  return {
-    ...toRefs(state),
-    navigationItemsWithoutSeparators,
-    setUser,
-    setBrand,
-    setProfileItems,
-    setHeaderLinks,
-    setNavigationItems,
-    setCustomNavigationItems,
-    setSiteMapItems,
-    isSeparator,
-    findNavigationItemById,
-    updateNavigationItemsVisible,
-    resetState
-  };
-}
-const _hoisted_1$9 = { class: "flex flex-col" };
-const _hoisted_2$5 = { class: "text-sm text-primary py-2 px-6 bg-[var(--color-blue-50)] rounded-lg mb-2 flex justify-between font-medium" };
-const _hoisted_3$3 = { class: "flex items-center gap-2 text-[var(--color-neutral-400)] h-12 pl-2" };
-const _hoisted_4$1 = { class: "icon-container" };
-const _hoisted_5$1 = ["href", "target"];
-const _hoisted_6$1 = {
-  key: 1,
-  class: "text-label text-sm flex-1"
-};
-const _hoisted_7 = ["onClick"];
-const _sfc_main$a = /* @__PURE__ */ defineComponent({
-  __name: "TheHeaderTabsNavigationItems",
-  setup(__props) {
-    const { t } = useTranslations();
-    const {
-      customNavigationItems,
-      setCustomNavigationItems: setCustomNavigationItems2,
-      updateNavigationItemsVisible: updateNavigationItemsVisible2
-    } = useHeaderStore();
-    const el = useTemplateRef("el");
-    const list = shallowRef(customNavigationItems.value || []);
-    const getCountNavigationItems = computed(() => {
-      const total = customNavigationItems.value?.length;
-      const actives = customNavigationItems.value?.filter((i2) => i2.visible).length;
-      return `${actives}/${total}`;
-    });
-    const getTarget = (url) => {
-      return isExternalUrl(url) ? "_blank" : "_self";
-    };
-    function addDragClasses(item) {
-      item.classList.add(
-        "border",
-        "border-[var(--ui-primary)]",
-        "text-[var(--ui-primary)]",
-        "rounded-lg"
-      );
-      const textLabel = item.querySelector(".text-label");
-      if (textLabel) {
-        textLabel.classList.add("text-[var(--ui-primary)]");
-      }
-      const iconContainer = item.querySelector(".icon-container");
-      if (iconContainer) {
-        iconContainer.classList.add("text-[var(--ui-primary)]");
-      }
-      const buttonIcon = item.querySelector(".button-icon");
-      if (buttonIcon) {
-        buttonIcon.classList.add("text-[var(--ui-primary)]");
-      }
-    }
-    function removeDragClasses(item) {
-      item.classList.remove(
-        "border",
-        "border-[var(--ui-primary)]",
-        "text-[var(--ui-primary)]",
-        "rounded-lg"
-      );
-      const textLabel = item.querySelector(".text-label");
-      if (textLabel) {
-        textLabel.classList.remove("text-[var(--ui-primary)]");
-      }
-      const iconContainer = item.querySelector(".icon-container");
-      if (iconContainer) {
-        iconContainer.classList.remove("text-[var(--ui-primary)]");
-      }
-      const buttonIcon = item.querySelector(".button-icon");
-      if (buttonIcon) {
-        buttonIcon.classList.remove("text-[var(--ui-primary)]");
-      }
-    }
-    useSortable(el, list, {
-      animation: 150,
-      scroll: true,
-      scrollSensitivity: 30,
-      scrollSpeed: 10,
-      onStart: (evt) => addDragClasses(evt.item),
-      onEnd: (evt) => removeDragClasses(evt.item),
-      onChange: () => {
-      }
-    });
-    watch(list, (newList) => setCustomNavigationItems2(toRaw(newList)));
-    function handleClick(item) {
-      const currentVisibility = item.visible ?? false;
-      updateNavigationItemsVisible2(item, !currentVisibility);
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1$9, [
-        createBaseVNode("div", _hoisted_2$5, [
-          createBaseVNode("p", null, toDisplayString(unref(t)("theHeader.tabs.navigationItems.pinnedApps")), 1),
-          createBaseVNode("span", null, toDisplayString(getCountNavigationItems.value), 1)
-        ]),
-        createBaseVNode("div", {
-          ref_key: "el",
-          ref: el,
-          class: "overflow-y-auto max-h-[280px]"
-        }, [
-          (openBlock(true), createElementBlock(Fragment, null, renderList(list.value, (item, index2) => {
-            return openBlock(), createElementBlock("div", {
-              key: index2,
-              class: "hover:bg-gray-500/10 transition-colors cursor-pointer border-b border-[var(--color-neutral-100)] mr-2"
-            }, [
-              createBaseVNode("div", _hoisted_3$3, [
-                createBaseVNode("div", _hoisted_4$1, [
-                  createVNode(_sfc_main$c, {
-                    icon: "me-icon-s icon-grid-horizontal",
-                    class: "text-inherit",
-                    "custom-size": 12
-                  })
-                ]),
-                item.url ? (openBlock(), createElementBlock("a", {
-                  key: 0,
-                  href: item.url,
-                  target: getTarget(item.url),
-                  class: "text-label text-sm no-underline flex-1",
-                  onClick: _cache[0] || (_cache[0] = withModifiers(() => {
-                  }, ["stop"]))
-                }, toDisplayString(item.label), 9, _hoisted_5$1)) : (openBlock(), createElementBlock("span", _hoisted_6$1, toDisplayString(item.label), 1)),
-                !item?.siteMap ? (openBlock(), createElementBlock("button", {
-                  key: 2,
-                  class: "ml-auto size-12",
-                  onClick: withModifiers(() => handleClick(item), ["stop"])
-                }, [
-                  createVNode(_sfc_main$c, {
-                    icon: "me-icon-l icon-eye-slash",
-                    class: "button-icon",
-                    "custom-size": 14,
-                    color: item.visible ? "var(--ui-primary)" : "var(--color-neutral-200)"
-                  }, null, 8, ["color"])
-                ], 8, _hoisted_7)) : createCommentVNode("", true)
-              ])
-            ]);
-          }), 128))
-        ], 512)
-      ]);
-    };
-  }
-});
-const _hoisted_1$8 = { class: "p-4 w-[384px]" };
-const _hoisted_2$4 = { class: "p-4 text-center text-gray-500" };
-const _hoisted_3$2 = { class: "p-4 text-center text-gray-500" };
-const _sfc_main$9 = /* @__PURE__ */ defineComponent({
-  __name: "TheHeaderTabs",
-  props: {
-    siteMapItems: { type: Array }
-  },
-  setup(__props) {
-    const { t } = useTranslations();
-    const props = __props;
-    const items = ref([
-      {
-        label: t("theHeader.tabs.othersFuncionality"),
-        slot: "siteMapItems"
-      }
-    ]);
-    return (_ctx, _cache) => {
-      const _component_UTabs = _sfc_main$f;
-      return openBlock(), createElementBlock("div", _hoisted_1$8, [
-        createVNode(_component_UTabs, {
-          items: items.value,
-          class: "w-full",
-          size: "xs",
-          variant: "pill",
-          color: "neutral",
-          ui: {
-            list: "grid grid-col w-full",
-            trigger: "flex-1 text-center cursor-pointer data-[state=active]:bg-white data-[state=active]:text-gray-900 focus:outline-none focus-visible:outline-none",
-            indicator: "bg-white"
-          }
-        }, {
-          navigationItems: withCtx(() => [
-            createBaseVNode("keep-alive", null, [
-              (openBlock(), createBlock(Suspense, null, {
-                fallback: withCtx(() => [
-                  createBaseVNode("div", _hoisted_2$4, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
-                ]),
-                default: withCtx(() => [
-                  createVNode(_sfc_main$a)
-                ]),
-                _: 1
-              }))
-            ])
-          ]),
-          siteMapItems: withCtx(() => [
-            createBaseVNode("keep-alive", null, [
-              (openBlock(), createBlock(Suspense, null, {
-                fallback: withCtx(() => [
-                  createBaseVNode("div", _hoisted_3$2, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
-                ]),
-                default: withCtx(() => [
-                  createVNode(_sfc_main$b, {
-                    siteMapItems: props.siteMapItems
-                  }, null, 8, ["siteMapItems"])
-                ]),
-                _: 1
-              }))
-            ])
-          ]),
-          _: 1
-        }, 8, ["items"])
-      ]);
-    };
-  }
-});
-const _hoisted_1$7 = { class: "relative flex items-center justify-center" };
-const _hoisted_2$3 = { class: "text-xs py-[6px] text-[var(--header-icon-color)] whitespace-nowrap" };
-const activeClass = "after:content-[''] after:bg-[var(--header-icon-color)] after:h-1 after:rounded-full after:absolute after:block after:w-[80%] after:bottom-0 after:left-1/2 after:-translate-x-1/2";
-const _sfc_main$8 = /* @__PURE__ */ defineComponent({
-  __name: "TheHeaderNavigationItemContent",
-  props: {
-    iconColor: { type: String },
-    id: { type: String },
-    icon: { type: [String, null] },
-    label: { type: [String, null] },
-    active: { type: Boolean },
-    click: { type: Function },
-    siteMap: { type: [Boolean, null] },
-    linkName: { type: [String, null] },
-    url: { type: [String, null] },
-    target: { type: [String, null] },
-    badgeTotalUrl: { type: [String, null] },
-    badgeEvent: { type: [String, null] },
-    badge: { type: [Object, null] },
-    visible: { type: Boolean }
-  },
-  setup(__props) {
-    const props = __props;
-    const isLink = computed(() => Boolean(props.url));
-    function handleClick() {
-      props.click?.(props);
-    }
-    return (_ctx, _cache) => {
-      const _component_UChip = _sfc_main$k;
-      return openBlock(), createBlock(resolveDynamicComponent(isLink.value ? "a" : "button"), {
-        href: isLink.value ? _ctx.url : void 0,
-        target: isLink.value ? _ctx.target ?? "_self" : void 0,
-        type: !isLink.value ? "button" : void 0,
-        class: normalizeClass(["grid place-items-center gap-1 px-2 py-1 cursor-pointer relative transition-colors duration-200 hover:bg-[rgba(0,0,0,0.1)] text-[var(--color-neutral-300)] text-center", [
-          isLink.value ? "no-underline" : "border-0 bg-transparent",
-          _ctx.active && activeClass
-        ]]),
-        style: normalizeStyle({ "--header-icon-color": _ctx.iconColor }),
-        onClick: withModifiers(handleClick, ["prevent", "stop"])
-      }, {
-        default: withCtx(() => [
-          createBaseVNode("div", _hoisted_1$7, [
-            createVNode(_sfc_main$c, {
-              icon: _ctx.icon || "",
-              "custom-size": 24,
-              color: _ctx.iconColor
-            }, null, 8, ["icon", "color"]),
-            _ctx.badge?.text ? (openBlock(), createBlock(_component_UChip, {
-              key: 0,
-              text: _ctx.badge.text,
-              color: "error",
-              size: "3xl",
-              position: "top-right",
-              inset: false,
-              ui: {
-                base: "px-2 py-3 ring-0 font-semibold",
-                root: "translate-x-2"
-              }
-            }, null, 8, ["text"])) : createCommentVNode("", true)
-          ]),
-          createBaseVNode("p", _hoisted_2$3, toDisplayString(_ctx.label), 1)
-        ]),
-        _: 1
-      }, 8, ["href", "target", "type", "class", "style"]);
-    };
-  }
-});
-const _hoisted_1$6 = {
-  key: 0,
-  class: "relative flex"
-};
-const _sfc_main$7 = /* @__PURE__ */ defineComponent({
-  __name: "TheHeaderNavigationItem",
-  props: {
-    iconColor: { type: String },
-    siteMapItems: { type: Array },
-    id: { type: String },
-    icon: { type: [String, null] },
-    label: { type: [String, null] },
-    active: { type: Boolean },
-    click: { type: Function },
-    siteMap: { type: [Boolean, null] },
-    linkName: { type: [String, null] },
-    url: { type: [String, null] },
-    target: { type: [String, null] },
-    badgeTotalUrl: { type: [String, null] },
-    badgeEvent: { type: [String, null] },
-    badge: { type: [Object, null] },
-    visible: { type: Boolean }
-  },
-  setup(__props) {
-    const isOpen = ref(false);
-    const headerBackdrop = inject("headerBackdrop");
-    function handlePopoverUpdate(open) {
-      isOpen.value = open;
-      if (open) {
-        headerBackdrop?.show(9999);
-      } else {
-        headerBackdrop?.close();
-      }
-    }
-    watch(isOpen, (newValue, oldValue) => {
-      if (oldValue && !newValue) {
-        headerBackdrop?.close();
-      }
-    });
-    return (_ctx, _cache) => {
-      const _component_TheHeaderTabs = _sfc_main$9;
-      const _component_UPopover = _sfc_main$h;
-      return _ctx.siteMap ? (openBlock(), createElementBlock("div", _hoisted_1$6, [
-        createVNode(_component_UPopover, {
-          open: isOpen.value,
-          ui: {
-            content: "z-[10001]",
-            arrow: "z-[10001]"
-          },
-          mode: "click",
-          arrow: "",
-          "onUpdate:open": handlePopoverUpdate
-        }, {
-          content: withCtx(() => [
-            createVNode(_component_TheHeaderTabs, { siteMapItems: _ctx.siteMapItems }, null, 8, ["siteMapItems"])
-          ]),
-          default: withCtx(() => [
-            createVNode(_sfc_main$8, normalizeProps(guardReactiveProps(_ctx.$props)), null, 16)
-          ]),
-          _: 1
-        }, 8, ["open"])
-      ])) : (openBlock(), createBlock(_sfc_main$8, normalizeProps(mergeProps({ key: 1 }, _ctx.$props)), null, 16));
-    };
-  }
-});
-const _hoisted_1$5 = { class: "ml-auto flex justify-center gap-6" };
-const _sfc_main$6 = /* @__PURE__ */ defineComponent({
-  __name: "TheHeaderNavigation",
-  props: {
-    navigationItems: { type: Array },
-    iconColor: { type: String },
-    siteMapItems: { type: Array }
-  },
-  setup(__props) {
-    const props = __props;
-    const { isSeparator: isSeparator2 } = useHeaderStore();
-    const filteredNavigationItems = computed(() => {
-      const filtered = [];
-      let lastWasSeparator = false;
-      for (const item of props.navigationItems || []) {
-        if (isSeparator2(item)) {
-          if (lastWasSeparator) continue;
-          filtered.push(item);
-          lastWasSeparator = true;
-        } else if (item.visible !== false) {
-          filtered.push(item);
-          lastWasSeparator = false;
-        }
-      }
-      return filtered;
-    });
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1$5, [
-        (openBlock(true), createElementBlock(Fragment, null, renderList(filteredNavigationItems.value, (item, index2) => {
-          return openBlock(), createElementBlock(Fragment, {
-            key: unref(isSeparator2)(item) ? `separator-${index2}` : item.label
-          }, [
-            unref(isSeparator2)(item) ? (openBlock(), createElementBlock("div", {
-              key: 0,
-              class: "my-2 border-l",
-              style: normalizeStyle({ borderColor: _ctx.iconColor })
-            }, null, 4)) : item.visible ?? false ? (openBlock(), createBlock(_sfc_main$7, mergeProps({
-              key: 1,
-              ref_for: true
-            }, item, {
-              iconColor: _ctx.iconColor,
-              siteMapItems: _ctx.siteMapItems
-            }), null, 16, ["iconColor", "siteMapItems"])) : createCommentVNode("", true)
-          ], 64);
-        }), 128))
-      ]);
-    };
-  }
-});
-const _hoisted_1$4 = { class: "cursor-pointer overflow-hidden rounded-bl-lg" };
-const _hoisted_2$2 = ["href", "onClick"];
-const _sfc_main$5 = /* @__PURE__ */ defineComponent({
-  __name: "TheHeaderAvatarMenuItem",
-  props: {
-    profileItems: { type: Array },
-    setVisibleToFalse: { type: Function },
-    nested: { type: Boolean }
-  },
-  setup(__props) {
-    const props = __props;
-    function accordionItems(item) {
-      const { icon, ...rest } = item;
-      return [
-        {
-          ...rest,
-          label: icon ? `${icon.class} ${item.label || ""}` : item.label || "",
-          children: item.children || []
-        }
-      ];
-    }
-    function handleClick(item) {
-      const { url, click } = item;
-      const target = item.target ?? "_blank";
-      if (click) {
-        click();
-        props.setVisibleToFalse();
-        return;
-      }
-      if (url) {
-        if (isExternalUrl(url)) {
-          window.open(url, target, "noopener,noreferrer");
-        } else {
-          window.location.href = url;
-        }
-        props.setVisibleToFalse();
-        return;
-      }
-    }
-    return (_ctx, _cache) => {
-      const _component_TheHeaderAvatarMenuItem = resolveComponent("TheHeaderAvatarMenuItem", true);
-      const _component_UAccordion = _sfc_main$e;
-      return openBlock(), createElementBlock("ul", _hoisted_1$4, [
-        (openBlock(true), createElementBlock(Fragment, null, renderList(props.profileItems, (item, index2) => {
-          return openBlock(), createElementBlock("li", { key: index2 }, [
-            item.children ? (openBlock(), createBlock(_component_UAccordion, {
-              key: 0,
-              items: accordionItems(item),
-              ui: {
-                body: "p-0",
-                trigger: `py-2 px-4 hover:bg-blue-100 hover:text-primary flex navigationItems-center gap-2 cursor-pointer font-normal ${item.active ? "text-primary" : ""}`
-              }
-            }, {
-              body: withCtx(({ item: accordionItem }) => [
-                createVNode(_component_TheHeaderAvatarMenuItem, {
-                  "profile-items": accordionItem.children || [],
-                  "set-visible-to-false": _ctx.setVisibleToFalse,
-                  nested: ""
-                }, null, 8, ["profile-items", "set-visible-to-false"])
-              ]),
-              _: 2
-            }, 1032, ["items", "ui"])) : (openBlock(), createElementBlock("a", {
-              key: 1,
-              class: "flex h-10 cursor-pointer items-center gap-2 px-4 py-2 group hover:text-primary hover:bg-blue-100",
-              href: item.url || "#",
-              onClick: withModifiers(() => handleClick(item), ["prevent", "stop"])
-            }, [
-              createBaseVNode("span", {
-                class: normalizeClass(["text-gray-500 group-hover:text-primary", {
-                  "text-[var(--color-neutral-400)] font-semibold": props.nested && !item.active
-                }])
-              }, toDisplayString(item.label), 3),
-              createBaseVNode("span", null, [
-                item.icon ? (openBlock(), createBlock(_sfc_main$c, {
-                  key: 0,
-                  icon: item.icon.class,
-                  "custom-size": 16,
-                  color: item.icon.color,
-                  class: "leading-none"
-                }, null, 8, ["icon", "color"])) : createCommentVNode("", true)
-              ])
-            ], 8, _hoisted_2$2))
-          ]);
-        }), 128))
-      ]);
-    };
-  }
-});
-const _sfc_main$4 = /* @__PURE__ */ defineComponent({
-  __name: "TheHeaderAvatarChip",
-  props: {
-    user: { type: Object }
-  },
-  setup(__props) {
-    const props = __props;
-    return (_ctx, _cache) => {
-      const _component_MeIcon = _sfc_main$c;
-      const _component_UChip = _sfc_main$k;
-      return props?.user?.badge?.icon ? (openBlock(), createBlock(_component_UChip, {
-        key: 0,
-        color: "error",
-        size: "3xl",
-        position: "bottom-right",
-        inset: false,
-        ui: {
-          base: "p-2 ring-0 font-semibold",
-          root: "translate-x-1 translate-y-3"
-        }
-      }, {
-        content: withCtx(() => [
-          props.user?.badge.icon ? (openBlock(), createBlock(_component_MeIcon, {
-            key: 0,
-            icon: props.user?.badge.icon,
-            color: props.user?.badge.variant || "danger"
-          }, null, 8, ["icon", "color"])) : createCommentVNode("", true)
-        ]),
-        _: 1
-      })) : createCommentVNode("", true);
-    };
-  }
-});
-const _hoisted_1$3 = { class: "relative flex select-none flex-col items-end" };
-const _hoisted_2$1 = { class: "flex justify-between gap-4 px-4 py-2 align-center" };
-const _hoisted_3$1 = { class: "grid w-[168px]" };
-const _hoisted_4 = { class: "mb-0 truncate text-gray-500" };
-const _hoisted_5 = { class: "block truncate text-xs text-gray-400" };
-const _hoisted_6 = { class: "text-2xl font-normal no-underline text-white" };
-const _sfc_main$3 = /* @__PURE__ */ defineComponent({
-  __name: "TheHeaderAvatarMenu",
-  props: {
-    user: { type: Object },
-    profileItems: { type: Array },
-    setVisibleToFalse: { type: Function }
-  },
-  setup(__props) {
-    const menuAvatar = useTemplateRef("menuAvatar");
-    const avatar = useTemplateRef("avatar");
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1$3, [
-        createBaseVNode("div", {
-          ref_key: "menuAvatar",
-          ref: menuAvatar,
-          class: "absolute rounded-bl-lg bg-white text-sm top-[-1px] right-[-8px]"
-        }, [
-          createBaseVNode("div", _hoisted_2$1, [
-            createBaseVNode("div", _hoisted_3$1, [
-              createBaseVNode("p", _hoisted_4, toDisplayString(_ctx.user.name), 1),
-              createBaseVNode("small", _hoisted_5, toDisplayString(_ctx.user.role || _ctx.user.email || ""), 1)
-            ]),
-            createBaseVNode("div", {
-              ref_key: "avatar",
-              ref: avatar,
-              class: "flex items-center justify-center size-12 rounded-full bg-primary mx-auto border-transparent border"
-            }, [
-              createBaseVNode("span", _hoisted_6, toDisplayString(_ctx.user.acronym), 1),
-              createVNode(_sfc_main$4, { user: _ctx.user }, null, 8, ["user"])
-            ], 512)
-          ]),
-          createVNode(_sfc_main$5, {
-            profileItems: _ctx.profileItems,
-            "set-visible-to-false": _ctx.setVisibleToFalse
-          }, null, 8, ["profileItems", "set-visible-to-false"])
-        ], 512)
-      ]);
-    };
-  }
-});
-const _hoisted_1$2 = { class: "group py-2 px-4 hover:bg-[rgba(0,0,0,0.1)] cursor-pointer" };
-const _hoisted_2 = { class: "flex items-center justify-center size-12 rounded-full bg-[rgba(0,0,0,0.4)] mx-auto border-transparent border group-hover:border-white group-hover:border-2" };
-const _hoisted_3 = { class: "text-2xl uppercase" };
-const _sfc_main$2 = /* @__PURE__ */ defineComponent({
-  __name: "TheHeaderAvatar",
-  props: {
-    user: { type: Object },
-    profileItems: { type: Array }
-  },
-  setup(__props) {
-    const props = __props;
-    const visibleMenu = ref(false);
-    const headerBackdrop = inject("headerBackdrop");
-    function handlePopoverUpdate(open) {
-      if (open) {
-        headerBackdrop?.show(9999);
-      } else {
-        headerBackdrop?.close();
-      }
-    }
-    function setVisibleToFalse() {
-      visibleMenu.value = false;
-      headerBackdrop?.close();
-    }
-    watch(visibleMenu, (newValue) => {
-      if (!newValue) {
-        headerBackdrop?.close();
-      }
-    });
-    onBeforeUnmount(() => {
-      setVisibleToFalse();
-    });
-    return (_ctx, _cache) => {
-      const _component_UPopover = _sfc_main$h;
-      return openBlock(), createElementBlock("div", null, [
-        createVNode(_component_UPopover, {
-          open: visibleMenu.value,
-          "onUpdate:open": [
-            _cache[0] || (_cache[0] = ($event) => visibleMenu.value = $event),
-            handlePopoverUpdate
-          ],
-          content: {
-            align: "end",
-            side: "bottom",
-            sideOffset: -63
-          },
-          ui: {
-            content: "z-[10003]"
-          },
-          mode: "click"
-        }, {
-          content: withCtx(() => [
-            createVNode(_sfc_main$3, {
-              user: props.user,
-              profileItems: props.profileItems,
-              "set-visible-to-false": setVisibleToFalse
-            }, null, 8, ["user", "profileItems"])
-          ]),
-          default: withCtx(() => [
-            createBaseVNode("div", _hoisted_1$2, [
-              createBaseVNode("div", _hoisted_2, [
-                createBaseVNode("span", _hoisted_3, toDisplayString(props.user.acronym), 1),
-                createVNode(_sfc_main$4, {
-                  user: props.user
-                }, null, 8, ["user"])
-              ])
-            ])
-          ]),
-          _: 1
-        }, 8, ["open"])
-      ]);
-    };
-  }
-});
-const _hoisted_1$1 = { class: "size-full" };
-const _sfc_main$1 = /* @__PURE__ */ defineComponent({
-  __name: "AppBackdrop",
-  props: {
-    teleportTo: { default: "body", type: String },
-    class: { type: String },
-    zIndex: { default: 1e4, type: Number }
-  },
-  emits: ["click"],
-  setup(__props) {
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(Teleport, { to: _ctx.teleportTo }, [
-        createBaseVNode("div", {
-          class: normalizeClass([
-            "size-full fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.4)]",
-            __props.class
-          ]),
-          style: normalizeStyle({ zIndex: _ctx.zIndex })
-        }, [
-          createBaseVNode("div", _hoisted_1$1, [
-            renderSlot(_ctx.$slots, "default")
-          ])
-        ], 6)
-      ], 8, ["to"]);
-    };
-  }
-});
 function bind(fn, thisArg) {
   return function wrap() {
     return fn.apply(thisArg, arguments);
@@ -29263,6 +28595,795 @@ function useHttp() {
     clearCustomToken: httpService.clearCustomToken.bind(httpService)
   };
 }
+function useBadgeManager(pusher) {
+  const { get: get2 } = useHttp();
+  const state2 = reactive({
+    badges: {},
+    badgeLoader: {}
+  });
+  const channel = ref(null);
+  const setBadgeValue = (linkName, value) => {
+    state2.badges[linkName] = value;
+  };
+  const getBadgeValue2 = (linkName) => {
+    return state2.badges[linkName];
+  };
+  const setBadgesValue = async (headerLink) => {
+    if (!headerLink.badgeTotalUrl || !headerLink.linkName) return;
+    const response = await get2(headerLink.badgeTotalUrl);
+    if (response) {
+      const data = response;
+      setBadgeValue(headerLink.linkName, data?.total || 0);
+    }
+  };
+  const loadBadge = (headerLink) => {
+    if (!headerLink.linkName || !headerLink.badgeTotalUrl) return;
+    if (!state2.badgeLoader[headerLink.linkName]) {
+      const throttledFn = /* @__PURE__ */ useThrottleFn(setBadgesValue, 2e3);
+      state2.badgeLoader[headerLink.linkName] = throttledFn;
+    }
+    state2.badgeLoader[headerLink.linkName](headerLink);
+  };
+  const initBadge = (headerLink, userId) => {
+    if (!headerLink.badgeTotalUrl || !headerLink.linkName) return;
+    loadBadge(headerLink);
+    if (headerLink.badgeEvent && userId && pusher) {
+      try {
+        if (!channel.value) {
+          channel.value = pusher.subscribe(`user.${userId}`);
+        }
+        channel.value.unbind(headerLink.badgeEvent);
+        channel.value.bind(headerLink.badgeEvent, () => {
+          loadBadge(headerLink);
+        });
+      } catch (error) {
+        console.error(`Error configuring Pusher for ${headerLink.linkName}:`, error);
+      }
+    }
+  };
+  const initBadgesForLinks = (headerLinks, userId) => {
+    headerLinks.forEach((headerLink) => initBadge(headerLink, userId));
+  };
+  return {
+    setBadgeValue,
+    getBadgeValue: getBadgeValue2,
+    initBadgesForLinks
+  };
+}
+const initialState = {
+  user: {},
+  navigationItems: [],
+  customNavigationItems: [],
+  siteMapItems: [],
+  brand: {},
+  profileItems: [],
+  headerLinks: []
+};
+const state = reactive(initialState);
+const navigationItemsWithoutSeparators = computed(
+  () => state.navigationItems.filter((item) => !isSeparator(item))
+);
+const isSeparator = (item) => "separator" in item && item.separator === true;
+const setUser = (user, pusher) => {
+  state.user = { ...user };
+  if (user.id && state.headerLinks.length > 0) {
+    const { initBadgesForLinks } = useBadgeManager(pusher);
+    initBadgesForLinks(state.headerLinks, user.id);
+  }
+};
+const setBrand = (brand) => {
+  state.brand = { ...brand };
+};
+const setProfileItems = (items) => {
+  state.profileItems = items;
+};
+const setNavigationItems = (items) => {
+  state.navigationItems = items;
+  state.customNavigationItems = navigationItemsWithoutSeparators.value;
+};
+const setSiteMapItems = (items) => {
+  state.siteMapItems = items;
+};
+const setHeaderLinks = (headerLinks, pusher) => {
+  state.headerLinks = headerLinks;
+  if (state.user.id) {
+    const { initBadgesForLinks } = useBadgeManager(pusher);
+    initBadgesForLinks(headerLinks, state.user.id);
+  }
+};
+const updateBadgeValue = (linkName, value) => {
+  const { setBadgeValue } = useBadgeManager();
+  setBadgeValue(linkName, value);
+};
+const getBadgeValue = (linkName) => {
+  const { getBadgeValue: getBadge } = useBadgeManager();
+  return getBadge(linkName);
+};
+function useHeaderStore() {
+  return {
+    ...toRefs(state),
+    navigationItemsWithoutSeparators,
+    setUser,
+    setBrand,
+    setProfileItems,
+    setNavigationItems,
+    setSiteMapItems,
+    setHeaderLinks,
+    isSeparator,
+    updateBadgeValue,
+    getBadgeValue
+  };
+}
+const _hoisted_1$9 = { class: "flex flex-col" };
+const _hoisted_2$5 = { class: "text-sm text-primary py-2 px-6 bg-[var(--color-blue-50)] rounded-lg mb-2 flex justify-between font-medium" };
+const _hoisted_3$3 = { class: "flex items-center gap-2 text-[var(--color-neutral-400)] h-12 pl-2" };
+const _hoisted_4$1 = { class: "icon-container" };
+const _hoisted_5$1 = ["href", "target"];
+const _hoisted_6$1 = {
+  key: 1,
+  class: "text-label text-sm flex-1"
+};
+const _hoisted_7 = ["onClick"];
+const _sfc_main$a = /* @__PURE__ */ defineComponent({
+  __name: "TheHeaderTabsNavigationItems",
+  setup(__props) {
+    const { t } = useTranslations();
+    const { isExternalUrl } = useIsExternalUrl();
+    const {
+      customNavigationItems,
+      setCustomNavigationItems,
+      updateNavigationItemsVisible
+    } = useHeaderStore();
+    const el = useTemplateRef("el");
+    const list = shallowRef(customNavigationItems.value || []);
+    const getCountNavigationItems = computed(() => {
+      const total = customNavigationItems.value?.length;
+      const actives = customNavigationItems.value?.filter((i2) => i2.visible).length;
+      return `${actives}/${total}`;
+    });
+    const getTarget = (url) => {
+      return isExternalUrl(url) ? "_blank" : "_self";
+    };
+    function addDragClasses(item) {
+      item.classList.add(
+        "border",
+        "border-[var(--ui-primary)]",
+        "text-[var(--ui-primary)]",
+        "rounded-lg"
+      );
+      const textLabel = item.querySelector(".text-label");
+      if (textLabel) {
+        textLabel.classList.add("text-[var(--ui-primary)]");
+      }
+      const iconContainer = item.querySelector(".icon-container");
+      if (iconContainer) {
+        iconContainer.classList.add("text-[var(--ui-primary)]");
+      }
+      const buttonIcon = item.querySelector(".button-icon");
+      if (buttonIcon) {
+        buttonIcon.classList.add("text-[var(--ui-primary)]");
+      }
+    }
+    function removeDragClasses(item) {
+      item.classList.remove(
+        "border",
+        "border-[var(--ui-primary)]",
+        "text-[var(--ui-primary)]",
+        "rounded-lg"
+      );
+      const textLabel = item.querySelector(".text-label");
+      if (textLabel) {
+        textLabel.classList.remove("text-[var(--ui-primary)]");
+      }
+      const iconContainer = item.querySelector(".icon-container");
+      if (iconContainer) {
+        iconContainer.classList.remove("text-[var(--ui-primary)]");
+      }
+      const buttonIcon = item.querySelector(".button-icon");
+      if (buttonIcon) {
+        buttonIcon.classList.remove("text-[var(--ui-primary)]");
+      }
+    }
+    useSortable(el, list, {
+      animation: 150,
+      scroll: true,
+      scrollSensitivity: 30,
+      scrollSpeed: 10,
+      onStart: (evt) => addDragClasses(evt.item),
+      onEnd: (evt) => removeDragClasses(evt.item),
+      onChange: () => {
+      }
+    });
+    watch(list, (newList) => setCustomNavigationItems(toRaw(newList)));
+    function handleClick(item) {
+      const currentVisibility = item.visible ?? false;
+      updateNavigationItemsVisible(item, !currentVisibility);
+    }
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1$9, [
+        createBaseVNode("div", _hoisted_2$5, [
+          createBaseVNode("p", null, toDisplayString(unref(t)("theHeader.tabs.navigationItems.pinnedApps")), 1),
+          createBaseVNode("span", null, toDisplayString(getCountNavigationItems.value), 1)
+        ]),
+        createBaseVNode("div", {
+          ref_key: "el",
+          ref: el,
+          class: "overflow-y-auto max-h-[280px]"
+        }, [
+          (openBlock(true), createElementBlock(Fragment, null, renderList(list.value, (item, index2) => {
+            return openBlock(), createElementBlock("div", {
+              key: index2,
+              class: "hover:bg-gray-500/10 transition-colors cursor-pointer border-b border-[var(--color-neutral-100)] mr-2"
+            }, [
+              createBaseVNode("div", _hoisted_3$3, [
+                createBaseVNode("div", _hoisted_4$1, [
+                  createVNode(_sfc_main$c, {
+                    icon: "me-icon-s icon-grid-horizontal",
+                    class: "text-inherit",
+                    "custom-size": 12
+                  })
+                ]),
+                item.url ? (openBlock(), createElementBlock("a", {
+                  key: 0,
+                  href: item.url,
+                  target: getTarget(item.url),
+                  class: "text-label text-sm no-underline flex-1",
+                  onClick: _cache[0] || (_cache[0] = withModifiers(() => {
+                  }, ["stop"]))
+                }, toDisplayString(item.label), 9, _hoisted_5$1)) : (openBlock(), createElementBlock("span", _hoisted_6$1, toDisplayString(item.label), 1)),
+                !item?.siteMap ? (openBlock(), createElementBlock("button", {
+                  key: 2,
+                  class: "ml-auto size-12",
+                  onClick: withModifiers(() => handleClick(item), ["stop"])
+                }, [
+                  createVNode(_sfc_main$c, {
+                    icon: "me-icon-l icon-eye-slash",
+                    class: "button-icon",
+                    "custom-size": 14,
+                    color: item.visible ? "var(--ui-primary)" : "var(--color-neutral-200)"
+                  }, null, 8, ["color"])
+                ], 8, _hoisted_7)) : createCommentVNode("", true)
+              ])
+            ]);
+          }), 128))
+        ], 512)
+      ]);
+    };
+  }
+});
+const _hoisted_1$8 = { class: "p-4 w-[384px]" };
+const _hoisted_2$4 = { class: "p-4 text-center text-gray-500" };
+const _hoisted_3$2 = { class: "p-4 text-center text-gray-500" };
+const _sfc_main$9 = /* @__PURE__ */ defineComponent({
+  __name: "TheHeaderTabs",
+  props: {
+    siteMapItems: { type: Array }
+  },
+  setup(__props) {
+    const { t } = useTranslations();
+    const props = __props;
+    const items = ref([
+      // {
+      //   label: 'Apps',
+      //   slot: 'navigationItems' as const
+      // },
+      {
+        label: t("theHeader.tabs.othersFuncionality"),
+        slot: "siteMapItems"
+      }
+    ]);
+    return (_ctx, _cache) => {
+      const _component_UTabs = _sfc_main$f;
+      return openBlock(), createElementBlock("div", _hoisted_1$8, [
+        createVNode(_component_UTabs, {
+          items: items.value,
+          class: "w-full",
+          size: "xs",
+          variant: "pill",
+          color: "neutral",
+          ui: {
+            list: "grid grid-col w-full",
+            trigger: "flex-1 text-center cursor-pointer data-[state=active]:bg-white data-[state=active]:text-gray-900 focus:outline-none focus-visible:outline-none",
+            indicator: "bg-white"
+          }
+        }, {
+          navigationItems: withCtx(() => [
+            createBaseVNode("keep-alive", null, [
+              (openBlock(), createBlock(Suspense, null, {
+                fallback: withCtx(() => [
+                  createBaseVNode("div", _hoisted_2$4, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
+                ]),
+                default: withCtx(() => [
+                  createVNode(_sfc_main$a)
+                ]),
+                _: 1
+              }))
+            ])
+          ]),
+          siteMapItems: withCtx(() => [
+            createBaseVNode("keep-alive", null, [
+              (openBlock(), createBlock(Suspense, null, {
+                fallback: withCtx(() => [
+                  createBaseVNode("div", _hoisted_3$2, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
+                ]),
+                default: withCtx(() => [
+                  createVNode(_sfc_main$b, {
+                    siteMapItems: props.siteMapItems
+                  }, null, 8, ["siteMapItems"])
+                ]),
+                _: 1
+              }))
+            ])
+          ]),
+          _: 1
+        }, 8, ["items"])
+      ]);
+    };
+  }
+});
+const _hoisted_1$7 = { class: "relative flex items-center justify-center" };
+const _hoisted_2$3 = { class: "text-xs py-[6px] text-[var(--header-icon-color)] whitespace-nowrap" };
+const activeClass = "after:content-[''] after:bg-[var(--header-icon-color)] after:h-1 after:rounded-full after:absolute after:block after:w-[80%] after:bottom-0 after:left-1/2 after:-translate-x-1/2";
+const _sfc_main$8 = /* @__PURE__ */ defineComponent({
+  __name: "TheHeaderNavigationItemContent",
+  props: {
+    iconColor: { type: String },
+    id: { type: String },
+    icon: { type: [String, null] },
+    label: { type: [String, null] },
+    active: { type: Boolean },
+    click: { type: Function },
+    siteMap: { type: [Boolean, null] },
+    linkName: { type: [String, null] },
+    url: { type: [String, null] },
+    target: { type: [String, null] },
+    badgeTotalUrl: { type: [String, null] },
+    badgeEvent: { type: [String, null] },
+    badge: { type: [Object, null] },
+    visible: { type: Boolean }
+  },
+  setup(__props) {
+    const props = __props;
+    const { getBadgeValue: getBadgeValue2 } = useHeaderStore();
+    const isLink = computed(() => Boolean(props.url));
+    const computedBadge = computed(() => {
+      if (props.badge?.text) {
+        return props.badge;
+      }
+      if (props.linkName) {
+        const storeBadgeValue = getBadgeValue2(props.linkName);
+        if (storeBadgeValue !== void 0) {
+          return { text: String(storeBadgeValue) };
+        }
+      }
+      return null;
+    });
+    function handleClick() {
+      props.click?.(props);
+    }
+    return (_ctx, _cache) => {
+      const _component_UChip = _sfc_main$k;
+      return openBlock(), createBlock(resolveDynamicComponent(isLink.value ? "a" : "button"), {
+        href: isLink.value ? _ctx.url : void 0,
+        target: isLink.value ? _ctx.target ?? "_self" : void 0,
+        type: !isLink.value ? "button" : void 0,
+        class: normalizeClass(["grid place-items-center gap-1 px-2 py-1 cursor-pointer relative transition-colors duration-200 hover:bg-[rgba(0,0,0,0.1)] text-[var(--color-neutral-300)] text-center", [
+          isLink.value ? "no-underline" : "border-0 bg-transparent",
+          _ctx.active && activeClass
+        ]]),
+        style: normalizeStyle({ "--header-icon-color": _ctx.iconColor }),
+        onClick: withModifiers(handleClick, ["prevent", "stop"])
+      }, {
+        default: withCtx(() => [
+          createBaseVNode("div", _hoisted_1$7, [
+            createVNode(_sfc_main$c, {
+              icon: _ctx.icon || "",
+              "custom-size": 24,
+              color: _ctx.iconColor
+            }, null, 8, ["icon", "color"]),
+            computedBadge.value?.text ? (openBlock(), createBlock(_component_UChip, {
+              key: 0,
+              text: computedBadge.value.text,
+              color: "error",
+              size: "3xl",
+              position: "top-right",
+              inset: false,
+              ui: {
+                base: "px-2 py-3 ring-0 font-semibold",
+                root: "translate-x-2"
+              }
+            }, null, 8, ["text"])) : createCommentVNode("", true)
+          ]),
+          createBaseVNode("p", _hoisted_2$3, toDisplayString(_ctx.label), 1)
+        ]),
+        _: 1
+      }, 8, ["href", "target", "type", "class", "style"]);
+    };
+  }
+});
+const _hoisted_1$6 = {
+  key: 0,
+  class: "relative flex"
+};
+const _sfc_main$7 = /* @__PURE__ */ defineComponent({
+  __name: "TheHeaderNavigationItem",
+  props: {
+    iconColor: { type: String },
+    siteMapItems: { type: Array },
+    id: { type: String },
+    icon: { type: [String, null] },
+    label: { type: [String, null] },
+    active: { type: Boolean },
+    click: { type: Function },
+    siteMap: { type: [Boolean, null] },
+    linkName: { type: [String, null] },
+    url: { type: [String, null] },
+    target: { type: [String, null] },
+    badgeTotalUrl: { type: [String, null] },
+    badgeEvent: { type: [String, null] },
+    badge: { type: [Object, null] },
+    visible: { type: Boolean }
+  },
+  setup(__props) {
+    const isOpen = ref(false);
+    const headerBackdrop = inject("headerBackdrop");
+    function handlePopoverUpdate(open) {
+      isOpen.value = open;
+      if (open) {
+        headerBackdrop?.show(9999);
+      } else {
+        headerBackdrop?.close();
+      }
+    }
+    watch(isOpen, (newValue, oldValue) => {
+      if (oldValue && !newValue) {
+        headerBackdrop?.close();
+      }
+    });
+    return (_ctx, _cache) => {
+      const _component_TheHeaderTabs = _sfc_main$9;
+      const _component_UPopover = _sfc_main$h;
+      return _ctx.siteMap ? (openBlock(), createElementBlock("div", _hoisted_1$6, [
+        createVNode(_component_UPopover, {
+          open: isOpen.value,
+          ui: {
+            content: "z-[10001]",
+            arrow: "z-[10001]"
+          },
+          mode: "click",
+          arrow: "",
+          "onUpdate:open": handlePopoverUpdate
+        }, {
+          content: withCtx(() => [
+            createVNode(_component_TheHeaderTabs, { siteMapItems: _ctx.siteMapItems }, null, 8, ["siteMapItems"])
+          ]),
+          default: withCtx(() => [
+            createVNode(_sfc_main$8, normalizeProps(guardReactiveProps(_ctx.$props)), null, 16)
+          ]),
+          _: 1
+        }, 8, ["open"])
+      ])) : (openBlock(), createBlock(_sfc_main$8, normalizeProps(mergeProps({ key: 1 }, _ctx.$props)), null, 16));
+    };
+  }
+});
+const _hoisted_1$5 = { class: "ml-auto flex justify-center gap-6" };
+const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+  __name: "TheHeaderNavigation",
+  props: {
+    navigationItems: { type: Array },
+    iconColor: { type: String },
+    siteMapItems: { type: Array }
+  },
+  setup(__props) {
+    const props = __props;
+    const { isSeparator: isSeparator2 } = useHeaderStore();
+    const filteredNavigationItems = computed(() => {
+      const filtered = [];
+      let lastWasSeparator = false;
+      for (const item of props.navigationItems || []) {
+        if (isSeparator2(item)) {
+          if (lastWasSeparator) continue;
+          filtered.push(item);
+          lastWasSeparator = true;
+        } else if (item.visible !== false) {
+          filtered.push(item);
+          lastWasSeparator = false;
+        }
+      }
+      return filtered;
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1$5, [
+        (openBlock(true), createElementBlock(Fragment, null, renderList(filteredNavigationItems.value, (item, index2) => {
+          return openBlock(), createElementBlock(Fragment, {
+            key: unref(isSeparator2)(item) ? `separator-${index2}` : item.label
+          }, [
+            unref(isSeparator2)(item) ? (openBlock(), createElementBlock("div", {
+              key: 0,
+              class: "my-2 border-l",
+              style: normalizeStyle({ borderColor: _ctx.iconColor })
+            }, null, 4)) : item.visible ?? false ? (openBlock(), createBlock(_sfc_main$7, mergeProps({
+              key: 1,
+              ref_for: true
+            }, item, {
+              iconColor: _ctx.iconColor,
+              siteMapItems: _ctx.siteMapItems
+            }), null, 16, ["iconColor", "siteMapItems"])) : createCommentVNode("", true)
+          ], 64);
+        }), 128))
+      ]);
+    };
+  }
+});
+const _hoisted_1$4 = { class: "cursor-pointer overflow-hidden rounded-bl-lg" };
+const _hoisted_2$2 = ["href", "onClick"];
+const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+  __name: "TheHeaderAvatarMenuItem",
+  props: {
+    profileItems: { type: Array },
+    setVisibleToFalse: { type: Function },
+    nested: { type: Boolean }
+  },
+  setup(__props) {
+    const props = __props;
+    function accordionItems(item) {
+      const { icon, ...rest } = item;
+      return [
+        {
+          ...rest,
+          label: icon ? `${icon.class} ${item.label || ""}` : item.label || "",
+          children: item.children || []
+        }
+      ];
+    }
+    const { isExternalUrl } = useIsExternalUrl();
+    function handleClick(item) {
+      const { url, click } = item;
+      const target = item.target ?? "_blank";
+      if (click) {
+        click();
+        props.setVisibleToFalse();
+        return;
+      }
+      if (url) {
+        if (isExternalUrl(url)) {
+          window.open(url, target, "noopener,noreferrer");
+        } else {
+          window.location.href = url;
+        }
+        props.setVisibleToFalse();
+        return;
+      }
+    }
+    return (_ctx, _cache) => {
+      const _component_TheHeaderAvatarMenuItem = resolveComponent("TheHeaderAvatarMenuItem", true);
+      const _component_UAccordion = _sfc_main$e;
+      return openBlock(), createElementBlock("ul", _hoisted_1$4, [
+        (openBlock(true), createElementBlock(Fragment, null, renderList(props.profileItems, (item, index2) => {
+          return openBlock(), createElementBlock("li", { key: index2 }, [
+            item.children ? (openBlock(), createBlock(_component_UAccordion, {
+              key: 0,
+              items: accordionItems(item),
+              ui: {
+                body: "p-0",
+                trigger: `py-2 px-4 hover:bg-blue-100 hover:text-primary flex navigationItems-center gap-2 cursor-pointer font-normal ${item.active ? "text-primary" : ""}`
+              }
+            }, {
+              body: withCtx(({ item: accordionItem }) => [
+                createVNode(_component_TheHeaderAvatarMenuItem, {
+                  "profile-items": accordionItem.children || [],
+                  "set-visible-to-false": _ctx.setVisibleToFalse,
+                  nested: ""
+                }, null, 8, ["profile-items", "set-visible-to-false"])
+              ]),
+              _: 2
+            }, 1032, ["items", "ui"])) : (openBlock(), createElementBlock("a", {
+              key: 1,
+              class: "flex h-10 cursor-pointer items-center gap-2 px-4 py-2 group hover:text-primary hover:bg-blue-100",
+              href: item.url || "#",
+              onClick: withModifiers(() => handleClick(item), ["prevent", "stop"])
+            }, [
+              createBaseVNode("span", {
+                class: normalizeClass(["text-gray-500 group-hover:text-primary", {
+                  "text-[var(--color-neutral-400)] font-semibold": props.nested && !item.active
+                }])
+              }, toDisplayString(item.label), 3),
+              createBaseVNode("span", null, [
+                item.icon ? (openBlock(), createBlock(_sfc_main$c, {
+                  key: 0,
+                  icon: item.icon.class,
+                  "custom-size": 16,
+                  color: item.icon.color,
+                  class: "leading-none"
+                }, null, 8, ["icon", "color"])) : createCommentVNode("", true)
+              ])
+            ], 8, _hoisted_2$2))
+          ]);
+        }), 128))
+      ]);
+    };
+  }
+});
+const _sfc_main$4 = /* @__PURE__ */ defineComponent({
+  __name: "TheHeaderAvatarChip",
+  props: {
+    user: { type: Object }
+  },
+  setup(__props) {
+    const props = __props;
+    return (_ctx, _cache) => {
+      const _component_MeIcon = _sfc_main$c;
+      const _component_UChip = _sfc_main$k;
+      return props?.user?.badge?.icon ? (openBlock(), createBlock(_component_UChip, {
+        key: 0,
+        color: "error",
+        size: "3xl",
+        position: "bottom-right",
+        inset: false,
+        ui: {
+          base: "p-2 ring-0 font-semibold",
+          root: "translate-x-1 translate-y-3"
+        }
+      }, {
+        content: withCtx(() => [
+          props.user?.badge.icon ? (openBlock(), createBlock(_component_MeIcon, {
+            key: 0,
+            icon: props.user?.badge.icon,
+            color: props.user?.badge.variant || "danger"
+          }, null, 8, ["icon", "color"])) : createCommentVNode("", true)
+        ]),
+        _: 1
+      })) : createCommentVNode("", true);
+    };
+  }
+});
+const _hoisted_1$3 = { class: "relative flex select-none flex-col items-end" };
+const _hoisted_2$1 = { class: "flex justify-between gap-4 px-4 py-2 align-center" };
+const _hoisted_3$1 = { class: "grid w-[168px]" };
+const _hoisted_4 = { class: "mb-0 truncate text-gray-500" };
+const _hoisted_5 = { class: "block truncate text-xs text-gray-400" };
+const _hoisted_6 = { class: "text-2xl font-normal no-underline text-white" };
+const _sfc_main$3 = /* @__PURE__ */ defineComponent({
+  __name: "TheHeaderAvatarMenu",
+  props: {
+    user: { type: Object },
+    profileItems: { type: Array },
+    setVisibleToFalse: { type: Function }
+  },
+  setup(__props) {
+    const menuAvatar = useTemplateRef("menuAvatar");
+    const avatar = useTemplateRef("avatar");
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1$3, [
+        createBaseVNode("div", {
+          ref_key: "menuAvatar",
+          ref: menuAvatar,
+          class: "absolute rounded-bl-lg bg-white text-sm top-[-1px] right-[-8px]"
+        }, [
+          createBaseVNode("div", _hoisted_2$1, [
+            createBaseVNode("div", _hoisted_3$1, [
+              createBaseVNode("p", _hoisted_4, toDisplayString(_ctx.user.name), 1),
+              createBaseVNode("small", _hoisted_5, toDisplayString(_ctx.user.role || _ctx.user.email || ""), 1)
+            ]),
+            createBaseVNode("div", {
+              ref_key: "avatar",
+              ref: avatar,
+              class: "flex items-center justify-center size-12 rounded-full bg-primary mx-auto border-transparent border"
+            }, [
+              createBaseVNode("span", _hoisted_6, toDisplayString(_ctx.user.acronym), 1),
+              createVNode(_sfc_main$4, { user: _ctx.user }, null, 8, ["user"])
+            ], 512)
+          ]),
+          createVNode(_sfc_main$5, {
+            profileItems: _ctx.profileItems,
+            "set-visible-to-false": _ctx.setVisibleToFalse
+          }, null, 8, ["profileItems", "set-visible-to-false"])
+        ], 512)
+      ]);
+    };
+  }
+});
+const _hoisted_1$2 = { class: "group py-2 px-4 hover:bg-[rgba(0,0,0,0.1)] cursor-pointer" };
+const _hoisted_2 = { class: "flex items-center justify-center size-12 rounded-full bg-[rgba(0,0,0,0.4)] mx-auto border-transparent border group-hover:border-white group-hover:border-2" };
+const _hoisted_3 = { class: "text-2xl uppercase" };
+const _sfc_main$2 = /* @__PURE__ */ defineComponent({
+  __name: "TheHeaderAvatar",
+  props: {
+    user: { type: Object },
+    profileItems: { type: Array }
+  },
+  setup(__props) {
+    const props = __props;
+    const visibleMenu = ref(false);
+    const headerBackdrop = inject("headerBackdrop");
+    function handlePopoverUpdate(open) {
+      if (open) {
+        headerBackdrop?.show(9999);
+      } else {
+        headerBackdrop?.close();
+      }
+    }
+    function setVisibleToFalse() {
+      visibleMenu.value = false;
+      headerBackdrop?.close();
+    }
+    watch(visibleMenu, (newValue) => {
+      if (!newValue) {
+        headerBackdrop?.close();
+      }
+    });
+    onBeforeUnmount(() => {
+      setVisibleToFalse();
+    });
+    return (_ctx, _cache) => {
+      const _component_UPopover = _sfc_main$h;
+      return openBlock(), createElementBlock("div", null, [
+        createVNode(_component_UPopover, {
+          open: visibleMenu.value,
+          "onUpdate:open": [
+            _cache[0] || (_cache[0] = ($event) => visibleMenu.value = $event),
+            handlePopoverUpdate
+          ],
+          content: {
+            align: "end",
+            side: "bottom",
+            sideOffset: -63
+          },
+          ui: {
+            content: "z-[10003]"
+          },
+          mode: "click"
+        }, {
+          content: withCtx(() => [
+            createVNode(_sfc_main$3, {
+              user: props.user,
+              profileItems: props.profileItems,
+              "set-visible-to-false": setVisibleToFalse
+            }, null, 8, ["user", "profileItems"])
+          ]),
+          default: withCtx(() => [
+            createBaseVNode("div", _hoisted_1$2, [
+              createBaseVNode("div", _hoisted_2, [
+                createBaseVNode("span", _hoisted_3, toDisplayString(props.user.acronym), 1),
+                createVNode(_sfc_main$4, {
+                  user: props.user
+                }, null, 8, ["user"])
+              ])
+            ])
+          ]),
+          _: 1
+        }, 8, ["open"])
+      ]);
+    };
+  }
+});
+const _hoisted_1$1 = { class: "size-full" };
+const _sfc_main$1 = /* @__PURE__ */ defineComponent({
+  __name: "AppBackdrop",
+  props: {
+    teleportTo: { default: "body", type: String },
+    class: { type: String },
+    zIndex: { default: 1e4, type: Number }
+  },
+  emits: ["click"],
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(Teleport, { to: _ctx.teleportTo }, [
+        createBaseVNode("div", {
+          class: normalizeClass([
+            "size-full fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.4)]",
+            __props.class
+          ]),
+          style: normalizeStyle({ zIndex: _ctx.zIndex })
+        }, [
+          createBaseVNode("div", _hoisted_1$1, [
+            renderSlot(_ctx.$slots, "default")
+          ])
+        ], 6)
+      ], 8, ["to"]);
+    };
+  }
+});
 const GTM_EVENTS = {
   MAIS_BUSCAR: "MS_maisBuscar",
   TELAS_PRINCIPAIS: "MS_telasPrincipais",
@@ -29329,29 +29450,31 @@ const mapSiteMapItems = (items, parentCategory, gtm) => items.map((item) => {
 });
 const siteMapChildrenMapper = (data, parent, gtm) => ({
   ...data,
-  children: data.children?.map((childOption) => {
-    if (childOption.children?.length) {
+  children: data.children?.map(
+    (childOption) => {
+      if (childOption.children?.length) {
+        return {
+          ...siteMapChildrenMapper(
+            childOption,
+            childOption.description ?? childOption.name,
+            gtm
+          )
+        };
+      }
       return {
-        ...siteMapChildrenMapper(
-          childOption,
-          childOption.description ?? childOption.name,
-          gtm
-        )
+        ...childOption,
+        url: null,
+        click: childOption.url ? () => {
+          gtm.push({
+            event: GTM_EVENTS.MAIS_OPCAO,
+            categoria: parent || "",
+            selectOp: childOption.description
+          });
+          window.location.href = childOption.url;
+        } : null
       };
     }
-    return {
-      ...childOption,
-      url: null,
-      click: childOption.url ? () => {
-        gtm.push({
-          event: GTM_EVENTS.MAIS_OPCAO,
-          categoria: parent || "",
-          selectOp: childOption.description
-        });
-        window.location.href = childOption.url;
-      } : null
-    };
-  }) || []
+  ) || []
 });
 const mapNavigationItems = (navItems, activeLinkName, gtm) => navItems.map(({ $id, ...rest }) => ({
   ...rest,
@@ -29360,54 +29483,6 @@ const mapNavigationItems = (navItems, activeLinkName, gtm) => navItems.map(({ $i
   id: $id,
   visible: rest.visible ?? true
 }));
-const mapUserDetailsFromResponse = (response) => {
-  const user = {
-    id: response.id,
-    name: response.fullName,
-    role: response.profile,
-    acronym: response.header?.nameInitials || "",
-    culture: response.culture,
-    lastAccess: new Date(response.lastAccess || 0),
-    token: response.token,
-    badge: {
-      variant: "default",
-      icon: "user"
-    }
-  };
-  const customer = {
-    idMain: response.idMain,
-    registrationCompleted: response.company?.registrationCompleted || false
-  };
-  if (response.header?.customization) {
-    const header = response.header;
-    const customization = header.customization;
-    const homeUserUrl = header.homeUserUrl;
-    const backgroundColor = customization.backgroundColor;
-    const backgroundColorSecundary = customization.backgroundColorSecundary;
-    const buttonColor = customization.buttonColor;
-    customer.header = {
-      appsUrls: { users: homeUserUrl },
-      logo: customization.clientLogo,
-      iconColor: buttonColor?.primary,
-      background: {
-        mainImage: customization.backgroundMainImage,
-        repeatImage: customization.backgroundRepeatImage,
-        primaryColor: backgroundColor?.primary,
-        secondaryColor: backgroundColorSecundary?.primary
-      }
-    };
-  }
-  return {
-    user,
-    customer,
-    locale: response.culture,
-    token: response.token,
-    permissions: response.permit || {},
-    precisions: response.precision || {},
-    links: response.links || [],
-    virtualEntities: response.vEnts || []
-  };
-};
 const API_ENDPOINTS = {
   USERS: {
     CURRENT: "/do/api/v1/users/GetCurrentUser",
@@ -29419,15 +29494,11 @@ const API_ENDPOINTS = {
     PDM: "/do/api/v1/sitemap/pdm"
   }
 };
-const HTTP_HEADERS = {
-  NO_CACHE: { "Cache-Control": "no-cache", "Authorization": "" }
-};
 const ERROR_MESSAGES$1 = {
   USER_DATA: "Falha ao carregar dados do usuário",
   // refatorar
   NAVIGATION: "Falha ao carregar dados de navegação",
-  SITEMAP: "Falha ao carregar sitemap",
-  USER_DETAILS: "Falha ao carregar detalhes do usuário"
+  SITEMAP: "Falha ao carregar sitemap"
 };
 const buildQueryString = (params) => {
   const searchParams = new URLSearchParams();
@@ -29479,30 +29550,6 @@ const loadSiteMapData = async (get2, userId, culture, lastAccess) => {
   }
   return response;
 };
-const loadUserDetails = async (get2) => {
-  try {
-    const response = await get2(
-      API_ENDPOINTS.USERS.CURRENT,
-      { headers: HTTP_HEADERS.NO_CACHE }
-    );
-    if (!response) {
-      throw new Error(ERROR_MESSAGES$1.USER_DETAILS);
-    }
-    return mapUserDetailsFromResponse(response);
-  } catch (error) {
-    console.warn("Erro ao carregar detalhes do usuário, usando valores padrão:", error);
-    return {
-      user: {},
-      customer: {},
-      locale: "",
-      token: "",
-      permissions: {},
-      precisions: {},
-      links: [],
-      virtualEntities: []
-    };
-  }
-};
 const changeLocale = async (post, locale, gtm) => {
   gtm.push({
     event: "MS_perfilLocale",
@@ -29515,15 +29562,17 @@ const mapProfileLinks = (profileItems, gtm, onChangeLocale) => {
   const handleProfileLinks = [...profileItems];
   const localeLinks = handleProfileLinks.find((item) => item.name === "locale");
   if (localeLinks?.children) {
-    const handleLinks = localeLinks.children.map(({ active, children, label, url }) => {
-      const locale = url?.match(/[a-z]{2}-[A-Z]{2}/g)?.[0];
-      return {
-        active,
-        children,
-        label,
-        click: locale ? () => onChangeLocale(locale) : void 0
-      };
-    });
+    const handleLinks = localeLinks.children.map(
+      ({ active, children, label, url }) => {
+        const locale = url?.match(/[a-z]{2}-[A-Z]{2}/g)?.[0];
+        return {
+          active,
+          children,
+          label,
+          click: locale ? () => onChangeLocale(locale) : void 0
+        };
+      }
+    );
     handleProfileLinks.forEach((item) => {
       if (item.name === "locale") {
         item.children = handleLinks;
@@ -29546,11 +29595,9 @@ const ERROR_STATUS = {
 };
 const ERROR_MESSAGES = {
   FORBIDDEN: "⚠️ Acesso negado (403) - Usuário não autenticado, usando mock",
-  // refatorar
   UNAUTHORIZED: "⚠️ Não autorizado (401) - Token inválido, usando mock",
   GENERIC: "⚠️ Erro ao carregar dados do usuário:",
-  HEADER_LOAD: "❌ Erro ao carregar dados do header:",
-  LOCALE_CHANGE: "Erro ao mudar idioma:"
+  HEADER_LOAD: "❌ Erro ao carregar dados do header:"
 };
 function useHeader(activeLinkName, gtm) {
   const { get: get2, post, setCustomToken } = useHttp();
@@ -29598,13 +29645,13 @@ function useHeader(activeLinkName, gtm) {
       headerStore.setNavigationItems(mappedNavigationItems);
       headerStore.setHeaderLinks(mapHeaderLinks(response.navItems, gtm));
       headerStore.setBrand(response.brand);
-      const handleChangeLocale2 = async (locale) => {
+      const handleChangeLocale = async (locale) => {
         await changeLocale(post, locale, gtm);
       };
       const mappedProfileItems = mapProfileLinks(
         response.profileItems,
         gtm,
-        handleChangeLocale2
+        handleChangeLocale
       );
       headerStore.setProfileItems(mappedProfileItems);
     } catch {
@@ -29645,21 +29692,8 @@ function useHeader(activeLinkName, gtm) {
       console.error(ERROR_MESSAGES.HEADER_LOAD, error);
     }
   };
-  const handleChangeLocale = async (locale) => {
-    try {
-      await changeLocale(post, locale, gtm);
-      headerStore.setUser({
-        ...headerStore.user.value,
-        culture: locale
-      });
-    } catch (error) {
-      console.error(ERROR_MESSAGES.LOCALE_CHANGE, error);
-    }
-  };
   return {
-    initializeData,
-    loadUserDetails: () => loadUserDetails(get2),
-    changeLocale: handleChangeLocale
+    initializeData
   };
 }
 const _hoisted_1 = { class: "flex items-center justify-between" };
@@ -29668,7 +29702,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   props: {
     activeLinkName: { type: String },
     gtm: { type: Object },
-    token: { type: String }
+    token: { type: String },
+    pusher: { type: Object }
   },
   setup(__props) {
     const props = __props;
@@ -29677,11 +29712,18 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       props.gtm || { push: (e) => console.log("click no gtm", e) }
     );
     const headerStore = useHeaderStore();
+    const { initBadgesForLinks } = useBadgeManager(props.pusher);
     const storeUser = toRef$2(headerStore, "user");
     const storeNavigationItems = toRef$2(headerStore, "navigationItems");
     const storeBrand = toRef$2(headerStore, "brand");
     const storeProfileItems = toRef$2(headerStore, "profileItems");
     const storeSiteMapItems = toRef$2(headerStore, "siteMapItems");
+    const storeHeaderLinks = toRef$2(headerStore, "headerLinks");
+    watch(storeHeaderLinks, (newHeaderLinks) => {
+      if (newHeaderLinks && newHeaderLinks.length > 0 && storeUser.value.id) {
+        initBadgesForLinks(newHeaderLinks, storeUser.value.id);
+      }
+    }, { immediate: true });
     const backdropState = ref({
       visible: false,
       zIndex: 9999

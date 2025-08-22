@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref, computed, provide, onMounted, toRef} from 'vue'
+import {ref, computed, provide, onMounted, toRef, watch} from 'vue'
 import TheHeaderBrand from './TheHeaderBrand.vue'
 import TheHeaderNavigation from './TheHeaderNavigation.vue'
 import TheHeaderAvatar from './TheHeaderAvatar.vue'
@@ -32,13 +32,15 @@ import {
   useTranslations
 } from '@/composables/useTranslations/useTranslations.ts'
 import {useHeader} from '@/composables/useHeader/useHeader.ts'
-import type {GTM} from '@/types'
+import type {GTM, PusherInstance} from '@/types'
 import {useHttp} from '@/composables/useHttp'
+import { useBadgeManager } from '@/composables/useBadgeManager'
 
 interface Props {
   activeLinkName?: string
   gtm?: GTM
   token?: string
+  pusher?: PusherInstance
 }
 
 const props = defineProps<Props>()
@@ -49,6 +51,7 @@ const {initializeData} = useHeader(
 )
 
 const headerStore = useHeaderStore()
+const { initBadgesForLinks } = useBadgeManager(props.pusher)
 
 const storeUser = toRef(headerStore, 'user')
 
@@ -59,6 +62,13 @@ const storeBrand = toRef(headerStore, 'brand')
 const storeProfileItems = toRef(headerStore, 'profileItems')
 
 const storeSiteMapItems = toRef(headerStore, 'siteMapItems')
+const storeHeaderLinks = toRef(headerStore, 'headerLinks')
+
+watch(storeHeaderLinks, (newHeaderLinks) => {
+  if (newHeaderLinks && newHeaderLinks.length > 0 && storeUser.value.id) {
+    initBadgesForLinks(newHeaderLinks, storeUser.value.id)
+  }
+}, { immediate: true })
 
 const backdropState = ref({
   visible: false,

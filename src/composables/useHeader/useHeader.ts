@@ -23,11 +23,10 @@ const ERROR_STATUS = {
 } as const
 
 const ERROR_MESSAGES = {
-  FORBIDDEN: '⚠️ Acesso negado (403) - Usuário não autenticado, usando mock', // refatorar
+  FORBIDDEN: '⚠️ Acesso negado (403) - Usuário não autenticado, usando mock',
   UNAUTHORIZED: '⚠️ Não autorizado (401) - Token inválido, usando mock',
   GENERIC: '⚠️ Erro ao carregar dados do usuário:',
-  HEADER_LOAD: '❌ Erro ao carregar dados do header:',
-  LOCALE_CHANGE: 'Erro ao mudar idioma:'
+  HEADER_LOAD: '❌ Erro ao carregar dados do header:'
 } as const
 
 export function useHeader(activeLinkName: string, gtm: GTM) {
@@ -139,21 +138,7 @@ export function useHeader(activeLinkName: string, gtm: GTM) {
     }
   }
 
-  const handleChangeLocale = async (locale: string): Promise<void> => {
-    try {
-      await changeLocale(post, locale, gtm)
-      headerStore.setUser({
-        ...headerStore.user.value,
-        culture: locale
-      })
-    } catch (error) {
-      console.error(ERROR_MESSAGES.LOCALE_CHANGE, error)
-    }
-  }
-
   return {
-    initializeData,
-    loadUserDetails: () => loadUserDetails(get),
-    changeLocale: handleChangeLocale
+    initializeData
   }
 }

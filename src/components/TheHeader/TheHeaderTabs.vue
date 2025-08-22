@@ -59,6 +59,10 @@ interface Props {
 const props = defineProps<Props>()
 
 const items = ref<TabsItem[]>([
+  // {
+  //   label: 'Apps',
+  //   slot: 'navigationItems' as const
+  // },
   {
     label: t('theHeader.tabs.othersFuncionality'),
     slot: 'siteMapItems' as const

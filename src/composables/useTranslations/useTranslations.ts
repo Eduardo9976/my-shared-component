@@ -64,16 +64,8 @@ export function useTranslations() {
     }
   }
 
-  const getCurrentLocale = computed(() => globalLocale.value)
-
-  const getSupportedLocales = computed(
-    () => Object.keys(translations) as SupportedLocale[]
-  )
-
   return {
     t,
-    setLocale,
-    getCurrentLocale,
-    getSupportedLocales
+    setLocale
   }
 }

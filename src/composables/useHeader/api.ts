@@ -1,5 +1,7 @@
-import type {UseHttpReturn} from '@/composables/useHttp'
-import type {GTM, ProfileItem} from '@/types'
+import {useHttp} from '@/composables/useHttp'
+
+type UseHttpReturn = ReturnType<typeof useHttp>
+import type {GTM, ProfileItem, User} from '@/types'
 import type {HeaderResponse, SiteMapResponse, UserDetails} from '@/types/header'
 import {
   mapUserDetailsFromResponse,
@@ -49,8 +51,8 @@ const isPdmPath = (pathname: string): boolean =>
 export const loadUserData = async (
   get: UseHttpReturn['get'],
   setCustomToken: UseHttpReturn['setCustomToken']
-): Promise<Record<string, unknown>> => {
-  const data = await get<Record<string, unknown>>(API_ENDPOINTS.USERS.CURRENT)
+): Promise<User> => {
+  const data = await get<User>(API_ENDPOINTS.USERS.CURRENT)
 
   if (!data) {
     throw new Error(ERROR_MESSAGES.USER_DATA)

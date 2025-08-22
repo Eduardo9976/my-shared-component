@@ -90,5 +90,10 @@ export type GTM = {
   push: (data: Record<string, unknown>) => void
 }
 
+export type PusherInstance = {
+  subscribe: (channel: string) => any
+  unsubscribe: (channel: string) => void
+}
+
 export * from './http'
 export * from './header'

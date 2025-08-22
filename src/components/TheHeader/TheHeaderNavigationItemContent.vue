@@ -16,8 +16,8 @@
       <MeIcon :icon="icon || ''" :custom-size="24" :color="iconColor" />
 
       <UChip
-        v-if="badge?.text"
-        :text="badge.text"
+        v-if="computedBadge?.text"
+        :text="computedBadge.text"
         color="error"
         size="3xl"
         position="top-right"
@@ -41,14 +41,31 @@
 import {computed} from 'vue'
 import MeIcon from '@/components/MeIcon/MeIcon.vue'
 import type {NavigationItem} from '@/types'
+import { useHeaderStore } from '@/composables/useHeaderStore'
 
 interface Props extends NavigationItem {
   iconColor: string
 }
 
 const props = defineProps<Props>()
+const { getBadgeValue } = useHeaderStore()
 
 const isLink = computed(() => Boolean(props.url))
+
+const computedBadge = computed(() => {
+  if (props.badge?.text) {
+    return props.badge
+  }
+  
+  if (props.linkName) {
+    const storeBadgeValue = getBadgeValue(props.linkName)
+    if (storeBadgeValue !== undefined) {
+      return { text: String(storeBadgeValue) }
+    }
+  }
+  
+  return null
+})
 
 const activeClass =
   "after:content-[''] after:bg-[var(--header-icon-color)] after:h-1 after:rounded-full after:absolute after:block after:w-[80%] after:bottom-0 after:left-1/2 after:-translate-x-1/2"
