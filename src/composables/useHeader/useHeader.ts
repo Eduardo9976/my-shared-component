@@ -1,13 +1,13 @@
 import {toRef} from 'vue'
-import {useHttp} from './useHttp'
-import {useHeaderStore} from '@/composables/useHeaderStore'
+import {useHttp} from '../useHttp'
+import {useHeaderStore} from '@/composables/useHeaderStore.ts'
 import type {NavigationItem, GTM, User} from '@/types'
 import {
   mapHeaderLinks,
   mapNavigationItems,
   mapSiteMapItems,
   siteMapChildrenMapper
-} from './useHeader/mappers'
+} from './mappers.ts'
 import {
   loadUserData,
   loadHeaderData,
@@ -15,7 +15,7 @@ import {
   loadUserDetails,
   changeLocale,
   mapProfileLinks
-} from './useHeader/api'
+} from './api.ts'
 
 const ERROR_STATUS = {
   FORBIDDEN: 403,

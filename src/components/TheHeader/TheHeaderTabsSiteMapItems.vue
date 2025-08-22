@@ -53,10 +53,11 @@
 import {ref, computed} from 'vue'
 import MeIcon from '@/components/MeIcon/MeIcon.vue'
 import type {SiteMapItem} from '@/types'
-import {isExternalUrl} from '@/utils/isExternalUrl'
+import { useIsExternalUrl } from '@/composables/useIsExternalUrl'
 import {useTranslations} from '@/composables/useTranslations/useTranslations.ts'
 
 const {t} = useTranslations()
+const { isExternalUrl } = useIsExternalUrl()
 
 interface Props {
   siteMapItems?: SiteMapItem[]

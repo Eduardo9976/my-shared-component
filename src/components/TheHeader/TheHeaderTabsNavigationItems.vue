@@ -64,10 +64,11 @@ import {useSortable} from '@vueuse/integrations/useSortable'
 import MeIcon from '@/components/MeIcon/MeIcon.vue'
 import type {NavigationItem} from '@/types'
 import {useHeaderStore} from '@/composables/useHeaderStore.ts'
-import {isExternalUrl} from '@/utils/isExternalUrl.ts'
+import { useIsExternalUrl } from '@/composables/useIsExternalUrl'
 import {useTranslations} from '@/composables/useTranslations/useTranslations.ts'
 
 const {t} = useTranslations()
+const { isExternalUrl } = useIsExternalUrl()
 
 const {
   customNavigationItems,

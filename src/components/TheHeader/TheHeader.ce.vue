@@ -31,7 +31,7 @@ import {
   type SupportedLocale,
   useTranslations
 } from '@/composables/useTranslations/useTranslations.ts'
-import {useHeader} from '@/composables/useHeader.ts'
+import {useHeader} from '@/composables/useHeader/useHeader.ts'
 import type {GTM} from '@/types'
 import {useHttp} from '@/composables/useHttp'
 
