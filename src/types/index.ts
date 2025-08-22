@@ -90,5 +90,16 @@ export type GTM = {
   push: (data: Record<string, unknown>) => void
 }
 
+// Tipo para o canal Pusher
+export interface PusherChannel {
+  bind: (event: string, callback: () => void) => void
+  unbind: (event: string) => void
+}
+
+export type PusherInstance = {
+  subscribe: (channel: string) => PusherChannel
+  unsubscribe: (channel: string) => void
+}
+
 export * from './http'
 export * from './header'

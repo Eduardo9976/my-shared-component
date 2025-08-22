@@ -34,6 +34,23 @@ export default defineConfig({
   envDir: '.',
   server: {
     proxy: {
+      '/chat-api-bff': {
+        target: 'https://trunk.api.web.mercadoe.com',
+        changeOrigin: true,
+        secure: false,
+        configure: proxy => {
+          proxy.on('proxyReq', (proxyReq, req) => {
+            console.log('chat-api-bff request', req.method, req.url)
+          })
+          proxy.on('proxyRes', (proxyRes, req) => {
+            console.log(
+              'Received Response chat api bff:',
+              proxyRes.statusCode,
+              req.url
+            )
+          })
+        }
+      },
       '/do': {
         target: 'https://trunk.me.com.br',
         changeOrigin: true,

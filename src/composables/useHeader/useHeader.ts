@@ -1,21 +1,20 @@
 import {toRef} from 'vue'
-import {useHttp} from './useHttp'
-import {useHeaderStore} from '@/composables/useHeaderStore'
+import {useHttp} from '../useHttp'
+import {useHeaderStore} from '@/composables/useHeaderStore.ts'
 import type {NavigationItem, GTM, User} from '@/types'
 import {
   mapHeaderLinks,
   mapNavigationItems,
   mapSiteMapItems,
   siteMapChildrenMapper
-} from './useHeader/mappers'
+} from './mappers.ts'
 import {
   loadUserData,
   loadHeaderData,
   loadSiteMapData,
-  loadUserDetails,
   changeLocale,
   mapProfileLinks
-} from './useHeader/api'
+} from './api.ts'
 
 const ERROR_STATUS = {
   FORBIDDEN: 403,
@@ -23,15 +22,14 @@ const ERROR_STATUS = {
 } as const
 
 const ERROR_MESSAGES = {
-  FORBIDDEN: '⚠️ Acesso negado (403) - Usuário não autenticado, usando mock', // refatorar
+  FORBIDDEN: '⚠️ Acesso negado (403) - Usuário não autenticado, usando mock',
   UNAUTHORIZED: '⚠️ Não autorizado (401) - Token inválido, usando mock',
   GENERIC: '⚠️ Erro ao carregar dados do usuário:',
-  HEADER_LOAD: '❌ Erro ao carregar dados do header:',
-  LOCALE_CHANGE: 'Erro ao mudar idioma:'
+  HEADER_LOAD: '❌ Erro ao carregar dados do header:'
 } as const
 
 export function useHeader(activeLinkName: string, gtm: GTM) {
-  const {get, post, setCustomToken} = useHttp()
+  const {get, post, setToken} = useHttp()
   const headerStore = useHeaderStore()
   const storeUser = toRef(headerStore, 'user')
 
@@ -53,7 +51,7 @@ export function useHeader(activeLinkName: string, gtm: GTM) {
 
   const handleUserDataLoad = async (): Promise<void> => {
     try {
-      const userData = await loadUserData(get, setCustomToken)
+      const userData = await loadUserData(get, setToken)
       headerStore.setUser(userData as unknown as User)
     } catch (error) {
       handleUserDataError(error)
@@ -65,7 +63,7 @@ export function useHeader(activeLinkName: string, gtm: GTM) {
       const response = await loadHeaderData(
         get,
         headerStore.user.value.id,
-        headerStore.user.value.culture || '',
+        headerStore.user.value.culture ?? '',
         storeUser.value.lastAccess
       )
 
@@ -139,21 +137,7 @@ export function useHeader(activeLinkName: string, gtm: GTM) {
     }
   }
 
-  const handleChangeLocale = async (locale: string): Promise<void> => {
-    try {
-      await changeLocale(post, locale, gtm)
-      headerStore.setUser({
-        ...headerStore.user.value,
-        culture: locale
-      })
-    } catch (error) {
-      console.error(ERROR_MESSAGES.LOCALE_CHANGE, error)
-    }
-  }
-
   return {
-    initializeData,
-    loadUserDetails: () => loadUserDetails(get),
-    changeLocale: handleChangeLocale
+    initializeData
   }
 }

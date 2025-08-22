@@ -1,4 +1,4 @@
-import {ref, computed} from 'vue'
+import {ref} from 'vue'
 import enUS from './en-US.js'
 import ptBR from './pt-BR.js'
 import esES from './es-ES.js'
@@ -64,16 +64,8 @@ export function useTranslations() {
     }
   }
 
-  const getCurrentLocale = computed(() => globalLocale.value)
-
-  const getSupportedLocales = computed(
-    () => Object.keys(translations) as SupportedLocale[]
-  )
-
   return {
     t,
-    setLocale,
-    getCurrentLocale,
-    getSupportedLocales
+    setLocale
   }
 }

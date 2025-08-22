@@ -6,8 +6,10 @@ import type {
   SiteMapItem,
   User,
   Brand,
-  ProfileItem
+  ProfileItem,
+  PusherInstance
 } from '@/types'
+import {useBadgeManager} from './useBadgeManager'
 
 export interface HeaderLink extends NavigationItem {
   url: string | null
@@ -22,6 +24,7 @@ interface HeaderState {
   brand: Brand
   profileItems: ProfileItem[]
   headerLinks: HeaderLink[]
+  badges: Record<string, string | number>
 }
 
 const initialState: HeaderState = {
@@ -31,10 +34,23 @@ const initialState: HeaderState = {
   siteMapItems: [],
   brand: {} as Brand,
   profileItems: [],
-  headerLinks: []
+  headerLinks: [],
+  badges: {}
 }
 
 const state = reactive<HeaderState>(initialState)
+
+let badgeManagerInstance: ReturnType<typeof useBadgeManager> | null = null
+
+const getBadgeManager = (pusher?: PusherInstance) => {
+  badgeManagerInstance ??= useBadgeManager(
+    pusher,
+    (linkName: string, value: string | number) => {
+      state.badges[linkName] = value
+    }
+  )
+  return badgeManagerInstance
+}
 
 const navigationItemsWithoutSeparators = computed(
   () =>
@@ -46,8 +62,13 @@ const isSeparator = (
 ): item is NavigationSeparatorItem =>
   'separator' in item && item.separator === true
 
-const setUser = (user: User): void => {
+const setUser = (user: User, pusher?: PusherInstance): void => {
   state.user = {...user}
+
+  if (user.id && state.headerLinks.length > 0) {
+    const badgeManager = getBadgeManager(pusher)
+    badgeManager.initBadgesForLinks(state.headerLinks, user.id)
+  }
 }
 
 const setBrand = (brand: Brand): void => {
@@ -58,58 +79,35 @@ const setProfileItems = (items: ProfileItem[]): void => {
   state.profileItems = items
 }
 
-const setHeaderLinks = (headerLinks: HeaderLink[]): void => {
-  state.headerLinks = headerLinks
-}
-
 const setNavigationItems = (items: NavigationItemOrSeparator[]): void => {
   state.navigationItems = items
   state.customNavigationItems = navigationItemsWithoutSeparators.value
-}
-
-const setCustomNavigationItems = (items: NavigationItem[]): void => {
-  const updatedItems: (NavigationItem | NavigationSeparatorItem)[] = []
-  let itemIndex = 0
-
-  for (const currentItem of state.navigationItems) {
-    updatedItems.push(
-      isSeparator(currentItem)
-        ? currentItem
-        : (items[itemIndex++] ?? currentItem)
-    )
-  }
-
-  state.customNavigationItems = items
-  state.navigationItems = updatedItems
 }
 
 const setSiteMapItems = (items: SiteMapItem[]): void => {
   state.siteMapItems = items
 }
 
-const findNavigationItemById = (id: string): NavigationItem | undefined => {
-  if (!id) return undefined
-
-  return state.navigationItems.find(
-    item => !isSeparator(item) && item.id === id
-  ) as NavigationItem | undefined
-}
-
-const updateNavigationItemsVisible = (
-  item: NavigationItem,
-  visible: boolean
+const setHeaderLinks = (
+  headerLinks: HeaderLink[],
+  pusher?: PusherInstance
 ): void => {
-  if (!item.id) return
+  state.headerLinks = headerLinks
 
-  const targetItem = findNavigationItemById(item.id)
-  if (targetItem) {
-    targetItem.visible = visible
-    state.navigationItems = [...state.navigationItems]
+  if (state.user.id) {
+    const badgeManager = getBadgeManager(pusher)
+    badgeManager.initBadgesForLinks(headerLinks, state.user.id)
   }
 }
 
-const resetState = (): void => {
-  Object.assign(state, initialState)
+const updateBadgeValue = (linkName: string, value: string | number): void => {
+  const badgeManager = getBadgeManager()
+  badgeManager.setBadgeValue(linkName, value)
+  state.badges[linkName] = value
+}
+
+const getBadgeValue = (linkName: string): string | number | undefined => {
+  return state.badges[linkName]
 }
 
 export function useHeaderStore() {
@@ -119,13 +117,11 @@ export function useHeaderStore() {
     setUser,
     setBrand,
     setProfileItems,
-    setHeaderLinks,
     setNavigationItems,
-    setCustomNavigationItems,
     setSiteMapItems,
+    setHeaderLinks,
     isSeparator,
-    findNavigationItemById,
-    updateNavigationItemsVisible,
-    resetState
+    updateBadgeValue,
+    getBadgeValue
   }
 }
