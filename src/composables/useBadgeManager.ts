@@ -37,7 +37,7 @@ export function useBadgeManager(
     if (!headerLink.badgeTotalUrl || !headerLink.linkName) return
 
     const response = await get(
-      headerLink.badgeTotalUrl.replace('https://trunk.api.web.mercadoe.com', '')
+      headerLink.badgeTotalUrl
     ) // remover replace usado no proxy
     if (response) {
       const data = response as {total?: number}

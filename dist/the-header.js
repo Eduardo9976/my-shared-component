@@ -28584,7 +28584,7 @@ function useBadgeManager(pusher, onBadgeChange) {
   const setBadgesValue = async (headerLink) => {
     if (!headerLink.badgeTotalUrl || !headerLink.linkName) return;
     const response = await get2(
-      headerLink.badgeTotalUrl.replace("https://trunk.api.web.mercadoe.com", "")
+      headerLink.badgeTotalUrl
     );
     if (response) {
       const data = response;
