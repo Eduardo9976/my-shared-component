@@ -34,7 +34,7 @@ import {
 import {useHeader} from '@/composables/useHeader/useHeader.ts'
 import type {GTM, PusherInstance} from '@/types'
 import {useHttp} from '@/composables/useHttp'
-import { useBadgeManager } from '@/composables/useBadgeManager'
+import {useBadgeManager} from '@/composables/useBadgeManager'
 
 interface Props {
   activeLinkName?: string
@@ -51,7 +51,7 @@ const {initializeData} = useHeader(
 )
 
 const headerStore = useHeaderStore()
-const { initBadgesForLinks } = useBadgeManager(props.pusher)
+const {initBadgesForLinks} = useBadgeManager(props.pusher)
 
 const storeUser = toRef(headerStore, 'user')
 
@@ -65,11 +65,15 @@ const storeSiteMapItems = toRef(headerStore, 'siteMapItems')
 
 const storeHeaderLinks = toRef(headerStore, 'headerLinks')
 
-watch(storeHeaderLinks, (newHeaderLinks) => {
-  if (newHeaderLinks && newHeaderLinks.length > 0 && storeUser.value.id) {
-    initBadgesForLinks(newHeaderLinks, storeUser.value.id)
-  }
-}, { immediate: true })
+watch(
+  storeHeaderLinks,
+  newHeaderLinks => {
+    if (newHeaderLinks && newHeaderLinks.length > 0 && storeUser.value.id) {
+      initBadgesForLinks(newHeaderLinks, storeUser.value.id)
+    }
+  },
+  {immediate: true}
+)
 
 const backdropState = ref({
   visible: false,
@@ -94,10 +98,10 @@ provide('headerBackdrop', {
 })
 
 onMounted(async () => {
-  const {setCustomToken} = useHttp()
+  const {setToken} = useHttp()
 
   if (props.token) {
-    setCustomToken(props.token)
+    setToken(props.token)
   }
 
   await initializeData()

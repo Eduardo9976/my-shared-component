@@ -38,12 +38,16 @@ export default defineConfig({
         target: 'https://trunk.api.web.mercadoe.com',
         changeOrigin: true,
         secure: false,
-        configure: (proxy) => {
+        configure: proxy => {
           proxy.on('proxyReq', (proxyReq, req) => {
             console.log('chat-api-bff request', req.method, req.url)
           })
           proxy.on('proxyRes', (proxyRes, req) => {
-            console.log('Received Response chat api bff:', proxyRes.statusCode, req.url)
+            console.log(
+              'Received Response chat api bff:',
+              proxyRes.statusCode,
+              req.url
+            )
           })
         }
       },
@@ -69,42 +73,34 @@ export default defineConfig({
       }
     }
   },
-  build:
-    {
-      rollupOptions: {
-        input: {
-          app: './index.html',
-          'the-header':
-            './src/components/TheHeader/the-header.ts'
+  build: {
+    rollupOptions: {
+      input: {
+        app: './index.html',
+        'the-header': './src/components/TheHeader/the-header.ts'
+      },
+      output: {
+        entryFileNames: chunkInfo => {
+          if (chunkInfo.name === 'the-header') {
+            return 'the-header.js'
+          }
+          return '[name].js'
         },
-        output: {
-          entryFileNames: chunkInfo => {
-            if (chunkInfo.name === 'the-header') {
-              return 'the-header.js'
-            }
-            return '[name].js'
-          },
-          chunkFileNames:
-            '[name].js',
-          assetFileNames:
-            assetInfo => {
-              if (assetInfo.name === 'style.css') {
-                return 'webcomponents-styles.css'
-              }
-              if (assetInfo.name === 'the-header.css') {
-                return 'the-header.css'
-              }
-              return '[name].[ext]'
-            }
+        chunkFileNames: '[name].js',
+        assetFileNames: assetInfo => {
+          if (assetInfo.name === 'style.css') {
+            return 'webcomponents-styles.css'
+          }
+          if (assetInfo.name === 'the-header.css') {
+            return 'the-header.css'
+          }
+          return '[name].[ext]'
         }
       }
-      ,
-      cssCodeSplit: false,
-      assetsInlineLimit:
-        0,
-      minify:
-        false,
-      cssMinify:
-        false
-    }
+    },
+    cssCodeSplit: false,
+    assetsInlineLimit: 0,
+    minify: false,
+    cssMinify: false
+  }
 })

@@ -50,7 +50,7 @@ const isPdmPath = (pathname: string): boolean =>
 
 export const loadUserData = async (
   get: UseHttpReturn['get'],
-  setCustomToken: UseHttpReturn['setCustomToken']
+  setToken: UseHttpReturn['setToken']
 ): Promise<User> => {
   const data = await get<User>(API_ENDPOINTS.USERS.CURRENT)
 
@@ -59,7 +59,7 @@ export const loadUserData = async (
   }
 
   if (data.token?.accessToken && typeof data.token.accessToken === 'string') {
-    setCustomToken(data.token.accessToken)
+    setToken(data.token.accessToken)
   }
 
   return data

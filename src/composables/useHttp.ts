@@ -1,13 +1,10 @@
-import axios, { type AxiosInstance, type AxiosResponse } from 'axios'
-import { ref, computed } from 'vue'
-import type { RequestConfig } from '@/types/http'
+import axios, {type AxiosInstance, type AxiosResponse} from 'axios'
+import {ref, computed} from 'vue'
+import type {RequestConfig} from '@/types/http'
 
-let baseURL =
-  import.meta.env.DEV
-    ? window.location.origin
-    : (import.meta.env.VITE_MEWEB ?? window.location.origin)
+let baseURL = window.location.origin
 
-let customToken: string | null = null
+let token: string | null = null
 
 const instance: AxiosInstance = axios.create({
   baseURL,
@@ -27,7 +24,6 @@ instance.interceptors.request.use(
     }
 
     if (requestConfig.withToken !== false) {
-      const token = customToken || localStorage.getItem('ACCESS_TOKEN')
       if (token) {
         config.headers.Authorization = `Bearer ${token}`
       }
@@ -62,27 +58,45 @@ function getFullURL(url: string): string {
   return `${baseURL}/${url}`
 }
 
-async function httpGet<T = unknown>(url: string, config?: RequestConfig): Promise<T> {
+async function httpGet<T = unknown>(
+  url: string,
+  config?: RequestConfig
+): Promise<T> {
   const response = await instance.get<T>(getFullURL(url), config)
   return response.data
 }
 
-async function httpPost<T = unknown>(url: string, data?: unknown, config?: RequestConfig): Promise<T> {
+async function httpPost<T = unknown>(
+  url: string,
+  data?: unknown,
+  config?: RequestConfig
+): Promise<T> {
   const response = await instance.post<T>(getFullURL(url), data, config)
   return response.data
 }
 
-async function httpPut<T = unknown>(url: string, data?: unknown, config?: RequestConfig): Promise<T> {
+async function httpPut<T = unknown>(
+  url: string,
+  data?: unknown,
+  config?: RequestConfig
+): Promise<T> {
   const response = await instance.put<T>(getFullURL(url), data, config)
   return response.data
 }
 
-async function httpPatch<T = unknown>(url: string, data?: unknown, config?: RequestConfig): Promise<T> {
+async function httpPatch<T = unknown>(
+  url: string,
+  data?: unknown,
+  config?: RequestConfig
+): Promise<T> {
   const response = await instance.patch<T>(getFullURL(url), data, config)
   return response.data
 }
 
-async function httpDelete<T = unknown>(url: string, config?: RequestConfig): Promise<T> {
+async function httpDelete<T = unknown>(
+  url: string,
+  config?: RequestConfig
+): Promise<T> {
   const response = await instance.delete<T>(getFullURL(url), config)
   return response.data
 }
@@ -96,20 +110,16 @@ function getBaseURL() {
   return baseURL
 }
 
-function setCustomToken(token: string | null) {
-  if (token !== null && typeof token !== 'string') {
-    console.warn('Token deve ser uma string, recebido:', typeof token, token)
+function setToken(newToken: string | null) {
+  if (newToken !== null && typeof newToken !== 'string') {
+    console.warn(
+      'Token deve ser uma string, recebido:',
+      typeof newToken,
+      newToken
+    )
     return
   }
-  customToken = token
-}
-
-function getCustomToken() {
-  return customToken
-}
-
-function clearCustomToken() {
-  customToken = null
+  token = newToken
 }
 
 const httpService = {
@@ -120,9 +130,7 @@ const httpService = {
   delete: httpDelete,
   setBaseURL,
   getBaseURL,
-  setCustomToken,
-  getCustomToken,
-  clearCustomToken
+  setToken
 }
 
 export function useHttp() {
@@ -151,18 +159,24 @@ export function useHttp() {
       error.value = null
 
       switch (method) {
-        case 'get': return await httpService.get<T>(url, config)
-        case 'post': return await httpService.post<T>(url, data, config)
-        case 'put': return await httpService.put<T>(url, data, config)
-        case 'patch': return await httpService.patch<T>(url, data, config)
-        case 'delete': return await httpService.delete<T>(url, config)
-        default: throw new Error(`Unsupported HTTP method: ${method}`)
+        case 'get':
+          return await httpService.get<T>(url, config)
+        case 'post':
+          return await httpService.post<T>(url, data, config)
+        case 'put':
+          return await httpService.put<T>(url, data, config)
+        case 'patch':
+          return await httpService.patch<T>(url, data, config)
+        case 'delete':
+          return await httpService.delete<T>(url, config)
+        default:
+          throw new Error(`Unsupported HTTP method: ${method}`)
       }
     } catch (err: unknown) {
       const errorMessage =
-        (err as { response?: { data?: { message?: string } }; message?: string })
+        (err as {response?: {data?: {message?: string}}; message?: string})
           ?.response?.data?.message ||
-        (err as { message?: string })?.message ||
+        (err as {message?: string})?.message ||
         'An error occurred'
       setError(errorMessage)
       return null
@@ -177,21 +191,22 @@ export function useHttp() {
     errorMessage: error,
 
     request,
-    get: <T = unknown>(url: string, config?: RequestConfig) => request<T>('get', url, undefined, config),
-    post: <T = unknown>(url: string, data?: unknown, config?: RequestConfig) => request<T>('post', url, data, config),
-    put: <T = unknown>(url: string, data?: unknown, config?: RequestConfig) => request<T>('put', url, data, config),
-    patch: <T = unknown>(url: string, data?: unknown, config?: RequestConfig) => request<T>('patch', url, data, config),
-    delete: <T = unknown>(url: string, config?: RequestConfig) => request<T>('delete', url, undefined, config),
+    get: <T = unknown>(url: string, config?: RequestConfig) =>
+      request<T>('get', url, undefined, config),
+    post: <T = unknown>(url: string, data?: unknown, config?: RequestConfig) =>
+      request<T>('post', url, data, config),
+    put: <T = unknown>(url: string, data?: unknown, config?: RequestConfig) =>
+      request<T>('put', url, data, config),
+    patch: <T = unknown>(url: string, data?: unknown, config?: RequestConfig) =>
+      request<T>('patch', url, data, config),
+    delete: <T = unknown>(url: string, config?: RequestConfig) =>
+      request<T>('delete', url, undefined, config),
 
     clearError,
     setError,
 
     setBaseURL,
     getBaseURL,
-    setCustomToken,
-    getCustomToken,
-    clearCustomToken
+    setToken
   }
 }
-
-

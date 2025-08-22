@@ -50,7 +50,7 @@
 <script setup lang="ts">
 import type {ProfileItem} from '@/types'
 import MeIcon from '@/components/MeIcon/MeIcon.vue'
-import { useIsExternalUrl } from '@/composables/useIsExternalUrl'
+import {useIsExternalUrl} from '@/composables/useIsExternalUrl'
 
 interface Props {
   profileItems: ProfileItem[]
@@ -71,7 +71,7 @@ function accordionItems(item: ProfileItem) {
   ]
 }
 
-const { isExternalUrl } = useIsExternalUrl()
+const {isExternalUrl} = useIsExternalUrl()
 
 function handleClick(item: ProfileItem) {
   const {url, click} = item

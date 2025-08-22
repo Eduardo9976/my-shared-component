@@ -40,13 +40,15 @@ const initialState: HeaderState = {
 
 const state = reactive<HeaderState>(initialState)
 
-
 let badgeManagerInstance: ReturnType<typeof useBadgeManager> | null = null
 
 const getBadgeManager = (pusher?: PusherInstance) => {
-  badgeManagerInstance ??= useBadgeManager(pusher, (linkName: string, value: string | number) => {
-    state.badges[linkName] = value
-  });
+  badgeManagerInstance ??= useBadgeManager(
+    pusher,
+    (linkName: string, value: string | number) => {
+      state.badges[linkName] = value
+    }
+  )
   return badgeManagerInstance
 }
 
@@ -86,7 +88,10 @@ const setSiteMapItems = (items: SiteMapItem[]): void => {
   state.siteMapItems = items
 }
 
-const setHeaderLinks = (headerLinks: HeaderLink[], pusher?: PusherInstance): void => {
+const setHeaderLinks = (
+  headerLinks: HeaderLink[],
+  pusher?: PusherInstance
+): void => {
   state.headerLinks = headerLinks
 
   if (state.user.id) {

@@ -12,7 +12,6 @@ import {
   loadUserData,
   loadHeaderData,
   loadSiteMapData,
-  loadUserDetails,
   changeLocale,
   mapProfileLinks
 } from './api.ts'
@@ -30,7 +29,7 @@ const ERROR_MESSAGES = {
 } as const
 
 export function useHeader(activeLinkName: string, gtm: GTM) {
-  const {get, post, setCustomToken} = useHttp()
+  const {get, post, setToken} = useHttp()
   const headerStore = useHeaderStore()
   const storeUser = toRef(headerStore, 'user')
 
@@ -52,7 +51,7 @@ export function useHeader(activeLinkName: string, gtm: GTM) {
 
   const handleUserDataLoad = async (): Promise<void> => {
     try {
-      const userData = await loadUserData(get, setCustomToken)
+      const userData = await loadUserData(get, setToken)
       headerStore.setUser(userData as unknown as User)
     } catch (error) {
       handleUserDataError(error)
@@ -64,7 +63,7 @@ export function useHeader(activeLinkName: string, gtm: GTM) {
       const response = await loadHeaderData(
         get,
         headerStore.user.value.id,
-        headerStore.user.value.culture || '',
+        headerStore.user.value.culture ?? '',
         storeUser.value.lastAccess
       )
 
