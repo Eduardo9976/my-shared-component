@@ -26324,15 +26324,15 @@ const _setImmediate = ((setImmediateSupported, postMessageSupported) => {
   if (setImmediateSupported) {
     return setImmediate;
   }
-  return postMessageSupported ? ((token, callbacks) => {
+  return postMessageSupported ? ((token2, callbacks) => {
     _global.addEventListener("message", ({ source, data }) => {
-      if (source === _global && data === token) {
+      if (source === _global && data === token2) {
         callbacks.length && callbacks.shift()();
       }
     }, false);
     return (cb) => {
       callbacks.push(cb);
-      _global.postMessage(token, "*");
+      _global.postMessage(token2, "*");
     };
   })(`axios@${Math.random()}`, []) : (cb) => setTimeout(cb);
 })(
@@ -26482,9 +26482,9 @@ function removeBrackets(key) {
 }
 function renderKey(path, key, dots) {
   if (!path) return key;
-  return path.concat(key).map(function each(token, i2) {
-    token = removeBrackets(token);
-    return !dots && i2 ? "[" + token + "]" : token;
+  return path.concat(key).map(function each(token2, i2) {
+    token2 = removeBrackets(token2);
+    return !dots && i2 ? "[" + token2 + "]" : token2;
   }).join(dots ? "." : "");
 }
 function isFlatArray(arr) {
@@ -27462,7 +27462,7 @@ const resolveConfig = (config) => {
     if (platform.hasStandardBrowserEnv || platform.hasStandardBrowserWebWorkerEnv) {
       headers.setContentType(void 0);
     } else if ((contentType = headers.getContentType()) !== false) {
-      const [type, ...tokens] = contentType ? contentType.split(";").map((token) => token.trim()).filter(Boolean) : [];
+      const [type, ...tokens] = contentType ? contentType.split(";").map((token2) => token2.trim()).filter(Boolean) : [];
       headers.setContentType([type || "multipart/form-data", ...tokens].join("; "));
     }
   }
@@ -28209,32 +28209,32 @@ let CancelToken$1 = class CancelToken {
     this.promise = new Promise(function promiseExecutor(resolve2) {
       resolvePromise = resolve2;
     });
-    const token = this;
+    const token2 = this;
     this.promise.then((cancel) => {
-      if (!token._listeners) return;
-      let i2 = token._listeners.length;
+      if (!token2._listeners) return;
+      let i2 = token2._listeners.length;
       while (i2-- > 0) {
-        token._listeners[i2](cancel);
+        token2._listeners[i2](cancel);
       }
-      token._listeners = null;
+      token2._listeners = null;
     });
     this.promise.then = (onfulfilled) => {
       let _resolve;
       const promise = new Promise((resolve2) => {
-        token.subscribe(resolve2);
+        token2.subscribe(resolve2);
         _resolve = resolve2;
       }).then(onfulfilled);
       promise.cancel = function reject() {
-        token.unsubscribe(_resolve);
+        token2.unsubscribe(_resolve);
       };
       return promise;
     };
     executor(function cancel(message, config, request) {
-      if (token.reason) {
+      if (token2.reason) {
         return;
       }
-      token.reason = new CanceledError$1(message, config, request);
-      resolvePromise(token.reason);
+      token2.reason = new CanceledError$1(message, config, request);
+      resolvePromise(token2.reason);
     });
   }
   /**
@@ -28286,11 +28286,11 @@ let CancelToken$1 = class CancelToken {
    */
   static source() {
     let cancel;
-    const token = new CancelToken(function executor(c2) {
+    const token2 = new CancelToken(function executor(c2) {
       cancel = c2;
     });
     return {
-      token,
+      token: token2,
       cancel
     };
   }
@@ -28419,8 +28419,8 @@ const {
   getAdapter,
   mergeConfig
 } = axios;
-let baseURL = "https://trunk.me.com.br";
-let customToken = null;
+let baseURL = "https://localhost:9001/";
+let token = null;
 const instance = axios.create({
   baseURL,
   timeout: 1e4,
@@ -28434,7 +28434,6 @@ instance.interceptors.request.use(
   (config) => {
     const requestConfig = config;
     if (requestConfig.withToken !== false) {
-      const token = customToken || localStorage.getItem("ACCESS_TOKEN");
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -28491,18 +28490,16 @@ function setBaseURL(url) {
 function getBaseURL() {
   return baseURL;
 }
-function setCustomToken(token) {
-  if (token !== null && typeof token !== "string") {
-    console.warn("Token deve ser uma string, recebido:", typeof token, token);
+function setToken(newToken) {
+  if (newToken !== null && typeof newToken !== "string") {
+    console.warn(
+      "Token deve ser uma string, recebido:",
+      typeof newToken,
+      newToken
+    );
     return;
   }
-  customToken = token;
-}
-function getCustomToken() {
-  return customToken;
-}
-function clearCustomToken() {
-  customToken = null;
+  token = newToken;
 }
 const httpService = {
   get: httpGet,
@@ -28512,9 +28509,7 @@ const httpService = {
   delete: httpDelete,
   setBaseURL,
   getBaseURL,
-  setCustomToken,
-  getCustomToken,
-  clearCustomToken
+  setToken
 };
 function useHttp() {
   const loading = ref(false);
@@ -28567,60 +28562,60 @@ function useHttp() {
     setError,
     setBaseURL,
     getBaseURL,
-    setCustomToken,
-    getCustomToken,
-    clearCustomToken
+    setToken
   };
 }
-function useBadgeManager(pusher) {
+const globalState = reactive({
+  badges: {},
+  badgeLoader: {}
+});
+const globalChannel = ref(null);
+function useBadgeManager(pusher, onBadgeChange) {
   const { get: get2 } = useHttp();
-  const state2 = reactive({
-    badges: {},
-    badgeLoader: {}
-  });
-  const channel = ref(null);
   const setBadgeValue = (linkName, value) => {
-    state2.badges[linkName] = value;
+    globalState.badges[linkName] = value;
+    if (onBadgeChange) {
+      onBadgeChange(linkName, value);
+    }
   };
   const getBadgeValue2 = (linkName) => {
-    return state2.badges[linkName];
+    return globalState.badges[linkName];
   };
   const setBadgesValue = async (headerLink) => {
     if (!headerLink.badgeTotalUrl || !headerLink.linkName) return;
-    console.log("setBadgesValue", headerLink.badgeTotalUrl);
-    const response = await get2(headerLink.badgeTotalUrl.replace("https://trunk.api.web.mercadoe.com", ""));
+    const response = await get2(
+      headerLink.badgeTotalUrl.replace("https://trunk.api.web.mercadoe.com", "")
+    );
     if (response) {
       const data = response;
-      console.log("resposta", data);
       setBadgeValue(headerLink.linkName, data?.total ?? 0);
     }
   };
   const loadBadge = (headerLink) => {
     if (!headerLink.linkName || !headerLink.badgeTotalUrl) return;
-    console.log("loadBadge", headerLink.linkName, headerLink.badgeTotalUrl);
-    if (!state2.badgeLoader[headerLink.linkName]) {
-      console.log("Creating new throttled function for", headerLink.linkName);
-      const throttledFn = /* @__PURE__ */ useThrottleFn(setBadgesValue, 2e3);
-      state2.badgeLoader[headerLink.linkName] = throttledFn;
-    }
-    state2.badgeLoader[headerLink.linkName](headerLink);
-    console.log("Badge loader for", headerLink.linkName, "exists:", !!state2.badgeLoader[headerLink.linkName]);
+    globalState.badgeLoader[headerLink.linkName] ??= /* @__PURE__ */ useThrottleFn(
+      setBadgesValue,
+      2e3
+    );
+    globalState.badgeLoader[headerLink.linkName](headerLink);
   };
   const initBadge = (headerLink, userId) => {
     if (!headerLink.badgeTotalUrl || !headerLink.linkName) return;
     loadBadge(headerLink);
     if (headerLink.badgeEvent && userId && pusher) {
-      console.log("headerLink.badgeEvent", headerLink.badgeEvent);
       try {
-        if (!channel.value) {
-          channel.value = pusher.subscribe(`user.${userId}`);
-        }
-        channel.value.unbind(headerLink.badgeEvent);
-        channel.value.bind(headerLink.badgeEvent, () => {
+        globalChannel.value ??= pusher.subscribe(
+          `user.${userId}`
+        );
+        globalChannel.value.unbind(headerLink.badgeEvent);
+        globalChannel.value.bind(headerLink.badgeEvent, () => {
           loadBadge(headerLink);
         });
       } catch (error) {
-        console.error(`Error configuring Pusher for ${headerLink.linkName}:`, error);
+        console.error(
+          `Error configuring Pusher for ${headerLink.linkName}:`,
+          error
+        );
       }
     }
   };
@@ -28640,9 +28635,20 @@ const initialState = {
   siteMapItems: [],
   brand: {},
   profileItems: [],
-  headerLinks: []
+  headerLinks: [],
+  badges: {}
 };
 const state = reactive(initialState);
+let badgeManagerInstance = null;
+const getBadgeManager = (pusher) => {
+  badgeManagerInstance ??= useBadgeManager(
+    pusher,
+    (linkName, value) => {
+      state.badges[linkName] = value;
+    }
+  );
+  return badgeManagerInstance;
+};
 const navigationItemsWithoutSeparators = computed(
   () => state.navigationItems.filter((item) => !isSeparator(item))
 );
@@ -28650,8 +28656,8 @@ const isSeparator = (item) => "separator" in item && item.separator === true;
 const setUser = (user, pusher) => {
   state.user = { ...user };
   if (user.id && state.headerLinks.length > 0) {
-    const { initBadgesForLinks } = useBadgeManager(pusher);
-    initBadgesForLinks(state.headerLinks, user.id);
+    const badgeManager = getBadgeManager(pusher);
+    badgeManager.initBadgesForLinks(state.headerLinks, user.id);
   }
 };
 const setBrand = (brand) => {
@@ -28670,17 +28676,17 @@ const setSiteMapItems = (items) => {
 const setHeaderLinks = (headerLinks, pusher) => {
   state.headerLinks = headerLinks;
   if (state.user.id) {
-    const { initBadgesForLinks } = useBadgeManager(pusher);
-    initBadgesForLinks(headerLinks, state.user.id);
+    const badgeManager = getBadgeManager(pusher);
+    badgeManager.initBadgesForLinks(headerLinks, state.user.id);
   }
 };
 const updateBadgeValue = (linkName, value) => {
-  const { setBadgeValue } = useBadgeManager();
-  setBadgeValue(linkName, value);
+  const badgeManager = getBadgeManager();
+  badgeManager.setBadgeValue(linkName, value);
+  state.badges[linkName] = value;
 };
 const getBadgeValue = (linkName) => {
-  const { getBadgeValue: getBadge } = useBadgeManager();
-  return getBadge(linkName);
+  return state.badges[linkName];
 };
 function useHeaderStore() {
   return {
@@ -29493,13 +29499,13 @@ const buildQueryString = (params) => {
   return searchParams.toString();
 };
 const isPdmPath = (pathname) => pathname.includes("/MEPDM/") || pathname.includes("/PDM/");
-const loadUserData = async (get2, setCustomToken2) => {
+const loadUserData = async (get2, setToken2) => {
   const data = await get2(API_ENDPOINTS.USERS.CURRENT);
   if (!data) {
     throw new Error(ERROR_MESSAGES$1.USER_DATA);
   }
   if (data.token?.accessToken && typeof data.token.accessToken === "string") {
-    setCustomToken2(data.token.accessToken);
+    setToken2(data.token.accessToken);
   }
   return data;
 };
@@ -29583,7 +29589,7 @@ const ERROR_MESSAGES = {
   HEADER_LOAD: "❌ Erro ao carregar dados do header:"
 };
 function useHeader(activeLinkName, gtm) {
-  const { get: get2, post, setCustomToken: setCustomToken2 } = useHttp();
+  const { get: get2, post, setToken: setToken2 } = useHttp();
   const headerStore = useHeaderStore();
   const storeUser = toRef$2(headerStore, "user");
   const handleUserDataError = (error) => {
@@ -29602,7 +29608,7 @@ function useHeader(activeLinkName, gtm) {
   };
   const handleUserDataLoad = async () => {
     try {
-      const userData = await loadUserData(get2, setCustomToken2);
+      const userData = await loadUserData(get2, setToken2);
       headerStore.setUser(userData);
     } catch (error) {
       handleUserDataError(error);
@@ -29613,7 +29619,7 @@ function useHeader(activeLinkName, gtm) {
       const response = await loadHeaderData(
         get2,
         headerStore.user.value.id,
-        headerStore.user.value.culture || "",
+        headerStore.user.value.culture ?? "",
         storeUser.value.lastAccess
       );
       headerStore.setUser({
@@ -29702,11 +29708,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const storeProfileItems = toRef$2(headerStore, "profileItems");
     const storeSiteMapItems = toRef$2(headerStore, "siteMapItems");
     const storeHeaderLinks = toRef$2(headerStore, "headerLinks");
-    watch(storeHeaderLinks, (newHeaderLinks) => {
-      if (newHeaderLinks && newHeaderLinks.length > 0 && storeUser.value.id) {
-        initBadgesForLinks(newHeaderLinks, storeUser.value.id);
-      }
-    }, { immediate: true });
+    watch(
+      storeHeaderLinks,
+      (newHeaderLinks) => {
+        if (newHeaderLinks && newHeaderLinks.length > 0 && storeUser.value.id) {
+          initBadgesForLinks(newHeaderLinks, storeUser.value.id);
+        }
+      },
+      { immediate: true }
+    );
     const backdropState = ref({
       visible: false,
       zIndex: 9999
@@ -29726,9 +29736,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       state: backdropState
     });
     onMounted(async () => {
-      const { setCustomToken: setCustomToken2 } = useHttp();
+      const { setToken: setToken2 } = useHttp();
       if (props.token) {
-        setCustomToken2(props.token);
+        setToken2(props.token);
       }
       await initializeData();
       useTranslations().setLocale(storeUser.value.culture);
