@@ -62,6 +62,7 @@ const storeBrand = toRef(headerStore, 'brand')
 const storeProfileItems = toRef(headerStore, 'profileItems')
 
 const storeSiteMapItems = toRef(headerStore, 'siteMapItems')
+
 const storeHeaderLinks = toRef(headerStore, 'headerLinks')
 
 watch(storeHeaderLinks, (newHeaderLinks) => {

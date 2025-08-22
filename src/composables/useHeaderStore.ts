@@ -6,10 +6,10 @@ import type {
   SiteMapItem,
   User,
   Brand,
-  ProfileItem
+  ProfileItem,
+  PusherInstance
 } from '@/types'
-import { useBadgeManager } from './useBadgeManager'
-import type { PusherInstance } from '@/types'
+import {useBadgeManager} from './useBadgeManager'
 
 export interface HeaderLink extends NavigationItem {
   url: string | null
@@ -24,6 +24,7 @@ interface HeaderState {
   brand: Brand
   profileItems: ProfileItem[]
   headerLinks: HeaderLink[]
+  badges: Record<string, string | number>
 }
 
 const initialState: HeaderState = {
@@ -33,10 +34,21 @@ const initialState: HeaderState = {
   siteMapItems: [],
   brand: {} as Brand,
   profileItems: [],
-  headerLinks: []
+  headerLinks: [],
+  badges: {}
 }
 
 const state = reactive<HeaderState>(initialState)
+
+
+let badgeManagerInstance: ReturnType<typeof useBadgeManager> | null = null
+
+const getBadgeManager = (pusher?: PusherInstance) => {
+  badgeManagerInstance ??= useBadgeManager(pusher, (linkName: string, value: string | number) => {
+    state.badges[linkName] = value
+  });
+  return badgeManagerInstance
+}
 
 const navigationItemsWithoutSeparators = computed(
   () =>
@@ -50,10 +62,10 @@ const isSeparator = (
 
 const setUser = (user: User, pusher?: PusherInstance): void => {
   state.user = {...user}
-  
+
   if (user.id && state.headerLinks.length > 0) {
-    const { initBadgesForLinks } = useBadgeManager(pusher)
-    initBadgesForLinks(state.headerLinks, user.id)
+    const badgeManager = getBadgeManager(pusher)
+    badgeManager.initBadgesForLinks(state.headerLinks, user.id)
   }
 }
 
@@ -76,21 +88,21 @@ const setSiteMapItems = (items: SiteMapItem[]): void => {
 
 const setHeaderLinks = (headerLinks: HeaderLink[], pusher?: PusherInstance): void => {
   state.headerLinks = headerLinks
-  
+
   if (state.user.id) {
-    const { initBadgesForLinks } = useBadgeManager(pusher)
-    initBadgesForLinks(headerLinks, state.user.id)
+    const badgeManager = getBadgeManager(pusher)
+    badgeManager.initBadgesForLinks(headerLinks, state.user.id)
   }
 }
 
 const updateBadgeValue = (linkName: string, value: string | number): void => {
-  const { setBadgeValue } = useBadgeManager()
-  setBadgeValue(linkName, value)
+  const badgeManager = getBadgeManager()
+  badgeManager.setBadgeValue(linkName, value)
+  state.badges[linkName] = value
 }
 
 const getBadgeValue = (linkName: string): string | number | undefined => {
-  const { getBadgeValue: getBadge } = useBadgeManager()
-  return getBadge(linkName)
+  return state.badges[linkName]
 }
 
 export function useHeaderStore() {

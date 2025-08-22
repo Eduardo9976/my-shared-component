@@ -8,43 +8,44 @@ interface BadgeState {
   badgeLoader: Record<string, any>
 }
 
-export function useBadgeManager(pusher?: PusherInstance) {
-  const { get } = useHttp()
-  
-  const state = reactive<BadgeState>({
-    badges: {},
-    badgeLoader: {}
-  })
+const globalState = reactive<BadgeState>({
+  badges: {},
+  badgeLoader: {}
+})
 
-  const channel = ref<any>(null)
+const globalChannel = ref<any>(null)
+
+export function useBadgeManager(pusher?: PusherInstance, onBadgeChange?: (linkName: string, value: string | number) => void) {
+  const { get } = useHttp()
 
   const setBadgeValue = (linkName: string, value: string | number) => {
-    state.badges[linkName] = value
+    globalState.badges[linkName] = value
+
+    if (onBadgeChange) {
+      onBadgeChange(linkName, value)
+    }
   }
 
   const getBadgeValue = (linkName: string) => {
-    return state.badges[linkName]
+    return globalState.badges[linkName]
   }
 
   const setBadgesValue = async (headerLink: NavigationItem) => {
     if (!headerLink.badgeTotalUrl || !headerLink.linkName) return
 
-    const response = await get(headerLink.badgeTotalUrl)
+    const response = await get(headerLink.badgeTotalUrl.replace('https://trunk.api.web.mercadoe.com', '')) // remover replace, usado no proxy
     if (response) {
       const data = response as any
-      setBadgeValue(headerLink.linkName, data?.total || 0)
+      setBadgeValue(headerLink.linkName, data?.total ?? 0)
     }
   }
 
   const loadBadge = (headerLink: NavigationItem) => {
     if (!headerLink.linkName || !headerLink.badgeTotalUrl) return
 
-    if (!state.badgeLoader[headerLink.linkName]) {
-      const throttledFn = useThrottleFn(setBadgesValue, 2000)
-      state.badgeLoader[headerLink.linkName] = throttledFn
-    }
+    globalState.badgeLoader[headerLink.linkName] ??= useThrottleFn(setBadgesValue, 2000);
 
-    state.badgeLoader[headerLink.linkName](headerLink)
+    globalState.badgeLoader[headerLink.linkName](headerLink)
   }
 
   const initBadge = (headerLink: NavigationItem, userId?: string) => {
@@ -54,15 +55,13 @@ export function useBadgeManager(pusher?: PusherInstance) {
 
     if (headerLink.badgeEvent && userId && pusher) {
       try {
-        if (!channel.value) {
-          channel.value = pusher.subscribe(`user.${userId}`)
-        }
+        globalChannel.value ??= pusher.subscribe(`user.${userId}`);
 
-        channel.value.unbind(headerLink.badgeEvent)
-        channel.value.bind(headerLink.badgeEvent, () => {
+        globalChannel.value.unbind(headerLink.badgeEvent)
+        globalChannel.value.bind(headerLink.badgeEvent, () => {
           loadBadge(headerLink)
         })
-        
+
       } catch (error) {
         console.error(`Error configuring Pusher for ${headerLink.linkName}:`, error)
       }
