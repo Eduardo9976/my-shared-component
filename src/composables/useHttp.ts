@@ -2,7 +2,7 @@ import axios, {type AxiosInstance, type AxiosResponse} from 'axios'
 import {ref, computed} from 'vue'
 import type {RequestConfig} from '@/types/http'
 
-let baseURL = 'https://localhost:9001/'
+let baseURL = window.location.origin
 
 let token: string | null = null
 

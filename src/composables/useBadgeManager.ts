@@ -38,7 +38,7 @@ export function useBadgeManager(
 
     const response = await get(
       headerLink.badgeTotalUrl
-    ) // remover replace usado no proxy
+    )
     if (response) {
       const data = response as {total?: number}
       setBadgeValue(headerLink.linkName, data?.total ?? 0)

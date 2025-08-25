@@ -28419,7 +28419,7 @@ const {
   getAdapter,
   mergeConfig
 } = axios;
-let baseURL = "https://localhost:9001/";
+let baseURL = window.location.origin;
 let token = null;
 const instance = axios.create({
   baseURL,
