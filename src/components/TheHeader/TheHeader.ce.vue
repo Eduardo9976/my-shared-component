@@ -4,7 +4,7 @@
       <TheHeaderBrand :brand="storeBrand" />
 
       <TheHeaderNavigation
-        :navigationItems="storeNavigationItems"
+        :navigationItems="navigationItemsWithCart"
         :iconColor="iconColor"
         :siteMapItems="storeSiteMapItems"
       />
@@ -32,15 +32,17 @@ import {
   useTranslations
 } from '@/composables/useTranslations/useTranslations.ts'
 import {useHeader} from '@/composables/useHeader/useHeader.ts'
-import type {GTM, PusherInstance} from '@/types'
+import type {GTM, PusherInstance, NavigationItem, NavigationSeparatorItem} from '@/types'
 import {useHttp} from '@/composables/useHttp'
 import {useBadgeManager} from '@/composables/useBadgeManager'
+import {useCart} from '@/composables/useCart'
 
 interface Props {
   activeLinkName?: string
   gtm?: GTM
   token?: string
   pusher?: PusherInstance
+  showCart?: boolean
 }
 
 const props = defineProps<Props>()
@@ -52,6 +54,7 @@ const {initializeData} = useHeader(
 
 const headerStore = useHeaderStore()
 const {initBadgesForLinks} = useBadgeManager(props.pusher)
+const {cartItemCount, loadCart} = useCart()
 
 const storeUser = toRef(headerStore, 'user')
 
@@ -65,11 +68,40 @@ const storeSiteMapItems = toRef(headerStore, 'siteMapItems')
 
 const storeHeaderLinks = toRef(headerStore, 'headerLinks')
 
+if (props.showCart) {
+  headerStore.setShowCart(true)
+}
+
+const navigationItemsWithCart = ref<(NavigationItem | NavigationSeparatorItem)[]>([])
+
+watch(
+  storeNavigationItems,
+  (newItems) => {
+    const items = [...newItems]
+    
+    if (props.showCart && items.length > 0) {
+      const cartNavItem = headerStore.getCartNavItem()
+      
+      if (cartNavItem) {
+        headerStore.updateCartBadge(cartItemCount.value || 0)
+        items.push(cartNavItem)
+      }
+    }
+    
+    navigationItemsWithCart.value = items
+  },
+  { immediate: false }
+)
+
 watch(
   storeHeaderLinks,
   newHeaderLinks => {
     if (newHeaderLinks && newHeaderLinks.length > 0 && storeUser.value.id) {
       initBadgesForLinks(newHeaderLinks, storeUser.value.id)
+
+      if (props.showCart) {
+        loadCart()
+      }
     }
   },
   {immediate: true}

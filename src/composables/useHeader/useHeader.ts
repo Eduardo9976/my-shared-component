@@ -54,6 +54,7 @@ export function useHeader(activeLinkName: string, gtm: GTM) {
       const userData = await loadUserData(get, setToken)
       headerStore.setUser(userData as unknown as User)
     } catch (error) {
+      console.error('🔍 Erro no handleUserDataLoad:', error)
       handleUserDataError(error)
     }
   }
@@ -95,6 +96,38 @@ export function useHeader(activeLinkName: string, gtm: GTM) {
       headerStore.setProfileItems(mappedProfileItems)
     } catch {
       console.warn('Não foi possível carregar itens de navegação, usando mock')
+
+      // Dados mock para garantir que o header funcione
+      const mockNavigationItems: NavigationItem[] = [
+        {
+          id: '1',
+          icon: 'me-icon-s icon-home',
+          label: 'Home',
+          active: false,
+          linkName: 'home',
+          url: '/',
+          visible: true
+        },
+        {
+          id: '2',
+          icon: 'me-icon-s icon-user',
+          label: 'Usuário',
+          active: false,
+          linkName: 'user',
+          url: '/user',
+          visible: true
+        }
+      ]
+
+      headerStore.setNavigationItems(mockNavigationItems)
+      headerStore.setHeaderLinks(
+        mockNavigationItems.map(item => ({...item, url: item.url || null}))
+      )
+      headerStore.setBrand({
+        logo: '',
+        link: '/',
+        newTab: false
+      })
     }
   }
 

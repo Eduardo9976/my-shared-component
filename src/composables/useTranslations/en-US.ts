@@ -9,6 +9,14 @@ export default {
       siteMapItems: {
         search: 'Search'
       }
+    },
+    cart: {
+      label: 'Cart',
+      linkName: 'Cart'
+    },
+    apiErrors: {
+      cart: 'Error loading cart data',
+      getTotalMessages: 'Error loading total messages'
     }
   }
 }

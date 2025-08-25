@@ -36,9 +36,7 @@ export function useBadgeManager(
   const setBadgesValue = async (headerLink: NavigationItem) => {
     if (!headerLink.badgeTotalUrl || !headerLink.linkName) return
 
-    const response = await get(
-      headerLink.badgeTotalUrl
-    )
+    const response = await get(headerLink.badgeTotalUrl)
     if (response) {
       const data = response as {total?: number}
       setBadgeValue(headerLink.linkName, data?.total ?? 0)

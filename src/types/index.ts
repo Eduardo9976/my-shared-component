@@ -101,5 +101,34 @@ export type PusherInstance = {
   unsubscribe: (channel: string) => void
 }
 
+// Tipos para o carrinho
+export interface CartProduct {
+  id: string
+  name: string
+  quantity: number
+  price: number
+  image?: string
+}
+
+export interface CartData {
+  products: CartProduct[]
+  total: number
+  itemCount: number
+}
+
+export interface CartNavItem extends NavigationItem {
+  id: string // Mudou de $id para id
+  icon: string
+  label: string
+  linkName: string
+  separator: false
+  siteMap: false
+  target: null
+  click: () => void
+  badge?: {
+    text: string | number
+  }
+}
+
 export * from './http'
 export * from './header'

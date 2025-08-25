@@ -7,14 +7,14 @@ import type {
   User,
   Brand,
   ProfileItem,
-  PusherInstance
+  PusherInstance,
+  CartNavItem
 } from '@/types'
 import {useBadgeManager} from './useBadgeManager'
-
-export interface HeaderLink extends NavigationItem {
-  url: string | null
-  click?: (item: NavigationItem) => void
-}
+import {
+  useTranslations,
+  type SupportedLocale
+} from './useTranslations/useTranslations'
 
 interface HeaderState {
   user: User
@@ -23,8 +23,10 @@ interface HeaderState {
   siteMapItems: SiteMapItem[]
   brand: Brand
   profileItems: ProfileItem[]
-  headerLinks: HeaderLink[]
+  headerLinks: NavigationItem[]
   badges: Record<string, string | number>
+  showCart: boolean
+  cartNavItem: CartNavItem | null
 }
 
 const initialState: HeaderState = {
@@ -35,7 +37,9 @@ const initialState: HeaderState = {
   brand: {} as Brand,
   profileItems: [],
   headerLinks: [],
-  badges: {}
+  badges: {},
+  showCart: false,
+  cartNavItem: null
 }
 
 const state = reactive<HeaderState>(initialState)
@@ -72,29 +76,25 @@ const setUser = (user: User, pusher?: PusherInstance): void => {
 }
 
 const setBrand = (brand: Brand): void => {
-  state.brand = {...brand}
+  state.brand = brand
 }
 
-const setProfileItems = (items: ProfileItem[]): void => {
-  state.profileItems = items
+const setProfileItems = (profileItems: ProfileItem[]): void => {
+  state.profileItems = profileItems
 }
 
-const setNavigationItems = (items: NavigationItemOrSeparator[]): void => {
-  state.navigationItems = items
-  state.customNavigationItems = navigationItemsWithoutSeparators.value
+const setNavigationItems = (navigationItems: NavigationItemOrSeparator[]): void => {
+  state.navigationItems = navigationItems
 }
 
-const setSiteMapItems = (items: SiteMapItem[]): void => {
-  state.siteMapItems = items
+const setSiteMapItems = (siteMapItems: SiteMapItem[]): void => {
+  state.siteMapItems = siteMapItems
 }
 
-const setHeaderLinks = (
-  headerLinks: HeaderLink[],
-  pusher?: PusherInstance
-): void => {
+const setHeaderLinks = (headerLinks: NavigationItem[], pusher?: PusherInstance): void => {
   state.headerLinks = headerLinks
 
-  if (state.user.id) {
+  if (state.user.id && headerLinks.length > 0) {
     const badgeManager = getBadgeManager(pusher)
     badgeManager.initBadgesForLinks(headerLinks, state.user.id)
   }
@@ -110,6 +110,80 @@ const getBadgeValue = (linkName: string): string | number | undefined => {
   return state.badges[linkName]
 }
 
+const setShowCart = (show: boolean): void => {
+  state.showCart = show
+}
+
+const createCartNavItem = (): CartNavItem => {
+  const {t, setLocale} = useTranslations()
+
+  if (state.user.culture) {
+    setLocale(state.user.culture as SupportedLocale)
+  }
+
+  return {
+    id: '00',
+    active: false,
+    icon: 'me-icon-l icon-cart-shopping',
+    label: t('theHeader.cart.label'),
+    linkName: t('theHeader.cart.linkName'),
+    separator: false,
+    siteMap: false,
+    target: null,
+    url: null,
+    click: () => null,
+    visible: true,
+    badge: {
+      text: 0
+    }
+  }
+}
+
+const updateCartBadge = (count: number): void => {
+  if (state.cartNavItem) {
+    state.cartNavItem.badge = {
+      text: count
+    }
+  }
+}
+
+// Interface interna para rastrear cultura
+interface CartNavItemWithCulture extends CartNavItem {
+  _culture?: string
+}
+
+const getCartNavItem = (): CartNavItem | null => {
+  if (!state.showCart) {
+    return null
+  }
+
+  if (state.cartNavItem && state.user.culture) {
+    const currentCulture = state.user.culture
+    const itemCulture = (state.cartNavItem as CartNavItemWithCulture)._culture
+    
+    if (itemCulture !== currentCulture) {
+      state.cartNavItem = null
+    }
+  }
+
+  if (state.cartNavItem) {
+    return state.cartNavItem
+  }
+
+  const cartItem = createCartNavItem()
+  
+  if (state.user.culture) {
+    (cartItem as CartNavItemWithCulture)._culture = state.user.culture
+  }
+  
+  state.cartNavItem = cartItem
+  return cartItem
+}
+
+const refreshCart = (): void => {
+  // Será implementado no componente
+}
+
 export function useHeaderStore() {
   return {
     ...toRefs(state),
@@ -122,6 +196,10 @@ export function useHeaderStore() {
     setHeaderLinks,
     isSeparator,
     updateBadgeValue,
-    getBadgeValue
+    getBadgeValue,
+    setShowCart,
+    getCartNavItem,
+    refreshCart,
+    updateCartBadge
   }
 }
