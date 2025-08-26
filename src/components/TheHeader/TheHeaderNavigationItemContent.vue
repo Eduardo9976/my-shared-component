@@ -13,7 +13,7 @@
     @click.prevent.stop="handleClick"
   >
     <div class="relative flex items-center justify-center">
-      <MeIcon :icon="icon || ''" :custom-size="24" :color="iconColor" />
+      <MeIcon :icon="getIcon(icon, active) || ''" :custom-size="24" :color="iconColor" />
 
       <UChip
         v-if="computedBadge?.text"
@@ -69,6 +69,12 @@ const computedBadge = computed(() => {
 
 const activeClass =
   "after:content-[''] after:bg-[var(--header-icon-color)] after:h-1 after:rounded-full after:absolute after:block after:w-[80%] after:bottom-0 after:left-1/2 after:-translate-x-1/2"
+
+function getIcon(icon: string, isActive: boolean) {
+  return isActive
+    ? icon.replace('me-icon-l', 'me-icon-s')
+    : icon
+}
 
 function handleClick() {
   props.click?.(props)
