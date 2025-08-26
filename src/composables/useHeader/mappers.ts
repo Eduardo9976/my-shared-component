@@ -19,7 +19,12 @@ export const createNavItemClickHandler = (navItem: NavItem, gtm: GTM) => {
         event: GTM_EVENTS.TELAS_PRINCIPAIS,
         selectOp: navItem.linkName
       })
-      window.location.href = navItem.url!
+
+      if (navItem?.target === '_blank') {
+        window.open(navItem.url as string, navItem.target)
+      } else {
+        window.location.href = navItem.url as string
+      }
     }
   }
 
@@ -39,7 +44,12 @@ export const createSiteMapClickHandler = (
       categoria: parentCategory,
       selectOp: (item.description as string) ?? (item.name as string)
     })
-    window.location.href = item.url as string
+
+    if (item?.target === '_blank') {
+      window.open(item.url as string, item.target)
+    } else {
+      window.location.href = item.url as string
+    }
   }
 }
 
@@ -54,7 +64,12 @@ export const createProfileItemClickHandler = (
       event: GTM_EVENTS.PERFIL_OPCAO,
       selectOp: profileItem.label as string
     })
-    window.location.href = profileItem.url as string
+
+    if (profileItem?.target === '_blank') {
+      window.open(profileItem.url as string, profileItem.target)
+    } else {
+      window.location.href = profileItem.url as string
+    }
   }
 }
 

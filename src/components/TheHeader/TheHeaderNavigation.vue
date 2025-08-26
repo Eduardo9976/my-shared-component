@@ -10,7 +10,7 @@
     >
       <div
         v-if="isSeparator(item)"
-        class="w-[1px] h-[40px] self-center opacity-35 mx-[15px]"
+        class="self-center w-[1px] h-[40px] opacity-35 mx-[15px]"
         :style="{background: iconColor}"
       />
 

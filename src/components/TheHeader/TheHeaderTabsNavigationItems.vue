@@ -28,13 +28,13 @@
             v-if="item.url"
             :href="item.url"
             :target="getTarget(item.url)"
-            class="text-label text-sm no-underline flex-1"
+            class="flex-1 text-sm no-underline text-label"
             @click.stop
           >
             {{ item.label }}
           </a>
 
-          <span v-else class="text-label text-sm flex-1">
+          <span v-else class="flex-1 text-sm text-label">
             {{ item.label }}
           </span>
 

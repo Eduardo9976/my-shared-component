@@ -5,15 +5,16 @@
     :target="isLink ? (target ?? '_self') : undefined"
     :type="!isLink ? 'button' : undefined"
     class="grid place-items-center gap-1 px-[15px] py-1 cursor-pointer relative transition-colors duration-200 hover:bg-[rgba(0,0,0,0.1)] text-[var(--color-neutral-300)] text-center"
-    :class="[
-      isLink ? 'no-underline' : 'border-0 bg-transparent',
-      active && activeClass
-    ]"
+    :class="[isLink ? 'no-underline' : 'border-0 bg-transparent']"
     :style="{'--header-icon-color': iconColor}"
     @click.prevent.stop="handleClick"
   >
     <div class="relative flex items-center justify-center">
-      <MeIcon :icon="getIcon(icon, active) || ''" :custom-size="24" :color="iconColor" />
+      <MeIcon
+        :icon="getIcon(icon, active) || ''"
+        :custom-size="24"
+        :color="iconColor"
+      />
 
       <UChip
         v-if="computedBadge?.text"
@@ -30,6 +31,7 @@
     </div>
 
     <p
+      :class="[active && activeClass]"
       class="text-xs py-[6px] text-[var(--header-icon-color)] whitespace-nowrap"
     >
       {{ label }}
@@ -71,9 +73,7 @@ const activeClass =
   "after:content-[''] after:bg-[var(--header-icon-color)] after:h-1 after:rounded-full after:absolute after:block after:w-[80%] after:bottom-0 after:left-1/2 after:-translate-x-1/2"
 
 function getIcon(icon: string, isActive: boolean) {
-  return isActive
-    ? icon.replace('me-icon-l', 'me-icon-s')
-    : icon
+  return isActive ? icon.replace('me-icon-l', 'me-icon-s') : icon
 }
 
 function handleClick() {

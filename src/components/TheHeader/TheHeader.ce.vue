@@ -33,7 +33,6 @@ import {
 } from '@/composables/useTranslations/useTranslations.ts'
 import {useHeader} from '@/composables/useHeader/useHeader.ts'
 import type {GTM, PusherInstance} from '@/types'
-import {useHttp} from '@/composables/useHttp'
 import {useBadgeManager} from '@/composables/useBadgeManager'
 import {useCart} from '@/composables/useCart'
 

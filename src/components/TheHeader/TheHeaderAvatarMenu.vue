@@ -3,7 +3,7 @@
     <div
       class="absolute rounded-bl-lg bg-white text-sm top-[-1px] right-[-8px]"
     >
-      <div class="flex justify-between gap-4 px-4 py-2 align-center">
+      <div class="flex justify-between gap-4 py-2 pl-4 align-center">
         <div class="grid w-[168px]">
           <p class="mb-0 truncate text-gray-500">
             {{ user.name }}
@@ -14,9 +14,9 @@
         </div>
         <div
           ref="avatarMenu"
-          class="flex items-center justify-center size-12 rounded-full bg-primary mx-auto border-transparent border"
+          class="mx-4 flex items-center justify-center rounded-full border border-transparent size-12 bg-primary"
         >
-          <span class="text-2xl font-normal no-underline text-white">
+          <span class="text-2xl font-normal text-white no-underline">
             {{ user.acronym }}
           </span>
 
