@@ -1267,6 +1267,10 @@
     height: 40px;
   }
 
+  .h-\[64px\] {
+    height: 64px;
+  }
+
   .h-auto {
     height: auto;
   }

@@ -13074,7 +13074,7 @@ function useSingleOrMultipleValue(props, emits) {
   };
 }
 const [injectConfigProviderContext, provideConfigProviderContext] = createContext("ConfigProvider");
-const _sfc_main$Z = /* @__PURE__ */ defineComponent({
+const _sfc_main$_ = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -13151,7 +13151,7 @@ function useForwardExpose() {
   return { forwardRef, currentRef, currentElement };
 }
 const [injectAccordionRootContext, provideAccordionRootContext] = createContext("AccordionRoot");
-const _sfc_main$Y = /* @__PURE__ */ defineComponent({
+const _sfc_main$Z = /* @__PURE__ */ defineComponent({
   __name: "AccordionRoot",
   props: {
     collapsible: { type: Boolean, default: false },
@@ -13199,7 +13199,7 @@ const _sfc_main$Y = /* @__PURE__ */ defineComponent({
   }
 });
 const [injectCollapsibleRootContext, provideCollapsibleRootContext] = createContext("CollapsibleRoot");
-const _sfc_main$X = /* @__PURE__ */ defineComponent({
+const _sfc_main$Y = /* @__PURE__ */ defineComponent({
   __name: "CollapsibleRoot",
   props: {
     defaultOpen: { type: Boolean, default: false },
@@ -13316,7 +13316,7 @@ function findNextFocusableElement(elements, currentElement, options, iterations 
   return candidate;
 }
 const [injectAccordionItemContext, provideAccordionItemContext] = createContext("AccordionItem");
-const _sfc_main$W = /* @__PURE__ */ defineComponent({
+const _sfc_main$X = /* @__PURE__ */ defineComponent({
   __name: "AccordionItem",
   props: {
     disabled: { type: Boolean },
@@ -13369,7 +13369,7 @@ const _sfc_main$W = /* @__PURE__ */ defineComponent({
       );
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$X), {
+      return openBlock(), createBlock(unref(_sfc_main$Y), {
         "data-orientation": unref(rootContext).orientation,
         "data-disabled": dataDisabled.value,
         "data-state": dataState.value,
@@ -13588,7 +13588,7 @@ const Presence = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$V = /* @__PURE__ */ defineComponent({
+const _sfc_main$W = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -13680,7 +13680,7 @@ const _sfc_main$V = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$U = /* @__PURE__ */ defineComponent({
+const _sfc_main$V = /* @__PURE__ */ defineComponent({
   __name: "AccordionContent",
   props: {
     forceMount: { type: Boolean },
@@ -13693,7 +13693,7 @@ const _sfc_main$U = /* @__PURE__ */ defineComponent({
     const itemContext = injectAccordionItemContext();
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$V), {
+      return openBlock(), createBlock(unref(_sfc_main$W), {
         role: "region",
         "as-child": props.asChild,
         as: _ctx.as,
@@ -13713,7 +13713,7 @@ const _sfc_main$U = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$T = /* @__PURE__ */ defineComponent({
+const _sfc_main$U = /* @__PURE__ */ defineComponent({
   __name: "AccordionHeader",
   props: {
     asChild: { type: Boolean },
@@ -13740,7 +13740,7 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$S = /* @__PURE__ */ defineComponent({
+const _sfc_main$T = /* @__PURE__ */ defineComponent({
   __name: "CollapsibleTrigger",
   props: {
     asChild: { type: Boolean },
@@ -13770,7 +13770,7 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$R = /* @__PURE__ */ defineComponent({
+const _sfc_main$S = /* @__PURE__ */ defineComponent({
   __name: "AccordionTrigger",
   props: {
     asChild: { type: Boolean },
@@ -13788,7 +13788,7 @@ const _sfc_main$R = /* @__PURE__ */ defineComponent({
       rootContext.changeModelValue(itemContext.value.value);
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$S), {
+      return openBlock(), createBlock(unref(_sfc_main$T), {
         id: unref(itemContext).triggerId,
         ref: unref(itemContext).currentRef,
         "data-reka-collection-item": "",
@@ -13924,7 +13924,7 @@ function focus(element, { select = false } = {}) {
     }
   }
 }
-const _sfc_main$Q = /* @__PURE__ */ defineComponent({
+const _sfc_main$R = /* @__PURE__ */ defineComponent({
   __name: "FocusScope",
   props: {
     loop: { type: Boolean, default: false },
@@ -14196,7 +14196,7 @@ const context = reactive({
   layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
   branches: /* @__PURE__ */ new Set()
 });
-const _sfc_main$P = /* @__PURE__ */ defineComponent({
+const _sfc_main$Q = /* @__PURE__ */ defineComponent({
   __name: "DismissableLayer",
   props: {
     disableOutsidePointerEvents: { type: Boolean, default: false },
@@ -14583,7 +14583,7 @@ function preventDefault(rawEvent) {
     e.preventDefault();
   return false;
 }
-const _sfc_main$O = /* @__PURE__ */ defineComponent({
+const _sfc_main$P = /* @__PURE__ */ defineComponent({
   __name: "Teleport",
   props: {
     to: { default: "body" },
@@ -14747,7 +14747,7 @@ function wrapArray(array, startIndex) {
   return array.map((_2, index2) => array[(startIndex + index2) % array.length]);
 }
 const [injectRovingFocusGroupContext, provideRovingFocusGroupContext] = createContext("RovingFocusGroup");
-const _sfc_main$N = /* @__PURE__ */ defineComponent({
+const _sfc_main$O = /* @__PURE__ */ defineComponent({
   __name: "RovingFocusGroup",
   props: {
     orientation: { default: void 0 },
@@ -14845,7 +14845,7 @@ const _sfc_main$N = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$M = /* @__PURE__ */ defineComponent({
+const _sfc_main$N = /* @__PURE__ */ defineComponent({
   __name: "RovingFocusItem",
   props: {
     tabStopId: {},
@@ -14931,7 +14931,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
   }
 });
 const [injectPopperRootContext, providePopperRootContext] = createContext("PopperRoot");
-const _sfc_main$L = /* @__PURE__ */ defineComponent({
+const _sfc_main$M = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -14947,7 +14947,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$K = /* @__PURE__ */ defineComponent({
+const _sfc_main$L = /* @__PURE__ */ defineComponent({
   __name: "PopperAnchor",
   props: {
     reference: {},
@@ -14983,7 +14983,7 @@ const _hoisted_2$7 = {
   key: 1,
   d: "M0 0L4.58579 4.58579C5.36683 5.36683 6.63316 5.36684 7.41421 4.58579L12 0"
 };
-const _sfc_main$J = /* @__PURE__ */ defineComponent({
+const _sfc_main$K = /* @__PURE__ */ defineComponent({
   __name: "Arrow",
   props: {
     width: { default: 10 },
@@ -15106,7 +15106,7 @@ const PopperContentPropsDefaultValue = {
   prioritizePosition: false
 };
 const [injectPopperContentContext, providePopperContentContext] = createContext("PopperContent");
-const _sfc_main$I = /* @__PURE__ */ defineComponent({
+const _sfc_main$J = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -15301,7 +15301,7 @@ const OPPOSITE_SIDE = {
   bottom: "top",
   left: "right"
 };
-const _sfc_main$H = /* @__PURE__ */ defineComponent({
+const _sfc_main$I = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -15343,7 +15343,7 @@ const _sfc_main$H = /* @__PURE__ */ defineComponent({
           visibility: unref(contentContext).shouldHideArrow.value ? "hidden" : void 0
         })
       }, [
-        createVNode(_sfc_main$J, mergeProps(_ctx.$attrs, {
+        createVNode(_sfc_main$K, mergeProps(_ctx.$attrs, {
           ref: unref(forwardRef),
           style: {
             display: "block"
@@ -15397,7 +15397,7 @@ function createFocusGuard() {
   return element;
 }
 const [injectPopoverRootContext, providePopoverRootContext] = createContext("PopoverRoot");
-const _sfc_main$G = /* @__PURE__ */ defineComponent({
+const _sfc_main$H = /* @__PURE__ */ defineComponent({
   __name: "PopoverRoot",
   props: {
     defaultOpen: { type: Boolean, default: false },
@@ -15430,7 +15430,7 @@ const _sfc_main$G = /* @__PURE__ */ defineComponent({
       hasCustomAnchor
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$L), null, {
+      return openBlock(), createBlock(unref(_sfc_main$M), null, {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default", { open: unref(open) })
         ]),
@@ -15439,7 +15439,7 @@ const _sfc_main$G = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$F = /* @__PURE__ */ defineComponent({
+const _sfc_main$G = /* @__PURE__ */ defineComponent({
   __name: "PopoverAnchor",
   props: {
     reference: {},
@@ -15457,7 +15457,7 @@ const _sfc_main$F = /* @__PURE__ */ defineComponent({
       rootContext.hasCustomAnchor.value = false;
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$K), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$L), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -15466,7 +15466,7 @@ const _sfc_main$F = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$E = /* @__PURE__ */ defineComponent({
+const _sfc_main$F = /* @__PURE__ */ defineComponent({
   __name: "PopoverArrow",
   props: {
     width: { default: 10 },
@@ -15479,7 +15479,7 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$H), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$I), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -15488,7 +15488,7 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$D = /* @__PURE__ */ defineComponent({
+const _sfc_main$E = /* @__PURE__ */ defineComponent({
   __name: "PopoverClose",
   props: {
     asChild: { type: Boolean },
@@ -15513,7 +15513,7 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$C = /* @__PURE__ */ defineComponent({
+const _sfc_main$D = /* @__PURE__ */ defineComponent({
   __name: "PopoverPortal",
   props: {
     to: {},
@@ -15524,7 +15524,7 @@ const _sfc_main$C = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$O), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$P), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -15533,7 +15533,7 @@ const _sfc_main$C = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$B = /* @__PURE__ */ defineComponent({
+const _sfc_main$C = /* @__PURE__ */ defineComponent({
   __name: "PopoverContentImpl",
   props: {
     trapFocus: { type: Boolean },
@@ -15565,7 +15565,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
     const rootContext = injectPopoverRootContext();
     useFocusGuards();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$Q), {
+      return openBlock(), createBlock(unref(_sfc_main$R), {
         "as-child": "",
         loop: "",
         trapped: _ctx.trapFocus,
@@ -15573,7 +15573,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
         onUnmountAutoFocus: _cache[6] || (_cache[6] = ($event) => emits("closeAutoFocus", $event))
       }, {
         default: withCtx(() => [
-          createVNode(unref(_sfc_main$P), {
+          createVNode(unref(_sfc_main$Q), {
             "as-child": "",
             "disable-outside-pointer-events": _ctx.disableOutsidePointerEvents,
             onPointerDownOutside: _cache[0] || (_cache[0] = ($event) => emits("pointerDownOutside", $event)),
@@ -15583,7 +15583,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
             onDismiss: _cache[4] || (_cache[4] = ($event) => unref(rootContext).onOpenChange(false))
           }, {
             default: withCtx(() => [
-              createVNode(unref(_sfc_main$I), mergeProps(unref(forwarded), {
+              createVNode(unref(_sfc_main$J), mergeProps(unref(forwarded), {
                 id: unref(rootContext).contentId,
                 ref: unref(forwardRef),
                 "data-state": unref(rootContext).open.value ? "open" : "closed",
@@ -15611,7 +15611,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$A = /* @__PURE__ */ defineComponent({
+const _sfc_main$B = /* @__PURE__ */ defineComponent({
   __name: "PopoverContentModal",
   props: {
     side: {},
@@ -15644,7 +15644,7 @@ const _sfc_main$A = /* @__PURE__ */ defineComponent({
     const { forwardRef, currentElement } = useForwardExpose();
     useHideOthers(currentElement);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$B, mergeProps(unref(forwarded), {
+      return openBlock(), createBlock(_sfc_main$C, mergeProps(unref(forwarded), {
         ref: unref(forwardRef),
         "trap-focus": unref(rootContext).open.value,
         "disable-outside-pointer-events": "",
@@ -15673,7 +15673,7 @@ const _sfc_main$A = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$z = /* @__PURE__ */ defineComponent({
+const _sfc_main$A = /* @__PURE__ */ defineComponent({
   __name: "PopoverContentNonModal",
   props: {
     side: {},
@@ -15704,7 +15704,7 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
     const hasPointerDownOutsideRef = ref(false);
     const forwarded = useForwardPropsEmits(props, emits);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$B, mergeProps(unref(forwarded), {
+      return openBlock(), createBlock(_sfc_main$C, mergeProps(unref(forwarded), {
         "trap-focus": false,
         "disable-outside-pointer-events": false,
         onCloseAutoFocus: _cache[0] || (_cache[0] = (event) => {
@@ -15740,7 +15740,7 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$y = /* @__PURE__ */ defineComponent({
+const _sfc_main$z = /* @__PURE__ */ defineComponent({
   __name: "PopoverContent",
   props: {
     forceMount: { type: Boolean },
@@ -15776,12 +15776,12 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
         present: _ctx.forceMount || unref(rootContext).open.value
       }, {
         default: withCtx(() => [
-          unref(rootContext).modal.value ? (openBlock(), createBlock(_sfc_main$A, mergeProps({ key: 0 }, unref(forwarded), { ref: unref(forwardRef) }), {
+          unref(rootContext).modal.value ? (openBlock(), createBlock(_sfc_main$B, mergeProps({ key: 0 }, unref(forwarded), { ref: unref(forwardRef) }), {
             default: withCtx(() => [
               renderSlot(_ctx.$slots, "default")
             ]),
             _: 3
-          }, 16)) : (openBlock(), createBlock(_sfc_main$z, mergeProps({ key: 1 }, unref(forwarded), { ref: unref(forwardRef) }), {
+          }, 16)) : (openBlock(), createBlock(_sfc_main$A, mergeProps({ key: 1 }, unref(forwarded), { ref: unref(forwardRef) }), {
             default: withCtx(() => [
               renderSlot(_ctx.$slots, "default")
             ]),
@@ -15793,7 +15793,7 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$x = /* @__PURE__ */ defineComponent({
+const _sfc_main$y = /* @__PURE__ */ defineComponent({
   __name: "PopoverTrigger",
   props: {
     asChild: { type: Boolean },
@@ -15808,7 +15808,7 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
       rootContext.triggerElement.value = triggerElement.value;
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(resolveDynamicComponent(unref(rootContext).hasCustomAnchor.value ? unref(Primitive) : unref(_sfc_main$K)), { "as-child": "" }, {
+      return openBlock(), createBlock(resolveDynamicComponent(unref(rootContext).hasCustomAnchor.value ? unref(Primitive) : unref(_sfc_main$L)), { "as-child": "" }, {
         default: withCtx(() => [
           createVNode(unref(Primitive), {
             id: unref(rootContext).triggerId,
@@ -15833,7 +15833,7 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$w = /* @__PURE__ */ defineComponent({
+const _sfc_main$x = /* @__PURE__ */ defineComponent({
   __name: "HoverCardArrow",
   props: {
     width: { default: 10 },
@@ -15846,7 +15846,7 @@ const _sfc_main$w = /* @__PURE__ */ defineComponent({
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$H), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$I), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -15869,7 +15869,7 @@ function getTabbableNodes(container) {
   return nodes;
 }
 const [injectHoverCardRootContext, provideHoverCardRootContext] = createContext("HoverCardRoot");
-const _sfc_main$v = /* @__PURE__ */ defineComponent({
+const _sfc_main$w = /* @__PURE__ */ defineComponent({
   __name: "HoverCardRoot",
   props: {
     defaultOpen: { type: Boolean, default: false },
@@ -15919,7 +15919,7 @@ const _sfc_main$v = /* @__PURE__ */ defineComponent({
       triggerElement
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$L), null, {
+      return openBlock(), createBlock(unref(_sfc_main$M), null, {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default", { open: unref(open) })
         ]),
@@ -16105,7 +16105,7 @@ function getHullPresorted(points) {
     return upperHull.concat(lowerHull);
   }
 }
-const _sfc_main$u = /* @__PURE__ */ defineComponent({
+const _sfc_main$v = /* @__PURE__ */ defineComponent({
   __name: "HoverCardContentImpl",
   props: {
     side: {},
@@ -16174,7 +16174,7 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
       rootContext.isPointerDownOnContentRef.value = false;
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$P), {
+      return openBlock(), createBlock(unref(_sfc_main$Q), {
         "as-child": "",
         "disable-outside-pointer-events": false,
         onEscapeKeyDown: _cache[1] || (_cache[1] = ($event) => emits("escapeKeyDown", $event)),
@@ -16183,7 +16183,7 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
         onDismiss: unref(rootContext).onDismiss
       }, {
         default: withCtx(() => [
-          createVNode(unref(_sfc_main$I), mergeProps({ ...unref(forwarded), ..._ctx.$attrs }, {
+          createVNode(unref(_sfc_main$J), mergeProps({ ...unref(forwarded), ..._ctx.$attrs }, {
             ref: unref(forwardRef),
             "data-state": unref(rootContext).open.value ? "open" : "closed",
             style: {
@@ -16216,7 +16216,7 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$t = /* @__PURE__ */ defineComponent({
+const _sfc_main$u = /* @__PURE__ */ defineComponent({
   __name: "HoverCardContent",
   props: {
     forceMount: { type: Boolean },
@@ -16250,7 +16250,7 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
         present: _ctx.forceMount || unref(rootContext).open.value
       }, {
         default: withCtx(() => [
-          createVNode(_sfc_main$u, mergeProps(unref(forwarded), {
+          createVNode(_sfc_main$v, mergeProps(unref(forwarded), {
             ref: unref(forwardRef),
             onPointerenter: _cache[0] || (_cache[0] = ($event) => unref(excludeTouch)(unref(rootContext).onOpen)($event))
           }), {
@@ -16265,7 +16265,7 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$s = /* @__PURE__ */ defineComponent({
+const _sfc_main$t = /* @__PURE__ */ defineComponent({
   __name: "HoverCardPortal",
   props: {
     to: {},
@@ -16276,7 +16276,7 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$O), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$P), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -16285,7 +16285,7 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$r = /* @__PURE__ */ defineComponent({
+const _sfc_main$s = /* @__PURE__ */ defineComponent({
   __name: "HoverCardTrigger",
   props: {
     reference: {},
@@ -16304,7 +16304,7 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
       }, 0);
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$K), {
+      return openBlock(), createBlock(unref(_sfc_main$L), {
         "as-child": "",
         reference: _ctx.reference
       }, {
@@ -16338,7 +16338,7 @@ function makeContentId(baseId, value) {
   return `${baseId}-content-${value}`;
 }
 const [injectTabsRootContext, provideTabsRootContext] = createContext("TabsRoot");
-const _sfc_main$q = /* @__PURE__ */ defineComponent({
+const _sfc_main$r = /* @__PURE__ */ defineComponent({
   __name: "TabsRoot",
   props: {
     defaultValue: {},
@@ -16389,7 +16389,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$p = /* @__PURE__ */ defineComponent({
+const _sfc_main$q = /* @__PURE__ */ defineComponent({
   __name: "TabsContent",
   props: {
     value: {},
@@ -16442,7 +16442,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$o = /* @__PURE__ */ defineComponent({
+const _sfc_main$p = /* @__PURE__ */ defineComponent({
   __name: "TabsIndicator",
   props: {
     asChild: { type: Boolean },
@@ -16493,7 +16493,7 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$n = /* @__PURE__ */ defineComponent({
+const _sfc_main$o = /* @__PURE__ */ defineComponent({
   __name: "TabsList",
   props: {
     loop: { type: Boolean, default: true },
@@ -16507,7 +16507,7 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
     const context2 = injectTabsRootContext();
     context2.tabsList = currentElement;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$N), {
+      return openBlock(), createBlock(unref(_sfc_main$O), {
         "as-child": "",
         orientation: unref(context2).orientation.value,
         dir: unref(context2).dir.value,
@@ -16532,7 +16532,7 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$m = /* @__PURE__ */ defineComponent({
+const _sfc_main$n = /* @__PURE__ */ defineComponent({
   __name: "TabsTrigger",
   props: {
     value: {},
@@ -16548,7 +16548,7 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
     const contentId = computed(() => makeContentId(rootContext.baseId, props.value));
     const isSelected = computed(() => props.value === rootContext.modelValue.value);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$M), {
+      return openBlock(), createBlock(unref(_sfc_main$N), {
         "as-child": "",
         focusable: !_ctx.disabled,
         active: isSelected.value
@@ -21768,7 +21768,7 @@ const Icon = /* @__PURE__ */ defineComponent((props, { emit: emit2 }) => {
   ],
   emits: ["load"]
 });
-const _sfc_main$l = {
+const _sfc_main$m = {
   __name: "Icon",
   props: {
     name: { type: String, required: true }
@@ -21791,7 +21791,7 @@ function useAvatarGroup(props) {
     size: size2
   };
 }
-const theme$6 = {
+const theme$7 = {
   "slots": {
     "root": "relative inline-flex items-center justify-center shrink-0",
     "base": "rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap"
@@ -21858,7 +21858,7 @@ const theme$6 = {
     "position": "top-right"
   }
 };
-const _sfc_main$k = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
+const _sfc_main$l = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   __name: "Chip",
   props: /* @__PURE__ */ mergeModels({
     as: { type: null, required: false },
@@ -21880,7 +21880,7 @@ const _sfc_main$k = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     const show = useModel(__props, "show", { type: Boolean, ...{ default: true } });
     const { size: size2 } = useAvatarGroup(props);
     const appConfig2 = useAppConfig();
-    const ui = computed(() => tv({ extend: tv(theme$6), ...appConfig2.ui?.chip || {} })({
+    const ui = computed(() => tv({ extend: tv(theme$7), ...appConfig2.ui?.chip || {} })({
       color: props.color,
       size: size2.value,
       position: props.position,
@@ -21913,7 +21913,7 @@ const _sfc_main$k = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     };
   }
 });
-const theme$5 = {
+const theme$6 = {
   "slots": {
     "root": "inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated",
     "image": "h-full w-full rounded-[inherit] object-cover",
@@ -21955,7 +21955,7 @@ const theme$5 = {
     "size": "md"
   }
 };
-const _sfc_main$j = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
+const _sfc_main$k = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   __name: "Avatar",
   props: {
     as: { type: null, required: false, default: "span" },
@@ -21974,7 +21974,7 @@ const _sfc_main$j = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     const fallback = computed(() => props.text || (props.alt || "").split(" ").map((word) => word.charAt(0)).join("").substring(0, 2));
     const appConfig2 = useAppConfig();
     const { size: size2 } = useAvatarGroup(props);
-    const ui = computed(() => tv({ extend: tv(theme$5), ...appConfig2.ui?.avatar || {} })({
+    const ui = computed(() => tv({ extend: tv(theme$6), ...appConfig2.ui?.avatar || {} })({
       size: size2.value
     }));
     const sizePx = computed(() => ({
@@ -21998,7 +21998,7 @@ const _sfc_main$j = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       error.value = true;
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(resolveDynamicComponent(props.chip ? _sfc_main$k : unref(Primitive)), mergeProps({ as: __props.as }, props.chip ? typeof props.chip === "object" ? { inset: true, ...props.chip } : { inset: true } : {}, {
+      return openBlock(), createBlock(resolveDynamicComponent(props.chip ? _sfc_main$l : unref(Primitive)), mergeProps({ as: __props.as }, props.chip ? typeof props.chip === "object" ? { inset: true, ...props.chip } : { inset: true } : {}, {
         class: ui.value.root({ class: [props.ui?.root, props.class] }),
         style: props.style
       }), {
@@ -22016,7 +22016,7 @@ const _sfc_main$j = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
           }), null, 16, ["src", "alt", "width", "height", "class"])) : (openBlock(), createBlock(unref(Slot), normalizeProps(mergeProps({ key: 1 }, _ctx.$attrs)), {
             default: withCtx(() => [
               renderSlot(_ctx.$slots, "default", {}, () => [
-                __props.icon ? (openBlock(), createBlock(_sfc_main$l, {
+                __props.icon ? (openBlock(), createBlock(_sfc_main$m, {
                   key: 0,
                   name: __props.icon,
                   class: normalizeClass(ui.value.icon({ class: props.ui?.icon }))
@@ -22133,6 +22133,36 @@ function useFormField(props, opts) {
     })
   };
 }
+const theme$5 = {
+  "base": "animate-pulse rounded-md bg-elevated"
+};
+const _sfc_main$j = {
+  __name: "Skeleton",
+  props: {
+    as: { type: null, required: false },
+    class: { type: null, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const appConfig2 = useAppConfig();
+    const ui = computed(() => tv({ extend: tv(theme$5), ...appConfig2.ui?.skeleton || {} }));
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        as: __props.as,
+        "aria-busy": "true",
+        "aria-label": "loading",
+        "aria-live": "polite",
+        role: "alert",
+        class: normalizeClass(ui.value({ class: props.class }))
+      }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 8, ["as", "class"]);
+    };
+  }
+};
 function useSanitizeURL(url) {
   try {
     const parsed = new URL(url, window.location.origin);
@@ -22169,20 +22199,20 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
   }
 });
 const HoverCard = {
-  Root: _sfc_main$v,
-  Trigger: _sfc_main$r,
-  Portal: _sfc_main$s,
-  Content: _sfc_main$t,
-  Arrow: _sfc_main$w
+  Root: _sfc_main$w,
+  Trigger: _sfc_main$s,
+  Portal: _sfc_main$t,
+  Content: _sfc_main$u,
+  Arrow: _sfc_main$x
 };
 const Popover = {
-  Root: _sfc_main$G,
-  Trigger: _sfc_main$x,
-  Portal: _sfc_main$C,
-  Content: _sfc_main$y,
-  Arrow: _sfc_main$E,
-  Close: _sfc_main$D,
-  Anchor: _sfc_main$F
+  Root: _sfc_main$H,
+  Trigger: _sfc_main$y,
+  Portal: _sfc_main$D,
+  Content: _sfc_main$z,
+  Arrow: _sfc_main$F,
+  Close: _sfc_main$E,
+  Anchor: _sfc_main$G
 };
 const theme$4 = {
   "slots": {
@@ -22556,11 +22586,11 @@ const _sfc_main$g = {
       }, {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "leading", {}, () => [
-            unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$l, {
+            unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$m, {
               key: 0,
               name: unref(leadingIconName),
               class: normalizeClass(ui.value.leadingIcon({ class: props.ui?.leadingIcon }))
-            }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$j, mergeProps({
+            }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$k, mergeProps({
               key: 1,
               size: props.ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
             }, __props.avatar, {
@@ -22574,7 +22604,7 @@ const _sfc_main$g = {
             }, toDisplayString(__props.label), 3)) : createCommentVNode("", true)
           ]),
           renderSlot(_ctx.$slots, "trailing", {}, () => [
-            unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$l, {
+            unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$m, {
               key: 0,
               name: unref(trailingIconName),
               class: normalizeClass(ui.value.trailingIcon({ class: props.ui?.trailingIcon }))
@@ -22853,20 +22883,20 @@ const _sfc_main$f = {
     });
     return (_ctx, _cache) => {
       const _component_UBadge = _sfc_main$g;
-      return openBlock(), createBlock(unref(_sfc_main$q), mergeProps(unref(rootProps), {
+      return openBlock(), createBlock(unref(_sfc_main$r), mergeProps(unref(rootProps), {
         class: ui.value.root({ class: [props.ui?.root, props.class] })
       }), {
         default: withCtx(() => [
-          createVNode(unref(_sfc_main$n), {
+          createVNode(unref(_sfc_main$o), {
             class: normalizeClass(ui.value.list({ class: props.ui?.list }))
           }, {
             default: withCtx(() => [
-              createVNode(unref(_sfc_main$o), {
+              createVNode(unref(_sfc_main$p), {
                 class: normalizeClass(ui.value.indicator({ class: props.ui?.indicator }))
               }, null, 8, ["class"]),
               renderSlot(_ctx.$slots, "list-leading"),
               (openBlock(true), createElementBlock(Fragment, null, renderList(__props.items, (item, index2) => {
-                return openBlock(), createBlock(unref(_sfc_main$m), {
+                return openBlock(), createBlock(unref(_sfc_main$n), {
                   key: index2,
                   ref_for: true,
                   ref: (el) => triggersRef.value[index2] = el,
@@ -22879,11 +22909,11 @@ const _sfc_main$f = {
                       item,
                       index: index2
                     }, () => [
-                      item.icon ? (openBlock(), createBlock(_sfc_main$l, {
+                      item.icon ? (openBlock(), createBlock(_sfc_main$m, {
                         key: 0,
                         name: item.icon,
                         class: normalizeClass(ui.value.leadingIcon({ class: [props.ui?.leadingIcon, item.ui?.leadingIcon] }))
-                      }, null, 8, ["name", "class"])) : item.avatar ? (openBlock(), createBlock(_sfc_main$j, mergeProps({
+                      }, null, 8, ["name", "class"])) : item.avatar ? (openBlock(), createBlock(_sfc_main$k, mergeProps({
                         key: 1,
                         size: item.ui?.leadingAvatarSize || props.ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
                       }, { ref_for: true }, item.avatar, {
@@ -22923,7 +22953,7 @@ const _sfc_main$f = {
             _: 3
           }, 8, ["class"]),
           !!__props.content ? (openBlock(true), createElementBlock(Fragment, { key: 0 }, renderList(__props.items, (item, index2) => {
-            return openBlock(), createBlock(unref(_sfc_main$p), {
+            return openBlock(), createBlock(unref(_sfc_main$q), {
               key: index2,
               value: item.value || String(index2),
               class: normalizeClass(ui.value.content({ class: [props.ui?.content, item.ui?.content, item.class] }))
@@ -22992,24 +23022,24 @@ const _sfc_main$e = {
       disabled: props.disabled
     }));
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$Y), mergeProps(unref(rootProps), {
+      return openBlock(), createBlock(unref(_sfc_main$Z), mergeProps(unref(rootProps), {
         class: ui.value.root({ class: [props.ui?.root, props.class] })
       }), {
         default: withCtx(() => [
           (openBlock(true), createElementBlock(Fragment, null, renderList(props.items, (item, index2) => {
-            return openBlock(), createBlock(unref(_sfc_main$W), {
+            return openBlock(), createBlock(unref(_sfc_main$X), {
               key: index2,
               value: item.value || String(index2),
               disabled: item.disabled,
               class: normalizeClass(ui.value.item({ class: [props.ui?.item, item.ui?.item, item.class] }))
             }, {
               default: withCtx(({ open }) => [
-                createVNode(unref(_sfc_main$T), {
+                createVNode(unref(_sfc_main$U), {
                   as: "div",
                   class: normalizeClass(ui.value.header({ class: [props.ui?.header, item.ui?.header] }))
                 }, {
                   default: withCtx(() => [
-                    createVNode(unref(_sfc_main$R), {
+                    createVNode(unref(_sfc_main$S), {
                       class: normalizeClass(ui.value.trigger({ class: [props.ui?.trigger, item.ui?.trigger], disabled: item.disabled }))
                     }, {
                       default: withCtx(() => [
@@ -23018,7 +23048,7 @@ const _sfc_main$e = {
                           index: index2,
                           open
                         }, () => [
-                          item.icon ? (openBlock(), createBlock(_sfc_main$l, {
+                          item.icon ? (openBlock(), createBlock(_sfc_main$m, {
                             key: 0,
                             name: item.icon,
                             class: normalizeClass(ui.value.leadingIcon({ class: [props.ui?.leadingIcon, item?.ui?.leadingIcon] }))
@@ -23041,7 +23071,7 @@ const _sfc_main$e = {
                           index: index2,
                           open
                         }, () => [
-                          createVNode(_sfc_main$l, {
+                          createVNode(_sfc_main$m, {
                             name: item.trailingIcon || __props.trailingIcon || unref(appConfig2).ui.icons.chevronDown,
                             class: normalizeClass(ui.value.trailingIcon({ class: [props.ui?.trailingIcon, item.ui?.trailingIcon] }))
                           }, null, 8, ["name", "class"])
@@ -23052,7 +23082,7 @@ const _sfc_main$e = {
                   ]),
                   _: 2
                 }, 1032, ["class"]),
-                item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`] ? (openBlock(), createBlock(unref(_sfc_main$U), {
+                item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`] ? (openBlock(), createBlock(unref(_sfc_main$V), {
                   key: 0,
                   class: normalizeClass(ui.value.content({ class: [props.ui?.content, item.ui?.content] }))
                 }, {
@@ -23481,11 +23511,11 @@ const _sfc_main$d = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             class: normalizeClass(ui.value.leading({ class: props.ui?.leading }))
           }, [
             renderSlot(_ctx.$slots, "leading", {}, () => [
-              unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$l, {
+              unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$m, {
                 key: 0,
                 name: unref(leadingIconName),
                 class: normalizeClass(ui.value.leadingIcon({ class: props.ui?.leadingIcon }))
-              }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$j, mergeProps({
+              }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$k, mergeProps({
                 key: 1,
                 size: props.ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
               }, __props.avatar, {
@@ -23498,7 +23528,7 @@ const _sfc_main$d = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             class: normalizeClass(ui.value.trailing({ class: props.ui?.trailing }))
           }, [
             renderSlot(_ctx.$slots, "trailing", {}, () => [
-              unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$l, {
+              unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$m, {
                 key: 0,
                 name: unref(trailingIconName),
                 class: normalizeClass(ui.value.trailingIcon({ class: props.ui?.trailingIcon }))
@@ -29106,7 +29136,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       props.click?.(props);
     }
     return (_ctx, _cache) => {
-      const _component_UChip = _sfc_main$k;
+      const _component_UChip = _sfc_main$l;
       return openBlock(), createBlock(resolveDynamicComponent(isLink.value ? "a" : "button"), {
         href: isLink.value ? _ctx.url : void 0,
         target: isLink.value ? _ctx.target ?? "_self" : void 0,
@@ -29366,7 +29396,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     const props = __props;
     return (_ctx, _cache) => {
       const _component_MeIcon = _sfc_main$c;
-      const _component_UChip = _sfc_main$k;
+      const _component_UChip = _sfc_main$l;
       return props?.user?.badge?.icon ? (openBlock(), createBlock(_component_UChip, {
         key: 0,
         color: "error",
@@ -30009,8 +30039,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return storeBrand.value?.iconColor || "var(--ui-bg)";
     });
     return (_ctx, _cache) => {
+      const _component_USkeleton = _sfc_main$j;
       return openBlock(), createElementBlock(Fragment, null, [
-        createBaseVNode("header", {
+        storeUser.value.name ? (openBlock(), createElementBlock("header", {
+          key: 0,
           class: normalizeClass(headerClasses.value),
           style: normalizeStyle(headerStyles.value)
         }, [
@@ -30026,9 +30058,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               profileItems: storeProfileItems.value
             }, null, 8, ["user", "profileItems"])
           ])
-        ], 6),
+        ], 6)) : (openBlock(), createBlock(_component_USkeleton, {
+          key: 1,
+          class: "h-[64px] w-full"
+        })),
         backdropState.value.visible ? (openBlock(), createBlock(_sfc_main$1, {
-          key: 0,
+          key: 2,
           "z-index": backdropState.value.zIndex,
           onClick: closeBackdrop
         }, null, 8, ["z-index"])) : createCommentVNode("", true)
@@ -31303,6 +31338,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .h-\\[40px\\] {
     height: 40px;
+  }
+
+  .h-\\[64px\\] {
+    height: 64px;
   }
 
   .h-auto {
@@ -37604,7 +37643,7 @@ export {
   inject as X,
   reactive as Y,
   h as Z,
-  _sfc_main$O as _,
+  _sfc_main$P as _,
   useForwardExpose as a,
   isEqual as a0,
   useForwardProps as a1,
@@ -37616,9 +37655,9 @@ export {
   formLoadingInjectionKey as a7,
   useComponentIcons as a8,
   mergeClasses as a9,
-  _sfc_main$l as aa,
+  _sfc_main$m as aa,
   normalizeClass as ab,
-  _sfc_main$j as ac,
+  _sfc_main$k as ac,
   omit as ad,
   useForwardPropsEmits as ae,
   renderList as af,
@@ -37629,7 +37668,7 @@ export {
   shallowReactive as ak,
   markRaw as al,
   useId$1 as am,
-  _sfc_main$Z as an,
+  _sfc_main$_ as an,
   provide as ao,
   portalTargetInjectionKey as ap,
   createApp as aq,
