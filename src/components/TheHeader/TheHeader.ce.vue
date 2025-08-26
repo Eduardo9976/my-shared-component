@@ -40,7 +40,6 @@ import {useCart} from '@/composables/useCart'
 interface Props {
   activeLinkName?: string
   gtm?: GTM
-  token?: string
   pusher?: PusherInstance
   showCart?: boolean
 }
@@ -117,12 +116,6 @@ provide('headerBackdrop', {
 })
 
 onMounted(async () => {
-  const {setToken} = useHttp()
-
-  if (props.token) {
-    setToken(props.token)
-  }
-
   await initializeData()
   useTranslations().setLocale(storeUser.value.culture as SupportedLocale)
 })
@@ -197,3 +190,11 @@ const iconColor = computed(() => {
   return storeBrand.value?.iconColor || 'var(--ui-bg)'
 })
 </script>
+
+<style scoped>
+:host {
+  all: initial !important;
+  display: block;
+  font-family: sans-serif;
+}
+</style>
