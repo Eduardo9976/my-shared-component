@@ -72,6 +72,12 @@
   }
 }
 
+:host {
+  color: inherit;
+  font-family: inherit;
+  all: initial !important;
+}
+
 @layer theme {
   :root, :host {
     --font-sans: "Roboto", sans-serif;

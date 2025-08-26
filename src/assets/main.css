@@ -1,3 +1,9 @@
+:host {
+  all: initial !important;
+  font-family: inherit;
+  color: inherit;
+}
+
 @import 'tailwindcss' theme(static);
 @import '@nuxt/ui';
 

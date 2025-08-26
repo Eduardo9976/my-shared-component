@@ -4,8 +4,7 @@ import tailwindStyles from '../../assets/main.css?inline'
 import meIconStyles from '@mercadoeletronico/me-icon/dist/css/me-icon.min.css?inline'
 
 const TheHeaderElement = defineCustomElement(TheHeader, {
-  // shadowRoot: true,
-  shadow: true,
+  shadowRoot: true,
   styles: [meIconStyles, tailwindStyles]
 })
 

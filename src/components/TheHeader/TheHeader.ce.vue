@@ -190,11 +190,3 @@ const iconColor = computed(() => {
   return storeBrand.value?.iconColor || 'var(--ui-bg)'
 })
 </script>
-
-<style scoped>
-:host {
-  all: initial !important;
-  display: block;
-  font-family: sans-serif;
-}
-</style>
