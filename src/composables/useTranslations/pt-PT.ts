@@ -15,8 +15,9 @@ export default {
       linkName: 'Carrinho'
     },
     apiErrors: {
-      cart: 'Erro ao carregar dados do carrinho',
-      getTotalMessages: 'Erro ao carregar total de mensagens'
+      cart: 'Não foi possível recuperar as informações do carrinho',
+      getTotalMessages: 'Erro ao carregar novas mensagens',
+      generic: 'Ocorreu um erro de processamento. Por favor tente novamente.'
     }
   }
 }

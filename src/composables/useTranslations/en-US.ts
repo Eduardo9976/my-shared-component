@@ -15,8 +15,9 @@ export default {
       linkName: 'Cart'
     },
     apiErrors: {
-      cart: 'Error loading cart data',
-      getTotalMessages: 'Error loading total messages'
+      cart: 'Unable to retrieve cart information',
+      getTotalMessages: 'Error loading new messages',
+      generic: 'A processing error occurred. Please try again.'
     }
   }
 }

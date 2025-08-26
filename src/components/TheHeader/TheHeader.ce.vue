@@ -32,7 +32,7 @@ import {
   useTranslations
 } from '@/composables/useTranslations/useTranslations.ts'
 import {useHeader} from '@/composables/useHeader/useHeader.ts'
-import type {GTM, PusherInstance, NavigationItem, NavigationSeparatorItem} from '@/types'
+import type {GTM, PusherInstance} from '@/types'
 import {useHttp} from '@/composables/useHttp'
 import {useBadgeManager} from '@/composables/useBadgeManager'
 import {useCart} from '@/composables/useCart'
@@ -53,8 +53,10 @@ const {initializeData} = useHeader(
 )
 
 const headerStore = useHeaderStore()
+
 const {initBadgesForLinks} = useBadgeManager(props.pusher)
-const {cartItemCount, loadCart} = useCart()
+
+const {cartNavItem, loadCart} = useCart()
 
 const storeUser = toRef(headerStore, 'user')
 
@@ -68,30 +70,15 @@ const storeSiteMapItems = toRef(headerStore, 'siteMapItems')
 
 const storeHeaderLinks = toRef(headerStore, 'headerLinks')
 
-if (props.showCart) {
-  headerStore.setShowCart(true)
-}
+const navigationItemsWithCart = computed(() => {
+  const items = [...storeNavigationItems.value]
 
-const navigationItemsWithCart = ref<(NavigationItem | NavigationSeparatorItem)[]>([])
+  if (props.showCart && items.length > 0) {
+    items.push(cartNavItem.value)
+  }
 
-watch(
-  storeNavigationItems,
-  (newItems) => {
-    const items = [...newItems]
-    
-    if (props.showCart && items.length > 0) {
-      const cartNavItem = headerStore.getCartNavItem()
-      
-      if (cartNavItem) {
-        headerStore.updateCartBadge(cartItemCount.value || 0)
-        items.push(cartNavItem)
-      }
-    }
-    
-    navigationItemsWithCart.value = items
-  },
-  { immediate: false }
-)
+  return items
+})
 
 watch(
   storeHeaderLinks,

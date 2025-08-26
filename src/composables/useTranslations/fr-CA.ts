@@ -15,8 +15,9 @@ export default {
       linkName: 'Panier'
     },
     apiErrors: {
-      cart: 'Erreur lors du chargement des données du panier',
-      getTotalMessages: 'Erreur lors du chargement du total des messages'
+      cart: 'Impossible de récupérer les informations du panier',
+      getTotalMessages: 'Erreur lors du chargement de nouveaux messages',
+      generic: "Une erreur de traitement s'est produite. Veuillez réessayer."
     }
   }
 }

@@ -1,7 +1,6 @@
 <template>
   <div class="relative flex select-none flex-col items-end">
     <div
-      ref="menuAvatar"
       class="absolute rounded-bl-lg bg-white text-sm top-[-1px] right-[-8px]"
     >
       <div class="flex justify-between gap-4 px-4 py-2 align-center">
@@ -14,7 +13,7 @@
           }}</small>
         </div>
         <div
-          ref="avatar"
+          ref="avatarMenu"
           class="flex items-center justify-center size-12 rounded-full bg-primary mx-auto border-transparent border"
         >
           <span class="text-2xl font-normal no-underline text-white">
@@ -34,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import {useTemplateRef} from 'vue'
+import {useTemplateRef, onMounted} from 'vue'
 import type {ProfileItem, User} from '@/types'
 import TheHeaderAvatarMenuItem from './TheHeaderAvatarMenuItem.vue'
 import TheHeaderAvatarChip from '@/components/TheHeader/TheHeaderAvatarChip.vue'
@@ -43,10 +42,18 @@ interface Props {
   user: User
   profileItems: ProfileItem[]
   setVisibleToFalse: () => void
+  avatarRef: HTMLDivElement | null
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
-const menuAvatar = useTemplateRef<HTMLDivElement>('menuAvatar')
-const avatar = useTemplateRef<HTMLDivElement>('avatar')
+const avatarMenu = useTemplateRef<HTMLDivElement>('avatarMenu')
+
+onMounted(() => {
+  if (props.avatarRef && avatarMenu.value) {
+    const rect = props.avatarRef.getBoundingClientRect()
+    avatarMenu.value.style.top = `${rect.top + rect.height + 8}px`
+    avatarMenu.value.style.left = `${rect.left - 150 + rect.width / 2}px`
+  }
+})
 </script>

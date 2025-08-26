@@ -7,14 +7,9 @@ import type {
   User,
   Brand,
   ProfileItem,
-  PusherInstance,
-  CartNavItem
+  PusherInstance
 } from '@/types'
 import {useBadgeManager} from './useBadgeManager'
-import {
-  useTranslations,
-  type SupportedLocale
-} from './useTranslations/useTranslations'
 
 interface HeaderState {
   user: User
@@ -25,8 +20,6 @@ interface HeaderState {
   profileItems: ProfileItem[]
   headerLinks: NavigationItem[]
   badges: Record<string, string | number>
-  showCart: boolean
-  cartNavItem: CartNavItem | null
 }
 
 const initialState: HeaderState = {
@@ -37,9 +30,7 @@ const initialState: HeaderState = {
   brand: {} as Brand,
   profileItems: [],
   headerLinks: [],
-  badges: {},
-  showCart: false,
-  cartNavItem: null
+  badges: {}
 }
 
 const state = reactive<HeaderState>(initialState)
@@ -83,20 +74,59 @@ const setProfileItems = (profileItems: ProfileItem[]): void => {
   state.profileItems = profileItems
 }
 
-const setNavigationItems = (navigationItems: NavigationItemOrSeparator[]): void => {
-  state.navigationItems = navigationItems
+const setNavigationItems = (items: NavigationItemOrSeparator[]): void => {
+  state.navigationItems = items
+  state.customNavigationItems = navigationItemsWithoutSeparators.value
 }
 
-const setSiteMapItems = (siteMapItems: SiteMapItem[]): void => {
-  state.siteMapItems = siteMapItems
+const setCustomNavigationItems = (items: NavigationItem[]): void => {
+  const updatedItems: (NavigationItem | NavigationSeparatorItem)[] = []
+  let itemIndex = 0
+
+  for (const currentItem of state.navigationItems) {
+    updatedItems.push(
+      isSeparator(currentItem)
+        ? currentItem
+        : (items[itemIndex++] ?? currentItem)
+    )
+  }
+
+  state.navigationItems = updatedItems
+  state.customNavigationItems = items
 }
 
-const setHeaderLinks = (headerLinks: NavigationItem[], pusher?: PusherInstance): void => {
+const setSiteMapItems = (items: SiteMapItem[]): void => {
+  state.siteMapItems = items
+}
+
+const findNavigationItemById = (id: string): NavigationItem | undefined => {
+  return state.navigationItems.find(
+    item => !isSeparator(item) && item.id === id
+  ) as NavigationItem | undefined
+}
+
+const setHeaderLinks = (
+  headerLinks: NavigationItem[],
+  pusher?: PusherInstance
+): void => {
   state.headerLinks = headerLinks
 
   if (state.user.id && headerLinks.length > 0) {
     const badgeManager = getBadgeManager(pusher)
     badgeManager.initBadgesForLinks(headerLinks, state.user.id)
+  }
+}
+
+const updateNavigationItemsVisible = (
+  item: NavigationItem,
+  visible: boolean
+): void => {
+  if (!item.id) return
+
+  const targetItem = findNavigationItemById(item.id)
+  if (targetItem) {
+    targetItem.visible = visible
+    state.navigationItems = [...state.navigationItems]
   }
 }
 
@@ -110,80 +140,6 @@ const getBadgeValue = (linkName: string): string | number | undefined => {
   return state.badges[linkName]
 }
 
-const setShowCart = (show: boolean): void => {
-  state.showCart = show
-}
-
-const createCartNavItem = (): CartNavItem => {
-  const {t, setLocale} = useTranslations()
-
-  if (state.user.culture) {
-    setLocale(state.user.culture as SupportedLocale)
-  }
-
-  return {
-    id: '00',
-    active: false,
-    icon: 'me-icon-l icon-cart-shopping',
-    label: t('theHeader.cart.label'),
-    linkName: t('theHeader.cart.linkName'),
-    separator: false,
-    siteMap: false,
-    target: null,
-    url: null,
-    click: () => null,
-    visible: true,
-    badge: {
-      text: 0
-    }
-  }
-}
-
-const updateCartBadge = (count: number): void => {
-  if (state.cartNavItem) {
-    state.cartNavItem.badge = {
-      text: count
-    }
-  }
-}
-
-// Interface interna para rastrear cultura
-interface CartNavItemWithCulture extends CartNavItem {
-  _culture?: string
-}
-
-const getCartNavItem = (): CartNavItem | null => {
-  if (!state.showCart) {
-    return null
-  }
-
-  if (state.cartNavItem && state.user.culture) {
-    const currentCulture = state.user.culture
-    const itemCulture = (state.cartNavItem as CartNavItemWithCulture)._culture
-    
-    if (itemCulture !== currentCulture) {
-      state.cartNavItem = null
-    }
-  }
-
-  if (state.cartNavItem) {
-    return state.cartNavItem
-  }
-
-  const cartItem = createCartNavItem()
-  
-  if (state.user.culture) {
-    (cartItem as CartNavItemWithCulture)._culture = state.user.culture
-  }
-  
-  state.cartNavItem = cartItem
-  return cartItem
-}
-
-const refreshCart = (): void => {
-  // Será implementado no componente
-}
-
 export function useHeaderStore() {
   return {
     ...toRefs(state),
@@ -192,14 +148,12 @@ export function useHeaderStore() {
     setBrand,
     setProfileItems,
     setNavigationItems,
+    setCustomNavigationItems,
     setSiteMapItems,
     setHeaderLinks,
     isSeparator,
+    updateNavigationItemsVisible,
     updateBadgeValue,
-    getBadgeValue,
-    setShowCart,
-    getCartNavItem,
-    refreshCart,
-    updateCartBadge
+    getBadgeValue
   }
 }

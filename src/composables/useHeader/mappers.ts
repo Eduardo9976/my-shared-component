@@ -1,5 +1,4 @@
 import type {GTM} from '@/types'
-import type {HeaderLink} from '@/composables/useHeaderStore'
 import type {NavItem, SiteMapItem, Customer, UserDetails} from '@/types/header'
 
 const GTM_EVENTS = {
@@ -59,7 +58,7 @@ export const createProfileItemClickHandler = (
   }
 }
 
-export const mapHeaderLinks = (navItems: NavItem[], gtm: GTM): HeaderLink[] =>
+export const mapHeaderLinks = (navItems: NavItem[], gtm: GTM) =>
   navItems.map(({$id, ...rest}) => ({
     ...rest,
     id: $id || undefined,

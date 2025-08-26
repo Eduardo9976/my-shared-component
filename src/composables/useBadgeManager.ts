@@ -2,6 +2,7 @@ import {ref, reactive} from 'vue'
 import {useThrottleFn} from '@vueuse/core'
 import type {NavigationItem, PusherInstance, PusherChannel} from '@/types'
 import {useHttp} from './useHttp'
+import {useTranslations} from '@/composables/useTranslations/useTranslations.ts'
 
 interface BadgeState {
   badges: Record<string, string | number>
@@ -20,6 +21,8 @@ export function useBadgeManager(
   onBadgeChange?: (linkName: string, value: string | number) => void
 ) {
   const {get} = useHttp()
+  const {t} = useTranslations()
+  const toast = useToast()
 
   const setBadgeValue = (linkName: string, value: string | number) => {
     globalState.badges[linkName] = value
@@ -36,10 +39,17 @@ export function useBadgeManager(
   const setBadgesValue = async (headerLink: NavigationItem) => {
     if (!headerLink.badgeTotalUrl || !headerLink.linkName) return
 
-    const response = await get(headerLink.badgeTotalUrl)
-    if (response) {
-      const data = response as {total?: number}
-      setBadgeValue(headerLink.linkName, data?.total ?? 0)
+    try {
+      const response = await get(headerLink.badgeTotalUrl)
+      if (response) {
+        const data = response as {total?: number}
+        setBadgeValue(headerLink.linkName, data?.total ?? 0)
+      }
+    } catch {
+      toast.add({
+        title: t('theHeader.apiErrors.getTotalMessages'),
+        color: 'error'
+      })
     }
   }
 
@@ -61,19 +71,17 @@ export function useBadgeManager(
 
     if (headerLink.badgeEvent && userId && pusher) {
       try {
-        globalChannel.value ??= pusher.subscribe(
-          `user.${userId}`
-        ) as PusherChannel
+        globalChannel.value ??= pusher.subscribe(`user.${userId}`)
 
         globalChannel.value.unbind(headerLink.badgeEvent)
         globalChannel.value.bind(headerLink.badgeEvent, () => {
           loadBadge(headerLink)
         })
-      } catch (error) {
-        console.error(
-          `Error configuring Pusher for ${headerLink.linkName}:`,
-          error
-        )
+      } catch {
+        toast.add({
+          title: t('theHeader.apiErrors.generic'),
+          color: 'error'
+        })
       }
     }
   }

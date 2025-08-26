@@ -7,6 +7,7 @@ import {
   mapUserDetailsFromResponse,
   createProfileItemClickHandler
 } from './mappers'
+import {useTranslations} from '@/composables/useTranslations/useTranslations.ts'
 
 const API_ENDPOINTS = {
   USERS: {
@@ -22,13 +23,6 @@ const API_ENDPOINTS = {
 
 const HTTP_HEADERS = {
   NO_CACHE: {'Cache-Control': 'no-cache', Authorization: ''}
-} as const
-
-const ERROR_MESSAGES = {
-  USER_DATA: 'Falha ao carregar dados do usuário', // refatorar
-  NAVIGATION: 'Falha ao carregar dados de navegação',
-  SITEMAP: 'Falha ao carregar sitemap',
-  USER_DETAILS: 'Falha ao carregar detalhes do usuário'
 } as const
 
 const buildQueryString = (
@@ -55,7 +49,7 @@ export const loadUserData = async (
   const data = await get<User>(API_ENDPOINTS.USERS.CURRENT)
 
   if (!data) {
-    throw new Error(ERROR_MESSAGES.USER_DATA)
+    throw new Error()
   }
 
   if (data.token?.accessToken && typeof data.token.accessToken === 'string') {
@@ -83,7 +77,7 @@ export const loadHeaderData = async (
   const response = await get<HeaderResponse>(url)
 
   if (!response) {
-    throw new Error(ERROR_MESSAGES.NAVIGATION)
+    throw new Error()
   }
 
   return response
@@ -112,7 +106,7 @@ export const loadSiteMapData = async (
   const response = await get<SiteMapResponse>(url)
 
   if (!response) {
-    throw new Error(ERROR_MESSAGES.SITEMAP)
+    throw new Error()
   }
 
   return response
@@ -128,15 +122,18 @@ export const loadUserDetails = async (
     )
 
     if (!response) {
-      throw new Error(ERROR_MESSAGES.USER_DETAILS)
+      throw new Error()
     }
 
     return mapUserDetailsFromResponse(response)
-  } catch (error) {
-    console.warn(
-      'Erro ao carregar detalhes do usuário, usando valores padrão:',
-      error
-    )
+  } catch {
+    const {t} = useTranslations()
+    const toast = useToast()
+
+    toast.add({
+      title: t('theHeader.apiErrors.generic'),
+      color: 'error'
+    })
 
     return {
       user: {} as UserDetails['user'],

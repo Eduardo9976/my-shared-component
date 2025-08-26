@@ -17146,6 +17146,65 @@ const useState = (key, init) => {
   return value;
 };
 createHooks();
+function useToast() {
+  const toasts = useState("toasts", () => []);
+  const running = ref(false);
+  const queue2 = [];
+  const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+  async function processQueue() {
+    if (running.value || queue2.length === 0) {
+      return;
+    }
+    running.value = true;
+    while (queue2.length > 0) {
+      const toast = queue2.shift();
+      await nextTick();
+      toasts.value = [...toasts.value, toast].slice(-5);
+    }
+    running.value = false;
+  }
+  function add(toast) {
+    const body = {
+      id: generateId(),
+      open: true,
+      ...toast
+    };
+    queue2.push(body);
+    processQueue();
+    return body;
+  }
+  function update(id, toast) {
+    const index2 = toasts.value.findIndex((t) => t.id === id);
+    if (index2 !== -1) {
+      toasts.value[index2] = {
+        ...toasts.value[index2],
+        ...toast
+      };
+    }
+  }
+  function remove2(id) {
+    const index2 = toasts.value.findIndex((t) => t.id === id);
+    if (index2 !== -1) {
+      toasts.value[index2] = {
+        ...toasts.value[index2],
+        open: false
+      };
+    }
+    setTimeout(() => {
+      toasts.value = toasts.value.filter((t) => t.id !== id);
+    }, 200);
+  }
+  function clear() {
+    toasts.value = [];
+  }
+  return {
+    toasts,
+    add,
+    update,
+    remove: remove2,
+    clear
+  };
+}
 var l = (e) => typeof e == "boolean" ? `${e}` : e === 0 ? "0" : e, u = (e) => !e || typeof e != "object" || Object.keys(e).length === 0, x$1 = (e, o) => JSON.stringify(e) === JSON.stringify(o);
 function i(e, o) {
   e.forEach(function(r) {
@@ -23566,6 +23625,15 @@ const enUS = {
       siteMapItems: {
         search: "Search"
       }
+    },
+    cart: {
+      label: "Cart",
+      linkName: "Cart"
+    },
+    apiErrors: {
+      cart: "Unable to retrieve cart information",
+      getTotalMessages: "Error loading new messages",
+      generic: "A processing error occurred. Please try again."
     }
   }
 };
@@ -23580,6 +23648,15 @@ const ptBR = {
       siteMapItems: {
         search: "Buscar"
       }
+    },
+    cart: {
+      label: "Carrinho",
+      linkName: "Carrinho"
+    },
+    apiErrors: {
+      cart: "Não foi possível recuperar as informações do carrinho",
+      getTotalMessages: "Erro ao carregar novas mensagens",
+      generic: "Ocorreu um erro de processamento. Por favor tente novamente."
     }
   }
 };
@@ -23589,11 +23666,20 @@ const esES = {
       othersFuncionality: "Otras funcionalidades",
       loading: "Cargando...",
       navigationItems: {
-        pinnedApps: "Apps fijados en el header:"
+        pinnedApps: "Apps fijadas en el header:"
       },
       siteMapItems: {
         search: "Buscar"
       }
+    },
+    cart: {
+      label: "Carrito",
+      linkName: "Carrito"
+    },
+    apiErrors: {
+      cart: "No fue posible recuperar la información del carrito",
+      getTotalMessages: "Error al cargar nuevos mensajes",
+      generic: "Ocurrió un error de procesamiento. Por favor inténtalo de nuevo."
     }
   }
 };
@@ -23603,11 +23689,20 @@ const esMX = {
       othersFuncionality: "Otras funcionalidades",
       loading: "Cargando...",
       navigationItems: {
-        pinnedApps: "Apps fijados en el header:"
+        pinnedApps: "Apps fijadas en el header:"
       },
       siteMapItems: {
         search: "Buscar"
       }
+    },
+    cart: {
+      label: "Carrito",
+      linkName: "Carrito"
+    },
+    apiErrors: {
+      cart: "No fue posible recuperar la información del carrito",
+      getTotalMessages: "Error al cargar nuevos mensajes",
+      generic: "Ocurrió un error de procesamiento. Por favor inténtalo de nuevo."
     }
   }
 };
@@ -23617,11 +23712,20 @@ const frCA = {
       othersFuncionality: "Autres fonctionnalités",
       loading: "Chargement...",
       navigationItems: {
-        pinnedApps: "Apps épinglés dans l'en-tête:"
+        pinnedApps: "Applications épinglées dans l'en-tête:"
       },
       siteMapItems: {
         search: "Rechercher"
       }
+    },
+    cart: {
+      label: "Panier",
+      linkName: "Panier"
+    },
+    apiErrors: {
+      cart: "Impossible de récupérer les informations du panier",
+      getTotalMessages: "Erreur lors du chargement de nouveaux messages",
+      generic: "Une erreur de traitement s'est produite. Veuillez réessayer."
     }
   }
 };
@@ -23631,11 +23735,20 @@ const frFR = {
       othersFuncionality: "Autres fonctionnalités",
       loading: "Chargement...",
       navigationItems: {
-        pinnedApps: "Apps épinglés dans l'en-tête:"
+        pinnedApps: "Applications épinglées dans l'en-tête:"
       },
       siteMapItems: {
         search: "Rechercher"
       }
+    },
+    cart: {
+      label: "Panier",
+      linkName: "Panier"
+    },
+    apiErrors: {
+      cart: "Impossible de récupérer les informations du panier",
+      getTotalMessages: "Erreur lors du chargement de nouveaux messages",
+      generic: "Une erreur de traitement s'est produite. Veuillez réessayer."
     }
   }
 };
@@ -23645,11 +23758,20 @@ const ptPT = {
       othersFuncionality: "Outras funcionalidades",
       loading: "A carregar...",
       navigationItems: {
-        pinnedApps: "Apps fixados no cabeçalho:"
+        pinnedApps: "Apps fixadas no cabeçalho:"
       },
       siteMapItems: {
         search: "Pesquisar"
       }
+    },
+    cart: {
+      label: "Carrinho",
+      linkName: "Carrinho"
+    },
+    apiErrors: {
+      cart: "Não foi possível recuperar as informações do carrinho",
+      getTotalMessages: "Erro ao carregar novas mensagens",
+      generic: "Ocorreu um erro de processamento. Por favor tente novamente."
     }
   }
 };
@@ -23701,7 +23823,7 @@ function useTranslations() {
 }
 const _hoisted_1$a = { class: "max-h-[280px] overflow-y-auto" };
 const _hoisted_2$6 = { class: "space-y-2" };
-const _hoisted_3$4 = ["href", "target", "onClick"];
+const _hoisted_3$3 = ["href", "target", "onClick"];
 const _sfc_main$b = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabsSiteMapItems",
   props: {
@@ -23789,7 +23911,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
                     target: child.url ? getTarget(child.url) : void 0,
                     class: "block cursor-pointer rounded-md p-2 text-sm text-gray-600 no-underline transition-colors hover:bg-gray-100 hover:text-gray-800",
                     onClick: withModifiers(() => handleClick(child), ["prevent", "stop"])
-                  }, toDisplayString(child.description), 9, _hoisted_3$4);
+                  }, toDisplayString(child.description), 9, _hoisted_3$3);
                 }), 128))
               ])
             ]),
@@ -28572,6 +28694,8 @@ const globalState = reactive({
 const globalChannel = ref(null);
 function useBadgeManager(pusher, onBadgeChange) {
   const { get: get2 } = useHttp();
+  const { t } = useTranslations();
+  const toast = useToast();
   const setBadgeValue = (linkName, value) => {
     globalState.badges[linkName] = value;
     if (onBadgeChange) {
@@ -28583,12 +28707,17 @@ function useBadgeManager(pusher, onBadgeChange) {
   };
   const setBadgesValue = async (headerLink) => {
     if (!headerLink.badgeTotalUrl || !headerLink.linkName) return;
-    const response = await get2(
-      headerLink.badgeTotalUrl
-    );
-    if (response) {
-      const data = response;
-      setBadgeValue(headerLink.linkName, data?.total ?? 0);
+    try {
+      const response = await get2(headerLink.badgeTotalUrl);
+      if (response) {
+        const data = response;
+        setBadgeValue(headerLink.linkName, data?.total ?? 0);
+      }
+    } catch {
+      toast.add({
+        title: t("theHeader.apiErrors.getTotalMessages"),
+        color: "error"
+      });
     }
   };
   const loadBadge = (headerLink) => {
@@ -28611,11 +28740,11 @@ function useBadgeManager(pusher, onBadgeChange) {
         globalChannel.value.bind(headerLink.badgeEvent, () => {
           loadBadge(headerLink);
         });
-      } catch (error) {
-        console.error(
-          `Error configuring Pusher for ${headerLink.linkName}:`,
-          error
-        );
+      } catch {
+        toast.add({
+          title: t("theHeader.apiErrors.generic"),
+          color: "error"
+        });
       }
     }
   };
@@ -28661,23 +28790,47 @@ const setUser = (user, pusher) => {
   }
 };
 const setBrand = (brand) => {
-  state.brand = { ...brand };
+  state.brand = brand;
 };
-const setProfileItems = (items) => {
-  state.profileItems = items;
+const setProfileItems = (profileItems) => {
+  state.profileItems = profileItems;
 };
 const setNavigationItems = (items) => {
   state.navigationItems = items;
   state.customNavigationItems = navigationItemsWithoutSeparators.value;
 };
+const setCustomNavigationItems = (items) => {
+  const updatedItems = [];
+  let itemIndex = 0;
+  for (const currentItem of state.navigationItems) {
+    updatedItems.push(
+      isSeparator(currentItem) ? currentItem : items[itemIndex++] ?? currentItem
+    );
+  }
+  state.navigationItems = updatedItems;
+  state.customNavigationItems = items;
+};
 const setSiteMapItems = (items) => {
   state.siteMapItems = items;
 };
+const findNavigationItemById = (id) => {
+  return state.navigationItems.find(
+    (item) => !isSeparator(item) && item.id === id
+  );
+};
 const setHeaderLinks = (headerLinks, pusher) => {
   state.headerLinks = headerLinks;
-  if (state.user.id) {
+  if (state.user.id && headerLinks.length > 0) {
     const badgeManager = getBadgeManager(pusher);
     badgeManager.initBadgesForLinks(headerLinks, state.user.id);
+  }
+};
+const updateNavigationItemsVisible = (item, visible) => {
+  if (!item.id) return;
+  const targetItem = findNavigationItemById(item.id);
+  if (targetItem) {
+    targetItem.visible = visible;
+    state.navigationItems = [...state.navigationItems];
   }
 };
 const updateBadgeValue = (linkName, value) => {
@@ -28696,23 +28849,25 @@ function useHeaderStore() {
     setBrand,
     setProfileItems,
     setNavigationItems,
+    setCustomNavigationItems,
     setSiteMapItems,
     setHeaderLinks,
     isSeparator,
+    updateNavigationItemsVisible,
     updateBadgeValue,
     getBadgeValue
   };
 }
 const _hoisted_1$9 = { class: "flex flex-col" };
 const _hoisted_2$5 = { class: "text-sm text-primary py-2 px-6 bg-[var(--color-blue-50)] rounded-lg mb-2 flex justify-between font-medium" };
-const _hoisted_3$3 = { class: "flex items-center gap-2 text-[var(--color-neutral-400)] h-12 pl-2" };
+const _hoisted_3$2 = { class: "flex items-center gap-2 text-[var(--color-neutral-400)] h-12 pl-2" };
 const _hoisted_4$1 = { class: "icon-container" };
 const _hoisted_5$1 = ["href", "target"];
 const _hoisted_6$1 = {
   key: 1,
   class: "text-label text-sm flex-1"
 };
-const _hoisted_7 = ["onClick"];
+const _hoisted_7$1 = ["onClick"];
 const _sfc_main$a = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabsNavigationItems",
   setup(__props) {
@@ -28720,8 +28875,8 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     const { isExternalUrl } = useIsExternalUrl();
     const {
       customNavigationItems,
-      setCustomNavigationItems,
-      updateNavigationItemsVisible
+      setCustomNavigationItems: setCustomNavigationItems2,
+      updateNavigationItemsVisible: updateNavigationItemsVisible2
     } = useHeaderStore();
     const el = useTemplateRef("el");
     const list = shallowRef(customNavigationItems.value || []);
@@ -28783,10 +28938,10 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       onChange: () => {
       }
     });
-    watch(list, (newList) => setCustomNavigationItems(toRaw(newList)));
+    watch(list, (newList) => setCustomNavigationItems2(toRaw(newList)));
     function handleClick(item) {
       const currentVisibility = item.visible ?? false;
-      updateNavigationItemsVisible(item, !currentVisibility);
+      updateNavigationItemsVisible2(item, !currentVisibility);
     }
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1$9, [
@@ -28804,7 +28959,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
               key: index2,
               class: "hover:bg-gray-500/10 transition-colors cursor-pointer border-b border-[var(--color-neutral-100)] mr-2"
             }, [
-              createBaseVNode("div", _hoisted_3$3, [
+              createBaseVNode("div", _hoisted_3$2, [
                 createBaseVNode("div", _hoisted_4$1, [
                   createVNode(_sfc_main$c, {
                     icon: "me-icon-s icon-grid-horizontal",
@@ -28831,7 +28986,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                     "custom-size": 14,
                     color: item.visible ? "var(--ui-primary)" : "var(--color-neutral-200)"
                   }, null, 8, ["color"])
-                ], 8, _hoisted_7)) : createCommentVNode("", true)
+                ], 8, _hoisted_7$1)) : createCommentVNode("", true)
               ])
             ]);
           }), 128))
@@ -28842,7 +28997,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
 });
 const _hoisted_1$8 = { class: "p-4 w-[384px]" };
 const _hoisted_2$4 = { class: "p-4 text-center text-gray-500" };
-const _hoisted_3$2 = { class: "p-4 text-center text-gray-500" };
+const _hoisted_3$1 = { class: "p-4 text-center text-gray-500" };
 const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabs",
   props: {
@@ -28852,10 +29007,10 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     const { t } = useTranslations();
     const props = __props;
     const items = ref([
-      // {
-      //   label: 'Apps',
-      //   slot: 'navigationItems' as const
-      // },
+      {
+        label: "Apps",
+        slot: "navigationItems"
+      },
       {
         label: t("theHeader.tabs.othersFuncionality"),
         slot: "siteMapItems"
@@ -28893,7 +29048,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             createBaseVNode("keep-alive", null, [
               (openBlock(), createBlock(Suspense, null, {
                 fallback: withCtx(() => [
-                  createBaseVNode("div", _hoisted_3$2, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
+                  createBaseVNode("div", _hoisted_3$1, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
                 ]),
                 default: withCtx(() => [
                   createVNode(_sfc_main$b, {
@@ -29227,39 +29382,44 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1$3 = { class: "relative flex select-none flex-col items-end" };
-const _hoisted_2$1 = { class: "flex justify-between gap-4 px-4 py-2 align-center" };
-const _hoisted_3$1 = { class: "grid w-[168px]" };
-const _hoisted_4 = { class: "mb-0 truncate text-gray-500" };
-const _hoisted_5 = { class: "block truncate text-xs text-gray-400" };
-const _hoisted_6 = { class: "text-2xl font-normal no-underline text-white" };
+const _hoisted_2$1 = { class: "absolute rounded-bl-lg bg-white text-sm top-[-1px] right-[-8px]" };
+const _hoisted_3 = { class: "flex justify-between gap-4 px-4 py-2 align-center" };
+const _hoisted_4 = { class: "grid w-[168px]" };
+const _hoisted_5 = { class: "mb-0 truncate text-gray-500" };
+const _hoisted_6 = { class: "block truncate text-xs text-gray-400" };
+const _hoisted_7 = { class: "text-2xl font-normal no-underline text-white" };
 const _sfc_main$3 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderAvatarMenu",
   props: {
     user: { type: Object },
     profileItems: { type: Array },
-    setVisibleToFalse: { type: Function }
+    setVisibleToFalse: { type: Function },
+    avatarRef: { type: null }
   },
   setup(__props) {
-    const menuAvatar = useTemplateRef("menuAvatar");
-    const avatar = useTemplateRef("avatar");
+    const props = __props;
+    const avatarMenu = useTemplateRef("avatarMenu");
+    onMounted(() => {
+      if (props.avatarRef && avatarMenu.value) {
+        const rect = props.avatarRef.getBoundingClientRect();
+        avatarMenu.value.style.top = `${rect.top + rect.height + 8}px`;
+        avatarMenu.value.style.left = `${rect.left - 150 + rect.width / 2}px`;
+      }
+    });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1$3, [
-        createBaseVNode("div", {
-          ref_key: "menuAvatar",
-          ref: menuAvatar,
-          class: "absolute rounded-bl-lg bg-white text-sm top-[-1px] right-[-8px]"
-        }, [
-          createBaseVNode("div", _hoisted_2$1, [
-            createBaseVNode("div", _hoisted_3$1, [
-              createBaseVNode("p", _hoisted_4, toDisplayString(_ctx.user.name), 1),
-              createBaseVNode("small", _hoisted_5, toDisplayString(_ctx.user.role || _ctx.user.email || ""), 1)
+        createBaseVNode("div", _hoisted_2$1, [
+          createBaseVNode("div", _hoisted_3, [
+            createBaseVNode("div", _hoisted_4, [
+              createBaseVNode("p", _hoisted_5, toDisplayString(_ctx.user.name), 1),
+              createBaseVNode("small", _hoisted_6, toDisplayString(_ctx.user.role || _ctx.user.email || ""), 1)
             ]),
             createBaseVNode("div", {
-              ref_key: "avatar",
-              ref: avatar,
+              ref_key: "avatarMenu",
+              ref: avatarMenu,
               class: "flex items-center justify-center size-12 rounded-full bg-primary mx-auto border-transparent border"
             }, [
-              createBaseVNode("span", _hoisted_6, toDisplayString(_ctx.user.acronym), 1),
+              createBaseVNode("span", _hoisted_7, toDisplayString(_ctx.user.acronym), 1),
               createVNode(_sfc_main$4, { user: _ctx.user }, null, 8, ["user"])
             ], 512)
           ]),
@@ -29267,14 +29427,13 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
             profileItems: _ctx.profileItems,
             "set-visible-to-false": _ctx.setVisibleToFalse
           }, null, 8, ["profileItems", "set-visible-to-false"])
-        ], 512)
+        ])
       ]);
     };
   }
 });
-const _hoisted_1$2 = { class: "group py-2 px-4 hover:bg-[rgba(0,0,0,0.1)] cursor-pointer" };
-const _hoisted_2 = { class: "flex items-center justify-center size-12 rounded-full bg-[rgba(0,0,0,0.4)] mx-auto border-transparent border group-hover:border-white group-hover:border-2" };
-const _hoisted_3 = { class: "text-2xl uppercase" };
+const _hoisted_1$2 = { class: "flex items-center justify-center size-12 rounded-full bg-[rgba(0,0,0,0.4)] mx-auto border-transparent border group-hover:border-white group-hover:border-2" };
+const _hoisted_2 = { class: "text-2xl uppercase" };
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderAvatar",
   props: {
@@ -29283,6 +29442,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
+    const avatarRef = useTemplateRef("avatarRef");
     const visibleMenu = ref(false);
     const headerBackdrop = inject("headerBackdrop");
     function handlePopoverUpdate(open) {
@@ -29327,18 +29487,23 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
             createVNode(_sfc_main$3, {
               user: props.user,
               profileItems: props.profileItems,
-              "set-visible-to-false": setVisibleToFalse
-            }, null, 8, ["user", "profileItems"])
+              "set-visible-to-false": setVisibleToFalse,
+              "avatar-ref": avatarRef.value
+            }, null, 8, ["user", "profileItems", "avatar-ref"])
           ]),
           default: withCtx(() => [
-            createBaseVNode("div", _hoisted_1$2, [
-              createBaseVNode("div", _hoisted_2, [
-                createBaseVNode("span", _hoisted_3, toDisplayString(props.user.acronym), 1),
+            createBaseVNode("div", {
+              ref_key: "avatarRef",
+              ref: avatarRef,
+              class: "group py-2 px-4 hover:bg-[rgba(0,0,0,0.1)] cursor-pointer"
+            }, [
+              createBaseVNode("div", _hoisted_1$2, [
+                createBaseVNode("span", _hoisted_2, toDisplayString(props.user.acronym), 1),
                 createVNode(_sfc_main$4, {
                   user: props.user
                 }, null, 8, ["user"])
               ])
-            ])
+            ], 512)
           ]),
           _: 1
         }, 8, ["open"])
@@ -29483,12 +29648,6 @@ const API_ENDPOINTS = {
     PDM: "/do/api/v1/sitemap/pdm"
   }
 };
-const ERROR_MESSAGES$1 = {
-  USER_DATA: "Falha ao carregar dados do usuário",
-  // refatorar
-  NAVIGATION: "Falha ao carregar dados de navegação",
-  SITEMAP: "Falha ao carregar sitemap"
-};
 const buildQueryString = (params) => {
   const searchParams = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
@@ -29502,7 +29661,7 @@ const isPdmPath = (pathname) => pathname.includes("/MEPDM/") || pathname.include
 const loadUserData = async (get2, setToken2) => {
   const data = await get2(API_ENDPOINTS.USERS.CURRENT);
   if (!data) {
-    throw new Error(ERROR_MESSAGES$1.USER_DATA);
+    throw new Error();
   }
   if (data.token?.accessToken && typeof data.token.accessToken === "string") {
     setToken2(data.token.accessToken);
@@ -29519,7 +29678,7 @@ const loadHeaderData = async (get2, userId, culture, lastAccess) => {
   const url = `${API_ENDPOINTS.HEADER}?${queryString}`;
   const response = await get2(url);
   if (!response) {
-    throw new Error(ERROR_MESSAGES$1.NAVIGATION);
+    throw new Error();
   }
   return response;
 };
@@ -29535,7 +29694,7 @@ const loadSiteMapData = async (get2, userId, culture, lastAccess) => {
   const url = `${baseUrl}?${queryString}`;
   const response = await get2(url);
   if (!response) {
-    throw new Error(ERROR_MESSAGES$1.SITEMAP);
+    throw new Error();
   }
   return response;
 };
@@ -29578,40 +29737,21 @@ const mapProfileLinks = (profileItems, gtm, onChangeLocale) => {
     };
   });
 };
-const ERROR_STATUS = {
-  FORBIDDEN: 403,
-  UNAUTHORIZED: 401
-};
-const ERROR_MESSAGES = {
-  FORBIDDEN: "⚠️ Acesso negado (403) - Usuário não autenticado, usando mock",
-  UNAUTHORIZED: "⚠️ Não autorizado (401) - Token inválido, usando mock",
-  GENERIC: "⚠️ Erro ao carregar dados do usuário:",
-  HEADER_LOAD: "❌ Erro ao carregar dados do header:"
-};
 function useHeader(activeLinkName, gtm) {
+  const { t } = useTranslations();
+  const toast = useToast();
   const { get: get2, post, setToken: setToken2 } = useHttp();
   const headerStore = useHeaderStore();
   const storeUser = toRef$2(headerStore, "user");
-  const handleUserDataError = (error) => {
-    const errorObj = error;
-    if (errorObj?.response?.status === ERROR_STATUS.FORBIDDEN) {
-      console.warn(ERROR_MESSAGES.FORBIDDEN);
-    } else if (errorObj?.response?.status === ERROR_STATUS.UNAUTHORIZED) {
-      console.warn(ERROR_MESSAGES.UNAUTHORIZED);
-    } else {
-      console.warn(
-        ERROR_MESSAGES.GENERIC,
-        errorObj?.message || "Erro desconhecido",
-        "usando mock"
-      );
-    }
-  };
   const handleUserDataLoad = async () => {
     try {
       const userData = await loadUserData(get2, setToken2);
       headerStore.setUser(userData);
-    } catch (error) {
-      handleUserDataError(error);
+    } catch {
+      toast.add({
+        title: t("theHeader.apiErrors.generic"),
+        color: "error"
+      });
     }
   };
   const handleNavigationItemsLoad = async () => {
@@ -29644,7 +29784,10 @@ function useHeader(activeLinkName, gtm) {
       );
       headerStore.setProfileItems(mappedProfileItems);
     } catch {
-      console.warn("Não foi possível carregar itens de navegação, usando mock");
+      toast.add({
+        title: t("theHeader.apiErrors.generic"),
+        color: "error"
+      });
     }
   };
   const handleSiteMapLoad = async () => {
@@ -29652,7 +29795,7 @@ function useHeader(activeLinkName, gtm) {
       const response = await loadSiteMapData(
         get2,
         storeUser.value.id,
-        storeUser.value.culture || "",
+        storeUser.value.culture ?? "",
         storeUser.value.lastAccess
       );
       siteMapChildrenMapper(
@@ -29667,7 +29810,10 @@ function useHeader(activeLinkName, gtm) {
       );
       headerStore.setSiteMapItems(mappedSiteMapItems);
     } catch {
-      console.warn("Não foi possível carregar sitemap, usando mock");
+      toast.add({
+        title: t("theHeader.apiErrors.generic"),
+        color: "error"
+      });
     }
   };
   const initializeData = async () => {
@@ -29677,12 +29823,63 @@ function useHeader(activeLinkName, gtm) {
         handleNavigationItemsLoad(),
         handleSiteMapLoad()
       ]);
-    } catch (error) {
-      console.error(ERROR_MESSAGES.HEADER_LOAD, error);
+    } catch {
+      toast.add({
+        title: t("theHeader.apiErrors.generic"),
+        color: "error"
+      });
     }
   };
   return {
     initializeData
+  };
+}
+const cartItemCount = ref("");
+const updateCartItemCount = (value) => {
+  cartItemCount.value = String(value);
+};
+function useCart() {
+  const { get: get2 } = useHttp();
+  const { t } = useTranslations();
+  const toast = useToast();
+  const fetchCart = async () => {
+    try {
+      const response = await get2("/cart/cart");
+      if (response?.products && response.products.length > 0) {
+        updateCartItemCount(response.products.length);
+      }
+    } catch {
+      toast.add({
+        title: t("theHeader.apiErrors.cart"),
+        color: "error"
+      });
+    }
+  };
+  const throttledFetchCart = /* @__PURE__ */ useThrottleFn(fetchCart, 2e3);
+  const loadCart = () => {
+    throttledFetchCart();
+  };
+  const cartNavItem = computed(() => {
+    return {
+      id: "00",
+      active: false,
+      icon: "me-icon-l icon-cart-shopping",
+      label: t("theHeader.cart.label"),
+      linkName: t("theHeader.cart.linkName"),
+      separator: false,
+      siteMap: false,
+      target: null,
+      click: () => null,
+      visible: true,
+      badge: {
+        text: cartItemCount.value
+      }
+    };
+  });
+  return {
+    cartNavItem,
+    loadCart,
+    updateCartItemCount
   };
 }
 const _hoisted_1 = { class: "flex items-center justify-between" };
@@ -29692,7 +29889,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     activeLinkName: { type: String },
     gtm: { type: Object },
     token: { type: String },
-    pusher: { type: Object }
+    pusher: { type: Object },
+    showCart: { type: Boolean }
   },
   setup(__props) {
     const props = __props;
@@ -29702,17 +29900,28 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     );
     const headerStore = useHeaderStore();
     const { initBadgesForLinks } = useBadgeManager(props.pusher);
+    const { cartNavItem, loadCart } = useCart();
     const storeUser = toRef$2(headerStore, "user");
     const storeNavigationItems = toRef$2(headerStore, "navigationItems");
     const storeBrand = toRef$2(headerStore, "brand");
     const storeProfileItems = toRef$2(headerStore, "profileItems");
     const storeSiteMapItems = toRef$2(headerStore, "siteMapItems");
     const storeHeaderLinks = toRef$2(headerStore, "headerLinks");
+    const navigationItemsWithCart = computed(() => {
+      const items = [...storeNavigationItems.value];
+      if (props.showCart && items.length > 0) {
+        items.push(cartNavItem.value);
+      }
+      return items;
+    });
     watch(
       storeHeaderLinks,
       (newHeaderLinks) => {
         if (newHeaderLinks && newHeaderLinks.length > 0 && storeUser.value.id) {
           initBadgesForLinks(newHeaderLinks, storeUser.value.id);
+          if (props.showCart) {
+            loadCart();
+          }
         }
       },
       { immediate: true }
@@ -29792,7 +30001,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           createBaseVNode("nav", _hoisted_1, [
             createVNode(_sfc_main$i, { brand: storeBrand.value }, null, 8, ["brand"]),
             createVNode(_sfc_main$6, {
-              navigationItems: storeNavigationItems.value,
+              navigationItems: navigationItemsWithCart.value,
               iconColor: iconColor.value,
               siteMapItems: storeSiteMapItems.value
             }, null, 8, ["navigationItems", "iconColor", "siteMapItems"]),
@@ -37312,7 +37521,7 @@ if (!customElements.get("the-header")) {
   customElements.define("the-header", TheHeaderElement);
 }
 export {
-  useState as $,
+  reactivePick as $,
   createElementBlock as A,
   createVNode as B,
   withModifiers as C,
@@ -37341,25 +37550,25 @@ export {
   h as Z,
   _sfc_main$O as _,
   useForwardExpose as a,
-  reactivePick as a0,
-  isEqual as a1,
-  useForwardProps as a2,
-  reactiveOmit as a3,
-  tv as a4,
-  useAppConfig as a5,
-  useSlots as a6,
-  useButtonGroup as a7,
-  formLoadingInjectionKey as a8,
-  useComponentIcons as a9,
-  mergeClasses as aa,
-  _sfc_main$l as ab,
-  normalizeClass as ac,
-  _sfc_main$j as ad,
-  omit as ae,
-  useForwardPropsEmits as af,
-  renderList as ag,
-  createBaseVNode as ah,
-  resolveDynamicComponent as ai,
+  isEqual as a0,
+  useForwardProps as a1,
+  reactiveOmit as a2,
+  tv as a3,
+  useAppConfig as a4,
+  useSlots as a5,
+  useButtonGroup as a6,
+  formLoadingInjectionKey as a7,
+  useComponentIcons as a8,
+  mergeClasses as a9,
+  _sfc_main$l as aa,
+  normalizeClass as ab,
+  _sfc_main$j as ac,
+  omit as ad,
+  useForwardPropsEmits as ae,
+  renderList as af,
+  createBaseVNode as ag,
+  resolveDynamicComponent as ah,
+  useToast as ai,
   usePortal as aj,
   shallowReactive as ak,
   markRaw as al,

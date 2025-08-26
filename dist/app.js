@@ -1,4 +1,4 @@
-import { d as defineComponent, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, P as Primitive, a as useForwardExpose, b as useVModel, e as watch, n as nextTick, f as computed, i as isNullish, g as createContext, m as mergeProps, t as toRefs, h as useCollection, j as ref, k as useTimeout, l as useRafFn, p as createCommentVNode, q as createTextVNode, s as toDisplayString, v as watchEffect, x as onKeyStroke, y as onMounted, z as onUnmounted, A as createElementBlock, B as createVNode, C as withModifiers, T as Teleport, F as Fragment, D as isClient, E as getActiveElement, G as normalizeProps, H as guardReactiveProps, _ as _sfc_main$q, I as Presence, J as context, K as focusFirst, L as unrefElement, M as normalizeStyle, N as getTabbableCandidates, O as useTimeoutFn, Q as serialize, R as isRef, S as get, U as defu, V as createSharedComposable, W as toRef, X as inject, Y as reactive, Z as h, $ as useState, a0 as reactivePick, a1 as isEqual, a2 as useForwardProps, a3 as reactiveOmit, a4 as tv, a5 as useAppConfig, a6 as useSlots, a7 as useButtonGroup, a8 as formLoadingInjectionKey, a9 as useComponentIcons, aa as mergeClasses, ab as _sfc_main$r, ac as normalizeClass, ad as _sfc_main$s, ae as omit, af as useForwardPropsEmits, ag as renderList, ah as createBaseVNode, ai as resolveDynamicComponent, aj as usePortal, ak as shallowReactive, al as markRaw, am as useId, an as _sfc_main$t, ao as provide, ap as portalTargetInjectionKey, aq as createApp } from "./the-header.js";
+import { d as defineComponent, c as createBlock, o as openBlock, w as withCtx, r as renderSlot, u as unref, P as Primitive, a as useForwardExpose, b as useVModel, e as watch, n as nextTick, f as computed, i as isNullish, g as createContext, m as mergeProps, t as toRefs, h as useCollection, j as ref, k as useTimeout, l as useRafFn, p as createCommentVNode, q as createTextVNode, s as toDisplayString, v as watchEffect, x as onKeyStroke, y as onMounted, z as onUnmounted, A as createElementBlock, B as createVNode, C as withModifiers, T as Teleport, F as Fragment, D as isClient, E as getActiveElement, G as normalizeProps, H as guardReactiveProps, _ as _sfc_main$q, I as Presence, J as context, K as focusFirst, L as unrefElement, M as normalizeStyle, N as getTabbableCandidates, O as useTimeoutFn, Q as serialize, R as isRef, S as get, U as defu, V as createSharedComposable, W as toRef, X as inject, Y as reactive, Z as h, $ as reactivePick, a0 as isEqual, a1 as useForwardProps, a2 as reactiveOmit, a3 as tv, a4 as useAppConfig, a5 as useSlots, a6 as useButtonGroup, a7 as formLoadingInjectionKey, a8 as useComponentIcons, a9 as mergeClasses, aa as _sfc_main$r, ab as normalizeClass, ac as _sfc_main$s, ad as omit, ae as useForwardPropsEmits, af as renderList, ag as createBaseVNode, ah as resolveDynamicComponent, ai as useToast, aj as usePortal, ak as shallowReactive, al as markRaw, am as useId, an as _sfc_main$t, ao as provide, ap as portalTargetInjectionKey, aq as createApp } from "./the-header.js";
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) return;
@@ -1350,65 +1350,6 @@ function getOriginalPath(record) {
 const getLinkClass = (propClass, globalClass, defaultClass) => propClass != null ? propClass : globalClass != null ? globalClass : defaultClass;
 function useRoute(_name) {
   return inject(routeLocationKey);
-}
-function useToast() {
-  const toasts = useState("toasts", () => []);
-  const running = ref(false);
-  const queue = [];
-  const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-  async function processQueue() {
-    if (running.value || queue.length === 0) {
-      return;
-    }
-    running.value = true;
-    while (queue.length > 0) {
-      const toast = queue.shift();
-      await nextTick();
-      toasts.value = [...toasts.value, toast].slice(-5);
-    }
-    running.value = false;
-  }
-  function add(toast) {
-    const body = {
-      id: generateId(),
-      open: true,
-      ...toast
-    };
-    queue.push(body);
-    processQueue();
-    return body;
-  }
-  function update(id, toast) {
-    const index = toasts.value.findIndex((t) => t.id === id);
-    if (index !== -1) {
-      toasts.value[index] = {
-        ...toasts.value[index],
-        ...toast
-      };
-    }
-  }
-  function remove(id) {
-    const index = toasts.value.findIndex((t) => t.id === id);
-    if (index !== -1) {
-      toasts.value[index] = {
-        ...toasts.value[index],
-        open: false
-      };
-    }
-    setTimeout(() => {
-      toasts.value = toasts.value.filter((t) => t.id !== id);
-    }, 200);
-  }
-  function clear() {
-    toasts.value = [];
-  }
-  return {
-    toasts,
-    add,
-    update,
-    remove,
-    clear
-  };
 }
 function pickLinkProps(link) {
   const keys = Object.keys(link);
@@ -3192,7 +3133,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_UApp = _sfc_main$1;
       return openBlock(), createBlock(_component_UApp, null, {
         default: withCtx(() => _cache[0] || (_cache[0] = [
-          createBaseVNode("the-header", null, null, -1)
+          createBaseVNode("the-header", { "show-cart": true }, null, -1)
         ])),
         _: 1,
         __: [0]
