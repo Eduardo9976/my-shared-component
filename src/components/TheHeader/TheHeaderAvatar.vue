@@ -15,7 +15,7 @@
     >
       <div
         ref="avatarRef"
-        class="group py-2 px-4 hover:bg-[rgba(0,0,0,0.1)] cursor-pointer"
+        class="group py-2 px-4 ml-1.5 hover:bg-[rgba(0,0,0,0.1)] cursor-pointer"
       >
         <div
           class="flex items-center justify-center size-12 rounded-full bg-[rgba(0,0,0,0.4)] mx-auto border-transparent border group-hover:border-white group-hover:border-2"

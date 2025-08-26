@@ -3133,7 +3133,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_UApp = _sfc_main$1;
       return openBlock(), createBlock(_component_UApp, null, {
         default: withCtx(() => _cache[0] || (_cache[0] = [
-          createBaseVNode("the-header", { "show-cart": true }, null, -1)
+          createBaseVNode("the-header", { "show-cart": false }, null, -1)
         ])),
         _: 1,
         __: [0]

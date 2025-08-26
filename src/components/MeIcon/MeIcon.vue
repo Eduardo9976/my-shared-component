@@ -126,6 +126,3 @@ const currentIcon = computed(() => {
   return []
 })
 </script>
-<style scoped>
-@import '@mercadoeletronico/me-icon/dist/css/me-icon.min.css';
-</style>

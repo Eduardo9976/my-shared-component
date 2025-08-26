@@ -4,7 +4,7 @@
     :href="isLink ? url : undefined"
     :target="isLink ? (target ?? '_self') : undefined"
     :type="!isLink ? 'button' : undefined"
-    class="grid place-items-center gap-1 px-2 py-1 cursor-pointer relative transition-colors duration-200 hover:bg-[rgba(0,0,0,0.1)] text-[var(--color-neutral-300)] text-center"
+    class="grid place-items-center gap-1 px-[15px] py-1 cursor-pointer relative transition-colors duration-200 hover:bg-[rgba(0,0,0,0.1)] text-[var(--color-neutral-300)] text-center"
     :class="[
       isLink ? 'no-underline' : 'border-0 bg-transparent',
       active && activeClass
