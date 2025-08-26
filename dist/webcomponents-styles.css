@@ -782,6 +782,10 @@
     margin-inline: calc(var(--spacing, .25rem) * 3);
   }
 
+  .mx-4 {
+    margin-inline: calc(var(--spacing, .25rem) * 4);
+  }
+
   .mx-\[15px\] {
     margin-inline: 15px;
   }
@@ -948,6 +952,10 @@
 
   .\!ml-4 {
     margin-left: calc(var(--spacing, .25rem) * 4) !important;
+  }
+
+  .ml-1 {
+    margin-left: calc(var(--spacing, .25rem) * 1);
   }
 
   .ml-1\.5 {
@@ -2721,6 +2729,10 @@
 
   .pl-2 {
     padding-left: calc(var(--spacing, .25rem) * 2);
+  }
+
+  .pl-4 {
+    padding-left: calc(var(--spacing, .25rem) * 4);
   }
 
   .text-center {

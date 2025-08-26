@@ -14979,7 +14979,7 @@ const _hoisted_1$e = {
   key: 0,
   d: "M0 0L6 6L12 0"
 };
-const _hoisted_2$8 = {
+const _hoisted_2$7 = {
   key: 1,
   d: "M0 0L4.58579 4.58579C5.36683 5.36683 6.63316 5.36684 7.41421 4.58579L12 0"
 };
@@ -15004,7 +15004,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
       }), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default", {}, () => [
-            !_ctx.rounded ? (openBlock(), createElementBlock("path", _hoisted_1$e)) : (openBlock(), createElementBlock("path", _hoisted_2$8))
+            !_ctx.rounded ? (openBlock(), createElementBlock("path", _hoisted_1$e)) : (openBlock(), createElementBlock("path", _hoisted_2$7))
           ])
         ]),
         _: 3
@@ -22146,7 +22146,7 @@ function useSanitizeURL(url) {
   }
 }
 const _hoisted_1$d = ["href", "target"];
-const _hoisted_2$7 = ["src"];
+const _hoisted_2$6 = ["src"];
 const _sfc_main$i = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderBrand",
   props: {
@@ -22163,7 +22163,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
           src: _ctx.brand.logo,
           alt: "logo",
           class: "max-w-[75px] max-h-[32px]"
-        }, null, 8, _hoisted_2$7)
+        }, null, 8, _hoisted_2$6)
       ], 8, _hoisted_1$d);
     };
   }
@@ -23821,8 +23821,8 @@ function useTranslations() {
     setLocale
   };
 }
-const _hoisted_1$a = { class: "max-h-[280px] overflow-y-auto" };
-const _hoisted_2$6 = { class: "space-y-2" };
+const _hoisted_1$a = { class: "overflow-y-auto max-h-[280px]" };
+const _hoisted_2$5 = { class: "space-y-2" };
 const _hoisted_3$3 = ["href", "target", "onClick"];
 const _sfc_main$b = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabsSiteMapItems",
@@ -23882,7 +23882,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
             fn: withCtx(() => [
               createBaseVNode("button", {
                 type: "button",
-                class: "inline-flex size-8 items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
+                class: "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors size-8 hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
                 onClick: _cache[0] || (_cache[0] = ($event) => searchTerm.value = "")
               }, [
                 createVNode(_sfc_main$c, { icon: "me-icon-l icon-xmark" })
@@ -23903,7 +23903,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
             }
           }, {
             content: withCtx(({ item }) => [
-              createBaseVNode("div", _hoisted_2$6, [
+              createBaseVNode("div", _hoisted_2$5, [
                 (openBlock(true), createElementBlock(Fragment, null, renderList(item.children, (child, idx) => {
                   return openBlock(), createElementBlock("a", {
                     key: idx,
@@ -28857,13 +28857,13 @@ function useHeaderStore() {
   };
 }
 const _hoisted_1$9 = { class: "flex flex-col" };
-const _hoisted_2$5 = { class: "text-sm text-primary py-2 px-6 bg-[var(--color-blue-50)] rounded-lg mb-2 flex justify-between font-medium" };
+const _hoisted_2$4 = { class: "text-sm text-primary py-2 px-6 bg-[var(--color-blue-50)] rounded-lg mb-2 flex justify-between font-medium" };
 const _hoisted_3$2 = { class: "flex items-center gap-2 text-[var(--color-neutral-400)] h-12 pl-2" };
 const _hoisted_4$1 = { class: "icon-container" };
 const _hoisted_5$1 = ["href", "target"];
 const _hoisted_6$1 = {
   key: 1,
-  class: "text-label text-sm flex-1"
+  class: "flex-1 text-sm text-label"
 };
 const _hoisted_7$1 = ["onClick"];
 const _sfc_main$a = /* @__PURE__ */ defineComponent({
@@ -28943,7 +28943,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     }
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1$9, [
-        createBaseVNode("div", _hoisted_2$5, [
+        createBaseVNode("div", _hoisted_2$4, [
           createBaseVNode("p", null, toDisplayString(unref(t)("theHeader.tabs.navigationItems.pinnedApps")), 1),
           createBaseVNode("span", null, toDisplayString(getCountNavigationItems.value), 1)
         ]),
@@ -28969,7 +28969,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                   key: 0,
                   href: item.url,
                   target: getTarget(item.url),
-                  class: "text-label text-sm no-underline flex-1",
+                  class: "flex-1 text-sm no-underline text-label",
                   onClick: _cache[0] || (_cache[0] = withModifiers(() => {
                   }, ["stop"]))
                 }, toDisplayString(item.label), 9, _hoisted_5$1)) : (openBlock(), createElementBlock("span", _hoisted_6$1, toDisplayString(item.label), 1)),
@@ -28994,7 +28994,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1$8 = { class: "p-4 w-[384px]" };
-const _hoisted_2$4 = { class: "p-4 text-center text-gray-500" };
+const _hoisted_2$3 = { class: "p-4 text-center text-gray-500" };
 const _hoisted_3$1 = { class: "p-4 text-center text-gray-500" };
 const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabs",
@@ -29033,7 +29033,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             createBaseVNode("keep-alive", null, [
               (openBlock(), createBlock(Suspense, null, {
                 fallback: withCtx(() => [
-                  createBaseVNode("div", _hoisted_2$4, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
+                  createBaseVNode("div", _hoisted_2$3, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
                 ]),
                 default: withCtx(() => [
                   createVNode(_sfc_main$a)
@@ -29064,7 +29064,6 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1$7 = { class: "relative flex items-center justify-center" };
-const _hoisted_2$3 = { class: "text-xs py-[6px] text-[var(--header-icon-color)] whitespace-nowrap" };
 const activeClass = "after:content-[''] after:bg-[var(--header-icon-color)] after:h-1 after:rounded-full after:absolute after:block after:w-[80%] after:bottom-0 after:left-1/2 after:-translate-x-1/2";
 const _sfc_main$8 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderNavigationItemContent",
@@ -29100,6 +29099,9 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       }
       return null;
     });
+    function getIcon(icon, isActive) {
+      return isActive ? icon.replace("me-icon-l", "me-icon-s") : icon;
+    }
     function handleClick() {
       props.click?.(props);
     }
@@ -29109,17 +29111,14 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
         href: isLink.value ? _ctx.url : void 0,
         target: isLink.value ? _ctx.target ?? "_self" : void 0,
         type: !isLink.value ? "button" : void 0,
-        class: normalizeClass(["grid place-items-center gap-1 px-[15px] py-1 cursor-pointer relative transition-colors duration-200 hover:bg-[rgba(0,0,0,0.1)] text-[var(--color-neutral-300)] text-center", [
-          isLink.value ? "no-underline" : "border-0 bg-transparent",
-          _ctx.active && activeClass
-        ]]),
+        class: normalizeClass(["grid place-items-center gap-1 px-[15px] py-1 cursor-pointer relative transition-colors duration-200 hover:bg-[rgba(0,0,0,0.1)] text-[var(--color-neutral-300)] text-center", [isLink.value ? "no-underline" : "border-0 bg-transparent"]]),
         style: normalizeStyle({ "--header-icon-color": _ctx.iconColor }),
         onClick: withModifiers(handleClick, ["prevent", "stop"])
       }, {
         default: withCtx(() => [
           createBaseVNode("div", _hoisted_1$7, [
             createVNode(_sfc_main$c, {
-              icon: _ctx.icon || "",
+              icon: getIcon(_ctx.icon, _ctx.active) || "",
               "custom-size": 24,
               color: _ctx.iconColor
             }, null, 8, ["icon", "color"]),
@@ -29136,7 +29135,9 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
               }
             }, null, 8, ["text"])) : createCommentVNode("", true)
           ]),
-          createBaseVNode("p", _hoisted_2$3, toDisplayString(_ctx.label), 1)
+          createBaseVNode("p", {
+            class: normalizeClass([[_ctx.active && activeClass], "text-xs py-[6px] text-[var(--header-icon-color)] whitespace-nowrap"])
+          }, toDisplayString(_ctx.label), 3)
         ]),
         _: 1
       }, 8, ["href", "target", "type", "class", "style"]);
@@ -29242,7 +29243,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
           }, [
             unref(isSeparator2)(item) ? (openBlock(), createElementBlock("div", {
               key: 0,
-              class: "w-[1px] h-[40px] self-center opacity-35 mx-[15px]",
+              class: "self-center w-[1px] h-[40px] opacity-35 mx-[15px]",
               style: normalizeStyle({ background: _ctx.iconColor })
             }, null, 4)) : item.visible ?? false ? (openBlock(), createBlock(_sfc_main$7, mergeProps({
               key: 1,
@@ -29288,8 +29289,16 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
         return;
       }
       if (url) {
-        if (isExternalUrl(url)) {
-          window.open(url, target, "noopener,noreferrer");
+        const openWithNoopener = (link, tgt) => {
+          const newWindow = window.open(link, tgt, "noopener=yes,noreferrer=yes");
+          if (newWindow) newWindow.opener = null;
+        };
+        const shouldOpenExternally = isExternalUrl(url);
+        const shouldOpenInNewTab = !shouldOpenExternally && target === "_blank";
+        if (shouldOpenExternally) {
+          openWithNoopener(url, target);
+        } else if (shouldOpenInNewTab) {
+          window.open(url, target);
         } else {
           window.location.href = url;
         }
@@ -29307,8 +29316,10 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
               key: 0,
               items: accordionItems(item),
               ui: {
+                item: "border-none",
+                header: "border-none",
                 body: "p-0",
-                trigger: `py-2 px-4 hover:bg-blue-100 hover:text-primary flex navigationItems-center gap-2 cursor-pointer font-normal ${item.active ? "text-primary" : ""}`
+                trigger: `py-2 px-4 hover:bg-blue-100 hover:text-primary flex navigationItems-center gap-2 focus-visible:outline-none cursor-pointer font-normal ${item.active ? "text-primary" : ""}`
               }
             }, {
               body: withCtx(({ item: accordionItem }) => [
@@ -29381,11 +29392,11 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
 });
 const _hoisted_1$3 = { class: "relative flex select-none flex-col items-end" };
 const _hoisted_2$1 = { class: "absolute rounded-bl-lg bg-white text-sm top-[-1px] right-[-8px]" };
-const _hoisted_3 = { class: "flex justify-between gap-4 px-4 py-2 align-center" };
+const _hoisted_3 = { class: "flex justify-between gap-4 py-2 pl-4 align-center" };
 const _hoisted_4 = { class: "grid w-[168px]" };
 const _hoisted_5 = { class: "mb-0 truncate text-gray-500" };
 const _hoisted_6 = { class: "block truncate text-xs text-gray-400" };
-const _hoisted_7 = { class: "text-2xl font-normal no-underline text-white" };
+const _hoisted_7 = { class: "text-2xl font-normal text-white no-underline" };
 const _sfc_main$3 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderAvatarMenu",
   props: {
@@ -29415,7 +29426,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
             createBaseVNode("div", {
               ref_key: "avatarMenu",
               ref: avatarMenu,
-              class: "flex items-center justify-center size-12 rounded-full bg-primary mx-auto border-transparent border"
+              class: "mx-4 flex items-center justify-center rounded-full border border-transparent size-12 bg-primary"
             }, [
               createBaseVNode("span", _hoisted_7, toDisplayString(_ctx.user.acronym), 1),
               createVNode(_sfc_main$4, { user: _ctx.user }, null, 8, ["user"])
@@ -29552,7 +29563,11 @@ const createNavItemClickHandler = (navItem, gtm) => {
         event: GTM_EVENTS.TELAS_PRINCIPAIS,
         selectOp: navItem.linkName
       });
-      window.location.href = navItem.url;
+      if (navItem?.target === "_blank") {
+        window.open(navItem.url, navItem.target);
+      } else {
+        window.location.href = navItem.url;
+      }
     };
   }
   return void 0;
@@ -29565,7 +29580,11 @@ const createSiteMapClickHandler = (item, parentCategory, gtm) => {
       categoria: parentCategory,
       selectOp: item.description ?? item.name
     });
-    window.location.href = item.url;
+    if (item?.target === "_blank") {
+      window.open(item.url, item.target);
+    } else {
+      window.location.href = item.url;
+    }
   };
 };
 const createProfileItemClickHandler = (profileItem, gtm) => {
@@ -29575,7 +29594,11 @@ const createProfileItemClickHandler = (profileItem, gtm) => {
       event: GTM_EVENTS.PERFIL_OPCAO,
       selectOp: profileItem.label
     });
-    window.location.href = profileItem.url;
+    if (profileItem?.target === "_blank") {
+      window.open(profileItem.url, profileItem.target);
+    } else {
+      window.location.href = profileItem.url;
+    }
   };
 };
 const mapHeaderLinks = (navItems, gtm) => navItems.map(({ $id, ...rest }) => ({
@@ -30797,6 +30820,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     margin-inline: calc(var(--spacing, .25rem) * 3);
   }
 
+  .mx-4 {
+    margin-inline: calc(var(--spacing, .25rem) * 4);
+  }
+
   .mx-\\[15px\\] {
     margin-inline: 15px;
   }
@@ -30963,6 +30990,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .\\!ml-4 {
     margin-left: calc(var(--spacing, .25rem) * 4) !important;
+  }
+
+  .ml-1 {
+    margin-left: calc(var(--spacing, .25rem) * 1);
   }
 
   .ml-1\\.5 {
@@ -32736,6 +32767,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .pl-2 {
     padding-left: calc(var(--spacing, .25rem) * 2);
+  }
+
+  .pl-4 {
+    padding-left: calc(var(--spacing, .25rem) * 4);
   }
 
   .text-center {
