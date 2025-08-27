@@ -17,8 +17,8 @@
       />
 
       <UChip
-        v-if="computedBadge?.text"
-        :text="computedBadge.text"
+        v-if="showBadge"
+        :text="computedBadge?.text"
         color="error"
         size="3xl"
         position="top-right"
@@ -54,6 +54,12 @@ const {getBadgeValue} = useHeaderStore()
 
 const isLink = computed(() => Boolean(props.url))
 
+const showBadge = computed(() => {
+  const value = computedBadge.value?.text
+
+  return Boolean(value) && value !== '0'
+})
+
 const computedBadge = computed(() => {
   if (props.badge?.text) {
     return props.badge
@@ -72,7 +78,9 @@ const computedBadge = computed(() => {
 const activeClass =
   "after:content-[''] after:bg-[var(--header-icon-color)] after:h-1 after:rounded-full after:absolute after:block after:w-[80%] after:bottom-0 after:left-1/2 after:-translate-x-1/2"
 
-function getIcon(icon: string, isActive: boolean) {
+function getIcon(icon?: string | null, isActive = false) {
+  if (!icon) return ''
+
   return isActive ? icon.replace('me-icon-l', 'me-icon-s') : icon
 }
 

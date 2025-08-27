@@ -268,19 +268,26 @@
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 6px !important;
+  height: 6px !important;
+  scrollbar-width: initial !important;
+  scrollbar-color: rgba(0, 0, 0, 0.25) transparent !important;
 }
 
 ::-webkit-scrollbar-track {
-  display: none;
+  display: none !important;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.25);
-  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.25) !important;
+  border-radius: 15px !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.45) !important;
+}
+
+a {
+  color: var(--color-neutral-400) !important;
+  text-decoration: none !important;
 }

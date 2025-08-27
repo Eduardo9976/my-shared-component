@@ -29024,8 +29024,8 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1$8 = { class: "p-4 w-[384px]" };
-const _hoisted_2$3 = { class: "p-4 text-center text-gray-500" };
-const _hoisted_3$1 = { class: "p-4 text-center text-gray-500" };
+const _hoisted_2$3 = { class: "p-4 text-center text-gray-500 text-xs" };
+const _hoisted_3$1 = { class: "p-4 text-center text-gray-500 text-xs" };
 const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabs",
   props: {
@@ -29035,10 +29035,10 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     const { t } = useTranslations();
     const props = __props;
     const items = ref([
-      {
-        label: "Apps",
-        slot: "navigationItems"
-      },
+      // {
+      //   label: 'Apps',
+      //   slot: 'navigationItems' as const
+      // },
       {
         label: t("theHeader.tabs.othersFuncionality"),
         slot: "siteMapItems"
@@ -29117,6 +29117,10 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     const props = __props;
     const { getBadgeValue: getBadgeValue2 } = useHeaderStore();
     const isLink = computed(() => Boolean(props.url));
+    const showBadge = computed(() => {
+      const value = computedBadge.value?.text;
+      return Boolean(value) && value !== "0";
+    });
     const computedBadge = computed(() => {
       if (props.badge?.text) {
         return props.badge;
@@ -29129,7 +29133,8 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       }
       return null;
     });
-    function getIcon(icon, isActive) {
+    function getIcon(icon, isActive = false) {
+      if (!icon) return "";
       return isActive ? icon.replace("me-icon-l", "me-icon-s") : icon;
     }
     function handleClick() {
@@ -29152,9 +29157,9 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
               "custom-size": 24,
               color: _ctx.iconColor
             }, null, 8, ["icon", "color"]),
-            computedBadge.value?.text ? (openBlock(), createBlock(_component_UChip, {
+            showBadge.value ? (openBlock(), createBlock(_component_UChip, {
               key: 0,
-              text: computedBadge.value.text,
+              text: computedBadge.value?.text,
               color: "error",
               size: "3xl",
               position: "top-right",
@@ -37220,21 +37225,28 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  scrollbar-width: initial !important;
+  scrollbar-color: #00000040 transparent !important;
+  width: 6px !important;
+  height: 6px !important;
 }
 
 ::-webkit-scrollbar-track {
-  display: none;
+  display: none !important;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #00000040;
-  border-radius: 15px;
+  background: #00000040 !important;
+  border-radius: 15px !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #00000073;
+  background: #00000073 !important;
+}
+
+a {
+  color: var(--color-neutral-400) !important;
+  text-decoration: none !important;
 }
 
 @property --tw-translate-x {
