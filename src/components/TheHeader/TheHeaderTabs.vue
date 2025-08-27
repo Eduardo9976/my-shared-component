@@ -18,7 +18,7 @@
           <Suspense>
             <TheHeaderTabsNavigationItems />
             <template #fallback>
-              <div class="p-4 text-center text-gray-500">
+              <div class="p-4 text-center text-gray-500 text-xs">
                 {{ t('theHeader.tabs.loading') }}
               </div>
             </template>
@@ -31,7 +31,7 @@
           <Suspense>
             <TheHeaderTabsSiteMapItems :siteMapItems="props.siteMapItems" />
             <template #fallback>
-              <div class="p-4 text-center text-gray-500">
+              <div class="p-4 text-center text-gray-500 text-xs">
                 {{ t('theHeader.tabs.loading') }}
               </div>
             </template>

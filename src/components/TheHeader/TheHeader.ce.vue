@@ -1,10 +1,10 @@
 <template>
-  <header :class="headerClasses" :style="headerStyles">
+  <header v-if="storeUser.name" :class="headerClasses" :style="headerStyles">
     <nav class="flex items-center justify-between">
       <TheHeaderBrand :brand="storeBrand" />
 
       <TheHeaderNavigation
-        :navigationItems="storeNavigationItems"
+        :navigationItems="navigationItemsWithCart"
         :iconColor="iconColor"
         :siteMapItems="storeSiteMapItems"
       />
@@ -12,6 +12,8 @@
       <TheHeaderAvatar :user="storeUser" :profileItems="storeProfileItems" />
     </nav>
   </header>
+
+  <USkeleton v-else class="h-[64px] w-full" />
 
   <AppBackdrop
     v-if="backdropState.visible"
@@ -33,14 +35,14 @@ import {
 } from '@/composables/useTranslations/useTranslations.ts'
 import {useHeader} from '@/composables/useHeader/useHeader.ts'
 import type {GTM, PusherInstance} from '@/types'
-import {useHttp} from '@/composables/useHttp'
 import {useBadgeManager} from '@/composables/useBadgeManager'
+import {useCart} from '@/composables/useCart'
 
 interface Props {
   activeLinkName?: string
   gtm?: GTM
-  token?: string
   pusher?: PusherInstance
+  showCart?: boolean
 }
 
 const props = defineProps<Props>()
@@ -51,7 +53,10 @@ const {initializeData} = useHeader(
 )
 
 const headerStore = useHeaderStore()
+
 const {initBadgesForLinks} = useBadgeManager(props.pusher)
+
+const {cartNavItem, loadCart} = useCart()
 
 const storeUser = toRef(headerStore, 'user')
 
@@ -65,11 +70,25 @@ const storeSiteMapItems = toRef(headerStore, 'siteMapItems')
 
 const storeHeaderLinks = toRef(headerStore, 'headerLinks')
 
+const navigationItemsWithCart = computed(() => {
+  const items = [...storeNavigationItems.value]
+
+  if (props.showCart && items.length > 0) {
+    items.push(cartNavItem.value)
+  }
+
+  return items
+})
+
 watch(
   storeHeaderLinks,
   newHeaderLinks => {
     if (newHeaderLinks && newHeaderLinks.length > 0 && storeUser.value.id) {
       initBadgesForLinks(newHeaderLinks, storeUser.value.id)
+
+      if (props.showCart) {
+        loadCart()
+      }
     }
   },
   {immediate: true}
@@ -98,12 +117,6 @@ provide('headerBackdrop', {
 })
 
 onMounted(async () => {
-  const {setToken} = useHttp()
-
-  if (props.token) {
-    setToken(props.token)
-  }
-
   await initializeData()
   useTranslations().setLocale(storeUser.value.culture as SupportedLocale)
 })

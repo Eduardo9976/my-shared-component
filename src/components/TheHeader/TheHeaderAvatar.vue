@@ -13,7 +13,10 @@
       mode="click"
       @update:open="handlePopoverUpdate"
     >
-      <div class="group py-2 px-4 hover:bg-[rgba(0,0,0,0.1)] cursor-pointer">
+      <div
+        ref="avatarRef"
+        class="group py-2 px-4 ml-1.5 hover:bg-[rgba(0,0,0,0.1)] cursor-pointer"
+      >
         <div
           class="flex items-center justify-center size-12 rounded-full bg-[rgba(0,0,0,0.4)] mx-auto border-transparent border group-hover:border-white group-hover:border-2"
         >
@@ -27,6 +30,7 @@
           :user="props.user"
           :profileItems="props.profileItems"
           :set-visible-to-false="setVisibleToFalse"
+          :avatar-ref="avatarRef"
         />
       </template>
     </UPopover>
@@ -34,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import {inject, onBeforeUnmount, ref, watch} from 'vue'
+import {inject, onBeforeUnmount, ref, watch, useTemplateRef} from 'vue'
 import type {HeaderBackdrop, ProfileItem, User} from '@/types'
 import TheHeaderAvatarMenu from './TheHeaderAvatarMenu.vue'
 import TheHeaderAvatarChip from '@/components/TheHeader/TheHeaderAvatarChip.vue'
@@ -45,6 +49,8 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+
+const avatarRef = useTemplateRef<HTMLDivElement>('avatarRef')
 
 const visibleMenu = ref(false)
 

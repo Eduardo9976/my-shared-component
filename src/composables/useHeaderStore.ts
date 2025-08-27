@@ -11,11 +11,6 @@ import type {
 } from '@/types'
 import {useBadgeManager} from './useBadgeManager'
 
-export interface HeaderLink extends NavigationItem {
-  url: string | null
-  click?: (item: NavigationItem) => void
-}
-
 interface HeaderState {
   user: User
   navigationItems: NavigationItemOrSeparator[]
@@ -23,7 +18,7 @@ interface HeaderState {
   siteMapItems: SiteMapItem[]
   brand: Brand
   profileItems: ProfileItem[]
-  headerLinks: HeaderLink[]
+  headerLinks: NavigationItem[]
   badges: Record<string, string | number>
 }
 
@@ -72,11 +67,11 @@ const setUser = (user: User, pusher?: PusherInstance): void => {
 }
 
 const setBrand = (brand: Brand): void => {
-  state.brand = {...brand}
+  state.brand = brand
 }
 
-const setProfileItems = (items: ProfileItem[]): void => {
-  state.profileItems = items
+const setProfileItems = (profileItems: ProfileItem[]): void => {
+  state.profileItems = profileItems
 }
 
 const setNavigationItems = (items: NavigationItemOrSeparator[]): void => {
@@ -84,19 +79,54 @@ const setNavigationItems = (items: NavigationItemOrSeparator[]): void => {
   state.customNavigationItems = navigationItemsWithoutSeparators.value
 }
 
+const setCustomNavigationItems = (items: NavigationItem[]): void => {
+  const updatedItems: (NavigationItem | NavigationSeparatorItem)[] = []
+  let itemIndex = 0
+
+  for (const currentItem of state.navigationItems) {
+    updatedItems.push(
+      isSeparator(currentItem)
+        ? currentItem
+        : (items[itemIndex++] ?? currentItem)
+    )
+  }
+
+  state.navigationItems = updatedItems
+  state.customNavigationItems = items
+}
+
 const setSiteMapItems = (items: SiteMapItem[]): void => {
   state.siteMapItems = items
 }
 
+const findNavigationItemById = (id: string): NavigationItem | undefined => {
+  return state.navigationItems.find(
+    item => !isSeparator(item) && item.id === id
+  ) as NavigationItem | undefined
+}
+
 const setHeaderLinks = (
-  headerLinks: HeaderLink[],
+  headerLinks: NavigationItem[],
   pusher?: PusherInstance
 ): void => {
   state.headerLinks = headerLinks
 
-  if (state.user.id) {
+  if (state.user.id && headerLinks.length > 0) {
     const badgeManager = getBadgeManager(pusher)
     badgeManager.initBadgesForLinks(headerLinks, state.user.id)
+  }
+}
+
+const updateNavigationItemsVisible = (
+  item: NavigationItem,
+  visible: boolean
+): void => {
+  if (!item.id) return
+
+  const targetItem = findNavigationItemById(item.id)
+  if (targetItem) {
+    targetItem.visible = visible
+    state.navigationItems = [...state.navigationItems]
   }
 }
 
@@ -118,9 +148,11 @@ export function useHeaderStore() {
     setBrand,
     setProfileItems,
     setNavigationItems,
+    setCustomNavigationItems,
     setSiteMapItems,
     setHeaderLinks,
     isSeparator,
+    updateNavigationItemsVisible,
     updateBadgeValue,
     getBadgeValue
   }

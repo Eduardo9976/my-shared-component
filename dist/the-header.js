@@ -13074,7 +13074,7 @@ function useSingleOrMultipleValue(props, emits) {
   };
 }
 const [injectConfigProviderContext, provideConfigProviderContext] = createContext("ConfigProvider");
-const _sfc_main$Z = /* @__PURE__ */ defineComponent({
+const _sfc_main$_ = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -13151,7 +13151,7 @@ function useForwardExpose() {
   return { forwardRef, currentRef, currentElement };
 }
 const [injectAccordionRootContext, provideAccordionRootContext] = createContext("AccordionRoot");
-const _sfc_main$Y = /* @__PURE__ */ defineComponent({
+const _sfc_main$Z = /* @__PURE__ */ defineComponent({
   __name: "AccordionRoot",
   props: {
     collapsible: { type: Boolean, default: false },
@@ -13199,7 +13199,7 @@ const _sfc_main$Y = /* @__PURE__ */ defineComponent({
   }
 });
 const [injectCollapsibleRootContext, provideCollapsibleRootContext] = createContext("CollapsibleRoot");
-const _sfc_main$X = /* @__PURE__ */ defineComponent({
+const _sfc_main$Y = /* @__PURE__ */ defineComponent({
   __name: "CollapsibleRoot",
   props: {
     defaultOpen: { type: Boolean, default: false },
@@ -13316,7 +13316,7 @@ function findNextFocusableElement(elements, currentElement, options, iterations 
   return candidate;
 }
 const [injectAccordionItemContext, provideAccordionItemContext] = createContext("AccordionItem");
-const _sfc_main$W = /* @__PURE__ */ defineComponent({
+const _sfc_main$X = /* @__PURE__ */ defineComponent({
   __name: "AccordionItem",
   props: {
     disabled: { type: Boolean },
@@ -13369,7 +13369,7 @@ const _sfc_main$W = /* @__PURE__ */ defineComponent({
       );
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$X), {
+      return openBlock(), createBlock(unref(_sfc_main$Y), {
         "data-orientation": unref(rootContext).orientation,
         "data-disabled": dataDisabled.value,
         "data-state": dataState.value,
@@ -13588,7 +13588,7 @@ const Presence = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$V = /* @__PURE__ */ defineComponent({
+const _sfc_main$W = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -13680,7 +13680,7 @@ const _sfc_main$V = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$U = /* @__PURE__ */ defineComponent({
+const _sfc_main$V = /* @__PURE__ */ defineComponent({
   __name: "AccordionContent",
   props: {
     forceMount: { type: Boolean },
@@ -13693,7 +13693,7 @@ const _sfc_main$U = /* @__PURE__ */ defineComponent({
     const itemContext = injectAccordionItemContext();
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$V), {
+      return openBlock(), createBlock(unref(_sfc_main$W), {
         role: "region",
         "as-child": props.asChild,
         as: _ctx.as,
@@ -13713,7 +13713,7 @@ const _sfc_main$U = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$T = /* @__PURE__ */ defineComponent({
+const _sfc_main$U = /* @__PURE__ */ defineComponent({
   __name: "AccordionHeader",
   props: {
     asChild: { type: Boolean },
@@ -13740,7 +13740,7 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$S = /* @__PURE__ */ defineComponent({
+const _sfc_main$T = /* @__PURE__ */ defineComponent({
   __name: "CollapsibleTrigger",
   props: {
     asChild: { type: Boolean },
@@ -13770,7 +13770,7 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$R = /* @__PURE__ */ defineComponent({
+const _sfc_main$S = /* @__PURE__ */ defineComponent({
   __name: "AccordionTrigger",
   props: {
     asChild: { type: Boolean },
@@ -13788,7 +13788,7 @@ const _sfc_main$R = /* @__PURE__ */ defineComponent({
       rootContext.changeModelValue(itemContext.value.value);
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$S), {
+      return openBlock(), createBlock(unref(_sfc_main$T), {
         id: unref(itemContext).triggerId,
         ref: unref(itemContext).currentRef,
         "data-reka-collection-item": "",
@@ -13924,7 +13924,7 @@ function focus(element, { select = false } = {}) {
     }
   }
 }
-const _sfc_main$Q = /* @__PURE__ */ defineComponent({
+const _sfc_main$R = /* @__PURE__ */ defineComponent({
   __name: "FocusScope",
   props: {
     loop: { type: Boolean, default: false },
@@ -14196,7 +14196,7 @@ const context = reactive({
   layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
   branches: /* @__PURE__ */ new Set()
 });
-const _sfc_main$P = /* @__PURE__ */ defineComponent({
+const _sfc_main$Q = /* @__PURE__ */ defineComponent({
   __name: "DismissableLayer",
   props: {
     disableOutsidePointerEvents: { type: Boolean, default: false },
@@ -14583,7 +14583,7 @@ function preventDefault(rawEvent) {
     e.preventDefault();
   return false;
 }
-const _sfc_main$O = /* @__PURE__ */ defineComponent({
+const _sfc_main$P = /* @__PURE__ */ defineComponent({
   __name: "Teleport",
   props: {
     to: { default: "body" },
@@ -14747,7 +14747,7 @@ function wrapArray(array, startIndex) {
   return array.map((_2, index2) => array[(startIndex + index2) % array.length]);
 }
 const [injectRovingFocusGroupContext, provideRovingFocusGroupContext] = createContext("RovingFocusGroup");
-const _sfc_main$N = /* @__PURE__ */ defineComponent({
+const _sfc_main$O = /* @__PURE__ */ defineComponent({
   __name: "RovingFocusGroup",
   props: {
     orientation: { default: void 0 },
@@ -14845,7 +14845,7 @@ const _sfc_main$N = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$M = /* @__PURE__ */ defineComponent({
+const _sfc_main$N = /* @__PURE__ */ defineComponent({
   __name: "RovingFocusItem",
   props: {
     tabStopId: {},
@@ -14931,7 +14931,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
   }
 });
 const [injectPopperRootContext, providePopperRootContext] = createContext("PopperRoot");
-const _sfc_main$L = /* @__PURE__ */ defineComponent({
+const _sfc_main$M = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -14947,7 +14947,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$K = /* @__PURE__ */ defineComponent({
+const _sfc_main$L = /* @__PURE__ */ defineComponent({
   __name: "PopperAnchor",
   props: {
     reference: {},
@@ -14979,11 +14979,11 @@ const _hoisted_1$e = {
   key: 0,
   d: "M0 0L6 6L12 0"
 };
-const _hoisted_2$8 = {
+const _hoisted_2$7 = {
   key: 1,
   d: "M0 0L4.58579 4.58579C5.36683 5.36683 6.63316 5.36684 7.41421 4.58579L12 0"
 };
-const _sfc_main$J = /* @__PURE__ */ defineComponent({
+const _sfc_main$K = /* @__PURE__ */ defineComponent({
   __name: "Arrow",
   props: {
     width: { default: 10 },
@@ -15004,7 +15004,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
       }), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default", {}, () => [
-            !_ctx.rounded ? (openBlock(), createElementBlock("path", _hoisted_1$e)) : (openBlock(), createElementBlock("path", _hoisted_2$8))
+            !_ctx.rounded ? (openBlock(), createElementBlock("path", _hoisted_1$e)) : (openBlock(), createElementBlock("path", _hoisted_2$7))
           ])
         ]),
         _: 3
@@ -15106,7 +15106,7 @@ const PopperContentPropsDefaultValue = {
   prioritizePosition: false
 };
 const [injectPopperContentContext, providePopperContentContext] = createContext("PopperContent");
-const _sfc_main$I = /* @__PURE__ */ defineComponent({
+const _sfc_main$J = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -15301,7 +15301,7 @@ const OPPOSITE_SIDE = {
   bottom: "top",
   left: "right"
 };
-const _sfc_main$H = /* @__PURE__ */ defineComponent({
+const _sfc_main$I = /* @__PURE__ */ defineComponent({
   ...{
     inheritAttrs: false
   },
@@ -15343,7 +15343,7 @@ const _sfc_main$H = /* @__PURE__ */ defineComponent({
           visibility: unref(contentContext).shouldHideArrow.value ? "hidden" : void 0
         })
       }, [
-        createVNode(_sfc_main$J, mergeProps(_ctx.$attrs, {
+        createVNode(_sfc_main$K, mergeProps(_ctx.$attrs, {
           ref: unref(forwardRef),
           style: {
             display: "block"
@@ -15397,7 +15397,7 @@ function createFocusGuard() {
   return element;
 }
 const [injectPopoverRootContext, providePopoverRootContext] = createContext("PopoverRoot");
-const _sfc_main$G = /* @__PURE__ */ defineComponent({
+const _sfc_main$H = /* @__PURE__ */ defineComponent({
   __name: "PopoverRoot",
   props: {
     defaultOpen: { type: Boolean, default: false },
@@ -15430,7 +15430,7 @@ const _sfc_main$G = /* @__PURE__ */ defineComponent({
       hasCustomAnchor
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$L), null, {
+      return openBlock(), createBlock(unref(_sfc_main$M), null, {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default", { open: unref(open) })
         ]),
@@ -15439,7 +15439,7 @@ const _sfc_main$G = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$F = /* @__PURE__ */ defineComponent({
+const _sfc_main$G = /* @__PURE__ */ defineComponent({
   __name: "PopoverAnchor",
   props: {
     reference: {},
@@ -15457,7 +15457,7 @@ const _sfc_main$F = /* @__PURE__ */ defineComponent({
       rootContext.hasCustomAnchor.value = false;
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$K), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$L), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -15466,7 +15466,7 @@ const _sfc_main$F = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$E = /* @__PURE__ */ defineComponent({
+const _sfc_main$F = /* @__PURE__ */ defineComponent({
   __name: "PopoverArrow",
   props: {
     width: { default: 10 },
@@ -15479,7 +15479,7 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$H), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$I), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -15488,7 +15488,7 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$D = /* @__PURE__ */ defineComponent({
+const _sfc_main$E = /* @__PURE__ */ defineComponent({
   __name: "PopoverClose",
   props: {
     asChild: { type: Boolean },
@@ -15513,7 +15513,7 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$C = /* @__PURE__ */ defineComponent({
+const _sfc_main$D = /* @__PURE__ */ defineComponent({
   __name: "PopoverPortal",
   props: {
     to: {},
@@ -15524,7 +15524,7 @@ const _sfc_main$C = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$O), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$P), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -15533,7 +15533,7 @@ const _sfc_main$C = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$B = /* @__PURE__ */ defineComponent({
+const _sfc_main$C = /* @__PURE__ */ defineComponent({
   __name: "PopoverContentImpl",
   props: {
     trapFocus: { type: Boolean },
@@ -15565,7 +15565,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
     const rootContext = injectPopoverRootContext();
     useFocusGuards();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$Q), {
+      return openBlock(), createBlock(unref(_sfc_main$R), {
         "as-child": "",
         loop: "",
         trapped: _ctx.trapFocus,
@@ -15573,7 +15573,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
         onUnmountAutoFocus: _cache[6] || (_cache[6] = ($event) => emits("closeAutoFocus", $event))
       }, {
         default: withCtx(() => [
-          createVNode(unref(_sfc_main$P), {
+          createVNode(unref(_sfc_main$Q), {
             "as-child": "",
             "disable-outside-pointer-events": _ctx.disableOutsidePointerEvents,
             onPointerDownOutside: _cache[0] || (_cache[0] = ($event) => emits("pointerDownOutside", $event)),
@@ -15583,7 +15583,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
             onDismiss: _cache[4] || (_cache[4] = ($event) => unref(rootContext).onOpenChange(false))
           }, {
             default: withCtx(() => [
-              createVNode(unref(_sfc_main$I), mergeProps(unref(forwarded), {
+              createVNode(unref(_sfc_main$J), mergeProps(unref(forwarded), {
                 id: unref(rootContext).contentId,
                 ref: unref(forwardRef),
                 "data-state": unref(rootContext).open.value ? "open" : "closed",
@@ -15611,7 +15611,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$A = /* @__PURE__ */ defineComponent({
+const _sfc_main$B = /* @__PURE__ */ defineComponent({
   __name: "PopoverContentModal",
   props: {
     side: {},
@@ -15644,7 +15644,7 @@ const _sfc_main$A = /* @__PURE__ */ defineComponent({
     const { forwardRef, currentElement } = useForwardExpose();
     useHideOthers(currentElement);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$B, mergeProps(unref(forwarded), {
+      return openBlock(), createBlock(_sfc_main$C, mergeProps(unref(forwarded), {
         ref: unref(forwardRef),
         "trap-focus": unref(rootContext).open.value,
         "disable-outside-pointer-events": "",
@@ -15673,7 +15673,7 @@ const _sfc_main$A = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$z = /* @__PURE__ */ defineComponent({
+const _sfc_main$A = /* @__PURE__ */ defineComponent({
   __name: "PopoverContentNonModal",
   props: {
     side: {},
@@ -15704,7 +15704,7 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
     const hasPointerDownOutsideRef = ref(false);
     const forwarded = useForwardPropsEmits(props, emits);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$B, mergeProps(unref(forwarded), {
+      return openBlock(), createBlock(_sfc_main$C, mergeProps(unref(forwarded), {
         "trap-focus": false,
         "disable-outside-pointer-events": false,
         onCloseAutoFocus: _cache[0] || (_cache[0] = (event) => {
@@ -15740,7 +15740,7 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$y = /* @__PURE__ */ defineComponent({
+const _sfc_main$z = /* @__PURE__ */ defineComponent({
   __name: "PopoverContent",
   props: {
     forceMount: { type: Boolean },
@@ -15776,12 +15776,12 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
         present: _ctx.forceMount || unref(rootContext).open.value
       }, {
         default: withCtx(() => [
-          unref(rootContext).modal.value ? (openBlock(), createBlock(_sfc_main$A, mergeProps({ key: 0 }, unref(forwarded), { ref: unref(forwardRef) }), {
+          unref(rootContext).modal.value ? (openBlock(), createBlock(_sfc_main$B, mergeProps({ key: 0 }, unref(forwarded), { ref: unref(forwardRef) }), {
             default: withCtx(() => [
               renderSlot(_ctx.$slots, "default")
             ]),
             _: 3
-          }, 16)) : (openBlock(), createBlock(_sfc_main$z, mergeProps({ key: 1 }, unref(forwarded), { ref: unref(forwardRef) }), {
+          }, 16)) : (openBlock(), createBlock(_sfc_main$A, mergeProps({ key: 1 }, unref(forwarded), { ref: unref(forwardRef) }), {
             default: withCtx(() => [
               renderSlot(_ctx.$slots, "default")
             ]),
@@ -15793,7 +15793,7 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$x = /* @__PURE__ */ defineComponent({
+const _sfc_main$y = /* @__PURE__ */ defineComponent({
   __name: "PopoverTrigger",
   props: {
     asChild: { type: Boolean },
@@ -15808,7 +15808,7 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
       rootContext.triggerElement.value = triggerElement.value;
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(resolveDynamicComponent(unref(rootContext).hasCustomAnchor.value ? unref(Primitive) : unref(_sfc_main$K)), { "as-child": "" }, {
+      return openBlock(), createBlock(resolveDynamicComponent(unref(rootContext).hasCustomAnchor.value ? unref(Primitive) : unref(_sfc_main$L)), { "as-child": "" }, {
         default: withCtx(() => [
           createVNode(unref(Primitive), {
             id: unref(rootContext).triggerId,
@@ -15833,7 +15833,7 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$w = /* @__PURE__ */ defineComponent({
+const _sfc_main$x = /* @__PURE__ */ defineComponent({
   __name: "HoverCardArrow",
   props: {
     width: { default: 10 },
@@ -15846,7 +15846,7 @@ const _sfc_main$w = /* @__PURE__ */ defineComponent({
     const props = __props;
     useForwardExpose();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$H), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$I), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -15869,7 +15869,7 @@ function getTabbableNodes(container) {
   return nodes;
 }
 const [injectHoverCardRootContext, provideHoverCardRootContext] = createContext("HoverCardRoot");
-const _sfc_main$v = /* @__PURE__ */ defineComponent({
+const _sfc_main$w = /* @__PURE__ */ defineComponent({
   __name: "HoverCardRoot",
   props: {
     defaultOpen: { type: Boolean, default: false },
@@ -15919,7 +15919,7 @@ const _sfc_main$v = /* @__PURE__ */ defineComponent({
       triggerElement
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$L), null, {
+      return openBlock(), createBlock(unref(_sfc_main$M), null, {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default", { open: unref(open) })
         ]),
@@ -16105,7 +16105,7 @@ function getHullPresorted(points) {
     return upperHull.concat(lowerHull);
   }
 }
-const _sfc_main$u = /* @__PURE__ */ defineComponent({
+const _sfc_main$v = /* @__PURE__ */ defineComponent({
   __name: "HoverCardContentImpl",
   props: {
     side: {},
@@ -16174,7 +16174,7 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
       rootContext.isPointerDownOnContentRef.value = false;
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$P), {
+      return openBlock(), createBlock(unref(_sfc_main$Q), {
         "as-child": "",
         "disable-outside-pointer-events": false,
         onEscapeKeyDown: _cache[1] || (_cache[1] = ($event) => emits("escapeKeyDown", $event)),
@@ -16183,7 +16183,7 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
         onDismiss: unref(rootContext).onDismiss
       }, {
         default: withCtx(() => [
-          createVNode(unref(_sfc_main$I), mergeProps({ ...unref(forwarded), ..._ctx.$attrs }, {
+          createVNode(unref(_sfc_main$J), mergeProps({ ...unref(forwarded), ..._ctx.$attrs }, {
             ref: unref(forwardRef),
             "data-state": unref(rootContext).open.value ? "open" : "closed",
             style: {
@@ -16216,7 +16216,7 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$t = /* @__PURE__ */ defineComponent({
+const _sfc_main$u = /* @__PURE__ */ defineComponent({
   __name: "HoverCardContent",
   props: {
     forceMount: { type: Boolean },
@@ -16250,7 +16250,7 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
         present: _ctx.forceMount || unref(rootContext).open.value
       }, {
         default: withCtx(() => [
-          createVNode(_sfc_main$u, mergeProps(unref(forwarded), {
+          createVNode(_sfc_main$v, mergeProps(unref(forwarded), {
             ref: unref(forwardRef),
             onPointerenter: _cache[0] || (_cache[0] = ($event) => unref(excludeTouch)(unref(rootContext).onOpen)($event))
           }), {
@@ -16265,7 +16265,7 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$s = /* @__PURE__ */ defineComponent({
+const _sfc_main$t = /* @__PURE__ */ defineComponent({
   __name: "HoverCardPortal",
   props: {
     to: {},
@@ -16276,7 +16276,7 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$O), normalizeProps(guardReactiveProps(props)), {
+      return openBlock(), createBlock(unref(_sfc_main$P), normalizeProps(guardReactiveProps(props)), {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "default")
         ]),
@@ -16285,7 +16285,7 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$r = /* @__PURE__ */ defineComponent({
+const _sfc_main$s = /* @__PURE__ */ defineComponent({
   __name: "HoverCardTrigger",
   props: {
     reference: {},
@@ -16304,7 +16304,7 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
       }, 0);
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$K), {
+      return openBlock(), createBlock(unref(_sfc_main$L), {
         "as-child": "",
         reference: _ctx.reference
       }, {
@@ -16338,7 +16338,7 @@ function makeContentId(baseId, value) {
   return `${baseId}-content-${value}`;
 }
 const [injectTabsRootContext, provideTabsRootContext] = createContext("TabsRoot");
-const _sfc_main$q = /* @__PURE__ */ defineComponent({
+const _sfc_main$r = /* @__PURE__ */ defineComponent({
   __name: "TabsRoot",
   props: {
     defaultValue: {},
@@ -16389,7 +16389,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$p = /* @__PURE__ */ defineComponent({
+const _sfc_main$q = /* @__PURE__ */ defineComponent({
   __name: "TabsContent",
   props: {
     value: {},
@@ -16442,7 +16442,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$o = /* @__PURE__ */ defineComponent({
+const _sfc_main$p = /* @__PURE__ */ defineComponent({
   __name: "TabsIndicator",
   props: {
     asChild: { type: Boolean },
@@ -16493,7 +16493,7 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$n = /* @__PURE__ */ defineComponent({
+const _sfc_main$o = /* @__PURE__ */ defineComponent({
   __name: "TabsList",
   props: {
     loop: { type: Boolean, default: true },
@@ -16507,7 +16507,7 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
     const context2 = injectTabsRootContext();
     context2.tabsList = currentElement;
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$N), {
+      return openBlock(), createBlock(unref(_sfc_main$O), {
         "as-child": "",
         orientation: unref(context2).orientation.value,
         dir: unref(context2).dir.value,
@@ -16532,7 +16532,7 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$m = /* @__PURE__ */ defineComponent({
+const _sfc_main$n = /* @__PURE__ */ defineComponent({
   __name: "TabsTrigger",
   props: {
     value: {},
@@ -16548,7 +16548,7 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
     const contentId = computed(() => makeContentId(rootContext.baseId, props.value));
     const isSelected = computed(() => props.value === rootContext.modelValue.value);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$M), {
+      return openBlock(), createBlock(unref(_sfc_main$N), {
         "as-child": "",
         focusable: !_ctx.disabled,
         active: isSelected.value
@@ -17146,6 +17146,65 @@ const useState = (key, init) => {
   return value;
 };
 createHooks();
+function useToast() {
+  const toasts = useState("toasts", () => []);
+  const running = ref(false);
+  const queue2 = [];
+  const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+  async function processQueue() {
+    if (running.value || queue2.length === 0) {
+      return;
+    }
+    running.value = true;
+    while (queue2.length > 0) {
+      const toast = queue2.shift();
+      await nextTick();
+      toasts.value = [...toasts.value, toast].slice(-5);
+    }
+    running.value = false;
+  }
+  function add(toast) {
+    const body = {
+      id: generateId(),
+      open: true,
+      ...toast
+    };
+    queue2.push(body);
+    processQueue();
+    return body;
+  }
+  function update(id, toast) {
+    const index2 = toasts.value.findIndex((t) => t.id === id);
+    if (index2 !== -1) {
+      toasts.value[index2] = {
+        ...toasts.value[index2],
+        ...toast
+      };
+    }
+  }
+  function remove2(id) {
+    const index2 = toasts.value.findIndex((t) => t.id === id);
+    if (index2 !== -1) {
+      toasts.value[index2] = {
+        ...toasts.value[index2],
+        open: false
+      };
+    }
+    setTimeout(() => {
+      toasts.value = toasts.value.filter((t) => t.id !== id);
+    }, 200);
+  }
+  function clear() {
+    toasts.value = [];
+  }
+  return {
+    toasts,
+    add,
+    update,
+    remove: remove2,
+    clear
+  };
+}
 var l = (e) => typeof e == "boolean" ? `${e}` : e === 0 ? "0" : e, u = (e) => !e || typeof e != "object" || Object.keys(e).length === 0, x$1 = (e, o) => JSON.stringify(e) === JSON.stringify(o);
 function i(e, o) {
   e.forEach(function(r) {
@@ -21709,7 +21768,7 @@ const Icon = /* @__PURE__ */ defineComponent((props, { emit: emit2 }) => {
   ],
   emits: ["load"]
 });
-const _sfc_main$l = {
+const _sfc_main$m = {
   __name: "Icon",
   props: {
     name: { type: String, required: true }
@@ -21732,7 +21791,7 @@ function useAvatarGroup(props) {
     size: size2
   };
 }
-const theme$6 = {
+const theme$7 = {
   "slots": {
     "root": "relative inline-flex items-center justify-center shrink-0",
     "base": "rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap"
@@ -21799,7 +21858,7 @@ const theme$6 = {
     "position": "top-right"
   }
 };
-const _sfc_main$k = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
+const _sfc_main$l = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   __name: "Chip",
   props: /* @__PURE__ */ mergeModels({
     as: { type: null, required: false },
@@ -21821,7 +21880,7 @@ const _sfc_main$k = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     const show = useModel(__props, "show", { type: Boolean, ...{ default: true } });
     const { size: size2 } = useAvatarGroup(props);
     const appConfig2 = useAppConfig();
-    const ui = computed(() => tv({ extend: tv(theme$6), ...appConfig2.ui?.chip || {} })({
+    const ui = computed(() => tv({ extend: tv(theme$7), ...appConfig2.ui?.chip || {} })({
       color: props.color,
       size: size2.value,
       position: props.position,
@@ -21854,7 +21913,7 @@ const _sfc_main$k = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     };
   }
 });
-const theme$5 = {
+const theme$6 = {
   "slots": {
     "root": "inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated",
     "image": "h-full w-full rounded-[inherit] object-cover",
@@ -21896,7 +21955,7 @@ const theme$5 = {
     "size": "md"
   }
 };
-const _sfc_main$j = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
+const _sfc_main$k = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
   __name: "Avatar",
   props: {
     as: { type: null, required: false, default: "span" },
@@ -21915,7 +21974,7 @@ const _sfc_main$j = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
     const fallback = computed(() => props.text || (props.alt || "").split(" ").map((word) => word.charAt(0)).join("").substring(0, 2));
     const appConfig2 = useAppConfig();
     const { size: size2 } = useAvatarGroup(props);
-    const ui = computed(() => tv({ extend: tv(theme$5), ...appConfig2.ui?.avatar || {} })({
+    const ui = computed(() => tv({ extend: tv(theme$6), ...appConfig2.ui?.avatar || {} })({
       size: size2.value
     }));
     const sizePx = computed(() => ({
@@ -21939,7 +21998,7 @@ const _sfc_main$j = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
       error.value = true;
     }
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(resolveDynamicComponent(props.chip ? _sfc_main$k : unref(Primitive)), mergeProps({ as: __props.as }, props.chip ? typeof props.chip === "object" ? { inset: true, ...props.chip } : { inset: true } : {}, {
+      return openBlock(), createBlock(resolveDynamicComponent(props.chip ? _sfc_main$l : unref(Primitive)), mergeProps({ as: __props.as }, props.chip ? typeof props.chip === "object" ? { inset: true, ...props.chip } : { inset: true } : {}, {
         class: ui.value.root({ class: [props.ui?.root, props.class] }),
         style: props.style
       }), {
@@ -21957,7 +22016,7 @@ const _sfc_main$j = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
           }), null, 16, ["src", "alt", "width", "height", "class"])) : (openBlock(), createBlock(unref(Slot), normalizeProps(mergeProps({ key: 1 }, _ctx.$attrs)), {
             default: withCtx(() => [
               renderSlot(_ctx.$slots, "default", {}, () => [
-                __props.icon ? (openBlock(), createBlock(_sfc_main$l, {
+                __props.icon ? (openBlock(), createBlock(_sfc_main$m, {
                   key: 0,
                   name: __props.icon,
                   class: normalizeClass(ui.value.icon({ class: props.ui?.icon }))
@@ -22074,6 +22133,36 @@ function useFormField(props, opts) {
     })
   };
 }
+const theme$5 = {
+  "base": "animate-pulse rounded-md bg-elevated"
+};
+const _sfc_main$j = {
+  __name: "Skeleton",
+  props: {
+    as: { type: null, required: false },
+    class: { type: null, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const appConfig2 = useAppConfig();
+    const ui = computed(() => tv({ extend: tv(theme$5), ...appConfig2.ui?.skeleton || {} }));
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(Primitive), {
+        as: __props.as,
+        "aria-busy": "true",
+        "aria-label": "loading",
+        "aria-live": "polite",
+        role: "alert",
+        class: normalizeClass(ui.value({ class: props.class }))
+      }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 8, ["as", "class"]);
+    };
+  }
+};
 function useSanitizeURL(url) {
   try {
     const parsed = new URL(url, window.location.origin);
@@ -22087,7 +22176,7 @@ function useSanitizeURL(url) {
   }
 }
 const _hoisted_1$d = ["href", "target"];
-const _hoisted_2$7 = ["src"];
+const _hoisted_2$6 = ["src"];
 const _sfc_main$i = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderBrand",
   props: {
@@ -22098,32 +22187,32 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("a", {
         href: unref(useSanitizeURL)(_ctx.brand.link),
         target: _ctx.brand.newTab ? "_blank" : "_self",
-        class: "px-4"
+        class: "px-4 flex items-center justify-center"
       }, [
         createBaseVNode("img", {
           src: _ctx.brand.logo,
           alt: "logo",
-          class: "max-w-[75px] max-h-[32px]"
-        }, null, 8, _hoisted_2$7)
+          class: "basis-[75px] grow shrink min-w-0 max-h-[32px]"
+        }, null, 8, _hoisted_2$6)
       ], 8, _hoisted_1$d);
     };
   }
 });
 const HoverCard = {
-  Root: _sfc_main$v,
-  Trigger: _sfc_main$r,
-  Portal: _sfc_main$s,
-  Content: _sfc_main$t,
-  Arrow: _sfc_main$w
+  Root: _sfc_main$w,
+  Trigger: _sfc_main$s,
+  Portal: _sfc_main$t,
+  Content: _sfc_main$u,
+  Arrow: _sfc_main$x
 };
 const Popover = {
-  Root: _sfc_main$G,
-  Trigger: _sfc_main$x,
-  Portal: _sfc_main$C,
-  Content: _sfc_main$y,
-  Arrow: _sfc_main$E,
-  Close: _sfc_main$D,
-  Anchor: _sfc_main$F
+  Root: _sfc_main$H,
+  Trigger: _sfc_main$y,
+  Portal: _sfc_main$D,
+  Content: _sfc_main$z,
+  Arrow: _sfc_main$F,
+  Close: _sfc_main$E,
+  Anchor: _sfc_main$G
 };
 const theme$4 = {
   "slots": {
@@ -22497,11 +22586,11 @@ const _sfc_main$g = {
       }, {
         default: withCtx(() => [
           renderSlot(_ctx.$slots, "leading", {}, () => [
-            unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$l, {
+            unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$m, {
               key: 0,
               name: unref(leadingIconName),
               class: normalizeClass(ui.value.leadingIcon({ class: props.ui?.leadingIcon }))
-            }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$j, mergeProps({
+            }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$k, mergeProps({
               key: 1,
               size: props.ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
             }, __props.avatar, {
@@ -22515,7 +22604,7 @@ const _sfc_main$g = {
             }, toDisplayString(__props.label), 3)) : createCommentVNode("", true)
           ]),
           renderSlot(_ctx.$slots, "trailing", {}, () => [
-            unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$l, {
+            unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$m, {
               key: 0,
               name: unref(trailingIconName),
               class: normalizeClass(ui.value.trailingIcon({ class: props.ui?.trailingIcon }))
@@ -22794,20 +22883,20 @@ const _sfc_main$f = {
     });
     return (_ctx, _cache) => {
       const _component_UBadge = _sfc_main$g;
-      return openBlock(), createBlock(unref(_sfc_main$q), mergeProps(unref(rootProps), {
+      return openBlock(), createBlock(unref(_sfc_main$r), mergeProps(unref(rootProps), {
         class: ui.value.root({ class: [props.ui?.root, props.class] })
       }), {
         default: withCtx(() => [
-          createVNode(unref(_sfc_main$n), {
+          createVNode(unref(_sfc_main$o), {
             class: normalizeClass(ui.value.list({ class: props.ui?.list }))
           }, {
             default: withCtx(() => [
-              createVNode(unref(_sfc_main$o), {
+              createVNode(unref(_sfc_main$p), {
                 class: normalizeClass(ui.value.indicator({ class: props.ui?.indicator }))
               }, null, 8, ["class"]),
               renderSlot(_ctx.$slots, "list-leading"),
               (openBlock(true), createElementBlock(Fragment, null, renderList(__props.items, (item, index2) => {
-                return openBlock(), createBlock(unref(_sfc_main$m), {
+                return openBlock(), createBlock(unref(_sfc_main$n), {
                   key: index2,
                   ref_for: true,
                   ref: (el) => triggersRef.value[index2] = el,
@@ -22820,11 +22909,11 @@ const _sfc_main$f = {
                       item,
                       index: index2
                     }, () => [
-                      item.icon ? (openBlock(), createBlock(_sfc_main$l, {
+                      item.icon ? (openBlock(), createBlock(_sfc_main$m, {
                         key: 0,
                         name: item.icon,
                         class: normalizeClass(ui.value.leadingIcon({ class: [props.ui?.leadingIcon, item.ui?.leadingIcon] }))
-                      }, null, 8, ["name", "class"])) : item.avatar ? (openBlock(), createBlock(_sfc_main$j, mergeProps({
+                      }, null, 8, ["name", "class"])) : item.avatar ? (openBlock(), createBlock(_sfc_main$k, mergeProps({
                         key: 1,
                         size: item.ui?.leadingAvatarSize || props.ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
                       }, { ref_for: true }, item.avatar, {
@@ -22864,7 +22953,7 @@ const _sfc_main$f = {
             _: 3
           }, 8, ["class"]),
           !!__props.content ? (openBlock(true), createElementBlock(Fragment, { key: 0 }, renderList(__props.items, (item, index2) => {
-            return openBlock(), createBlock(unref(_sfc_main$p), {
+            return openBlock(), createBlock(unref(_sfc_main$q), {
               key: index2,
               value: item.value || String(index2),
               class: normalizeClass(ui.value.content({ class: [props.ui?.content, item.ui?.content, item.class] }))
@@ -22933,24 +23022,24 @@ const _sfc_main$e = {
       disabled: props.disabled
     }));
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(_sfc_main$Y), mergeProps(unref(rootProps), {
+      return openBlock(), createBlock(unref(_sfc_main$Z), mergeProps(unref(rootProps), {
         class: ui.value.root({ class: [props.ui?.root, props.class] })
       }), {
         default: withCtx(() => [
           (openBlock(true), createElementBlock(Fragment, null, renderList(props.items, (item, index2) => {
-            return openBlock(), createBlock(unref(_sfc_main$W), {
+            return openBlock(), createBlock(unref(_sfc_main$X), {
               key: index2,
               value: item.value || String(index2),
               disabled: item.disabled,
               class: normalizeClass(ui.value.item({ class: [props.ui?.item, item.ui?.item, item.class] }))
             }, {
               default: withCtx(({ open }) => [
-                createVNode(unref(_sfc_main$T), {
+                createVNode(unref(_sfc_main$U), {
                   as: "div",
                   class: normalizeClass(ui.value.header({ class: [props.ui?.header, item.ui?.header] }))
                 }, {
                   default: withCtx(() => [
-                    createVNode(unref(_sfc_main$R), {
+                    createVNode(unref(_sfc_main$S), {
                       class: normalizeClass(ui.value.trigger({ class: [props.ui?.trigger, item.ui?.trigger], disabled: item.disabled }))
                     }, {
                       default: withCtx(() => [
@@ -22959,7 +23048,7 @@ const _sfc_main$e = {
                           index: index2,
                           open
                         }, () => [
-                          item.icon ? (openBlock(), createBlock(_sfc_main$l, {
+                          item.icon ? (openBlock(), createBlock(_sfc_main$m, {
                             key: 0,
                             name: item.icon,
                             class: normalizeClass(ui.value.leadingIcon({ class: [props.ui?.leadingIcon, item?.ui?.leadingIcon] }))
@@ -22982,7 +23071,7 @@ const _sfc_main$e = {
                           index: index2,
                           open
                         }, () => [
-                          createVNode(_sfc_main$l, {
+                          createVNode(_sfc_main$m, {
                             name: item.trailingIcon || __props.trailingIcon || unref(appConfig2).ui.icons.chevronDown,
                             class: normalizeClass(ui.value.trailingIcon({ class: [props.ui?.trailingIcon, item.ui?.trailingIcon] }))
                           }, null, 8, ["name", "class"])
@@ -22993,7 +23082,7 @@ const _sfc_main$e = {
                   ]),
                   _: 2
                 }, 1032, ["class"]),
-                item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`] ? (openBlock(), createBlock(unref(_sfc_main$U), {
+                item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`] ? (openBlock(), createBlock(unref(_sfc_main$V), {
                   key: 0,
                   class: normalizeClass(ui.value.content({ class: [props.ui?.content, item.ui?.content] }))
                 }, {
@@ -23422,11 +23511,11 @@ const _sfc_main$d = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             class: normalizeClass(ui.value.leading({ class: props.ui?.leading }))
           }, [
             renderSlot(_ctx.$slots, "leading", {}, () => [
-              unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$l, {
+              unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$m, {
                 key: 0,
                 name: unref(leadingIconName),
                 class: normalizeClass(ui.value.leadingIcon({ class: props.ui?.leadingIcon }))
-              }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$j, mergeProps({
+              }, null, 8, ["name", "class"])) : !!__props.avatar ? (openBlock(), createBlock(_sfc_main$k, mergeProps({
                 key: 1,
                 size: props.ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
               }, __props.avatar, {
@@ -23439,7 +23528,7 @@ const _sfc_main$d = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
             class: normalizeClass(ui.value.trailing({ class: props.ui?.trailing }))
           }, [
             renderSlot(_ctx.$slots, "trailing", {}, () => [
-              unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$l, {
+              unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$m, {
                 key: 0,
                 name: unref(trailingIconName),
                 class: normalizeClass(ui.value.trailingIcon({ class: props.ui?.trailingIcon }))
@@ -23566,6 +23655,15 @@ const enUS = {
       siteMapItems: {
         search: "Search"
       }
+    },
+    cart: {
+      label: "Cart",
+      linkName: "Cart"
+    },
+    apiErrors: {
+      cart: "Unable to retrieve cart information",
+      getTotalMessages: "Error loading new messages",
+      generic: "A processing error occurred. Please try again."
     }
   }
 };
@@ -23580,6 +23678,15 @@ const ptBR = {
       siteMapItems: {
         search: "Buscar"
       }
+    },
+    cart: {
+      label: "Carrinho",
+      linkName: "Carrinho"
+    },
+    apiErrors: {
+      cart: "Não foi possível recuperar as informações do carrinho",
+      getTotalMessages: "Erro ao carregar novas mensagens",
+      generic: "Ocorreu um erro de processamento. Por favor tente novamente."
     }
   }
 };
@@ -23589,11 +23696,20 @@ const esES = {
       othersFuncionality: "Otras funcionalidades",
       loading: "Cargando...",
       navigationItems: {
-        pinnedApps: "Apps fijados en el header:"
+        pinnedApps: "Apps fijadas en el header:"
       },
       siteMapItems: {
         search: "Buscar"
       }
+    },
+    cart: {
+      label: "Carrito",
+      linkName: "Carrito"
+    },
+    apiErrors: {
+      cart: "No fue posible recuperar la información del carrito",
+      getTotalMessages: "Error al cargar nuevos mensajes",
+      generic: "Ocurrió un error de procesamiento. Por favor inténtalo de nuevo."
     }
   }
 };
@@ -23603,11 +23719,20 @@ const esMX = {
       othersFuncionality: "Otras funcionalidades",
       loading: "Cargando...",
       navigationItems: {
-        pinnedApps: "Apps fijados en el header:"
+        pinnedApps: "Apps fijadas en el header:"
       },
       siteMapItems: {
         search: "Buscar"
       }
+    },
+    cart: {
+      label: "Carrito",
+      linkName: "Carrito"
+    },
+    apiErrors: {
+      cart: "No fue posible recuperar la información del carrito",
+      getTotalMessages: "Error al cargar nuevos mensajes",
+      generic: "Ocurrió un error de procesamiento. Por favor inténtalo de nuevo."
     }
   }
 };
@@ -23617,11 +23742,20 @@ const frCA = {
       othersFuncionality: "Autres fonctionnalités",
       loading: "Chargement...",
       navigationItems: {
-        pinnedApps: "Apps épinglés dans l'en-tête:"
+        pinnedApps: "Applications épinglées dans l'en-tête:"
       },
       siteMapItems: {
         search: "Rechercher"
       }
+    },
+    cart: {
+      label: "Panier",
+      linkName: "Panier"
+    },
+    apiErrors: {
+      cart: "Impossible de récupérer les informations du panier",
+      getTotalMessages: "Erreur lors du chargement de nouveaux messages",
+      generic: "Une erreur de traitement s'est produite. Veuillez réessayer."
     }
   }
 };
@@ -23631,11 +23765,20 @@ const frFR = {
       othersFuncionality: "Autres fonctionnalités",
       loading: "Chargement...",
       navigationItems: {
-        pinnedApps: "Apps épinglés dans l'en-tête:"
+        pinnedApps: "Applications épinglées dans l'en-tête:"
       },
       siteMapItems: {
         search: "Rechercher"
       }
+    },
+    cart: {
+      label: "Panier",
+      linkName: "Panier"
+    },
+    apiErrors: {
+      cart: "Impossible de récupérer les informations du panier",
+      getTotalMessages: "Erreur lors du chargement de nouveaux messages",
+      generic: "Une erreur de traitement s'est produite. Veuillez réessayer."
     }
   }
 };
@@ -23645,11 +23788,20 @@ const ptPT = {
       othersFuncionality: "Outras funcionalidades",
       loading: "A carregar...",
       navigationItems: {
-        pinnedApps: "Apps fixados no cabeçalho:"
+        pinnedApps: "Apps fixadas no cabeçalho:"
       },
       siteMapItems: {
         search: "Pesquisar"
       }
+    },
+    cart: {
+      label: "Carrinho",
+      linkName: "Carrinho"
+    },
+    apiErrors: {
+      cart: "Não foi possível recuperar as informações do carrinho",
+      getTotalMessages: "Erro ao carregar novas mensagens",
+      generic: "Ocorreu um erro de processamento. Por favor tente novamente."
     }
   }
 };
@@ -23699,9 +23851,9 @@ function useTranslations() {
     setLocale
   };
 }
-const _hoisted_1$a = { class: "max-h-[280px] overflow-y-auto" };
-const _hoisted_2$6 = { class: "space-y-2" };
-const _hoisted_3$4 = ["href", "target", "onClick"];
+const _hoisted_1$a = { class: "overflow-y-auto max-h-[280px]" };
+const _hoisted_2$5 = { class: "space-y-2" };
+const _hoisted_3$3 = ["href", "target", "onClick"];
 const _sfc_main$b = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabsSiteMapItems",
   props: {
@@ -23760,7 +23912,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
             fn: withCtx(() => [
               createBaseVNode("button", {
                 type: "button",
-                class: "inline-flex size-8 items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
+                class: "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors size-8 hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
                 onClick: _cache[0] || (_cache[0] = ($event) => searchTerm.value = "")
               }, [
                 createVNode(_sfc_main$c, { icon: "me-icon-l icon-xmark" })
@@ -23781,7 +23933,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
             }
           }, {
             content: withCtx(({ item }) => [
-              createBaseVNode("div", _hoisted_2$6, [
+              createBaseVNode("div", _hoisted_2$5, [
                 (openBlock(true), createElementBlock(Fragment, null, renderList(item.children, (child, idx) => {
                   return openBlock(), createElementBlock("a", {
                     key: idx,
@@ -23789,7 +23941,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
                     target: child.url ? getTarget(child.url) : void 0,
                     class: "block cursor-pointer rounded-md p-2 text-sm text-gray-600 no-underline transition-colors hover:bg-gray-100 hover:text-gray-800",
                     onClick: withModifiers(() => handleClick(child), ["prevent", "stop"])
-                  }, toDisplayString(child.description), 9, _hoisted_3$4);
+                  }, toDisplayString(child.description), 9, _hoisted_3$3);
                 }), 128))
               ])
             ]),
@@ -26324,15 +26476,15 @@ const _setImmediate = ((setImmediateSupported, postMessageSupported) => {
   if (setImmediateSupported) {
     return setImmediate;
   }
-  return postMessageSupported ? ((token, callbacks) => {
+  return postMessageSupported ? ((token2, callbacks) => {
     _global.addEventListener("message", ({ source, data }) => {
-      if (source === _global && data === token) {
+      if (source === _global && data === token2) {
         callbacks.length && callbacks.shift()();
       }
     }, false);
     return (cb) => {
       callbacks.push(cb);
-      _global.postMessage(token, "*");
+      _global.postMessage(token2, "*");
     };
   })(`axios@${Math.random()}`, []) : (cb) => setTimeout(cb);
 })(
@@ -26482,9 +26634,9 @@ function removeBrackets(key) {
 }
 function renderKey(path, key, dots) {
   if (!path) return key;
-  return path.concat(key).map(function each(token, i2) {
-    token = removeBrackets(token);
-    return !dots && i2 ? "[" + token + "]" : token;
+  return path.concat(key).map(function each(token2, i2) {
+    token2 = removeBrackets(token2);
+    return !dots && i2 ? "[" + token2 + "]" : token2;
   }).join(dots ? "." : "");
 }
 function isFlatArray(arr) {
@@ -27462,7 +27614,7 @@ const resolveConfig = (config) => {
     if (platform.hasStandardBrowserEnv || platform.hasStandardBrowserWebWorkerEnv) {
       headers.setContentType(void 0);
     } else if ((contentType = headers.getContentType()) !== false) {
-      const [type, ...tokens] = contentType ? contentType.split(";").map((token) => token.trim()).filter(Boolean) : [];
+      const [type, ...tokens] = contentType ? contentType.split(";").map((token2) => token2.trim()).filter(Boolean) : [];
       headers.setContentType([type || "multipart/form-data", ...tokens].join("; "));
     }
   }
@@ -28209,32 +28361,32 @@ let CancelToken$1 = class CancelToken {
     this.promise = new Promise(function promiseExecutor(resolve2) {
       resolvePromise = resolve2;
     });
-    const token = this;
+    const token2 = this;
     this.promise.then((cancel) => {
-      if (!token._listeners) return;
-      let i2 = token._listeners.length;
+      if (!token2._listeners) return;
+      let i2 = token2._listeners.length;
       while (i2-- > 0) {
-        token._listeners[i2](cancel);
+        token2._listeners[i2](cancel);
       }
-      token._listeners = null;
+      token2._listeners = null;
     });
     this.promise.then = (onfulfilled) => {
       let _resolve;
       const promise = new Promise((resolve2) => {
-        token.subscribe(resolve2);
+        token2.subscribe(resolve2);
         _resolve = resolve2;
       }).then(onfulfilled);
       promise.cancel = function reject() {
-        token.unsubscribe(_resolve);
+        token2.unsubscribe(_resolve);
       };
       return promise;
     };
     executor(function cancel(message, config, request) {
-      if (token.reason) {
+      if (token2.reason) {
         return;
       }
-      token.reason = new CanceledError$1(message, config, request);
-      resolvePromise(token.reason);
+      token2.reason = new CanceledError$1(message, config, request);
+      resolvePromise(token2.reason);
     });
   }
   /**
@@ -28286,11 +28438,11 @@ let CancelToken$1 = class CancelToken {
    */
   static source() {
     let cancel;
-    const token = new CancelToken(function executor(c2) {
+    const token2 = new CancelToken(function executor(c2) {
       cancel = c2;
     });
     return {
-      token,
+      token: token2,
       cancel
     };
   }
@@ -28419,8 +28571,8 @@ const {
   getAdapter,
   mergeConfig
 } = axios;
-let baseURL = "https://trunk.me.com.br";
-let customToken = null;
+let baseURL = window.location.origin;
+let token = null;
 const instance = axios.create({
   baseURL,
   timeout: 1e4,
@@ -28434,7 +28586,6 @@ instance.interceptors.request.use(
   (config) => {
     const requestConfig = config;
     if (requestConfig.withToken !== false) {
-      const token = customToken || localStorage.getItem("ACCESS_TOKEN");
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -28491,18 +28642,16 @@ function setBaseURL(url) {
 function getBaseURL() {
   return baseURL;
 }
-function setCustomToken(token) {
-  if (token !== null && typeof token !== "string") {
-    console.warn("Token deve ser uma string, recebido:", typeof token, token);
+function setToken(newToken) {
+  if (newToken !== null && typeof newToken !== "string") {
+    console.warn(
+      "Token deve ser uma string, recebido:",
+      typeof newToken,
+      newToken
+    );
     return;
   }
-  customToken = token;
-}
-function getCustomToken() {
-  return customToken;
-}
-function clearCustomToken() {
-  customToken = null;
+  token = newToken;
 }
 const httpService = {
   get: httpGet,
@@ -28512,9 +28661,7 @@ const httpService = {
   delete: httpDelete,
   setBaseURL,
   getBaseURL,
-  setCustomToken,
-  getCustomToken,
-  clearCustomToken
+  setToken
 };
 function useHttp() {
   const loading = ref(false);
@@ -28567,60 +28714,65 @@ function useHttp() {
     setError,
     setBaseURL,
     getBaseURL,
-    setCustomToken,
-    getCustomToken,
-    clearCustomToken
+    setToken
   };
 }
-function useBadgeManager(pusher) {
+const globalState = reactive({
+  badges: {},
+  badgeLoader: {}
+});
+const globalChannel = ref(null);
+function useBadgeManager(pusher, onBadgeChange) {
   const { get: get2 } = useHttp();
-  const state2 = reactive({
-    badges: {},
-    badgeLoader: {}
-  });
-  const channel = ref(null);
+  const { t } = useTranslations();
+  const toast = useToast();
   const setBadgeValue = (linkName, value) => {
-    state2.badges[linkName] = value;
+    globalState.badges[linkName] = value;
+    if (onBadgeChange) {
+      onBadgeChange(linkName, value);
+    }
   };
   const getBadgeValue2 = (linkName) => {
-    return state2.badges[linkName];
+    return globalState.badges[linkName];
   };
   const setBadgesValue = async (headerLink) => {
     if (!headerLink.badgeTotalUrl || !headerLink.linkName) return;
-    console.log("setBadgesValue", headerLink.badgeTotalUrl);
-    const response = await get2(headerLink.badgeTotalUrl.replace("https://trunk.api.web.mercadoe.com", ""));
-    if (response) {
-      const data = response;
-      console.log("resposta", data);
-      setBadgeValue(headerLink.linkName, data?.total ?? 0);
+    try {
+      const response = await get2(headerLink.badgeTotalUrl);
+      if (response) {
+        const data = response;
+        setBadgeValue(headerLink.linkName, data?.total ?? 0);
+      }
+    } catch {
+      toast.add({
+        title: t("theHeader.apiErrors.getTotalMessages"),
+        color: "error"
+      });
     }
   };
   const loadBadge = (headerLink) => {
     if (!headerLink.linkName || !headerLink.badgeTotalUrl) return;
-    console.log("loadBadge", headerLink.linkName, headerLink.badgeTotalUrl);
-    if (!state2.badgeLoader[headerLink.linkName]) {
-      console.log("Creating new throttled function for", headerLink.linkName);
-      const throttledFn = /* @__PURE__ */ useThrottleFn(setBadgesValue, 2e3);
-      state2.badgeLoader[headerLink.linkName] = throttledFn;
-    }
-    state2.badgeLoader[headerLink.linkName](headerLink);
-    console.log("Badge loader for", headerLink.linkName, "exists:", !!state2.badgeLoader[headerLink.linkName]);
+    globalState.badgeLoader[headerLink.linkName] ??= /* @__PURE__ */ useThrottleFn(
+      setBadgesValue,
+      2e3
+    );
+    globalState.badgeLoader[headerLink.linkName](headerLink);
   };
   const initBadge = (headerLink, userId) => {
     if (!headerLink.badgeTotalUrl || !headerLink.linkName) return;
     loadBadge(headerLink);
     if (headerLink.badgeEvent && userId && pusher) {
-      console.log("headerLink.badgeEvent", headerLink.badgeEvent);
       try {
-        if (!channel.value) {
-          channel.value = pusher.subscribe(`user.${userId}`);
-        }
-        channel.value.unbind(headerLink.badgeEvent);
-        channel.value.bind(headerLink.badgeEvent, () => {
+        globalChannel.value ??= pusher.subscribe(`user.${userId}`);
+        globalChannel.value.unbind(headerLink.badgeEvent);
+        globalChannel.value.bind(headerLink.badgeEvent, () => {
           loadBadge(headerLink);
         });
-      } catch (error) {
-        console.error(`Error configuring Pusher for ${headerLink.linkName}:`, error);
+      } catch {
+        toast.add({
+          title: t("theHeader.apiErrors.generic"),
+          color: "error"
+        });
       }
     }
   };
@@ -28640,9 +28792,20 @@ const initialState = {
   siteMapItems: [],
   brand: {},
   profileItems: [],
-  headerLinks: []
+  headerLinks: [],
+  badges: {}
 };
 const state = reactive(initialState);
+let badgeManagerInstance = null;
+const getBadgeManager = (pusher) => {
+  badgeManagerInstance ??= useBadgeManager(
+    pusher,
+    (linkName, value) => {
+      state.badges[linkName] = value;
+    }
+  );
+  return badgeManagerInstance;
+};
 const navigationItemsWithoutSeparators = computed(
   () => state.navigationItems.filter((item) => !isSeparator(item))
 );
@@ -28650,37 +28813,61 @@ const isSeparator = (item) => "separator" in item && item.separator === true;
 const setUser = (user, pusher) => {
   state.user = { ...user };
   if (user.id && state.headerLinks.length > 0) {
-    const { initBadgesForLinks } = useBadgeManager(pusher);
-    initBadgesForLinks(state.headerLinks, user.id);
+    const badgeManager = getBadgeManager(pusher);
+    badgeManager.initBadgesForLinks(state.headerLinks, user.id);
   }
 };
 const setBrand = (brand) => {
-  state.brand = { ...brand };
+  state.brand = brand;
 };
-const setProfileItems = (items) => {
-  state.profileItems = items;
+const setProfileItems = (profileItems) => {
+  state.profileItems = profileItems;
 };
 const setNavigationItems = (items) => {
   state.navigationItems = items;
   state.customNavigationItems = navigationItemsWithoutSeparators.value;
 };
+const setCustomNavigationItems = (items) => {
+  const updatedItems = [];
+  let itemIndex = 0;
+  for (const currentItem of state.navigationItems) {
+    updatedItems.push(
+      isSeparator(currentItem) ? currentItem : items[itemIndex++] ?? currentItem
+    );
+  }
+  state.navigationItems = updatedItems;
+  state.customNavigationItems = items;
+};
 const setSiteMapItems = (items) => {
   state.siteMapItems = items;
 };
+const findNavigationItemById = (id) => {
+  return state.navigationItems.find(
+    (item) => !isSeparator(item) && item.id === id
+  );
+};
 const setHeaderLinks = (headerLinks, pusher) => {
   state.headerLinks = headerLinks;
-  if (state.user.id) {
-    const { initBadgesForLinks } = useBadgeManager(pusher);
-    initBadgesForLinks(headerLinks, state.user.id);
+  if (state.user.id && headerLinks.length > 0) {
+    const badgeManager = getBadgeManager(pusher);
+    badgeManager.initBadgesForLinks(headerLinks, state.user.id);
+  }
+};
+const updateNavigationItemsVisible = (item, visible) => {
+  if (!item.id) return;
+  const targetItem = findNavigationItemById(item.id);
+  if (targetItem) {
+    targetItem.visible = visible;
+    state.navigationItems = [...state.navigationItems];
   }
 };
 const updateBadgeValue = (linkName, value) => {
-  const { setBadgeValue } = useBadgeManager();
-  setBadgeValue(linkName, value);
+  const badgeManager = getBadgeManager();
+  badgeManager.setBadgeValue(linkName, value);
+  state.badges[linkName] = value;
 };
 const getBadgeValue = (linkName) => {
-  const { getBadgeValue: getBadge } = useBadgeManager();
-  return getBadge(linkName);
+  return state.badges[linkName];
 };
 function useHeaderStore() {
   return {
@@ -28690,21 +28877,23 @@ function useHeaderStore() {
     setBrand,
     setProfileItems,
     setNavigationItems,
+    setCustomNavigationItems,
     setSiteMapItems,
     setHeaderLinks,
     isSeparator,
+    updateNavigationItemsVisible,
     updateBadgeValue,
     getBadgeValue
   };
 }
 const _hoisted_1$9 = { class: "flex flex-col" };
-const _hoisted_2$5 = { class: "text-sm text-primary py-2 px-6 bg-[var(--color-blue-50)] rounded-lg mb-2 flex justify-between font-medium" };
-const _hoisted_3$3 = { class: "flex items-center gap-2 text-[var(--color-neutral-400)] h-12 pl-2" };
+const _hoisted_2$4 = { class: "text-sm text-primary py-2 px-6 bg-[var(--color-blue-50)] rounded-lg mb-2 flex justify-between font-medium" };
+const _hoisted_3$2 = { class: "flex items-center gap-2 text-[var(--color-neutral-400)] h-12 pl-2" };
 const _hoisted_4$1 = { class: "icon-container" };
 const _hoisted_5$1 = ["href", "target"];
 const _hoisted_6$1 = {
   key: 1,
-  class: "text-label text-sm flex-1"
+  class: "flex-1 text-sm text-label"
 };
 const _hoisted_7 = ["onClick"];
 const _sfc_main$a = /* @__PURE__ */ defineComponent({
@@ -28714,8 +28903,8 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     const { isExternalUrl } = useIsExternalUrl();
     const {
       customNavigationItems,
-      setCustomNavigationItems,
-      updateNavigationItemsVisible
+      setCustomNavigationItems: setCustomNavigationItems2,
+      updateNavigationItemsVisible: updateNavigationItemsVisible2
     } = useHeaderStore();
     const el = useTemplateRef("el");
     const list = shallowRef(customNavigationItems.value || []);
@@ -28777,14 +28966,14 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       onChange: () => {
       }
     });
-    watch(list, (newList) => setCustomNavigationItems(toRaw(newList)));
+    watch(list, (newList) => setCustomNavigationItems2(toRaw(newList)));
     function handleClick(item) {
       const currentVisibility = item.visible ?? false;
-      updateNavigationItemsVisible(item, !currentVisibility);
+      updateNavigationItemsVisible2(item, !currentVisibility);
     }
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1$9, [
-        createBaseVNode("div", _hoisted_2$5, [
+        createBaseVNode("div", _hoisted_2$4, [
           createBaseVNode("p", null, toDisplayString(unref(t)("theHeader.tabs.navigationItems.pinnedApps")), 1),
           createBaseVNode("span", null, toDisplayString(getCountNavigationItems.value), 1)
         ]),
@@ -28798,7 +28987,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
               key: index2,
               class: "hover:bg-gray-500/10 transition-colors cursor-pointer border-b border-[var(--color-neutral-100)] mr-2"
             }, [
-              createBaseVNode("div", _hoisted_3$3, [
+              createBaseVNode("div", _hoisted_3$2, [
                 createBaseVNode("div", _hoisted_4$1, [
                   createVNode(_sfc_main$c, {
                     icon: "me-icon-s icon-grid-horizontal",
@@ -28810,7 +28999,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                   key: 0,
                   href: item.url,
                   target: getTarget(item.url),
-                  class: "text-label text-sm no-underline flex-1",
+                  class: "flex-1 text-sm no-underline text-label",
                   onClick: _cache[0] || (_cache[0] = withModifiers(() => {
                   }, ["stop"]))
                 }, toDisplayString(item.label), 9, _hoisted_5$1)) : (openBlock(), createElementBlock("span", _hoisted_6$1, toDisplayString(item.label), 1)),
@@ -28835,8 +29024,8 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1$8 = { class: "p-4 w-[384px]" };
-const _hoisted_2$4 = { class: "p-4 text-center text-gray-500" };
-const _hoisted_3$2 = { class: "p-4 text-center text-gray-500" };
+const _hoisted_2$3 = { class: "p-4 text-center text-gray-500 text-xs" };
+const _hoisted_3$1 = { class: "p-4 text-center text-gray-500 text-xs" };
 const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabs",
   props: {
@@ -28874,7 +29063,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             createBaseVNode("keep-alive", null, [
               (openBlock(), createBlock(Suspense, null, {
                 fallback: withCtx(() => [
-                  createBaseVNode("div", _hoisted_2$4, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
+                  createBaseVNode("div", _hoisted_2$3, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
                 ]),
                 default: withCtx(() => [
                   createVNode(_sfc_main$a)
@@ -28887,7 +29076,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             createBaseVNode("keep-alive", null, [
               (openBlock(), createBlock(Suspense, null, {
                 fallback: withCtx(() => [
-                  createBaseVNode("div", _hoisted_3$2, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
+                  createBaseVNode("div", _hoisted_3$1, toDisplayString(unref(t)("theHeader.tabs.loading")), 1)
                 ]),
                 default: withCtx(() => [
                   createVNode(_sfc_main$b, {
@@ -28905,7 +29094,6 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1$7 = { class: "relative flex items-center justify-center" };
-const _hoisted_2$3 = { class: "text-xs py-[6px] text-[var(--header-icon-color)] whitespace-nowrap" };
 const activeClass = "after:content-[''] after:bg-[var(--header-icon-color)] after:h-1 after:rounded-full after:absolute after:block after:w-[80%] after:bottom-0 after:left-1/2 after:-translate-x-1/2";
 const _sfc_main$8 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderNavigationItemContent",
@@ -28929,6 +29117,10 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     const props = __props;
     const { getBadgeValue: getBadgeValue2 } = useHeaderStore();
     const isLink = computed(() => Boolean(props.url));
+    const showBadge = computed(() => {
+      const value = computedBadge.value?.text;
+      return Boolean(value) && value !== "0";
+    });
     const computedBadge = computed(() => {
       if (props.badge?.text) {
         return props.badge;
@@ -28941,32 +29133,33 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       }
       return null;
     });
+    function getIcon(icon, isActive = false) {
+      if (!icon) return "";
+      return isActive ? icon.replace("me-icon-l", "me-icon-s") : icon;
+    }
     function handleClick() {
       props.click?.(props);
     }
     return (_ctx, _cache) => {
-      const _component_UChip = _sfc_main$k;
+      const _component_UChip = _sfc_main$l;
       return openBlock(), createBlock(resolveDynamicComponent(isLink.value ? "a" : "button"), {
         href: isLink.value ? _ctx.url : void 0,
         target: isLink.value ? _ctx.target ?? "_self" : void 0,
         type: !isLink.value ? "button" : void 0,
-        class: normalizeClass(["grid place-items-center gap-1 px-2 py-1 cursor-pointer relative transition-colors duration-200 hover:bg-[rgba(0,0,0,0.1)] text-[var(--color-neutral-300)] text-center", [
-          isLink.value ? "no-underline" : "border-0 bg-transparent",
-          _ctx.active && activeClass
-        ]]),
+        class: normalizeClass(["grid place-items-center gap-1 px-[15px] py-1 cursor-pointer relative transition-colors duration-200 hover:bg-[rgba(0,0,0,0.1)] text-[var(--color-neutral-300)] text-center", [isLink.value ? "no-underline" : "border-0 bg-transparent"]]),
         style: normalizeStyle({ "--header-icon-color": _ctx.iconColor }),
         onClick: withModifiers(handleClick, ["prevent", "stop"])
       }, {
         default: withCtx(() => [
           createBaseVNode("div", _hoisted_1$7, [
             createVNode(_sfc_main$c, {
-              icon: _ctx.icon || "",
+              icon: getIcon(_ctx.icon, _ctx.active) || "",
               "custom-size": 24,
               color: _ctx.iconColor
             }, null, 8, ["icon", "color"]),
-            computedBadge.value?.text ? (openBlock(), createBlock(_component_UChip, {
+            showBadge.value ? (openBlock(), createBlock(_component_UChip, {
               key: 0,
-              text: computedBadge.value.text,
+              text: computedBadge.value?.text,
               color: "error",
               size: "3xl",
               position: "top-right",
@@ -28977,7 +29170,9 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
               }
             }, null, 8, ["text"])) : createCommentVNode("", true)
           ]),
-          createBaseVNode("p", _hoisted_2$3, toDisplayString(_ctx.label), 1)
+          createBaseVNode("p", {
+            class: normalizeClass([[_ctx.active && activeClass], "text-xs py-[6px] text-[var(--header-icon-color)] whitespace-nowrap"])
+          }, toDisplayString(_ctx.label), 3)
         ]),
         _: 1
       }, 8, ["href", "target", "type", "class", "style"]);
@@ -29049,7 +29244,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$5 = { class: "ml-auto flex justify-center gap-6" };
+const _hoisted_1$5 = { class: "ml-auto flex justify-center" };
 const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderNavigation",
   props: {
@@ -29083,8 +29278,8 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
           }, [
             unref(isSeparator2)(item) ? (openBlock(), createElementBlock("div", {
               key: 0,
-              class: "my-2 border-l",
-              style: normalizeStyle({ borderColor: _ctx.iconColor })
+              class: "self-center w-[1px] h-[40px] opacity-35 mx-[15px]",
+              style: normalizeStyle({ background: _ctx.iconColor })
             }, null, 4)) : item.visible ?? false ? (openBlock(), createBlock(_sfc_main$7, mergeProps({
               key: 1,
               ref_for: true
@@ -29129,8 +29324,16 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
         return;
       }
       if (url) {
-        if (isExternalUrl(url)) {
-          window.open(url, target, "noopener,noreferrer");
+        const openWithNoopener = (link, tgt) => {
+          const newWindow = window.open(link, tgt, "noopener=yes,noreferrer=yes");
+          if (newWindow) newWindow.opener = null;
+        };
+        const shouldOpenExternally = isExternalUrl(url);
+        const shouldOpenInNewTab = !shouldOpenExternally && target === "_blank";
+        if (shouldOpenExternally) {
+          openWithNoopener(url, target);
+        } else if (shouldOpenInNewTab) {
+          window.open(url, target);
         } else {
           window.location.href = url;
         }
@@ -29148,8 +29351,10 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
               key: 0,
               items: accordionItems(item),
               ui: {
+                item: "border-none",
+                header: "border-none",
                 body: "p-0",
-                trigger: `py-2 px-4 hover:bg-blue-100 hover:text-primary flex navigationItems-center gap-2 cursor-pointer font-normal ${item.active ? "text-primary" : ""}`
+                trigger: `py-2 px-4 hover:bg-blue-100 hover:text-primary flex navigationItems-center gap-2 focus-visible:outline-none cursor-pointer font-normal ${item.active ? "text-primary" : ""}`
               }
             }, {
               body: withCtx(({ item: accordionItem }) => [
@@ -29196,7 +29401,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     const props = __props;
     return (_ctx, _cache) => {
       const _component_MeIcon = _sfc_main$c;
-      const _component_UChip = _sfc_main$k;
+      const _component_UChip = _sfc_main$l;
       return props?.user?.badge?.icon ? (openBlock(), createBlock(_component_UChip, {
         key: 0,
         color: "error",
@@ -29221,37 +29426,81 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1$3 = { class: "relative flex select-none flex-col items-end" };
-const _hoisted_2$1 = { class: "flex justify-between gap-4 px-4 py-2 align-center" };
-const _hoisted_3$1 = { class: "grid w-[168px]" };
+const _hoisted_2$1 = { class: "flex justify-between gap-4 py-2 pl-4 align-center" };
+const _hoisted_3 = { class: "grid w-[168px]" };
 const _hoisted_4 = { class: "mb-0 truncate text-gray-500" };
 const _hoisted_5 = { class: "block truncate text-xs text-gray-400" };
-const _hoisted_6 = { class: "text-2xl font-normal no-underline text-white" };
+const _hoisted_6 = { class: "text-2xl font-normal text-white no-underline" };
 const _sfc_main$3 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderAvatarMenu",
   props: {
     user: { type: Object },
     profileItems: { type: Array },
-    setVisibleToFalse: { type: Function }
+    setVisibleToFalse: { type: Function },
+    avatarRef: { type: null }
   },
   setup(__props) {
-    const menuAvatar = useTemplateRef("menuAvatar");
-    const avatar = useTemplateRef("avatar");
+    const props = __props;
+    const avatarMenu = useTemplateRef("avatarMenu");
+    const menuContainer = useTemplateRef("menuContainer");
+    const calculateCenter = (rect) => ({
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2
+    });
+    const calculateOffset = (elementRect, containerRect) => ({
+      x: elementRect.left - containerRect.left,
+      y: elementRect.top - containerRect.top
+    });
+    const updateMenuPosition = () => {
+      if (!props.avatarRef || !avatarMenu.value || !menuContainer.value) return;
+      const originalAvatar = props.avatarRef;
+      const menuAvatar = avatarMenu.value;
+      const container = menuContainer.value;
+      const originalCenter = calculateCenter(originalAvatar.getBoundingClientRect());
+      const menuAvatarRect = menuAvatar.getBoundingClientRect();
+      const menuAvatarCenter = calculateCenter(menuAvatarRect);
+      const containerRect = container.getBoundingClientRect();
+      const menuAvatarOffset = calculateOffset(menuAvatarRect, containerRect);
+      const position = {
+        left: originalCenter.x - menuAvatarCenter.x + menuAvatarOffset.x,
+        top: originalCenter.y - menuAvatarCenter.y + menuAvatarOffset.y
+      };
+      Object.assign(container.style, {
+        position: "fixed",
+        top: `${position.top}px`,
+        left: `${position.left}px`,
+        zIndex: "10003",
+        right: "auto"
+      });
+    };
+    const setupEventListeners = () => {
+      const events = ["scroll", "resize"];
+      events.forEach((event) => window.addEventListener(event, updateMenuPosition));
+      return () => events.forEach(
+        (event) => window.removeEventListener(event, updateMenuPosition)
+      );
+    };
+    onMounted(() => {
+      updateMenuPosition();
+      const cleanup = setupEventListeners();
+      onBeforeUnmount(cleanup);
+    });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1$3, [
         createBaseVNode("div", {
-          ref_key: "menuAvatar",
-          ref: menuAvatar,
+          ref_key: "menuContainer",
+          ref: menuContainer,
           class: "absolute rounded-bl-lg bg-white text-sm top-[-1px] right-[-8px]"
         }, [
           createBaseVNode("div", _hoisted_2$1, [
-            createBaseVNode("div", _hoisted_3$1, [
+            createBaseVNode("div", _hoisted_3, [
               createBaseVNode("p", _hoisted_4, toDisplayString(_ctx.user.name), 1),
               createBaseVNode("small", _hoisted_5, toDisplayString(_ctx.user.role || _ctx.user.email || ""), 1)
             ]),
             createBaseVNode("div", {
-              ref_key: "avatar",
-              ref: avatar,
-              class: "flex items-center justify-center size-12 rounded-full bg-primary mx-auto border-transparent border"
+              ref_key: "avatarMenu",
+              ref: avatarMenu,
+              class: "mx-4 flex items-center justify-center rounded-full border border-transparent size-12 bg-primary"
             }, [
               createBaseVNode("span", _hoisted_6, toDisplayString(_ctx.user.acronym), 1),
               createVNode(_sfc_main$4, { user: _ctx.user }, null, 8, ["user"])
@@ -29266,9 +29515,8 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$2 = { class: "group py-2 px-4 hover:bg-[rgba(0,0,0,0.1)] cursor-pointer" };
-const _hoisted_2 = { class: "flex items-center justify-center size-12 rounded-full bg-[rgba(0,0,0,0.4)] mx-auto border-transparent border group-hover:border-white group-hover:border-2" };
-const _hoisted_3 = { class: "text-2xl uppercase" };
+const _hoisted_1$2 = { class: "flex items-center justify-center size-12 rounded-full bg-[rgba(0,0,0,0.4)] mx-auto border-transparent border group-hover:border-white group-hover:border-2" };
+const _hoisted_2 = { class: "text-2xl uppercase" };
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderAvatar",
   props: {
@@ -29277,6 +29525,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
+    const avatarRef = useTemplateRef("avatarRef");
     const visibleMenu = ref(false);
     const headerBackdrop = inject("headerBackdrop");
     function handlePopoverUpdate(open) {
@@ -29321,18 +29570,23 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
             createVNode(_sfc_main$3, {
               user: props.user,
               profileItems: props.profileItems,
-              "set-visible-to-false": setVisibleToFalse
-            }, null, 8, ["user", "profileItems"])
+              "set-visible-to-false": setVisibleToFalse,
+              "avatar-ref": avatarRef.value
+            }, null, 8, ["user", "profileItems", "avatar-ref"])
           ]),
           default: withCtx(() => [
-            createBaseVNode("div", _hoisted_1$2, [
-              createBaseVNode("div", _hoisted_2, [
-                createBaseVNode("span", _hoisted_3, toDisplayString(props.user.acronym), 1),
+            createBaseVNode("div", {
+              ref_key: "avatarRef",
+              ref: avatarRef,
+              class: "group py-2 px-4 ml-1.5 hover:bg-[rgba(0,0,0,0.1)] cursor-pointer"
+            }, [
+              createBaseVNode("div", _hoisted_1$2, [
+                createBaseVNode("span", _hoisted_2, toDisplayString(props.user.acronym), 1),
                 createVNode(_sfc_main$4, {
                   user: props.user
                 }, null, 8, ["user"])
               ])
-            ])
+            ], 512)
           ]),
           _: 1
         }, 8, ["open"])
@@ -29383,7 +29637,11 @@ const createNavItemClickHandler = (navItem, gtm) => {
         event: GTM_EVENTS.TELAS_PRINCIPAIS,
         selectOp: navItem.linkName
       });
-      window.location.href = navItem.url;
+      if (navItem?.target === "_blank") {
+        window.open(navItem.url, navItem.target);
+      } else {
+        window.location.href = navItem.url;
+      }
     };
   }
   return void 0;
@@ -29396,7 +29654,11 @@ const createSiteMapClickHandler = (item, parentCategory, gtm) => {
       categoria: parentCategory,
       selectOp: item.description ?? item.name
     });
-    window.location.href = item.url;
+    if (item?.target === "_blank") {
+      window.open(item.url, item.target);
+    } else {
+      window.location.href = item.url;
+    }
   };
 };
 const createProfileItemClickHandler = (profileItem, gtm) => {
@@ -29406,7 +29668,11 @@ const createProfileItemClickHandler = (profileItem, gtm) => {
       event: GTM_EVENTS.PERFIL_OPCAO,
       selectOp: profileItem.label
     });
-    window.location.href = profileItem.url;
+    if (profileItem?.target === "_blank") {
+      window.open(profileItem.url, profileItem.target);
+    } else {
+      window.location.href = profileItem.url;
+    }
   };
 };
 const mapHeaderLinks = (navItems, gtm) => navItems.map(({ $id, ...rest }) => ({
@@ -29477,12 +29743,6 @@ const API_ENDPOINTS = {
     PDM: "/do/api/v1/sitemap/pdm"
   }
 };
-const ERROR_MESSAGES$1 = {
-  USER_DATA: "Falha ao carregar dados do usuário",
-  // refatorar
-  NAVIGATION: "Falha ao carregar dados de navegação",
-  SITEMAP: "Falha ao carregar sitemap"
-};
 const buildQueryString = (params) => {
   const searchParams = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
@@ -29493,13 +29753,13 @@ const buildQueryString = (params) => {
   return searchParams.toString();
 };
 const isPdmPath = (pathname) => pathname.includes("/MEPDM/") || pathname.includes("/PDM/");
-const loadUserData = async (get2, setCustomToken2) => {
+const loadUserData = async (get2, setToken2) => {
   const data = await get2(API_ENDPOINTS.USERS.CURRENT);
   if (!data) {
-    throw new Error(ERROR_MESSAGES$1.USER_DATA);
+    throw new Error();
   }
   if (data.token?.accessToken && typeof data.token.accessToken === "string") {
-    setCustomToken2(data.token.accessToken);
+    setToken2(data.token.accessToken);
   }
   return data;
 };
@@ -29513,7 +29773,7 @@ const loadHeaderData = async (get2, userId, culture, lastAccess) => {
   const url = `${API_ENDPOINTS.HEADER}?${queryString}`;
   const response = await get2(url);
   if (!response) {
-    throw new Error(ERROR_MESSAGES$1.NAVIGATION);
+    throw new Error();
   }
   return response;
 };
@@ -29529,7 +29789,7 @@ const loadSiteMapData = async (get2, userId, culture, lastAccess) => {
   const url = `${baseUrl}?${queryString}`;
   const response = await get2(url);
   if (!response) {
-    throw new Error(ERROR_MESSAGES$1.SITEMAP);
+    throw new Error();
   }
   return response;
 };
@@ -29572,40 +29832,21 @@ const mapProfileLinks = (profileItems, gtm, onChangeLocale) => {
     };
   });
 };
-const ERROR_STATUS = {
-  FORBIDDEN: 403,
-  UNAUTHORIZED: 401
-};
-const ERROR_MESSAGES = {
-  FORBIDDEN: "⚠️ Acesso negado (403) - Usuário não autenticado, usando mock",
-  UNAUTHORIZED: "⚠️ Não autorizado (401) - Token inválido, usando mock",
-  GENERIC: "⚠️ Erro ao carregar dados do usuário:",
-  HEADER_LOAD: "❌ Erro ao carregar dados do header:"
-};
 function useHeader(activeLinkName, gtm) {
-  const { get: get2, post, setCustomToken: setCustomToken2 } = useHttp();
+  const { t } = useTranslations();
+  const toast = useToast();
+  const { get: get2, post, setToken: setToken2 } = useHttp();
   const headerStore = useHeaderStore();
   const storeUser = toRef$2(headerStore, "user");
-  const handleUserDataError = (error) => {
-    const errorObj = error;
-    if (errorObj?.response?.status === ERROR_STATUS.FORBIDDEN) {
-      console.warn(ERROR_MESSAGES.FORBIDDEN);
-    } else if (errorObj?.response?.status === ERROR_STATUS.UNAUTHORIZED) {
-      console.warn(ERROR_MESSAGES.UNAUTHORIZED);
-    } else {
-      console.warn(
-        ERROR_MESSAGES.GENERIC,
-        errorObj?.message || "Erro desconhecido",
-        "usando mock"
-      );
-    }
-  };
   const handleUserDataLoad = async () => {
     try {
-      const userData = await loadUserData(get2, setCustomToken2);
+      const userData = await loadUserData(get2, setToken2);
       headerStore.setUser(userData);
-    } catch (error) {
-      handleUserDataError(error);
+    } catch {
+      toast.add({
+        title: t("theHeader.apiErrors.generic"),
+        color: "error"
+      });
     }
   };
   const handleNavigationItemsLoad = async () => {
@@ -29613,7 +29854,7 @@ function useHeader(activeLinkName, gtm) {
       const response = await loadHeaderData(
         get2,
         headerStore.user.value.id,
-        headerStore.user.value.culture || "",
+        headerStore.user.value.culture ?? "",
         storeUser.value.lastAccess
       );
       headerStore.setUser({
@@ -29638,7 +29879,10 @@ function useHeader(activeLinkName, gtm) {
       );
       headerStore.setProfileItems(mappedProfileItems);
     } catch {
-      console.warn("Não foi possível carregar itens de navegação, usando mock");
+      toast.add({
+        title: t("theHeader.apiErrors.generic"),
+        color: "error"
+      });
     }
   };
   const handleSiteMapLoad = async () => {
@@ -29646,7 +29890,7 @@ function useHeader(activeLinkName, gtm) {
       const response = await loadSiteMapData(
         get2,
         storeUser.value.id,
-        storeUser.value.culture || "",
+        storeUser.value.culture ?? "",
         storeUser.value.lastAccess
       );
       siteMapChildrenMapper(
@@ -29661,7 +29905,10 @@ function useHeader(activeLinkName, gtm) {
       );
       headerStore.setSiteMapItems(mappedSiteMapItems);
     } catch {
-      console.warn("Não foi possível carregar sitemap, usando mock");
+      toast.add({
+        title: t("theHeader.apiErrors.generic"),
+        color: "error"
+      });
     }
   };
   const initializeData = async () => {
@@ -29671,12 +29918,63 @@ function useHeader(activeLinkName, gtm) {
         handleNavigationItemsLoad(),
         handleSiteMapLoad()
       ]);
-    } catch (error) {
-      console.error(ERROR_MESSAGES.HEADER_LOAD, error);
+    } catch {
+      toast.add({
+        title: t("theHeader.apiErrors.generic"),
+        color: "error"
+      });
     }
   };
   return {
     initializeData
+  };
+}
+const cartItemCount = ref("");
+const updateCartItemCount = (value) => {
+  cartItemCount.value = String(value);
+};
+function useCart() {
+  const { get: get2 } = useHttp();
+  const { t } = useTranslations();
+  const toast = useToast();
+  const fetchCart = async () => {
+    try {
+      const response = await get2("/cart/cart");
+      if (response?.products && response.products.length > 0) {
+        updateCartItemCount(response.products.length);
+      }
+    } catch {
+      toast.add({
+        title: t("theHeader.apiErrors.cart"),
+        color: "error"
+      });
+    }
+  };
+  const throttledFetchCart = /* @__PURE__ */ useThrottleFn(fetchCart, 2e3);
+  const loadCart = () => {
+    throttledFetchCart();
+  };
+  const cartNavItem = computed(() => {
+    return {
+      id: "00",
+      active: false,
+      icon: "me-icon-l icon-cart-shopping",
+      label: t("theHeader.cart.label"),
+      linkName: t("theHeader.cart.linkName"),
+      separator: false,
+      siteMap: false,
+      target: null,
+      click: () => null,
+      visible: true,
+      badge: {
+        text: cartItemCount.value
+      }
+    };
+  });
+  return {
+    cartNavItem,
+    loadCart,
+    updateCartItemCount
   };
 }
 const _hoisted_1 = { class: "flex items-center justify-between" };
@@ -29685,8 +29983,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   props: {
     activeLinkName: { type: String },
     gtm: { type: Object },
-    token: { type: String },
-    pusher: { type: Object }
+    pusher: { type: Object },
+    showCart: { type: Boolean }
   },
   setup(__props) {
     const props = __props;
@@ -29696,17 +29994,32 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     );
     const headerStore = useHeaderStore();
     const { initBadgesForLinks } = useBadgeManager(props.pusher);
+    const { cartNavItem, loadCart } = useCart();
     const storeUser = toRef$2(headerStore, "user");
     const storeNavigationItems = toRef$2(headerStore, "navigationItems");
     const storeBrand = toRef$2(headerStore, "brand");
     const storeProfileItems = toRef$2(headerStore, "profileItems");
     const storeSiteMapItems = toRef$2(headerStore, "siteMapItems");
     const storeHeaderLinks = toRef$2(headerStore, "headerLinks");
-    watch(storeHeaderLinks, (newHeaderLinks) => {
-      if (newHeaderLinks && newHeaderLinks.length > 0 && storeUser.value.id) {
-        initBadgesForLinks(newHeaderLinks, storeUser.value.id);
+    const navigationItemsWithCart = computed(() => {
+      const items = [...storeNavigationItems.value];
+      if (props.showCart && items.length > 0) {
+        items.push(cartNavItem.value);
       }
-    }, { immediate: true });
+      return items;
+    });
+    watch(
+      storeHeaderLinks,
+      (newHeaderLinks) => {
+        if (newHeaderLinks && newHeaderLinks.length > 0 && storeUser.value.id) {
+          initBadgesForLinks(newHeaderLinks, storeUser.value.id);
+          if (props.showCart) {
+            loadCart();
+          }
+        }
+      },
+      { immediate: true }
+    );
     const backdropState = ref({
       visible: false,
       zIndex: 9999
@@ -29726,10 +30039,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       state: backdropState
     });
     onMounted(async () => {
-      const { setCustomToken: setCustomToken2 } = useHttp();
-      if (props.token) {
-        setCustomToken2(props.token);
-      }
       await initializeData();
       useTranslations().setLocale(storeUser.value.culture);
     });
@@ -29774,15 +30083,17 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return storeBrand.value?.iconColor || "var(--ui-bg)";
     });
     return (_ctx, _cache) => {
+      const _component_USkeleton = _sfc_main$j;
       return openBlock(), createElementBlock(Fragment, null, [
-        createBaseVNode("header", {
+        storeUser.value.name ? (openBlock(), createElementBlock("header", {
+          key: 0,
           class: normalizeClass(headerClasses.value),
           style: normalizeStyle(headerStyles.value)
         }, [
           createBaseVNode("nav", _hoisted_1, [
             createVNode(_sfc_main$i, { brand: storeBrand.value }, null, 8, ["brand"]),
             createVNode(_sfc_main$6, {
-              navigationItems: storeNavigationItems.value,
+              navigationItems: navigationItemsWithCart.value,
               iconColor: iconColor.value,
               siteMapItems: storeSiteMapItems.value
             }, null, 8, ["navigationItems", "iconColor", "siteMapItems"]),
@@ -29791,9 +30102,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               profileItems: storeProfileItems.value
             }, null, 8, ["user", "profileItems"])
           ])
-        ], 6),
+        ], 6)) : (openBlock(), createBlock(_component_USkeleton, {
+          key: 1,
+          class: "h-[64px] w-full"
+        })),
         backdropState.value.visible ? (openBlock(), createBlock(_sfc_main$1, {
-          key: 0,
+          key: 2,
           "z-index": backdropState.value.zIndex,
           onClick: closeBackdrop
         }, null, 8, ["z-index"])) : createCommentVNode("", true)
@@ -30585,6 +30899,14 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     margin-inline: calc(var(--spacing, .25rem) * 3);
   }
 
+  .mx-4 {
+    margin-inline: calc(var(--spacing, .25rem) * 4);
+  }
+
+  .mx-\\[15px\\] {
+    margin-inline: 15px;
+  }
+
   .mx-auto {
     margin-inline: auto;
   }
@@ -30747,6 +31069,14 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .\\!ml-4 {
     margin-left: calc(var(--spacing, .25rem) * 4) !important;
+  }
+
+  .ml-1 {
+    margin-left: calc(var(--spacing, .25rem) * 1);
+  }
+
+  .ml-1\\.5 {
+    margin-left: calc(var(--spacing, .25rem) * 1.5);
   }
 
   .ml-auto {
@@ -31050,6 +31380,14 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     height: 12px;
   }
 
+  .h-\\[40px\\] {
+    height: 40px;
+  }
+
+  .h-\\[64px\\] {
+    height: 64px;
+  }
+
   .h-auto {
     height: auto;
   }
@@ -31202,6 +31540,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     width: calc(var(--spacing, .25rem) * 60);
   }
 
+  .w-\\[1px\\] {
+    width: 1px;
+  }
+
   .w-\\[6px\\] {
     width: 6px;
   }
@@ -31352,6 +31694,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .flex-grow, .grow {
     flex-grow: 1;
+  }
+
+  .basis-\\[75px\\] {
+    flex-basis: 75px;
   }
 
   .basis-full {
@@ -31735,6 +32081,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   :where(.divide-default > :not(:last-child)) {
     border-color: var(--ui-border);
+  }
+
+  .self-center {
+    align-self: center;
   }
 
   .self-end {
@@ -32290,6 +32640,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     padding-inline: calc(var(--spacing, .25rem) * 11);
   }
 
+  .px-\\[15px\\] {
+    padding-inline: 15px;
+  }
+
   .py-0 {
     padding-block: calc(var(--spacing, .25rem) * 0);
   }
@@ -32500,6 +32854,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .pl-2 {
     padding-left: calc(var(--spacing, .25rem) * 2);
+  }
+
+  .pl-4 {
+    padding-left: calc(var(--spacing, .25rem) * 4);
   }
 
   .text-center {
@@ -32896,6 +33254,10 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .opacity-0 {
     opacity: 0;
+  }
+
+  .opacity-35 {
+    opacity: .35;
   }
 
   .opacity-75 {
@@ -36906,21 +37268,28 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  scrollbar-width: initial !important;
+  scrollbar-color: #00000040 transparent !important;
+  width: 6px !important;
+  height: 6px !important;
 }
 
 ::-webkit-scrollbar-track {
-  display: none;
+  display: none !important;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #00000040;
-  border-radius: 15px;
+  background: #00000040 !important;
+  border-radius: 15px !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #00000073;
+  background: #00000073 !important;
+}
+
+a {
+  color: var(--color-neutral-400) !important;
+  text-decoration: none !important;
 }
 
 @property --tw-translate-x {
@@ -37302,7 +37671,7 @@ if (!customElements.get("the-header")) {
   customElements.define("the-header", TheHeaderElement);
 }
 export {
-  useState as $,
+  reactivePick as $,
   createElementBlock as A,
   createVNode as B,
   withModifiers as C,
@@ -37329,32 +37698,32 @@ export {
   inject as X,
   reactive as Y,
   h as Z,
-  _sfc_main$O as _,
+  _sfc_main$P as _,
   useForwardExpose as a,
-  reactivePick as a0,
-  isEqual as a1,
-  useForwardProps as a2,
-  reactiveOmit as a3,
-  tv as a4,
-  useAppConfig as a5,
-  useSlots as a6,
-  useButtonGroup as a7,
-  formLoadingInjectionKey as a8,
-  useComponentIcons as a9,
-  mergeClasses as aa,
-  _sfc_main$l as ab,
-  normalizeClass as ac,
-  _sfc_main$j as ad,
-  omit as ae,
-  useForwardPropsEmits as af,
-  renderList as ag,
-  createBaseVNode as ah,
-  resolveDynamicComponent as ai,
+  isEqual as a0,
+  useForwardProps as a1,
+  reactiveOmit as a2,
+  tv as a3,
+  useAppConfig as a4,
+  useSlots as a5,
+  useButtonGroup as a6,
+  formLoadingInjectionKey as a7,
+  useComponentIcons as a8,
+  mergeClasses as a9,
+  _sfc_main$m as aa,
+  normalizeClass as ab,
+  _sfc_main$k as ac,
+  omit as ad,
+  useForwardPropsEmits as ae,
+  renderList as af,
+  createBaseVNode as ag,
+  resolveDynamicComponent as ah,
+  useToast as ai,
   usePortal as aj,
   shallowReactive as ak,
   markRaw as al,
   useId$1 as am,
-  _sfc_main$Z as an,
+  _sfc_main$_ as an,
   provide as ao,
   portalTargetInjectionKey as ap,
   createApp as aq,

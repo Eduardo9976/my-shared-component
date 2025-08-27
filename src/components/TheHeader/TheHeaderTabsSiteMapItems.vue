@@ -11,7 +11,7 @@
       <template v-if="searchTerm" #trailing>
         <button
           type="button"
-          class="inline-flex size-8 items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50"
+          class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors size-8 hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
           @click="searchTerm = ''"
         >
           <MeIcon icon="me-icon-l icon-xmark" />
@@ -19,7 +19,7 @@
       </template>
     </UInput>
 
-    <div class="max-h-[280px] overflow-y-auto">
+    <div class="overflow-y-auto max-h-[280px]">
       <UAccordion
         type="multiple"
         :items="accordionItems"

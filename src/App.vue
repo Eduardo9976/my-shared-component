@@ -1,6 +1,6 @@
 <template>
   <UApp>
-    <the-header />
+    <the-header :show-cart="false" />
   </UApp>
 </template>
 

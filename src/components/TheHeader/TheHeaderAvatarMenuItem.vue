@@ -5,8 +5,10 @@
         v-if="item.children"
         :items="accordionItems(item)"
         :ui="{
+          item: 'border-none',
+          header: 'border-none',
           body: 'p-0',
-          trigger: `py-2 px-4 hover:bg-blue-100 hover:text-primary flex navigationItems-center gap-2 cursor-pointer font-normal ${item.active ? 'text-primary' : ''}`
+          trigger: `py-2 px-4 hover:bg-blue-100 hover:text-primary flex navigationItems-center gap-2 focus-visible:outline-none cursor-pointer font-normal ${item.active ? 'text-primary' : ''}`
         }"
       >
         <template #body="{item: accordionItem}">
@@ -84,8 +86,18 @@ function handleClick(item: ProfileItem) {
   }
 
   if (url) {
-    if (isExternalUrl(url)) {
-      window.open(url, target, 'noopener,noreferrer')
+    const openWithNoopener = (link: string, tgt: string) => {
+      const newWindow = window.open(link, tgt, 'noopener=yes,noreferrer=yes')
+      if (newWindow) newWindow.opener = null
+    }
+
+    const shouldOpenExternally = isExternalUrl(url)
+    const shouldOpenInNewTab = !shouldOpenExternally && target === '_blank'
+
+    if (shouldOpenExternally) {
+      openWithNoopener(url, target)
+    } else if (shouldOpenInNewTab) {
+      window.open(url, target)
     } else {
       window.location.href = url
     }

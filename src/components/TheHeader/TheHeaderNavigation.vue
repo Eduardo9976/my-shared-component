@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-auto flex justify-center gap-6">
+  <div class="ml-auto flex justify-center">
     <template
       v-for="(item, index) in filteredNavigationItems"
       :key="
@@ -10,8 +10,8 @@
     >
       <div
         v-if="isSeparator(item)"
-        class="my-2 border-l"
-        :style="{borderColor: iconColor}"
+        class="self-center w-[1px] h-[40px] opacity-35 mx-[15px]"
+        :style="{background: iconColor}"
       />
 
       <TheHeaderNavigationItem

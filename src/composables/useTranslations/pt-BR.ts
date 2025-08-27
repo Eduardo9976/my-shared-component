@@ -9,6 +9,15 @@ export default {
       siteMapItems: {
         search: 'Buscar'
       }
+    },
+    cart: {
+      label: 'Carrinho',
+      linkName: 'Carrinho'
+    },
+    apiErrors: {
+      cart: 'Não foi possível recuperar as informações do carrinho',
+      getTotalMessages: 'Erro ao carregar novas mensagens',
+      generic: 'Ocorreu um erro de processamento. Por favor tente novamente.'
     }
   }
 }
