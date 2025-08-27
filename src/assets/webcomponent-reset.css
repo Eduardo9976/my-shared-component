@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  box-sizing: border-box;
+  contain: layout style;
+
+  color: unset;
+  font-family: unset;
+  font-size: unset;
+  font-weight: unset;
+  line-height: unset;
+  text-align: unset;
+  text-decoration: unset;
+
+  scrollbar-color: unset;
+  scrollbar-width: unset;
+  scrollbar-gutter: unset;
+}
+
+:host *,
+:host *::before,
+:host *::after {
+  box-sizing: inherit;
+}
+
+:host * {
+  scrollbar-color: unset;
+  scrollbar-width: unset;
+  scrollbar-gutter: unset;
+}
+
+:host ul, :host ol {
+  list-style: none;
+}
+
+:host a {
+  text-decoration: none;
+  color: unset;
+}
