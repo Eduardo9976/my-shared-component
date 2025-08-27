@@ -1,9 +1,5 @@
 <template>
-  <header
-    v-if="storeUser.name"
-    :class="headerClasses"
-    :style="headerStyles"
-  >
+  <header v-if="storeUser.name" :class="headerClasses" :style="headerStyles">
     <nav class="flex items-center justify-between">
       <TheHeaderBrand :brand="storeBrand" />
 
@@ -15,7 +11,6 @@
 
       <TheHeaderAvatar :user="storeUser" :profileItems="storeProfileItems" />
     </nav>
-
   </header>
 
   <USkeleton v-else class="h-[64px] w-full" />

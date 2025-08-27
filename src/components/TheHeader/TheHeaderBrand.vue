@@ -2,9 +2,13 @@
   <a
     :href="useSanitizeURL(brand.link)"
     :target="brand.newTab ? '_blank' : '_self'"
-    class="px-4"
+    class="px-4 flex items-center justify-center"
   >
-    <img :src="brand.logo" alt="logo" class="max-w-[75px] max-h-[32px]" />
+    <img
+      :src="brand.logo"
+      alt="logo"
+      class="basis-[75px] grow shrink min-w-0 max-h-[32px]"
+    />
   </a>
 </template>
 
