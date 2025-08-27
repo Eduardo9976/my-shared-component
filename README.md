@@ -250,5 +250,3 @@ Este projeto é privado e proprietário.
 Para suporte e dúvidas, entre em contato com a equipe de desenvolvimento.
 
 ---
-
-Desenvolvido com ❤️ pela equipe ME Web
