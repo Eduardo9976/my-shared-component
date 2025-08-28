@@ -28895,7 +28895,7 @@ const _hoisted_6$1 = {
   key: 1,
   class: "flex-1 text-sm text-label"
 };
-const _hoisted_7 = ["onClick"];
+const _hoisted_7$1 = ["onClick"];
 const _sfc_main$a = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderTabsNavigationItems",
   setup(__props) {
@@ -29014,7 +29014,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                     "custom-size": 14,
                     color: item.visible ? "var(--ui-primary)" : "var(--color-neutral-200)"
                   }, null, 8, ["color"])
-                ], 8, _hoisted_7)) : createCommentVNode("", true)
+                ], 8, _hoisted_7$1)) : createCommentVNode("", true)
               ])
             ]);
           }), 128))
@@ -29426,11 +29426,12 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1$3 = { class: "relative flex select-none flex-col items-end" };
-const _hoisted_2$1 = { class: "flex justify-between gap-4 py-2 pl-4 align-center" };
-const _hoisted_3 = { class: "grid w-[168px]" };
-const _hoisted_4 = { class: "mb-0 truncate text-gray-500" };
-const _hoisted_5 = { class: "block truncate text-xs text-gray-400" };
-const _hoisted_6 = { class: "text-2xl font-normal text-white no-underline" };
+const _hoisted_2$1 = { class: "absolute rounded-bl-lg bg-white text-sm top-[-1px] right-[-8px]" };
+const _hoisted_3 = { class: "flex justify-between gap-4 py-2 pl-4 align-center" };
+const _hoisted_4 = { class: "grid w-[168px]" };
+const _hoisted_5 = { class: "mb-0 truncate text-gray-500" };
+const _hoisted_6 = { class: "block truncate text-xs text-gray-400" };
+const _hoisted_7 = { class: "text-2xl font-normal text-white no-underline" };
 const _sfc_main$3 = /* @__PURE__ */ defineComponent({
   __name: "TheHeaderAvatarMenu",
   props: {
@@ -29442,67 +29443,27 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     const avatarMenu = useTemplateRef("avatarMenu");
-    const menuContainer = useTemplateRef("menuContainer");
-    const calculateCenter = (rect) => ({
-      x: rect.left + rect.width / 2,
-      y: rect.top + rect.height / 2
-    });
-    const calculateOffset = (elementRect, containerRect) => ({
-      x: elementRect.left - containerRect.left,
-      y: elementRect.top - containerRect.top
-    });
-    const updateMenuPosition = () => {
-      if (!props.avatarRef || !avatarMenu.value || !menuContainer.value) return;
-      const originalAvatar = props.avatarRef;
-      const menuAvatar = avatarMenu.value;
-      const container = menuContainer.value;
-      const originalCenter = calculateCenter(originalAvatar.getBoundingClientRect());
-      const menuAvatarRect = menuAvatar.getBoundingClientRect();
-      const menuAvatarCenter = calculateCenter(menuAvatarRect);
-      const containerRect = container.getBoundingClientRect();
-      const menuAvatarOffset = calculateOffset(menuAvatarRect, containerRect);
-      const position = {
-        left: originalCenter.x - menuAvatarCenter.x + menuAvatarOffset.x,
-        top: originalCenter.y - menuAvatarCenter.y + menuAvatarOffset.y
-      };
-      Object.assign(container.style, {
-        position: "fixed",
-        top: `${position.top}px`,
-        left: `${position.left}px`,
-        zIndex: "10003",
-        right: "auto"
-      });
-    };
-    const setupEventListeners = () => {
-      const events = ["scroll", "resize"];
-      events.forEach((event) => window.addEventListener(event, updateMenuPosition));
-      return () => events.forEach(
-        (event) => window.removeEventListener(event, updateMenuPosition)
-      );
-    };
     onMounted(() => {
-      updateMenuPosition();
-      const cleanup = setupEventListeners();
-      onBeforeUnmount(cleanup);
+      if (props.avatarRef && avatarMenu.value) {
+        const rect = props.avatarRef.getBoundingClientRect();
+        avatarMenu.value.style.top = `${rect.top + rect.height + 8}px`;
+        avatarMenu.value.style.left = `${rect.left - 150 + rect.width / 2}px`;
+      }
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1$3, [
-        createBaseVNode("div", {
-          ref_key: "menuContainer",
-          ref: menuContainer,
-          class: "absolute rounded-bl-lg bg-white text-sm top-[-1px] right-[-8px]"
-        }, [
-          createBaseVNode("div", _hoisted_2$1, [
-            createBaseVNode("div", _hoisted_3, [
-              createBaseVNode("p", _hoisted_4, toDisplayString(_ctx.user.name), 1),
-              createBaseVNode("small", _hoisted_5, toDisplayString(_ctx.user.role || _ctx.user.email || ""), 1)
+        createBaseVNode("div", _hoisted_2$1, [
+          createBaseVNode("div", _hoisted_3, [
+            createBaseVNode("div", _hoisted_4, [
+              createBaseVNode("p", _hoisted_5, toDisplayString(_ctx.user.name), 1),
+              createBaseVNode("small", _hoisted_6, toDisplayString(_ctx.user.role || _ctx.user.email || ""), 1)
             ]),
             createBaseVNode("div", {
               ref_key: "avatarMenu",
               ref: avatarMenu,
               class: "mx-4 flex items-center justify-center rounded-full border border-transparent size-12 bg-primary"
             }, [
-              createBaseVNode("span", _hoisted_6, toDisplayString(_ctx.user.acronym), 1),
+              createBaseVNode("span", _hoisted_7, toDisplayString(_ctx.user.acronym), 1),
               createVNode(_sfc_main$4, { user: _ctx.user }, null, 8, ["user"])
             ], 512)
           ]),
@@ -29510,7 +29471,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
             profileItems: _ctx.profileItems,
             "set-visible-to-false": _ctx.setVisibleToFalse
           }, null, 8, ["profileItems", "set-visible-to-false"])
-        ], 512)
+        ])
       ]);
     };
   }
@@ -30223,6 +30184,7 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
     --color-old-neutral-800: oklch(26.9% 0 0);
     --color-old-neutral-900: oklch(20.5% 0 0);
     --color-old-neutral-950: oklch(14.5% 0 0);
+    --color-primary: var(--ui-primary);
   }
 }
 
@@ -31594,10 +31556,6 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
 
   .max-w-\\(--ui-container\\) {
     max-width: var(--ui-container);
-  }
-
-  .max-w-\\[75px\\] {
-    max-width: 75px;
   }
 
   .max-w-\\[calc\\(100\\%-2rem\\)\\] {
