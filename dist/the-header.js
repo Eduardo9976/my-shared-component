@@ -37245,11 +37245,6 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   background: #00000073 !important;
 }
 
-a {
-  color: var(--color-neutral-400) !important;
-  text-decoration: none !important;
-}
-
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;
