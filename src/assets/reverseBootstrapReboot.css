@@ -1,0 +1,12 @@
+:host {
+    all: initial;
+    display: block;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+
+:host * {
+    all: revert-layer;
+}
