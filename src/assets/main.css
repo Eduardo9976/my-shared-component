@@ -1,4 +1,3 @@
-@import './reverseBootstrapReboot.css';
 @import 'tailwindcss' theme(static);
 @import '@nuxt/ui';
 

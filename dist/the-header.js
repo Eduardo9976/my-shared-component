@@ -30150,19 +30150,6 @@ const tailwindStyles = `/*! tailwindcss v4.1.11 | MIT License | https://tailwind
   }
 }
 
-:host {
-  all: initial;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-  display: block;
-}
-
-:host * {
-  all: revert-layer;
-}
-
 @layer theme {
   :root, :host {
     --font-sans: "Roboto", sans-serif;
